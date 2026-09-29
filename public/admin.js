@@ -962,7 +962,8 @@
     else if (page.special === 'media') parts.push(mediaPage());
     else if (page.special === 'backups') parts.push(backupsPage());
     else if (page.special === 'themes') parts.push(themesEditor());
-    else parts.push(...objectFields(page.schema, page.path, true));
+    else if (page.schema && Object.keys(page.schema).length > 0) parts.push(...objectFields(page.schema, page.path, true));
+    else parts.push(placeholderPage(page.label));
     ed.replaceChildren(...parts);
     ed.scrollTop = top;
   }
@@ -1432,6 +1433,13 @@
         h('h3', {}, 'Tema Ekle'),
         h('p', { class: 'hint' }, 'Yeni tema oluşturmak için hazırlanıyor…'),
         h('button', { type: 'button', class: 'btn', disabled: true }, 'Yeni Tema Ekle')));
+  }
+
+  function placeholderPage(title) {
+    return h('div', { class: 'card' },
+      h('h3', {}, title),
+      h('p', { class: 'muted' }, 'Bu bölüm yakında eklenecek.'),
+      h('p', { style: 'opacity: 0.5; font-size: 12px; margin-top: 8px' }, '🚀 Geliştirme aşamasında...'));
   }
 
   function mergeDefaults(def, val) {
