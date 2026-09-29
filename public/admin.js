@@ -51,66 +51,75 @@
     newItem: { type: 'star', x: 45, y: 60, mx: 45, my: 60, size: 100, rotate: 0, float: true } });
 
   const PAGES = [
-    { group: 'Panel' },
+    { group: 'Genel Bakış' },
     {
-      id: 'temalarım', label: 'Temalarım', path: [], anchor: '#top', special: 'themes',
-      intro: 'Siteniz için temalar oluşturun, seçin ve yönetin.',
+      id: 'dashboard', label: 'Dashboard', path: [], anchor: '#top',
+      intro: 'Satış, sipariş ve müşteri özeti.',
+    },
+
+    { group: 'Ürünler' },
+    {
+      id: 'urunler', label: 'Ürün/Varyant', path: [], anchor: '#top',
+      intro: 'Ürünlerinizi ve varyantlarını yönetin.',
+    },
+    {
+      id: 'kategoriler', label: 'Kategori', path: [], anchor: '#top',
+      intro: 'Ürün kategorilerini yönetin.',
+    },
+    {
+      id: 'stok', label: 'Stok', path: [], anchor: '#top',
+      intro: 'Stok miktarlarını takip edin.',
+    },
+
+    { group: 'Siparişler' },
+    {
+      id: 'siparisler', label: 'Siparişler', path: [], anchor: '#top',
+      intro: 'Tüm siparişlerinizi yönetin.',
+    },
+    {
+      id: 'odemeler', label: 'Ödeme Durumu', path: [], anchor: '#top',
+      intro: 'Ödeme durumlarını takip edin.',
+    },
+    {
+      id: 'kargo', label: 'Kargo', path: [], anchor: '#top',
+      intro: 'Kargo işlemlerini yönetin.',
+    },
+
+    { group: 'Müşteriler' },
+    {
+      id: 'musteriler', label: 'Müşteriler', path: [], anchor: '#top',
+      intro: 'Müşteri bilgilerini yönetin.',
+    },
+    {
+      id: 'etiketi', label: 'Etiketler', path: [], anchor: '#top',
+      intro: 'Müşteri etiketlerini oluşturun.',
+    },
+
+    { group: 'Pazarlama' },
+    {
+      id: 'kuponlar', label: 'Kuponlar', path: [], anchor: '#top',
+      intro: 'Kupon ve indirimler oluşturun.',
+    },
+    {
+      id: 'kampanyalar', label: 'Kampanyalar', path: [], anchor: '#top',
+      intro: 'Otomatik kampanyalar yönetin.',
     },
     {
       id: 'blog', label: 'Blog', path: [], anchor: '#top',
-      intro: 'Blog yazılarınızı yönetin.',
+      intro: 'Blog yazılarını yönetin.',
     },
     {
       id: 'etkinlikler', label: 'Etkinlikler', path: [], anchor: '#top',
-      intro: 'Etkinliklerinizi yönetin.',
+      intro: 'Etkinlikleri yönetin.',
+    },
+
+    { group: 'Tema Yönetimi' },
+    {
+      id: 'tema-overview', label: 'Tema Seçimi', path: [], anchor: '#top', special: 'themes',
+      intro: 'Tema seçin ve yönetin.',
     },
     {
-      id: 'müşteriler', label: 'Müşteriler', path: [], anchor: '#top',
-      intro: 'Müşterilerinizi yönetin.',
-    },
-    {
-      id: 'siparişler', label: 'Siparişler', path: [], anchor: '#top',
-      intro: 'Siparişlerinizi yönetin.',
-    },
-    {
-      id: 'indirimleri', label: 'İndirimleri', path: [], anchor: '#top',
-      intro: 'İndirimlerinizi yönetin.',
-    },
-    {
-      id: 'fiyat-listesi', label: 'Fiyat Listesi', path: [], anchor: '#top',
-      intro: 'Fiyat listelerinizi yönetin.',
-    },
-    {
-      id: 'tanımlamalar', label: 'Tanımlamalar', path: [], anchor: '#top',
-      intro: 'Tanımlamalarınızı yapın.',
-    },
-    {
-      id: 'otomasyonlar', label: 'Otomasyonlar', path: [], anchor: '#top',
-      intro: 'Otomasyonlarınızı yönetin.',
-    },
-    {
-      id: 'bildirmler', label: 'Bildirmler', path: [], anchor: '#top',
-      intro: 'Bildirim ayarlarınızı yapın.',
-    },
-    {
-      id: 'lokalizasyon', label: 'Lokalizasyon', path: [], anchor: '#top',
-      intro: 'Dil ve bölge ayarlarını yapın.',
-    },
-    {
-      id: 'ödeme-ayarları', label: 'Ödeme Ayarları', path: [], anchor: '#top',
-      intro: 'Ödeme yöntemlerini yapılandırın.',
-    },
-    {
-      id: 'müşteri-ayarları', label: 'Müşteri Ayarları', path: [], anchor: '#top',
-      intro: 'Müşteri ayarlarını yapın.',
-    },
-    {
-      id: 'kargo-ayarları', label: 'Kargo Ayarları', path: [], anchor: '#top',
-      intro: 'Kargo ayarlarını yapın.',
-    },
-    { group: 'Genel' },
-    {
-      id: 'theme', label: 'Renkler ve stil', path: ['theme'], anchor: '#top',
+      id: 'theme', label: 'Renkler ve Stil', path: ['theme'], anchor: '#top',
       intro: 'Sitenin tamamındaki renkleri ve genel görünümü buradan ayarlarsın. Bir rengi değiştirince o rengi kullanan her yer güncellenir.',
       schema: {
         colors: group('Renk paleti', Object.fromEntries(Object.entries(COLOR_NAMES).map(([k, v]) => [k, hex(v)]))),
@@ -179,9 +188,8 @@
       id: 'sections', label: 'Bölüm sırası', path: ['sections'], anchor: '#top', special: 'sections',
       intro: 'Bölümlerin sırasını oklarla değiştir, göz simgesiyle gizle ya da göster.',
     },
-    { group: 'Üst kısım' },
     {
-      id: 'ticker', label: 'Kayan şerit', path: ['ticker'], anchor: '#top',
+      id: 'ticker', label: 'Kayan Şerit', path: ['ticker'], anchor: '#top',
       intro: 'Sayfanın en üstünde sürekli kayan duyuru şeridi.',
       schema: {
         visible: bool('Şeridi göster'),
@@ -201,9 +209,8 @@
         hideLinksOnScroll: bool('Aşağı kaydırınca menü linklerini gizle'),
       },
     },
-    { group: 'Ana sayfa bölümleri' },
     {
-      id: 'hero', label: 'Giriş (dev başlık)', path: ['hero'], anchor: '#top', section: 'hero',
+      id: 'hero', label: 'Giriş (Dev Başlık)', path: ['hero'], anchor: '#top', section: 'hero',
       schema: {
         main: group('Başlık', {
           title: text('Dev başlık'),
@@ -365,8 +372,38 @@
         stickers: stickerList('Sticker\'lar'),
       },
     },
-    { group: 'Araçlar' },
-    { id: 'media', label: 'Görsel kütüphanesi', special: 'media', anchor: '#top', intro: 'Yüklediğin tüm görseller. Buradan yeni görsel yükleyebilir ya da kullanmadıklarını silebilirsin.' },
+    { group: 'Entegrasyonlar' },
+    {
+      id: 'entegrasyon-odeme', label: 'Ödeme', path: [], anchor: '#top',
+      intro: 'Ödeme hizmetlerini entegre edin (Stripe, PayPal, vb).',
+    },
+    {
+      id: 'entegrasyon-kargo', label: 'Kargo', path: [], anchor: '#top',
+      intro: 'Kargo hizmetlerini entegre edin.',
+    },
+    {
+      id: 'entegrasyon-pazaryeri', label: 'Pazaryerleri', path: [], anchor: '#top',
+      intro: 'Pazaryeri entegrasyonlarını yönetin.',
+    },
+
+    { group: 'Ayarlar' },
+    {
+      id: 'ayar-magaza', label: 'Mağaza', path: [], anchor: '#top',
+      intro: 'Mağaza bilgilerini yapılandırın.',
+    },
+    {
+      id: 'ayar-lokalizasyon', label: 'Lokalizasyon', path: [], anchor: '#top',
+      intro: 'Dil, para birimi ve bölge ayarları.',
+    },
+    {
+      id: 'ayar-bildirimler', label: 'Bildirimler', path: [], anchor: '#top',
+      intro: 'E-posta ve SMS bildirimlerini yapılandırın.',
+    },
+    {
+      id: 'ayar-kullanicilar', label: 'Kullanıcılar', path: [], anchor: '#top',
+      intro: 'Kullanıcıları ve rollerini yönetin.',
+    },
+    { id: 'media', label: 'Görsel Kütüphanesi', special: 'media', anchor: '#top', intro: 'Yüklediğin tüm görseller. Buradan yeni görsel yükleyebilir ya da kullanmadıklarını silebilirsin.' },
     { id: 'backups', label: 'Yedekler', special: 'backups', anchor: '#top', intro: 'Her kaydetmede eski içerik otomatik yedeklenir (son 30 kayıt). Bir yedeği yükleyip kaydedersen site o hale döner.' },
   ];
 
@@ -558,21 +595,6 @@
     refreshPreview(true);
     updateStatus();
 
-    // Üst menü event listeners
-    const topMenuItems = document.querySelectorAll('#topMenu .menu-item');
-    topMenuItems.forEach(item => {
-      item.addEventListener('click', () => {
-        const pageId = item.getAttribute('data-page');
-        const targetPage = PAGES.find(p => p.id === pageId);
-        if (targetPage) {
-          // Update active state
-          topMenuItems.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
-          // Select page
-          selectPage(targetPage);
-        }
-      });
-    });
   }
 
   // =====================================================================
@@ -862,7 +884,32 @@
       return row(main, null, p.id === page.id, { group: 'sections', id: p.section });
     };
     const head = (t, c) => h('div', { class: 'group', style: `--gc:${c}` }, t);
-    const items = [head('Genel', 'var(--sky)'), ...['theme', 'motion', 'brand', 'sections'].map((id) => btn(byId(id)))];
+    const items = [];
+    const groupColors = {
+      'Genel Bakış': 'var(--sky)',
+      'Ürünler': '#55db9c',
+      'Siparişler': '#4da2ff',
+      'Müşteriler': '#e9ccff',
+      'Pazarlama': '#fb4903',
+      'Tema Yönetimi': '#ffd731',
+      'Entegrasyonlar': '#5c4ade',
+      'Ayarlar': '#cccccc',
+      'Sayfalar': 'var(--mint)',
+      'Ana sayfa · sitedeki sıra': 'var(--lavender)',
+    };
+
+    let currentGroup = null;
+    PAGES.forEach((p) => {
+      if (p.group) {
+        if (currentGroup !== p.group) {
+          currentGroup = p.group;
+          items.push(head(p.group, groupColors[p.group] || 'var(--bg)'));
+        }
+      } else if (p.id) {
+        const b = btn(p);
+        if (b) items.push(b);
+      }
+    });
 
     items.push(head('Sayfalar', 'var(--mint)'));
     state.pages.forEach((pg, pi) => {
@@ -882,9 +929,9 @@
 
     // Ana sayfa: sitedeki sıra (kayan şerit, menü, sonra "Bölüm sırası"ndaki bölümler, en altta alt bilgi)
     const flow = [byId('ticker'), byId('nav'), ...state.sections.map((x) => PAGES.find((p) => p.section === x.id)).filter(Boolean)];
-    items.push(head('Ana sayfa · sitedeki sıra', 'var(--lavender)'), ...flow.map(btn));
-
-    items.push(head('Araçlar', 'var(--sun)'), btn(byId('media')), btn(byId('backups')));
+    if (flow.some(Boolean)) {
+      items.push(head('Ana sayfa · sitedeki sıra', 'var(--lavender)'), ...flow.map(btn).filter(Boolean));
+    }
     nav.replaceChildren(...items);
   }
   $('#menuToggle').addEventListener('click', () => $('.sidebar').classList.toggle('open'));
