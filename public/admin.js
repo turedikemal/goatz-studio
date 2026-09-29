@@ -51,6 +51,63 @@
     newItem: { type: 'star', x: 45, y: 60, mx: 45, my: 60, size: 100, rotate: 0, float: true } });
 
   const PAGES = [
+    { group: 'Panel' },
+    {
+      id: 'temalarım', label: 'Temalarım', path: [], anchor: '#top', special: 'themes',
+      intro: 'Siteniz için temalar oluşturun, seçin ve yönetin.',
+    },
+    {
+      id: 'blog', label: 'Blog', path: [], anchor: '#top',
+      intro: 'Blog yazılarınızı yönetin.',
+    },
+    {
+      id: 'etkinlikler', label: 'Etkinlikler', path: [], anchor: '#top',
+      intro: 'Etkinliklerinizi yönetin.',
+    },
+    {
+      id: 'müşteriler', label: 'Müşteriler', path: [], anchor: '#top',
+      intro: 'Müşterilerinizi yönetin.',
+    },
+    {
+      id: 'siparişler', label: 'Siparişler', path: [], anchor: '#top',
+      intro: 'Siparişlerinizi yönetin.',
+    },
+    {
+      id: 'indirimleri', label: 'İndirimleri', path: [], anchor: '#top',
+      intro: 'İndirimlerinizi yönetin.',
+    },
+    {
+      id: 'fiyat-listesi', label: 'Fiyat Listesi', path: [], anchor: '#top',
+      intro: 'Fiyat listelerinizi yönetin.',
+    },
+    {
+      id: 'tanımlamalar', label: 'Tanımlamalar', path: [], anchor: '#top',
+      intro: 'Tanımlamalarınızı yapın.',
+    },
+    {
+      id: 'otomasyonlar', label: 'Otomasyonlar', path: [], anchor: '#top',
+      intro: 'Otomasyonlarınızı yönetin.',
+    },
+    {
+      id: 'bildirmler', label: 'Bildirmler', path: [], anchor: '#top',
+      intro: 'Bildirim ayarlarınızı yapın.',
+    },
+    {
+      id: 'lokalizasyon', label: 'Lokalizasyon', path: [], anchor: '#top',
+      intro: 'Dil ve bölge ayarlarını yapın.',
+    },
+    {
+      id: 'ödeme-ayarları', label: 'Ödeme Ayarları', path: [], anchor: '#top',
+      intro: 'Ödeme yöntemlerini yapılandırın.',
+    },
+    {
+      id: 'müşteri-ayarları', label: 'Müşteri Ayarları', path: [], anchor: '#top',
+      intro: 'Müşteri ayarlarını yapın.',
+    },
+    {
+      id: 'kargo-ayarları', label: 'Kargo Ayarları', path: [], anchor: '#top',
+      intro: 'Kargo ayarlarını yapın.',
+    },
     { group: 'Genel' },
     {
       id: 'theme', label: 'Renkler ve stil', path: ['theme'], anchor: '#top',
@@ -857,6 +914,7 @@
     if (page.special === 'sections') parts.push(sectionsEditor());
     else if (page.special === 'media') parts.push(mediaPage());
     else if (page.special === 'backups') parts.push(backupsPage());
+    else if (page.special === 'themes') parts.push(themesEditor());
     else parts.push(...objectFields(page.schema, page.path, true));
     ed.replaceChildren(...parts);
     ed.scrollTop = top;
@@ -1314,6 +1372,19 @@
           state = await request('/api/defaults');
           changed(); renderNav(); toast('Başlangıç içeriği yüklendi. Uygulamak için Kaydet\'e bas.');
         } }, 'Başlangıç içeriğine dön')));
+  }
+
+  // ---------- Temalar ----------
+  function themesEditor() {
+    return h('div', {},
+      h('div', { class: 'card' },
+        h('h3', {}, 'Şu Anki Tema'),
+        h('p', {}, 'The Sun'),
+        h('button', { type: 'button', class: 'btn solid', style: 'margin-top:10px', onclick: () => selectPage(PAGES.find(p => p.id === 'theme')) }, 'Temayı Düzenle')),
+      h('div', { class: 'card' },
+        h('h3', {}, 'Tema Ekle'),
+        h('p', { class: 'hint' }, 'Yeni tema oluşturmak için hazırlanıyor…'),
+        h('button', { type: 'button', class: 'btn', disabled: true }, 'Yeni Tema Ekle')));
   }
 
   function mergeDefaults(def, val) {
