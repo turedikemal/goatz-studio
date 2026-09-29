@@ -72,12 +72,6 @@
           displayLineHeight: number('Dev başlık satır aralığı', 60, 130, '%'),
           buttonTracking: number('Buton ve küçük etiket harf aralığı', -5, 20, '%', 0.1),
         }, { flat: true }),
-      },
-    },
-    {
-      id: 'motion', label: 'Animasyonlar', path: ['theme'], anchor: '#top',
-      intro: 'Sitedeki hareketler ve animasyonları kontrol et.',
-      schema: {
         animations: bool('Tüm hareketler (kapatırsan sitede hiçbir şey oynamaz)'),
         motion: group('Hareket türleri', {
           smooth: bool('Yumuşak, ataletli kaydırma (fare ile gezerken)'),
@@ -810,24 +804,9 @@
     const head = (t, c) => h('div', { class: 'group', style: `--gc:${c}` }, t);
     const items = [];
 
-    // PAGES dizisini tarayarak grup yapısını çiz
-    let currentGroup = null;
-    let groupColors = {
-      '📋 İçerik': 'var(--sky)',
-      '👥 Müşteri İşlemleri': 'var(--mint)',
-      '💰 Mali': 'var(--lavender)',
-      '📝 Tanımlamalar': 'var(--blue)',
-      '⚙️ Ayarlar': 'var(--ember)',
-      '📄 Ana Sayfa Bölümleri': 'var(--sun)',
-      '🛠️ Araçlar': 'var(--violet)',
-    };
-
+    // PAGES dizisini tarayarak düz menü çiz (gruplar gösterilmez)
     for (const p of PAGES) {
-      if (p.group) {
-        if (currentGroup) items.push(h('hr', { style: 'margin:8px 0;opacity:.2' }));
-        items.push(head(p.group, groupColors[p.group] || 'var(--sky)'));
-        currentGroup = p.group;
-      } else if (p.id) {
+      if (p.id) {
         const b = btn(p);
         if (b) items.push(b);
       }
