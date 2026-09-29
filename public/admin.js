@@ -500,6 +500,22 @@
     renderPage();
     refreshPreview(true);
     updateStatus();
+
+    // Üst menü event listeners
+    const topMenuItems = document.querySelectorAll('#topMenu .menu-item');
+    topMenuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const pageId = item.getAttribute('data-page');
+        const targetPage = PAGES.find(p => p.id === pageId);
+        if (targetPage) {
+          // Update active state
+          topMenuItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+          // Select page
+          selectPage(targetPage);
+        }
+      });
+    });
   }
 
   // =====================================================================
