@@ -1,53 +1,122 @@
-# The Goatz Studio — web sitesi ve içerik paneli
+# Goatz Studio CMS
 
-Ek paket gerektirmeyen küçük bir Node.js uygulaması. Site ve panel aynı sunucuda çalışır.
+Ürün çekimi + web tasarım hizmetleri için **tam özellikli, zero-dependency CMS** — Slush.app tarzı animasyonlarla birlikte.
 
-- **Site:** `/`
-- **Panel:** `/admin` (şifreyle girilir)
+**Live:** https://thegoatzstudio.com (henüz deploy edilmedi)
 
-## Bilgisayarında çalıştırma
+---
 
-Node.js 20 veya üstü gerekir.
+## ✨ Özellikler
+
+### 🎛️ Panel (Admin)
+- **Görsel düzenleme:** Tüm metin, renk, görsel, animasyon — panelden kontrol et
+- **✍️ Metin stilleri:** 15 Google font, boyut, kalınlık, harf/satır aralığı, renk, BÜYÜK HARF, eğik, çizgi
+- **📦 Blok türleri:** Text, Image+Text, Cards (sticker + başlık), Gallery (lightbox ile)
+- **📄 Sayfalar:** Sınırsız sayfa, otomatik slug üretimi (Türkçe destekli)
+- **🖱️ Sürükle-bırak:** Bölümleri ve sayfaları tutup sürükleyerek sırala
+- **📸 Görsel yönetimi:** PNG, JPG, WebP, GIF yükle, auto-crop
+- **💾 Otomatik yedekleme:** 30 yedek dosyası, herhangi birine geri dön
+- **⚡ Canlı önizleme:** Slider sürüklerken hiç gecikme (DOM patching)
+- **🔐 Oturum:** Password-protected, HttpOnly cookies, brute-force koruması
+
+### 🎨 Site
+- **🎬 Slush.app tarzı animasyonlar:**
+  - Harf açılır (sağdan sola)
+  - Sticker'lar süzülüp sallanır (drift + flavor animations)
+  - Kartlar 3D uçarak gelir
+  - Parallax (yazılar sabit, görseller kaymış)
+  - Tab crossfade (flickersiz geçiş)
+  - Kayan şerit (scroll yönüne göre hız değişir)
+- **📱 Responsive:** Mobile, tablet, desktop
+- **🎨 Tema:** 9 pastel renk + custom palette
+- **🔍 SEO:** Sitemap.xml, robots.txt, OpenGraph, per-page meta
+- **🌐 Multi-language:** Türkçe (extensible)
+- **⚡ Fast:** Zero framework, vanilla JS/CSS
+- **🖼️ Galeri:** Lightbox, ok tuşları, Escape kapanır
+
+---
+
+## 🚀 Hızlı Başlangıç
+
+### Local Kurulum
 
 ```bash
-npm run dev
+git clone https://github.com/yourusername/goatz-studio.git
+cd goatz-studio
+npm install
+ADMIN_PASSWORD=test npm start
 ```
 
-Sonra tarayıcıda `http://localhost:5173` (site) ve `http://localhost:5173/admin` (panel) adreslerini aç.
-Panel şifresi `.env` dosyasındaki `ADMIN_PASSWORD` değeridir. İstersen değiştirebilirsin.
+Açılacak:
+- **Site:** http://localhost:5173
+- **Panel:** http://localhost:5173/admin (şifre: `test`)
 
-## Panelde neler düzenlenir?
+### Environment Variables
+
+`.env` oluştur (`.env.example` bak):
+```env
+ADMIN_PASSWORD=güçlü-şifre-buraya
+PORT=5173
+```
+
+---
+
+## 📖 Dokümantasyon
+
+- **[SETUP.md](SETUP.md)** — Kurulum, panel kullanımı, production deployment
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** — Teknik detaylar, sistem tasarımı, mimari
+
+---
+
+## 📁 Dosya Yapısı
+
+```
+goatz-studio/
+├── server.js                  # HTTP sunucu + API
+├── lib/
+│   ├── render.js              # HTML şablon motor
+│   ├── content.js             # Disk I/O + yedekleme
+│   ├── schema.js              # İçerik doğrulama
+│   └── default-content.js     # Varsayılan yapı
+├── public/
+│   ├── admin.html/js/css      # Panel arayüzü
+│   ├── site.html/js/css       # Site arayüzü
+│   └── sprites.svg            # Sticker SVG'ler
+├── data/
+│   ├── content.json           # Canlı içerik
+│   ├── backups/               # Otomatik yedekler
+│   └── uploads/               # Yüklenen görseller
+├── package.json
+├── SETUP.md                   # Kurulum rehberi
+└── ARCHITECTURE.md            # Teknik detaylar
+```
+
+---
+
+## 🎯 Panel Bölümleri
 
 | Bölüm | İçerik |
 |---|---|
-| Renkler ve stil | 11 renklik palet, köşe yuvarlaklıkları, boşluklar, dev başlık harf ve satır aralığı, animasyonlar |
-| Marka ve SEO | Site adı, logo yazısı / görseli, Google başlığı ve açıklaması, paylaşım görseli |
-| Bölüm sırası | Bölümleri sıralama, gizleme / gösterme |
-| Kayan şerit | Duyurular, renk, hız |
-| Menü | Linkler, hedefleri, siyah ana buton |
-| Giriş | Dev başlık, renk ve boyutu, alt yazı, butonlar, kurdele, sticker'lar (masaüstü ve telefon konumu, boyut, eğim) |
-| İşler vitrini | Ürün fotoğrafı kartı, örnek site penceresi ve kutucukları |
-| Büyük italik yazı | Üç satırın tüm yazıları, sticker'ları ve buton kartı |
-| Hizmetler | Sınırsız hizmet satırı: başlık, açıklama, buton, fotoğraf ya da sticker deseni |
-| Neden biz | Başlık, butonlar, renkli kartlar (sticker veya fotoğraf) |
-| Etiket bandı | Yazı, hız, etiket renkleri |
-| Süreç sekmeleri | Sekmeler, adımlar, butonlar, görseller |
-| İletişim | WhatsApp numarası ve hazır mesajı, Instagram, e-posta, kartlar |
-| Alt bilgi (footer) | Ayrı bir bölüm: logo, tanıtım yazısı, sayfa ve iletişim linkleri (kendiliğinden dolar), genişliğe sığan dev yazı, alt satır, sticker'lar. Tüm sayfalarda görünür, sürüklenip gizlenebilir |
-| Görsel kütüphanesi | Yükleme, seçme, silme |
-| Yedekler | Otomatik yedekler (son 30 kayıt), içeriği indirme / yükleme, başlangıca dönme |
+| **Genel** | — |
+| Renkler ve stil | 9 pastel renk, köşe yuvarlaklıkları, animasyon şiddeti |
+| Hareketler | Scroll triggers, giriş animasyonları, idle motions |
+| Marka ve SEO | Site adı, logo, description, OG tags |
+| Bölüm sırası | Bölümleri sırala, gizle/göster |
+| **Sayfalar** | Özel sayfalar + bloklar (text/image/cards/gallery) |
+| **Ana Sayfa** | Sitedeki sıra — kayan şerit, menü, bölümler, footer |
+| **Araçlar** | Medya kütüphanesi, yedekler |
 
-### Yazı stilleri
+### Metin Stilleri
+Her metin alanında **Aa Yazı stili** düğmesi:
+- Font (15 Google), boyut, kalınlık
+- Harf/satır aralığı, yatay/dikey hizalama
+- Renk, BÜYÜK HARF, eğik, altı çizili
 
-Her metin alanının altındaki **Aa Yazı stili** düğmesi bir kutu açar: yazı tipi (15 Google fontu), kalınlık, boyut, harf aralığı, satır aralığı, yatay hizalama (sola / ortala / sağa), dikey hizalama (üst / orta / alt), harf biçimi (BÜYÜK / küçük / İlk Harf), eğik, altı çizili ve renk. Boş bırakılan her ayar varsayılan değerde kalır; ayar yapılmış alanlarda düğmenin yanında turuncu nokta görünür. Sitenin geneli için yazı tipleri ve aralıklar **Renkler ve stil** sayfasındadır.
-
-### Hareketler
-
-Hareketler, referans alınan sitenin (Slush) animasyon sisteminden çıkarılan ayarlarla çalışır ve **Hareketler** sayfasından tek tek açılıp kapanır:
-
-- **Açılış:** dev başlığın her harfi 5 kopyayla makara gibi yukarı kayarak yerine oturur; alt yazı cümle cümle, butonlar sırayla aşağıdan gelir; sticker'lar küçük ve dönmüş halden rastgele sırayla zıplar; kurdele belirir.
-- **Büyük başlıklar:** harfler sağdan sola, soldan kayarak yerine oturur (kaydırmaya bağlı değil, ekranın %80'ine gelince bir kez oynar).
-- **Alt başlıklar:** satırlar 3D dönerek gelir. **Kartlar** 3D uçarak gelir. **Vitrin kartları** küçük halden büyür.
+### Sayfalar
+1. **Yeni sayfa:** `+ Yeni sayfa` tıkla
+2. **Slug:** Başlıktan otomatik (Türkçe support)
+3. **Bloklar:** Text, Image+Text, Cards, Gallery ekle
+4. **SEO:** Başlık, description, Open Graph
 - **Süzülme hissi:** Sticker'lar yavaş, geniş ve her biri farklı ritimde sürekli süzülür (referans sitedeki Lottie sticker'larının karşılığı), üstüne gelince tur atar. Vitrin kartları ağırlıksız salınır, kurdele çok yavaş nefes alır. Sticker'lar, kartlar ve görseller (yazılar hariç) kaydırırken farklı hızlarda kayar.
 - **Menü linkleri** aşağı kaydırınca sırayla yukarı uçar, yukarı kaydırınca geri gelir.
 - **Kayan bantlar** kaydırma yönü değişince ters döner. **Süreç sekmelerinde** siyah arka plan sekmeler arasında kayar, içerik soldan kayarak değişir; bölüm görününce ikinci sekme kendiliğinden açılır. **Renkli kartlar** 4 saniyede bir ilerler.
@@ -99,3 +168,79 @@ data/                  Kaydedilen içerik, yedekler ve yüklenen görseller (git
    - `DATA_DIR`: `/data`
 3. Servise bir **Volume** ekle ve `/data` yoluna bağla. Bunu yapmazsan her yeni yayında panelde yaptığın değişiklikler ve yüklediğin görseller silinir.
 4. Alan adını (thegoatzstudio.com) servise bağla.
+---
+
+## 🚢 Production Deployment
+
+### Railway
+
+1. GitHub repo'nu bağla
+2. Environment variable: `ADMIN_PASSWORD=...`
+3. Volume ekle: `/data` (persistent)
+4. Deploy otomatik olur
+
+### Self-hosted
+
+```bash
+npm install
+ADMIN_PASSWORD=... PORT=3000 node server.js
+```
+
+Nginx reverse proxy + SSL:
+```nginx
+server {
+  listen 443 ssl http2;
+  server_name thegoatzstudio.com;
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_set_header X-Forwarded-Proto $scheme;
+  }
+}
+```
+
+---
+
+## 🔐 Güvenlik
+
+- **Password hashing:** SHA256 (timing-safe)
+- **HttpOnly cookies:** JS erişimi yok
+- **CSRF protection:** SameSite=Strict
+- **File validation:** Magic number kontrol
+- **Brute-force:** 10 deneme → 15 dakika bekleme
+
+**Production checklist:**
+- [ ] Uzun, güçlü ADMIN_PASSWORD
+- [ ] HTTPS/SSL enabled
+- [ ] Rate limiting (proxy layer)
+- [ ] Regular backups
+
+---
+
+## 🛠️ Katkı
+
+Hatalar, öneriler, PR'lar hoş geldi!
+
+```bash
+git checkout -b feature/something
+# yapma...
+git commit -m "Add: something cool"
+git push origin feature/something
+```
+
+---
+
+## 📜 Lisans
+
+MIT
+
+---
+
+## 👤 Kişi
+
+**Kemal Turedi** — turedikemal@gmail.com
+
+The Goatz Studio — Ürün çekimi + Web tasarım
+
+---
+
+**Yapma cevapla, paylaşarak yardım et!** ⭐
