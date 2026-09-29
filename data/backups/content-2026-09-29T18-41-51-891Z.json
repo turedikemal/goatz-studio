@@ -1,0 +1,413 @@
+{
+  "theme": {
+    "colors": {
+      "carbon": "#000000",
+      "paper": "#ffffff",
+      "sky": "#dceeff",
+      "concrete": "#cccccc",
+      "mist": "#e9e9e9",
+      "blue": "#4da2ff",
+      "mint": "#55db9c",
+      "lavender": "#e9ccff",
+      "ember": "#fb4903",
+      "sun": "#ffd731",
+      "violet": "#5c4ade"
+    },
+    "pageBackground": "carbon",
+    "panelRadius": 30,
+    "cardRadius": 20,
+    "panelGap": 8,
+    "displayTracking": -6,
+    "displayLineHeight": 80,
+    "animations": true
+  },
+  "brand": {
+    "siteName": "The Goatz Studio",
+    "logoText": "G",
+    "logoImage": ""
+  },
+  "seo": {
+    "title": "The Goatz Studio — Ürün Çekimi ve Web Tasarım",
+    "description": "The Goatz Studio: ürün fotoğrafçılığı ve web sitesi tasarımı. Ürününü çekiyor, markanı yayına alıyoruz.",
+    "shareImage": ""
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "visible": true
+    },
+    {
+      "id": "showcase",
+      "visible": true
+    },
+    {
+      "id": "statement",
+      "visible": true
+    },
+    {
+      "id": "services",
+      "visible": true
+    },
+    {
+      "id": "why",
+      "visible": true
+    },
+    {
+      "id": "band",
+      "visible": true
+    },
+    {
+      "id": "process",
+      "visible": true
+    },
+    {
+      "id": "contact",
+      "visible": true
+    }
+  ],
+  "ticker": {
+    "visible": true,
+    "background": "lavender",
+    "speed": 30,
+    "items": [
+      "Ürün çekimi + web sitesi paketi",
+      "İlk görüşme ücretsiz",
+      "E-ticarete hazır görseller",
+      "Mobil uyumlu siteler"
+    ]
+  },
+  "nav": {
+    "links": [
+      {
+        "label": "Hizmetler",
+        "target": "#hizmetler"
+      },
+      {
+        "label": "İşler",
+        "target": "#isler"
+      },
+      {
+        "label": "Neden Biz",
+        "target": "#neden"
+      },
+      {
+        "label": "Süreç",
+        "target": "#surec"
+      },
+      {
+        "label": "İletişim",
+        "target": "#iletisim"
+      }
+    ],
+    "cta": {
+      "label": "Teklif Al",
+      "target": "#iletisim"
+    },
+    "hideLinksOnScroll": true
+  },
+  "hero": {
+    "background": "sky",
+    "title": "ANAHTAR TESLİM",
+    "titleColor": "carbon",
+    "titleSize": 12,
+    "tagline": "E-Ticaret Siteleri",
+    "ribbon": {
+      "visible": true,
+      "color": "blue"
+    },
+    "buttons": [
+      {
+        "label": "İşleri gör",
+        "target": "#isler",
+        "style": "outline",
+        "whatsappIcon": false
+      },
+      {
+        "label": "WhatsApp'tan yaz",
+        "target": "whatsapp",
+        "style": "outline",
+        "whatsappIcon": true
+      }
+    ],
+    "stickers": [
+      {
+        "type": "camera",
+        "x": 12,
+        "y": 20,
+        "mx": 6,
+        "my": 11,
+        "size": 120,
+        "rotate": -14,
+        "float": true
+      },
+      {
+        "type": "coin",
+        "x": 52,
+        "y": 22,
+        "mx": 76,
+        "my": 12,
+        "size": 110,
+        "rotate": 10,
+        "float": true
+      },
+      {
+        "type": "browser",
+        "x": 78,
+        "y": 36,
+        "mx": 78,
+        "my": 80,
+        "size": 120,
+        "rotate": 12,
+        "float": true
+      },
+      {
+        "type": "check",
+        "x": 13,
+        "y": 44,
+        "mx": 6,
+        "my": 80,
+        "size": 100,
+        "rotate": -8,
+        "float": true
+      }
+    ]
+  },
+  "showcase": {
+    "background": "sky",
+    "ribbon": {
+      "visible": true,
+      "color": "blue"
+    },
+    "browser": {
+      "visible": true,
+      "address": "markan.com",
+      "title": "Yeni sezon koleksiyonu",
+      "subtitle": "Web tasarımı · Goatz Studio",
+      "accent": "violet",
+      "tiles": [
+        {
+          "color": "sun",
+          "image": ""
+        },
+        {
+          "color": "mint",
+          "image": ""
+        },
+        {
+          "color": "lavender",
+          "image": ""
+        }
+      ]
+    },
+    "photo": {
+      "visible": true,
+      "image": "",
+      "background": "sun",
+      "label": "Ürün çekimi · Stüdyo",
+      "note": "Yer tutucu: buraya senin çekimin gelecek"
+    }
+  },
+  "statement": {
+    "background": "sky",
+    "line1Start": "Çekim",
+    "line1Sticker": "camera",
+    "line1End": "+ tasarım",
+    "line2Sticker": "check",
+    "line2Start": "tek",
+    "card": {
+      "visible": true,
+      "label": "Teklif al",
+      "target": "#iletisim",
+      "color": "violet"
+    },
+    "line2End": "stüdyo",
+    "line3": "Goatz studio",
+    "line3Sticker": "browser"
+  },
+  "services": {
+    "background": "paper",
+    "items": [
+      {
+        "title": "Ürün\nçekimi",
+        "text": "Beyaz fonda katalog çekimlerinden konsept kurgulara kadar, ürününü en iyi açısından gösteren fotoğraflar. E-ticaret sitelerine ve pazaryerlerine hazır teslim.",
+        "button": {
+          "label": "Fiyat sor ↗",
+          "target": "#iletisim"
+        },
+        "color": "mint",
+        "image": "",
+        "media": "pattern",
+        "stickerA": "camera",
+        "stickerB": "coin"
+      },
+      {
+        "title": "Web\nsitesi",
+        "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler. Tanıtım sitesinden e-ticarete kadar tasarımı da kurulumu da bizden.",
+        "button": {
+          "label": "Fiyat sor ↗",
+          "target": "#iletisim"
+        },
+        "color": "lavender",
+        "image": "",
+        "media": "pattern",
+        "stickerA": "browser",
+        "stickerB": "cursor"
+      },
+      {
+        "title": "İkisi\nbir arada",
+        "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz. Tek muhatap, tek takvim, baştan sona tutarlı bir marka görünümü.",
+        "button": {
+          "label": "Paketi incele ↗",
+          "target": "#iletisim"
+        },
+        "color": "blue",
+        "image": "",
+        "media": "sticker",
+        "stickerA": "star",
+        "stickerB": "camera"
+      }
+    ]
+  },
+  "why": {
+    "background": "paper",
+    "heading": "Çek, tasarla, yayına al. Hepsi tek stüdyoda, sürpriz maliyet olmadan.",
+    "showButtons": true,
+    "cards": [
+      {
+        "title": "Net\nfiyat",
+        "color": "ember",
+        "sticker": "coin",
+        "image": ""
+      },
+      {
+        "title": "Hızlı\nteslim",
+        "color": "sun",
+        "sticker": "camera",
+        "image": ""
+      },
+      {
+        "title": "Mobilde\nkusursuz",
+        "color": "blue",
+        "sticker": "browser",
+        "image": ""
+      },
+      {
+        "title": "Satışa\nhazır",
+        "color": "lavender",
+        "sticker": "check",
+        "image": ""
+      },
+      {
+        "title": "Tek\nmuhatap",
+        "color": "mint",
+        "sticker": "star",
+        "image": ""
+      }
+    ]
+  },
+  "band": {
+    "text": "Goatz studio",
+    "speed": 36,
+    "row1": [
+      "blue",
+      "paper",
+      "sun",
+      "mint"
+    ],
+    "row2": [
+      "lavender",
+      "ember",
+      "paper",
+      "sun"
+    ]
+  },
+  "process": {
+    "background": "paper",
+    "heading": "Nasıl çalışıyoruz?",
+    "tabs": [
+      {
+        "tab": "Ürün çekimi",
+        "title": "Ürün\nçekimi",
+        "color": "sun",
+        "sticker": "camera",
+        "image": "",
+        "steps": [
+          "Ürünlerini ve nerede kullanacağını konuşuyoruz.",
+          "Ürünleri stüdyoya gönderiyorsun ya da biz geliyoruz.",
+          "Çekim, rötuş ve boyutlandırma yapılıyor.",
+          "Kullanıma hazır dosyalar sana teslim ediliyor."
+        ],
+        "button": {
+          "label": "Çekim planla ↗",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "tab": "Web sitesi",
+        "title": "Web\nsitesi",
+        "color": "lavender",
+        "sticker": "browser",
+        "image": "",
+        "steps": [
+          "Hedefini, sayfalarını ve içeriğini netleştiriyoruz.",
+          "Tasarım taslağını görüp onaylıyorsun.",
+          "Siteyi kuruyor, telefonda ve bilgisayarda test ediyoruz.",
+          "Alan adına bağlayıp yayına alıyoruz."
+        ],
+        "button": {
+          "label": "Site konuşalım ↗",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "tab": "Paket",
+        "title": "Çekim +\nsite",
+        "color": "mint",
+        "sticker": "check",
+        "image": "",
+        "steps": [
+          "Tek görüşmede hem çekimi hem siteyi planlıyoruz.",
+          "Önce ürünlerini çekiyoruz.",
+          "Siteyi bu fotoğraflarla tasarlıyoruz.",
+          "Her şey tek seferde yayında."
+        ],
+        "button": {
+          "label": "Paket teklifi al ↗",
+          "target": "#iletisim"
+        }
+      }
+    ]
+  },
+  "contact": {
+    "background": "paper",
+    "heading": "Hadi\nbaşlayalım",
+    "whatsapp": "",
+    "whatsappMessage": "Merhaba, The Goatz Studio hakkında bilgi almak istiyorum.",
+    "instagram": "",
+    "email": "",
+    "cards": {
+      "whatsapp": {
+        "visible": true,
+        "label": "WhatsApp",
+        "title": "Yaz",
+        "color": "mint"
+      },
+      "instagram": {
+        "visible": true,
+        "label": "Instagram",
+        "title": "Takip et",
+        "color": "lavender"
+      },
+      "email": {
+        "visible": true,
+        "label": "E-posta",
+        "title": "Mesaj at",
+        "color": "sun"
+      }
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 The Goatz Studio",
+    "tagline": "Ürün çekimi · Web tasarım"
+  }
+}

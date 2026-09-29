@@ -1,0 +1,27 @@
+# Bağımlılıklar
+node_modules/
+*.log
+npm-debug.log*
+
+# Ortam değişkenleri
+.env
+.env.local
+
+# İçerik ve yedekler (isteğe bağlı - sensitive veriler varsa)
+# data/backups/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Derleme çıktıları
+dist/
+build/

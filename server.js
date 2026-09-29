@@ -1,0 +1,236 @@
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
+const { render } = require('./lib/render');
+const store = require('./lib/content');
+const { resolvePages } = require('./lib/schema');
+
+const PORT = Number(process.env.PORT) || 5173;
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+const PUBLIC_DIR = path.join(__dirname, 'public');
+const SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
+const MAX_JSON = 1024 * 1024;
+const MAX_UPLOAD = 8 * 1024 * 1024;
+
+const TYPES = {
+  '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif',
+  '.svg': 'image/svg+xml', '.ico': 'image/x-icon',
+};
+const IMAGE_MAGIC = {
+  'image/png': [[0x89, 0x50, 0x4e, 0x47]],
+  'image/jpeg': [[0xff, 0xd8, 0xff]],
+  'image/gif': [[0x47, 0x49, 0x46, 0x38]],
+  'image/webp': [[0x52, 0x49, 0x46, 0x46]],
+};
+const EXT = { 'image/png': 'png', 'image/jpeg': 'jpg', 'image/gif': 'gif', 'image/webp': 'webp' };
+
+// ---------- Oturum ----------
+const sessions = new Map();
+const attempts = new Map();
+
+function cookies(req) {
+  return Object.fromEntries((req.headers.cookie || '').split(';').filter(Boolean).map((c) => {
+    const i = c.indexOf('=');
+    return [c.slice(0, i).trim(), decodeURIComponent(c.slice(i + 1).trim())];
+  }));
+}
+function authed(req) {
+  const token = cookies(req).gs_session;
+  const exp = token && sessions.get(token);
+  if (!exp) return false;
+  if (exp < Date.now()) { sessions.delete(token); return false; }
+  return true;
+}
+function passwordOk(input) {
+  if (!ADMIN_PASSWORD) return false;
+  const a = crypto.createHash('sha256').update(String(input)).digest();
+  const b = crypto.createHash('sha256').update(ADMIN_PASSWORD).digest();
+  return crypto.timingSafeEqual(a, b);
+}
+function tooManyAttempts(ip) {
+  const now = Date.now();
+  const list = (attempts.get(ip) || []).filter((t) => now - t < 15 * 60 * 1000);
+  attempts.set(ip, list);
+  return list.length >= 10;
+}
+
+// ---------- Yardımcılar ----------
+function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {}) {
+  res.writeHead(status, {
+    'Content-Type': type,
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    ...extra,
+  });
+  res.end(body);
+}
+const json = (res, status, data, extra) => send(res, status, JSON.stringify(data), 'application/json; charset=utf-8', extra);
+
+function readBody(req, limit) {
+  return new Promise((resolve, reject) => {
+    let size = 0;
+    const chunks = [];
+    req.on('data', (c) => {
+      size += c.length;
+      if (size > limit) { reject(Object.assign(new Error('Dosya çok büyük'), { status: 413 })); req.destroy(); return; }
+      chunks.push(c);
+    });
+    req.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+    req.on('error', reject);
+  });
+}
+async function readJson(req, limit = MAX_JSON) {
+  if (!String(req.headers['content-type'] || '').startsWith('application/json')) {
+    throw Object.assign(new Error('JSON bekleniyor'), { status: 415 });
+  }
+  try { return JSON.parse(await readBody(req, limit)); } catch (e) {
+    throw e.status ? e : Object.assign(new Error('Geçersiz JSON'), { status: 400 });
+  }
+}
+function serveFile(res, file, cache = 'no-cache') {
+  fs.readFile(file, (err, data) => {
+    if (err) return send(res, 404, 'Bulunamadı');
+    send(res, 200, data, TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', { 'Cache-Control': cache });
+  });
+}
+function safeJoin(dir, name) {
+  const file = path.join(dir, name);
+  return file.startsWith(dir + path.sep) ? file : null;
+}
+
+// ---------- API ----------
+async function api(req, res, url) {
+  const route = `${req.method} ${url.pathname}`;
+  const ip = req.socket.remoteAddress || '';
+
+  if (route === 'GET /api/me') return json(res, 200, { authed: authed(req), configured: Boolean(ADMIN_PASSWORD) });
+
+  if (route === 'POST /api/login') {
+    if (!ADMIN_PASSWORD) return json(res, 503, { error: 'Panel şifresi ayarlanmamış (ADMIN_PASSWORD).' });
+    if (tooManyAttempts(ip)) return json(res, 429, { error: 'Çok fazla deneme. 15 dakika sonra tekrar dene.' });
+    const { password } = await readJson(req);
+    if (!passwordOk(password)) {
+      attempts.get(ip).push(Date.now());
+      return json(res, 401, { error: 'Şifre yanlış.' });
+    }
+    const token = crypto.randomBytes(32).toString('hex');
+    sessions.set(token, Date.now() + SESSION_TTL);
+    const secure = req.headers['x-forwarded-proto'] === 'https' ? '; Secure' : '';
+    return json(res, 200, { ok: true }, {
+      'Set-Cookie': `gs_session=${token}; HttpOnly; SameSite=Strict; Path=/; Max-Age=${SESSION_TTL / 1000}${secure}`,
+    });
+  }
+
+  if (route === 'POST /api/logout') {
+    sessions.delete(cookies(req).gs_session);
+    return json(res, 200, { ok: true }, { 'Set-Cookie': 'gs_session=; HttpOnly; SameSite=Strict; Path=/; Max-Age=0' });
+  }
+
+  if (!authed(req)) return json(res, 401, { error: 'Giriş yapmalısın.' });
+
+  if (route === 'GET /api/content') return json(res, 200, store.load());
+  if (route === 'GET /api/defaults') return json(res, 200, store.DEFAULTS);
+  if (route === 'PUT /api/content') return json(res, 200, store.save(await readJson(req)));
+
+  if (route === 'POST /api/preview') {
+    const html = render(store.conform(store.DEFAULTS, await readJson(req)), { preview: true });
+    return send(res, 200, html, 'text/html; charset=utf-8', { 'Cache-Control': 'no-store' });
+  }
+
+  if (route === 'GET /api/backups') return json(res, 200, store.listBackups());
+  if (req.method === 'GET' && url.pathname.startsWith('/api/backups/')) {
+    const data = store.readBackup(decodeURIComponent(url.pathname.slice('/api/backups/'.length)));
+    return data ? json(res, 200, data) : json(res, 404, { error: 'Yedek bulunamadı.' });
+  }
+
+  if (route === 'GET /api/uploads') {
+    const files = fs.readdirSync(store.UPLOAD_DIR)
+      .filter((f) => /^[a-z0-9-]+\.(png|jpe?g|webp|gif)$/.test(f))
+      .map((f) => ({ url: `/uploads/${f}`, name: f, size: fs.statSync(path.join(store.UPLOAD_DIR, f)).size, time: fs.statSync(path.join(store.UPLOAD_DIR, f)).mtimeMs }))
+      .sort((a, b) => b.time - a.time);
+    return json(res, 200, files);
+  }
+
+  if (route === 'POST /api/upload') {
+    const { data } = await readJson(req, Math.ceil(MAX_UPLOAD * 1.4));
+    const m = /^data:(image\/(?:png|jpeg|webp|gif));base64,([A-Za-z0-9+/=]+)$/.exec(String(data || ''));
+    if (!m) return json(res, 400, { error: 'Yalnızca PNG, JPG, WEBP veya GIF yüklenebilir.' });
+    const buf = Buffer.from(m[2], 'base64');
+    if (buf.length > MAX_UPLOAD) return json(res, 413, { error: 'Görsel en fazla 8 MB olabilir.' });
+    if (!IMAGE_MAGIC[m[1]].some((sig) => sig.every((b, i) => buf[i] === b))) return json(res, 400, { error: 'Dosya içeriği bir görsel değil.' });
+    const name = `${Date.now().toString(36)}-${crypto.randomBytes(4).toString('hex')}.${EXT[m[1]]}`;
+    fs.writeFileSync(path.join(store.UPLOAD_DIR, name), buf);
+    return json(res, 200, { url: `/uploads/${name}` });
+  }
+
+  if (req.method === 'DELETE' && url.pathname.startsWith('/api/uploads/')) {
+    const name = decodeURIComponent(url.pathname.slice('/api/uploads/'.length));
+    const file = /^[a-z0-9-]+\.(png|jpe?g|webp|gif)$/.test(name) && safeJoin(store.UPLOAD_DIR, name);
+    if (!file || !fs.existsSync(file)) return json(res, 404, { error: 'Görsel bulunamadı.' });
+    fs.unlinkSync(file);
+    return json(res, 200, { ok: true });
+  }
+
+  return json(res, 404, { error: 'Bilinmeyen istek.' });
+}
+
+// ---------- Sunucu ----------
+const server = http.createServer(async (req, res) => {
+  const url = new URL(req.url, 'http://localhost');
+  try {
+    if (url.pathname.startsWith('/api/')) return await api(req, res, url);
+    if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'İzin verilmiyor');
+
+    if (url.pathname === '/') {
+      return send(res, 200, render(store.load()), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+    }
+    // Panel önizlemeyi tarayıcıda üretir; bu yüzden şablon dosyaları küçük bir CommonJS sarmalıyla tarayıcıya verilir.
+    if (url.pathname === '/render-bundle.js') {
+      const files = { './default-content': 'default-content.js', './schema': 'schema.js', './render': 'render.js' };
+      let out = '(function(){var defs={};';
+      for (const [name, file] of Object.entries(files)) {
+        out += `defs[${JSON.stringify(name)}]=function(module,exports,require){${fs.readFileSync(path.join(__dirname, 'lib', file), 'utf8')}\n};`;
+      }
+      out += 'var cache={};function req(n){if(cache[n])return cache[n].exports;if(!defs[n])throw new Error("yok: "+n);var m={exports:{}};cache[n]=m;defs[n](m,m.exports,req);return m.exports;}'
+        + 'var r=req("./render");window.GoatzRender={render:r.render,setSprites:r.setSprites,conform:req("./schema").conform,resolvePages:req("./schema").resolvePages,DEFAULTS:req("./default-content")};})();';
+      return send(res, 200, out, TYPES['.js'], { 'Cache-Control': 'no-cache' });
+    }
+    if (url.pathname === '/admin' || url.pathname === '/admin/') {
+      return serveFile(res, path.join(PUBLIC_DIR, 'admin.html'));
+    }
+    if (url.pathname.startsWith('/uploads/')) {
+      const file = safeJoin(store.UPLOAD_DIR, decodeURIComponent(url.pathname.slice('/uploads/'.length)));
+      return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
+    }
+    const origin = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+    if (url.pathname === '/robots.txt') {
+      return send(res, 200, `User-agent: *\nDisallow: /admin\nSitemap: ${origin}/sitemap.xml\n`);
+    }
+    if (url.pathname === '/sitemap.xml') {
+      const c = store.load();
+      const urls = ['/', ...resolvePages(c.pages).filter((p) => p.visible).map((p) => `/${p.slug}`)];
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${origin}${u}</loc></url>`).join('\n')}\n</urlset>\n`;
+      return send(res, 200, xml, 'application/xml; charset=utf-8');
+    }
+    // Özel sayfalar: /hakkimizda
+    const pm = /^\/([a-z0-9-]+)\/?$/.exec(url.pathname);
+    if (pm) {
+      const c = store.load();
+      const page = resolvePages(c.pages).find((p) => p.visible && p.slug === pm[1]);
+      if (page) return send(res, 200, render(c, { page: page.id }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+    }
+    const file = safeJoin(PUBLIC_DIR, decodeURIComponent(url.pathname.slice(1)));
+    if (file && fs.existsSync(file) && fs.statSync(file).isFile()) return serveFile(res, file);
+    return send(res, 404, 'Sayfa bulunamadı');
+  } catch (e) {
+    if (!res.headersSent) json(res, e.status || 500, { error: e.status ? e.message : 'Sunucu hatası.' });
+    if (!e.status) console.error(e);
+  }
+});
+
+server.listen(PORT, () => {
+  console.log(`The Goatz Studio: http://localhost:${PORT}  ·  Panel: http://localhost:${PORT}/admin`);
+  if (!ADMIN_PASSWORD) console.warn('Uyarı: ADMIN_PASSWORD ayarlı değil, panele giriş kapalı.');
+});

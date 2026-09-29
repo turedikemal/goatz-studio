@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "goatz",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["--env-file=.env", "--watch", "server.js"],
+      "port": 5173
+    }
+  ]
+}

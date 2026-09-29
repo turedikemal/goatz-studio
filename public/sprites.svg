@@ -1,0 +1,64 @@
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="noise"/>
+      <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+      <feComponentTransfer in="mono" result="soft"><feFuncA type="linear" slope="0.45"/></feComponentTransfer>
+      <feComposite in="soft" in2="SourceGraphic" operator="in" result="clipped"/>
+      <feBlend in="SourceGraphic" in2="clipped" mode="multiply"/>
+    </filter>
+    <!-- Kamera -->
+    <symbol id="s-camera" viewBox="0 0 120 100">
+      <rect x="8" y="24" width="104" height="68" rx="16" fill="#fb4903" stroke="#000" stroke-width="3"/>
+      <rect x="36" y="12" width="36" height="18" rx="6" fill="#fb4903" stroke="#000" stroke-width="3"/>
+      <circle cx="60" cy="58" r="24" fill="#fff" stroke="#000" stroke-width="3"/>
+      <circle cx="60" cy="58" r="13" fill="#5c4ade" stroke="#000" stroke-width="3"/>
+      <circle cx="55" cy="53" r="4" fill="#fff"/>
+      <rect x="90" y="34" width="12" height="8" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+    </symbol>
+    <!-- Tarayıcı penceresi -->
+    <symbol id="s-browser" viewBox="0 0 120 100">
+      <rect x="6" y="10" width="108" height="80" rx="14" fill="#5c4ade" stroke="#000" stroke-width="3"/>
+      <path d="M6 32h108" stroke="#000" stroke-width="3"/>
+      <circle cx="20" cy="21" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
+      <circle cx="32" cy="21" r="4" fill="#ffd731" stroke="#000" stroke-width="2"/>
+      <circle cx="44" cy="21" r="4" fill="#55db9c" stroke="#000" stroke-width="2"/>
+      <rect x="18" y="44" width="50" height="10" rx="5" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <rect x="18" y="62" width="34" height="16" rx="8" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+      <rect x="74" y="44" width="28" height="34" rx="6" fill="#e9ccff" stroke="#000" stroke-width="2.5"/>
+    </symbol>
+    <!-- G jetonu -->
+    <symbol id="s-coin" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="56" rx="42" ry="40" fill="#e0b800" stroke="#000" stroke-width="3"/>
+      <circle cx="50" cy="48" r="42" fill="#ffd731" stroke="#000" stroke-width="3"/>
+      <circle cx="37" cy="42" r="8" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <circle cx="63" cy="42" r="8" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <circle cx="39" cy="43" r="3.5" fill="#000"/>
+      <circle cx="65" cy="43" r="3.5" fill="#000"/>
+      <path d="M36 62 q14 12 28 0" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <!-- Onay rozeti -->
+    <symbol id="s-check" viewBox="0 0 100 100">
+      <path d="M50 6l11 9 14-3 4 14 13 7-5 13 5 13-13 7-4 14-14-3-11 9-11-9-14 3-4-14-13-7 5-13-5-13 13-7 4-14 14 3z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M33 51l12 12 23-25" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M33 51l12 12 23-25" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <!-- İmleç -->
+    <symbol id="s-cursor" viewBox="0 0 100 100">
+      <path d="M22 10l58 38-26 6 16 28-12 7-16-28-20 18z" fill="#fff" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Yıldız -->
+    <symbol id="s-star" viewBox="0 0 100 100">
+      <path d="M50 4c4 26 20 42 46 46-26 4-42 20-46 46-4-26-20-42-46-46 26-4 42-20 46-46z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Ürün şişesi (yer tutucu çekim) -->
+    <symbol id="s-bottle" viewBox="0 0 100 160">
+      <rect x="38" y="6" width="24" height="22" rx="4" fill="#000"/>
+      <rect x="42" y="26" width="16" height="14" fill="#fff" stroke="#000" stroke-width="3"/>
+      <rect x="18" y="38" width="64" height="112" rx="18" fill="#fff" stroke="#000" stroke-width="3"/>
+      <rect x="26" y="76" width="48" height="40" rx="6" fill="#fb4903" stroke="#000" stroke-width="3"/>
+      <text x="50" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="15" fill="#fff" letter-spacing="-0.5">GOATZ</text>
+    </symbol>
+  </defs>
+</svg>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Goatz Panel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+
+<!-- Giriş -->
+<section id="login" class="login" hidden>
+  <form id="loginForm" class="login-card">
+    <div class="logo-dot">G</div>
+    <h1>Goatz Panel</h1>
+    <p class="muted">Site içeriğini düzenlemek için şifreni gir.</p>
+    <label class="field">
+      <span>Şifre</span>
+      <input type="password" id="password" autocomplete="current-password" required>
+    </label>
+    <p class="error" id="loginError" role="alert"></p>
+    <button class="btn solid wide" type="submit">Giriş yap</button>
+  </form>
+</section>
+
+<!-- Panel -->
+<div id="app" class="app" hidden>
+  <aside class="sidebar">
+    <div class="brand"><div class="logo-dot">G</div><b>Goatz Panel</b></div>
+    <nav id="pages" aria-label="Panel bölümleri"></nav>
+  </aside>
+
+  <div class="workspace">
+    <header class="topbar">
+      <button class="btn icon" id="menuToggle" aria-label="Bölümler">☰</button>
+      <h2 id="pageTitle"></h2>
+      <span class="status" id="status" aria-live="polite"></span>
+      <div class="top-actions">
+        <button class="btn" id="previewToggle" aria-pressed="true">Önizleme</button>
+        <a class="btn" href="/" target="_blank" rel="noopener">Siteyi aç ↗</a>
+        <button class="btn solid" id="saveBtn" disabled>Kaydet</button>
+        <button class="btn ghost" id="logoutBtn">Çıkış</button>
+      </div>
+    </header>
+
+    <div class="split" id="split">
+      <main class="editor" id="editor"></main>
+      <section class="preview" id="previewPane" aria-label="Canlı önizleme">
+        <div class="preview-bar">
+          <span class="muted">Canlı önizleme · açılış animasyonları burada oynatılmaz, gerçek sitede görürsün</span>
+          <div class="seg" role="group" aria-label="Önizleme boyutu">
+            <button class="on" data-w="100%">Masaüstü</button>
+            <button data-w="390px">Telefon</button>
+          </div>
+        </div>
+        <div class="preview-stage"><iframe id="preview" title="Site önizlemesi"></iframe></div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- Görsel kütüphanesi -->
+<dialog id="library" class="modal">
+  <div class="modal-head">
+    <h3>Görsel kütüphanesi</h3>
+    <div>
+      <label class="btn solid">Yeni yükle<input type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden id="libUpload" multiple></label>
+      <button class="btn" data-close>Kapat</button>
+    </div>
+  </div>
+  <div class="grid" id="libGrid"></div>
+</dialog>
+
+<script src="/render-bundle.js"></script>
+<script src="/admin.js"></script>
+</body>
+</html>
