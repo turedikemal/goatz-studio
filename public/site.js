@@ -1039,12 +1039,12 @@
     setTimeout(() => sparks(c.x + c.w * 0.1, c.y + c.h * 0.1, { n: 6, size: Math.max(8, c.w * 0.12), dist: Math.max(30, c.w * 0.5) }), ms(0.7));
     setTimeout(fx.done, ms(1.3));
   };
-  // Ayak ve iskarpin: yürüyüş. Topuk yerde kalır, ayak ucu kalkıp öne basar (iki adım)
+  // Ayak ve iskarpin: tek, basit bir ileri adım (ucu hafif kalkar, öne basar, geri döner)
   const walkStep = (el) => {
-    if (busy(el, ms(2.2))) return;
+    if (busy(el, ms(1.2))) return;
     const rot = restRot(el);
     const f = (r, x, o) => ({ rotate: `calc(${rot} + ${r}deg)`, translate: `${x}px 0`, transformOrigin: '80% 92%', offset: o });
-    el.animate([f(0, 0, 0), f(-11, 0, 0.16), f(2, 8, 0.32), f(0, 8, 0.4), f(-11, 8, 0.56), f(2, 16, 0.72), f(0, 16, 0.8), f(0, 0, 1)], { duration: ms(1.8), easing: 'ease-in-out' });
+    el.animate([f(0, 0, 0), f(-9, 0, 0.3), f(1, 8, 0.6), f(0, 0, 1)], { duration: ms(1), easing: 'ease-in-out' });
   };
   // Zincir: halkalar gerilir ve toplanır
   const pullLink = (el) => {
