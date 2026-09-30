@@ -1039,27 +1039,28 @@
     setTimeout(() => sparks(c.x + c.w * 0.1, c.y + c.h * 0.1, { n: 6, size: Math.max(8, c.w * 0.12), dist: Math.max(30, c.w * 0.5) }), ms(0.7));
     setTimeout(fx.done, ms(1.3));
   };
-  // Keçi: kafa sallar, kulaklar çırpınır, sakal titrer, gözler kırpılır
-  const nodGoat = (el) => {
+  // Ayak: parmaklar yelpaze gibi açılır, sonra toplanır
+  const spreadToes = (el) => {
     if (busy(el, ms(2))) return;
-    const fx = inlineFx(el, 'goat'); if (!fx) return;
-    const q = (sel) => [...fx.g.querySelectorAll(sel)];
-    q('.ear').forEach((n, i) => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = i ? 'left center' : 'right center'; n.animate([{ transform: 'rotate(0)' }, { transform: `rotate(${i ? 22 : -22}deg)`, offset: 0.2 }, { transform: 'rotate(0)', offset: 0.4 }, { transform: `rotate(${i ? 22 : -22}deg)`, offset: 0.6 }, { transform: 'rotate(0)' }], { duration: ms(1.2), easing: 'ease-in-out' }); });
-    q('.beard').forEach((n) => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center top'; n.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-18deg)', offset: 0.2 }, { transform: 'rotate(16deg)', offset: 0.45 }, { transform: 'rotate(-8deg)', offset: 0.7 }, { transform: 'rotate(0)' }], { duration: ms(1.3), easing: 'ease-in-out' }); });
-    q('.eye').forEach((n) => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center'; n.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(.1)', offset: 0.45 }, { transform: 'scaleY(1)', offset: 0.6 }], { duration: ms(1), delay: ms(0.3) }); });
-    q('.pupil').forEach((n) => n.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-2px)', offset: 0.3 }, { transform: 'translateX(2px)', offset: 0.6 }, { transform: 'translateX(0)' }], { duration: ms(1.2) }));
+    const fx = inlineFx(el, 'foot'); if (!fx) return;
+    const ang = [-26, -12, 2, 16, 30];
+    fx.g.querySelectorAll('.toe').forEach((n, i) => {
+      n.style.transformBox = 'view-box'; n.style.transformOrigin = '54px 52px';
+      n.animate([{ transform: 'rotate(0) scale(1)' }, { transform: `rotate(${ang[i]}deg) scale(1.12)`, offset: 0.3 }, { transform: `rotate(${ang[i]}deg) scale(1.12)`, offset: 0.55 }, { transform: `rotate(${ang[i] * 0.3}deg) scale(1.04)`, offset: 0.75 }, { transform: 'rotate(0) scale(1)' }], { duration: ms(1.6), delay: ms(i * 0.05), easing: 'ease-in-out' });
+    });
     const rot = restRot(el);
-    el.animate([{ rotate: rot }, { rotate: `calc(${rot} - 9deg)`, offset: 0.25 }, { rotate: `calc(${rot} + 7deg)`, offset: 0.55 }, { rotate: rot }], { duration: ms(1.2), easing: 'ease-in-out' });
-    setTimeout(fx.done, ms(1.5));
+    el.animate([{ rotate: rot }, { rotate: `calc(${rot} + 5deg)`, offset: 0.3 }, { rotate: `calc(${rot} - 4deg)`, offset: 0.6 }, { rotate: rot }], { duration: ms(1.6), easing: 'ease-in-out' });
+    setTimeout(fx.done, ms(1.8));
   };
-  // Kahve: buhar yükselir, fincan hafifçe sallanır
-  const steamCoffee = (el) => {
-    if (busy(el, ms(2.2))) return;
-    const fx = inlineFx(el, 'coffee'); if (!fx) return;
-    fx.g.querySelectorAll('.steam').forEach((n, i) => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center bottom'; n.animate([{ transform: 'translateY(6px) scaleY(.5)', opacity: 0 }, { transform: 'translateY(-4px) scaleY(1.15)', opacity: 1, offset: 0.4 }, { transform: 'translateY(-14px) scaleY(1.3)', opacity: 0 }], { duration: ms(1.2), delay: ms(i * 0.22), easing: 'ease-out', iterations: 1 }); });
-    const mug = fx.g.querySelector('.mug'); if (mug) { mug.style.transformBox = 'fill-box'; mug.style.transformOrigin = 'center bottom'; mug.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-6deg)', offset: 0.3 }, { transform: 'rotate(5deg)', offset: 0.6 }, { transform: 'rotate(0)' }], { duration: ms(1), easing: 'ease-in-out' }); }
-    fx.g.querySelectorAll('.eye').forEach((n) => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = 'center'; n.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(.1)', offset: 0.5 }, { transform: 'scaleY(1)' }], { duration: ms(0.6), delay: ms(0.4) }); });
-    setTimeout(fx.done, ms(1.9));
+  // İskarpin: bağcıklar bacağa dolanır, sonra çözülür
+  const wrapLaces = (el) => {
+    if (busy(el, ms(2.6))) return;
+    const fx = inlineFx(el, 'shoe'); if (!fx) return;
+    const lace = fx.g.querySelector('.lace');
+    if (lace) lace.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0, offset: 0.4 }, { strokeDashoffset: 0, offset: 0.7 }, { strokeDashoffset: 1 }], { duration: ms(2.2), easing: 'ease-in-out' });
+    const rot = restRot(el);
+    el.animate([{ rotate: rot }, { rotate: `calc(${rot} - 6deg)`, offset: 0.2 }, { rotate: `calc(${rot} + 4deg)`, offset: 0.45 }, { rotate: rot }], { duration: ms(1.4), easing: 'ease-in-out' });
+    setTimeout(fx.done, ms(2.3));
   };
   // Zincir: halkalar gerilir ve toplanır
   const pullLink = (el) => {
@@ -1070,7 +1071,7 @@
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
-    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-goat': nodGoat, 'st-coffee': steamCoffee, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': spreadToes, 'st-shoe': wrapLaces, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   // Efektler fare üstüne gelince çalışır (dokunmatikte dokununca)
