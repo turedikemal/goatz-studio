@@ -852,3 +852,16 @@
   @media (min-width: 700px) { .wp-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   .polaroid i.pz { position: relative; overflow: hidden; background-image: none; }
   .polaroid i.pz * { animation: none !important; transition: none !important; }
+
+  .show-head .show-title { padding-bottom: .12em; }
+  .show-sub { margin-top: 18px; }
+  .show-tag { position: absolute; z-index: 5; bottom: -18px; right: 22px; background: var(--paper); color: var(--carbon); border: 1px solid var(--carbon); border-radius: var(--r-pill); padding: 6px 16px; font-size: 12px; box-shadow: 2px 3px 0 var(--carbon); }
+  .show-browser .show-tag { right: auto; left: 24px; }
+  .show-photo { position: relative; z-index: 2; display: grid; gap: 6px; align-content: center; justify-items: start; width: min(210px, 70vw); aspect-ratio: 1 / 1.05; padding: 22px 20px; background: var(--sun); color: var(--carbon); text-decoration: none; border: 1px solid var(--carbon); border-radius: calc(var(--r-card) * 1.6); box-shadow: 6px 8px 0 var(--carbon); rotate: 4deg; }
+  .show-photo b { font-size: clamp(26px, 3vw, 34px); line-height: .95; }
+  .show-photo .label { font-size: 11px; background: var(--paper); border: 1px solid var(--carbon); border-radius: var(--r-pill); padding: 3px 10px; }
+  .show-photo-st { position: absolute; right: -14px; top: -28px; width: 84px; height: 84px; rotate: 10deg; }
+  .show-browser .show-tag { left: auto; right: 28px; }
+  .show-apps .show-tag { bottom: auto; top: -18px; right: 20px; }
+  .show-photo { width: min(240px, 76vw); }
+  .show-photo b { font-size: clamp(22px, 2.4vw, 28px); overflow-wrap: anywhere; }
