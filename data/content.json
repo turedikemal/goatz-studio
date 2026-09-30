@@ -1512,7 +1512,7 @@
         "eyebrow": "Tek stüdyo",
         "title": "Kapı müşterisi beklemeye son!",
         "subtitle": "Web tasarım ve ürün çekimi aynı stüdyoda: markanızın yeni nesil dijital vitrini.",
-        "titleSize": 8,
+        "titleSize": 7,
         "ribbon": {
           "visible": true,
           "color": "blue"
@@ -1520,35 +1520,38 @@
         "stickers": [
           {
             "type": "browser",
-            "x": 84,
+            "x": 88,
             "y": 30,
-            "mx": 76,
-            "my": 18,
-            "size": 110,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
             "rotate": 10,
             "float": true
           },
           {
             "type": "camera",
-            "x": 8,
-            "y": 40,
-            "mx": 6,
-            "my": 58,
-            "size": 100,
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
             "rotate": -10,
             "float": true
           },
           {
             "type": "star",
-            "x": 50,
+            "x": 72,
             "y": 14,
-            "mx": 46,
+            "mx": 60,
             "my": 8,
-            "size": 80,
+            "size": 70,
             "rotate": 12,
             "float": true
           }
-        ]
+        ],
+        "subtitleStyle": {
+          "size": 60
+        }
       },
       "blocks": [
         {
