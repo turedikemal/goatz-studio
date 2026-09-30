@@ -750,3 +750,7 @@
   .work-story p:first-child { font-weight: 700; }
   .ws-d { right: clamp(10px, 3vw, 44px); top: clamp(12px, 3vw, 40px); rotate: -8deg; }
   .work-closing { margin: 0 0 36px; max-width: 34ch; font-size: clamp(24px, 3.4vw, 44px); line-height: 1.02; text-transform: none; font-weight: 800; }
+
+  /* Kelime vurgusu: üzerine gelince sitenin sarısı */
+  .hw { border-radius: 6px; padding: 0 .1em; margin: 0 -.1em; transition: background .12s ease; }
+  .hw:hover { background: var(--sun); }
