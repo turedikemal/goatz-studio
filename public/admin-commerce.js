@@ -361,5 +361,5 @@ window.GoatzCommerce = (ctx) => {
       h('div', { class: 'card' }, table(['Ürün', 'SKU', 'Depo', 'Adet', ''], tr, 'Stok kaydı yok. Önce ürün ekle.')));
   }
 
-  return { definitions, products, stock };
+  return { definitions, products, stock, ui: { api, fail, money, field, text, area, select, check, row, table, ensure, loadingCard } };
 };

@@ -6,6 +6,7 @@ const { render } = require('./lib/render');
 const store = require('./lib/content');
 const { resolvePages } = require('./lib/schema');
 const db = require('./lib/db');
+const salesRoutes = require('./lib/sales-routes');
 
 const PORT = Number(process.env.PORT) || 5173;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -405,6 +406,8 @@ async function api(req, res, url) {
       return json(res, e.status || 500, { error: e.status ? e.message : 'Stok güncellenemedi: ' + e.message });
     }
   }
+
+  if (await salesRoutes({ route, req, res, url, json, readJson })) return;
 
   return json(res, 404, { error: 'Bilinmeyen istek.' });
 }

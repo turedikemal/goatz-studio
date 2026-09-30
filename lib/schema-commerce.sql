@@ -174,3 +174,145 @@ CREATE INDEX IF NOT EXISTS idx_variants_product ON product_variants(product_id);
 CREATE INDEX IF NOT EXISTS idx_stock_variant ON stock(variant_id);
 CREATE INDEX IF NOT EXISTS idx_stock_warehouse ON stock(warehouse_id);
 CREATE INDEX IF NOT EXISTS idx_categories_parent ON categories(parent_id);
+
+-- ===== Müşteriler =====
+CREATE TABLE IF NOT EXISTS customer_tags (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  color VARCHAR(20) DEFAULT '#e9ccff',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS customers (
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(120) NOT NULL,
+  last_name VARCHAR(120),
+  email VARCHAR(255),
+  phone VARCHAR(50),
+  company VARCHAR(255),
+  tax_no VARCHAR(50),
+  tax_office VARCHAR(120),
+  tags TEXT[] DEFAULT '{}',
+  notes TEXT,
+  accepts_marketing BOOLEAN DEFAULT false,
+  addresses JSONB DEFAULT '[]',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_customers_email ON customers (LOWER(email)) WHERE email IS NOT NULL AND email <> '';
+
+-- ===== İndirimler =====
+CREATE TABLE IF NOT EXISTS coupons (
+  id SERIAL PRIMARY KEY,
+  code VARCHAR(60) NOT NULL UNIQUE,
+  description TEXT,
+  type VARCHAR(20) NOT NULL DEFAULT 'percent',
+  value DECIMAL(12, 2) DEFAULT 0,
+  min_order_total DECIMAL(12, 2) DEFAULT 0,
+  max_uses INTEGER,
+  used_count INTEGER DEFAULT 0,
+  starts_at TIMESTAMP,
+  ends_at TIMESTAMP,
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS campaigns (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  type VARCHAR(20) NOT NULL DEFAULT 'percent',
+  value DECIMAL(12, 2) NOT NULL DEFAULT 0,
+  scope VARCHAR(20) NOT NULL DEFAULT 'all',
+  scope_ids INTEGER[] DEFAULT '{}',
+  min_order_total DECIMAL(12, 2) DEFAULT 0,
+  starts_at TIMESTAMP,
+  ends_at TIMESTAMP,
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- ===== Siparişler =====
+CREATE SEQUENCE IF NOT EXISTS order_no_seq START 1001;
+
+CREATE TABLE IF NOT EXISTS orders (
+  id SERIAL PRIMARY KEY,
+  order_no INTEGER NOT NULL UNIQUE DEFAULT nextval('order_no_seq'),
+  customer_id INTEGER REFERENCES customers(id) ON DELETE SET NULL,
+  customer_name VARCHAR(255),
+  customer_email VARCHAR(255),
+  customer_phone VARCHAR(50),
+  channel VARCHAR(40) DEFAULT 'manual',
+  status VARCHAR(30) NOT NULL DEFAULT 'received',
+  payment_status VARCHAR(30) NOT NULL DEFAULT 'pending',
+  payment_method VARCHAR(60),
+  shipping_address JSONB DEFAULT '{}',
+  carrier VARCHAR(80),
+  tracking_no VARCHAR(120),
+  shipped_at TIMESTAMP,
+  delivered_at TIMESTAMP,
+  invoice_no VARCHAR(60),
+  invoice_date TIMESTAMP,
+  subtotal DECIMAL(12, 2) DEFAULT 0,
+  discount_total DECIMAL(12, 2) DEFAULT 0,
+  shipping_total DECIMAL(12, 2) DEFAULT 0,
+  tax_total DECIMAL(12, 2) DEFAULT 0,
+  total DECIMAL(12, 2) DEFAULT 0,
+  coupon_code VARCHAR(60),
+  notes TEXT,
+  stock_restored BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  product_id INTEGER REFERENCES products(id) ON DELETE SET NULL,
+  variant_id INTEGER REFERENCES product_variants(id) ON DELETE SET NULL,
+  name VARCHAR(255) NOT NULL,
+  sku VARCHAR(100),
+  quantity INTEGER NOT NULL,
+  unit_price DECIMAL(12, 2) NOT NULL,
+  discount_unit DECIMAL(12, 2) DEFAULT 0,
+  campaign_name VARCHAR(255),
+  tax_rate DECIMAL(5, 2) DEFAULT 0,
+  line_total DECIMAL(12, 2) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS order_events (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  type VARCHAR(40),
+  message TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS order_returns (
+  id SERIAL PRIMARY KEY,
+  order_id INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+  status VARCHAR(20) NOT NULL DEFAULT 'requested',
+  reason VARCHAR(120),
+  note TEXT,
+  items JSONB DEFAULT '[]',
+  refund_amount DECIMAL(12, 2) DEFAULT 0,
+  restocked BOOLEAN DEFAULT false,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS saved_filters (
+  id SERIAL PRIMARY KEY,
+  scope VARCHAR(40) NOT NULL,
+  name VARCHAR(120) NOT NULL,
+  filter JSONB NOT NULL DEFAULT '{}',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_orders_customer ON orders(customer_id);
+CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
+CREATE INDEX IF NOT EXISTS idx_orders_created ON orders(created_at);
+CREATE INDEX IF NOT EXISTS idx_order_items_order ON order_items(order_id);
+CREATE INDEX IF NOT EXISTS idx_order_events_order ON order_events(order_id);

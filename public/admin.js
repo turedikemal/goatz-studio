@@ -79,36 +79,40 @@
 
     { group: 'Siparişler' },
     {
-      id: 'siparisler', label: 'Siparişler', path: [], anchor: '#top',
-      intro: 'Tüm siparişlerinizi yönetin.',
+      id: 'siparisler', label: 'Siparişler', path: [], anchor: '#top', special: 'orders',
+      intro: 'Siparişleri filtrele, durumlarını yönet; ödeme, kargo, fatura ve iade işlemlerini yap.',
     },
     {
-      id: 'odemeler', label: 'Ödeme Durumu', path: [], anchor: '#top',
-      intro: 'Ödeme durumlarını takip edin.',
+      id: 'odemeler', label: 'Ödeme Durumu', path: [], anchor: '#top', special: 'orders',
+      intro: 'Ödemesi bekleyen, kısmi ödenen veya başarısız siparişleri takip et.',
     },
     {
-      id: 'kargo', label: 'Kargo', path: [], anchor: '#top',
-      intro: 'Kargo işlemlerini yönetin.',
+      id: 'kargo', label: 'Kargo', path: [], anchor: '#top', special: 'orders',
+      intro: 'Kargoya verilecek ve yoldaki siparişleri yönet, takip numarası gir.',
+    },
+    {
+      id: 'iadeler', label: 'İadeler', path: [], anchor: '#top', special: 'returns',
+      intro: 'İade taleplerini onayla, teslim al ve iadesini tamamla.',
     },
 
     { group: 'Müşteriler' },
     {
-      id: 'musteriler', label: 'Müşteriler', path: [], anchor: '#top',
-      intro: 'Müşteri bilgilerini yönetin.',
+      id: 'musteriler', label: 'Müşteriler', path: [], anchor: '#top', special: 'customers',
+      intro: 'Müşteri bilgilerini, adreslerini ve sipariş geçmişini yönet.',
     },
     {
-      id: 'etiketi', label: 'Etiketler', path: [], anchor: '#top',
-      intro: 'Müşteri etiketlerini oluşturun.',
+      id: 'etiketi', label: 'Etiketler', path: [], anchor: '#top', special: 'customer-tags',
+      intro: 'Müşterileri gruplamak için etiketler oluştur (VIP, Toptan…).',
     },
 
     { group: 'Pazarlama' },
     {
-      id: 'kuponlar', label: 'Kuponlar', path: [], anchor: '#top',
-      intro: 'Kupon ve indirimler oluşturun.',
+      id: 'kuponlar', label: 'Kuponlar', path: [], anchor: '#top', special: 'coupons',
+      intro: 'İndirim kuponları oluştur: yüzde, sabit tutar veya ücretsiz kargo.',
     },
     {
-      id: 'kampanyalar', label: 'Kampanyalar', path: [], anchor: '#top',
-      intro: 'Otomatik kampanyalar yönetin.',
+      id: 'kampanyalar', label: 'Kampanyalar', path: [], anchor: '#top', special: 'campaigns',
+      intro: 'Kategori veya ürüne otomatik uygulanan indirim kampanyaları.',
     },
     {
       id: 'blog', label: 'Blog', path: [], anchor: '#top',
@@ -965,6 +969,7 @@
       return;
     }
     $('#pageTitle').textContent = page.label;
+    sales.onPage(page);
     const parts = [];
     if (page.intro) parts.push(h('p', { class: 'intro' }, page.intro));
     if (page.section) {
@@ -978,6 +983,12 @@
     else if (page.special === 'definitions') parts.push(commerce.definitions(page));
     else if (page.special === 'products') parts.push(commerce.products());
     else if (page.special === 'stock') parts.push(commerce.stock());
+    else if (page.special === 'orders') parts.push(sales.orders(page));
+    else if (page.special === 'returns') parts.push(sales.returns());
+    else if (page.special === 'customers') parts.push(sales.customers());
+    else if (page.special === 'customer-tags') parts.push(sales.customerTags());
+    else if (page.special === 'coupons') parts.push(sales.coupons());
+    else if (page.special === 'campaigns') parts.push(sales.campaigns());
     else if (page.schema && Object.keys(page.schema).length > 0) parts.push(...objectFields(page.schema, page.path, true));
     else parts.push(placeholderPage(page.label));
     ed.replaceChildren(...parts);
@@ -1452,6 +1463,7 @@
   }
 
   const commerce = window.GoatzCommerce({ h, request, toast, rerender: () => renderPage() });
+  const sales = window.GoatzSales({ h, toast, rerender: () => renderPage(), goto: (id) => { const pg = PAGES.find((x) => x.id === id); if (pg) selectPage(pg); }, ui: commerce.ui });
 
   function placeholderPage(title) {
     return h('div', { class: 'card' },
