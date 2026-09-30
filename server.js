@@ -91,7 +91,7 @@ async function readJson(req, limit = MAX_JSON) {
     throw e.status ? e : Object.assign(new Error('Geçersiz JSON'), { status: 400 });
   }
 }
-function serveFile(res, file, cache = 'no-cache') {
+function serveFile(res, file, cache = 'no-store') {
   fs.readFile(file, (err, data) => {
     if (err) return send(res, 404, 'Bulunamadı');
     send(res, 200, data, TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream', { 'Cache-Control': cache });
@@ -431,7 +431,7 @@ const server = http.createServer(async (req, res) => {
       }
       out += 'var cache={};function req(n){if(cache[n])return cache[n].exports;if(!defs[n])throw new Error("yok: "+n);var m={exports:{}};cache[n]=m;defs[n](m,m.exports,req);return m.exports;}'
         + 'var r=req("./render");window.GoatzRender={render:r.render,setSprites:r.setSprites,conform:req("./schema").conform,resolvePages:req("./schema").resolvePages,DEFAULTS:req("./default-content")};})();';
-      return send(res, 200, out, TYPES['.js'], { 'Cache-Control': 'no-cache' });
+      return send(res, 200, out, TYPES['.js'], { 'Cache-Control': 'no-store' });
     }
     if (url.pathname === '/admin' || url.pathname === '/admin/') {
       return serveFile(res, path.join(PUBLIC_DIR, 'admin.html'));
