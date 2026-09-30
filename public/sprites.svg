@@ -113,6 +113,33 @@
       <rect x="42" y="80" width="16" height="9" rx="3" fill="#4da2ff" stroke="#000" stroke-width="3"/>
       <path d="M42 54l4-14 4 14 4-14 4 14" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
     </symbol>
+    <!-- Keçi (Goatz) -->
+    <symbol id="s-goat" viewBox="0 0 100 100">
+      <path class="ear" d="M22 44L4 38 10 54 24 54z" fill="#e9ccff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="ear" d="M78 44L96 38 90 54 76 54z" fill="#e9ccff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="horn" d="M36 30C26 22 28 8 40 4 37 12 40 20 44 28z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="horn" d="M64 30C74 22 72 8 60 4 63 12 60 20 56 28z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse class="head" cx="50" cy="54" rx="28" ry="30" fill="#fff" stroke="#000" stroke-width="3"/>
+      <circle class="eye" cx="38" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <circle class="eye" cx="62" cy="46" r="6" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <circle class="pupil" cx="39" cy="47" r="2.8" fill="#000"/>
+      <circle class="pupil" cx="61" cy="47" r="2.8" fill="#000"/>
+      <ellipse cx="50" cy="68" rx="14" ry="10" fill="#e9ccff" stroke="#000" stroke-width="2.5"/>
+      <circle cx="45" cy="66" r="1.8" fill="#000"/><circle cx="55" cy="66" r="1.8" fill="#000"/>
+      <path d="M44 73q6 5 12 0" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round"/>
+      <path class="beard" d="M42 82Q50 100 58 82z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Kahve -->
+    <symbol id="s-coffee" viewBox="0 0 100 100">
+      <g fill="none" stroke="#000" stroke-width="3.5" stroke-linecap="round">
+        <path class="steam" d="M36 28c-6-6 6-10 0-18"/><path class="steam" d="M50 28c-6-6 6-10 0-18"/><path class="steam" d="M64 28c-6-6 6-10 0-18"/>
+      </g>
+      <path d="M80 50h6a10 10 0 0 1 0 22h-8" fill="none" stroke="#000" stroke-width="4"/>
+      <path class="mug" d="M20 36h62l-4 40a14 14 0 0 1-14 12H38a14 14 0 0 1-14-12z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="51" cy="37" rx="31" ry="6" fill="#7a3b1d" stroke="#000" stroke-width="3"/>
+      <circle class="eye" cx="42" cy="58" r="3.4" fill="#000"/><circle class="eye" cx="60" cy="58" r="3.4" fill="#000"/>
+      <path d="M44 67q7 6 14 0" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
     <!-- G jetonu -->
     <symbol id="s-coin" viewBox="0 0 100 100">
       <ellipse cx="50" cy="56" rx="42" ry="40" fill="#e0b800" stroke="#000" stroke-width="3"/>

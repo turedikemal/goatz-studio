@@ -492,17 +492,17 @@
   "footer": {
     "background": "carbon",
     "showLogo": true,
-    "description": "Ürün çekimi ve web tasarım stüdyosu. Ürünlerini çekiyor, siteni tasarlıyor, yayına alıyoruz.",
+    "description": "Web tasarım ve e-ticaret stüdyosu. Siteni tasarlıyor, ürünlerini çekiyor, yayına alıyoruz.",
     "showLinks": true,
     "linksTitle": "Sayfalar",
     "showContact": true,
     "contactTitle": "İletişim",
     "bigText": "Goatz Studio",
     "copyright": "© 2026 The Goatz Studio",
-    "tagline": "Ürün çekimi · Web tasarım",
+    "tagline": "Web tasarım · E-ticaret · Ürün çekimi",
     "stickers": [
       {
-        "type": "star",
+        "type": "goat",
         "x": 5,
         "y": 8,
         "mx": 4,
@@ -512,7 +512,7 @@
         "float": true
       },
       {
-        "type": "coin",
+        "type": "coffee",
         "x": 88,
         "y": 12,
         "mx": 78,
@@ -521,7 +521,28 @@
         "rotate": 10,
         "float": true
       }
-    ]
+    ],
+    "showLegal": true,
+    "legalTitle": "Yasal",
+    "legalLinks": [
+      {
+        "label": "Gizlilik Politikası",
+        "target": "page:gizlilik"
+      },
+      {
+        "label": "KVKK Aydınlatma Metni",
+        "target": "page:kvkk"
+      },
+      {
+        "label": "Çerez Politikası",
+        "target": "page:cerez"
+      },
+      {
+        "label": "Kullanım Koşulları",
+        "target": "page:kosullar"
+      }
+    ],
+    "companyInfo": ""
   },
   "works": {
     "visible": true,
@@ -1855,6 +1876,946 @@
           "imageSticker": "star",
           "button": {
             "label": "Gönder",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gizlilik",
+      "title": "Gizlilik Politikası",
+      "slug": "gizlilik-politikasi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Gizlilik Politikası — The Goatz Studio",
+      "seoDescription": "The Goatz Studio gizlilik politikası: hangi bilgileri topluyoruz, nasıl kullanıyoruz ve nasıl koruyoruz.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Yasal",
+        "title": "Gizlilik Politikası",
+        "subtitle": "Bilgilerinizi nasıl topladığımızı ve koruduğumuzu açıklıyoruz.",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "layers",
+            "x": 86,
+            "y": 30,
+            "mx": 78,
+            "my": 16,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 56,
+            "size": 85,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Bilgileriniz bizde güvende.",
+          "text": "Bu politika, The Goatz Studio’nun thegoatzstudio.com sitesinde hangi bilgileri topladığını, nasıl kullandığını ve nasıl koruduğunu açıklar.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Topladığımız bilgiler",
+          "text": "İletişim formunda bize verdiğiniz ad soyad, e-posta, telefon (isteğe bağlı) ve mesaj bilgilerini topluyoruz. Bunun dışında sitede hesap oluşturma, üyelik ya da ödeme alma yoktur.\n\nSunucu, sitenin çalışması için standart teknik kayıtlar (örneğin erişim zamanı ve IP adresi) tutabilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Bilgileri nasıl kullanırız",
+          "text": "Bilgilerinizi yalnızca mesajınıza yanıt vermek, teklif hazırlamak ve talep ettiğiniz hizmetle ilgili sizinle iletişim kurmak için kullanırız. Bilgilerinizi satmayız ve izniniz olmadan reklam amacıyla paylaşmayız.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Üçüncü taraf hizmetler",
+          "text": "Site, yazı tiplerini Google Fonts’tan ve bir hareket kütüphanesini jsDelivr’den yükler; bu nedenle sayfayı açtığınızda tarayıcınız bu sağlayıcılara bağlanır ve IP adresiniz onlara iletilir. Mesaj bildirimleri için bir e-posta hizmeti sağlayıcısı kullanırız.\n\nSitede sosyal medya ve iletişim bağlantıları (WhatsApp, Instagram) bulunur; bu sitelerin gizlilik uygulamalarından ilgili platformlar sorumludur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Güvenlik",
+          "text": "Bilgilerinizi korumak için makul teknik ve idari önlemler alırız. Yine de internet üzerinden yapılan hiçbir aktarımın tamamen güvenli olduğu garanti edilemez.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Haklarınız ve iletişim",
+          "text": "Verilerinizin silinmesini, düzeltilmesini veya hangi verilerin tutulduğunu öğrenmek istediğinizde hello@thegoatzstudio.com adresine yazabilirsiniz. Ayrıntılı bilgi için KVKK Aydınlatma Metni’ne bakabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kvkk",
+      "title": "KVKK Aydınlatma Metni",
+      "slug": "kvkk-aydinlatma-metni",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "KVKK Aydınlatma Metni — The Goatz Studio",
+      "seoDescription": "The Goatz Studio KVKK aydınlatma metni: kişisel verilerin işlenmesi, aktarımı ve haklarınız.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Yasal",
+        "title": "KVKK Aydınlatma Metni",
+        "subtitle": "Kişisel verileriniz 6698 sayılı Kanun kapsamında nasıl işleniyor?",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "layers",
+            "x": 86,
+            "y": 30,
+            "mx": 78,
+            "my": 16,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 56,
+            "size": 85,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Veri sorumlusu",
+          "text": "Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca, thegoatzstudio.com internet sitesini ziyaret eden ve iletişim formunu kullanan kişileri bilgilendirmek amacıyla hazırlanmıştır.\n\nVeri sorumlusu The Goatz Studio’dur. Bize ulaşmak için: hello@thegoatzstudio.com",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "İşlenen kişisel veriler",
+          "text": "İletişim formunu doldurduğunuzda ad soyad, e-posta adresi, telefon numarası (isteğe bağlı) ve mesajınızın içeriği işlenir. WhatsApp, e-posta ya da Instagram üzerinden bize yazdığınızda ilgili platformda paylaştığınız bilgiler de işlenebilir.\n\nSite, ziyaretçileri izlemek ya da profil çıkarmak amacıyla veri toplamaz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "İşleme amacı ve hukuki sebep",
+          "text": "Kişisel verileriniz; mesajınıza yanıt vermek, teklif hazırlamak, talep ettiğiniz web tasarım ve e-ticaret hizmetleri için sizinle iletişim kurmak amacıyla işlenir.\n\nHukuki sebepler: bir sözleşmenin kurulması ya da ifası için gerekli olması ve veri sorumlusunun meşru menfaatidir (KVKK m.5/2-c ve m.5/2-f).",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Verilerin aktarılması",
+          "text": "Formdan gelen mesajlar sitenin barındırıldığı sunucuda saklanır ve bildirim e-postası göndermek için e-posta hizmeti sağlayıcısı üzerinden iletilir. Bu sağlayıcılar yurt dışında bulunabilir. Verileriniz bunun dışında üçüncü kişilere satılmaz veya pazarlama amacıyla paylaşılmaz. Yasal bir yükümlülük doğarsa yetkili kurumlarla paylaşılabilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Saklama süresi",
+          "text": "Verileriniz, iletişim talebinizin gerektirdiği süre boyunca ve yasal saklama yükümlülüklerinin gerektirdiği süre kadar saklanır; sonrasında silinir ya da anonim hale getirilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Haklarınız",
+          "text": "KVKK’nın 11. maddesi uyarınca; verilerinizin işlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme, amacına uygun kullanılıp kullanılmadığını öğrenme, aktarıldığı kişileri bilme, eksik veya yanlış işlenmişse düzeltilmesini isteme, silinmesini veya yok edilmesini isteme ve zarara uğramanız hâlinde tazminat talep etme haklarına sahipsiniz.\n\nBu haklarınızı kullanmak için hello@thegoatzstudio.com adresine yazabilirsiniz. Başvurunuz en geç otuz gün içinde yanıtlanır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cerez",
+      "title": "Çerez Politikası",
+      "slug": "cerez-politikasi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Çerez Politikası — The Goatz Studio",
+      "seoDescription": "The Goatz Studio çerez politikası.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Yasal",
+        "title": "Çerez Politikası",
+        "subtitle": "Sitemizde hangi çerezler kullanılıyor?",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "layers",
+            "x": 86,
+            "y": 30,
+            "mx": 78,
+            "my": 16,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 56,
+            "size": 85,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Çerezler nedir?",
+          "text": "Çerezler, bir siteyi ziyaret ettiğinizde tarayıcınıza kaydedilen küçük metin dosyalarıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Sitemizde çerez kullanımı",
+          "text": "Bu sitede ziyaretçileri izleme, reklam ya da istatistik amaçlı çerez kullanılmaz. Sitenin gösterilmesi için zorunlu olmayan çerez bulunmaz.\n\nYalnızca site yönetim paneline giriş yapan yetkili kişiler için oturum çerezi kullanılır; ziyaretçiler bu çerezle karşılaşmaz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Üçüncü taraf bağlantılar",
+          "text": "Sayfalar açılırken yazı tipleri Google Fonts’tan ve bir betik jsDelivr’den yüklenir. Bu sağlayıcılar kendi politikalarına göre teknik veri (örneğin IP adresi) işleyebilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Değişiklikler",
+          "text": "İleride analiz ya da benzeri bir araç eklersek bu politikayı güncelleriz ve gerekli izni ayrıca isteriz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kosullar",
+      "title": "Kullanım Koşulları",
+      "slug": "kullanim-kosullari",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Kullanım Koşulları — The Goatz Studio",
+      "seoDescription": "The Goatz Studio site kullanım koşulları.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Yasal",
+        "title": "Kullanım Koşulları",
+        "subtitle": "Siteyi kullanırken geçerli koşullar.",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "layers",
+            "x": 86,
+            "y": 30,
+            "mx": 78,
+            "my": 16,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 56,
+            "size": 85,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Genel",
+          "text": "thegoatzstudio.com sitesini kullanarak aşağıdaki koşulları kabul etmiş olursunuz. Siteyi kullanmak istemiyorsanız lütfen kullanmayın.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Site içeriği",
+          "text": "Sitedeki metinler, tasarımlar, görseller, sticker’lar ve çizimler The Goatz Studio’ya ya da ilgili hak sahiplerine aittir. Yazılı izin olmadan kopyalanamaz, çoğaltılamaz veya ticari amaçla kullanılamaz.\n\nİşler bölümündeki projeler ve markalar ilgili müşterilerine aittir; yalnızca portföy amacıyla gösterilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Hizmetler",
+          "text": "Sitedeki bilgiler genel bilgilendirme amaçlıdır ve bağlayıcı bir teklif sayılmaz. Hizmetin kapsamı, süresi ve bedeli ayrıca yazılı olarak kararlaştırılır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Sorumluluk",
+          "text": "Sitenin kesintisiz ya da hatasız çalışacağını garanti etmeyiz. Site içeriğindeki olası hatalar ya da üçüncü taraf sitelerin içeriği nedeniyle doğabilecek zararlardan sorumlu değiliz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Bağlantılar",
+          "text": "Site, üçüncü taraf sitelere bağlantılar içerebilir. Bu sitelerin içeriği ve gizlilik uygulamalarından ilgili siteler sorumludur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Değişiklik ve uygulanacak hukuk",
+          "text": "Bu koşulları önceden haber vermeden güncelleyebiliriz; güncel hali bu sayfada yayımlanır. Koşullara Türkiye Cumhuriyeti hukuku uygulanır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
             "target": "#iletisim"
           },
           "columns": 3,

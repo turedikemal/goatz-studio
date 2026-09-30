@@ -517,7 +517,7 @@
   /* ---------- Footer ---------- */
   .site-footer { position: relative; color: var(--ft, #fff); }
   .site-footer .inner { padding-block: clamp(64px, 8vw, 110px) 28px; position: relative; z-index: 2; }
-  .sf-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: clamp(28px, 5vw, 72px); }
+  .sf-top { display: grid; grid-template-columns: 1.3fr 1fr 1.1fr 1.1fr; gap: clamp(28px, 5vw, 72px); }
   .sf-logo { height: 64px; width: auto; display: block; margin-bottom: 18px; }
   .sf-logo-text { font-size: 48px; margin: 0 0 14px; }
   .sf-brand p { max-width: 36ch; margin: 0; font-size: 16px; }
@@ -897,17 +897,18 @@
   .cf-status.ok { background: var(--paper); border: 1px solid var(--carbon); border-radius: var(--r-card); padding: 10px 14px; }
   .cf-status.err { color: #b00020; background: var(--paper); border: 1px solid #b00020; border-radius: var(--r-card); padding: 10px 14px; }
 
-  /* Cam efektli sekme çubuğu */
-  .tabs { position: relative; }
-  .tabs::before { content: ''; position: absolute; left: 50%; top: 50%; width: min(380px, 84%); height: 56px; translate: -50% -50%; z-index: 0; pointer-events: none; filter: blur(9px); opacity: .95;
-    background: radial-gradient(circle at 16% 50%, var(--mint) 0 18%, transparent 19%), radial-gradient(circle at 50% 50%, var(--lavender) 0 20%, transparent 21%), radial-gradient(circle at 84% 50%, var(--sun) 0 18%, transparent 19%);
-    animation: tabOrbs 8s ease-in-out infinite alternate; }
-  @keyframes tabOrbs { from { translate: calc(-50% - 26px) -50%; } to { translate: calc(-50% + 26px) -50%; } }
-  html:not(.mo-idle) .tabs::before { animation: none; }
-  .tablist { z-index: 1; background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,.28)); -webkit-backdrop-filter: blur(14px) saturate(1.8); backdrop-filter: blur(14px) saturate(1.8);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -1px 0 rgba(0,0,0,.06), 0 10px 28px rgba(0,0,0,.12); }
-  .tab { mix-blend-mode: normal; color: var(--carbon); transition: color .22s ease .16s; }
-  .tab[aria-selected="true"] { color: #fff; }
-  .tab-bg { overflow: hidden; box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 4px 10px rgba(0,0,0,.25); }
-  .tab-bg::after { content: ''; position: absolute; inset: 0 0 50% 0; background: linear-gradient(rgba(255,255,255,.3), rgba(255,255,255,0)); border-radius: inherit; }
+  /* Liquid glass sekme çubuğu */
+  .tabs::before { content: none; }
+  .tablist { z-index: 1; border: 1px solid rgba(0,0,0,.16);
+    background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(205,214,230,.30));
+    -webkit-backdrop-filter: blur(22px) saturate(1.9) brightness(1.04); backdrop-filter: blur(22px) saturate(1.9) brightness(1.04);
+    box-shadow: inset 0 1.5px 1px rgba(255,255,255,.95), inset 0 -1.5px 2px rgba(0,0,0,.07), inset 0 0 14px rgba(255,255,255,.55), 0 10px 30px rgba(20,30,60,.14), 0 1px 2px rgba(0,0,0,.10); }
+  .tab { mix-blend-mode: normal; color: var(--carbon); transition: color .22s ease; }
+  .tab[aria-selected="true"] { color: var(--carbon); }
+  .tab-bg { overflow: hidden; border: 1px solid rgba(255,255,255,.7);
+    background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.55));
+    -webkit-backdrop-filter: blur(10px) saturate(1.6); backdrop-filter: blur(10px) saturate(1.6);
+    box-shadow: inset 0 2px 2px rgba(255,255,255,1), inset 0 -3px 5px rgba(0,0,0,.10), inset 2px 0 4px rgba(255,255,255,.6), inset -2px 0 4px rgba(255,255,255,.6), 0 6px 14px rgba(20,30,60,.22), 0 1px 3px rgba(0,0,0,.18); }
+  .tab-bg::after { content: ''; position: absolute; left: 8%; right: 8%; top: 2px; height: 42%; border-radius: 999px; background: linear-gradient(rgba(255,255,255,.85), rgba(255,255,255,0)); pointer-events: none; }
   .page-hero .page-eyebrow { margin-bottom: clamp(24px, 3.4vw, 48px); z-index: 6; }
+  .sf-company { font-size: 12px; opacity: .65; line-height: 1.5; margin: 14px 0 0; }

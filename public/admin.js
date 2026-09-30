@@ -6,7 +6,7 @@
     carbon: 'Siyah', paper: 'Beyaz', sky: 'Açık mavi', concrete: 'Gri', mist: 'Açık gri',
     blue: 'Mavi', mint: 'Nane yeşili', lavender: 'Lavanta', ember: 'Turuncu', sun: 'Sarı', violet: 'Mor',
   };
-  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', rocket: 'Roket', chart: 'Grafik', product: 'Ürün şişesi (MARKA)', signpost: 'Yön tabelası', vitrin: 'Fransız vitrin', code: 'Kod', phone: 'Telefon', layers: 'Katmanlar', type: 'Yazı (Aa)', bag: 'Alışveriş çantası', tag: 'Fiyat etiketi', bulb: 'Ampul (fikir)' };
+  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', rocket: 'Roket', chart: 'Grafik', product: 'Ürün şişesi (MARKA)', signpost: 'Yön tabelası', vitrin: 'Fransız vitrin', goat: 'Keçi', coffee: 'Kahve', code: 'Kod', phone: 'Telefon', layers: 'Katmanlar', type: 'Yazı (Aa)', bag: 'Alışveriş çantası', tag: 'Fiyat etiketi', bulb: 'Ampul (fikir)' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160', product: '0 0 100 160' };
   const TARGETS = [
     ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
@@ -470,6 +470,12 @@
           linksTitle: text('Sayfa linkleri sütun başlığı', { compact: true, hint: 'Linkler menüden ve "Menüye ekle" işaretli sayfalardan kendiliğinden gelir.' }),
           showContact: bool('İletişim sütununu göster'),
           contactTitle: text('İletişim sütun başlığı', { compact: true, hint: 'WhatsApp, Instagram ve e-posta, İletişim sayfasında girdiklerinden gelir.' }),
+        }, { flat: true }),
+        legal: group('Yasal bağlantılar sütunu (Sayfalar\'ın solunda)', {
+          showLegal: bool('Yasal sütununu göster'),
+          legalTitle: text('Sütun başlığı', { compact: true }),
+          legalLinks: list('Yasal sayfa linkleri', group('', { label: text('Yazı', { nostyle: true }), target: target() }), { addLabel: 'Link ekle', title: (v) => v.label || 'Link', max: 10, newItem: { label: '', target: '#iletisim' } }),
+          companyInfo: area('Firma bilgisi (isteğe bağlı)', { hint: 'Ünvan, vergi no, adres gibi bilgileri buraya yazarsan marka alanının altında küçük yazıyla görünür. Boşsa görünmez.' }),
         }, { flat: true }),
         big: group('Dev yazı', { bigText: text('Dev yazı', { hint: 'Boş bırakırsan görünmez.' }) }, { flat: true }),
         bottom: group('Alt satır', { copyright: text('Sol alttaki yazı'), tagline: text('Sağ alttaki yazı') }, { flat: true }),
