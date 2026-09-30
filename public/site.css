@@ -617,3 +617,8 @@
   .work-badge { padding: 5px 11px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); }
   .work-shot.is-natural { aspect-ratio: auto; }
   .work-shot.is-natural > img { flex: none; height: auto; object-fit: initial; }
+
+  /* İşler: kategori başlıkları */
+  .work-group[hidden] { display: none; }
+  .work-group + .work-group { margin-top: clamp(56px, 8vw, 110px); }
+  .work-group-h { margin: 0 0 clamp(20px, 3vw, 36px); font-size: clamp(44px, 8vw, 120px); line-height: .9; }

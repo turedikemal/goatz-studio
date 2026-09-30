@@ -303,10 +303,10 @@
   // ---------- İşler: kategori filtresi ----------
   const workFilters = document.querySelector('.work-filters');
   if (workFilters) {
-    const cards = [...document.querySelectorAll('.work-card')];
+    const groups = [...document.querySelectorAll('.work-group')];
     const apply = (key) => {
       workFilters.querySelectorAll('.work-filter').forEach((b) => b.classList.toggle('on', b.dataset.filter === key));
-      cards.forEach((c) => { c.hidden = !(key === 'all' || c.dataset.cat === key); });
+      groups.forEach((g) => { g.hidden = !(key === 'all' || g.dataset.cat === key); });
     };
     workFilters.addEventListener('click', (e) => {
       const b = e.target.closest('.work-filter');
