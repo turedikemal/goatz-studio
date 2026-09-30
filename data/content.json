@@ -613,6 +613,8 @@
         "color": "",
         "featured": false,
         "live": true,
+        "natural": false,
+        "badge": "",
         "visible": true
       },
       {
@@ -638,6 +640,8 @@
         "color": "",
         "featured": false,
         "live": true,
+        "natural": false,
+        "badge": "",
         "visible": true
       },
       {
@@ -663,6 +667,8 @@
         "color": "",
         "featured": false,
         "live": true,
+        "natural": false,
+        "badge": "",
         "visible": true
       },
       {
@@ -688,6 +694,8 @@
         "color": "",
         "featured": false,
         "live": true,
+        "natural": false,
+        "badge": "",
         "visible": true
       },
       {
@@ -713,6 +721,8 @@
         "color": "",
         "featured": false,
         "live": false,
+        "natural": false,
+        "badge": "",
         "visible": true
       },
       {
@@ -738,6 +748,8 @@
         "color": "",
         "featured": false,
         "live": true,
+        "natural": false,
+        "badge": "",
         "visible": true
       },
       {
@@ -763,6 +775,89 @@
         "color": "",
         "featured": false,
         "live": false,
+        "natural": false,
+        "badge": "",
+        "visible": true
+      },
+      {
+        "title": "Kategori Yıldızı",
+        "slug": "",
+        "category": "app",
+        "year": "",
+        "client": "",
+        "summary": "",
+        "description": "",
+        "image": "/uploads/muohc89q-30cc4148.webp",
+        "url": "",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          ""
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "live": false,
+        "natural": true,
+        "badge": "Geliştirmede",
+        "visible": true
+      },
+      {
+        "title": "Yorum Merkezi",
+        "slug": "",
+        "category": "app",
+        "year": "",
+        "client": "",
+        "summary": "",
+        "description": "",
+        "image": "/uploads/muohc89s-141cac3f.webp",
+        "url": "",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          ""
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "live": false,
+        "natural": true,
+        "badge": "Geliştirmede",
+        "visible": true
+      },
+      {
+        "title": "Sipariş Dağılım Haritası",
+        "slug": "",
+        "category": "app",
+        "year": "",
+        "client": "",
+        "summary": "",
+        "description": "",
+        "image": "/uploads/muohc89u-b690b5a4.webp",
+        "url": "",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          ""
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "live": false,
+        "natural": true,
+        "badge": "Yakında yayında",
         "visible": true
       }
     ],

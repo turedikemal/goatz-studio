@@ -613,3 +613,7 @@
   .work-live > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .work-live iframe { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; border: 0; background: #fff; transform-origin: 0 0; transform: scale(var(--k, .3)); opacity: 0; transition: opacity .7s ease; pointer-events: none; }
   .work-live.is-loaded iframe { opacity: 1; }
+
+  .work-badge { padding: 5px 11px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); }
+  .work-shot.is-natural { aspect-ratio: auto; }
+  .work-shot.is-natural > img { flex: none; height: auto; object-fit: initial; }
