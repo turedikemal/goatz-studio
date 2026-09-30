@@ -274,6 +274,24 @@
     }));
   }
 
+  // ---------- İşler: kategori filtresi ----------
+  const workFilters = document.querySelector('.work-filters');
+  if (workFilters) {
+    const cards = [...document.querySelectorAll('.work-card')];
+    const apply = (key) => {
+      workFilters.querySelectorAll('.work-filter').forEach((b) => b.classList.toggle('on', b.dataset.filter === key));
+      cards.forEach((c) => { c.hidden = !(key === 'all' || c.dataset.cat === key); });
+    };
+    workFilters.addEventListener('click', (e) => {
+      const b = e.target.closest('.work-filter');
+      if (!b) return;
+      apply(b.dataset.filter);
+      history.replaceState(null, '', b.dataset.filter === 'all' ? location.pathname : `#${b.dataset.filter}`);
+    });
+    const want = decodeURIComponent(location.hash.slice(1));
+    if (want && [...workFilters.querySelectorAll('.work-filter')].some((b) => b.dataset.filter === want)) apply(want);
+  }
+
   // ---------- Footer'daki dev yazı: her zaman satırın tam genişliğine sığar ----------
   const bigFooter = document.querySelector('.sf-big');
   if (bigFooter) {

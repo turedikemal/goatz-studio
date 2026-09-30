@@ -4,7 +4,7 @@ const path = require('path');
 const crypto = require('crypto');
 const { render } = require('./lib/render');
 const store = require('./lib/content');
-const { resolvePages } = require('./lib/schema');
+const { resolvePages, resolveWorks } = require('./lib/schema');
 const db = require('./lib/db');
 const salesRoutes = require('./lib/sales-routes');
 
@@ -446,9 +446,20 @@ const server = http.createServer(async (req, res) => {
     }
     if (url.pathname === '/sitemap.xml') {
       const c = store.load();
-      const urls = ['/', ...resolvePages(c.pages).filter((p) => p.visible).map((p) => `/${p.slug}`)];
+      const urls = ['/', ...(c.works.visible ? ['/isler', ...resolveWorks(c.works.items).filter((v) => v.visible).map((v) => `/isler/${v.slug}`)] : []), ...resolvePages(c.pages).filter((p) => p.visible).map((p) => `/${p.slug}`)];
       const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${origin}${u}</loc></url>`).join('\n')}\n</urlset>\n`;
       return send(res, 200, xml, 'application/xml; charset=utf-8');
+    }
+    // İşler: /isler ve /isler/proje-adi
+    const wm = /^\/isler(?:\/([a-z0-9-]+))?\/?$/.exec(url.pathname);
+    if (wm) {
+      const c = store.load();
+      if (c.works.visible) {
+        if (!wm[1]) return send(res, 200, render(c, { page: 'works' }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+        const it = resolveWorks(c.works.items).find((v) => v.visible && v.slug === wm[1]);
+        if (it) return send(res, 200, render(c, { work: it.slug }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      }
+      return send(res, 404, 'Sayfa bulunamadı');
     }
     // Özel sayfalar: /hakkimizda
     const pm = /^\/([a-z0-9-]+)\/?$/.exec(url.pathname);

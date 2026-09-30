@@ -319,3 +319,9 @@ body.is-dragging-nav, body.is-dragging-nav * { cursor: grabbing !important; user
 .line-row { display: grid; grid-template-columns: minmax(160px, 2fr) minmax(110px, 1fr) 70px minmax(110px, 1fr) auto; gap: 8px; margin-bottom: 8px; align-items: center; }
 .line-row select, .line-row input { padding: 8px 10px; border: 1px solid #bbb; border-radius: 12px; background: var(--paper); min-width: 0; }
 @media (max-width: 900px) { .line-row { grid-template-columns: 1fr 1fr; } }
+
+/* Dar panelde liste öğeleri taşmasın */
+.editor .field, .editor .list, .editor .item, .editor .item-body, .editor .fields { min-width: 0; }
+.item-head { min-width: 0; }
+.item-head b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item-tools { flex: none; }

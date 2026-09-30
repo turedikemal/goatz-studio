@@ -9,7 +9,7 @@
   const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160' };
   const TARGETS = [
-    ['#top', 'Sayfanın başı'], ['#isler', 'İşler bölümü'], ['#hizmetler', 'Hizmetler bölümü'],
+    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
     ['#neden', 'Neden biz bölümü'], ['#surec', 'Süreç bölümü'], ['#iletisim', 'İletişim bölümü'],
     ['whatsapp', 'WhatsApp (iletişimdeki numara)'], ['instagram', 'Instagram (iletişimdeki hesap)'], ['email', 'E-posta (iletişimdeki adres)'],
   ];
@@ -121,6 +121,73 @@
     {
       id: 'etkinlikler', label: 'Etkinlikler', path: [], anchor: '#top',
       intro: 'Etkinlikleri yönetin.',
+    },
+
+    { group: 'İşler' },
+    {
+      id: 'isler-projeler', label: 'Projeler', path: ['works'], anchor: '#top', previewPage: 'works',
+      intro: 'Yaptığınız web siteleri, web uygulamaları ve danışmanlık işleri. Her proje /isler sayfasında kart olarak, kendi adresinde de ayrıntılı sayfa olarak görünür.',
+      schema: {
+        items: list('Projeler', group('', {
+          title: text('Proje adı', { nostyle: true }),
+          category: select('Kategori', () => state.works.categories.map((c) => [c.key, c.label])),
+          summary: area('Kısa açıklama (kartta görünür)', { nostyle: true }),
+          image: image('Kapak görseli', { hint: 'Sitenin ekran görüntüsü önerilir (yatay, 16:10). Yüklemezsen renkli bir kart çıkar.' }),
+          url: text('Site / uygulama adresi', { nostyle: true, hint: 'https://ile başlamalı. Boş bırakırsan ziyaret butonu çıkmaz.' }),
+          detail: group('Detay sayfası', {
+            description: area('Proje hakkında', { nostyle: true, hint: 'Boş satır bırakarak yeni paragraf aç.' }),
+            client: text('Müşteri', { nostyle: true }),
+            year: text('Yıl', { nostyle: true, compact: true }),
+            tags: list('Teknolojiler / etiketler', text('', { nostyle: true }), { addLabel: 'Etiket ekle', newItem: '', max: 12 }),
+            urlLabel: text('Ziyaret butonunun yazısı', { nostyle: true }),
+            gallery: list('Galeri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
+            slug: text('Sayfa adresi', { nostyle: true, hint: 'Boş bırakırsan proje adından üretilir. Örn. pati-mama → /isler/pati-mama' }),
+          }),
+          look: group('Görünüm', {
+            color: select('Kart rengi', [['', 'Kategorinin rengi'], ...Object.entries(COLOR_NAMES)]),
+            featured: bool('Öne çıkan (listede geniş kart)'),
+            visible: bool('Sitede göster'),
+          }),
+        }), {
+          addLabel: 'Proje ekle', title: (v) => v.title || 'Yeni proje', max: 100,
+          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, visible: true },
+        }),
+      },
+    },
+    {
+      id: 'isler-ayarlar', label: 'Sayfa ve kategoriler', path: ['works'], anchor: '#top', previewPage: 'works',
+      intro: '/isler sayfasının başlığı, kategoriler (Web siteleri, Web uygulamaları, Danışmanlık…) ve Google bilgileri.',
+      schema: {
+        visible: bool('İşler sayfası yayında (kapatırsan menüdeki İşler bağlantıları ana sayfadaki bölüme döner)'),
+        hero: group('Sayfa başlığı', {
+          visible: bool('Başlık alanını göster'),
+          eyebrow: text('Küçük üst yazı', { nostyle: true }),
+          title: text('Başlık', { nostyle: true }),
+          subtitle: text('Alt yazı', { nostyle: true }),
+          titleSize: number('Başlık boyutu', 4, 30, ''),
+          ribbon,
+          stickers: stickerList('Sticker\'lar'),
+        }),
+        categories: list('Kategoriler', group('', {
+          label: text('Kategori adı', { nostyle: true }),
+          color: color('Kart rengi'),
+          sticker: sticker('Sticker'),
+          browser: bool('Kapak görselini tarayıcı penceresi içinde göster (web siteleri için)'),
+        }), {
+          title: (v) => v.label || 'Kategori', max: 8,
+          adders: [{ label: 'Kategori ekle', make: () => ({ key: `k${Math.random().toString(36).slice(2, 7)}`, label: 'Yeni kategori', color: 'sun', sticker: 'star', browser: false }) }],
+        }),
+        labels: group('Yazılar', {
+          allLabel: text('“Tümü” filtresi', { nostyle: true, compact: true }),
+          moreLabel: text('Kart butonu', { nostyle: true, compact: true }),
+          emptyText: text('Proje yokken görünen yazı', { nostyle: true }),
+        }, { flat: true }),
+        showContact: bool('Sayfanın altında iletişim bölümünü göster'),
+        seo: group('Google', {
+          seoTitle: text('Sayfa başlığı', { nostyle: true }),
+          seoDescription: area('Açıklama', { nostyle: true }),
+        }, { flat: true }),
+      },
     },
 
     { group: 'Tema Yönetimi' },
@@ -596,6 +663,7 @@
     saved = JSON.stringify(state);
     const cp = state.pages.find((p) => `pg:${p.id}` === location.hash.slice(1));
     if (cp) { page = customDef(cp); previewPage = cp.id; }
+    else if (page.previewPage) previewPage = page.previewPage;
     $('#login').hidden = true;
     $('#app').hidden = false;
     const bl = $('.brand .logo-dot');
@@ -852,7 +920,7 @@
   function selectPage(p) {
     page = p;
     history.replaceState(null, '', `#${p.id}`);
-    const target = p.custom ? p.pageId : null;
+    const target = p.custom ? p.pageId : (p.previewPage || null);
     renderNav();
     renderPage();
     if (target !== previewPage) { previewPage = target; refreshPreview(true); } else scrollPreviewTo(p.anchor);
@@ -898,6 +966,7 @@
       'Siparişler': '#4da2ff',
       'Müşteriler': '#e9ccff',
       'Pazarlama': '#fb4903',
+      'İşler': '#55db9c',
       'Tema Yönetimi': '#ffd731',
       'Entegrasyonlar': '#5c4ade',
       'Ayarlar': '#cccccc',
@@ -956,7 +1025,7 @@
     if (page.custom && !state.pages.some((p) => p.id === page.pageId)) { page = homePage(); previewPage = null; renderNav(); refreshPreview(true); }
 
     // Preview pane'i sadece tema/site yönetimi sayfalarında göster
-    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages', 'tema-overview'];
+    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages', 'tema-overview', 'isler-projeler', 'isler-ayarlar'];
     const isThemePage = page.custom || themePages.includes(page.id);
     const splitEl = $('#split');
     const wasHidden = splitEl.classList.contains('no-preview');
@@ -1223,7 +1292,7 @@
   }
 
   function selectField(def, value, onSet) {
-    const sel = h('select', { onchange: (e) => { onSet(e.target.value); rerender(); } }, def.options.map(([v, l]) => h('option', { value: v, selected: v === value }, l)));
+    const sel = h('select', { onchange: (e) => { onSet(e.target.value); rerender(); } }, (typeof def.options === 'function' ? def.options() : def.options).map(([v, l]) => h('option', { value: v, selected: v === value }, l)));
     return wrap(def, sel);
   }
 
