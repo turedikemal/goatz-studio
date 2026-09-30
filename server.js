@@ -149,6 +149,16 @@ async function api(req, res, url) {
   if (!authed(req)) return json(res, 401, { error: 'Giriş yapmalısın.' });
 
   if (route === 'GET /api/messages') return json(res, 200, messages.list());
+  if (route === 'POST /api/messages/reply') {
+    const { id, text } = await readJson(req);
+    const m = messages.get(String(id || ''));
+    const body = String(text || '').trim();
+    if (!m) return json(res, 404, { error: 'Mesaj bulunamadı.' });
+    if (body.length < 2) return json(res, 400, { error: 'Yanıt boş olamaz.' });
+    await mailer.reply(m, body, store.load().contact.email);
+    messages.addReply(m.id, body);
+    return json(res, 200, { ok: true });
+  }
   if (route === 'POST /api/messages/read') { messages.markRead(String((await readJson(req)).id || '')); return json(res, 200, { ok: true }); }
   if (req.method === 'DELETE' && url.pathname.startsWith('/api/messages/')) { messages.remove(decodeURIComponent(url.pathname.slice(14))); return json(res, 200, { ok: true }); }
 

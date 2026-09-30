@@ -1510,15 +1510,28 @@
   function messagesPage() {
     const box = h('div', {}, h('p', { class: 'muted' }, 'Yükleniyor…'));
     const card = (m) => {
-      const actions = [h('a', { class: 'btn small', target: '_blank', rel: 'noopener', href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(m.email)}&su=${encodeURIComponent('Mesajınız hakkında')}` }, 'Yanıtla (Gmail)')];
+      const form = h('div', { hidden: true, style: 'margin:10px 0 0' });
+      const ta = h('textarea', { rows: 5, placeholder: `${m.name} adlı kişiye yanıtın…`, style: 'width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--line,#ccc);border-radius:10px;font:inherit' });
+      const send = h('button', { type: 'button', class: 'btn small', onclick: async () => {
+        if (ta.value.trim().length < 2) return toast('Yanıt boş olamaz.', true);
+        send.disabled = true;
+        try { await request('/api/messages/reply', { method: 'POST', body: JSON.stringify({ id: m.id, text: ta.value }) }); toast('Yanıt gönderildi.'); load(); }
+        catch (err) { toast(err.message, true); send.disabled = false; }
+      } }, 'Yanıtı gönder');
+      form.append(ta, h('div', { style: 'margin-top:8px' }, send));
+      const actions = [h('button', { type: 'button', class: 'btn small', onclick: () => { form.hidden = !form.hidden; if (!form.hidden) ta.focus(); } }, 'Yanıtla')];
       if (!m.read) actions.push(h('button', { type: 'button', class: 'btn small', onclick: async () => { await request('/api/messages/read', { method: 'POST', body: JSON.stringify({ id: m.id }) }); load(); } }, 'Okundu'));
-      actions.push(h('button', { type: 'button', class: 'btn small', onclick: () => { navigator.clipboard.writeText(m.email).then(() => toast('E-posta adresi kopyalandı.')).catch(() => toast(m.email)); } }, 'Adresi kopyala'));
       actions.push(h('button', { type: 'button', class: 'btn small', onclick: async () => { if (confirm('Bu mesaj silinsin mi?')) { await request(`/api/messages/${m.id}`, { method: 'DELETE' }); load(); } } }, 'Sil'));
+      const replies = (m.replies || []).map((r) => h('div', { style: 'margin:10px 0 0;padding:8px 12px;border-left:3px solid #55db9c;background:rgba(85,219,156,.12);border-radius:6px' },
+        h('div', { class: 'muted', style: 'font-size:12px' }, `Yanıtın · ${new Date(r.date).toLocaleString('tr-TR')}`),
+        h('div', { style: 'white-space:pre-wrap' }, r.text)));
       return h('div', { class: 'card', style: 'margin-bottom:12px' },
         h('p', { style: 'margin:0 0 6px;font-weight:700' }, `${m.read ? '' : '● '}${m.name}  ·  ${new Date(m.date).toLocaleString('tr-TR')}`),
         h('p', { class: 'muted', style: 'margin:0 0 8px' }, [m.email, m.phone].filter(Boolean).join('  ·  ')),
         h('p', { style: 'margin:0 0 10px;white-space:pre-wrap' }, m.message),
-        h('div', { style: 'display:flex;gap:8px' }, ...actions));
+        ...replies,
+        h('div', { style: 'display:flex;gap:8px;margin-top:10px' }, ...actions),
+        form);
     };
     const load = () => request('/api/messages').then((list) => {
       box.replaceChildren(...(list.length ? list.map(card) : [h('p', { class: 'muted' }, 'Henüz mesaj yok.')]));
