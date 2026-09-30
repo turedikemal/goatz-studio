@@ -132,6 +132,7 @@
           title: text('Proje adı', { nostyle: true }),
           category: select('Kategori', () => state.works.categories.map((c) => [c.key, c.label])),
           badge: text('Rozet (örn. Geliştirmede, Yakında yayında)', { nostyle: true, compact: true }),
+          lang: select('Adın dili (BÜYÜK HARF yazımı için)', [['', 'Türkçe (HAKİ, İŞLER)'], ['en', 'İngilizce (FINE, FOODS)']]),
           listLabel: text('Açılır liste butonunun yazısı (boşsa “Yapılan işler”)', { nostyle: true, compact: true }),
           summary: area('Kısa açıklama (kartta görünür)', { nostyle: true }),
           image: image('Kapak görseli', { hint: 'Sitenin ekran görüntüsü önerilir (yatay, 16:10). Yüklemezsen renkli bir kart çıkar.' }),
@@ -156,7 +157,7 @@
           }),
         }), {
           addLabel: 'Proje ekle', title: (v) => v.title || 'Yeni proje', max: 100,
-          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, natural: false, badge: '', listLabel: '', fun: '', sections: [{ title: '', text: '' }], visible: true },
+          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, natural: false, badge: '', lang: '', listLabel: '', fun: '', sections: [{ title: '', text: '' }], visible: true },
         }),
       },
     },

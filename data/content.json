@@ -615,6 +615,7 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "lang": "en",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -650,6 +651,7 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "lang": "",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -685,6 +687,7 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "lang": "",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -720,6 +723,7 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "lang": "",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -755,6 +759,7 @@
         "live": false,
         "natural": false,
         "badge": "",
+        "lang": "",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -790,6 +795,7 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "lang": "en",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -825,6 +831,7 @@
         "live": false,
         "natural": false,
         "badge": "",
+        "lang": "",
         "listLabel": "",
         "fun": "",
         "sections": [
@@ -841,8 +848,8 @@
         "category": "app",
         "year": "",
         "client": "",
-        "summary": "",
-        "description": "",
+        "summary": "Kategori ve ürün sayfalarında en çok satan ürün rozetlerini tek merkezden yönetin.",
+        "description": "Kısa Özellikler\n\n* Kategori ve ürün sayfası desteği\n* Canlı önizleme ve düzenleme\n* Premium rozet ve şablon seçenekleri\n* Masaüstü ve mobil uyumlu görünüm",
         "image": "/uploads/muohc89q-30cc4148.webp",
         "url": "",
         "urlLabel": "Siteyi ziyaret et",
@@ -860,7 +867,8 @@
         "live": false,
         "natural": true,
         "badge": "Geliştirmede",
-        "listLabel": "",
+        "lang": "",
+        "listLabel": "Kısa özellikler",
         "fun": "",
         "sections": [
           {
@@ -876,7 +884,7 @@
         "category": "app",
         "year": "",
         "client": "",
-        "summary": "",
+        "summary": "Yorum Merkezi, e-ticaret mağazasının farklı kanallarda oluşan müşteri yorumlarını daha güçlü bir sosyal kanıt alanına dönüştürmek amacıyla geliştirilmiş bir yorum yönetimi ve gösterim uygulamasıdır.",
         "description": "Kısa Özellikler\n\n* Müşteri yorumlarını tek merkezde toplama\n* Birden fazla yorum kaynağını destekleyen yapı\n* Mağaza yorumlarını vitrinde gösterme\n* Google yorumlarını kullanabilme\n* Pazaryeri yorumları için entegrasyon altyapısı\n* Yorum kartlarını özelleştirme\n* Grid ve akış görünümleri\n* Masaüstü ve mobil için ayrı yerleşim seçenekleri\n* Ürün görselleriyle zenginleştirilmiş yorum kartları\n* Müşteri isim formatını değiştirebilme\n* Yıldız, tarih, ürün ve kaynak bilgilerinin kontrolü\n* Açılır detay kartları\n* Animasyon ve geçiş seçenekleri\n* Marka renklerine göre tasarım özelleştirmesi\n* Canlı önizleme\n* Farklı sayfalarda kullanılabilen modüler yapı",
         "image": "/uploads/muohrtr2-6cf86484.webp",
         "url": "",
@@ -895,6 +903,7 @@
         "live": false,
         "natural": true,
         "badge": "Geliştirmede",
+        "lang": "",
         "listLabel": "Kısa özellikler",
         "fun": "reviews",
         "sections": [
@@ -939,7 +948,7 @@
         "category": "app",
         "year": "",
         "client": "",
-        "summary": "",
+        "summary": "Canlı Sipariş Haritası, bir e-ticaret mağazasının sipariş hareketlerini klasik sayı ve tablolar yerine interaktif bir Türkiye haritası üzerinden ziyaretçilere göstermek için geliştirilmiş bir web uygulamasıdır.",
         "description": "Kısa Özellikler\n\n* Türkiye genelindeki siparişleri interaktif harita üzerinde gösterme\n* Sipariş verilen şehirleri görsel olarak öne çıkarma\n* Son sipariş bilgisini dinamik olarak gösterme\n* Sipariş ve teslimat hareketlerini görselleştirme\n* Mağaza konumunu harita üzerinde gösterme\n* Şehir bazlı etkileşim alanları\n* Sipariş yoğunluğuna göre farklı görsel durumlar\n* Rozet ve başarı sistemi\n* Ürün ve kategori yönlendirmeleri\n* Kampanya alanları\n* Masaüstü ve mobil uyumlu yapı\n* Mağaza tasarımına göre özelleştirilebilir görünüm\n* Farklı kullanım planlarına uygun özellik yapısı\n* E-ticaret mağazasıyla entegre çalışma",
         "image": "/uploads/muohrtr4-a527d353.webp",
         "url": "",
@@ -958,6 +967,7 @@
         "live": false,
         "natural": true,
         "badge": "Yakında yayında",
+        "lang": "",
         "listLabel": "Kısa özellikler",
         "fun": "map",
         "sections": [
@@ -991,72 +1001,13 @@
           }
         ],
         "visible": true
-      },
-      {
-        "title": "Akıllı Teslimat Süresi",
-        "slug": "",
-        "category": "app",
-        "year": "",
-        "client": "",
-        "summary": "",
-        "description": "Kısa Özellikler\n\n* Ürün bazında farklı teslimat süresi tanımlama\n* Her ürün için ayrı teslimat mesajı\n* Tahmini teslimat bilgisini ürün sayfasında gösterme\n* Dinamik tarih gösterimi\n* Kargo ve hazırlık sürecini görselleştirme\n* Hareketli teslimat bileşenleri\n* Marka renklerine göre özelleştirilebilir tasarım\n* Metin ve ikon özelleştirme\n* Masaüstü ve mobil uyum\n* Ürün sayfasına entegre çalışma\n* Farklı ürün grupları için farklı teslimat senaryoları\n* Müşteriye satın almadan önce daha açık teslimat bilgisi sunma",
-        "image": "",
-        "url": "",
-        "urlLabel": "Siteyi ziyaret et",
-        "tags": [
-          ""
-        ],
-        "gallery": [
-          {
-            "image": "",
-            "caption": ""
-          }
-        ],
-        "color": "",
-        "featured": false,
-        "live": false,
-        "natural": false,
-        "badge": "",
-        "listLabel": "Kısa özellikler",
-        "fun": "delivery",
-        "sections": [
-          {
-            "title": "Akıllı Teslimat Süresi Nedir?",
-            "text": "Akıllı Teslimat Süresi, e-ticaret mağazalarında her ürünün hazırlık ve gönderim süresinin aynı olmadığı durumlar için geliştirilmiş ürün bazlı teslimat bilgilendirme uygulamasıdır. Standart sistemlerde mağaza genelinde tek bir kargo veya teslimat süresi gösterilir. Ancak özellikle üretim yapan, kişiselleştirilmiş ürün satan veya farklı stok modelleri kullanan mağazalarda bu bilgi çoğu zaman yeterli değildir. Akıllı Teslimat Süresi bu problemi ürün seviyesinde çözer."
-          },
-          {
-            "title": "Her Ürüne Farklı Teslimat Bilgisi",
-            "text": "Hazır stokta bulunan bir ürün ile üretildikten sonra gönderilecek bir ürünün müşteriye aynı teslimat bilgisini göstermesi doğru değildir. Uygulama sayesinde her ürün için farklı hazırlık ve teslimat senaryoları oluşturulabilir. Örneğin bir ürün hızlı gönderime uygunken başka bir ürün için üretim süresi gerekiyorsa müşteriye buna uygun bilgi gösterilebilir."
-          },
-          {
-            "title": "Satın Alma Öncesinde Belirsizliği Azaltır",
-            "text": "E-ticarette müşterilerin satın almadan önce en sık öğrenmek istediği bilgilerden biri ürünün ne zaman kendilerine ulaşacağıdır. Teslimat bilgisinin ürün sayfasında açık ve anlaşılır biçimde gösterilmesi müşterinin satın alma kararını daha bilinçli vermesine yardımcı olur. Bu bilgi yalnızca metin olarak değil, görsel bir bileşen halinde sunulur."
-          },
-          {
-            "title": "Dinamik Teslimat Deneyimi",
-            "text": "Teslimat alanı klasik bir bilgilendirme satırından daha etkileşimli şekilde tasarlanabilir. Hazırlanıyor, kargoya veriliyor ve teslim ediliyor gibi aşamalar görsel olarak anlatılabilir. Böylece müşteri yalnızca bir tarih görmek yerine siparişin olası yolculuğunu anlayabilir."
-          },
-          {
-            "title": "Üretim Yapan Markalar İçin Özellikle Kullanışlıdır",
-            "text": "El yapımı, sipariş üzerine üretilen veya farklı hazırlık sürelerine sahip ürünler satan markalarda tüm ürünler için tek bir teslimat süresi kullanılması müşteri beklentilerini yanlış yönlendirebilir. Ürün bazlı sistem; el yapımı ürünler, kişiselleştirilebilir ürünler, ön sipariş ürünleri, farklı depolardan gönderilen ürünler ve üretim süresi bulunan ürünler için daha esnek bir yapı sağlar."
-          },
-          {
-            "title": "Tasarım Sistemiyle Birlikte Çalışır",
-            "text": "Teslimat bileşeninin görünümü mağazanın renklerine ve tasarım diline göre özelleştirilebilir. Amaç sayfaya yabancı bir eklenti eklemek değil, ürün bilgi alanının doğal bir parçası gibi çalışan bir kullanıcı deneyimi oluşturmaktır."
-          },
-          {
-            "title": "Akıllı Teslimat Süresi Neden Kullanılır?",
-            "text": "Uygulama özellikle teslimat beklentisini doğru yönetmek, müşterinin satın alma öncesi sorularını azaltmak, farklı ürünlerin farklı hazırlık sürelerini göstermek, ürün sayfasındaki bilgi kalitesini artırmak ve teslimat sürecini daha anlaşılır hale getirmek amacıyla geliştirilmiştir."
-          }
-        ],
-        "visible": true
       }
     ],
     "approach": {
       "visible": true,
       "eyebrow": "Ortak yaklaşım",
       "heading": "Uygulamaların Ortak Yaklaşımı",
-      "text": "Bu üç uygulamanın ortak noktası e-ticaret mağazalarındaki standart özellikleri yalnızca işlevsel olarak değil, kullanıcı deneyimi açısından da geliştirmeleridir.",
+      "text": "Bu uygulamaların ortak noktası e-ticaret mağazalarındaki standart özellikleri yalnızca işlevsel olarak değil, kullanıcı deneyimi açısından da geliştirmeleridir.",
       "points": [
         {
           "title": "Canlı Sipariş Haritası",
@@ -1065,10 +1016,6 @@
         {
           "title": "Yorum Merkezi",
           "text": "müşteri deneyimlerini güçlü bir sosyal kanıta dönüştürür."
-        },
-        {
-          "title": "Akıllı Teslimat Süresi",
-          "text": "satın alma öncesindeki teslimat belirsizliğini azaltır."
         }
       ],
       "cards": [

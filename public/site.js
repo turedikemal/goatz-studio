@@ -328,6 +328,16 @@
     t.setAttribute('aria-expanded', String(open));
   });
 
+  // ---------- Proje sayfasından geri dön: önceki sayfa işler listesiyse oraya dön ----------
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('[data-back]');
+    if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    try {
+      const ref = document.referrer ? new URL(document.referrer) : null;
+      if (ref && ref.origin === location.origin && /^\/isler\/?$/.test(ref.pathname) && history.length > 1) { e.preventDefault(); history.back(); }
+    } catch { /* bağlantı normal açılır */ }
+  });
+
   // ---------- İşler: kategori filtresi ----------
   const workFilters = document.querySelector('.work-filters');
   if (workFilters) {

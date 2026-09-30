@@ -615,8 +615,8 @@
   .work-live.is-loaded iframe { opacity: 1; }
 
   .work-badge { padding: 5px 11px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); }
-  .work-shot.is-natural { aspect-ratio: auto; }
-  .work-shot.is-natural > img { flex: none; height: auto; object-fit: initial; }
+  .work-shot.is-natural { background: var(--sky); }
+  .work-shot.is-natural > img { object-fit: contain; object-position: center; background: var(--sky); }
 
   /* İşler: kategori başlıkları */
   .work-group[hidden] { display: none; }
@@ -692,3 +692,25 @@
   .wa-card p { margin: 0; font-size: 15px; line-height: 1.5; }
   .wa-quote { margin: 0; font-size: clamp(28px, 4.6vw, 64px); line-height: 1; text-align: left; }
   .wa-quote .rating { font-size: clamp(22px, 3vw, 36px); vertical-align: middle; margin-left: 10px; }
+
+  /* Proje sayfası: renkli bölümler */
+  .page-eyebrow-link { text-decoration: none; color: inherit; transition: background .2s ease, color .2s ease, transform .2s ease; }
+  .page-eyebrow-link:hover { background: var(--carbon); color: var(--paper); transform: translateY(-2px); }
+  .work-stage .work-in, .work-featpanel .work-in, .work-secpanel .work-in, .work-end .work-in { padding-top: clamp(40px, 6vw, 80px); padding-bottom: clamp(40px, 6vw, 80px); }
+  .work-stage .work-facts { border: 0; padding: 0; margin-bottom: 28px; gap: 10px; }
+  .work-stage .work-facts > div { padding: 12px 18px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); }
+  .work-stage .work-facts dd { font-size: 16px; }
+  .work-stage .work-facts dt { margin: 0 0 2px; font-size: 11px; }
+  .work-stage .work-cover { margin-bottom: 28px; }
+  .work-stage .work-visit { margin-bottom: 28px; }
+  .work-stage .fun { margin-bottom: 0; }
+  .ws-st { width: clamp(56px, 8vw, 110px); left: auto; z-index: 4; }
+  .ws-a { right: clamp(10px, 3vw, 44px); top: clamp(10px, 3vw, 40px); rotate: 12deg; }
+  .ws-b { left: clamp(8px, 2vw, 28px); bottom: clamp(14px, 4vw, 50px); rotate: -10deg; }
+  .ws-c { right: clamp(10px, 3vw, 44px); top: clamp(10px, 2vw, 28px); rotate: 8deg; }
+  .work-featpanel .work-feat, .work-secpanel .work-secs { margin: 0; }
+  .work-end .work-pager { border-top: 0; padding-top: 0; }
+  .work-end .g-grid { margin: 0 0 28px; }
+
+  .work-mid { display: grid; gap: 10px; align-content: start; min-height: 88px; }
+  .work-meta .rating { font-size: 17px; gap: 2px; }
