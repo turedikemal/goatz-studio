@@ -875,4 +875,4 @@
   .show-hook-big { font-size: clamp(26px, 4vw, 54px); line-height: 1.35; text-wrap: balance; }
   .statement-cta { margin: clamp(24px, 4vw, 48px) 0 0; text-align: center; }
   .page-hero h1, .page-hero .tagline { text-wrap: balance; }
-  .blk-in h2, .wa-h, .work-group-h { line-height: 1.04; }
+  .blk-in h2, .wa-h, .work-group-h { line-height: .95; }

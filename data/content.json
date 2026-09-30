@@ -1555,7 +1555,7 @@
       },
       "blocks": [
         {
-          "type": "text",
+          "type": "imagetext",
           "visible": true,
           "background": "paper",
           "eyebrow": "Vitrin",
@@ -1563,9 +1563,9 @@
           "text": "Müşterileriniz artık önce telefonundan bakıyor. Ürünü görüyor, fotoğrafına bakıp fikir ediniyor, siteyi açıp karşılaştırıyor ve ancak ikna olursa sipariş veriyor.\n\nMağazanızın kapısını kapattığınız saatte bile açık kalan bir dijital vitrin, sizi tanımayan müşteriye de ulaşır. Bu vitrinin iki ayağı vardır: ürünü doğru gösteren fotoğraflar ve o fotoğrafları satışa çeviren bir web sitesi.",
           "align": "left",
           "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
+          "imageSide": "right",
+          "imageColor": "sun",
+          "imageSticker": "vitrin",
           "button": {
             "label": "",
             "target": "#iletisim"
