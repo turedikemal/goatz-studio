@@ -905,6 +905,22 @@
     if (fn) fn(t);
   });
 
+  // Büyük bildiri satırları: en geniş satır ekrana sığacak şekilde yazı küçülür
+  const stLines = document.querySelector('.statement .lines');
+  if (stLines) {
+    const fitLines = () => {
+      stLines.style.fontSize = '';
+      const base = parseFloat(getComputedStyle(stLines).fontSize);
+      const room = stLines.parentElement.clientWidth - 32;
+      let widest = 0;
+      stLines.querySelectorAll('.line').forEach((l) => { widest = Math.max(widest, l.scrollWidth); });
+      if (widest > room) stLines.style.fontSize = `${Math.max(24, base * room / widest * 0.98).toFixed(1)}px`;
+    };
+    fitLines();
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(fitLines);
+    addEventListener('resize', fitLines);
+  }
+
   // Yorumlardaki mini 5 yıldız: görününce ve tıklanınca sırayla parlar
   const rateSparkle = (box) => {
     if (box._sp) return; box._sp = true; setTimeout(() => { box._sp = false; }, ms(1.6));

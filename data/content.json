@@ -239,9 +239,9 @@
   },
   "statement": {
     "background": "sky",
-    "line1Start": "Çekim",
-    "line1Sticker": "camera",
-    "line1End": "+ tasarım",
+    "line1Start": "Web tasarım",
+    "line1Sticker": "browser",
+    "line1End": "+ ürün çekimi",
     "line2Sticker": "check",
     "line2Start": "tek",
     "card": {
@@ -250,9 +250,10 @@
       "target": "#iletisim",
       "color": "violet"
     },
-    "line2End": "stüdyo",
+    "line2End": "stüdyoda",
     "line3": "Goatz studio",
-    "line3Sticker": "browser"
+    "line3Sticker": "",
+    "line1Sticker2": "camera"
   },
   "services": {
     "background": "paper",

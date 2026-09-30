@@ -359,7 +359,7 @@
       intro: 'Üç satırlık dev italik yazı. Her satırda yazılar ve aralardaki sticker\'lar ayrı ayrı düzenlenir.',
       schema: {
         background: color('Arka plan rengi'),
-        l1: group('1. satır', { line1Start: text('Baştaki yazı', { nostyle: true }), line1Sticker: sticker('Aradaki sticker', { none: true }), line1End: text('Sondaki yazı', { nostyle: true }), line1Style: style('1. satırın yazı stili') }),
+        l1: group('1. satır', { line1Start: text('Baştaki yazı', { nostyle: true }), line1Sticker: sticker('Aradaki sticker', { none: true }), line1End: text('Sondaki yazı', { nostyle: true }), line1Sticker2: sticker('Satır sonundaki sticker', { none: true }), line1Style: style('1. satırın yazı stili') }),
         l2: group('2. satır', {
           line2Sticker: sticker('Baştaki sticker', { none: true }), line2Start: text('Yazı', { nostyle: true }),
           card: group('Aradaki buton kartı', { visible: bool('Kartı göster'), label: text('Kart yazısı', { compact: true }), target: target(), color: color('Kart rengi') }),
