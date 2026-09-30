@@ -523,12 +523,12 @@
       },
       {
         "type": "sock",
-        "x": 20,
-        "y": 4,
-        "mx": 4,
-        "my": 3,
+        "x": 4,
+        "y": 9,
+        "mx": 2,
+        "my": 8,
         "size": 85,
-        "rotate": -12,
+        "rotate": -6,
         "float": true
       }
     ],

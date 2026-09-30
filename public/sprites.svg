@@ -113,34 +113,24 @@
       <rect x="42" y="80" width="16" height="9" rx="3" fill="#4da2ff" stroke="#000" stroke-width="3"/>
       <path d="M42 54l4-14 4 14 4-14 4 14" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
     </symbol>
-    <!-- Ayak (erkek, 3/4 yan görünüş, sağa bakan) -->
+    <!-- Ayak (erkek, yandan, sağa bakan) -->
     <symbol id="s-foot" viewBox="0 0 100 100">
-      <g transform="translate(97 2) scale(-.94 .94)">
-        <path d="M57 15C64 10 80 8 92 12c0 12 1 24 4 33 3 14 4 28 1 36-2 8-11 12-21 13L42 98 20 92 8 84 5 72c4-6 11-7 17-8 12-4 24-12 30-21 5-7 6-14 6-21 0-5-1-7-1-7z" fill="#f1bf98" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-        <path d="M92 12c0 12 1 24 4 33 3 14 4 28 1 36-2 8-11 12-21 13 10-2 14-8 14-16 0-12-3-22-5-34-1-10-1-22-2-32z" fill="#000" fill-opacity=".11"/>
-        <path d="M80 54c4 8 6 16 2 24" fill="none" stroke="#000" stroke-width="2.600" stroke-linecap="round"/>
-        <path d="M83 56c2 6 3 12 1 17" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
-        <path d="M44 62c8-6 14-12 18-20" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
-        <g stroke="#000" stroke-width="2" fill="none" stroke-linecap="round">
-          <path d="M18 77c8-1 18-5 26-10"/><path d="M24 84c8-1 16-4 24-9"/><path d="M30 90c7-1 14-4 21-9"/><path d="M36 95c6-1 12-4 18-8"/>
-        </g>
-        <g stroke="#000" stroke-width="2.800" fill="#f1bf98" stroke-linejoin="round">
-          <ellipse cx="34.500" cy="97" rx="7" ry="4.800" transform="rotate(14 34.500 97)"/>
-          <ellipse cx="28.500" cy="92" rx="8" ry="5.600" transform="rotate(12 28.500 92)"/>
-          <ellipse cx="22" cy="86.500" rx="8.600" ry="6" transform="rotate(10 22 86.500)"/>
-          <ellipse cx="15" cy="80.500" rx="9" ry="6.600" transform="rotate(8 15 80.500)"/>
-          <ellipse cx="10" cy="73" rx="9" ry="7.600" transform="rotate(4 10 73)"/>
-        </g>
-        <g fill="#fde3cc" stroke="#000" stroke-width="1.600">
-          <ellipse cx="7" cy="72" rx="4.600" ry="4.200"/>
-          <ellipse cx="11.500" cy="80" rx="4.200" ry="3.600"/>
-          <ellipse cx="18" cy="86" rx="4" ry="3.300"/>
-          <ellipse cx="24.500" cy="91.500" rx="3.800" ry="3.100"/>
-          <ellipse cx="31" cy="96" rx="3.400" ry="2.700"/>
-        </g>
-        <rect x="53" y="0" width="43" height="16" rx="3" fill="#5c4ade" stroke="#000" stroke-width="3"/>
-        <path d="M58 5h33" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+      <path d="M12 8 C12 22 11 36 9 49 C7 61 4 74 8 85 C11 92 20 94 28 94 L76 94 C88 94 97 90 97 82 C97 75 93 72 88 73 C86 69 81 68 79 70 C77 66 72 65 70 67 C68 63 64 63 62 65 C60 61 56 60 54 62 C48 54 40 44 34 32 C34 22 34 14 34 8 Z" fill="#f1bf98" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M12 8 C12 22 11 36 9 49 C7 61 4 74 8 85 C10 89 14 92 19 93 C13 84 14 70 16 56 C18 40 18 24 18 8 Z" fill="#000" fill-opacity=".10"/>
+      <path d="M22 50 C20 55 21 60 25 63" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="2.400" stroke-linecap="round"/>
+      <path d="M24 52 C23 55 24 58 26 60" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.800" stroke-linecap="round"/>
+      <path d="M40 46 C46 54 52 60 58 66" fill="none" stroke="#fff" stroke-opacity=".40" stroke-width="2.200" stroke-linecap="round"/>
+      <path d="M30 89 C44 84 62 86 78 91" fill="none" stroke="#000" stroke-opacity=".16" stroke-width="2" stroke-linecap="round"/>
+      <g fill="none" stroke="#000" stroke-width="1.800" stroke-linecap="round" stroke-opacity=".55"><path d="M79 71 C78 75 78 79 79 82"/><path d="M71 68 C70 72 70 76 71 79"/><path d="M63 66 C62 70 62 73 63 76"/><path d="M56 64 C55 67 55 70 56 73"/></g>
+      <g fill="#fde3cc" stroke="#000" stroke-width="1.600">
+        <ellipse cx="92" cy="77" rx="4" ry="3.200" transform="rotate(-30 92 77)"/>
+        <ellipse cx="83" cy="71.500" rx="2.600" ry="2.100" transform="rotate(-28 83 71.500)"/>
+        <ellipse cx="74.500" cy="68.500" rx="2.400" ry="2" transform="rotate(-22 74.500 68.500)"/>
+        <ellipse cx="66" cy="66" rx="2.200" ry="1.900" transform="rotate(-18 66 66)"/>
+        <ellipse cx="58" cy="63.500" rx="2" ry="1.700" transform="rotate(-12 58 63.500)"/>
       </g>
+      <rect x="5" y="0" width="36" height="16" rx="3" fill="#5c4ade" stroke="#000" stroke-width="3"/>
+      <path d="M10 5h26" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
     </symbol>
     <!-- İskarpin (yandan) -->
     <symbol id="s-shoe" viewBox="0 0 120 100">
