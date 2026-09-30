@@ -950,6 +950,13 @@
     const top = ed.scrollTop;
     changeHooks.clear();
     if (page.custom && !state.pages.some((p) => p.id === page.pageId)) { page = homePage(); previewPage = null; renderNav(); refreshPreview(true); }
+
+    // Preview pane'i sadece tema/site yönetimi sayfalarında göster
+    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages'];
+    const isThemePage = page.custom || themePages.includes(page.id);
+    $('#split').classList.toggle('no-preview', !isThemePage);
+    $('#previewToggle').style.display = isThemePage ? '' : 'none';
+
     if (page.custom) {
       const pg = state.pages.find((p) => p.id === page.pageId);
       $('#pageTitle').textContent = pg.title || 'Sayfa';
