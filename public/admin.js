@@ -765,6 +765,7 @@
       return;
     }
     const off = split.classList.toggle('no-preview');
+    if (off) split.dataset.userHidden = '1'; else delete split.dataset.userHidden;
     $('#previewToggle').setAttribute('aria-pressed', !off);
     if (!off) refreshPreview(true);
   });
@@ -958,7 +959,10 @@
     // Preview pane'i sadece tema/site yönetimi sayfalarında göster
     const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages'];
     const isThemePage = page.custom || themePages.includes(page.id);
-    $('#split').classList.toggle('no-preview', !isThemePage);
+    const splitEl = $('#split');
+    const wasHidden = splitEl.classList.contains('no-preview');
+    if (!isThemePage) splitEl.classList.add('no-preview');
+    else if (wasHidden && !splitEl.dataset.userHidden) { splitEl.classList.remove('no-preview'); refreshPreview(true); }
     $('#previewToggle').style.display = isThemePage ? '' : 'none';
 
     if (page.custom) {
