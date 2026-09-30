@@ -615,6 +615,14 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -642,6 +650,14 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -669,6 +685,14 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -696,6 +720,14 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -723,6 +755,14 @@
         "live": false,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -750,6 +790,14 @@
         "live": true,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -777,6 +825,14 @@
         "live": false,
         "natural": false,
         "badge": "",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -804,6 +860,14 @@
         "live": false,
         "natural": true,
         "badge": "Geliştirmede",
+        "listLabel": "",
+        "fun": "",
+        "sections": [
+          {
+            "title": "",
+            "text": ""
+          }
+        ],
         "visible": true
       },
       {
@@ -813,7 +877,7 @@
         "year": "",
         "client": "",
         "summary": "",
-        "description": "",
+        "description": "Kısa Özellikler\n\n* Müşteri yorumlarını tek merkezde toplama\n* Birden fazla yorum kaynağını destekleyen yapı\n* Mağaza yorumlarını vitrinde gösterme\n* Google yorumlarını kullanabilme\n* Pazaryeri yorumları için entegrasyon altyapısı\n* Yorum kartlarını özelleştirme\n* Grid ve akış görünümleri\n* Masaüstü ve mobil için ayrı yerleşim seçenekleri\n* Ürün görselleriyle zenginleştirilmiş yorum kartları\n* Müşteri isim formatını değiştirebilme\n* Yıldız, tarih, ürün ve kaynak bilgilerinin kontrolü\n* Açılır detay kartları\n* Animasyon ve geçiş seçenekleri\n* Marka renklerine göre tasarım özelleştirmesi\n* Canlı önizleme\n* Farklı sayfalarda kullanılabilen modüler yapı",
         "image": "/uploads/muohrtr2-6cf86484.webp",
         "url": "",
         "urlLabel": "Siteyi ziyaret et",
@@ -831,16 +895,52 @@
         "live": false,
         "natural": true,
         "badge": "Geliştirmede",
+        "listLabel": "Kısa özellikler",
+        "fun": "reviews",
+        "sections": [
+          {
+            "title": "Yorum Merkezi Nedir?",
+            "text": "Yorum Merkezi, e-ticaret mağazasının farklı kanallarda oluşan müşteri yorumlarını daha güçlü bir sosyal kanıt alanına dönüştürmek amacıyla geliştirilmiş bir yorum yönetimi ve gösterim uygulamasıdır. Standart ürün değerlendirme alanlarından farklı olarak yorumların mağazanın farklı bölümlerinde kullanılabilmesini sağlar. Amaç yalnızca yorumları listelemek değil, müşterilerin gerçek deneyimlerini mağazanın tasarımının bir parçası haline getirmektir."
+          },
+          {
+            "title": "Yorumları Tek Bir Deneyimde Birleştirir",
+            "text": "E-ticaret yapan markaların müşteri yorumları zaman içerisinde farklı kanallarda dağılabilir. Yorum Merkezi bu dağınık deneyimi daha merkezi bir yapıya dönüştürmek için tasarlanmıştır. Desteklenen kaynaklardan elde edilen müşteri değerlendirmeleri ortak bir tasarım dili içerisinde ziyaretçiye sunulabilir."
+          },
+          {
+            "title": "Standart Yorum Alanından Daha Fazlası",
+            "text": "Klasik e-ticaret sistemlerinde yorumlar çoğunlukla ürün sayfasının altında bulunan statik bir liste olarak gösterilir. Yorum Merkezi ile yorumlar ana sayfada, ürün sayfalarında, alışveriş akışı içerisinde ve mağazanın farklı içerik alanlarında kullanılabilecek dinamik bileşenlere dönüştürülebilir."
+          },
+          {
+            "title": "Özelleştirilebilir Yorum Kartları",
+            "text": "Markalar yorum kartlarında hangi bilgilerin gösterileceğini kontrol edebilir. Müşteri adı, yıldız puanı, yorum metni, yorum tarihi, ürün bilgisi, görsel, doğrulanmış değerlendirme bilgisi ve yorum kaynağı gibi alanlar mağazanın ihtiyacına göre düzenlenebilir."
+          },
+          {
+            "title": "Görsel Odaklı Sosyal Kanıt",
+            "text": "Görsel içeren müşteri değerlendirmeleri daha güçlü bir biçimde öne çıkarılabilir. Yorum görselinin bulunmadığı durumlarda ürün görsellerinden yararlanılarak kartların görsel bütünlüğü korunabilir. Böylece yorum alanları yalnızca metinlerden oluşan klasik bir değerlendirme listesinden çıkarak mağazanın genel tasarımının bir parçası haline gelir."
+          },
+          {
+            "title": "Farklı Yerleşim Seçenekleri",
+            "text": "Yorumların sunum şekli mağazanın tasarımına göre değiştirilebilir. Akış, grid veya açılır kart benzeri farklı kullanım biçimleri sayesinde yorum alanı mağazanın mevcut arayüzüne adapte edilebilir. Masaüstü ve mobil cihazlar için farklı yerleşim davranışları uygulanabilir."
+          },
+          {
+            "title": "Marka Tasarımına Uyum",
+            "text": "Kart boyutları, tipografi, renkler, hizalamalar, animasyonlar ve diğer görsel öğeler marka kimliğine göre düzenlenebilir. Böylece uygulama mağazaya sonradan eklenmiş bağımsız bir widget gibi görünmek yerine mevcut tasarımın doğal bir parçası haline gelir."
+          },
+          {
+            "title": "Yorum Merkezi Neden Kullanılır?",
+            "text": "Uygulamanın temel amacı müşteri değerlendirmelerini satış sürecinin daha görünür bir parçası haline getirmektir. Sosyal kanıt oluşturmak, müşteri güvenini desteklemek, farklı platformlardaki değerlendirmeleri değerlendirmek, yorumların görünürlüğünü artırmak ve gerçek müşteri deneyimlerini ürünlerle ilişkilendirmek isteyen e-ticaret mağazaları için geliştirilmiştir."
+          }
+        ],
         "visible": true
       },
       {
-        "title": "Sipariş Dağılım Haritası",
+        "title": "Canlı Sipariş Haritası",
         "slug": "",
         "category": "app",
         "year": "",
         "client": "",
         "summary": "",
-        "description": "",
+        "description": "Kısa Özellikler\n\n* Türkiye genelindeki siparişleri interaktif harita üzerinde gösterme\n* Sipariş verilen şehirleri görsel olarak öne çıkarma\n* Son sipariş bilgisini dinamik olarak gösterme\n* Sipariş ve teslimat hareketlerini görselleştirme\n* Mağaza konumunu harita üzerinde gösterme\n* Şehir bazlı etkileşim alanları\n* Sipariş yoğunluğuna göre farklı görsel durumlar\n* Rozet ve başarı sistemi\n* Ürün ve kategori yönlendirmeleri\n* Kampanya alanları\n* Masaüstü ve mobil uyumlu yapı\n* Mağaza tasarımına göre özelleştirilebilir görünüm\n* Farklı kullanım planlarına uygun özellik yapısı\n* E-ticaret mağazasıyla entegre çalışma",
         "image": "/uploads/muohrtr4-a527d353.webp",
         "url": "",
         "urlLabel": "Siteyi ziyaret et",
@@ -858,9 +958,131 @@
         "live": false,
         "natural": true,
         "badge": "Yakında yayında",
+        "listLabel": "Kısa özellikler",
+        "fun": "map",
+        "sections": [
+          {
+            "title": "Canlı Sipariş Haritası Nedir?",
+            "text": "Canlı Sipariş Haritası, bir e-ticaret mağazasının sipariş hareketlerini klasik sayı ve tablolar yerine interaktif bir Türkiye haritası üzerinden ziyaretçilere göstermek için geliştirilmiş bir web uygulamasıdır. Uygulamanın temel amacı mağazanın satış hareketliliğini görünür hale getirirken aynı zamanda bunu müşterinin etkileşime girebileceği bir deneyime dönüştürmektir. Bir şehre sipariş ulaştığında ilgili bölge haritada aktif hale gelir. Böylece zaman içerisinde markanın Türkiye genelindeki erişimi ziyaretçiler tarafından doğrudan görülebilir."
+          },
+          {
+            "title": "Sosyal Kanıtı Görselleştirir",
+            "text": "Bir müşterinin yalnızca “çok sayıda sipariş verildi” gibi bir metin görmesi yerine, siparişlerin hangi şehirlerden geldiğini interaktif bir yapı içerisinde inceleyebilmesi daha güçlü bir sosyal kanıt oluşturabilir. Harita, markanın gerçek satış hareketlerini ziyaretçinin anlayabileceği görsel bir dile dönüştürür."
+          },
+          {
+            "title": "Son Sipariş Deneyimi",
+            "text": "Uygulama içerisinde son sipariş hareketi ayrı bir alan olarak gösterilebilir. Bu yapı sayesinde ziyaretçi mağazanın aktif olarak sipariş aldığını görebilir ve statik bir e-ticaret sayfası yerine yaşayan bir mağaza deneyimi oluşur."
+          },
+          {
+            "title": "Şehir Bazlı Etkileşim",
+            "text": "Harita üzerindeki şehirler yalnızca görsel bir gösterge değildir. Sipariş bulunan ve henüz sipariş bulunmayan şehirler için farklı kullanıcı deneyimleri oluşturulabilir. Böylece harita ziyaretçiyi ürünleri incelemeye veya mağazayı keşfetmeye yönlendiren interaktif bir alana dönüşür."
+          },
+          {
+            "title": "Rozet Sistemi",
+            "text": "Belirli sipariş seviyelerine ulaşan şehirler için farklı rozetler kullanılabilir. Bu sistem sayesinde yalnızca sipariş göstermek yerine ziyaretçilerin takip edebileceği küçük bir oyunlaştırma mekanizması oluşturulur. Şehirlerin zaman içerisinde yeni seviyelere ulaşması uygulamanın sürekli değişen ve yaşayan bir yapıya sahip olmasını sağlar."
+          },
+          {
+            "title": "Marka ve Mağaza Konumu",
+            "text": "Markanın fiziksel veya operasyonel konumu harita içerisinde ayrıca gösterilebilir. Böylece siparişlerin çıkış noktası ile ulaştığı şehirler arasında görsel bir bağ kurulabilir."
+          },
+          {
+            "title": "E-Ticaret İçin Neden Kullanılır?",
+            "text": "Canlı Sipariş Haritası; sosyal kanıt oluşturmak, mağaza hareketliliğini göstermek, müşterinin sayfada geçirdiği süreyi artırmak, markanın Türkiye genelindeki erişimini görselleştirmek ve klasik e-ticaret deneyimine interaktif bir alan eklemek amacıyla kullanılabilir. Uygulama farklı mağazalara ve marka tasarımlarına uyarlanabilecek şekilde geliştirilmiştir."
+          }
+        ],
+        "visible": true
+      },
+      {
+        "title": "Akıllı Teslimat Süresi",
+        "slug": "",
+        "category": "app",
+        "year": "",
+        "client": "",
+        "summary": "",
+        "description": "Kısa Özellikler\n\n* Ürün bazında farklı teslimat süresi tanımlama\n* Her ürün için ayrı teslimat mesajı\n* Tahmini teslimat bilgisini ürün sayfasında gösterme\n* Dinamik tarih gösterimi\n* Kargo ve hazırlık sürecini görselleştirme\n* Hareketli teslimat bileşenleri\n* Marka renklerine göre özelleştirilebilir tasarım\n* Metin ve ikon özelleştirme\n* Masaüstü ve mobil uyum\n* Ürün sayfasına entegre çalışma\n* Farklı ürün grupları için farklı teslimat senaryoları\n* Müşteriye satın almadan önce daha açık teslimat bilgisi sunma",
+        "image": "",
+        "url": "",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          ""
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "live": false,
+        "natural": false,
+        "badge": "",
+        "listLabel": "Kısa özellikler",
+        "fun": "delivery",
+        "sections": [
+          {
+            "title": "Akıllı Teslimat Süresi Nedir?",
+            "text": "Akıllı Teslimat Süresi, e-ticaret mağazalarında her ürünün hazırlık ve gönderim süresinin aynı olmadığı durumlar için geliştirilmiş ürün bazlı teslimat bilgilendirme uygulamasıdır. Standart sistemlerde mağaza genelinde tek bir kargo veya teslimat süresi gösterilir. Ancak özellikle üretim yapan, kişiselleştirilmiş ürün satan veya farklı stok modelleri kullanan mağazalarda bu bilgi çoğu zaman yeterli değildir. Akıllı Teslimat Süresi bu problemi ürün seviyesinde çözer."
+          },
+          {
+            "title": "Her Ürüne Farklı Teslimat Bilgisi",
+            "text": "Hazır stokta bulunan bir ürün ile üretildikten sonra gönderilecek bir ürünün müşteriye aynı teslimat bilgisini göstermesi doğru değildir. Uygulama sayesinde her ürün için farklı hazırlık ve teslimat senaryoları oluşturulabilir. Örneğin bir ürün hızlı gönderime uygunken başka bir ürün için üretim süresi gerekiyorsa müşteriye buna uygun bilgi gösterilebilir."
+          },
+          {
+            "title": "Satın Alma Öncesinde Belirsizliği Azaltır",
+            "text": "E-ticarette müşterilerin satın almadan önce en sık öğrenmek istediği bilgilerden biri ürünün ne zaman kendilerine ulaşacağıdır. Teslimat bilgisinin ürün sayfasında açık ve anlaşılır biçimde gösterilmesi müşterinin satın alma kararını daha bilinçli vermesine yardımcı olur. Bu bilgi yalnızca metin olarak değil, görsel bir bileşen halinde sunulur."
+          },
+          {
+            "title": "Dinamik Teslimat Deneyimi",
+            "text": "Teslimat alanı klasik bir bilgilendirme satırından daha etkileşimli şekilde tasarlanabilir. Hazırlanıyor, kargoya veriliyor ve teslim ediliyor gibi aşamalar görsel olarak anlatılabilir. Böylece müşteri yalnızca bir tarih görmek yerine siparişin olası yolculuğunu anlayabilir."
+          },
+          {
+            "title": "Üretim Yapan Markalar İçin Özellikle Kullanışlıdır",
+            "text": "El yapımı, sipariş üzerine üretilen veya farklı hazırlık sürelerine sahip ürünler satan markalarda tüm ürünler için tek bir teslimat süresi kullanılması müşteri beklentilerini yanlış yönlendirebilir. Ürün bazlı sistem; el yapımı ürünler, kişiselleştirilebilir ürünler, ön sipariş ürünleri, farklı depolardan gönderilen ürünler ve üretim süresi bulunan ürünler için daha esnek bir yapı sağlar."
+          },
+          {
+            "title": "Tasarım Sistemiyle Birlikte Çalışır",
+            "text": "Teslimat bileşeninin görünümü mağazanın renklerine ve tasarım diline göre özelleştirilebilir. Amaç sayfaya yabancı bir eklenti eklemek değil, ürün bilgi alanının doğal bir parçası gibi çalışan bir kullanıcı deneyimi oluşturmaktır."
+          },
+          {
+            "title": "Akıllı Teslimat Süresi Neden Kullanılır?",
+            "text": "Uygulama özellikle teslimat beklentisini doğru yönetmek, müşterinin satın alma öncesi sorularını azaltmak, farklı ürünlerin farklı hazırlık sürelerini göstermek, ürün sayfasındaki bilgi kalitesini artırmak ve teslimat sürecini daha anlaşılır hale getirmek amacıyla geliştirilmiştir."
+          }
+        ],
         "visible": true
       }
     ],
+    "approach": {
+      "visible": true,
+      "eyebrow": "Ortak yaklaşım",
+      "heading": "Uygulamaların Ortak Yaklaşımı",
+      "text": "Bu üç uygulamanın ortak noktası e-ticaret mağazalarındaki standart özellikleri yalnızca işlevsel olarak değil, kullanıcı deneyimi açısından da geliştirmeleridir.",
+      "points": [
+        {
+          "title": "Canlı Sipariş Haritası",
+          "text": "satış hareketlerini görünür hale getirir."
+        },
+        {
+          "title": "Yorum Merkezi",
+          "text": "müşteri deneyimlerini güçlü bir sosyal kanıta dönüştürür."
+        },
+        {
+          "title": "Akıllı Teslimat Süresi",
+          "text": "satın alma öncesindeki teslimat belirsizliğini azaltır."
+        }
+      ],
+      "cards": [
+        {
+          "title": "Güvenli ve Kontrollü Entegrasyon",
+          "text": "Uygulamalar mağazanın mevcut e-ticaret altyapısıyla birlikte çalışacak şekilde geliştirilmiştir. Verilerin nasıl işlendiği, platformlarla kullanılan bağlantı yöntemleri, yetkilendirme yapısı, veri eşleştirme mekanizmaları ve uygulamalara ait özel algoritmalar ürünlerin teknik altyapısının bir parçasıdır ve kamuya açık olarak paylaşılmaz. Kullanıcı tarafında ise mümkün olduğunca basit bir kurulum ve yönetim deneyimi hedeflenir."
+        },
+        {
+          "title": "E-Ticaret İçin Geliştirildi",
+          "text": "Bu uygulamalar genel amaçlı hazır widget çözümlerinden farklı olarak doğrudan e-ticaret mağazalarının ihtiyaçlarına odaklanır."
+        }
+      ],
+      "quote": "Veriyi göstermek değil, veriyi kullanıcı deneyimine dönüştürmek."
+    },
     "showContact": true
   },
   "pages": []

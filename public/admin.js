@@ -132,6 +132,7 @@
           title: text('Proje adı', { nostyle: true }),
           category: select('Kategori', () => state.works.categories.map((c) => [c.key, c.label])),
           badge: text('Rozet (örn. Geliştirmede, Yakında yayında)', { nostyle: true, compact: true }),
+          listLabel: text('Açılır liste butonunun yazısı (boşsa “Yapılan işler”)', { nostyle: true, compact: true }),
           summary: area('Kısa açıklama (kartta görünür)', { nostyle: true }),
           image: image('Kapak görseli', { hint: 'Sitenin ekran görüntüsü önerilir (yatay, 16:10). Yüklemezsen renkli bir kart çıkar.' }),
           url: text('Site / uygulama adresi', { nostyle: true, hint: 'https://ile başlamalı. Boş bırakırsan ziyaret butonu çıkmaz.' }),
@@ -142,6 +143,8 @@
             tags: list('Teknolojiler / etiketler', text('', { nostyle: true }), { addLabel: 'Etiket ekle', newItem: '', max: 12 }),
             urlLabel: text('Ziyaret butonunun yazısı', { nostyle: true }),
             gallery: list('Galeri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
+            sections: list('Proje sayfası bölümleri (başlık + yazı)', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Bölüm ekle', title: (v) => v.title || 'Bölüm', max: 12, newItem: { title: '', text: '' } }),
+            fun: select('Küçük eğlenceli gösterim', [['', 'Yok'], ['map', 'Sipariş haritası (şehir pini)'], ['reviews', 'Yorum yıldızları (parlar)'], ['delivery', 'Teslimat adımları (kamyon)']]),
             slug: text('Sayfa adresi', { nostyle: true, hint: 'Boş bırakırsan proje adından üretilir. Örn. pati-mama → /isler/pati-mama' }),
           }),
           look: group('Görünüm', {
@@ -153,7 +156,7 @@
           }),
         }), {
           addLabel: 'Proje ekle', title: (v) => v.title || 'Yeni proje', max: 100,
-          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, natural: false, badge: '', visible: true },
+          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, natural: false, badge: '', listLabel: '', fun: '', sections: [{ title: '', text: '' }], visible: true },
         }),
       },
     },
@@ -184,6 +187,15 @@
           moreLabel: text('Açılır liste butonu', { nostyle: true, compact: true }),
           emptyText: text('Proje yokken görünen yazı', { nostyle: true }),
         }, { flat: true }),
+        approach: group('Ortak yaklaşım bölümü (listenin altında)', {
+          visible: bool('Bölümü göster'),
+          eyebrow: text('Küçük üst yazı', { nostyle: true }),
+          heading: text('Başlık', { nostyle: true }),
+          text: area('Giriş yazısı', { nostyle: true }),
+          points: list('Maddeler', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Madde ekle', title: (v) => v.title || 'Madde', max: 6, newItem: { title: '', text: '' } }),
+          cards: list('Kartlar', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Kart ekle', title: (v) => v.title || 'Kart', max: 4, newItem: { title: '', text: '' } }),
+          quote: area('Alıntı', { nostyle: true }),
+        }),
         showContact: bool('Sayfanın altında iletişim bölümünü göster'),
         seo: group('Google', {
           seoTitle: text('Sayfa başlığı', { nostyle: true }),

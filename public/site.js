@@ -290,6 +290,34 @@
     liveBoxes.forEach((b) => { ro.observe(b); fit(b); if (wide) io.observe(b); });
   }
 
+  // ---------- İşler: detay sayfasındaki küçük gösterimler ----------
+  document.querySelectorAll('[data-fun="map"]').forEach((box) => {
+    const cities = (box.dataset.cities || '').split(',').filter(Boolean);
+    const out = box.querySelector('[data-city]'), stage = box.querySelector('.fm-stage'), lv = [...box.querySelectorAll('.fm-levels li')];
+    let i = 0;
+    const show = (n) => {
+      i = (n + cities.length) % cities.length;
+      out.textContent = cities[i];
+      lv.forEach((l, k) => l.classList.toggle('on', k === i % lv.length));
+      stage.classList.remove('pop'); void stage.offsetWidth; stage.classList.add('pop');
+    };
+    show(0);
+    box.addEventListener('click', () => show(i + 1));
+    if (!reduce) setInterval(() => { if (!document.hidden) show(i + 1); }, 2800);
+  });
+  document.querySelectorAll('[data-fun="delivery"]').forEach((box) => {
+    const steps = [...box.querySelectorAll('.fd-steps li')];
+    let cur = 0;
+    const go = (n) => {
+      cur = (n + steps.length) % steps.length;
+      steps.forEach((li, k) => { li.classList.toggle('on', k === cur); li.classList.toggle('done', k < cur); });
+      box.style.setProperty('--p', `${16 + (cur * 84) / (steps.length - 1) - (cur === steps.length - 1 ? 4 : 0)}%`);
+    };
+    go(0);
+    steps.forEach((li, k) => li.addEventListener('click', () => go(k)));
+    if (!reduce) setInterval(() => { if (!document.hidden) go(cur + 1); }, 2200);
+  });
+
   // ---------- İşler: açıklama aşağı doğru açılır ----------
   document.addEventListener('click', (e) => {
     const t = e.target.closest && e.target.closest('.work-toggle');
