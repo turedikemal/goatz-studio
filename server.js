@@ -68,6 +68,8 @@ function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {})
   });
   res.end(body);
 }
+const messages = require('./lib/messages');
+const contactHits = new Map();
 const json = (res, status, data, extra) => send(res, status, JSON.stringify(data), 'application/json; charset=utf-8', extra);
 
 function readBody(req, limit) {
@@ -107,6 +109,18 @@ async function api(req, res, url) {
   const route = `${req.method} ${url.pathname}`;
   const ip = req.socket.remoteAddress || '';
 
+  // Herkese açık: iletişim formu
+  if (route === 'POST /api/contact') {
+    const now = Date.now();
+    const hits = (contactHits.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
+    if (hits.length >= 5) return json(res, 429, { error: 'Çok fazla mesaj gönderdin. Biraz sonra tekrar dene.' });
+    const body = await readJson(req, 20000);
+    if (body && body.website) return json(res, 200, { ok: true }); // bot tuzağı
+    messages.add(body || {});
+    hits.push(now); contactHits.set(ip, hits);
+    return json(res, 200, { ok: true });
+  }
+
   if (route === 'GET /api/me') return json(res, 200, { authed: authed(req), configured: Boolean(ADMIN_PASSWORD) });
 
   if (route === 'POST /api/login') {
@@ -131,6 +145,10 @@ async function api(req, res, url) {
   }
 
   if (!authed(req)) return json(res, 401, { error: 'Giriş yapmalısın.' });
+
+  if (route === 'GET /api/messages') return json(res, 200, messages.list());
+  if (route === 'POST /api/messages/read') { messages.markRead(String((await readJson(req)).id || '')); return json(res, 200, { ok: true }); }
+  if (req.method === 'DELETE' && url.pathname.startsWith('/api/messages/')) { messages.remove(decodeURIComponent(url.pathname.slice(14))); return json(res, 200, { ok: true }); }
 
   if (route === 'GET /api/content') return json(res, 200, store.load());
   if (route === 'GET /api/defaults') return json(res, 200, store.DEFAULTS);

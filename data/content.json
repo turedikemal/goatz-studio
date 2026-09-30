@@ -1794,6 +1794,88 @@
           ]
         }
       ]
+    },
+    {
+      "id": "iletisim",
+      "title": "İletişim",
+      "slug": "iletisim",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "İletişim — The Goatz Studio",
+      "seoDescription": "The Goatz Studio ile iletişime geçin: web tasarım, e-ticaret sitesi ve ürün çekimi için mesaj bırakın.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Mesaj at",
+        "title": "İletişim",
+        "subtitle": "Bize yazın, size dönelim.",
+        "titleSize": 12,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "chat",
+            "x": 84,
+            "y": 30,
+            "mx": 76,
+            "my": 18,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 58,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "form",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "İletişim",
+          "heading": "Projenizi anlatın.",
+          "text": "Web sitesi ya da ürün çekimi için ne istediğinizi yazın. Mesajınız doğrudan bize ulaşır, en kısa sürede size dönüş yapalım.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Gönder",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

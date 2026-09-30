@@ -507,12 +507,13 @@
       id: 'ayar-kullanicilar', label: 'Kullanıcılar', path: [], anchor: '#top',
       intro: 'Kullanıcıları ve rollerini yönetin.',
     },
+    { id: 'mesajlar', label: 'Gelen Mesajlar', special: 'messages', anchor: '#top', intro: 'İletişim formundan gelen mesajlar. Yanıt için e-posta adresine tıkla.' },
     { id: 'media', label: 'Görsel Kütüphanesi', special: 'media', anchor: '#top', intro: 'Yüklediğin tüm görseller. Buradan yeni görsel yükleyebilir ya da kullanmadıklarını silebilirsin.' },
     { id: 'backups', label: 'Yedekler', special: 'backups', anchor: '#top', intro: 'Her kaydetmede eski içerik otomatik yedeklenir (son 30 kayıt). Bir yedeği yükleyip kaydedersen site o hale döner.' },
   ];
 
   // ---------- Özel sayfalar: şema ----------
-  const BLOCK_TYPES = { text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri' };
+  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri' };
   const is = (...types) => (o) => types.includes(o.type);
   const BLOCK_FIELDS = {
     type: select('Blok türü', Object.entries(BLOCK_TYPES)),
@@ -520,7 +521,7 @@
     background: color('Blok arka plan rengi'),
     eyebrow: text('Küçük üst yazı', { compact: true }),
     heading: area('Başlık', { hint: lineHint }),
-    text: area('Metin', { hint: 'Boş bir satır bırakarak yeni paragraf açarsın.', showIf: is('text', 'imagetext', 'cards', 'gallery') }),
+    text: area('Metin', { hint: 'Boş bir satır bırakarak yeni paragraf açarsın.', showIf: is('text', 'imagetext', 'cards', 'gallery', 'form') }),
     align: select('Hizalama', [['left', 'Sola yaslı'], ['center', 'Ortalı']]),
     image: image('Görsel', { hint: 'Kare ya da yatay bir görsel iyi durur.', showIf: is('imagetext') }),
     imageSide: select('Görsel hangi tarafta?', [['left', 'Solda'], ['right', 'Sağda']]),
@@ -546,7 +547,7 @@
   BLOCK_FIELDS.imageSide.showIf = is('imagetext');
   BLOCK_FIELDS.imageColor.showIf = is('imagetext');
   BLOCK_FIELDS.imageSticker.showIf = is('imagetext');
-  BLOCK_FIELDS.button.showIf = is('text', 'imagetext');
+  BLOCK_FIELDS.button.showIf = is('text', 'imagetext', 'form');
   BLOCK_FIELDS.ratio.showIf = is('gallery');
   BLOCK_FIELDS.bulk.showIf = is('gallery');
   BLOCK_FIELDS.images.showIf = is('gallery');
@@ -1078,6 +1079,7 @@
     if (page.special === 'sections') parts.push(sectionsEditor());
     else if (page.special === 'media') parts.push(mediaPage());
     else if (page.special === 'backups') parts.push(backupsPage());
+    else if (page.special === 'messages') parts.push(messagesPage());
     else if (page.special === 'themes') parts.push(themesEditor());
     else if (page.special === 'definitions') parts.push(commerce.definitions(page));
     else if (page.special === 'products') parts.push(commerce.products());
@@ -1499,6 +1501,24 @@
   }
 
   // ---------- Yedekler ----------
+  function messagesPage() {
+    const box = h('div', {}, h('p', { class: 'muted' }, 'Yükleniyor…'));
+    const card = (m) => {
+      const actions = [h('a', { class: 'btn small', href: `mailto:${m.email}?subject=${encodeURIComponent('Mesajınız hakkında')}` }, 'Yanıtla')];
+      if (!m.read) actions.push(h('button', { type: 'button', class: 'btn small', onclick: async () => { await request('/api/messages/read', { method: 'POST', body: JSON.stringify({ id: m.id }) }); load(); } }, 'Okundu'));
+      actions.push(h('button', { type: 'button', class: 'btn small', onclick: async () => { if (confirm('Bu mesaj silinsin mi?')) { await request(`/api/messages/${m.id}`, { method: 'DELETE' }); load(); } } }, 'Sil'));
+      return h('div', { class: 'card', style: 'margin-bottom:12px' },
+        h('p', { style: 'margin:0 0 6px;font-weight:700' }, `${m.read ? '' : '● '}${m.name}  ·  ${new Date(m.date).toLocaleString('tr-TR')}`),
+        h('p', { class: 'muted', style: 'margin:0 0 8px' }, [m.email, m.phone].filter(Boolean).join('  ·  ')),
+        h('p', { style: 'margin:0 0 10px;white-space:pre-wrap' }, m.message),
+        h('div', { style: 'display:flex;gap:8px' }, ...actions));
+    };
+    const load = () => request('/api/messages').then((list) => {
+      box.replaceChildren(...(list.length ? list.map(card) : [h('p', { class: 'muted' }, 'Henüz mesaj yok.')]));
+    }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
+    load();
+    return box;
+  }
   function backupsPage() {
     const box = h('div', {}, h('p', { class: 'muted' }, 'Yükleniyor…'));
     request('/api/backups').then((list) => {

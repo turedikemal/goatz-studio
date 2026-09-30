@@ -381,6 +381,29 @@
     check();
   }
 
+  // ---------- İletişim formu ----------
+  document.querySelectorAll('[data-contact-form]').forEach((form) => {
+    const status = form.querySelector('.cf-status'), btn = form.querySelector('button[type="submit"]');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.className = 'cf-status';
+      status.textContent = '';
+      const data = Object.fromEntries(new FormData(form));
+      btn.disabled = true;
+      try {
+        const r = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) throw new Error(j.error || 'Gönderilemedi. Lütfen tekrar dene.');
+        form.reset();
+        status.classList.add('ok');
+        status.textContent = 'Mesajın bize ulaştı. En kısa sürede dönüş yapacağız.';
+      } catch (err) {
+        status.classList.add('err');
+        status.textContent = err.message;
+      } finally { btn.disabled = false; }
+    });
+  });
+
   // ---------- İşler: kategori filtresi ----------
   const workFilters = document.querySelector('.work-filters');
   if (workFilters) {
