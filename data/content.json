@@ -520,6 +520,16 @@
         "size": 110,
         "rotate": -6,
         "float": true
+      },
+      {
+        "type": "sock",
+        "x": 20,
+        "y": 4,
+        "mx": 4,
+        "my": 3,
+        "size": 85,
+        "rotate": -12,
+        "float": true
       }
     ],
     "showLegal": true,

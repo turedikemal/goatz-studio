@@ -1039,13 +1039,8 @@
     setTimeout(() => sparks(c.x + c.w * 0.1, c.y + c.h * 0.1, { n: 6, size: Math.max(8, c.w * 0.12), dist: Math.max(30, c.w * 0.5) }), ms(0.7));
     setTimeout(fx.done, ms(1.3));
   };
-  // Ayak ve iskarpin: tek, basit bir ileri adım (ucu hafif kalkar, öne basar, geri döner)
-  const walkStep = (el) => {
-    if (busy(el, ms(1.2))) return;
-    const rot = restRot(el);
-    const f = (r, x, o) => ({ rotate: `calc(${rot} + ${r}deg)`, translate: `${x}px 0`, transformOrigin: '80% 92%', offset: o });
-    el.animate([f(0, 0, 0), f(-9, 0, 0.3), f(1, 8, 0.6), f(0, 0, 1)], { duration: ms(1), easing: 'ease-in-out' });
-  };
+  // Ayak ve iskarpin: efekt yok (yine de sayfa açılışındaki giriş animasyonunu alırlar, fare üstündeki tur atma uygulanmaz)
+  const noFx = () => {};
   // Zincir: halkalar gerilir ve toplanır
   const pullLink = (el) => {
     if (busy(el, ms(1.4))) return;
@@ -1055,7 +1050,7 @@
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
-    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': walkStep, 'st-shoe': walkStep, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': noFx, 'st-shoe': noFx, 'st-sock': noFx, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   // Efektler fare üstüne gelince çalışır (dokunmatikte dokununca)

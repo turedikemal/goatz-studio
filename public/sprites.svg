@@ -115,6 +115,7 @@
     </symbol>
     <!-- Ayak (erkek, yandan, pantolon paçalı) -->
     <symbol id="s-foot" viewBox="0 0 120 100">
+      <g transform="translate(120 0) scale(-1 1)">
       <g class="body">
         <g fill="#f1bf98" stroke="#000" stroke-width="2.600">
           <ellipse cx="41" cy="57" rx="4.600" ry="4.500" transform="rotate(-30 41 57)"/>
@@ -135,6 +136,7 @@
       </g>
       <rect x="58" y="0" width="28" height="20" rx="3" fill="#5c4ade" stroke="#000" stroke-width="3"/>
       <path d="M62 5h20" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+      </g>
     </symbol>
     <!-- İskarpin (yandan) -->
     <symbol id="s-shoe" viewBox="0 0 120 100">
@@ -160,6 +162,16 @@
       </g>
       <path d="M14 80h92v6c0 3-2 4-5 4H22c-5 0-8-4-8-10z" fill="#2b1b10" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M78 90h24v6H82c-3 0-4-3-4-6z" fill="#2b1b10" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Beyaz çorap -->
+    <symbol id="s-sock" viewBox="0 0 100 100">
+      <path d="M34 6h28v44c0 6 6 10 16 12 14 4 18 20 6 26H40C28 88 24 76 32 68c3-4 2-8 2-14z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M30 70c-4 8 0 16 10 18h8c-10-4-14-10-10-18z" fill="#e3e3ec"/>
+      <path d="M82 66c8 6 6 16-2 20h8c8-6 6-16-2-20z" fill="#e3e3ec"/>
+      <path d="M34 18h28M34 12h28" stroke="#000" stroke-opacity=".18" stroke-width="2"/>
+      <path d="M34 24h28" stroke="#fb4903" stroke-width="4"/>
+      <path d="M34 31h28" stroke="#5c4ade" stroke-width="4"/>
+      <path d="M40 40c0 6 1 10 1 14M50 38c0 6 0 10 0 15M58 40c0 6-1 10-1 14" stroke="#000" stroke-opacity=".12" stroke-width="2" stroke-linecap="round" fill="none"/>
     </symbol>
     <!-- G jetonu -->
     <symbol id="s-coin" viewBox="0 0 100 100">
