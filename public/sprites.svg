@@ -149,9 +149,9 @@
     <!-- Izgara -->
     <symbol id="s-grid" viewBox="0 0 100 100">
       <rect x="10" y="10" width="38" height="38" rx="8" fill="#fb4903" stroke="#000" stroke-width="3"/>
-      <rect x="52" y="10" width="38" height="38" rx="8" fill="#ffd731" stroke="#000" stroke-width="3"/>
-      <rect x="10" y="52" width="38" height="38" rx="8" fill="#55db9c" stroke="#000" stroke-width="3"/>
-      <rect x="52" y="52" width="38" height="38" rx="8" fill="#e9ccff" stroke="#000" stroke-width="3"/>
+      <rect x="52" y="10" width="38" height="38" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <rect x="10" y="52" width="38" height="38" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
+      <rect x="52" y="52" width="38" height="38" rx="8" fill="#fff" stroke="#000" stroke-width="3"/>
     </symbol>
     <!-- Renk paleti -->
     <symbol id="s-palette" viewBox="0 0 100 100">
@@ -165,6 +165,48 @@
     <symbol id="s-heart" viewBox="0 0 100 100">
       <path d="M50 88C18 64 8 46 8 32 8 18 19 10 31 10c9 0 15 5 19 12 4-7 10-12 19-12 12 0 23 8 23 22 0 14-10 32-42 56z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M24 32c0-7 4-11 10-11" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <!-- Büyüteç -->
+    <symbol id="s-magnifier" viewBox="0 0 100 100">
+      <path d="M62 62L88 88" stroke="#000" stroke-width="12" stroke-linecap="round"/>
+      <path d="M62 62L88 88" stroke="#fb4903" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="42" cy="42" r="30" fill="#dceeff" stroke="#000" stroke-width="3"/>
+      <path d="M26 38a18 18 0 0 1 14-14" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <!-- Dünya -->
+    <symbol id="s-globe" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="#55db9c" stroke="#000" stroke-width="3"/>
+      <ellipse cx="50" cy="50" rx="17" ry="40" fill="none" stroke="#000" stroke-width="3"/>
+      <path d="M10 50h80M16 30h68M16 70h68" fill="none" stroke="#000" stroke-width="3"/>
+    </symbol>
+    <!-- Kalem -->
+    <symbol id="s-pencil" viewBox="0 0 100 100">
+      <path d="M18 82l6-22L64 20l16 16L40 76z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M18 82l6-22 16 16z" fill="#fde2b0" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M64 20l8-8a7 7 0 0 1 10 0l6 6a7 7 0 0 1 0 10l-8 8z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Dişli -->
+    <symbol id="s-gear" viewBox="0 0 100 100">
+      <g fill="#ccc" stroke="#000" stroke-width="3" stroke-linejoin="round">
+        <rect x="43" y="6" width="14" height="20" rx="3"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(45 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(90 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(135 50 50)"/>
+        <rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(180 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(225 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(270 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(315 50 50)"/>
+      </g>
+      <circle cx="50" cy="50" r="30" fill="#ccc" stroke="#000" stroke-width="3"/>
+      <circle cx="50" cy="50" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+    </symbol>
+    <!-- Roket -->
+    <symbol id="s-rocket" viewBox="0 0 100 100">
+      <path d="M40 54h20l-10 30z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M32 50l-16 16 8 6 14-6z M68 50l16 16-8 6-14-6z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 6c14 10 20 28 18 48H32C30 34 36 16 50 6z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="50" cy="34" r="8" fill="#4da2ff" stroke="#000" stroke-width="3"/>
+    </symbol>
+    <!-- Grafik -->
+    <symbol id="s-chart" viewBox="0 0 100 100">
+      <rect x="12" y="54" width="20" height="32" rx="4" fill="#55db9c" stroke="#000" stroke-width="3"/>
+      <rect x="40" y="36" width="20" height="50" rx="4" fill="#ffd731" stroke="#000" stroke-width="3"/>
+      <rect x="68" y="14" width="20" height="72" rx="4" fill="#fb4903" stroke="#000" stroke-width="3"/>
+      <path d="M6 90h88" stroke="#000" stroke-width="3" stroke-linecap="round"/>
     </symbol>
   </defs>
 </svg>

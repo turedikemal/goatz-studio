@@ -616,12 +616,99 @@
         "natural": false,
         "badge": "",
         "lang": "en",
+        "story": "Dardanos Fine Foods için yalnızca bir e-ticaret sitesi hazırlamadık; markanın dijital satış altyapısını, kullanıcı deneyimini, içerik yapısını ve arama görünürlüğünü birlikte ele aldık.\n\nProjeye site mimarisinden başlayarak ürün ve kategori yapıları, mobil deneyim, SEO altyapısı, çok dilli içerik sistemi, Google entegrasyonları ve teknik optimizasyonları kapsayan bütüncül bir çalışma ile yaklaştık.\n\nAmacımız; ürünlerin daha güçlü sunulduğu, kullanıcıların aradığını kolayca bulabildiği, mobilde sorunsuz çalışan, Google’da daha görünür olan ve uzun vadede geliştirilebilir bir e-ticaret yapısı oluşturmaktı.",
+        "closing": "Dardanos Fine Foods projesinde hedefimiz yalnızca iyi görünen bir site hazırlamak değil; markanın dijital satış, içerik ve organik büyüme süreçlerini destekleyen sürdürülebilir bir e-ticaret altyapısı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Markanın görsel kimliğine ve ürün grubuna uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve marka ile uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Arama Görünürlüğü Çalışmaları",
+            "text": "Ürün, kategori ve içerik sayfalarının arama niyetine daha uygun hale gelmesi için içerik ve sayfa yapıları üzerinde çalıştık. Organik görünürlüğü artırmaya yönelik anahtar kelime, içerik ve sayfa optimizasyonları gerçekleştirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Türkçe & İngilizce Çok Dilli Site Yapısı",
+            "text": "Sitenin Türkçe ve İngilizce içerik yapısını oluşturduk. Yalnızca metin çevirileri değil; URL yapıları, başlıklar, meta bilgileri, blog içerikleri ve sayfa organizasyonlarını da iki dil için ayrı ayrı düzenledik.",
+            "sticker": ""
+          },
+          {
+            "title": "Blog & Organik Trafik Altyapısı",
+            "text": "Markanın ürün sayfalarının dışında da organik ziyaretçi kazanabilmesi için blog altyapısını geliştirdik. Arama niyetine uygun içerikler hazırladık, içerik hiyerarşilerini düzenledik ve blog yazılarını ürün ve kategori sayfalarıyla bağlantılı hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Site İçi Linkleme & İçerik Mimarisi",
+            "text": "Kategori, ürün ve blog sayfaları arasında mantıklı bağlantılar oluşturarak kullanıcıların site içerisinde daha rahat hareket etmesini sağladık. Aynı yapı arama motorlarının site içerisindeki sayfa ilişkilerini daha iyi anlamasını da destekledi.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Google Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Tag Manager & Ölçümleme Altyapısı",
+            "text": "Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Sitemap, 404 & 301 Yönlendirme Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Mimarisi & Teknik Yapı Düzenlemeleri",
+            "text": "Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün ve İçerik Yönetimi",
+            "text": "Ürün açıklamaları, kategori içerikleri, blog yazıları ve sayfa metinlerini daha tutarlı bir yapıya dönüştürdük. İçeriklerin hem kullanıcı açısından anlaşılır hem de SEO açısından anlamlı olmasına dikkat ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Trendyol & Hepsiburada Pazaryeri Entegrasyonları",
+            "text": "Markanın ürünlerini Trendyol ve Hepsiburada pazaryerlerinde de satışa sunabilmesi için entegrasyon altyapısını kurduk. Böylece site dışındaki satış kanalları da aynı düzen içinde yönetilebilir hale geldi.",
+            "sticker": ""
+          },
+          {
+            "title": "Ortak Yönetim Paneli Kurulumu",
+            "text": "Site ve pazaryerlerindeki satış süreçlerini tek yerden takip edebilmek için ortak bir yönetim paneli kurduk. Farklı kanalların yönetimi böylece daha düzenli ve tek merkezden ilerleyebilir hale geldi.",
+            "sticker": ""
+          },
+          {
+            "title": "Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+            "text": "Site yayına girdikten sonra da çalışmayı sürdürdük. Yeni ihtiyaçlar, SEO düzenlemeleri, içerik güncellemeleri, yönlendirmeler, entegrasyonlar ve teknik iyileştirmeler doğrultusunda siteyi sürekli geliştirdik.",
             "sticker": ""
           }
         ],
@@ -653,12 +740,49 @@
         "natural": false,
         "badge": "",
         "lang": "",
+        "story": "Haki Heal için yalnızca bir e-ticaret sitesi hazırlamadık; doğal cilt bakımı ve aromaterapi ürünlerinin dijital satış altyapısını, kullanıcı deneyimini, içerik yapısını ve arama görünürlüğünü birlikte ele aldık.\n\nToksik içeriklerden arındırılmış, sade ama etkili ürünler sunan markanın bakım anlayışını yansıtan bir arayüz kurguladık. Projeye ürün ve kategori yapılarından başlayarak mobil deneyim, SEO altyapısı, Google entegrasyonları ve teknik optimizasyonları kapsayan bütüncül bir çalışma ile yaklaştık.\n\nAmacımız; ürünlerin güven veren bir sadelikle sunulduğu, ziyaretçilerin aradığı bakım ürününe kolayca ulaştığı, mobilde sorunsuz çalışan ve Google’da daha görünür bir e-ticaret yapısı oluşturmaktı.",
+        "closing": "Haki Heal projesinde hedefimiz yalnızca iyi görünen bir site hazırlamak değil; markanın dijital satış ve içerik süreçlerini destekleyen sürdürülebilir bir e-ticaret altyapısı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Markanın görsel kimliğine ve ürün grubuna uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve marka ile uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Ölçümleme Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık. Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Yönlendirme & Site Mimarisi Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik. Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
             "sticker": ""
           }
         ],
@@ -690,12 +814,49 @@
         "natural": false,
         "badge": "",
         "lang": "",
+        "story": "Maya Gusto için yalnızca bir e-ticaret sitesi hazırlamadık; organik, gurme, yerli ve ithal yüzlerce ürün çeşidi sunan yeni nesil şarküterinin dijital satış altyapısını, kullanıcı deneyimini ve arama görünürlüğünü birlikte ele aldık.\n\nGeniş bir ürün yelpazesinin kolay bulunabilmesi için ürün ve kategori yapılarını, mobil deneyimi, SEO altyapısını ve Google entegrasyonlarını kapsayan bütüncül bir çalışma yürüttük.\n\nAmacımız; yüzlerce ürünün düzenli sunulduğu, ziyaretçilerin aradığı ürüne hızla ulaştığı, online siparişin mobilde de sorunsuz tamamlandığı ve Google’da daha görünür bir e-ticaret yapısı oluşturmaktı.",
+        "closing": "Maya Gusto projesinde hedefimiz yalnızca iyi görünen bir site hazırlamak değil; markanın dijital satış süreçlerini destekleyen sürdürülebilir bir e-ticaret altyapısı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Markanın görsel kimliğine ve ürün grubuna uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve marka ile uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Ölçümleme Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık. Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Yönlendirme & Site Mimarisi Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik. Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
             "sticker": ""
           }
         ],
@@ -727,12 +888,69 @@
         "natural": false,
         "badge": "",
         "lang": "",
+        "story": "Dengepak için yalnızca bir e-ticaret sitesi hazırlamadık; inovatif ve sürdürülebilir ambalaj ürünlerinin dijital satış altyapısını, kullanıcı deneyimini, içerik yapısını ve arama görünürlüğünü birlikte ele aldık.\n\nProjeye site mimarisinden başlayarak ürün ve kategori yapıları, mobil deneyim, SEO altyapısı, çok dilli içerik sistemi, Google entegrasyonları ve teknik optimizasyonları kapsayan bütüncül bir çalışma ile yaklaştık.\n\nAmacımız; ambalaj ihtiyacına göre doğru ürüne kolayca ulaşılan, mobilde sorunsuz çalışan, Google’da daha görünür ve uzun vadede geliştirilebilir bir e-ticaret yapısı oluşturmaktı.",
+        "closing": "Dengepak projesinde hedefimiz yalnızca iyi görünen bir site hazırlamak değil; markanın dijital satış, içerik ve organik büyüme süreçlerini destekleyen sürdürülebilir bir e-ticaret altyapısı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Markanın görsel kimliğine ve ürün grubuna uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve marka ile uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Arama Görünürlüğü Çalışmaları",
+            "text": "Ürün, kategori ve içerik sayfalarının arama niyetine daha uygun hale gelmesi için içerik ve sayfa yapıları üzerinde çalıştık. Organik görünürlüğü artırmaya yönelik anahtar kelime, içerik ve sayfa optimizasyonları gerçekleştirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Türkçe & İngilizce Çok Dilli Site Yapısı",
+            "text": "Sitenin Türkçe ve İngilizce içerik yapısını oluşturduk. Yalnızca metin çevirileri değil; URL yapıları, başlıklar, meta bilgileri, blog içerikleri ve sayfa organizasyonlarını da iki dil için ayrı ayrı düzenledik.",
+            "sticker": ""
+          },
+          {
+            "title": "Blog & Organik Trafik Altyapısı",
+            "text": "Markanın ürün sayfalarının dışında da organik ziyaretçi kazanabilmesi için blog altyapısını geliştirdik. Arama niyetine uygun içerikler hazırladık, içerik hiyerarşilerini düzenledik ve blog yazılarını ürün ve kategori sayfalarıyla bağlantılı hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Ölçümleme Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık. Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Yönlendirme & Site Mimarisi Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik. Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
+            "sticker": ""
+          },
+          {
+            "title": "Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+            "text": "Site yayına girdikten sonra da çalışmayı sürdürdük. Yeni ihtiyaçlar, SEO düzenlemeleri, içerik güncellemeleri, yönlendirmeler, entegrasyonlar ve teknik iyileştirmeler doğrultusunda siteyi sürekli geliştirdik.",
             "sticker": ""
           }
         ],
@@ -764,12 +982,69 @@
         "natural": false,
         "badge": "",
         "lang": "",
+        "story": "Loogy için yalnızca bir web sitesi hazırlamadık; sondaj logu ve geoteknik rapor yazılımının kullanıcıya tanıtıldığı, üyelik ve paketlerin sunulduğu dijital altyapıyı, kullanıcı deneyimini, içerik yapısını ve arama görünürlüğünü birlikte ele aldık.\n\nJeoloji ve geoteknik mühendisliğine yönelik bir platformun ihtiyaçlarını gözeterek site mimarisi, mobil deneyim, SEO altyapısı, çok dilli içerik sistemi, Google entegrasyonları ve teknik optimizasyonları kapsayan bütüncül bir çalışma yürüttük.\n\nAmacımız; platformun ne sunduğunun ilk bakışta anlaşıldığı, mobilde sorunsuz çalışan, Google’da daha görünür ve uzun vadede geliştirilebilir bir dijital yapı oluşturmaktı.",
+        "closing": "Loogy projesinde hedefimiz yalnızca iyi görünen bir site hazırlamak değil; platformun tanıtım, içerik ve organik büyüme süreçlerini destekleyen sürdürülebilir bir dijital altyapı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Markanın görsel kimliğine ve ürün grubuna uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve marka ile uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Arama Görünürlüğü Çalışmaları",
+            "text": "Ürün, kategori ve içerik sayfalarının arama niyetine daha uygun hale gelmesi için içerik ve sayfa yapıları üzerinde çalıştık. Organik görünürlüğü artırmaya yönelik anahtar kelime, içerik ve sayfa optimizasyonları gerçekleştirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Türkçe & İngilizce Çok Dilli Site Yapısı",
+            "text": "Sitenin Türkçe ve İngilizce içerik yapısını oluşturduk. Yalnızca metin çevirileri değil; URL yapıları, başlıklar, meta bilgileri, blog içerikleri ve sayfa organizasyonlarını da iki dil için ayrı ayrı düzenledik.",
+            "sticker": ""
+          },
+          {
+            "title": "Blog & Organik Trafik Altyapısı",
+            "text": "Markanın ürün sayfalarının dışında da organik ziyaretçi kazanabilmesi için blog altyapısını geliştirdik. Arama niyetine uygun içerikler hazırladık, içerik hiyerarşilerini düzenledik ve blog yazılarını ürün ve kategori sayfalarıyla bağlantılı hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Ölçümleme Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık. Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Yönlendirme & Site Mimarisi Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik. Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
+            "sticker": ""
+          },
+          {
+            "title": "Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+            "text": "Site yayına girdikten sonra da çalışmayı sürdürdük. Yeni ihtiyaçlar, SEO düzenlemeleri, içerik güncellemeleri, yönlendirmeler, entegrasyonlar ve teknik iyileştirmeler doğrultusunda siteyi sürekli geliştirdik.",
             "sticker": ""
           }
         ],
@@ -801,12 +1076,69 @@
         "natural": false,
         "badge": "",
         "lang": "en",
+        "story": "The Goatz Creative için yalnızca bir e-ticaret sitesi hazırlamadık; Çanakkale atölyesinde hazırlanan el yapımı seramikler ve dekoratif soya mumlarının dijital satış altyapısını, kullanıcı deneyimini, içerik yapısını ve arama görünürlüğünü birlikte ele aldık.\n\nRenkli ve karakterli ürün dünyasını yansıtan bir arayüz kurguladık. Projeye site mimarisinden başlayarak ürün ve kategori yapıları, mobil deneyim, SEO altyapısı, çok dilli içerik sistemi, Google entegrasyonları ve teknik optimizasyonları kapsayan bütüncül bir çalışma ile yaklaştık.\n\nAmacımız; el yapımı ürünlerin hak ettiği şekilde sunulduğu, ziyaretçilerin aradığını kolayca bulabildiği, mobilde sorunsuz çalışan ve Google’da daha görünür bir e-ticaret yapısı oluşturmaktı.",
+        "closing": "The Goatz Creative projesinde hedefimiz yalnızca iyi görünen bir site hazırlamak değil; markanın dijital satış, içerik ve organik büyüme süreçlerini destekleyen sürdürülebilir bir e-ticaret altyapısı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Markanın görsel kimliğine ve ürün grubuna uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve marka ile uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Arama Görünürlüğü Çalışmaları",
+            "text": "Ürün, kategori ve içerik sayfalarının arama niyetine daha uygun hale gelmesi için içerik ve sayfa yapıları üzerinde çalıştık. Organik görünürlüğü artırmaya yönelik anahtar kelime, içerik ve sayfa optimizasyonları gerçekleştirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Türkçe & İngilizce Çok Dilli Site Yapısı",
+            "text": "Sitenin Türkçe ve İngilizce içerik yapısını oluşturduk. Yalnızca metin çevirileri değil; URL yapıları, başlıklar, meta bilgileri, blog içerikleri ve sayfa organizasyonlarını da iki dil için ayrı ayrı düzenledik.",
+            "sticker": ""
+          },
+          {
+            "title": "Blog & Organik Trafik Altyapısı",
+            "text": "Markanın ürün sayfalarının dışında da organik ziyaretçi kazanabilmesi için blog altyapısını geliştirdik. Arama niyetine uygun içerikler hazırladık, içerik hiyerarşilerini düzenledik ve blog yazılarını ürün ve kategori sayfalarıyla bağlantılı hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Ölçümleme Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık. Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Yönlendirme & Site Mimarisi Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik. Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
+            "sticker": ""
+          },
+          {
+            "title": "Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+            "text": "Site yayına girdikten sonra da çalışmayı sürdürdük. Yeni ihtiyaçlar, SEO düzenlemeleri, içerik güncellemeleri, yönlendirmeler, entegrasyonlar ve teknik iyileştirmeler doğrultusunda siteyi sürekli geliştirdik.",
             "sticker": ""
           }
         ],
@@ -838,12 +1170,49 @@
         "natural": false,
         "badge": "",
         "lang": "",
+        "story": "Çanakkale İli Damızlık Koyun Keçi Yetiştiricileri Birliği için yalnızca bir web sitesi hazırlamadık; 2003 yılında kurulan birliğin dijital kimliğini, kullanıcı deneyimini, içerik yapısını ve arama görünürlüğünü birlikte ele aldık.\n\nKüçükbaş hayvan yetiştiriciliğinde verimliliği artırmak amacıyla faaliyet gösteren bir STK’nın ihtiyaçlarına uygun olarak site mimarisi, mobil deneyim, SEO altyapısı ve teknik optimizasyonları kapsayan bütüncül bir çalışma yürüttük.\n\nAmacımız; birliğin çalışmalarının ve içeriklerinin kolayca bulunduğu, mobilde sorunsuz çalışan, Google’da daha görünür ve uzun vadede yönetilebilir bir web yapısı oluşturmaktı.",
+        "closing": "Bu projede hedefimiz yalnızca iyi görünen bir site hazırlamak değil; birliğin dijital varlığını destekleyen sürdürülebilir bir web altyapısı oluşturmaktı.",
         "listLabel": "",
         "fun": "",
         "sections": [
           {
-            "title": "",
-            "text": "",
+            "title": "Anahtar Teslim E-Ticaret Sitesi Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını oluşturduk. Siteyi yayına hazır, yönetilebilir ve gelecekte geliştirilebilir bir yapı halinde kurguladık.",
+            "sticker": ""
+          },
+          {
+            "title": "STK'ya Özel Web Tasarımı",
+            "text": "Kurumun kimliğine ve hedef kitlesine uygun bir kullanıcı arayüzü oluşturduk. Sayfa düzenleri, tipografi, içerik hiyerarşisi ve kullanıcı etkileşimlerini daha sade, anlaşılır ve kurumsal kimlikle uyumlu hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "Mobil Uyumlu ve Satış Odaklı Site Tasarımı",
+            "text": "Masaüstü, tablet ve mobil cihazlarda tutarlı çalışan responsive bir yapı oluşturduk. Mobil kullanıcıların ürünlere, kategorilere ve satın alma adımlarına daha hızlı ulaşabilmesi için kullanıcı deneyimini optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Ürün & Kategori Sayfalarının Yapılandırılması",
+            "text": "Ürün ve kategori sayfalarını yalnızca görsel olarak değil, içerik ve kullanıcı deneyimi açısından da yeniden düzenledik. Ürün grupları, açıklamalar, kategori hiyerarşileri ve sayfa içi bilgi sıralamalarını daha anlaşılır hale getirdik.",
+            "sticker": ""
+          },
+          {
+            "title": "SEO & Teknik SEO Optimizasyonu",
+            "text": "Sayfa başlıkları, meta açıklamaları, içerik hiyerarşileri, URL yapıları, iç bağlantılar ve teknik SEO unsurlarını düzenledik. Arama motorlarının siteyi daha doğru taraması ve içerikleri daha iyi anlaması için altyapıyı optimize ettik.",
+            "sticker": ""
+          },
+          {
+            "title": "Google Merchant Center & Ölçümleme Entegrasyonları",
+            "text": "Ürünlerin Google ekosisteminde kullanılabilmesi için gerekli entegrasyon yapıları üzerinde çalıştık. Merchant Center, Google Tag Manager ve ilgili ölçümleme sistemlerini e-ticaret altyapısına bağladık. Site içerisindeki dönüşüm ve kullanıcı hareketlerinin takip edilebilmesi için ölçümleme altyapısını düzenledik. Gerekli script ve entegrasyonların daha kontrollü şekilde yönetilebilmesi için Google Tag Manager yapısını kullandık.",
+            "sticker": ""
+          },
+          {
+            "title": "Site Hızı, Kullanılabilirlik & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım, içerik yerleşimleri ve teknik performans üzerinde iyileştirmeler yaptık. Kullanıcıların daha hızlı ve daha akıcı bir alışveriş deneyimi yaşamasını hedefledik.",
+            "sticker": ""
+          },
+          {
+            "title": "URL, Yönlendirme & Site Mimarisi Yönetimi",
+            "text": "Eski ve hatalı URL'leri analiz ederek site içerisindeki bağlantı yapısını yeniden düzenledik. 404 veren sayfaları tespit ettik, doğru sayfalara yönlendirmeler oluşturduk ve sitemap içerisindeki sorunlu URL'leri kontrol ettik. Sayfaların birbirleriyle olan ilişkilerini, kategori hiyerarşisini ve URL yapısını daha düzenli hale getirdik. Kullanıcıların ve arama motorlarının site içerisinde daha kolay ilerleyebileceği bir yapı oluşturduk.",
             "sticker": ""
           }
         ],
@@ -875,6 +1244,8 @@
         "natural": true,
         "badge": "Geliştirmede",
         "lang": "",
+        "story": "",
+        "closing": "",
         "listLabel": "Kısa özellikler",
         "fun": "badges",
         "sections": [
@@ -942,6 +1313,8 @@
         "natural": true,
         "badge": "Geliştirmede",
         "lang": "",
+        "story": "",
+        "closing": "",
         "listLabel": "Kısa özellikler",
         "fun": "reviews",
         "sections": [
@@ -1014,6 +1387,8 @@
         "natural": true,
         "badge": "Yakında yayında",
         "lang": "",
+        "story": "",
+        "closing": "",
         "listLabel": "Kısa özellikler",
         "fun": "map",
         "sections": [

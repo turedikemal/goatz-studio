@@ -700,10 +700,72 @@
   };
   const plain = (el) => { if (busy(el, ms(0.9))) return; boing(el); };
 
+
+  // ---- Parça parça canlanan sticker'lar: çizimin satır içi kopyası oynatılır ----
+  const inlineFx = (el, id) => {
+    const sym = document.getElementById(`s-${id}`), use = el.querySelector(':scope > use');
+    if (!sym || !use) return null;
+    const g = svgEl('g', { class: 'fx' });
+    [...sym.children].forEach((n) => g.append(n.cloneNode(true)));
+    el.append(g); use.style.visibility = 'hidden';
+    return { g, parts: [...g.children], done: () => { g.remove(); use.style.visibility = ''; } };
+  };
+  const fillIn = (node, colors, delay, hold = 0.5) => node.animate([{ fill: '#fff', scale: 0.8 }, { fill: colors, scale: 1.12, offset: 0.25 }, { fill: colors, scale: 1, offset: 0.4 }, { fill: colors, scale: 1, offset: 1 }], { duration: ms(hold), delay: ms(delay), easing: 'ease-out', fill: 'both' });
+  const pop = (node) => { node.style.transformBox = 'fill-box'; node.style.transformOrigin = 'center'; };
+
+  // Palet: renk noktaları tek tek dolar
+  const paintPalette = (el) => {
+    if (busy(el, ms(2.6))) return;
+    const fx = inlineFx(el, 'palette'); if (!fx) return;
+    const dots = fx.parts.slice(1);
+    dots.forEach((d, i) => { pop(d); const col = d.getAttribute('fill'); d.animate([{ fill: '#fff', scale: 0.7 }, { fill: col, scale: 1.25, offset: 0.35 }, { fill: col, scale: 1 }], { duration: ms(0.45), delay: ms(0.15 + i * 0.4), easing: 'ease-out', fill: 'both' }); });
+    setTimeout(fx.done, ms(0.15 + dots.length * 0.4 + 0.9));
+  };
+  // Izgara: kırmızı kare sabit, diğer üçü sırayla dolar
+  const fillGrid = (el) => {
+    if (busy(el, ms(3.2))) return;
+    const fx = inlineFx(el, 'grid'); if (!fx) return;
+    const cols = ['#ffd731', '#55db9c', '#e9ccff'];
+    fx.parts.slice(1).forEach((r, i) => { pop(r); r.animate([{ fill: '#fff', scale: 0.85 }, { fill: cols[i], scale: 1.1, offset: 0.2 }, { fill: cols[i], scale: 1, offset: 0.32 }, { fill: cols[i], scale: 1, offset: 0.85 }, { fill: '#fff', scale: 1 }], { duration: ms(2.2), delay: ms(0.1 + i * 0.35), easing: 'ease-out', fill: 'both' }); });
+    setTimeout(fx.done, ms(0.1 + 3 * 0.35 + 2.3));
+  };
+  // Manzara: güneş alçalıp dağların ardına iner, gökyüzü akşam olur, sonra yeniden doğar
+  const sunset = (el) => {
+    if (busy(el, ms(3))) return;
+    const fx = inlineFx(el, 'photo'); if (!fx) return;
+    const [sky, sun] = fx.parts;
+    sun.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(48px)', offset: 0.45 }, { transform: 'translateY(48px)', offset: 0.6 }, { transform: 'translateY(0)' }], { duration: ms(2.6), easing: 'ease-in-out' });
+    sky.animate([{ fill: '#dceeff' }, { fill: '#ffb27a', offset: 0.45 }, { fill: '#ffb27a', offset: 0.6 }, { fill: '#dceeff' }], { duration: ms(2.6), easing: 'ease-in-out' });
+    setTimeout(fx.done, ms(2.7));
+  };
+  // Ayar çubukları: yuvarlaklar çizgileri boyunca gidip gelir, başlangıca döner
+  const slideKnobs = (el) => {
+    if (busy(el, ms(2.4))) return;
+    const fx = inlineFx(el, 'sliders'); if (!fx) return;
+    const path = [[47, -15], [-47, 15], [37, -25]];
+    fx.parts.slice(3).forEach((k, i) => k.animate([{ transform: 'translateX(0)' }, { transform: `translateX(${path[i][0]}px)`, offset: 0.4 }, { transform: `translateX(${path[i][0] + path[i][1]}px)`, offset: 0.75 }, { transform: 'translateX(0)' }], { duration: ms(2), delay: ms(i * 0.12), easing: 'ease-in-out' }));
+    setTimeout(fx.done, ms(2.4));
+  };
+  // Sepet: sağa doğru gider, soldan girer, yerine oturur
+  const rollCart = (el) => {
+    if (busy(el, ms(2.1))) return;
+    el.animate([{ translate: '0 0', opacity: 1 }, { translate: '190% 0', opacity: 1, offset: 0.42 }, { translate: '190% 0', opacity: 0, offset: 0.43 }, { translate: '-190% 0', opacity: 0, offset: 0.44 }, { translate: '-190% 0', opacity: 1, offset: 0.45 }, { translate: '0 0', opacity: 1 }], { duration: ms(1.9), easing: 'cubic-bezier(.45,0,.3,1)' });
+  };
+  // Harita: kanatları katlanır, sonra açılır
+  const foldMap = (el) => {
+    if (busy(el, ms(2.2))) return;
+    const fx = inlineFx(el, 'map'); if (!fx) return;
+    const [left, mid, right, route, pin] = fx.parts;
+    const fold = (node, ox, sx) => { node.style.transformBox = 'view-box'; node.style.transformOrigin = `${ox}px 50px`; node.animate([{ transform: 'scaleX(1)' }, { transform: `scaleX(${sx})`, offset: 0.4 }, { transform: `scaleX(${sx})`, offset: 0.55 }, { transform: 'scaleX(1)' }], { duration: ms(1.8), easing: 'cubic-bezier(.5,0,.3,1)' }); };
+    fold(left, 35, 0.18); fold(right, 65, 0.18); fold(mid, 50, 0.72);
+    [route, pin].forEach((n) => n.animate([{ opacity: 1 }, { opacity: 0, offset: 0.25 }, { opacity: 0, offset: 0.65 }, { opacity: 1 }], { duration: ms(1.8) }));
+    setTimeout(fx.done, ms(1.9));
+  };
+
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
-    'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': burstOf('star'), 'st-box': burstOf('star'),
-    'st-map': plain, 'st-store': plain, 'st-cart': plain, 'st-link': plain, 'st-sliders': plain, 'st-photo': plain, 'st-grid': plain,
+    'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': burstOf('star'),
+    'st-magnifier': plain, 'st-pencil': plain, 'st-globe': spinMedal, 'st-gear': spinMedal, 'st-rocket': driveTruck, 'st-chart': plain, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   document.addEventListener('click', (e) => {

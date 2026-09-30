@@ -741,3 +741,12 @@
   .fb-badge.b3 { background: linear-gradient(90deg, var(--ember), var(--sun)); color: var(--carbon); }
   .fb-badge.b4 { background: var(--carbon); color: var(--sun); }
   .fb-badge.b5 { background: var(--mint); color: var(--carbon); }
+
+  /* Hikaye ve kapanış */
+  .work-storypanel .work-in { padding-top: clamp(40px, 6vw, 80px); padding-bottom: clamp(40px, 6vw, 80px); }
+  .work-story-h { margin: 0 0 24px; font-size: clamp(34px, 5.4vw, 76px); line-height: .92; max-width: 18ch; }
+  .work-story { max-width: 72ch; }
+  .work-story p { margin: 0 0 1em; font-size: clamp(18px, 1.7vw, 24px); line-height: 1.5; }
+  .work-story p:first-child { font-weight: 700; }
+  .ws-d { right: clamp(10px, 3vw, 44px); top: clamp(12px, 3vw, 40px); rotate: -8deg; }
+  .work-closing { margin: 0 0 36px; max-width: 34ch; font-size: clamp(24px, 3.4vw, 44px); line-height: 1.02; text-transform: none; font-weight: 800; }

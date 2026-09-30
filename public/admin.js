@@ -6,7 +6,7 @@
     carbon: 'Siyah', paper: 'Beyaz', sky: 'Açık mavi', concrete: 'Gri', mist: 'Açık gri',
     blue: 'Mavi', mint: 'Nane yeşili', lavender: 'Lavanta', ember: 'Turuncu', sun: 'Sarı', violet: 'Mor',
   };
-  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp' };
+  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', rocket: 'Roket', chart: 'Grafik' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160' };
   const TARGETS = [
     ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
@@ -144,6 +144,8 @@
             tags: list('Teknolojiler / etiketler', text('', { nostyle: true }), { addLabel: 'Etiket ekle', newItem: '', max: 12 }),
             urlLabel: text('Ziyaret butonunun yazısı', { nostyle: true }),
             gallery: list('Galeri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
+            story: area('Hikaye (proje sayfasının girişi; paragraflar arasına boş satır)', { nostyle: true }),
+            closing: area('Kapanış cümlesi', { nostyle: true }),
             sections: list('Proje sayfası bölümleri (başlık + yazı)', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }), sticker: select('Köşedeki sticker', [['', 'Konuya göre otomatik'], ...Object.entries(STICKERS)]) }), { addLabel: 'Bölüm ekle', title: (v) => v.title || 'Bölüm', max: 12, newItem: { title: '', text: '', sticker: '' } }),
             fun: select('Küçük eğlenceli gösterim', [['', 'Yok'], ['map', 'Sipariş haritası (şehir pini)'], ['reviews', 'Yorum yıldızları (parlar)'], ['delivery', 'Teslimat adımları (kamyon)'], ['badges', 'Rozet şablonları (çok satan)']]),
             slug: text('Sayfa adresi', { nostyle: true, hint: 'Boş bırakırsan proje adından üretilir. Örn. pati-mama → /isler/pati-mama' }),
@@ -157,7 +159,7 @@
           }),
         }), {
           addLabel: 'Proje ekle', title: (v) => v.title || 'Yeni proje', max: 100,
-          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, natural: false, badge: '', lang: '', listLabel: '', fun: '', sections: [{ title: '', text: '' }], visible: true },
+          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, natural: false, badge: '', lang: '', story: '', closing: '', listLabel: '', fun: '', sections: [{ title: '', text: '' }], visible: true },
         }),
       },
     },
