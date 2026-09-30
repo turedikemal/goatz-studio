@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const { render } = require('./lib/render');
 const store = require('./lib/content');
 const { resolvePages } = require('./lib/schema');
+const db = require('./lib/db');
 
 const PORT = Number(process.env.PORT) || 5173;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -173,6 +174,145 @@ async function api(req, res, url) {
     return json(res, 200, { ok: true });
   }
 
+  // ========== Tanımlamalar (Definitions) API ==========
+  if (route === 'GET /api/definitions/brands') {
+    try {
+      const brands = await db.getBrands();
+      return json(res, 200, brands);
+    } catch (e) {
+      return json(res, 500, { error: 'Markalar yüklenemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/definitions/brands') {
+    try {
+      const { name, slug, description, logoUrl } = await readJson(req);
+      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
+      const brand = await db.createBrand(name, slug, description, logoUrl);
+      return json(res, 201, brand);
+    } catch (e) {
+      return json(res, 500, { error: 'Marka oluşturulamadı: ' + e.message });
+    }
+  }
+
+  const updateBrandMatch = /^PUT \/api\/definitions\/brands\/(\d+)$/.exec(route);
+  if (updateBrandMatch) {
+    try {
+      const id = parseInt(updateBrandMatch[1]);
+      const { name, slug, description, logoUrl } = await readJson(req);
+      const brand = await db.updateBrand(id, name, slug, description, logoUrl);
+      return json(res, 200, brand);
+    } catch (e) {
+      return json(res, 500, { error: 'Marka güncellenemedi: ' + e.message });
+    }
+  }
+
+  const deleteBrandMatch = /^DELETE \/api\/definitions\/brands\/(\d+)$/.exec(route);
+  if (deleteBrandMatch) {
+    try {
+      const id = parseInt(deleteBrandMatch[1]);
+      await db.deleteRow('brands', id);
+      return json(res, 200, { ok: true });
+    } catch (e) {
+      return json(res, 500, { error: 'Marka silinemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'GET /api/definitions/categories') {
+    try {
+      const categories = await db.getCategories();
+      return json(res, 200, categories);
+    } catch (e) {
+      return json(res, 500, { error: 'Kategoriler yüklenemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/definitions/categories') {
+    try {
+      const { name, slug, parentId, description, icon } = await readJson(req);
+      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
+      const category = await db.createCategory(name, slug, parentId || null, description, icon);
+      return json(res, 201, category);
+    } catch (e) {
+      return json(res, 500, { error: 'Kategori oluşturulamadı: ' + e.message });
+    }
+  }
+
+  if (route === 'GET /api/definitions/properties') {
+    try {
+      const properties = await db.getProperties();
+      // Her property için values'ları da ekle
+      for (const prop of properties) {
+        prop.values = await db.getPropertyValues(prop.id);
+      }
+      return json(res, 200, properties);
+    } catch (e) {
+      return json(res, 500, { error: 'Özellikler yüklenemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/definitions/properties') {
+    try {
+      const { name, slug, inputType, description } = await readJson(req);
+      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
+      const property = await db.createProperty(name, slug, inputType, description);
+      return json(res, 201, property);
+    } catch (e) {
+      return json(res, 500, { error: 'Özellik oluşturulamadı: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/definitions/property-values') {
+    try {
+      const { propertyId, value, colorHex } = await readJson(req);
+      if (!propertyId || !value) return json(res, 400, { error: 'propertyId ve value gerekli.' });
+      const propValue = await db.createPropertyValue(propertyId, value, colorHex);
+      return json(res, 201, propValue);
+    } catch (e) {
+      return json(res, 500, { error: 'Özellik değeri oluşturulamadı: ' + e.message });
+    }
+  }
+
+  if (route === 'GET /api/definitions/tax-rates') {
+    try {
+      const rates = await db.getTaxRates();
+      return json(res, 200, rates);
+    } catch (e) {
+      return json(res, 500, { error: 'Vergi oranları yüklenemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/definitions/tax-rates') {
+    try {
+      const { name, rate, description } = await readJson(req);
+      if (!name || rate === undefined) return json(res, 400, { error: 'Name ve rate gerekli.' });
+      const taxRate = await db.createTaxRate(name, rate, description);
+      return json(res, 201, taxRate);
+    } catch (e) {
+      return json(res, 500, { error: 'Vergi oranı oluşturulamadı: ' + e.message });
+    }
+  }
+
+  if (route === 'GET /api/definitions/warehouses') {
+    try {
+      const warehouses = await db.getWarehouses();
+      return json(res, 200, warehouses);
+    } catch (e) {
+      return json(res, 500, { error: 'Depolar yüklenemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/definitions/warehouses') {
+    try {
+      const { name, slug, address, isDefault } = await readJson(req);
+      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
+      const warehouse = await db.createWarehouse(name, slug, address, isDefault);
+      return json(res, 201, warehouse);
+    } catch (e) {
+      return json(res, 500, { error: 'Depo oluşturulamadı: ' + e.message });
+    }
+  }
+
   return json(res, 404, { error: 'Bilinmeyen istek.' });
 }
 
@@ -230,7 +370,16 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`The Goatz Studio: http://localhost:${PORT}  ·  Panel: http://localhost:${PORT}/admin`);
-  if (!ADMIN_PASSWORD) console.warn('Uyarı: ADMIN_PASSWORD ayarlı değil, panele giriş kapalı.');
-});
+// Database initialization
+(async () => {
+  try {
+    await db.initSchema();
+  } catch (e) {
+    console.error('Database init error:', e.message);
+  }
+
+  server.listen(PORT, () => {
+    console.log(`The Goatz Studio: http://localhost:${PORT}  ·  Panel: http://localhost:${PORT}/admin`);
+    if (!ADMIN_PASSWORD) console.warn('Uyarı: ADMIN_PASSWORD ayarlı değil, panele giriş kapalı.');
+  });
+})();

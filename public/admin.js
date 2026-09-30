@@ -71,6 +71,12 @@
       intro: 'Stok miktarlarını takip edin.',
     },
 
+    { group: 'Tanımlamalar' },
+    {
+      id: 'tanimlamalar', label: 'Tanımlamalar', path: [], anchor: '#top', special: 'definitions',
+      intro: 'Markalar, kategoriler, özellikler, vergi oranları ve depolarını yönetin.',
+    },
+
     { group: 'Siparişler' },
     {
       id: 'siparisler', label: 'Siparişler', path: [], anchor: '#top',
@@ -962,6 +968,14 @@
     else if (page.special === 'media') parts.push(mediaPage());
     else if (page.special === 'backups') parts.push(backupsPage());
     else if (page.special === 'themes') parts.push(themesEditor());
+    else if (page.special === 'definitions') {
+      if (definitionsState.brands.length === 0) {
+        loadDefinitions().then(() => renderPage());
+        parts.push(h('div', { class: 'card' }, h('p', { class: 'muted' }, 'Tanımlamalar yükleniyor...')));
+      } else {
+        parts.push(definitionsEditor());
+      }
+    }
     else if (page.schema && Object.keys(page.schema).length > 0) parts.push(...objectFields(page.schema, page.path, true));
     else parts.push(placeholderPage(page.label));
     ed.replaceChildren(...parts);
@@ -1433,6 +1447,83 @@
         h('h3', {}, 'Tema Ekle'),
         h('p', { class: 'hint' }, 'Yeni tema oluşturmak için hazırlanıyor…'),
         h('button', { type: 'button', class: 'btn', disabled: true }, 'Yeni Tema Ekle')));
+  }
+
+  // ---------- Tanımlamalar (Definitions) ----------
+  let definitionsState = {
+    brands: [],
+    categories: [],
+    properties: [],
+    taxRates: [],
+    warehouses: [],
+    activeTab: 'brands',
+    editing: null,
+  };
+
+  async function loadDefinitions() {
+    try {
+      definitionsState.brands = await request('/api/definitions/brands');
+      definitionsState.categories = await request('/api/definitions/categories');
+      definitionsState.properties = await request('/api/definitions/properties');
+      definitionsState.taxRates = await request('/api/definitions/tax-rates');
+      definitionsState.warehouses = await request('/api/definitions/warehouses');
+    } catch (e) {
+      toast('Tanımlamalar yüklenemedi: ' + e.message);
+    }
+  }
+
+  function definitionsEditor() {
+    const tabs = ['brands', 'categories', 'properties', 'taxRates', 'warehouses'];
+    const tabLabels = { brands: 'Markalar', categories: 'Kategoriler', properties: 'Özellikler', taxRates: 'Vergi Oranları', warehouses: 'Depolar' };
+
+    const renderBrands = () => h('div', {},
+      h('div', { class: 'segment-control', style: 'margin-bottom: 16px' },
+        ...tabs.map(tab => h('button', {
+          class: definitionsState.activeTab === tab ? 'on' : '',
+          onclick: () => { definitionsState.activeTab = tab; renderPage(); }
+        }, tabLabels[tab]))
+      ),
+      h('table', { class: 'data-table', style: 'width: 100%' },
+        h('thead', {},
+          h('tr', {},
+            h('th', {}, 'Marka'),
+            h('th', {}, 'Slug'),
+            h('th', {}, 'İşlem'))),
+        h('tbody', {},
+          ...definitionsState.brands.map(brand => h('tr', {},
+            h('td', {}, brand.name),
+            h('td', { style: 'color: #999; font-size: 12px' }, brand.slug),
+            h('td', {},
+              h('button', {
+                class: 'btn icon',
+                onclick: async () => {
+                  if (confirm(brand.name + ' silinecek?')) {
+                    await request('/api/definitions/brands/' + brand.id, { method: 'DELETE' });
+                    await loadDefinitions();
+                    renderPage();
+                  }
+                }
+              }, '🗑')))),
+          h('tr', { style: 'background: #f9f9f9' },
+            h('td', { colspan: 3 },
+              h('div', { style: 'display: grid; gap: 8px' },
+                h('input', { type: 'text', id: 'newBrandName', placeholder: 'Yeni marka adı', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' }),
+                h('input', { type: 'text', id: 'newBrandSlug', placeholder: 'Slug (örn: apple)', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' }),
+                h('button', {
+                  class: 'btn solid',
+                  onclick: async () => {
+                    const name = $('#newBrandName').value;
+                    const slug = $('#newBrandSlug').value;
+                    if (!name || !slug) { toast('Marka adı ve slug gerekli.'); return; }
+                    await request('/api/definitions/brands', { method: 'POST', body: { name, slug } });
+                    await loadDefinitions();
+                    $('#newBrandName').value = '';
+                    $('#newBrandSlug').value = '';
+                    renderPage();
+                  }
+                }, '+ Marka Ekle')))))));
+
+    return h('div', {}, renderBrands());
   }
 
   function placeholderPage(title) {
