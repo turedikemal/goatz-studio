@@ -366,6 +366,7 @@
           line2End: text('Sondaki yazı', { nostyle: true }),
           line2Style: style('2. satırın yazı stili'),
         }),
+        button: button('Sayfaya giden buton (boşsa görünmez)'),
         l3: group('3. satır', { line3: text('Yazı'), line3Sticker: sticker('Sondaki sticker', { none: true }) }),
       },
     },

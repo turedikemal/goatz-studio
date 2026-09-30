@@ -253,7 +253,11 @@
     "line2End": "stüdyoda",
     "line3": "Goatz studio",
     "line3Sticker": "",
-    "line1Sticker2": "camera"
+    "line1Sticker2": "camera",
+    "button": {
+      "label": "Nasıl çalışıyoruz? ↗",
+      "target": "page:tekstudyo"
+    }
   },
   "services": {
     "background": "paper",
@@ -1490,5 +1494,303 @@
       ]
     }
   },
-  "pages": []
+  "pages": [
+    {
+      "id": "tekstudyo",
+      "title": "Web Tasarım ve Ürün Çekimi",
+      "slug": "web-tasarim-urun-cekimi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Web Tasarım ve Ürün Çekimi Tek Stüdyoda — The Goatz Studio",
+      "seoDescription": "E-ticaret siteniz için web tasarım ve ürün çekimi aynı stüdyoda. Çanakkale ürün fotoğrafçılığı, beyaz fon ve renkli fon ürün fotoğrafları, mobil uyumlu e-ticaret siteleri.",
+      "background": "sky",
+      "showContact": true,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Tek stüdyo",
+        "title": "Kapı müşterisi beklemeye son!",
+        "subtitle": "Web tasarım ve ürün çekimi aynı stüdyoda: markanızın yeni nesil dijital vitrini.",
+        "titleSize": 8,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "browser",
+            "x": 84,
+            "y": 30,
+            "mx": 76,
+            "my": 18,
+            "size": 110,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "camera",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 58,
+            "size": 100,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "star",
+            "x": 50,
+            "y": 14,
+            "mx": 46,
+            "my": 8,
+            "size": 80,
+            "rotate": 12,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Vitrin",
+          "heading": "Kapıdan girene satış yapma devri bitti.",
+          "text": "Müşterileriniz artık önce telefonundan bakıyor. Ürünü görüyor, fotoğrafına bakıp fikir ediniyor, siteyi açıp karşılaştırıyor ve ancak ikna olursa sipariş veriyor.\n\nMağazanızın kapısını kapattığınız saatte bile açık kalan bir dijital vitrin, sizi tanımayan müşteriye de ulaşır. Bu vitrinin iki ayağı vardır: ürünü doğru gösteren fotoğraflar ve o fotoğrafları satışa çeviren bir web sitesi.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Neden tek stüdyo?",
+          "heading": "İki işi ayrı yerlerde yaptırmayın.",
+          "text": "Fotoğrafçıyla tasarımcı ayrı çalışınca fotoğraflar siteye uymaz, site fotoğrafları taşımaz. Aynı stüdyoda ikisi birbirine göre kurulur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Fotoğraflar siteye uyar",
+              "text": "Çekimleri sitenin tasarımını bilerek yapıyoruz. Ölçü, kadraj ve fon baştan siteye göre seçilir.",
+              "color": "sun",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "Site fotoğrafları taşır",
+              "text": "Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
+              "color": "lavender",
+              "sticker": "browser",
+              "image": ""
+            },
+            {
+              "title": "Tek muhatap, tek takvim",
+              "text": "Fotoğrafçıyı tasarımcıyla, tasarımcıyı yazılımcıyla eşleştirmekle uğraşmazsınız. Her şey tek elden ve tek planla ilerler.",
+              "color": "mint",
+              "sticker": "check",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "1 · Web tasarım",
+          "heading": "Önce satan bir site.",
+          "text": "Önceliğimiz web tasarım. Hızlı açılan, telefonda kusursuz görünen, markanıza özel tasarlanmış e-ticaret siteleri kuruyoruz. Ürün listesinden sepete, ödeme adımından sipariş takibine kadar müşterinin yolunu kolaylaştırıyoruz.\n\nTasarımı da kurulumu da biz yapıyoruz; siz yönetim panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "lavender",
+          "imageSticker": "browser",
+          "button": {
+            "label": "Yaptığımız siteleri gör ↗",
+            "target": "#isler"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "2 · Ürün çekimi",
+          "heading": "Siteye göre çekilen ürün fotoğrafları.",
+          "text": "Çanakkale’de ürün fotoğrafçılığı yaparken çekimi, sitenin ihtiyacına göre kurguluyoruz. Pazaryerleri ve ürün listeleri için temiz beyaz fon ürün fotoğrafları, ana sayfa ve kampanyalar için markanızın renklerine uygun renkli fon ürün fotoğrafları hazırlıyoruz.\n\nBöylece e-ticaret fotoğraflarınız dağınık değil, tek bir dille konuşan bir katalog gibi görünür.",
+          "align": "left",
+          "image": "",
+          "imageSide": "right",
+          "imageColor": "sun",
+          "imageSticker": "camera",
+          "button": {
+            "label": "İşlerimize bak ↗",
+            "target": "#isler"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Nasıl ilerliyoruz?",
+          "heading": "Çekim + site, tek seferde yayında.",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 4,
+          "cards": [
+            {
+              "title": "1. Tek görüşme",
+              "text": "Hem çekimi hem siteyi birlikte planlıyoruz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "2. Önce çekim",
+              "text": "Ürünlerinizi çekiyor, rötuşluyor ve siteye uygun boyutlandırıyoruz.",
+              "color": "mint",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "3. Sonra tasarım",
+              "text": "Siteyi bu fotoğraflarla tasarlıyor, telefonda ve bilgisayarda test ediyoruz.",
+              "color": "lavender",
+              "sticker": "browser",
+              "image": ""
+            },
+            {
+              "title": "4. Yayın",
+              "text": "Alan adınıza bağlayıp yayına alıyoruz. Her şey tek seferde hazır.",
+              "color": "sky",
+              "sticker": "check",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Vitrininizi birlikte kuralım.",
+          "text": "Kapı müşterisi beklemek yerine, markanızı 7/24 açık bir vitrinde sergileyin. Ürünlerinizi ve hedefinizi anlatın, size paket teklifimizi hazırlayalım.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Paket teklifi al ↗",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

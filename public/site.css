@@ -873,3 +873,4 @@
   .show-hook-sub { font-size: clamp(16px, 1.9vw, 24px); font-weight: 600; line-height: 1.3; }
   .show-hook { gap: 22px; }
   .show-hook-big { font-size: clamp(26px, 4vw, 54px); line-height: 1.35; text-wrap: balance; }
+  .statement-cta { margin: clamp(24px, 4vw, 48px) 0 0; text-align: center; }
