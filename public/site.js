@@ -630,12 +630,34 @@
     const rot = restRot(el);
     el.animate([{ scale: 1 }, { scale: 0.86, offset: 0.12 }, { scale: 1.08, offset: 0.4 }, { scale: 1 }], { duration: ms(0.55), easing: 'ease-out' });
     el.animate([{ rotate: rot }, { rotate: `calc(${rot} - 6deg)`, offset: 0.12 }, { rotate: rot }], { duration: ms(0.55), easing: 'ease-out' });
-    const pw = Math.max(54, c.w * 0.62);
+    const pw = Math.max(96, c.w * 0.95);
     const ph = document.createElement('div');
     ph.className = 'polaroid';
-    ph.style.cssText = `left:${c.x}px;top:${c.y + c.h * 0.22}px;width:${pw}px`;
+    ph.style.cssText = `left:${c.x}px;top:${c.y + c.h * 0.22}px;width:${pw}px;padding:${(pw * 0.06).toFixed(1)}px ${(pw * 0.06).toFixed(1)}px 0`;
     ph.innerHTML = '<i></i><b></b>';
     document.body.append(ph);
+    // Fotoğrafın içi: kameranın bulunduğu ekranın küçültülmüş görüntüsü
+    try {
+      const sec = el.closest('.panel, header, footer, section');
+      const win = ph.firstChild;
+      if (sec && win) {
+        const vw = innerWidth, vh = innerHeight, L = Math.min(vw, vh) * 0.9;
+        const x0 = Math.max(0, Math.min(vw - L, c.x - L / 2)), y0 = Math.max(0, Math.min(vh - L, c.y - L / 2));
+        const k = (pw * 0.88 - 3) / L;
+        const r = sec.getBoundingClientRect();
+        const shot = sec.cloneNode(true);
+        shot.querySelectorAll('[id]').forEach((n) => n.removeAttribute('id'));
+        shot.querySelectorAll('iframe, video, canvas, script').forEach((n) => n.remove());
+        shot.querySelectorAll('[style]').forEach((n) => { if (n.style.opacity === '0') n.style.opacity = ''; if (/scale\(0|scale: 0/.test(n.getAttribute('style'))) n.style.scale = ''; });
+        shot.setAttribute('aria-hidden', 'true');
+        shot.removeAttribute('data-reveal');
+        shot.style.cssText += `;position:absolute;left:0;top:0;margin:0;width:${r.width}px;height:${r.height}px;transform-origin:0 0;translate:${((r.left - x0) * k).toFixed(1)}px ${((r.top - y0) * k).toFixed(1)}px;scale:${k.toFixed(4)};pointer-events:none`;
+        win.textContent = '';
+        win.classList.add('pz');
+        win.style.background = getComputedStyle(sec).backgroundColor;
+        win.append(shot);
+      }
+    } catch (e) { /* boş kare kalır */ }
     const tilt = Math.random() * 10 - 5;
     const anim = ph.animate([
       { translate: '-50% -30%', scale: 0.45, rotate: '0deg', opacity: 0 },

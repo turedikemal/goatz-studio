@@ -522,7 +522,7 @@
     "visible": true,
     "background": "sky",
     "seoTitle": "İşler — The Goatz Studio",
-    "seoDescription": "The Goatz Studio işleri: web siteleri, web uygulamaları, Çanakkale ürün fotoğrafçılığı, e-ticaret fotoğrafları, beyaz fon ve renkli fon ürün fotoğrafları.",
+    "seoDescription": "The Goatz Studio işleri: web siteleri, web uygulamaları, Çanakkale ürün fotoğrafı ve ürün fotoğrafçılığı, e-ticaret fotoğrafları, beyaz fon ve renkli fon ürün fotoğrafları.",
     "hero": {
       "visible": true,
       "eyebrow": "Portföy",
@@ -1458,23 +1458,27 @@
       "visible": true,
       "color": "sun",
       "heading": "Ürün çekimi",
-      "text": "Çanakkale ürün fotoğrafı ve ürün fotoğrafçılığı hizmetimiz, web sitelerine özel hazırlanan profesyonel e-ticaret fotoğraflarını kapsar: beyaz fon ve renkli fon ürün fotoğrafları.",
+      "text": "Çanakkale’de ürün fotoğrafçılığı, bir ürünü sadece çekmek değil; onu web sitesinde satın aldıracak şekilde göstermektir. Web siteleri için hazırladığımız e-ticaret fotoğraflarında ürünün rengi, dokusu ve detayları gerçeğe yakın görünür. Her ürün için beyaz fon ve renkli fon ürün fotoğrafları hazırlar, çekimleri sitenin tasarımıyla birlikte düşünürüz.",
       "points": [
         {
-          "title": "Beyaz Fon Ürün Fotoğrafları",
-          "text": "Pazaryerlerinin ve e-ticaret sitelerinin istediği temiz, beyaz fonlu ürün fotoğrafları. Ürün net, dengeli ışıkta ve gerçek rengiyle görünür."
+          "title": "Çanakkale Ürün Fotoğrafı",
+          "text": "Çanakkale’de ürün fotoğrafı arayan üreticiler, yerel markalar ve e-ticaret mağazaları için çekim yapıyoruz. Ürünlerinizi bize getirin ya da çekimi birlikte planlayalım; fotoğraflar doğrudan web sitenizde kullanılacak şekilde hazırlanır."
         },
         {
-          "title": "Renkli Fon Ürün Fotoğrafları",
-          "text": "Markanın renklerine uygun, renkli fonlu ürün fotoğrafları ile ürün sayfaları, kampanyalar ve ana sayfa görselleri öne çıkar."
+          "title": "Ürün Fotoğrafçılığı",
+          "text": "Ürün fotoğrafçılığı, ışığın, açının ve kompozisyonun doğru kurulmasıyla ürünün kalitesini tek karede anlatma işidir. Ambalajı, etiketi ve yüzeyi net görünsün diye her ürünü ayrı ayrı ışıklandırır, farklı açılardan çekeriz."
         },
         {
           "title": "E-Ticaret Fotoğrafları",
-          "text": "Web sitesinin tasarımıyla birlikte düşünülen e-ticaret fotoğrafları: ürün listesi, ürün detayı ve kampanya görselleri aynı dilde olur."
+          "text": "E-ticaret fotoğrafları müşterinin ürüne dokunamadığı yerde karar verdirir. Ürün listesi, ürün detay sayfası ve kampanya görsellerini aynı dilde hazırlarız; böylece mağazanız dağınık değil, tutarlı ve güvenilir görünür."
         },
         {
-          "title": "Çanakkale Ürün Fotoğrafçılığı",
-          "text": "Çanakkale’de ürün fotoğrafçılığı: ürünlerinizi çekiyor, fotoğrafları web sitenize uygun ölçü ve formatta hazırlıyoruz."
+          "title": "Beyaz Fon Ürün Fotoğrafları",
+          "text": "Beyaz fon ürün fotoğrafları, ürünü tek başına ve en temiz haliyle gösterir. Pazaryerlerinin ve ürün listelerinin istediği bu çekimlerde ürün net, dengeli ışıkta ve gerçek rengiyle görünür; farklı ürünler yan yana geldiğinde düzenli bir katalog oluşur."
+        },
+        {
+          "title": "Renkli Fon Ürün Fotoğrafları",
+          "text": "Renkli fon ürün fotoğrafları markanın kişiliğini öne çıkarır. Ürüne ve marka renklerine uygun fonlarla ana sayfa, kampanya ve sosyal medya görselleri hazırlarız; ürün sayfasında sade, vitrinde dikkat çeken bir görünüm elde edilir."
         }
       ],
       "images": [

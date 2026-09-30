@@ -850,3 +850,5 @@
   .wp-gallery figcaption { padding: 8px 4px 2px; font-size: 11px; }
   .work-approach { margin-top: clamp(40px, 6vw, 80px); }
   @media (min-width: 700px) { .wp-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .polaroid i.pz { position: relative; overflow: hidden; background-image: none; }
+  .polaroid i.pz * { animation: none !important; transition: none !important; }
