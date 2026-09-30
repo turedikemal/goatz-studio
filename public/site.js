@@ -351,7 +351,7 @@
       cur = (n + slides.length) % slides.length;
       slides.forEach((sl, k) => sl.classList.toggle('on', k === cur));
       const d = slides[cur].dataset;
-      if (d.wc && box.classList.contains('show-browser')) box.style.setProperty('--wc', d.wc);
+      if (d.wc) box.style.setProperty('--wc', d.wc);
       if (cap) { cap.textContent = d.name; cap.lang = d.lang || 'tr'; }
       if (url) url.textContent = d.host || '';
       if (note) note.textContent = `Web uygulaması${d.badge ? ` · ${d.badge}` : ''}`;
