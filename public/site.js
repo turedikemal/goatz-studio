@@ -765,7 +765,7 @@
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': burstOf('star'),
-    'st-magnifier': plain, 'st-pencil': plain, 'st-globe': spinMedal, 'st-gear': spinMedal, 'st-rocket': driveTruck, 'st-chart': plain, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-product': plain, 'st-magnifier': plain, 'st-pencil': plain, 'st-globe': spinMedal, 'st-gear': spinMedal, 'st-rocket': driveTruck, 'st-chart': plain, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   document.addEventListener('click', (e) => {
