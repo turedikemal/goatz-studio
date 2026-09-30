@@ -848,3 +848,5 @@
   .wp-gallery figure { margin: 0; background: var(--paper); border: 1px solid var(--carbon); border-radius: var(--r-card); padding: 8px; }
   .wp-gallery img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: calc(var(--r-card) - 4px); }
   .wp-gallery figcaption { padding: 8px 4px 2px; font-size: 11px; }
+  .work-approach { margin-top: clamp(40px, 6vw, 80px); }
+  @media (min-width: 700px) { .wp-points { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

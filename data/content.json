@@ -522,7 +522,7 @@
     "visible": true,
     "background": "sky",
     "seoTitle": "İşler — The Goatz Studio",
-    "seoDescription": "The Goatz Studio işleri: web siteleri, web uygulamaları ve danışmanlık projeleri.",
+    "seoDescription": "The Goatz Studio işleri: web siteleri, web uygulamaları, Çanakkale ürün fotoğrafçılığı, e-ticaret fotoğrafları, beyaz fon ve renkli fon ürün fotoğrafları.",
     "hero": {
       "visible": true,
       "eyebrow": "Portföy",
@@ -1453,7 +1453,37 @@
       ],
       "quote": "Veriyi göstermek değil, veriyi kullanıcı deneyimine dönüştürmek."
     },
-    "showContact": true
+    "showContact": true,
+    "photo": {
+      "visible": true,
+      "color": "sun",
+      "heading": "Ürün çekimi",
+      "text": "Çanakkale ürün fotoğrafı ve ürün fotoğrafçılığı hizmetimiz, web sitelerine özel hazırlanan profesyonel e-ticaret fotoğraflarını kapsar: beyaz fon ve renkli fon ürün fotoğrafları.",
+      "points": [
+        {
+          "title": "Beyaz Fon Ürün Fotoğrafları",
+          "text": "Pazaryerlerinin ve e-ticaret sitelerinin istediği temiz, beyaz fonlu ürün fotoğrafları. Ürün net, dengeli ışıkta ve gerçek rengiyle görünür."
+        },
+        {
+          "title": "Renkli Fon Ürün Fotoğrafları",
+          "text": "Markanın renklerine uygun, renkli fonlu ürün fotoğrafları ile ürün sayfaları, kampanyalar ve ana sayfa görselleri öne çıkar."
+        },
+        {
+          "title": "E-Ticaret Fotoğrafları",
+          "text": "Web sitesinin tasarımıyla birlikte düşünülen e-ticaret fotoğrafları: ürün listesi, ürün detayı ve kampanya görselleri aynı dilde olur."
+        },
+        {
+          "title": "Çanakkale Ürün Fotoğrafçılığı",
+          "text": "Çanakkale’de ürün fotoğrafçılığı: ürünlerinizi çekiyor, fotoğrafları web sitenize uygun ölçü ve formatta hazırlıyoruz."
+        }
+      ],
+      "images": [
+        {
+          "image": "",
+          "caption": ""
+        }
+      ]
+    }
   },
   "pages": []
 }
