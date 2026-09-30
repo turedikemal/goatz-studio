@@ -789,3 +789,10 @@
   .to-top.show { opacity: 1; translate: 0 0; pointer-events: auto; }
   .to-top.show:hover { background: var(--carbon); color: var(--sun); translate: 0 -4px; }
   .work-premium-inline { padding: 5px 11px; font-size: 11px; }
+
+  /* Premium proje etiketi: sitenin sarı hap diliyle, alan adının altında */
+  .work-ptag { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 7px 16px 7px 10px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); color: var(--carbon); font-size: 11px; font-weight: 900; letter-spacing: .06em; box-shadow: 2px 3px 0 var(--carbon); rotate: -1.5deg; transition: rotate .3s var(--slush, ease), translate .3s var(--slush, ease); white-space: nowrap; }
+  .work-ptag .pt-star { width: 20px; height: 20px; flex: none; background: var(--paper); border: 1px solid var(--carbon); border-radius: 50%; padding: 2px; }
+  html.mo-idle .work-ptag .pt-star { animation: pt-spin 6s linear infinite; }
+  @keyframes pt-spin { to { rotate: 360deg; } }
+  .work-card:hover .work-ptag { rotate: 0deg; translate: 0 -2px; }
