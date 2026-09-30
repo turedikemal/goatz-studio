@@ -878,3 +878,4 @@
   .blk-in h2, .wa-h, .work-group-h { line-height: .95; }
   .feature-media.is-bare { background: transparent !important; border: 0; aspect-ratio: auto; overflow: visible; }
   .feature-media.is-bare svg { filter: drop-shadow(6px 8px 0 #000); }
+  .tabpanel h3.display { line-height: .95; }

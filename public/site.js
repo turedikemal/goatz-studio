@@ -198,9 +198,9 @@
     prev.classList.add('leaving');
     prev.inert = true;
     // Yazılar üst üste binmesin: eski içerik önce kaybolur, sonra yenisi belirir
-    prev.animate([{ opacity: 1 }, { opacity: 0 }], { duration: ms(0.14), easing: 'ease-in', fill: 'forwards' });
-    next.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms(0.22), delay: ms(0.14), easing: 'ease-out', fill: 'backwards' });
-    cleanTimer = setTimeout(() => { prev.classList.remove('leaving'); }, ms(0.14) + 40);
+    prev.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: '0 -12px' }], { duration: ms(0.16), easing: 'ease-in', fill: 'forwards' });
+    next.animate([{ opacity: 0, translate: '0 18px', scale: 0.985 }, { opacity: 1, translate: '0 0', scale: 1 }], { duration: ms(0.5), delay: ms(0.14), easing: BOUNCE, fill: 'backwards' });
+    cleanTimer = setTimeout(() => { prev.classList.remove('leaving'); }, ms(0.16) + 40);
   };
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => { userPicked = true; showTab(i); });
