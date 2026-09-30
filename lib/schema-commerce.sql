@@ -109,6 +109,10 @@ CREATE TABLE IF NOT EXISTS products (
   is_published BOOLEAN DEFAULT false,
   seo_title VARCHAR(255),
   seo_description TEXT,
+  seo_keywords TEXT,
+  weight DECIMAL(8, 3),
+  desi DECIMAL(8, 3),
+  images JSONB DEFAULT '[]',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -116,7 +120,8 @@ CREATE TABLE IF NOT EXISTS products (
 -- Ürün Varyantları
 CREATE TABLE IF NOT EXISTS product_variants (
   id SERIAL PRIMARY KEY,
-  product_id INTEGER NOT NULL REFERENCES products(id),
+  product_id INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+  name VARCHAR(255),
   sku VARCHAR(100) NOT NULL UNIQUE,
   barcode VARCHAR(100),
   sale_price DECIMAL(12, 2),
@@ -131,7 +136,7 @@ CREATE TABLE IF NOT EXISTS product_variants (
 -- Varyant Özellik Değerleri
 CREATE TABLE IF NOT EXISTS variant_properties (
   id SERIAL PRIMARY KEY,
-  variant_id INTEGER NOT NULL REFERENCES product_variants(id),
+  variant_id INTEGER NOT NULL REFERENCES product_variants(id) ON DELETE CASCADE,
   property_id INTEGER NOT NULL REFERENCES properties(id),
   property_value_id INTEGER NOT NULL REFERENCES property_values(id),
   UNIQUE(variant_id, property_id)
@@ -140,7 +145,7 @@ CREATE TABLE IF NOT EXISTS variant_properties (
 -- Stok
 CREATE TABLE IF NOT EXISTS stock (
   id SERIAL PRIMARY KEY,
-  variant_id INTEGER NOT NULL REFERENCES product_variants(id),
+  variant_id INTEGER NOT NULL REFERENCES product_variants(id) ON DELETE CASCADE,
   warehouse_id INTEGER NOT NULL REFERENCES warehouses(id),
   quantity INTEGER DEFAULT 0,
   reserved INTEGER DEFAULT 0,
@@ -152,7 +157,7 @@ CREATE TABLE IF NOT EXISTS stock (
 -- Stok Hareketleri (Audit)
 CREATE TABLE IF NOT EXISTS stock_movements (
   id SERIAL PRIMARY KEY,
-  variant_id INTEGER NOT NULL REFERENCES product_variants(id),
+  variant_id INTEGER NOT NULL REFERENCES product_variants(id) ON DELETE CASCADE,
   warehouse_id INTEGER NOT NULL REFERENCES warehouses(id),
   quantity_change INTEGER NOT NULL,
   movement_type VARCHAR(50), -- in, out, adjustment, reservation
@@ -162,10 +167,10 @@ CREATE TABLE IF NOT EXISTS stock_movements (
 );
 
 -- İndeksler
-CREATE INDEX idx_products_brand ON products(brand_id);
-CREATE INDEX idx_products_category ON products(category_id);
-CREATE INDEX idx_products_status ON products(status);
-CREATE INDEX idx_variants_product ON product_variants(product_id);
-CREATE INDEX idx_stock_variant ON stock(variant_id);
-CREATE INDEX idx_stock_warehouse ON stock(warehouse_id);
-CREATE INDEX idx_categories_parent ON categories(parent_id);
+CREATE INDEX IF NOT EXISTS idx_products_brand ON products(brand_id);
+CREATE INDEX IF NOT EXISTS idx_products_category ON products(category_id);
+CREATE INDEX IF NOT EXISTS idx_products_status ON products(status);
+CREATE INDEX IF NOT EXISTS idx_variants_product ON product_variants(product_id);
+CREATE INDEX IF NOT EXISTS idx_stock_variant ON stock(variant_id);
+CREATE INDEX IF NOT EXISTS idx_stock_warehouse ON stock(warehouse_id);
+CREATE INDEX IF NOT EXISTS idx_categories_parent ON categories(parent_id);

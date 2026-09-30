@@ -180,18 +180,18 @@ async function api(req, res, url) {
       const brands = await db.getBrands();
       return json(res, 200, brands);
     } catch (e) {
-      return json(res, 500, { error: 'Markalar yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Markalar yüklenemedi: ' + e.message });
     }
   }
 
   if (route === 'POST /api/definitions/brands') {
     try {
       const { name, slug, description, logoUrl } = await readJson(req);
-      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
-      const brand = await db.createBrand(name, slug, description, logoUrl);
+      if (!name) return json(res, 400, { error: 'Ad gerekli.' });
+      const brand = await db.createBrand(name, slug || db.slugify(name), description, logoUrl);
       return json(res, 201, brand);
     } catch (e) {
-      return json(res, 500, { error: 'Marka oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Marka oluşturulamadı: ' + e.message });
     }
   }
 
@@ -203,7 +203,7 @@ async function api(req, res, url) {
       const brand = await db.updateBrand(id, name, slug, description, logoUrl);
       return json(res, 200, brand);
     } catch (e) {
-      return json(res, 500, { error: 'Marka güncellenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Marka güncellenemedi: ' + e.message });
     }
   }
 
@@ -214,7 +214,7 @@ async function api(req, res, url) {
       await db.deleteRow('brands', id);
       return json(res, 200, { ok: true });
     } catch (e) {
-      return json(res, 500, { error: 'Marka silinemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Marka silinemedi: ' + e.message });
     }
   }
 
@@ -223,18 +223,18 @@ async function api(req, res, url) {
       const categories = await db.getCategories();
       return json(res, 200, categories);
     } catch (e) {
-      return json(res, 500, { error: 'Kategoriler yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Kategoriler yüklenemedi: ' + e.message });
     }
   }
 
   if (route === 'POST /api/definitions/categories') {
     try {
       const { name, slug, parentId, description, icon } = await readJson(req);
-      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
-      const category = await db.createCategory(name, slug, parentId || null, description, icon);
+      if (!name) return json(res, 400, { error: 'Ad gerekli.' });
+      const category = await db.createCategory(name, slug || db.slugify(name), parentId || null, description, icon);
       return json(res, 201, category);
     } catch (e) {
-      return json(res, 500, { error: 'Kategori oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Kategori oluşturulamadı: ' + e.message });
     }
   }
 
@@ -247,18 +247,18 @@ async function api(req, res, url) {
       }
       return json(res, 200, properties);
     } catch (e) {
-      return json(res, 500, { error: 'Özellikler yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Özellikler yüklenemedi: ' + e.message });
     }
   }
 
   if (route === 'POST /api/definitions/properties') {
     try {
       const { name, slug, inputType, description } = await readJson(req);
-      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
-      const property = await db.createProperty(name, slug, inputType, description);
+      if (!name) return json(res, 400, { error: 'Ad gerekli.' });
+      const property = await db.createProperty(name, slug || db.slugify(name), inputType, description);
       return json(res, 201, property);
     } catch (e) {
-      return json(res, 500, { error: 'Özellik oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Özellik oluşturulamadı: ' + e.message });
     }
   }
 
@@ -269,7 +269,7 @@ async function api(req, res, url) {
       const propValue = await db.createPropertyValue(propertyId, value, colorHex);
       return json(res, 201, propValue);
     } catch (e) {
-      return json(res, 500, { error: 'Özellik değeri oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Özellik değeri oluşturulamadı: ' + e.message });
     }
   }
 
@@ -278,7 +278,7 @@ async function api(req, res, url) {
       const rates = await db.getTaxRates();
       return json(res, 200, rates);
     } catch (e) {
-      return json(res, 500, { error: 'Vergi oranları yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Vergi oranları yüklenemedi: ' + e.message });
     }
   }
 
@@ -289,7 +289,7 @@ async function api(req, res, url) {
       const taxRate = await db.createTaxRate(name, rate, description);
       return json(res, 201, taxRate);
     } catch (e) {
-      return json(res, 500, { error: 'Vergi oranı oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Vergi oranı oluşturulamadı: ' + e.message });
     }
   }
 
@@ -298,19 +298,32 @@ async function api(req, res, url) {
       const warehouses = await db.getWarehouses();
       return json(res, 200, warehouses);
     } catch (e) {
-      return json(res, 500, { error: 'Depolar yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Depolar yüklenemedi: ' + e.message });
     }
   }
 
   if (route === 'POST /api/definitions/warehouses') {
     try {
       const { name, slug, address, isDefault } = await readJson(req);
-      if (!name || !slug) return json(res, 400, { error: 'Name ve slug gerekli.' });
-      const warehouse = await db.createWarehouse(name, slug, address, isDefault);
+      if (!name) return json(res, 400, { error: 'Ad gerekli.' });
+      const warehouse = await db.createWarehouse(name, slug || db.slugify(name), address, isDefault);
       return json(res, 201, warehouse);
     } catch (e) {
-      return json(res, 500, { error: 'Depo oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Depo oluşturulamadı: ' + e.message });
     }
+  }
+
+  const defMatch = /^(PUT|DELETE) \/api\/definitions\/([a-z-]+)\/(\d+)$/.exec(route);
+  if (defMatch) {
+    const id = parseInt(defMatch[3], 10);
+    if (defMatch[1] === 'DELETE') { await db.deleteDefinition(defMatch[2], id); return json(res, 200, { ok: true }); }
+    return json(res, 200, await db.updateDefinition(defMatch[2], id, await readJson(req)));
+  }
+
+  if (route === 'GET /api/stock') return json(res, 200, await db.getStockList());
+  if (route === 'POST /api/products/bulk') {
+    const { ids, action } = await readJson(req);
+    return json(res, 200, { ok: true, count: await db.bulkProducts(ids, action) });
   }
 
   // ========== Ürünler (Products) API ==========
@@ -319,7 +332,7 @@ async function api(req, res, url) {
       const products = await db.getProducts();
       return json(res, 200, products);
     } catch (e) {
-      return json(res, 500, { error: 'Ürünler yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Ürünler yüklenemedi: ' + e.message });
     }
   }
 
@@ -330,7 +343,7 @@ async function api(req, res, url) {
       const product = await db.createProduct(data);
       return json(res, 201, product);
     } catch (e) {
-      return json(res, 500, { error: 'Ürün oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Ürün oluşturulamadı: ' + e.message });
     }
   }
 
@@ -342,7 +355,7 @@ async function api(req, res, url) {
       if (!product) return json(res, 404, { error: 'Ürün bulunamadı.' });
       return json(res, 200, product);
     } catch (e) {
-      return json(res, 500, { error: 'Ürün yüklenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Ürün yüklenemedi: ' + e.message });
     }
   }
 
@@ -354,7 +367,7 @@ async function api(req, res, url) {
       const product = await db.updateProduct(id, data);
       return json(res, 200, product);
     } catch (e) {
-      return json(res, 500, { error: 'Ürün güncellenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Ürün güncellenemedi: ' + e.message });
     }
   }
 
@@ -365,7 +378,7 @@ async function api(req, res, url) {
       await db.deleteRow('products', id);
       return json(res, 200, { ok: true });
     } catch (e) {
-      return json(res, 500, { error: 'Ürün silinemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Ürün silinemedi: ' + e.message });
     }
   }
 
@@ -376,7 +389,7 @@ async function api(req, res, url) {
       const variant = await db.createProductVariant(productId, variantData);
       return json(res, 201, variant);
     } catch (e) {
-      return json(res, 500, { error: 'Varyant oluşturulamadı: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Varyant oluşturulamadı: ' + e.message });
     }
   }
 
@@ -389,7 +402,7 @@ async function api(req, res, url) {
       const stock = await db.updateStock(variantId, warehouseId, quantity);
       return json(res, 200, stock);
     } catch (e) {
-      return json(res, 500, { error: 'Stok güncellenemedi: ' + e.message });
+      return json(res, e.status || 500, { error: e.status ? e.message : 'Stok güncellenemedi: ' + e.message });
     }
   }
 
