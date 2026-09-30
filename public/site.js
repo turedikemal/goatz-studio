@@ -351,6 +351,14 @@
     } catch { /* bağlantı normal açılır */ }
   });
 
+  // ---------- Yukarı çık oku: biraz kaydırınca belirir ----------
+  const toTop = document.querySelector('.to-top');
+  if (toTop) {
+    const check = () => toTop.classList.toggle('show', window.scrollY > 300);
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+  }
+
   // ---------- İşler: kategori filtresi ----------
   const workFilters = document.querySelector('.work-filters');
   if (workFilters) {
