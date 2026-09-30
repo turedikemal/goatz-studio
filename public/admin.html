@@ -35,13 +35,19 @@
     <nav id="pages" aria-label="Panel bölümleri"></nav>
   </aside>
 
+  <aside class="panel" id="panel" aria-label="Bölüm ayarları">
+    <div class="panel-head">
+      <h2 id="pageTitle"></h2>
+      <button class="btn icon" id="panelClose" aria-label="Paneli kapat" title="Kapat (Esc)">×</button>
+    </div>
+    <main class="editor" id="editor"></main>
+  </aside>
+
   <div class="workspace">
     <header class="topbar">
       <button class="btn icon" id="menuToggle" aria-label="Bölümler">☰</button>
-      <h2 id="pageTitle"></h2>
       <span class="status" id="status" aria-live="polite"></span>
       <div class="top-actions">
-        <button class="btn" id="previewToggle" aria-pressed="true">Önizleme</button>
         <a class="btn" href="/" target="_blank" rel="noopener">Siteyi aç ↗</a>
         <button class="btn solid" id="saveBtn" disabled>Kaydet</button>
         <button class="btn ghost" id="logoutBtn">Çıkış</button>
@@ -49,7 +55,6 @@
     </header>
 
     <div class="split" id="split">
-      <main class="editor" id="editor"></main>
       <section class="preview" id="previewPane" aria-label="Canlı önizleme">
         <div class="preview-bar">
           <span class="muted">Canlı önizleme · açılış animasyonları burada oynatılmaz, gerçek sitede görürsün</span>
@@ -60,6 +65,7 @@
         </div>
         <div class="preview-stage"><iframe id="preview" title="Site önizlemesi"></iframe></div>
       </section>
+      <div class="split-empty" id="splitEmpty"><p>Soldaki menüden bir bölüm seç.</p></div>
     </div>
   </div>
 </div>

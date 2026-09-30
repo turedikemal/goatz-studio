@@ -604,6 +604,7 @@
     renderPage();
     refreshPreview(true);
     updateStatus();
+    if (location.hash.length > 1) openPanel();
 
   }
 
@@ -756,19 +757,6 @@
     document.querySelectorAll('.seg button').forEach((x) => x.classList.toggle('on', x === b));
     frame.style.width = b.dataset.w;
   }));
-  $('#previewToggle').addEventListener('click', () => {
-    const split = $('#split');
-    if (matchMedia('(max-width: 1100px)').matches) {
-      split.classList.toggle('show-preview');
-      $('#previewToggle').setAttribute('aria-pressed', split.classList.contains('show-preview'));
-      if (split.classList.contains('show-preview')) refreshPreview(true);
-      return;
-    }
-    const off = split.classList.toggle('no-preview');
-    if (off) split.dataset.userHidden = '1'; else delete split.dataset.userHidden;
-    $('#previewToggle').setAttribute('aria-pressed', !off);
-    if (!off) refreshPreview(true);
-  });
 
   // =====================================================================
   //  Sol menü
@@ -854,6 +842,13 @@
     });
   }
 
+  const openPanel = () => $('#panel').classList.add('open');
+  const closePanel = () => $('#panel').classList.remove('open');
+  $('#panelClose').addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && $('#panel').classList.contains('open') && !document.querySelector('dialog[open]') && !e.target.closest?.('input, textarea, select')) closePanel();
+  });
+
   function selectPage(p) {
     page = p;
     history.replaceState(null, '', `#${p.id}`);
@@ -862,6 +857,7 @@
     renderPage();
     if (target !== previewPage) { previewPage = target; refreshPreview(true); } else scrollPreviewTo(p.anchor);
     $('.sidebar').classList.remove('open');
+    openPanel();
   }
   const homePage = () => PAGES.find((x) => x.id === 'hero');
 
@@ -957,13 +953,13 @@
     if (page.custom && !state.pages.some((p) => p.id === page.pageId)) { page = homePage(); previewPage = null; renderNav(); refreshPreview(true); }
 
     // Preview pane'i sadece tema/site yönetimi sayfalarında göster
-    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages'];
+    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages', 'tema-overview'];
     const isThemePage = page.custom || themePages.includes(page.id);
     const splitEl = $('#split');
     const wasHidden = splitEl.classList.contains('no-preview');
-    if (!isThemePage) splitEl.classList.add('no-preview');
-    else if (wasHidden && !splitEl.dataset.userHidden) { splitEl.classList.remove('no-preview'); refreshPreview(true); }
-    $('#previewToggle').style.display = isThemePage ? '' : 'none';
+    splitEl.classList.toggle('no-preview', !isThemePage);
+    $('#panel').classList.toggle('wide', !isThemePage);
+    if (isThemePage && wasHidden) refreshPreview(true);
 
     if (page.custom) {
       const pg = state.pages.find((p) => p.id === page.pageId);
