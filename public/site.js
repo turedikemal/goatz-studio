@@ -183,6 +183,22 @@
       if (k !== curTab) { p.classList.remove('active', 'leaving'); p.inert = true; }
     });
   };
+  // Sekme içeriği: başlık bulanıktan netleşerek gelir, adımlar sırayla kayarak girer, numaralar dönerek belirir
+  const revealPanel = (panel, base) => {
+    const col = panel.querySelector(':scope > div:not(.feature-media)');
+    if (!col) return;
+    const ease = 'cubic-bezier(.2,.8,.2,1)';
+    const h = col.querySelector('h3');
+    if (h) h.animate([{ opacity: 0, translate: '0 30px', filter: 'blur(10px)' }, { opacity: 1, translate: '0 0', filter: 'blur(0)' }], { duration: ms(0.75), delay: base, easing: ease, fill: 'backwards' });
+    const items = [...col.querySelectorAll('.steps li')];
+    items.forEach((li, n) => {
+      const d = base + ms(0.22 + n * 0.1);
+      li.animate([{ opacity: 0, translate: '-24px 0', filter: 'blur(6px)' }, { opacity: 1, translate: '0 0', filter: 'blur(0)' }], { duration: ms(0.6), delay: d, easing: ease, fill: 'backwards' });
+      li.animate([{ scale: 0.3, rotate: '-120deg' }, { scale: 1.12, rotate: '8deg', offset: 0.65 }, { scale: 1, rotate: '0deg' }], { duration: ms(0.6), delay: d + ms(0.08), easing: 'ease-out', fill: 'backwards', pseudoElement: '::before' });
+    });
+    const btn = col.querySelector('.btn');
+    if (btn) btn.animate([{ opacity: 0, translate: '0 18px', scale: 0.9 }, { opacity: 1, translate: '0 0', scale: 1 }], { duration: ms(0.6), delay: base + ms(0.3 + items.length * 0.1), easing: BOUNCE, fill: 'backwards' });
+  };
   const showTab = (i, first) => {
     if (i === curTab && !first) return;
     tabs.forEach((t, k) => { t.setAttribute('aria-selected', k === i); t.tabIndex = k === i ? 0 : -1; });
@@ -200,6 +216,7 @@
     // Yazılar üst üste binmesin: eski içerik önce kaybolur, sonra yenisi belirir
     prev.animate([{ opacity: 1, translate: '0 0' }, { opacity: 0, translate: '0 -12px' }], { duration: ms(0.16), easing: 'ease-in', fill: 'forwards' });
     next.animate([{ opacity: 0, translate: '0 18px', scale: 0.985 }, { opacity: 1, translate: '0 0', scale: 1 }], { duration: ms(0.5), delay: ms(0.14), easing: BOUNCE, fill: 'backwards' });
+    revealPanel(next, ms(0.18));
     cleanTimer = setTimeout(() => { prev.classList.remove('leaving'); }, ms(0.16) + 40);
   };
   tabs.forEach((t, i) => {
