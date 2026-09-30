@@ -839,7 +839,7 @@
   const zoomLens = (el) => {
     if (busy(el, ms(2.4))) return;
     const rot = restRot(el);
-    el.animate([{ scale: 1, rotate: rot }, { scale: 1.9, rotate: `calc(${rot} - 8deg)`, offset: 0.3 }, { scale: 1.9, rotate: `calc(${rot} - 8deg)`, offset: 0.45 }, { scale: 0.6, rotate: `calc(${rot} + 6deg)`, offset: 0.75 }, { scale: 1, rotate: rot }], { duration: ms(2.2), easing: 'ease-in-out' });
+    el.animate([{ scale: 1, rotate: rot }, { scale: 1.3, rotate: `calc(${rot} - 6deg)`, offset: 0.3 }, { scale: 1.3, rotate: `calc(${rot} - 6deg)`, offset: 0.45 }, { scale: 0.8, rotate: `calc(${rot} + 4deg)`, offset: 0.75 }, { scale: 1, rotate: rot }], { duration: ms(2.2), easing: 'ease-in-out' });
   };
 
   const CLICKS = {
