@@ -905,12 +905,117 @@
     el.animate([{ scale: 1, rotate: rot }, { scale: 1.3, rotate: `calc(${rot} - 6deg)`, offset: 0.3 }, { scale: 1.3, rotate: `calc(${rot} - 6deg)`, offset: 0.45 }, { scale: 0.8, rotate: `calc(${rot} + 4deg)`, offset: 0.75 }, { scale: 1, rotate: rot }], { duration: ms(2.2), easing: 'ease-in-out' });
   };
 
+
+  // ---- Web tasarım sticker'ları: her birinin kendi efekti ----
+  const fxBox = (n, origin = 'center') => { n.style.transformBox = 'fill-box'; n.style.transformOrigin = origin; };
+  // Kod: parantezler açılır, eğik çizgi çizilir
+  const writeCode = (el) => {
+    if (busy(el, ms(2))) return;
+    const fx = inlineFx(el, 'code'); if (!fx) return;
+    const [, l, r, sl] = fx.parts;
+    l.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-12px)', offset: 0.35 }, { transform: 'translateX(0)' }], { duration: ms(1.3), easing: 'ease-in-out' });
+    r.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(12px)', offset: 0.35 }, { transform: 'translateX(0)' }], { duration: ms(1.3), easing: 'ease-in-out' });
+    sl.style.strokeDasharray = '1'; sl.style.strokeDashoffset = '0';
+    sl.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 1, offset: 0.2 }, { strokeDashoffset: 0 }], { duration: ms(1.1), easing: 'ease-out' });
+    setTimeout(fx.done, ms(1.4));
+  };
+  // Telefon: ekran blokları sırayla içeri kayar
+  const loadPhone = (el) => {
+    if (busy(el, ms(2.2))) return;
+    const fx = inlineFx(el, 'phone'); if (!fx) return;
+    fx.parts.slice(2, 6).forEach((bar, i) => {
+      fxBox(bar, 'left center');
+      bar.animate([{ transform: 'translateX(-20px) scaleX(.2)', opacity: 0 }, { transform: 'translateX(0) scaleX(1.08)', opacity: 1, offset: 0.7 }, { transform: 'translateX(0) scaleX(1)', opacity: 1 }], { duration: ms(0.5), delay: ms(0.1 + i * 0.22), easing: 'ease-out', fill: 'both' });
+    });
+    const rot = restRot(el);
+    el.animate([{ rotate: rot }, { rotate: `calc(${rot} - 7deg)`, offset: 0.25 }, { rotate: `calc(${rot} + 5deg)`, offset: 0.55 }, { rotate: rot }], { duration: ms(1.1), easing: 'ease-in-out' });
+    setTimeout(fx.done, ms(1.6));
+  };
+  // Katmanlar: üst ve alt katman açılır, sonra üst üste biner
+  const fanLayers = (el) => {
+    if (busy(el, ms(1.8))) return;
+    const fx = inlineFx(el, 'layers'); if (!fx) return;
+    const [a, , c] = fx.parts;
+    a.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(14px)', offset: 0.4 }, { transform: 'translateY(14px)', offset: 0.6 }, { transform: 'translateY(0)' }], { duration: ms(1.4), easing: 'ease-in-out' });
+    c.animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-14px)', offset: 0.4 }, { transform: 'translateY(-14px)', offset: 0.6 }, { transform: 'translateY(0)' }], { duration: ms(1.4), easing: 'ease-in-out' });
+    setTimeout(fx.done, ms(1.5));
+  };
+  // Yazı: büyük A eğilip büyür, küçük a zıplar
+  const bounceType = (el) => {
+    if (busy(el, ms(1.8))) return;
+    const fx = inlineFx(el, 'type'); if (!fx) return;
+    const [, big, ring, stem] = fx.parts;
+    fxBox(big);
+    big.animate([{ transform: 'scale(1) rotate(0)' }, { transform: 'scale(1.3) rotate(-10deg)', offset: 0.35 }, { transform: 'scale(1) rotate(0)' }], { duration: ms(0.8), easing: BOUNCE });
+    [ring, stem].forEach((n) => { fxBox(n); n.animate([{ transform: 'translateY(0) scale(1)' }, { transform: 'translateY(-12px) scale(1.2)', offset: 0.4 }, { transform: 'translateY(0) scale(1)' }], { duration: ms(0.7), delay: ms(0.3), easing: BOUNCE }); });
+    setTimeout(fx.done, ms(1.4));
+  };
+  // Çanta: sapından sallanır, kalp atar
+  const swingBag = (el) => {
+    if (busy(el, ms(2))) return;
+    const fx = inlineFx(el, 'bag'); if (!fx) return;
+    const [, body, heart] = fx.parts;
+    [body, heart].forEach((n) => { n.style.transformBox = 'view-box'; n.style.transformOrigin = '50px 34px'; n.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-14deg)', offset: 0.25 }, { transform: 'rotate(10deg)', offset: 0.5 }, { transform: 'rotate(-5deg)', offset: 0.75 }, { transform: 'rotate(0)' }], { duration: ms(1.5), easing: 'ease-in-out' }); });
+    fxBox(heart); heart.animate([{ scale: 1 }, { scale: 1.35, offset: 0.3 }, { scale: 1, offset: 0.5 }, { scale: 1.25, offset: 0.7 }, { scale: 1 }], { duration: ms(1.3), delay: ms(0.2), easing: 'ease-out' });
+    setTimeout(fx.done, ms(1.7));
+  };
+  // Etiket: deliğinden sarkaç gibi sallanır
+  const swingTag = (el) => {
+    if (busy(el, ms(2.2))) return;
+    const fx = inlineFx(el, 'tag'); if (!fx) return;
+    fx.parts.slice(1).forEach((n) => { n.style.transformBox = 'view-box'; n.style.transformOrigin = '50px 38px'; n.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(-26deg)', offset: 0.22 }, { transform: 'rotate(20deg)', offset: 0.5 }, { transform: 'rotate(-10deg)', offset: 0.75 }, { transform: 'rotate(0)' }], { duration: ms(1.8), easing: 'ease-in-out' }); });
+    setTimeout(fx.done, ms(1.9));
+  };
+  // Ampul: ışık yanar, ışınlar açılır
+  const lightBulb = (el) => {
+    if (busy(el, ms(2.4))) return;
+    const fx = inlineFx(el, 'bulb'); if (!fx) return;
+    const [rays, glass] = fx.parts;
+    glass.animate([{ fill: '#fff' }, { fill: '#ffd731', offset: 0.2 }, { fill: '#ffd731', offset: 0.75 }, { fill: '#fff' }], { duration: ms(2), easing: 'ease-out' });
+    fxBox(rays);
+    rays.animate([{ opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1.1, offset: 0.25 }, { opacity: 1, scale: 1, offset: 0.75 }, { opacity: 0, scale: 0.9 }], { duration: ms(2), easing: 'ease-out' });
+    const c = centerOf(el);
+    setTimeout(() => sparks(c.x, c.y - c.h * 0.1, { n: 6, size: Math.max(9, c.w * 0.14), dist: Math.max(40, c.w * 0.7) }), ms(0.25));
+    setTimeout(fx.done, ms(2.1));
+  };
+  // Vitrin: tente çizgileri dalgalanır, tabela ışıldar
+  const waveShop = (el) => {
+    if (busy(el, ms(2))) return;
+    const fx = inlineFx(el, 'vitrin'); if (!fx) return;
+    fx.g.querySelectorAll('.stripe').forEach((n, i) => { fxBox(n, 'center top'); n.animate([{ transform: 'scaleY(1)' }, { transform: 'scaleY(1.22)', offset: 0.4 }, { transform: 'scaleY(1)' }], { duration: ms(0.6), delay: ms(i * 0.1), easing: 'ease-in-out' }); });
+    const sign = fx.g.querySelector('.sign');
+    if (sign) sign.animate([{ fill: '#fff' }, { fill: '#ffd731', offset: 0.3 }, { fill: '#fff', offset: 0.6 }, { fill: '#ffd731', offset: 0.8 }, { fill: '#fff' }], { duration: ms(1.3) });
+    setTimeout(fx.done, ms(1.5));
+  };
+  // İmleç: hedefe gider ve tıklar
+  const clickCursor = (el) => {
+    if (busy(el, ms(1.6))) return;
+    const fx = inlineFx(el, 'cursor'); if (!fx) return;
+    fx.g.style.transformBox = 'view-box'; fx.g.style.transformOrigin = '22px 10px';
+    fx.g.animate([{ transform: 'translate(0,0) scale(1)' }, { transform: 'translate(-10px,-8px) scale(1)', offset: 0.3 }, { transform: 'translate(6px,8px) scale(.82)', offset: 0.55 }, { transform: 'translate(6px,8px) scale(.82)', offset: 0.65 }, { transform: 'translate(0,0) scale(1)' }], { duration: ms(1.2), easing: 'ease-in-out' });
+    const c = centerOf(el);
+    setTimeout(() => sparks(c.x + c.w * 0.1, c.y + c.h * 0.1, { n: 6, size: Math.max(8, c.w * 0.12), dist: Math.max(30, c.w * 0.5) }), ms(0.7));
+    setTimeout(fx.done, ms(1.3));
+  };
+  // Zincir: halkalar gerilir ve toplanır
+  const pullLink = (el) => {
+    if (busy(el, ms(1.4))) return;
+    const rot = restRot(el);
+    el.animate([{ scale: '1 1', rotate: rot }, { scale: '1.35 .85', rotate: rot, offset: 0.35 }, { scale: '.9 1.08', rotate: rot, offset: 0.65 }, { scale: '1 1', rotate: rot }], { duration: ms(1), easing: 'ease-in-out' });
+  };
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
-    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': plain, 'st-vitrin': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
+  // Efektler fare üstüne gelince çalışır (dokunmatikte dokununca)
+  document.addEventListener('mouseover', (e) => {
+    const t = e.target.closest && e.target.closest(CLICK_SEL);
+    if (!t || t.contains(e.relatedTarget)) return;
+    const fn = CLICKS[[...t.classList].find((c) => CLICKS[c])];
+    if (fn) fn(t);
+  });
   document.addEventListener('click', (e) => {
     const t = e.target.closest && e.target.closest(CLICK_SEL);
     if (!t || t.closest('a, button')) return;

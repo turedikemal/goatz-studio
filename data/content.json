@@ -550,7 +550,7 @@
           "float": true
         },
         {
-          "type": "check",
+          "type": "code",
           "x": 10,
           "y": 42,
           "mx": 6,
@@ -560,7 +560,7 @@
           "float": true
         },
         {
-          "type": "star",
+          "type": "layers",
           "x": 52,
           "y": 16,
           "mx": 46,
@@ -1529,7 +1529,7 @@
             "float": true
           },
           {
-            "type": "camera",
+            "type": "bulb",
             "x": 5,
             "y": 34,
             "mx": 4,
@@ -1539,7 +1539,7 @@
             "float": true
           },
           {
-            "type": "star",
+            "type": "layers",
             "x": 72,
             "y": 14,
             "mx": 60,
@@ -1617,14 +1617,14 @@
               "title": "Site fotoğrafları taşır",
               "text": "Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
               "color": "lavender",
-              "sticker": "browser",
+              "sticker": "layers",
               "image": ""
             },
             {
               "title": "Tek muhatap, tek takvim",
               "text": "Fotoğrafçıyı tasarımcıyla, tasarımcıyı yazılımcıyla eşleştirmekle uğraşmazsınız. Her şey tek elden ve tek planla ilerler.",
               "color": "mint",
-              "sticker": "check",
+              "sticker": "phone",
               "image": ""
             }
           ],
@@ -1647,7 +1647,7 @@
           "image": "",
           "imageSide": "left",
           "imageColor": "lavender",
-          "imageSticker": "browser",
+          "imageSticker": "phone",
           "button": {
             "label": "Yaptığımız siteleri gör ↗",
             "target": "#isler"
@@ -1726,7 +1726,7 @@
               "title": "1. Tek görüşme",
               "text": "Hem çekimi hem siteyi birlikte planlıyoruz.",
               "color": "sun",
-              "sticker": "star",
+              "sticker": "bulb",
               "image": ""
             },
             {
@@ -1740,14 +1740,14 @@
               "title": "3. Sonra tasarım",
               "text": "Siteyi bu fotoğraflarla tasarlıyor, telefonda ve bilgisayarda test ediyoruz.",
               "color": "lavender",
-              "sticker": "browser",
+              "sticker": "code",
               "image": ""
             },
             {
               "title": "4. Yayın",
               "text": "Alan adınıza bağlayıp yayına alıyoruz. Her şey tek seferde hazır.",
               "color": "sky",
-              "sticker": "check",
+              "sticker": "tag",
               "image": ""
             }
           ],

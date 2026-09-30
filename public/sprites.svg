@@ -28,38 +28,90 @@
       <rect x="18" y="62" width="34" height="16" rx="8" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
       <rect x="74" y="44" width="28" height="34" rx="6" fill="#e9ccff" stroke="#000" stroke-width="2.5"/>
     </symbol>
-    <!-- Fransız vitrin: kemerli cam, tabela, kapı -->
+    <!-- Fransız vitrin: çizgili tente, kemerli cam, kapı -->
     <symbol id="s-vitrin" viewBox="0 0 200 216">
-      <rect x="10" y="22" width="180" height="190" rx="4" fill="#5c4ade" stroke="#000" stroke-width="3"/>
-      <rect x="4" y="6" width="192" height="18" rx="4" fill="#fff" stroke="#000" stroke-width="3"/>
-      <path d="M16 24v6M30 24v6M44 24v6M58 24v6M72 24v6M86 24v6M100 24v6M114 24v6M128 24v6M142 24v6M156 24v6M170 24v6M184 24v6" stroke="#000" stroke-width="3"/>
-      <rect x="10" y="34" width="14" height="164" fill="#e9ccff" stroke="#000" stroke-width="3"/>
-      <rect x="176" y="34" width="14" height="164" fill="#e9ccff" stroke="#000" stroke-width="3"/>
-      <rect x="30" y="36" width="140" height="26" rx="13" fill="#ffd731" stroke="#000" stroke-width="3"/>
-      <path d="M46 49h12M64 49h36M106 49h20" stroke="#000" stroke-width="5" stroke-linecap="round"/>
-      <path d="M140 49l3 -6 3 6 6 3 -6 3 -3 6 -3 -6 -6 -3z" fill="#fb4903" stroke="#000" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M30 196V92a46 22 0 0 1 92 0V196z" fill="#dceeff" stroke="#000" stroke-width="3"/>
-      <path d="M76 70V196M30 104H122" stroke="#000" stroke-width="3"/>
-      <path d="M40 98q6 -14 20 -20M112 98q-6 -14 -20 -20" fill="none" stroke="#000" stroke-width="2"/>
-      <path d="M30 152H122M30 188H122" stroke="#000" stroke-width="3"/>
-      <rect x="38" y="124" width="16" height="28" rx="4" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
-      <rect x="42" y="114" width="8" height="10" fill="#fff" stroke="#000" stroke-width="2.5"/>
-      <rect x="60" y="132" width="10" height="20" rx="2" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
-      <rect x="82" y="130" width="34" height="22" rx="5" fill="#fb4903" stroke="#000" stroke-width="2.5"/>
-      <circle cx="99" cy="141" r="7" fill="#fff" stroke="#000" stroke-width="2.5"/>
-      <circle cx="99" cy="141" r="3" fill="#5c4ade"/>
-      <rect x="92" y="124" width="10" height="6" rx="1.5" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
-      <rect x="38" y="164" width="22" height="24" rx="3" fill="#e9ccff" stroke="#000" stroke-width="2.5"/>
-      <path d="M49 164v24M38 175h22" stroke="#000" stroke-width="2"/>
-      <rect x="66" y="170" width="18" height="18" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
-      <rect x="88" y="160" width="28" height="28" rx="3" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
-      <path d="M102 160v28" stroke="#000" stroke-width="2"/>
-      <path d="M132 196V108a19 16 0 0 1 38 0V196z" fill="#55db9c" stroke="#000" stroke-width="3"/>
-      <path d="M138 150V112a13 11 0 0 1 26 0V150z" fill="#dceeff" stroke="#000" stroke-width="2.5"/>
-      <rect x="141" y="124" width="20" height="9" rx="4.5" fill="#fff" stroke="#000" stroke-width="2"/>
-      <circle cx="146" cy="128.5" r="2.4" fill="#fb4903"/>
-      <circle cx="163" cy="168" r="4" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
-      <rect x="4" y="196" width="192" height="16" rx="3" fill="#000"/>
+      <rect x="14" y="44" width="172" height="168" rx="4" fill="#4da2ff" stroke="#000" stroke-width="3"/>
+      <rect class="sign" x="36" y="6" width="128" height="26" rx="13" fill="#fff" stroke="#000" stroke-width="3"/>
+      <path d="M58 19h14M80 19h40M128 19h14" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+      <path class="stripe" d="M14.00 34h28.67v24a14.33 11 0 0 1 -28.67 0z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="stripe" d="M42.67 34h28.67v24a14.33 11 0 0 1 -28.67 0z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="stripe" d="M71.33 34h28.67v24a14.33 11 0 0 1 -28.67 0z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="stripe" d="M100.00 34h28.67v24a14.33 11 0 0 1 -28.67 0z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="stripe" d="M128.67 34h28.67v24a14.33 11 0 0 1 -28.67 0z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path class="stripe" d="M157.33 34h28.67v24a14.33 11 0 0 1 -28.67 0z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M28 196V112a45 20 0 0 1 90 0V196z" fill="#dceeff" stroke="#000" stroke-width="3"/>
+      <path d="M73 92V196M28 118H118M28 154H118M28 190H118" stroke="#000" stroke-width="3"/>
+      <rect x="36" y="128" width="15" height="26" rx="4" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
+      <rect x="39.5" y="119" width="8" height="9" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <path d="M58 154l3-22h22l3 22z" fill="#fb4903" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M65 132v-4a7 7 0 0 1 14 0v4" fill="none" stroke="#000" stroke-width="2.5"/>
+      <rect x="92" y="134" width="22" height="20" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+      <path d="M103 134v20" stroke="#000" stroke-width="2.5"/>
+      <path d="M40 190v-22h22v22z" fill="#e9ccff" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M51 168c-8-8-6-14 0-14 6 0 8 6 0 14z" fill="#55db9c" stroke="#000" stroke-width="2"/>
+      <rect x="70" y="172" width="18" height="18" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+      <rect x="92" y="164" width="24" height="26" rx="3" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
+      <path d="M132 196V116a20 18 0 0 1 40 0V196z" fill="#e9ccff" stroke="#000" stroke-width="3"/>
+      <path d="M139 152V120a13 11 0 0 1 26 0V152z" fill="#dceeff" stroke="#000" stroke-width="2.5"/>
+      <rect x="142" y="128" width="20" height="9" rx="4.5" fill="#fff" stroke="#000" stroke-width="2"/>
+      <circle cx="147" cy="132.5" r="2.4" fill="#55db9c"/>
+      <circle cx="165" cy="172" r="4" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+      <rect x="6" y="196" width="188" height="16" rx="3" fill="#000"/>
+    </symbol>
+    <!-- Kod -->
+    <symbol id="s-code" viewBox="0 0 120 100">
+      <rect x="6" y="12" width="108" height="76" rx="14" fill="#55db9c" stroke="#000" stroke-width="3"/>
+      <path d="M46 34L26 50l20 16" fill="none" stroke="#000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M74 34l20 16-20 16" fill="none" stroke="#000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M66 30L54 70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+    </symbol>
+    <!-- Telefon -->
+    <symbol id="s-phone" viewBox="0 0 100 100">
+      <rect x="27" y="4" width="46" height="92" rx="11" fill="#fff" stroke="#000" stroke-width="3"/>
+      <rect x="33" y="16" width="34" height="68" rx="4" fill="#dceeff" stroke="#000" stroke-width="2.5"/>
+      <rect x="37" y="22" width="26" height="11" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+      <rect x="37" y="38" width="26" height="11" rx="3" fill="#e9ccff" stroke="#000" stroke-width="2.5"/>
+      <rect x="37" y="54" width="15" height="11" rx="3" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
+      <rect x="37" y="70" width="26" height="9" rx="4.5" fill="#4da2ff" stroke="#000" stroke-width="2.5"/>
+      <rect x="42" y="8" width="16" height="3" rx="1.5" fill="#000"/>
+    </symbol>
+    <!-- Katmanlar -->
+    <symbol id="s-layers" viewBox="0 0 100 100">
+      <path d="M50 46L92 66 50 86 8 66z" fill="#4da2ff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 30L92 50 50 70 8 50z" fill="#e9ccff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 14L92 34 50 54 8 34z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Yazı (Aa) -->
+    <symbol id="s-type" viewBox="0 0 100 100">
+      <rect x="6" y="10" width="88" height="80" rx="16" fill="#ffd731" stroke="#000" stroke-width="3"/>
+      <path d="M16 72L34 26l18 46M23 56h22" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="72" cy="62" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
+      <path d="M83 50v24" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <!-- Alışveriş çantası -->
+    <symbol id="s-bag" viewBox="0 0 100 100">
+      <path d="M36 38V28a14 14 0 0 1 28 0v10" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/>
+      <path d="M20 36h60l6 54H14z" fill="#4da2ff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M50 78C32 66 38 52 50 62 62 52 68 66 50 78z" fill="#fff" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+    </symbol>
+    <!-- Fiyat etiketi -->
+    <symbol id="s-tag" viewBox="0 0 100 100">
+      <path d="M50 38C50 22 40 12 28 10" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+      <path d="M34 24h32l14 14v52H20V38z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="50" cy="38" r="5" fill="#fff" stroke="#000" stroke-width="2.5"/>
+      <circle cx="40" cy="60" r="5" fill="#fb4903" stroke="#000" stroke-width="2.5"/>
+      <circle cx="60" cy="78" r="5" fill="#fb4903" stroke="#000" stroke-width="2.5"/>
+      <path d="M62 54L38 84" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+    </symbol>
+    <!-- Ampul (fikir) -->
+    <symbol id="s-bulb" viewBox="0 0 100 100">
+      <g opacity="0" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round">
+        <path d="M50 2v8M12 18l6 6M88 18l-6 6M4 46h8M96 46h-8"/>
+      </g>
+      <circle cx="50" cy="46" r="26" fill="#fff" stroke="#000" stroke-width="3"/>
+      <rect x="38" y="70" width="24" height="9" rx="3" fill="#e9ccff" stroke="#000" stroke-width="3"/>
+      <rect x="42" y="80" width="16" height="9" rx="3" fill="#4da2ff" stroke="#000" stroke-width="3"/>
+      <path d="M42 54l4-14 4 14 4-14 4 14" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
     </symbol>
     <!-- G jetonu -->
     <symbol id="s-coin" viewBox="0 0 100 100">
