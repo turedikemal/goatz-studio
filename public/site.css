@@ -622,3 +622,5 @@
   .work-group[hidden] { display: none; }
   .work-group + .work-group { margin-top: clamp(56px, 8vw, 110px); }
   .work-group-h { margin: 0 0 clamp(20px, 3vw, 36px); font-size: clamp(44px, 8vw, 120px); line-height: .9; }
+
+  .work-body > .work-page { justify-self: start; margin: 10px 0 0; }
