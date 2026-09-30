@@ -686,6 +686,9 @@
     showLogin();
   });
 
+  let unreadMsgs = 0;
+  function setUnread(n) { if (n !== unreadMsgs) { unreadMsgs = n; renderNav(); } }
+  const refreshUnread = () => request('/api/messages').then((l) => setUnread(l.filter((m) => !m.read).length)).catch(() => {});
   async function start() {
     state = await request('/api/content');
     saved = JSON.stringify(state);
@@ -700,6 +703,8 @@
     renderPage();
     refreshPreview(true);
     updateStatus();
+    refreshUnread();
+    setInterval(() => { if (!document.hidden) refreshUnread(); }, 60000);
     if (location.hash.length > 1) openPanel();
 
   }
@@ -982,7 +987,8 @@
       const main = h('button', { class: p.id === page.id ? 'on' : '', onclick: notJustDragged(() => selectPage(p)) },
         dc ? h('i', { class: 'dot', style: `background:${dc}` }) : null,
         h('span', { class: 'lbl' }, p.label),
-        sec && !sec.visible ? h('span', { class: 'eye', title: 'Bu bölüm gizli' }, 'gizli') : null);
+        sec && !sec.visible ? h('span', { class: 'eye', title: 'Bu bölüm gizli' }, 'gizli') : null,
+        p.id === 'mesajlar' && unreadMsgs > 0 ? h('span', { class: 'nav-badge', title: `${unreadMsgs} okunmamış mesaj` }, String(unreadMsgs > 99 ? '99+' : unreadMsgs)) : null);
       if (!sec) return main;
       return row(main, null, p.id === page.id, { group: 'sections', id: p.section });
     };
@@ -1504,8 +1510,9 @@
   function messagesPage() {
     const box = h('div', {}, h('p', { class: 'muted' }, 'Yükleniyor…'));
     const card = (m) => {
-      const actions = [h('a', { class: 'btn small', href: `mailto:${m.email}?subject=${encodeURIComponent('Mesajınız hakkında')}` }, 'Yanıtla')];
+      const actions = [h('a', { class: 'btn small', target: '_blank', rel: 'noopener', href: `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(m.email)}&su=${encodeURIComponent('Mesajınız hakkında')}` }, 'Yanıtla (Gmail)')];
       if (!m.read) actions.push(h('button', { type: 'button', class: 'btn small', onclick: async () => { await request('/api/messages/read', { method: 'POST', body: JSON.stringify({ id: m.id }) }); load(); } }, 'Okundu'));
+      actions.push(h('button', { type: 'button', class: 'btn small', onclick: () => { navigator.clipboard.writeText(m.email).then(() => toast('E-posta adresi kopyalandı.')).catch(() => toast(m.email)); } }, 'Adresi kopyala'));
       actions.push(h('button', { type: 'button', class: 'btn small', onclick: async () => { if (confirm('Bu mesaj silinsin mi?')) { await request(`/api/messages/${m.id}`, { method: 'DELETE' }); load(); } } }, 'Sil'));
       return h('div', { class: 'card', style: 'margin-bottom:12px' },
         h('p', { style: 'margin:0 0 6px;font-weight:700' }, `${m.read ? '' : '● '}${m.name}  ·  ${new Date(m.date).toLocaleString('tr-TR')}`),
@@ -1515,6 +1522,7 @@
     };
     const load = () => request('/api/messages').then((list) => {
       box.replaceChildren(...(list.length ? list.map(card) : [h('p', { class: 'muted' }, 'Henüz mesaj yok.')]));
+      setUnread(list.filter((m) => !m.read).length);
     }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
     load();
     return box;

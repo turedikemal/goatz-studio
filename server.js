@@ -69,6 +69,7 @@ function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {})
   res.end(body);
 }
 const messages = require('./lib/messages');
+const mailer = require('./lib/mailer');
 const contactHits = new Map();
 const json = (res, status, data, extra) => send(res, status, JSON.stringify(data), 'application/json; charset=utf-8', extra);
 
@@ -116,7 +117,8 @@ async function api(req, res, url) {
     if (hits.length >= 5) return json(res, 429, { error: 'Çok fazla mesaj gönderdin. Biraz sonra tekrar dene.' });
     const body = await readJson(req, 20000);
     if (body && body.website) return json(res, 200, { ok: true }); // bot tuzağı
-    messages.add(body || {});
+    const saved = messages.add(body || {});
+    mailer.notify(saved, store.load().contact.email).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
     hits.push(now); contactHits.set(ip, hits);
     return json(res, 200, { ok: true });
   }
