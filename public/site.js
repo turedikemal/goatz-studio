@@ -305,6 +305,19 @@
     box.addEventListener('click', () => show(i + 1));
     if (!reduce) setInterval(() => { if (!document.hidden) show(i + 1); }, 2800);
   });
+  document.querySelectorAll('[data-fun="badges"]').forEach((box) => {
+    const tile = box.querySelector('.fb-tile .fb-badge'), chips = [...box.querySelectorAll('.fb-chip')];
+    let cur = 0;
+    const pick = (n) => {
+      cur = (n + chips.length) % chips.length;
+      chips.forEach((c, k) => c.classList.toggle('on', k === cur));
+      tile.className = `fb-badge ${chips[cur].dataset.b}`;
+      tile.textContent = chips[cur].textContent;
+      tile.animate([{ scale: 0.6, rotate: '-8deg' }, { scale: 1.12, rotate: '3deg', offset: 0.6 }, { scale: 1, rotate: '0deg' }], { duration: 420, easing: 'ease-out' });
+    };
+    chips.forEach((c, k) => c.addEventListener('click', () => pick(k)));
+    if (!reduce) setInterval(() => { if (!document.hidden) pick(cur + 1); }, 2600);
+  });
   document.querySelectorAll('[data-fun="delivery"]').forEach((box) => {
     const steps = [...box.querySelectorAll('.fd-steps li')];
     let cur = 0;
@@ -551,13 +564,13 @@
   const fxLayer = (el) => { const old = el.querySelector(':scope > .fx'); if (old) old.remove(); const g = svgEl('g', { class: 'fx' }); el.append(g); return g; };
   const centerOf = (el) => { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height }; };
   const restRot = (el) => getComputedStyle(el).getPropertyValue('--r') || getComputedStyle(el).rotate.split(' ').pop() || '0deg';
-  const sparks = (x, y, { n = 10, size = 16, dist = 70 } = {}) => {
+  const sparks = (x, y, { n = 10, size = 16, dist = 70, id = 'star' } = {}) => {
     for (let i = 0; i < n; i++) {
       const sp = document.createElement('span');
       sp.className = 'fx-spark';
-      sp.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#s-star"/></svg>';
+      sp.innerHTML = `<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#s-${id}"/></svg>`;
       const w = size * (0.55 + Math.random() * 0.9);
-      sp.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${w}px;filter:hue-rotate(${Math.round(Math.random() * 40 - 10)}deg)`;
+      sp.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${w}px;${id === 'star' ? `filter:hue-rotate(${Math.round(Math.random() * 40 - 10)}deg)` : ''}`;
       document.body.append(sp);
       const a = (Math.PI * 2 * i) / n + Math.random() * 0.6, d = dist * (0.6 + Math.random() * 0.8);
       sp.animate([
@@ -658,9 +671,43 @@
     sparks(c.x, c.y, { n: 9, size: Math.max(12, c.w * 0.22), dist: Math.max(50, c.w * 0.9) });
   };
 
-  const CLICKS = { 'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar };
+  // Konu sticker'ları: her biri kendi işine uygun küçük bir oyun oynar
+  const boing = (el, extra = {}) => {
+    const rot = restRot(el);
+    el.animate([{ scale: 1, rotate: rot }, { scale: 0.85, rotate: `calc(${rot} - 8deg)`, offset: 0.2 }, { scale: 1.18, rotate: `calc(${rot} + 8deg)`, offset: 0.5 }, { scale: 1, rotate: rot }], { duration: ms(0.7), easing: 'ease-out', ...extra });
+  };
+  const dropPin = (el) => {
+    if (busy(el, ms(1.2))) return;
+    const c = centerOf(el);
+    el.animate([{ translate: '0 -40px', scale: 0.8 }, { translate: '0 0', scale: 1.15, offset: 0.55 }, { translate: '0 -8px', scale: 0.95, offset: 0.75 }, { translate: '0 0', scale: 1 }], { duration: ms(0.9), easing: 'cubic-bezier(.3,.9,.4,1)' });
+    sparks(c.x, c.y + c.h * 0.3, { n: 6, size: Math.max(10, c.w * 0.16), dist: Math.max(40, c.w * 0.6) });
+  };
+  const driveTruck = (el) => {
+    if (busy(el, ms(2))) return;
+    el.animate([{ translate: '0 0', opacity: 1 }, { translate: '160% 0', opacity: 0, offset: 0.45 }, { translate: '-160% 0', opacity: 0, offset: 0.46 }, { translate: '0 0', opacity: 1 }], { duration: ms(1.8), easing: 'cubic-bezier(.5,0,.3,1)' });
+  };
+  const spinMedal = (el) => {
+    if (busy(el, ms(1.1))) return;
+    const c = centerOf(el), rot = restRot(el);
+    el.animate([{ rotate: rot, scale: 1 }, { rotate: `calc(${rot} + 360deg)`, scale: 1.3, offset: 0.55 }, { rotate: `calc(${rot} + 360deg)`, scale: 1 }], { duration: ms(1), easing: 'ease-in-out' });
+    sparks(c.x, c.y, { n: 8, size: Math.max(12, c.w * 0.2), dist: Math.max(50, c.w * 0.8) });
+  };
+  const burstOf = (id) => (el) => {
+    if (busy(el, ms(1.1))) return;
+    const c = centerOf(el);
+    boing(el);
+    sparks(c.x, c.y, { n: 8, size: Math.max(12, c.w * 0.2), dist: Math.max(50, c.w * 0.8), id });
+  };
+  const plain = (el) => { if (busy(el, ms(0.9))) return; boing(el); };
+
+  const CLICKS = {
+    'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
+    'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': burstOf('star'), 'st-box': burstOf('star'),
+    'st-map': plain, 'st-store': plain, 'st-cart': plain, 'st-link': plain, 'st-sliders': plain, 'st-photo': plain, 'st-grid': plain,
+  };
+  const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   document.addEventListener('click', (e) => {
-    const t = e.target.closest && e.target.closest('.st-camera, .st-coin, .st-check, .st-star');
+    const t = e.target.closest && e.target.closest(CLICK_SEL);
     if (!t || t.closest('a, button')) return;
     const fn = CLICKS[[...t.classList].find((c) => CLICKS[c])];
     if (fn) fn(t);
@@ -682,7 +729,7 @@
 
   // Fare üstüne gelince sticker bir tur atar
   pops.forEach((el) => el.addEventListener('mouseenter', () => {
-    if (!on('pop') || el._spin) return;
+    if (!on('pop') || el._spin || el.matches(CLICK_SEL)) return;
     const rot = getComputedStyle(el).getPropertyValue('--r') || '0deg';
     el._spin = true;
     el.classList.remove('idle-on'); // dönerken boşta oynama durur, bitince temiz başlar

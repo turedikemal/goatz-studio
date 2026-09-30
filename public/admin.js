@@ -6,7 +6,7 @@
     carbon: 'Siyah', paper: 'Beyaz', sky: 'Açık mavi', concrete: 'Gri', mist: 'Açık gri',
     blue: 'Mavi', mint: 'Nane yeşili', lavender: 'Lavanta', ember: 'Turuncu', sun: 'Sarı', violet: 'Mor',
   };
-  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe' };
+  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160' };
   const TARGETS = [
     ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
@@ -144,8 +144,8 @@
             tags: list('Teknolojiler / etiketler', text('', { nostyle: true }), { addLabel: 'Etiket ekle', newItem: '', max: 12 }),
             urlLabel: text('Ziyaret butonunun yazısı', { nostyle: true }),
             gallery: list('Galeri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
-            sections: list('Proje sayfası bölümleri (başlık + yazı)', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Bölüm ekle', title: (v) => v.title || 'Bölüm', max: 12, newItem: { title: '', text: '' } }),
-            fun: select('Küçük eğlenceli gösterim', [['', 'Yok'], ['map', 'Sipariş haritası (şehir pini)'], ['reviews', 'Yorum yıldızları (parlar)'], ['delivery', 'Teslimat adımları (kamyon)']]),
+            sections: list('Proje sayfası bölümleri (başlık + yazı)', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }), sticker: select('Köşedeki sticker', [['', 'Konuya göre otomatik'], ...Object.entries(STICKERS)]) }), { addLabel: 'Bölüm ekle', title: (v) => v.title || 'Bölüm', max: 12, newItem: { title: '', text: '', sticker: '' } }),
+            fun: select('Küçük eğlenceli gösterim', [['', 'Yok'], ['map', 'Sipariş haritası (şehir pini)'], ['reviews', 'Yorum yıldızları (parlar)'], ['delivery', 'Teslimat adımları (kamyon)'], ['badges', 'Rozet şablonları (çok satan)']]),
             slug: text('Sayfa adresi', { nostyle: true, hint: 'Boş bırakırsan proje adından üretilir. Örn. pati-mama → /isler/pati-mama' }),
           }),
           look: group('Görünüm', {

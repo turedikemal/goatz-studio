@@ -621,7 +621,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -657,7 +658,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -693,7 +695,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -729,7 +732,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -765,7 +769,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -801,7 +806,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -837,7 +843,8 @@
         "sections": [
           {
             "title": "",
-            "text": ""
+            "text": "",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -848,8 +855,8 @@
         "category": "app",
         "year": "",
         "client": "",
-        "summary": "Kategori ve ürün sayfalarında en çok satan ürün rozetlerini tek merkezden yönetin.",
-        "description": "Kısa Özellikler\n\n* Kategori ve ürün sayfası desteği\n* Canlı önizleme ve düzenleme\n* Premium rozet ve şablon seçenekleri\n* Masaüstü ve mobil uyumlu görünüm",
+        "summary": "Kategori Yıldızı, e-ticaret mağazalarında en çok satan ürünleri kategori ve ürün sayfalarında dikkat çeken rozetlerle öne çıkarmak için geliştirilmiş bir web uygulamasıdır.",
+        "description": "Kısa Özellikler\n\n* Çok satan ürünlere rozet ekleme\n* Kategori sayfalarında rozet gösterme\n* Ürün detay sayfasında rozet gösterme\n* Rozetleri tek merkezden yönetme\n* Hazır rozet şablonları\n* Premium rozet şablonları\n* Rozet yazısını düzenleme\n* Renk ve gradyan ayarları\n* Rozet konumlandırma\n* Kategori ve ürün detay için canlı önizleme\n* Masaüstü ve mobil için ayrı görünüm\n* Mağaza tasarımına göre özelleştirilebilir görünüm",
         "image": "/uploads/muohc89q-30cc4148.webp",
         "url": "",
         "urlLabel": "Siteyi ziyaret et",
@@ -869,11 +876,42 @@
         "badge": "Geliştirmede",
         "lang": "",
         "listLabel": "Kısa özellikler",
-        "fun": "",
+        "fun": "badges",
         "sections": [
           {
-            "title": "",
-            "text": ""
+            "title": "Kategori Yıldızı Nedir?",
+            "text": "Kategori Yıldızı, e-ticaret mağazalarında en çok satan ürünleri kategori ve ürün sayfalarında dikkat çeken rozetlerle öne çıkarmak için geliştirilmiş bir web uygulamasıdır. Rozetlerin tasarımı, yazısı ve konumu tek bir merkezden yönetilir; yapılan her değişiklik canlı önizlemede anında görünür. Amaç, satışa en güçlü ürünlerin ziyaretçi tarafından ilk bakışta fark edilmesini sağlamaktır.",
+            "sticker": ""
+          },
+          {
+            "title": "Çok Satanları İlk Bakışta Fark Ettirir",
+            "text": "Kategori sayfalarında onlarca ürün yan yana dururken ziyaretçi çoğu zaman en güvenilir seçeneği arar. Çok satan rozeti bu seçeneği görsel olarak işaretler, ürün kartları arasında öne çıkarır ve sosyal kanıtı doğrudan ürünün üzerine taşır.",
+            "sticker": ""
+          },
+          {
+            "title": "Kategori ve Ürün Sayfalarında Çalışır",
+            "text": "Rozetler yalnızca liste görünümünde değil ürün detay sayfasında da gösterilebilir. Aynı ürünün hem kategori sayfasındaki kartında hem de kendi sayfasında tutarlı biçimde öne çıkması, ziyaretçinin ürüne duyduğu güveni destekler.",
+            "sticker": ""
+          },
+          {
+            "title": "Hazır ve Premium Şablonlar",
+            "text": "Dolgulu, çizgili, kesik çizgili, gradyanlı ve koyu zeminli gibi farklı rozet şablonları arasından mağazanın tasarımına uyan seçilebilir. Premium şablonlar, dikkat çekmesi gereken vitrin alanları için daha özel görünümler sunar.",
+            "sticker": ""
+          },
+          {
+            "title": "Metin, Renk ve Konum Kontrolü",
+            "text": "Rozetin üzerindeki yazı, renkler ve gradyanlar ile rozetin ürün görseli üzerindeki konumu düzenlenebilir. Böylece rozet mağazaya sonradan eklenmiş bir etiket gibi değil, ürün kartının doğal bir parçası gibi görünür.",
+            "sticker": ""
+          },
+          {
+            "title": "Canlı Önizleme ve Düzenleme",
+            "text": "Yapılan değişiklikler kategori sayfası ve ürün detay görünümleri için ayrı ayrı canlı olarak önizlenir. Masaüstü ve mobil görünümler arasında geçiş yapılarak rozetin her cihazda nasıl duracağı yayına almadan önce kontrol edilebilir.",
+            "sticker": ""
+          },
+          {
+            "title": "Kategori Yıldızı Neden Kullanılır?",
+            "text": "Uygulama; en çok satan ürünleri görünür kılmak, ziyaretçinin seçim yapmasını kolaylaştırmak, sosyal kanıtı ürün kartlarına taşımak ve satışa en güçlü ürünlerden başlamak isteyen e-ticaret mağazaları için geliştirilmiştir.",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -909,35 +947,43 @@
         "sections": [
           {
             "title": "Yorum Merkezi Nedir?",
-            "text": "Yorum Merkezi, e-ticaret mağazasının farklı kanallarda oluşan müşteri yorumlarını daha güçlü bir sosyal kanıt alanına dönüştürmek amacıyla geliştirilmiş bir yorum yönetimi ve gösterim uygulamasıdır. Standart ürün değerlendirme alanlarından farklı olarak yorumların mağazanın farklı bölümlerinde kullanılabilmesini sağlar. Amaç yalnızca yorumları listelemek değil, müşterilerin gerçek deneyimlerini mağazanın tasarımının bir parçası haline getirmektir."
+            "text": "Yorum Merkezi, e-ticaret mağazasının farklı kanallarda oluşan müşteri yorumlarını daha güçlü bir sosyal kanıt alanına dönüştürmek amacıyla geliştirilmiş bir yorum yönetimi ve gösterim uygulamasıdır. Standart ürün değerlendirme alanlarından farklı olarak yorumların mağazanın farklı bölümlerinde kullanılabilmesini sağlar. Amaç yalnızca yorumları listelemek değil, müşterilerin gerçek deneyimlerini mağazanın tasarımının bir parçası haline getirmektir.",
+            "sticker": ""
           },
           {
             "title": "Yorumları Tek Bir Deneyimde Birleştirir",
-            "text": "E-ticaret yapan markaların müşteri yorumları zaman içerisinde farklı kanallarda dağılabilir. Yorum Merkezi bu dağınık deneyimi daha merkezi bir yapıya dönüştürmek için tasarlanmıştır. Desteklenen kaynaklardan elde edilen müşteri değerlendirmeleri ortak bir tasarım dili içerisinde ziyaretçiye sunulabilir."
+            "text": "E-ticaret yapan markaların müşteri yorumları zaman içerisinde farklı kanallarda dağılabilir. Yorum Merkezi bu dağınık deneyimi daha merkezi bir yapıya dönüştürmek için tasarlanmıştır. Desteklenen kaynaklardan elde edilen müşteri değerlendirmeleri ortak bir tasarım dili içerisinde ziyaretçiye sunulabilir.",
+            "sticker": ""
           },
           {
             "title": "Standart Yorum Alanından Daha Fazlası",
-            "text": "Klasik e-ticaret sistemlerinde yorumlar çoğunlukla ürün sayfasının altında bulunan statik bir liste olarak gösterilir. Yorum Merkezi ile yorumlar ana sayfada, ürün sayfalarında, alışveriş akışı içerisinde ve mağazanın farklı içerik alanlarında kullanılabilecek dinamik bileşenlere dönüştürülebilir."
+            "text": "Klasik e-ticaret sistemlerinde yorumlar çoğunlukla ürün sayfasının altında bulunan statik bir liste olarak gösterilir. Yorum Merkezi ile yorumlar ana sayfada, ürün sayfalarında, alışveriş akışı içerisinde ve mağazanın farklı içerik alanlarında kullanılabilecek dinamik bileşenlere dönüştürülebilir.",
+            "sticker": ""
           },
           {
             "title": "Özelleştirilebilir Yorum Kartları",
-            "text": "Markalar yorum kartlarında hangi bilgilerin gösterileceğini kontrol edebilir. Müşteri adı, yıldız puanı, yorum metni, yorum tarihi, ürün bilgisi, görsel, doğrulanmış değerlendirme bilgisi ve yorum kaynağı gibi alanlar mağazanın ihtiyacına göre düzenlenebilir."
+            "text": "Markalar yorum kartlarında hangi bilgilerin gösterileceğini kontrol edebilir. Müşteri adı, yıldız puanı, yorum metni, yorum tarihi, ürün bilgisi, görsel, doğrulanmış değerlendirme bilgisi ve yorum kaynağı gibi alanlar mağazanın ihtiyacına göre düzenlenebilir.",
+            "sticker": ""
           },
           {
             "title": "Görsel Odaklı Sosyal Kanıt",
-            "text": "Görsel içeren müşteri değerlendirmeleri daha güçlü bir biçimde öne çıkarılabilir. Yorum görselinin bulunmadığı durumlarda ürün görsellerinden yararlanılarak kartların görsel bütünlüğü korunabilir. Böylece yorum alanları yalnızca metinlerden oluşan klasik bir değerlendirme listesinden çıkarak mağazanın genel tasarımının bir parçası haline gelir."
+            "text": "Görsel içeren müşteri değerlendirmeleri daha güçlü bir biçimde öne çıkarılabilir. Yorum görselinin bulunmadığı durumlarda ürün görsellerinden yararlanılarak kartların görsel bütünlüğü korunabilir. Böylece yorum alanları yalnızca metinlerden oluşan klasik bir değerlendirme listesinden çıkarak mağazanın genel tasarımının bir parçası haline gelir.",
+            "sticker": ""
           },
           {
             "title": "Farklı Yerleşim Seçenekleri",
-            "text": "Yorumların sunum şekli mağazanın tasarımına göre değiştirilebilir. Akış, grid veya açılır kart benzeri farklı kullanım biçimleri sayesinde yorum alanı mağazanın mevcut arayüzüne adapte edilebilir. Masaüstü ve mobil cihazlar için farklı yerleşim davranışları uygulanabilir."
+            "text": "Yorumların sunum şekli mağazanın tasarımına göre değiştirilebilir. Akış, grid veya açılır kart benzeri farklı kullanım biçimleri sayesinde yorum alanı mağazanın mevcut arayüzüne adapte edilebilir. Masaüstü ve mobil cihazlar için farklı yerleşim davranışları uygulanabilir.",
+            "sticker": ""
           },
           {
             "title": "Marka Tasarımına Uyum",
-            "text": "Kart boyutları, tipografi, renkler, hizalamalar, animasyonlar ve diğer görsel öğeler marka kimliğine göre düzenlenebilir. Böylece uygulama mağazaya sonradan eklenmiş bağımsız bir widget gibi görünmek yerine mevcut tasarımın doğal bir parçası haline gelir."
+            "text": "Kart boyutları, tipografi, renkler, hizalamalar, animasyonlar ve diğer görsel öğeler marka kimliğine göre düzenlenebilir. Böylece uygulama mağazaya sonradan eklenmiş bağımsız bir widget gibi görünmek yerine mevcut tasarımın doğal bir parçası haline gelir.",
+            "sticker": ""
           },
           {
             "title": "Yorum Merkezi Neden Kullanılır?",
-            "text": "Uygulamanın temel amacı müşteri değerlendirmelerini satış sürecinin daha görünür bir parçası haline getirmektir. Sosyal kanıt oluşturmak, müşteri güvenini desteklemek, farklı platformlardaki değerlendirmeleri değerlendirmek, yorumların görünürlüğünü artırmak ve gerçek müşteri deneyimlerini ürünlerle ilişkilendirmek isteyen e-ticaret mağazaları için geliştirilmiştir."
+            "text": "Uygulamanın temel amacı müşteri değerlendirmelerini satış sürecinin daha görünür bir parçası haline getirmektir. Sosyal kanıt oluşturmak, müşteri güvenini desteklemek, farklı platformlardaki değerlendirmeleri değerlendirmek, yorumların görünürlüğünü artırmak ve gerçek müşteri deneyimlerini ürünlerle ilişkilendirmek isteyen e-ticaret mağazaları için geliştirilmiştir.",
+            "sticker": ""
           }
         ],
         "visible": true
@@ -973,31 +1019,38 @@
         "sections": [
           {
             "title": "Canlı Sipariş Haritası Nedir?",
-            "text": "Canlı Sipariş Haritası, bir e-ticaret mağazasının sipariş hareketlerini klasik sayı ve tablolar yerine interaktif bir Türkiye haritası üzerinden ziyaretçilere göstermek için geliştirilmiş bir web uygulamasıdır. Uygulamanın temel amacı mağazanın satış hareketliliğini görünür hale getirirken aynı zamanda bunu müşterinin etkileşime girebileceği bir deneyime dönüştürmektir. Bir şehre sipariş ulaştığında ilgili bölge haritada aktif hale gelir. Böylece zaman içerisinde markanın Türkiye genelindeki erişimi ziyaretçiler tarafından doğrudan görülebilir."
+            "text": "Canlı Sipariş Haritası, bir e-ticaret mağazasının sipariş hareketlerini klasik sayı ve tablolar yerine interaktif bir Türkiye haritası üzerinden ziyaretçilere göstermek için geliştirilmiş bir web uygulamasıdır. Uygulamanın temel amacı mağazanın satış hareketliliğini görünür hale getirirken aynı zamanda bunu müşterinin etkileşime girebileceği bir deneyime dönüştürmektir. Bir şehre sipariş ulaştığında ilgili bölge haritada aktif hale gelir. Böylece zaman içerisinde markanın Türkiye genelindeki erişimi ziyaretçiler tarafından doğrudan görülebilir.",
+            "sticker": ""
           },
           {
             "title": "Sosyal Kanıtı Görselleştirir",
-            "text": "Bir müşterinin yalnızca “çok sayıda sipariş verildi” gibi bir metin görmesi yerine, siparişlerin hangi şehirlerden geldiğini interaktif bir yapı içerisinde inceleyebilmesi daha güçlü bir sosyal kanıt oluşturabilir. Harita, markanın gerçek satış hareketlerini ziyaretçinin anlayabileceği görsel bir dile dönüştürür."
+            "text": "Bir müşterinin yalnızca “çok sayıda sipariş verildi” gibi bir metin görmesi yerine, siparişlerin hangi şehirlerden geldiğini interaktif bir yapı içerisinde inceleyebilmesi daha güçlü bir sosyal kanıt oluşturabilir. Harita, markanın gerçek satış hareketlerini ziyaretçinin anlayabileceği görsel bir dile dönüştürür.",
+            "sticker": ""
           },
           {
             "title": "Son Sipariş Deneyimi",
-            "text": "Uygulama içerisinde son sipariş hareketi ayrı bir alan olarak gösterilebilir. Bu yapı sayesinde ziyaretçi mağazanın aktif olarak sipariş aldığını görebilir ve statik bir e-ticaret sayfası yerine yaşayan bir mağaza deneyimi oluşur."
+            "text": "Uygulama içerisinde son sipariş hareketi ayrı bir alan olarak gösterilebilir. Bu yapı sayesinde ziyaretçi mağazanın aktif olarak sipariş aldığını görebilir ve statik bir e-ticaret sayfası yerine yaşayan bir mağaza deneyimi oluşur.",
+            "sticker": ""
           },
           {
             "title": "Şehir Bazlı Etkileşim",
-            "text": "Harita üzerindeki şehirler yalnızca görsel bir gösterge değildir. Sipariş bulunan ve henüz sipariş bulunmayan şehirler için farklı kullanıcı deneyimleri oluşturulabilir. Böylece harita ziyaretçiyi ürünleri incelemeye veya mağazayı keşfetmeye yönlendiren interaktif bir alana dönüşür."
+            "text": "Harita üzerindeki şehirler yalnızca görsel bir gösterge değildir. Sipariş bulunan ve henüz sipariş bulunmayan şehirler için farklı kullanıcı deneyimleri oluşturulabilir. Böylece harita ziyaretçiyi ürünleri incelemeye veya mağazayı keşfetmeye yönlendiren interaktif bir alana dönüşür.",
+            "sticker": ""
           },
           {
             "title": "Rozet Sistemi",
-            "text": "Belirli sipariş seviyelerine ulaşan şehirler için farklı rozetler kullanılabilir. Bu sistem sayesinde yalnızca sipariş göstermek yerine ziyaretçilerin takip edebileceği küçük bir oyunlaştırma mekanizması oluşturulur. Şehirlerin zaman içerisinde yeni seviyelere ulaşması uygulamanın sürekli değişen ve yaşayan bir yapıya sahip olmasını sağlar."
+            "text": "Belirli sipariş seviyelerine ulaşan şehirler için farklı rozetler kullanılabilir. Bu sistem sayesinde yalnızca sipariş göstermek yerine ziyaretçilerin takip edebileceği küçük bir oyunlaştırma mekanizması oluşturulur. Şehirlerin zaman içerisinde yeni seviyelere ulaşması uygulamanın sürekli değişen ve yaşayan bir yapıya sahip olmasını sağlar.",
+            "sticker": ""
           },
           {
             "title": "Marka ve Mağaza Konumu",
-            "text": "Markanın fiziksel veya operasyonel konumu harita içerisinde ayrıca gösterilebilir. Böylece siparişlerin çıkış noktası ile ulaştığı şehirler arasında görsel bir bağ kurulabilir."
+            "text": "Markanın fiziksel veya operasyonel konumu harita içerisinde ayrıca gösterilebilir. Böylece siparişlerin çıkış noktası ile ulaştığı şehirler arasında görsel bir bağ kurulabilir.",
+            "sticker": ""
           },
           {
             "title": "E-Ticaret İçin Neden Kullanılır?",
-            "text": "Canlı Sipariş Haritası; sosyal kanıt oluşturmak, mağaza hareketliliğini göstermek, müşterinin sayfada geçirdiği süreyi artırmak, markanın Türkiye genelindeki erişimini görselleştirmek ve klasik e-ticaret deneyimine interaktif bir alan eklemek amacıyla kullanılabilir. Uygulama farklı mağazalara ve marka tasarımlarına uyarlanabilecek şekilde geliştirilmiştir."
+            "text": "Canlı Sipariş Haritası; sosyal kanıt oluşturmak, mağaza hareketliliğini göstermek, müşterinin sayfada geçirdiği süreyi artırmak, markanın Türkiye genelindeki erişimini görselleştirmek ve klasik e-ticaret deneyimine interaktif bir alan eklemek amacıyla kullanılabilir. Uygulama farklı mağazalara ve marka tasarımlarına uyarlanabilecek şekilde geliştirilmiştir.",
+            "sticker": ""
           }
         ],
         "visible": true

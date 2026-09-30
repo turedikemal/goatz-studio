@@ -714,3 +714,30 @@
 
   .work-mid { display: grid; gap: 10px; align-content: start; min-height: 88px; }
   .work-meta .rating { font-size: 17px; gap: 2px; }
+
+  /* Renkli çerçeve (zemin beyaz kalır) */
+  .work-frame { position: relative; margin: 0 0 40px; padding: clamp(12px, 1.8vw, 22px); background: var(--wc, var(--mint)); border: 1px solid var(--carbon); border-radius: calc(var(--r-card) * 1.7); box-shadow: 6px 8px 0 var(--carbon); }
+  .work-frame .work-cover { margin: 0; }
+  .work-frame .work-shot { border: 1px solid var(--carbon); border-radius: var(--r-card); box-shadow: none; }
+  .wf-tape { position: absolute; top: -13px; width: clamp(64px, 9vw, 104px); height: 26px; background: #ffffffcc; border: 1px solid var(--carbon); z-index: 2; }
+  .wf-t1 { left: 9%; rotate: -5deg; } .wf-t2 { right: 9%; rotate: 4deg; }
+  .wf-tag { position: absolute; left: clamp(18px, 3vw, 36px); bottom: -15px; padding: 8px 16px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); z-index: 2; }
+  .work-stage .work-visit { margin-top: 12px; }
+  .work-stage .work-facts > div { background: var(--wc, var(--sky)); }
+
+  /* Rozet şablonları gösterimi */
+  .fun-badges { background: var(--lavender); }
+  .fb-tile { position: relative; width: 150px; height: 190px; flex: none; display: grid; place-items: center; border: 1px solid var(--carbon); border-radius: var(--r-card); background: var(--sun); }
+  .fb-tile .fb-bottle { width: 62px; height: auto; }
+  .fb-tile .fb-badge { position: absolute; left: 10px; top: 10px; }
+  .fb-side { display: grid; gap: 12px; }
+  .fb-side .label { margin: 0; }
+  .fb-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .fb-badge { display: inline-block; padding: 7px 13px; border: 1.5px solid var(--carbon); border-radius: var(--r-pill); font: 800 12px/1 inherit; font-family: inherit; white-space: nowrap; transition: transform .25s var(--slush, ease); }
+  button.fb-chip { cursor: pointer; } button.fb-chip:hover { transform: translateY(-3px) rotate(-2deg); } button.fb-chip.on { outline: 3px solid var(--carbon); outline-offset: 2px; }
+  .fb-badge.b0 { background: var(--violet); color: #fff; }
+  .fb-badge.b1 { background: #fff; color: var(--carbon); }
+  .fb-badge.b2 { background: #fff; color: var(--ember); border: 1.5px dashed var(--ember); }
+  .fb-badge.b3 { background: linear-gradient(90deg, var(--ember), var(--sun)); color: var(--carbon); }
+  .fb-badge.b4 { background: var(--carbon); color: var(--sun); }
+  .fb-badge.b5 { background: var(--mint); color: var(--carbon); }
