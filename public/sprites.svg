@@ -163,15 +163,14 @@
       <path d="M14 80h92v6c0 3-2 4-5 4H22c-5 0-8-4-8-10z" fill="#2b1b10" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M78 90h24v6H82c-3 0-4-3-4-6z" fill="#2b1b10" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
     </symbol>
-    <!-- Beyaz çorap -->
+    <!-- Beyaz çorap (düz, sağa bakan) -->
     <symbol id="s-sock" viewBox="0 0 100 100">
-      <path d="M34 6h28v44c0 6 6 10 16 12 14 4 18 20 6 26H40C28 88 24 76 32 68c3-4 2-8 2-14z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M30 70c-4 8 0 16 10 18h8c-10-4-14-10-10-18z" fill="#e3e3ec"/>
-      <path d="M82 66c8 6 6 16-2 20h8c8-6 6-16-2-20z" fill="#e3e3ec"/>
-      <path d="M34 18h28M34 12h28" stroke="#000" stroke-opacity=".18" stroke-width="2"/>
-      <path d="M34 24h28" stroke="#fb4903" stroke-width="4"/>
-      <path d="M34 31h28" stroke="#5c4ade" stroke-width="4"/>
-      <path d="M40 40c0 6 1 10 1 14M50 38c0 6 0 10 0 15M58 40c0 6-1 10-1 14" stroke="#000" stroke-opacity=".12" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M22 4h32v48l36 11c9 3 10 18 2 22-4 2-10 2-16 2H34c-12 0-18-7-16-17 2-8 4-12 4-18z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M26 4v46M32 4v46M38 4v46M44 4v46M50 4v46" stroke="#000" stroke-opacity=".10" stroke-width="1.600" fill="none"/>
+      <path d="M22 17h32v8H22z" fill="#fb4903" stroke="#000" stroke-width="2"/>
+      <path d="M22 32h32v8H22z" fill="#4da2ff" stroke="#000" stroke-width="2"/>
+      <path d="M54 52l36 11c9 3 10 18 2 22" fill="none" stroke="#000" stroke-opacity=".08" stroke-width="6" stroke-linecap="round"/>
+      <path d="M26 64c4 3 10 4 16 3M76 72c4 2 8 6 8 12" fill="none" stroke="#000" stroke-opacity=".14" stroke-width="2" stroke-linecap="round"/>
     </symbol>
     <!-- G jetonu -->
     <symbol id="s-coin" viewBox="0 0 100 100">
