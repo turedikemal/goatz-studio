@@ -503,22 +503,22 @@
     "stickers": [
       {
         "type": "foot",
-        "x": 5,
+        "x": 91,
         "y": 8,
-        "mx": 4,
-        "my": 6,
+        "mx": 80,
+        "my": 4,
         "size": 90,
-        "rotate": -10,
+        "rotate": 8,
         "float": true
       },
       {
         "type": "shoe",
-        "x": 88,
-        "y": 12,
-        "mx": 78,
-        "my": 8,
+        "x": 4,
+        "y": 58,
+        "mx": 4,
+        "my": 54,
         "size": 110,
-        "rotate": 10,
+        "rotate": -6,
         "float": true
       }
     ],
