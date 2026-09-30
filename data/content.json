@@ -514,9 +514,9 @@
       {
         "type": "shoe",
         "x": 4,
-        "y": 58,
+        "y": 50,
         "mx": 4,
-        "my": 54,
+        "my": 46,
         "size": 110,
         "rotate": -6,
         "float": true
