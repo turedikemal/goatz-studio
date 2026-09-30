@@ -322,38 +322,55 @@
 
   // 1) Açılış: dev başlık harf makarası, sonra alt yazı, butonlar, sticker'lar ve kurdele
   const introEl = on('intro') ? document.querySelector('[data-intro]') : null;
+  const titleEl = document.querySelector('[data-intro]');
+  const rnd = (i, salt) => { const x = Math.sin(i * 12.9898 + salt * 78.233) * 43758.5453; return x - Math.floor(x); };
+
+  // Dev başlığı harflere böler (kerning korunur). Her harf kendi süzülüşünü alır.
+  const splitTitle = () => {
+    if (!titleEl || titleEl.classList.contains('ready')) return [];
+    const text = titleEl.textContent;
+    titleEl.setAttribute('aria-label', text.trim());
+    titleEl.textContent = '';
+    const letters = [];
+    text.split(/(\s+)/).forEach((part) => {
+      if (!part) return;
+      if (/^\s+$/.test(part)) { titleEl.append(' '); return; }
+      const w = document.createElement('span');
+      w.className = 'rw';
+      w.setAttribute('aria-hidden', 'true');
+      for (const ch of part) {
+        const l = document.createElement('span');
+        l.className = 'rl';
+        const real = document.createElement('span');
+        real.className = 'rc';
+        real.textContent = ch;
+        l.append(real);
+        const i = letters.length;
+        l.style.setProperty('--lx', ((rnd(i, 1) - 0.5) * 0.04 * K).toFixed(4));
+        l.style.setProperty('--ly', ((0.012 + rnd(i, 2) * 0.022) * K).toFixed(4));
+        l.style.setProperty('--lr', `${((rnd(i, 3) - 0.5) * 3.2 * K).toFixed(2)}deg`);
+        l.style.setProperty('--ld', `${(8 + rnd(i, 4) * 7).toFixed(1)}s`);
+        l.style.setProperty('--ldl', `-${(rnd(i, 5) * 12).toFixed(1)}s`);
+        w.append(l);
+        letters.push(l);
+      }
+      titleEl.append(w);
+    });
+    titleEl.querySelectorAll('.rw').forEach((wd) => kernWord(wd, [...wd.querySelectorAll('.rl')].map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))));
+    titleEl.classList.add('ready');
+    return letters;
+  };
+
+  // 1) Açılış: harfler boşluktan, bulanıklıktan sıyrılarak yavaşça belirir; sonra alt yazı, butonlar, sticker'lar ve kurdele
   if (introEl) {
     const run = () => {
-      const text = introEl.textContent;
-      introEl.setAttribute('aria-label', text.trim());
-      introEl.textContent = '';
-      const letters = [];
-      text.split(/(\s+)/).forEach((part) => {
-        if (!part) return;
-        if (/^\s+$/.test(part)) { introEl.append(' '); return; }
-        const w = document.createElement('span');
-        w.className = 'rw';
-        w.setAttribute('aria-hidden', 'true');
-        for (const ch of part) {
-          const l = document.createElement('span');
-          l.className = 'rl';
-          const real = document.createElement('span');
-          real.className = 'rc';
-          real.textContent = ch;
-          l.append(real);
-          for (let k = 0; k < 5; k++) { const d = document.createElement('span'); d.className = 'rd'; d.textContent = ch; l.append(d); }
-          w.append(l);
-          letters.push(l);
-        }
-        introEl.append(w);
-      });
-      introEl.querySelectorAll('.rw').forEach((wd) => kernWord(wd, [...wd.querySelectorAll('.rl')].map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))));
-      introEl.classList.add('ready');
-      // Her harfte 5 kopya sırayla yukarı kayar, gerçek harf en son yerine oturur
+      const letters = splitTitle();
       letters.forEach((l, i) => {
-        const base = ms(0.1 + i * 0.05);
-        l.querySelectorAll('.rd').forEach((d, k) => d.animate([{ translate: '0 140%' }, { translate: '0 -140%' }], { duration: ms(1.25), delay: base + ms(k * 0.15), easing: EASE, fill: 'both' }));
-        l.querySelector('.rc').animate([{ translate: '0 140%' }, { translate: '0 0' }], { duration: ms(1.25), delay: base + ms(0.5), easing: EASE, fill: 'both' });
+        const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
+        l.querySelector('.rc').animate([
+          { opacity: 0, filter: 'blur(18px)', scale: 0.86, rotate: `${((rnd(i, 8) - 0.5) * 16).toFixed(1)}deg`, translate: `${dx}em ${dy}em` },
+          { opacity: 1, filter: 'blur(0px)', scale: 1, rotate: '0deg', translate: '0em 0em' },
+        ], { duration: ms(2.4), delay: ms(0.15 + rnd(i, 9) * 0.9), easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'both' });
       });
 
       const start = ms(0.6);
@@ -385,6 +402,8 @@
       shuffle([...document.querySelectorAll('.hero [data-pop]')]).forEach((el, k) => popIn(el, start + ms(k * 0.1), 1));
     };
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(run);
+  } else if (titleEl && on('idle')) {
+    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(splitTitle);
   }
 
   // 2) Sticker girişi: küçük + -90° dönmüş halden zıplayarak yerine oturur
@@ -408,7 +427,10 @@
     el.style.setProperty('--fx', `${(dir * (8 + ((i * 7) % 9)) * K).toFixed(1)}px`);
     el.style.setProperty('--fy', `${((10 + ((i * 5) % 9)) * K).toFixed(1)}px`);
     el.style.setProperty('--fr', `${(3 + ((i * 3) % 5)) * dir}deg`);
-    el.style.setProperty('--dur', `${(8 + ((i * 17) % 50) / 10).toFixed(1)}s`);
+    const heroK = el.closest('.hero') ? 1.6 : 1;
+    el.style.setProperty('--fx', `${(dir * (8 + ((i * 7) % 9)) * K * heroK).toFixed(1)}px`);
+    el.style.setProperty('--fy', `${((10 + ((i * 5) % 9)) * K * heroK).toFixed(1)}px`);
+    el.style.setProperty('--dur', `${((8 + ((i * 17) % 50) / 10) * (el.closest('.hero') ? 1.5 : 1)).toFixed(1)}s`);
     if (!el.style.animationDelay) el.style.animationDelay = `-${((i * 1.7) % 9).toFixed(1)}s`;
   });
   if (on('pop')) {
@@ -421,6 +443,161 @@
   } else {
     pops.forEach((el) => { el.classList.add('popped'); el.classList.add('idle-on'); });
   }
+  // Fareyle derinlik: başlık ve sticker'lar farklı derinliklerde, yumuşakça ve ters yönde kayar (boşlukta asılı gibi)
+  const heroEl = document.querySelector('.hero');
+  if (heroEl && on('parallax') && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const layers = [];
+    if (titleEl) layers.push({ el: titleEl, d: -7 * K });
+    heroEl.querySelectorAll('.sticker').forEach((el, i) => layers.push({ el, d: (i % 2 ? 1 : -1) * (12 + ((i * 11) % 24)) * K }));
+    let tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+    const tick = () => {
+      cx += (tx - cx) * 0.06; cy += (ty - cy) * 0.06;
+      layers.forEach((l) => { l.el.style.setProperty('--pmx', `${(cx * l.d).toFixed(2)}px`); l.el.style.setProperty('--pmy', `${(cy * l.d).toFixed(2)}px`); });
+      raf = Math.abs(tx - cx) > 0.001 || Math.abs(ty - cy) > 0.001 ? requestAnimationFrame(tick) : 0;
+    };
+    window.addEventListener('pointermove', (e) => {
+      if (heroEl.getBoundingClientRect().bottom < 0) return;
+      tx = (e.clientX / innerWidth - 0.5) * 2; ty = (e.clientY / innerHeight - 0.5) * 2;
+      if (!raf) raf = requestAnimationFrame(tick);
+    }, { passive: true });
+  }
+  // =====================================================================
+  //  Sticker'lara tıklayınca: kamera flaş çakar, gülen yüz utanır, onay tik atar, yıldız parlar
+  // =====================================================================
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const svgEl = (tag, attrs = {}) => { const n = document.createElementNS(SVGNS, tag); Object.entries(attrs).forEach(([k, v]) => n.setAttribute(k, v)); return n; };
+  const fxLayer = (el) => { const old = el.querySelector(':scope > .fx'); if (old) old.remove(); const g = svgEl('g', { class: 'fx' }); el.append(g); return g; };
+  const centerOf = (el) => { const r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height }; };
+  const restRot = (el) => getComputedStyle(el).getPropertyValue('--r') || getComputedStyle(el).rotate.split(' ').pop() || '0deg';
+  const sparks = (x, y, { n = 10, size = 16, dist = 70 } = {}) => {
+    for (let i = 0; i < n; i++) {
+      const sp = document.createElement('span');
+      sp.className = 'fx-spark';
+      sp.innerHTML = '<svg viewBox="0 0 100 100" aria-hidden="true"><use href="#s-star"/></svg>';
+      const w = size * (0.55 + Math.random() * 0.9);
+      sp.style.cssText = `left:${x}px;top:${y}px;width:${w}px;height:${w}px;filter:hue-rotate(${Math.round(Math.random() * 40 - 10)}deg)`;
+      document.body.append(sp);
+      const a = (Math.PI * 2 * i) / n + Math.random() * 0.6, d = dist * (0.6 + Math.random() * 0.8);
+      sp.animate([
+        { translate: '-50% -50%', scale: 0.2, rotate: '0deg', opacity: 1 },
+        { translate: `calc(-50% + ${Math.cos(a) * d}px) calc(-50% + ${Math.sin(a) * d}px)`, scale: 1, rotate: `${Math.random() * 180}deg`, opacity: 1, offset: 0.6 },
+        { translate: `calc(-50% + ${Math.cos(a) * d * 1.15}px) calc(-50% + ${Math.sin(a) * d * 1.15 + 14}px)`, scale: 0.1, opacity: 0 },
+      ], { duration: ms(0.9 + Math.random() * 0.4), easing: 'cubic-bezier(.2,.7,.3,1)' }).onfinish = () => sp.remove();
+      setTimeout(() => sp.remove(), ms(1.3) + 500);
+    }
+  };
+  const busy = (el, dur) => { if (el._fx) return true; el._fx = true; setTimeout(() => { el._fx = false; }, dur); return false; };
+
+  // Kamera: flaş patlar, deklanşör tık yapar, çekilen fotoğraf (polaroid) dışarı çıkar
+  const shootPhoto = (el) => {
+    if (busy(el, ms(2.2) )) return;
+    const c = centerOf(el);
+    const g = fxLayer(el);
+    const bulb = svgEl('circle', { cx: 96, cy: 38, r: 4, fill: '#fff' });
+    const glint = svgEl('circle', { cx: 55, cy: 53, r: 4, fill: '#fff' });
+    g.append(bulb, glint);
+    bulb.animate([{ r: 4, opacity: 1 }, { r: 26, opacity: 0.9, offset: 0.25 }, { r: 34, opacity: 0 }], { duration: ms(0.6), easing: 'ease-out' });
+    glint.animate([{ opacity: 1 }, { opacity: 0.2, offset: 0.3 }, { opacity: 1 }], { duration: ms(0.5) });
+    setTimeout(() => g.remove(), ms(0.7));
+    const flash = document.createElement('div');
+    flash.className = 'cam-flash';
+    document.body.append(flash);
+    flash.animate([{ opacity: 0 }, { opacity: 0.92, offset: 0.1 }, { opacity: 0.35, offset: 0.35 }, { opacity: 0 }], { duration: ms(0.7), easing: 'ease-out' }).onfinish = () => flash.remove();
+    setTimeout(() => flash.remove(), ms(0.7) + 400);
+    const rot = restRot(el);
+    el.animate([{ scale: 1 }, { scale: 0.86, offset: 0.12 }, { scale: 1.08, offset: 0.4 }, { scale: 1 }], { duration: ms(0.55), easing: 'ease-out' });
+    el.animate([{ rotate: rot }, { rotate: `calc(${rot} - 6deg)`, offset: 0.12 }, { rotate: rot }], { duration: ms(0.55), easing: 'ease-out' });
+    const pw = Math.max(54, c.w * 0.62);
+    const ph = document.createElement('div');
+    ph.className = 'polaroid';
+    ph.style.cssText = `left:${c.x}px;top:${c.y + c.h * 0.22}px;width:${pw}px`;
+    ph.innerHTML = '<i></i><b></b>';
+    document.body.append(ph);
+    const tilt = Math.random() * 10 - 5;
+    const anim = ph.animate([
+      { translate: '-50% -30%', scale: 0.45, rotate: '0deg', opacity: 0 },
+      { translate: '-50% 20%', scale: 0.9, rotate: `${tilt}deg`, opacity: 1, offset: 0.3 },
+      { translate: '-50% 75%', scale: 1, rotate: `${tilt * 1.4}deg`, opacity: 1, offset: 0.55 },
+      { translate: '-50% 75%', scale: 1, rotate: `${tilt * 1.4}deg`, opacity: 1, offset: 0.85 },
+      { translate: '-50% 150%', scale: 0.92, rotate: `${tilt * 2}deg`, opacity: 0 },
+    ], { duration: ms(2.4), easing: 'cubic-bezier(.3,.8,.3,1)' });
+    anim.onfinish = () => ph.remove();
+    setTimeout(() => ph.remove(), ms(2.4) + 400);
+  };
+
+  // Gülen yüz: utanır, yanakları kızarır, gözleri aşağı kayar, biraz küçülüp eğilir
+  const shyFace = (el) => {
+    if (busy(el, ms(3.2))) return;
+    const g = fxLayer(el);
+    const eyeL = svgEl('circle', { cx: 37, cy: 42, r: 8, fill: '#fff', stroke: '#000', 'stroke-width': 2.5 });
+    const eyeR = svgEl('circle', { cx: 63, cy: 42, r: 8, fill: '#fff', stroke: '#000', 'stroke-width': 2.5 });
+    const pupL = svgEl('circle', { cx: 35, cy: 47, r: 3.5, fill: '#000' });
+    const pupR = svgEl('circle', { cx: 61, cy: 47, r: 3.5, fill: '#000' });
+    const patch = svgEl('rect', { x: 33, y: 57, width: 34, height: 15, fill: '#ffd731' });
+    const mouth = svgEl('path', { d: 'M41 65 q9 4 18 0', fill: 'none', stroke: '#000', 'stroke-width': 3, 'stroke-linecap': 'round' });
+    const bl = svgEl('ellipse', { cx: 25, cy: 56, rx: 10, ry: 6, fill: '#ff5d8f', opacity: 0 });
+    const br = svgEl('ellipse', { cx: 75, cy: 56, rx: 10, ry: 6, fill: '#ff5d8f', opacity: 0 });
+    const lines = svgEl('path', { d: 'M20 53 l4 4 M26 52 l4 4 M70 52 l4 4 M76 53 l4 4', stroke: '#fff', 'stroke-width': 1.6, 'stroke-linecap': 'round', opacity: 0 });
+    const scene = svgEl('g', { opacity: 0 });
+    scene.append(eyeL, eyeR, pupL, pupR, patch, mouth);
+    g.append(scene, bl, br, lines);
+    const hold = 2.3;
+    scene.animate([{ opacity: 0 }, { opacity: 1, offset: 0.08 }, { opacity: 1, offset: 0.86 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' });
+    [bl, br].forEach((b) => b.animate([{ opacity: 0 }, { opacity: 0.95, offset: 0.22 }, { opacity: 0.7, offset: 0.5 }, { opacity: 0.95, offset: 0.7 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' }));
+    lines.animate([{ opacity: 0 }, { opacity: 0.9, offset: 0.3 }, { opacity: 0.9, offset: 0.8 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' });
+    const rot = restRot(el);
+    el.animate([{ rotate: rot, scale: 1 }, { rotate: `calc(${rot} + 10deg)`, scale: 0.9, offset: 0.2 }, { rotate: `calc(${rot} + 7deg)`, scale: 0.92, offset: 0.8 }, { rotate: rot, scale: 1 }], { duration: ms(hold), easing: 'ease-in-out' });
+    setTimeout(() => g.remove(), ms(hold) + 100);
+  };
+
+  // Onay rozeti: tik yeniden çizilerek atılır, halka yayılır
+  const tickCheck = (el) => {
+    if (busy(el, ms(1.4))) return;
+    const g = fxLayer(el);
+    const cover = svgEl('circle', { cx: 50.5, cy: 50, r: 27, fill: '#55db9c' });
+    const ring = svgEl('circle', { cx: 50, cy: 50, r: 34, fill: 'none', stroke: '#55db9c', 'stroke-width': 3 });
+    const white = svgEl('path', { d: 'M33 51l12 12 23-25', fill: 'none', stroke: '#fff', 'stroke-width': 8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': 1 });
+    const black = svgEl('path', { d: 'M33 51l12 12 23-25', fill: 'none', stroke: '#000', 'stroke-width': 3, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': 1 });
+    g.append(ring, cover, white, black);
+    const draw = { duration: ms(0.45), delay: ms(0.18), easing: 'cubic-bezier(.6,0,.2,1)', fill: 'forwards' };
+    [white, black].forEach((p) => p.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], draw));
+    ring.animate([{ r: 34, opacity: 0.9 }, { r: 52, opacity: 0 }], { duration: ms(0.8), delay: ms(0.5), easing: 'ease-out', fill: 'both' });
+    const rot = restRot(el);
+    el.animate([{ scale: 1, rotate: rot }, { scale: 0.86, rotate: `calc(${rot} - 8deg)`, offset: 0.25 }, { scale: 1.16, rotate: `calc(${rot} + 6deg)`, offset: 0.6 }, { scale: 1, rotate: rot }], { duration: ms(0.9), easing: 'ease-out' });
+    setTimeout(() => g.remove(), ms(1.4));
+  };
+
+  // Yıldız: dönüp büyür, parlar ve etrafa minik yıldızlar saçar
+  const sparkleStar = (el) => {
+    if (busy(el, ms(1.1))) return;
+    const c = centerOf(el);
+    const rot = restRot(el);
+    el.animate([{ rotate: rot, scale: 1, filter: 'drop-shadow(0 0 0 #ffd731)' }, { rotate: `calc(${rot} + 180deg)`, scale: 1.4, filter: 'drop-shadow(0 0 14px #ffd731)', offset: 0.5 }, { rotate: `calc(${rot} + 360deg)`, scale: 1, filter: 'drop-shadow(0 0 0 #ffd731)' }], { duration: ms(0.9), easing: 'ease-in-out' });
+    sparks(c.x, c.y, { n: 9, size: Math.max(12, c.w * 0.22), dist: Math.max(50, c.w * 0.9) });
+  };
+
+  const CLICKS = { 'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar };
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest && e.target.closest('.st-camera, .st-coin, .st-check, .st-star');
+    if (!t || t.closest('a, button')) return;
+    const fn = CLICKS[[...t.classList].find((c) => CLICKS[c])];
+    if (fn) fn(t);
+  });
+
+  // Yorumlardaki mini 5 yıldız: görününce ve tıklanınca sırayla parlar
+  const rateSparkle = (box) => {
+    if (box._sp) return; box._sp = true; setTimeout(() => { box._sp = false; }, ms(1.6));
+    [...box.querySelectorAll('.rs')].forEach((st, i) => {
+      st.animate([{ scale: 1, filter: 'brightness(1) drop-shadow(0 0 0 #ffd731)' }, { scale: 1.45, filter: 'brightness(1.25) drop-shadow(0 0 8px #ffd731)', offset: 0.4 }, { scale: 1, filter: 'brightness(1) drop-shadow(0 0 0 #ffd731)' }], { duration: ms(0.7), delay: ms(i * 0.12), easing: 'ease-in-out' });
+      setTimeout(() => { const c = centerOf(st); sparks(c.x, c.y, { n: 4, size: 9, dist: 26 }); }, ms(i * 0.12 + 0.15));
+    });
+  };
+  const ratings = [...document.querySelectorAll('.rating')];
+  if (ratings.length) {
+    const ro = new IntersectionObserver((en) => en.forEach((x) => { if (x.isIntersecting) { rateSparkle(x.target); ro.unobserve(x.target); } }), { threshold: 0.6 });
+    ratings.forEach((r) => { ro.observe(r); r.addEventListener('click', () => rateSparkle(r)); r.addEventListener('mouseenter', () => rateSparkle(r)); });
+  }
+
   // Fare üstüne gelince sticker bir tur atar
   pops.forEach((el) => el.addEventListener('mouseenter', () => {
     if (!on('pop') || el._spin) return;

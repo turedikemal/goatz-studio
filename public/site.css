@@ -358,10 +358,17 @@
   .ch { display: inline-block; }
   .ln { display: block; }
   .rw { display: inline-block; white-space: nowrap; }
-  .rl { display: inline-block; position: relative; clip-path: inset(-40% -16%); }
-  .rd { position: absolute; left: 0; top: 0; width: 100%; text-align: center; translate: 0 140%; }
+  .rl { display: inline-block; position: relative; }
   .rc { display: inline-block; }
-  html.js.mo-intro .rc { translate: 0 140%; }
+  /* Başlık harfleri boşlukta ağırlıksızca süzülür: her harf kendi yönünde, hızında ve fazında */
+  html.mo-idle [data-intro].ready .rl { animation: zerog var(--ld, 10s) ease-in-out infinite; animation-delay: var(--ldl, 0s); will-change: translate, rotate; }
+  @keyframes zerog {
+    0%, 100% { translate: 0 0; rotate: 0deg; }
+    30% { translate: calc(var(--lx, .01) * 1em) calc(var(--ly, .015) * -1em); rotate: var(--lr, 1deg); }
+    65% { translate: calc(var(--lx, .01) * -.8em) calc(var(--ly, .015) * .7em); rotate: calc(var(--lr, 1deg) * -.9); }
+  }
+  [data-intro] { translate: var(--pmx, 0px) var(--pmy, 0px); }
+  .hero .sticker { margin: var(--pmy, 0px) 0 0 var(--pmx, 0px); }
   html.js.mo-intro .hero [data-intro]:not(.ready),
   html.js.mo-reveal [data-reveal]:not(.split-ready),
   html.js.mo-headings [data-heading]:not(.split-ready) { visibility: hidden; animation: unhide 0s 1.8s forwards; }
@@ -521,3 +528,16 @@
   .sf-big { margin: clamp(48px, 7vw, 110px) 0 clamp(20px, 3vw, 36px); font-size: 12vw; line-height: .8; text-align: center; text-transform: uppercase; white-space: nowrap; overflow: hidden; }
   .site-footer .foot { border-top: 1px solid color-mix(in srgb, var(--ft, #fff) 35%, transparent); color: inherit; }
   @media (max-width: 800px) { .sf-top { grid-template-columns: 1fr 1fr; } .sf-brand { grid-column: 1 / -1; } }
+
+  /* Sticker tıklama oyunları */
+  .st-camera, .st-coin, .st-check, .st-star { cursor: pointer; }
+  .sticker, .inline-sticker { overflow: visible; }
+  .cam-flash { position: fixed; inset: 0; z-index: 9999; background: #fff; opacity: 0; pointer-events: none; }
+  .polaroid { position: fixed; z-index: 60; pointer-events: none; aspect-ratio: 5 / 6; background: #fff; border: 2px solid #000; border-radius: 4px; padding: 6% 6% 0; box-shadow: 3px 4px 0 #000; }
+  .polaroid i { display: block; width: 100%; aspect-ratio: 1; background: radial-gradient(circle at 30% 30%, #ffd731 0 12%, transparent 13%), linear-gradient(160deg, #dceeff, #e9ccff 60%, #55db9c); border: 1.5px solid #000; }
+  .polaroid b { display: block; width: 46%; height: 5%; margin: 8% auto 0; background: #000; border-radius: 4px; opacity: .8; }
+  .fx-spark { position: fixed; z-index: 70; pointer-events: none; }
+  .fx-spark svg { width: 100%; height: 100%; display: block; }
+  .rating { display: inline-flex; gap: 3px; cursor: pointer; }
+  .rating .rs { display: inline-block; width: 1.1em; height: 1.1em; }
+  .rating .rs svg { width: 100%; height: 100%; display: block; }

@@ -157,12 +157,12 @@
         animations: bool('Tüm hareketler (kapatırsan sitede hiçbir şey oynamaz)'),
         motion: group('Hareket türleri', {
           smooth: bool('Yumuşak, ataletli kaydırma (fare ile gezerken)'),
-          intro: bool('Açılış: dev başlığın harfleri makara gibi yukarı kayarak yerine oturur; alt yazı, butonlar ve sticker\'lar sırayla gelir'),
+          intro: bool('Açılış: dev başlığın harfleri boşluktan, bulanıklıktan sıyrılarak yavaşça belirir; alt yazı, butonlar ve sticker\'lar sırayla gelir'),
           reveal: bool('Büyük başlıklar: harfler sağdan sola, soldan kayarak yerine oturur'),
           headings: bool('Alt başlıklar: satırlar 3D dönerek gelir'),
           cards: bool('Kartlar: 3D uçarak gelir (renkli kartlar, iletişim kartları)'),
           pop: bool('Sticker\'lar: küçük ve dönmüş halden zıplayarak belirir, üstüne gelince bir tur atar'),
-          idle: bool('Sticker\'lar durmadan hafifçe oynar (kamera, jeton, onay, yıldız)'),
+          idle: bool('Ağırlıksız süzülme: sticker\'lar ve dev başlığın harfleri boşlukta durmadan hafifçe salınır; fareyle çok hafif derinlik kayması'),
           parallax: bool('Kurdele ve banttaki sticker\'lar kaydırırken farklı hızda kayar'),
           device: bool('İşler vitrini: kartlar küçük halden büyüyerek gelir'),
           marquee: bool('Kayan bantlar: kaydırma yönü değişince bant da ters döner, bant kaydırmayla yana kayar'),
@@ -905,6 +905,10 @@
       'Ana sayfa · sitedeki sıra': 'var(--lavender)',
     };
 
+    // Ana sayfa bölümleri (kayan şerit, menü, sıralanabilir bölümler) tek kez ve sitedeki gerçek sırayla, Tema Yönetimi içinde çizilir.
+    const flow = [byId('ticker'), byId('nav'), ...state.sections.map((x) => PAGES.find((p) => p.section === x.id)).filter(Boolean)];
+    const inFlow = (p) => p.section || p.id === 'ticker' || p.id === 'nav';
+    let flowDone = false;
     let currentGroup = null;
     PAGES.forEach((p) => {
       if (p.group) {
@@ -913,6 +917,10 @@
           items.push(head(p.group, groupColors[p.group] || 'var(--bg)'));
         }
       } else if (p.id) {
+        if (inFlow(p)) {
+          if (!flowDone) { flowDone = true; items.push(...flow.map(btn).filter(Boolean)); }
+          return;
+        }
         const b = btn(p);
         if (b) items.push(b);
       }
@@ -934,11 +942,6 @@
       selectPage(customDef(p));
     } }, '+ Yeni sayfa'));
 
-    // Ana sayfa: sitedeki sıra (kayan şerit, menü, sonra "Bölüm sırası"ndaki bölümler, en altta alt bilgi)
-    const flow = [byId('ticker'), byId('nav'), ...state.sections.map((x) => PAGES.find((p) => p.section === x.id)).filter(Boolean)];
-    if (flow.some(Boolean)) {
-      items.push(head('Ana sayfa · sitedeki sıra', 'var(--lavender)'), ...flow.map(btn).filter(Boolean));
-    }
     nav.replaceChildren(...items);
   }
   $('#menuToggle').addEventListener('click', () => $('.sidebar').classList.toggle('open'));
