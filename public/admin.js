@@ -59,8 +59,8 @@
 
     { group: 'Ürünler' },
     {
-      id: 'urunler', label: 'Ürün/Varyant', path: [], anchor: '#top',
-      intro: 'Ürünlerinizi ve varyantlarını yönetin.',
+      id: 'urunler', label: 'Ürün/Varyant', path: [], anchor: '#top', special: 'products',
+      intro: 'Ürünlerinizi ve varyantlarını yönetin. SEO, fiyat, stok ve görselleri ekleyin.',
     },
     {
       id: 'kategoriler', label: 'Kategori', path: [], anchor: '#top',
@@ -983,6 +983,14 @@
         parts.push(definitionsEditor());
       }
     }
+    else if (page.special === 'products') {
+      if (productsState.products.length === 0 && !productsState.showForm) {
+        loadProductsData().then(() => renderPage());
+        parts.push(h('div', { class: 'card' }, h('p', { class: 'muted' }, 'Ürünler yükleniyor...')));
+      } else {
+        parts.push(productsEditor());
+      }
+    }
     else if (page.schema && Object.keys(page.schema).length > 0) parts.push(...objectFields(page.schema, page.path, true));
     else parts.push(placeholderPage(page.label));
     ed.replaceChildren(...parts);
@@ -1441,6 +1449,144 @@
           state = await request('/api/defaults');
           changed(); renderNav(); toast('Başlangıç içeriği yüklendi. Uygulamak için Kaydet\'e bas.');
         } }, 'Başlangıç içeriğine dön')));
+  }
+
+  // ---------- Ürünler (Products) ----------
+  let productsState = {
+    products: [],
+    brands: [],
+    categories: [],
+    taxRates: [],
+    warehouses: [],
+    editingProduct: null,
+    showForm: false,
+  };
+
+  async function loadProductsData() {
+    try {
+      productsState.products = await request('/api/products');
+      productsState.brands = await request('/api/definitions/brands');
+      productsState.categories = await request('/api/definitions/categories');
+      productsState.taxRates = await request('/api/definitions/tax-rates');
+      productsState.warehouses = await request('/api/definitions/warehouses');
+    } catch (e) {
+      toast('Veriler yüklenemedi: ' + e.message);
+    }
+  }
+
+  function productsEditor() {
+    if (!productsState.products.length && !productsState.showForm) {
+      return h('div', {},
+        h('div', { class: 'card' },
+          h('h3', {}, 'Ürün Yönetimi'),
+          h('p', { class: 'muted' }, 'Henüz ürün yok. Hemen ekleyin!'),
+          h('button', {
+            class: 'btn solid',
+            onclick: () => { productsState.showForm = true; renderPage(); }
+          }, '+ Yeni Ürün Ekle')));
+    }
+
+    const productsList = () => h('div', {},
+      h('div', { style: 'display: flex; gap: 12px; margin-bottom: 20px' },
+        h('button', {
+          class: 'btn solid',
+          onclick: () => { productsState.editingProduct = null; productsState.showForm = true; renderPage(); }
+        }, '+ Yeni Ürün Ekle')),
+      h('table', { class: 'data-table', style: 'width: 100%' },
+        h('thead', {},
+          h('tr', {},
+            h('th', {}, 'Ürün Adı'),
+            h('th', {}, 'Marka'),
+            h('th', {}, 'Fiyat'),
+            h('th', {}, 'Stok'),
+            h('th', {}, 'Durum'),
+            h('th', {}, 'İşlem'))),
+        h('tbody', {},
+          ...productsState.products.map(p => h('tr', {},
+            h('td', {}, h('a', { href: '#', onclick: (e) => { e.preventDefault(); productsState.editingProduct = p; productsState.showForm = true; renderPage(); } }, p.name)),
+            h('td', {}, p.brand_name || '-'),
+            h('td', { style: 'font-weight: 600' }, '₺' + (p.sale_price || 0).toFixed(2)),
+            h('td', {}, '0 / - '),
+            h('td', {}, p.status),
+            h('td', {},
+              h('button', {
+                class: 'btn icon',
+                onclick: async () => {
+                  if (confirm(p.name + ' silinecek?')) {
+                    await request('/api/products/' + p.id, { method: 'DELETE' });
+                    await loadProductsData();
+                    renderPage();
+                  }
+                }
+              }, '🗑'))))));
+
+    const productForm = () => h('div', {},
+      h('div', { class: 'card' },
+        h('h3', {}, productsState.editingProduct ? 'Ürünü Düzenle' : 'Yeni Ürün Ekle'),
+        h('div', { class: 'fields', style: 'display: grid; grid-template-columns: 1fr 1fr; gap: 12px' },
+          h('input', { type: 'text', id: 'productName', placeholder: 'Ürün adı', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' }),
+          h('select', { id: 'productBrand', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' },
+            h('option', {}, 'Marka seç'),
+            ...productsState.brands.map(b => h('option', { value: b.id }, b.name))),
+          h('select', { id: 'productCategory', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' },
+            h('option', {}, 'Kategori seç'),
+            ...productsState.categories.map(c => h('option', { value: c.id }, c.name))),
+          h('input', { type: 'number', id: 'productPrice', placeholder: 'Satış fiyatı', step: '0.01', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' }),
+          h('input', { type: 'text', id: 'productSKU', placeholder: 'SKU', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' }),
+          h('select', { id: 'productTax', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px' },
+            h('option', {}, 'Vergi oranı seç'),
+            ...productsState.taxRates.map(t => h('option', { value: t.id }, t.name + ' (%' + t.rate + ')'))),
+        ),
+        h('textarea', { id: 'productDesc', placeholder: 'Ürün açıklaması', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px; width: 100%; height: 80px; margin-top: 12px' }),
+        h('div', { style: 'margin-top: 12px; border-top: 1px solid #eee; padding-top: 12px' },
+          h('h4', {}, 'SEO Bilgileri'),
+          h('input', { type: 'text', id: 'productSeoTitle', placeholder: 'SEO başlığı (title tag)', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px; width: 100%; margin-bottom: 8px' }),
+          h('textarea', { id: 'productSeoDesc', placeholder: 'SEO açıklaması (meta description)', style: 'padding: 8px; border: 1px solid #ddd; border-radius: 6px; width: 100%; height: 60px' }),
+        ),
+        h('div', { style: 'margin-top: 12px; display: flex; gap: 8px' },
+          h('button', {
+            class: 'btn solid',
+            onclick: async () => {
+              const name = $('#productName').value;
+              const salePrice = parseFloat($('#productPrice').value);
+              if (!name || !salePrice) { toast('Ürün adı ve fiyat gerekli.'); return; }
+
+              const data = {
+                name,
+                salePrice,
+                brandId: $('#productBrand').value || null,
+                categoryId: $('#productCategory').value || null,
+                sku: $('#productSKU').value,
+                taxRateId: $('#productTax').value || null,
+                description: $('#productDesc').value,
+                seoTitle: $('#productSeoTitle').value,
+                seoDescription: $('#productSeoDesc').value,
+              };
+
+              if (productsState.editingProduct) {
+                data.slug = productsState.editingProduct.slug;
+                await request('/api/products/' + productsState.editingProduct.id, { method: 'PUT', body: data });
+              } else {
+                await request('/api/products', { method: 'POST', body: data });
+              }
+
+              productsState.showForm = false;
+              productsState.editingProduct = null;
+              await loadProductsData();
+              renderPage();
+              toast(productsState.editingProduct ? 'Ürün güncellendi!' : 'Ürün eklendi!');
+            }
+          }, 'Kaydet'),
+          h('button', {
+            class: 'btn',
+            onclick: () => { productsState.showForm = false; productsState.editingProduct = null; renderPage(); }
+          }, 'İptal'),
+        ));
+
+    if (productsState.showForm) {
+      return productForm();
+    }
+    return productsList();
   }
 
   // ---------- Temalar ----------

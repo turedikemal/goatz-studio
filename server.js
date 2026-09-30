@@ -313,6 +313,86 @@ async function api(req, res, url) {
     }
   }
 
+  // ========== Ürünler (Products) API ==========
+  if (route === 'GET /api/products') {
+    try {
+      const products = await db.getProducts();
+      return json(res, 200, products);
+    } catch (e) {
+      return json(res, 500, { error: 'Ürünler yüklenemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/products') {
+    try {
+      const data = await readJson(req);
+      if (!data.name || !data.salePrice) return json(res, 400, { error: 'Ürün adı ve satış fiyatı gerekli.' });
+      const product = await db.createProduct(data);
+      return json(res, 201, product);
+    } catch (e) {
+      return json(res, 500, { error: 'Ürün oluşturulamadı: ' + e.message });
+    }
+  }
+
+  const getProductMatch = /^GET \/api\/products\/(\d+)$/.exec(route);
+  if (getProductMatch) {
+    try {
+      const id = parseInt(getProductMatch[1]);
+      const product = await db.getProduct(id);
+      if (!product) return json(res, 404, { error: 'Ürün bulunamadı.' });
+      return json(res, 200, product);
+    } catch (e) {
+      return json(res, 500, { error: 'Ürün yüklenemedi: ' + e.message });
+    }
+  }
+
+  const updateProductMatch = /^PUT \/api\/products\/(\d+)$/.exec(route);
+  if (updateProductMatch) {
+    try {
+      const id = parseInt(updateProductMatch[1]);
+      const data = await readJson(req);
+      const product = await db.updateProduct(id, data);
+      return json(res, 200, product);
+    } catch (e) {
+      return json(res, 500, { error: 'Ürün güncellenemedi: ' + e.message });
+    }
+  }
+
+  const deleteProductMatch = /^DELETE \/api\/products\/(\d+)$/.exec(route);
+  if (deleteProductMatch) {
+    try {
+      const id = parseInt(deleteProductMatch[1]);
+      await db.deleteRow('products', id);
+      return json(res, 200, { ok: true });
+    } catch (e) {
+      return json(res, 500, { error: 'Ürün silinemedi: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/products/variants') {
+    try {
+      const { productId, ...variantData } = await readJson(req);
+      if (!productId) return json(res, 400, { error: 'Ürün ID gerekli.' });
+      const variant = await db.createProductVariant(productId, variantData);
+      return json(res, 201, variant);
+    } catch (e) {
+      return json(res, 500, { error: 'Varyant oluşturulamadı: ' + e.message });
+    }
+  }
+
+  if (route === 'POST /api/stock') {
+    try {
+      const { variantId, warehouseId, quantity } = await readJson(req);
+      if (!variantId || !warehouseId || quantity === undefined) {
+        return json(res, 400, { error: 'Varyant ID, depo ID ve miktar gerekli.' });
+      }
+      const stock = await db.updateStock(variantId, warehouseId, quantity);
+      return json(res, 200, stock);
+    } catch (e) {
+      return json(res, 500, { error: 'Stok güncellenemedi: ' + e.message });
+    }
+  }
+
   return json(res, 404, { error: 'Bilinmeyen istek.' });
 }
 
