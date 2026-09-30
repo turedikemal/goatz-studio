@@ -341,6 +341,26 @@
     t.setAttribute('aria-expanded', String(open));
   });
 
+  // ---------- Ana sayfa işler vitrini: projeler sırayla değişir ----------
+  document.querySelectorAll('[data-showcase]').forEach((box, bi) => {
+    const slides = [...box.querySelectorAll('.show-slide')];
+    if (slides.length < 2) return;
+    const cap = box.querySelector('[data-cap]'), url = box.querySelector('[data-url]'), note = box.querySelector('.placeholder-note');
+    let cur = 0, hover = false;
+    const show = (n) => {
+      cur = (n + slides.length) % slides.length;
+      slides.forEach((sl, k) => sl.classList.toggle('on', k === cur));
+      const d = slides[cur].dataset;
+      if (d.wc && box.classList.contains('show-browser')) box.style.setProperty('--wc', d.wc);
+      if (cap) { cap.textContent = d.name; cap.lang = d.lang || 'tr'; }
+      if (url) url.textContent = d.host || '';
+      if (note) note.textContent = `Web uygulaması${d.badge ? ` · ${d.badge}` : ''}`;
+    };
+    box.addEventListener('mouseenter', () => { hover = true; });
+    box.addEventListener('mouseleave', () => { hover = false; });
+    if (!reduce) setInterval(() => { if (!hover && !document.hidden) show(cur + 1); }, 3400 + bi * 700);
+  });
+
   // ---------- Proje sayfasından geri dön: önceki sayfa işler listesiyse oraya dön ----------
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('[data-back]');

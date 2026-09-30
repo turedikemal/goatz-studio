@@ -796,3 +796,33 @@
   html.mo-idle .work-ptag .pt-star { animation: pt-spin 6s linear infinite; }
   @keyframes pt-spin { to { rotate: 360deg; } }
   .work-card:hover .work-ptag { rotate: 0deg; translate: 0 -2px; }
+
+  /* Ana sayfa işler vitrini: gerçek projeler */
+  .show-stage { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: var(--sky); }
+  .show-slide { position: absolute; inset: 0; display: block; opacity: 0; transition: opacity .8s ease; }
+  .show-slide.on { opacity: 1; z-index: 1; }
+  .show-slide img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .show-cap { position: absolute; left: 12px; bottom: 12px; z-index: 3; padding: 7px 14px; background: var(--paper); color: var(--carbon); border: 1px solid var(--carbon); border-radius: var(--r-pill); font-size: 11px; box-shadow: 2px 3px 0 var(--carbon); pointer-events: none; }
+  .show-apps { width: min(380px, 78vw); }
+  .photo-card.show-apps .shot { aspect-ratio: 16 / 11; border: 1px solid var(--carbon); background: var(--sky); }
+  .show-apps .show-slide img { object-fit: contain; background: var(--sky); }
+  .show-appcap { margin: 12px 4px 0 !important; font-size: 13px; }
+  .show-st { width: clamp(50px, 7vw, 92px); z-index: 1; }
+  @media (max-width: 760px) { .show-st { display: none; } }
+
+  /* Görseller kadraja oturur: ekran görüntüleri 2,05:1 */
+  .work-shot { aspect-ratio: 2.05 / 1; }
+  .work-cover .work-shot { aspect-ratio: 2.05 / 1; }
+  @media (min-width: 900px) { .work-card.is-featured .work-shot { aspect-ratio: 2.05 / 1; } }
+  .work-shot.is-natural > img { object-fit: contain; }
+
+  /* Ana sayfa vitrini: temalı renkli çerçeve */
+  .show-browser { width: min(640px, 92vw); padding: 10px 10px 14px; background: var(--wc, var(--mint)); color: var(--carbon); border: 1px solid var(--carbon); border-radius: calc(var(--r-card) * 1.6); box-shadow: 6px 8px 0 var(--carbon); overflow: visible; transition: background .7s ease; }
+  .show-browser .browser-bar { background: transparent; padding: 4px 4px 10px; }
+  .show-browser .browser-bar i { width: 11px; height: 11px; border: 1px solid var(--carbon); background: var(--paper); }
+  .show-browser .browser-bar i:nth-child(1) { background: var(--ember); } .show-browser .browser-bar i:nth-child(2) { background: var(--sun); } .show-browser .browser-bar i:nth-child(3) { background: var(--paper); }
+  .show-browser .browser-bar .url { background: var(--paper); color: var(--carbon); border: 1px solid var(--carbon); font-weight: 700; font-size: 12px; padding: 5px 14px; }
+  .show-browser .show-stage { aspect-ratio: 2.05 / 1; border: 1px solid var(--carbon); border-radius: var(--r-card); background: var(--paper); }
+  .show-browser .wf-tape { top: -13px; }
+  .photo-card.show-apps .shot { aspect-ratio: 16 / 9; }
+  .showcase { padding-bottom: 140px; }
