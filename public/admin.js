@@ -191,6 +191,14 @@
           moreLabel: text('Açılır liste butonu', { nostyle: true, compact: true }),
           emptyText: text('Proje yokken görünen yazı', { nostyle: true }),
         }, { flat: true }),
+        photo: group('Ürün çekimi bölümü (listede web uygulamalarından sonra)', {
+          visible: bool('Bölümü göster'),
+          heading: text('Başlık', { nostyle: true }),
+          text: area('Yazı', { nostyle: true }),
+          color: color('Kart rengi'),
+          points: list('Maddeler', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Madde ekle', title: (v) => v.title || 'Madde', max: 6, newItem: { title: '', text: '' } }),
+          images: list('Çekim görselleri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
+        }),
         approach: group('Ortak yaklaşım bölümü (listenin altında)', {
           visible: bool('Bölümü göster'),
           eyebrow: text('Küçük üst yazı', { nostyle: true }),
