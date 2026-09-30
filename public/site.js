@@ -844,6 +844,19 @@
     });
     setTimeout(fx.done, ms(0.15 + 3 * 0.45 + 0.9));
   };
+  // Tarayıcı: beyaz ve sarı çubuklar soldan sağa dolar, yan kutu renklenir
+  const fillBrowser = (el) => {
+    if (busy(el, ms(2.6))) return;
+    const fx = inlineFx(el, 'browser'); if (!fx) return;
+    const [white, yellow, side] = fx.parts.slice(5, 8);
+    [[white, 0.1], [yellow, 0.6]].forEach(([bar, d]) => {
+      const col = bar.getAttribute('fill');
+      bar.style.transformBox = 'fill-box'; bar.style.transformOrigin = 'left center';
+      bar.animate([{ transform: 'scaleX(.06)', fill: '#5c4ade' }, { transform: 'scaleX(1.06)', fill: col, offset: 0.7 }, { transform: 'scaleX(1)', fill: col }], { duration: ms(0.7), delay: ms(d), easing: 'ease-out', fill: 'both' });
+    });
+    if (side) { pop(side); side.animate([{ scale: 0.5, fill: '#5c4ade' }, { scale: 1.12, fill: '#e9ccff', offset: 0.6 }, { scale: 1, fill: '#e9ccff' }], { duration: ms(0.6), delay: ms(1.2), easing: 'ease-out', fill: 'both' }); }
+    setTimeout(fx.done, ms(2.2));
+  };
   // Çark: yavaşça tam tur döner
   const turnGear = (el) => {
     if (busy(el, ms(3))) return;
@@ -895,7 +908,7 @@
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
-    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   document.addEventListener('click', (e) => {
