@@ -197,8 +197,10 @@
     prev.classList.remove('active');
     prev.classList.add('leaving');
     prev.inert = true;
-    next.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms(0.22), easing: 'ease-out' });
-    cleanTimer = setTimeout(() => { prev.classList.remove('leaving'); }, ms(0.22) + 40);
+    // Yazılar üst üste binmesin: eski içerik önce kaybolur, sonra yenisi belirir
+    prev.animate([{ opacity: 1 }, { opacity: 0 }], { duration: ms(0.14), easing: 'ease-in', fill: 'forwards' });
+    next.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms(0.22), delay: ms(0.14), easing: 'ease-out', fill: 'backwards' });
+    cleanTimer = setTimeout(() => { prev.classList.remove('leaving'); }, ms(0.14) + 40);
   };
   tabs.forEach((t, i) => {
     t.addEventListener('click', () => { userPicked = true; showTab(i); });
