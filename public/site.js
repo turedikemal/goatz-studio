@@ -274,6 +274,22 @@
     }));
   }
 
+  // ---------- İşler: canlı site önizlemeleri (görününce yüklenir) ----------
+  const liveBoxes = [...document.querySelectorAll('.work-live')];
+  if (liveBoxes.length) {
+    const fit = (box) => { const f = box.querySelector('iframe'); if (f && box.clientWidth) f.style.setProperty('--k', (box.clientWidth / 1440).toFixed(4)); };
+    const ro = new ResizeObserver((es) => es.forEach((e) => fit(e.target)));
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      const f = e.target.querySelector('iframe');
+      f.addEventListener('load', () => e.target.classList.add('is-loaded'), { once: true });
+      f.src = e.target.dataset.src;
+    }), { rootMargin: '300px' });
+    const wide = matchMedia('(min-width: 700px)').matches;
+    liveBoxes.forEach((b) => { ro.observe(b); fit(b); if (wide) io.observe(b); });
+  }
+
   // ---------- İşler: açıklama aşağı doğru açılır ----------
   document.addEventListener('click', (e) => {
     const t = e.target.closest && e.target.closest('.work-toggle');

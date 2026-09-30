@@ -574,22 +574,19 @@
         "key": "web",
         "label": "Web siteleri",
         "color": "mint",
-        "sticker": "browser",
-        "browser": true
+        "sticker": "browser"
       },
       {
         "key": "app",
         "label": "Web uygulamaları",
         "color": "lavender",
-        "sticker": "cursor",
-        "browser": true
+        "sticker": "cursor"
       },
       {
         "key": "consulting",
         "label": "Danışmanlık",
         "color": "sun",
-        "sticker": "check",
-        "browser": false
+        "sticker": "check"
       }
     ],
     "items": [
@@ -615,6 +612,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": true,
         "visible": true
       },
       {
@@ -639,6 +637,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": true,
         "visible": true
       },
       {
@@ -663,6 +662,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": true,
         "visible": true
       },
       {
@@ -687,6 +687,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": true,
         "visible": true
       },
       {
@@ -711,6 +712,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": false,
         "visible": true
       },
       {
@@ -735,6 +737,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": true,
         "visible": true
       },
       {
@@ -744,7 +747,7 @@
         "year": "",
         "client": "",
         "summary": "",
-        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* STK'ya Özel Web Tasarımı\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
         "image": "/uploads/muoghosn-0d771632.webp",
         "url": "https://ckkyb.com/",
         "urlLabel": "Siteyi ziyaret et",
@@ -759,6 +762,7 @@
         ],
         "color": "",
         "featured": false,
+        "live": false,
         "visible": true
       }
     ],

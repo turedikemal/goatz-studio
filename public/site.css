@@ -557,9 +557,6 @@
   .work-shot > img, .work-shot > .work-ph { flex: 1; min-height: 0; width: 100%; }
   .work-shot > img { display: block; object-fit: cover; object-position: top center; transition: scale .6s var(--slush, ease); }
   .work-card:hover .work-shot > img { scale: 1.05; }
-  .work-bar { display: flex; gap: 6px; align-items: center; padding: 8px 12px; background: #221d47; flex: none; }
-  .work-bar i { width: 9px; height: 9px; border-radius: 50%; background: #ffffff40; }
-  .work-bar span { margin-left: 8px; flex: 1; background: #ffffff1a; border-radius: var(--r-pill); padding: 3px 12px; font-size: 11px; color: #ffffffb0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .work-ph { position: relative; display: grid; place-items: center; overflow: hidden; }
   .work-ph .work-st { position: absolute; width: 38%; right: -4%; bottom: -10%; rotate: -12deg; opacity: .95; }
   .work-ph b { position: relative; font-size: clamp(56px, 9vw, 120px); line-height: 1; }
@@ -609,3 +606,10 @@
   .work-page { display: inline-block; margin: 16px 0 4px; color: inherit; text-decoration: none; border-bottom: 1.5px solid var(--carbon); }
   .work-text.work-desc p { font-size: 20px; margin-top: 0; }
   .work-text.work-desc li { font-size: 17px; }
+
+  /* Canlı site önizlemesi: masaüstü genişliğinde çizilip karta sığacak şekilde küçültülür */
+  .work-shot > .work-live { flex: 1; min-height: 0; }
+  .work-live { position: relative; overflow: hidden; background: var(--wc, var(--mint)); }
+  .work-live > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .work-live iframe { position: absolute; left: 0; top: 0; width: 1440px; height: 900px; border: 0; background: #fff; transform-origin: 0 0; transform: scale(var(--k, .3)); opacity: 0; transition: opacity .7s ease; pointer-events: none; }
+  .work-live.is-loaded iframe { opacity: 1; }

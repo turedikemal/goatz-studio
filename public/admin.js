@@ -145,12 +145,13 @@
           }),
           look: group('Görünüm', {
             color: select('Kart rengi', [['', 'Kategorinin rengi'], ...Object.entries(COLOR_NAMES)]),
+            live: bool('Kapakta canlı siteyi göster (site gömülmeye izin veriyorsa; görsel yedek olarak kalır)'),
             featured: bool('Öne çıkan (listede geniş kart)'),
             visible: bool('Sitede göster'),
           }),
         }), {
           addLabel: 'Proje ekle', title: (v) => v.title || 'Yeni proje', max: 100,
-          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, visible: true },
+          newItem: { title: 'Yeni proje', slug: '', category: 'web', year: String(new Date().getFullYear()), client: '', summary: '', description: '', image: '', url: '', urlLabel: 'Siteyi ziyaret et', tags: [''], gallery: [{ image: '', caption: '' }], color: '', featured: false, live: false, visible: true },
         }),
       },
     },
@@ -172,10 +173,9 @@
           label: text('Kategori adı', { nostyle: true }),
           color: color('Kart rengi'),
           sticker: sticker('Sticker'),
-          browser: bool('Kapak görselini tarayıcı penceresi içinde göster (web siteleri için)'),
         }), {
           title: (v) => v.label || 'Kategori', max: 8,
-          adders: [{ label: 'Kategori ekle', make: () => ({ key: `k${Math.random().toString(36).slice(2, 7)}`, label: 'Yeni kategori', color: 'sun', sticker: 'star', browser: false }) }],
+          adders: [{ label: 'Kategori ekle', make: () => ({ key: `k${Math.random().toString(36).slice(2, 7)}`, label: 'Yeni kategori', color: 'sun', sticker: 'star' }) }],
         }),
         labels: group('Yazılar', {
           allLabel: text('“Tümü” filtresi', { nostyle: true, compact: true }),
