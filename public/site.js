@@ -762,10 +762,90 @@
     setTimeout(fx.done, ms(1.9));
   };
 
+
+  // Kalem: yazı yazar (zikzak çizgi belirirken kalem ilerler)
+  const writePencil = (el) => {
+    if (busy(el, ms(2.8))) return;
+    const fx = inlineFx(el, 'pencil'); if (!fx) return;
+    const line = svgEl('path', { d: 'M20 90l9-7 9 7 9-7 9 7 9-7 9 7 9-7', fill: 'none', stroke: '#000', 'stroke-width': 3.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', pathLength: 1, 'stroke-dasharray': 1, 'stroke-dashoffset': 1 });
+    fx.g.prepend(line);
+    line.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0, offset: 0.72 }, { strokeDashoffset: 0 }], { duration: ms(2.2), easing: 'linear', fill: 'both' });
+    const path = [[0, 0], [14, -4], [28, 3], [42, -4], [56, 3], [66, -2], [66, -2], [0, 0]];
+    const kf = path.map(([x, y], i) => ({ transform: `translate(${x}px, ${y}px) rotate(${i % 2 ? -4 : 3}deg)`, offset: i === path.length - 1 ? 1 : Math.min(0.72 * (i / 5), 0.72) + (i >= 5 ? 0.0 : 0) }));
+    kf[5].offset = 0.72; kf[6].offset = 0.82; kf[7].offset = 1;
+    fx.parts.filter((n) => n !== line).forEach((n) => { n.style.transformBox = 'view-box'; n.style.transformOrigin = '50px 50px'; n.animate(kf, { duration: ms(2.2), easing: 'ease-in-out' }); });
+    setTimeout(fx.done, ms(2.4));
+  };
+  // Roket: alevle yukarı fırlar, aşağıdan yeniden girip yerine iner
+  const flyRocket = (el) => {
+    if (busy(el, ms(1.6))) return;
+    const c = centerOf(el), rot = restRot(el);
+    el.animate([{ translate: '0 0', rotate: rot }, { translate: '0 -8%', rotate: `calc(${rot} - 3deg)`, offset: 0.1 }, { translate: '0 -62%', rotate: `calc(${rot} + 2deg)`, offset: 0.42 }, { translate: '0 -62%', rotate: `calc(${rot} - 2deg)`, offset: 0.56 }, { translate: '0 0', rotate: rot }], { duration: ms(1.4), easing: 'cubic-bezier(.4,0,.3,1)' });
+    sparks(c.x, c.y + c.h * 0.42, { n: 5, size: Math.max(9, c.w * 0.12), dist: Math.max(26, c.w * 0.45) });
+  };
+  // Grafik: çubuklar beyaz başlar, renkleri tek tek dolar ve boylanır
+  const fillBars = (el) => {
+    if (busy(el, ms(2.6))) return;
+    const fx = inlineFx(el, 'chart'); if (!fx) return;
+    fx.parts.slice(0, 3).forEach((bar, i) => {
+      const col = bar.getAttribute('fill');
+      bar.style.transformBox = 'fill-box'; bar.style.transformOrigin = 'center bottom';
+      bar.animate([{ fill: '#fff', transform: 'scaleY(.35)' }, { fill: col, transform: 'scaleY(1.12)', offset: 0.35 }, { fill: col, transform: 'scaleY(1)' }], { duration: ms(0.6), delay: ms(0.15 + i * 0.45), easing: 'ease-out', fill: 'both' });
+    });
+    setTimeout(fx.done, ms(0.15 + 3 * 0.45 + 0.9));
+  };
+  // Çark: yavaşça tam tur döner
+  const turnGear = (el) => {
+    if (busy(el, ms(3))) return;
+    const rot = restRot(el);
+    el.animate([{ rotate: rot }, { rotate: `calc(${rot} + 360deg)` }], { duration: ms(2.8), easing: 'ease-in-out' });
+  };
+  // Yön tabelası: tabelalar sallanarak yön değiştirir
+  const swingSign = (el) => {
+    if (busy(el, ms(1.6))) return;
+    const fx = inlineFx(el, 'signpost'); if (!fx) return;
+    const [, b1, b2] = fx.parts;
+    const swing = (n, oy, a) => { n.style.transformBox = 'view-box'; n.style.transformOrigin = `50px ${oy}px`; n.animate([{ transform: 'rotate(0)' }, { transform: `rotate(${a}deg)`, offset: 0.25 }, { transform: `rotate(${-a * 0.7}deg)`, offset: 0.55 }, { transform: `rotate(${a * 0.3}deg)`, offset: 0.8 }, { transform: 'rotate(0)' }], { duration: ms(1.4), easing: 'ease-in-out' }); };
+    swing(b1, 28, -16); swing(b2, 58, 16);
+    setTimeout(fx.done, ms(1.5));
+  };
+
+
+  // Kutu: üst kapakları iki yana açılır, içinden yıldız fırlar, kapaklar kapanır
+  const openBox = (el) => {
+    if (busy(el, ms(2.4))) return;
+    const fx = inlineFx(el, 'box'); if (!fx) return;
+    const [, , star, lf, rf] = fx.parts;
+    const hinge = (n, ox, deg) => { n.style.transformBox = 'view-box'; n.style.transformOrigin = `${ox}px 42px`; n.animate([{ transform: 'rotate(0)' }, { transform: `rotate(${deg}deg)`, offset: 0.25 }, { transform: `rotate(${deg}deg)`, offset: 0.7 }, { transform: 'rotate(0)' }], { duration: ms(2), easing: 'cubic-bezier(.3,1.3,.5,1)' }); };
+    hinge(lf, 14, -115); hinge(rf, 86, 115);
+    star.style.transformBox = 'fill-box'; star.style.transformOrigin = 'center';
+    star.animate([{ transform: 'translateY(0) scale(1)' }, { transform: 'translateY(-4px) scale(1)', offset: 0.22 }, { transform: 'translateY(-26px) scale(1.7) rotate(25deg)', offset: 0.42 }, { transform: 'translateY(-20px) scale(1.5) rotate(-10deg)', offset: 0.62 }, { transform: 'translateY(0) scale(1)' }], { duration: ms(2), easing: 'ease-in-out' });
+    setTimeout(fx.done, ms(2.1));
+  };
+
+
+  // Şişe: kapak döne döne yukarı kalkar, sonra yerine oturur
+  const uncap = (id) => (el) => {
+    if (busy(el, ms(2))) return;
+    const fx = inlineFx(el, id); if (!fx) return;
+    const cap = fx.parts[0];
+    cap.style.transformBox = 'fill-box'; cap.style.transformOrigin = 'center';
+    cap.animate([{ transform: 'translateY(0) rotate(0)' }, { transform: 'translateY(-24px) rotate(-28deg)', offset: 0.3 }, { transform: 'translateY(-30px) rotate(-18deg) translateX(10px)', offset: 0.65 }, { transform: 'translateY(0) rotate(0)' }], { duration: ms(1.7), easing: 'cubic-bezier(.3,1.2,.5,1)' });
+    const c = centerOf(el);
+    setTimeout(() => sparks(c.x, c.y - c.h * 0.4, { n: 5, size: Math.max(9, c.w * 0.14), dist: Math.max(36, c.w * 0.6) }), ms(0.35));
+    setTimeout(fx.done, ms(1.8));
+  };
+  // Mercek: yaklaşır, uzaklaşır
+  const zoomLens = (el) => {
+    if (busy(el, ms(2.4))) return;
+    const rot = restRot(el);
+    el.animate([{ scale: 1, rotate: rot }, { scale: 1.9, rotate: `calc(${rot} - 8deg)`, offset: 0.3 }, { scale: 1.9, rotate: `calc(${rot} - 8deg)`, offset: 0.45 }, { scale: 0.6, rotate: `calc(${rot} + 6deg)`, offset: 0.75 }, { scale: 1, rotate: rot }], { duration: ms(2.2), easing: 'ease-in-out' });
+  };
+
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
-    'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': burstOf('star'),
-    'st-product': plain, 'st-magnifier': plain, 'st-pencil': plain, 'st-globe': spinMedal, 'st-gear': spinMedal, 'st-rocket': driveTruck, 'st-chart': plain, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
+    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-map': foldMap, 'st-store': plain, 'st-cart': rollCart, 'st-link': plain, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   document.addEventListener('click', (e) => {

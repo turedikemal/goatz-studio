@@ -74,11 +74,13 @@
       <path d="M14 66q10-16 22-6" fill="none" stroke="#000" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round"/>
       <circle cx="50" cy="44" r="8" fill="#fb4903" stroke="#000" stroke-width="3"/>
     </symbol>
-    <!-- Paket -->
+    <!-- Paket (üst kapakları açılır) -->
     <symbol id="s-box" viewBox="0 0 100 100">
-      <path d="M12 34l38-20 38 20v40L50 94 12 74z" fill="#e8b872" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M12 34l38 20 38-20M50 54v40" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M31 24l38 20v14l-12-6V50L31 38z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M14 42h72v44a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4z" fill="#e8b872" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="43" y="42" width="14" height="30" fill="#fff" stroke="#000" stroke-width="3"/>
+      <path d="M50 24c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z" fill="#ffd731" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="14" y="30" width="38" height="12" rx="2" fill="#f2cc8f" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <rect x="48" y="30" width="38" height="12" rx="2" fill="#f2cc8f" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
     </symbol>
     <!-- Kamyon -->
     <symbol id="s-truck" viewBox="0 0 100 100">
@@ -215,6 +217,13 @@
       <rect x="18" y="38" width="64" height="112" rx="18" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="26" y="76" width="48" height="40" rx="6" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <text x="50" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="14" fill="#fff" letter-spacing="-0.5">MARKA</text>
+    </symbol>
+    <!-- Yön tabelası -->
+    <symbol id="s-signpost" viewBox="0 0 100 100">
+      <ellipse cx="50" cy="93" rx="20" ry="4.5" fill="#000" opacity=".18"/>
+      <rect x="45" y="8" width="10" height="84" rx="3" fill="#e8b872" stroke="#000" stroke-width="3"/>
+      <path d="M20 16h46l12 12-12 12H20z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M80 46H34L22 58l12 12h46z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
     </symbol>
   </defs>
 </svg>
