@@ -865,3 +865,4 @@
   .show-apps .show-tag { bottom: auto; top: -18px; right: 20px; }
   .show-photo { width: min(240px, 76vw); }
   .show-photo b { font-size: clamp(22px, 2.4vw, 28px); overflow-wrap: anywhere; }
+  .wp-text { font-weight: 600; font-size: clamp(17px, 1.8vw, 21px); line-height: 1.4; }
