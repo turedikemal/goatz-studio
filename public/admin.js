@@ -135,7 +135,7 @@
           image: image('Kapak görseli', { hint: 'Sitenin ekran görüntüsü önerilir (yatay, 16:10). Yüklemezsen renkli bir kart çıkar.' }),
           url: text('Site / uygulama adresi', { nostyle: true, hint: 'https://ile başlamalı. Boş bırakırsan ziyaret butonu çıkmaz.' }),
           detail: group('Detay sayfası', {
-            description: area('Proje hakkında', { nostyle: true, hint: 'Boş satır bırakarak yeni paragraf aç.' }),
+            description: area('Yapılan işler (karttaki açılır liste)', { nostyle: true, hint: 'Her satırın başına * koyarsan madde işaretli liste olur. Boş satır bırakarak yeni paragraf aç. Örn: önce bir başlık satırı, boş satır, sonra * ile başlayan maddeler.' }),
             client: text('Müşteri', { nostyle: true }),
             year: text('Yıl', { nostyle: true, compact: true }),
             tags: list('Teknolojiler / etiketler', text('', { nostyle: true }), { addLabel: 'Etiket ekle', newItem: '', max: 12 }),
@@ -179,7 +179,7 @@
         }),
         labels: group('Yazılar', {
           allLabel: text('“Tümü” filtresi', { nostyle: true, compact: true }),
-          moreLabel: text('Kart butonu', { nostyle: true, compact: true }),
+          moreLabel: text('Açılır liste butonu', { nostyle: true, compact: true }),
           emptyText: text('Proje yokken görünen yazı', { nostyle: true }),
         }, { flat: true }),
         showContact: bool('Sayfanın altında iletişim bölümünü göster'),

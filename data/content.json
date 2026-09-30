@@ -89,6 +89,10 @@
     {
       "id": "contact",
       "visible": true
+    },
+    {
+      "id": "footer",
+      "visible": true
     }
   ],
   "ticker": {
@@ -346,6 +350,12 @@
       "paper",
       "sun"
     ],
+    "row3": [
+      "mint",
+      "sun",
+      "blue",
+      "paper"
+    ],
     "stickers": [
       {
         "type": "camera",
@@ -475,8 +485,298 @@
     }
   },
   "footer": {
+    "background": "carbon",
+    "showLogo": true,
+    "description": "Ürün çekimi ve web tasarım stüdyosu. Ürünlerini çekiyor, siteni tasarlıyor, yayına alıyoruz.",
+    "showLinks": true,
+    "linksTitle": "Sayfalar",
+    "showContact": true,
+    "contactTitle": "İletişim",
+    "bigText": "Goatz Studio",
     "copyright": "© 2026 The Goatz Studio",
-    "tagline": "Ürün çekimi · Web tasarım"
+    "tagline": "Ürün çekimi · Web tasarım",
+    "stickers": [
+      {
+        "type": "star",
+        "x": 5,
+        "y": 8,
+        "mx": 4,
+        "my": 6,
+        "size": 90,
+        "rotate": -10,
+        "float": true
+      },
+      {
+        "type": "coin",
+        "x": 88,
+        "y": 12,
+        "mx": 78,
+        "my": 8,
+        "size": 100,
+        "rotate": 10,
+        "float": true
+      }
+    ]
+  },
+  "works": {
+    "visible": true,
+    "background": "sky",
+    "seoTitle": "İşler — The Goatz Studio",
+    "seoDescription": "The Goatz Studio işleri: web siteleri, web uygulamaları ve danışmanlık projeleri.",
+    "hero": {
+      "visible": true,
+      "eyebrow": "Portföy",
+      "title": "İşler",
+      "subtitle": "Web siteleri, web uygulamaları ve danışmanlık projelerimiz.",
+      "titleSize": 12,
+      "ribbon": {
+        "visible": true,
+        "color": "blue"
+      },
+      "stickers": [
+        {
+          "type": "browser",
+          "x": 80,
+          "y": 30,
+          "mx": 74,
+          "my": 18,
+          "size": 110,
+          "rotate": 10,
+          "float": true
+        },
+        {
+          "type": "check",
+          "x": 10,
+          "y": 42,
+          "mx": 6,
+          "my": 62,
+          "size": 90,
+          "rotate": -8,
+          "float": true
+        },
+        {
+          "type": "star",
+          "x": 52,
+          "y": 16,
+          "mx": 46,
+          "my": 10,
+          "size": 80,
+          "rotate": 12,
+          "float": true
+        }
+      ]
+    },
+    "allLabel": "Tümü",
+    "moreLabel": "Yapılan işler",
+    "emptyText": "Projeler çok yakında burada.",
+    "categories": [
+      {
+        "key": "web",
+        "label": "Web siteleri",
+        "color": "mint",
+        "sticker": "browser",
+        "browser": true
+      },
+      {
+        "key": "app",
+        "label": "Web uygulamaları",
+        "color": "lavender",
+        "sticker": "cursor",
+        "browser": true
+      },
+      {
+        "key": "consulting",
+        "label": "Danışmanlık",
+        "color": "sun",
+        "sticker": "check",
+        "browser": false
+      }
+    ],
+    "items": [
+      {
+        "title": "Dardanos Fine Foods",
+        "slug": "",
+        "category": "web",
+        "year": "",
+        "client": "",
+        "summary": "Naturel sızma zeytinyağı ve gurme ürünler için e-ticaret sitesi.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghosb-9ea7c361.webp",
+        "url": "https://www.dardanosfinefoods.com",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "E-Ticaret",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      },
+      {
+        "title": "Haki Heal",
+        "slug": "",
+        "category": "web",
+        "year": "",
+        "client": "",
+        "summary": "Doğal cilt, saç ve vücut bakım ürünleri için e-ticaret sitesi.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghosc-2cc24980.webp",
+        "url": "https://www.hakiheal.com",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "E-Ticaret",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      },
+      {
+        "title": "Maya Gusto",
+        "slug": "",
+        "category": "web",
+        "year": "",
+        "client": "",
+        "summary": "Dünya mutfağından gurme ve özel gıda ürünleri için e-ticaret sitesi.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghose-b2d5d0c6.webp",
+        "url": "https://www.mayagusto.com",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "E-Ticaret",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      },
+      {
+        "title": "Dengepak",
+        "slug": "",
+        "category": "web",
+        "year": "",
+        "client": "",
+        "summary": "Koruyucu dolgu kağıdı ve ambalaj ürünleri için e-ticaret sitesi.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghosf-e9063bad.webp",
+        "url": "https://www.dengepak.com",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "E-Ticaret",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      },
+      {
+        "title": "Loogy",
+        "slug": "",
+        "category": "app",
+        "year": "",
+        "client": "",
+        "summary": "Jeoloji ve geoteknik mühendisliği için hepsi bir arada platform.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghosi-fbc3566a.webp",
+        "url": "https://www.geoloogy.com",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "Web uygulaması",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      },
+      {
+        "title": "The Goatz Creative",
+        "slug": "",
+        "category": "web",
+        "year": "",
+        "client": "",
+        "summary": "El yapımı seramik ve ev dekorasyon ürünleri için e-ticaret sitesi.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghosk-0b1caab6.webp",
+        "url": "https://www.thegoatz.co",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "E-Ticaret",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      },
+      {
+        "title": "Çanakkale Koyun Keçi Birliği",
+        "slug": "",
+        "category": "web",
+        "year": "",
+        "client": "",
+        "summary": "Çanakkale İli Damızlık Koyun Keçi Yetiştiricileri Birliği kurumsal web sitesi.",
+        "description": "Anahtar Teslim E-Ticaret Sitesi Kurulumu\n\n* Markaya Özel Web Tasarım & UI/UX\n* Mobil Uyumlu ve Satış Odaklı Site Tasarımı\n* Ürün & Kategori Sayfalarının Yapılandırılması\n* SEO & Teknik SEO Optimizasyonu\n* Google Arama Görünürlüğü Çalışmaları\n* Türkçe & İngilizce Çok Dilli Site Yapısı\n* Blog & Organik Trafik Altyapısı\n* Google Merchant Center & Ölçümleme Entegrasyonları\n* Site Hızı, Kullanılabilirlik & Teknik Optimizasyon\n* URL, Yönlendirme & Site Mimarisi Yönetimi\n* Yayın Sonrası Teknik Geliştirme & Güncellemeler",
+        "image": "/uploads/muoghosn-0d771632.webp",
+        "url": "https://ckkyb.com/",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          "Kurumsal site",
+          "UI/UX",
+          "SEO"
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "",
+        "featured": false,
+        "visible": true
+      }
+    ],
+    "showContact": true
   },
   "pages": []
 }

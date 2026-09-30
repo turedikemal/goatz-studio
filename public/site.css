@@ -585,3 +585,27 @@
   .work-in .g-grid { margin: 8px 0 40px; }
   .work-pager { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; padding-top: 28px; border-top: 1px solid var(--carbon); }
   .showcase-cta { position: absolute; left: 50%; bottom: 28px; translate: -50% 0; z-index: 6; }
+
+  /* İşler kartı: alan adı ve aşağı doğru açılan açıklama */
+  .work-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); align-items: start; }
+  .work-shotlink { display: block; color: inherit; text-decoration: none; }
+  .work-card:hover { transform: none; box-shadow: 4px 6px 0 var(--carbon); }
+  .work-domain { justify-self: start; color: inherit; text-decoration: none; border-bottom: 1.5px solid var(--carbon); padding-bottom: 1px; }
+  .work-domain:hover { background: var(--carbon); color: var(--paper); }
+  .work-sum { margin: 0; }
+  .work-toggle { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; margin-top: 8px; padding: 13px 18px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); color: var(--carbon); font-family: inherit; cursor: pointer; text-align: left; transition: background .2s ease, color .2s ease; }
+  .work-toggle:hover { background: var(--carbon); color: var(--paper); }
+  .work-toggle i { font-style: normal; font-size: 20px; line-height: 1; transition: rotate .35s var(--slush, ease); }
+  .work-card.open .work-toggle i { rotate: 135deg; }
+  .work-card.open .work-toggle { background: var(--carbon); color: var(--paper); }
+  .work-panel { display: grid; grid-template-rows: 1fr; }
+  html.js .work-panel { grid-template-rows: 0fr; transition: grid-template-rows .5s var(--slush, ease); }
+  html.js .work-card.open .work-panel { grid-template-rows: 1fr; }
+  .work-panel > .work-desc { min-height: 0; overflow: hidden; }
+  .work-desc p { margin: 14px 0 0; font-size: 16px; font-weight: 800; line-height: 1.35; }
+  .work-desc ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 8px; }
+  .work-desc li { position: relative; padding-left: 28px; font-size: 15px; line-height: 1.4; }
+  .work-desc li::before { content: '✓'; position: absolute; left: 0; top: 1px; width: 19px; height: 19px; display: grid; place-items: center; border: 1px solid var(--carbon); border-radius: 50%; background: var(--paper); font-size: 11px; font-weight: 900; }
+  .work-page { display: inline-block; margin: 16px 0 4px; color: inherit; text-decoration: none; border-bottom: 1.5px solid var(--carbon); }
+  .work-text.work-desc p { font-size: 20px; margin-top: 0; }
+  .work-text.work-desc li { font-size: 17px; }

@@ -274,6 +274,16 @@
     }));
   }
 
+  // ---------- İşler: açıklama aşağı doğru açılır ----------
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest && e.target.closest('.work-toggle');
+    if (!t) return;
+    const card = t.closest('.work-card');
+    const open = !card.classList.contains('open');
+    card.classList.toggle('open', open);
+    t.setAttribute('aria-expanded', String(open));
+  });
+
   // ---------- İşler: kategori filtresi ----------
   const workFilters = document.querySelector('.work-filters');
   if (workFilters) {
