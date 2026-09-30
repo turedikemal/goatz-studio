@@ -773,3 +773,12 @@
   .work-feat-h.display, .work-story-h.display { line-height: .96; }
   .wa-h.display, .work-closing.display { line-height: .98; }
   .work-group-h.display { line-height: .95; }
+
+  /* Premium proje etiketi */
+  .work-premium { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--carbon); color: var(--sun); font-size: 11px; white-space: nowrap; }
+  .work-premium i { font-style: normal; }
+  .work-card > .work-premium { position: absolute; left: 14px; top: 14px; z-index: 4; box-shadow: 2px 3px 0 #0003; }
+  html.mo-idle .work-premium { background-image: linear-gradient(110deg, #000 38%, #4a3d00 50%, #000 62%); background-size: 250% 100%; animation: premium-shine 3.4s linear infinite; }
+  @keyframes premium-shine { from { background-position: 150% 0; } to { background-position: -100% 0; } }
+  .work-card.is-premium { box-shadow: 4px 6px 0 var(--sun), 4px 6px 0 1px var(--carbon); }
+  .work-premium-note { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; margin: 0 0 24px; font-size: 15px; font-weight: 600; }
