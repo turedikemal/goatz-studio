@@ -128,11 +128,20 @@
     const a = state.answers;
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
-    if (a.marketplace === 'advanced') return 'Advanced';
-    if (a.products === '501+' || a.marketplace === 'local5' || a.marketplace === 'local2') return 'Signature';
-    if (['both', 'abroad'].includes(a.market)) return 'Advanced';
-    if (a.platform === 'ikas') return 'Starter';
-    if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) return 'Signature';
+    
+    let score = 0;
+    if (a.marketplace === 'local2') score += 2;
+    if (a.marketplace === 'local5') score += 5;
+    if (a.marketplace === 'advanced') score += 7;
+    if (a.products === '101-500') score += 3;
+    if (a.products === '501+') score += 5;
+    if (['both', 'abroad'].includes(a.market)) score += 2;
+    if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) score += 3;
+    if (a.platform === 'ikas') score += 1;
+    
+    if (score >= 7) return 'Advanced';
+    if (score >= 4) return 'Signature';
+    if (score >= 1) return 'Core';
     return 'Core';
   };
   const packageReason = () => {
