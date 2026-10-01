@@ -60,9 +60,10 @@
       ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
     marketplace: { title: "Pazaryeri yonetimi", desc: "Hangi platformlarda", options: [
-      ["no", "Hayir, kendi sitem", "Yalnizca kendi sitemde"],
-      ["local", "Trendyol Hepsiburada Amazon Etsy", "Trendyol, Hepsiburada, Amazon, Etsy"],
-      ["advanced", "Tum pazaryerleri", "Tum yerli ve yurt disi pazaryerleri"]] },
+      ["no", "Hayir, sadece kendi sitemde", "Yalnizca kendi sitemde satis"],
+      ["local2", "Trendyol ve Hepsiburada", "Trendyol, Hepsiburada"],
+      ["local5", "Trendyol, Hepsiburada, N11, Amazon, Etsy", "5 onemli pazaryeri"],
+      ["advanced", "19 Yurt ici, 7 Yurt disi", "Trendyol, Hepsiburada, N11, Amazon ve Etsy pazaryerleri dahil toplam 26 pazaryeri ile entegre olarak siparislerinizi ve stoklarinizi tek ekrandan yonetebilirsiniz."]] },
     products: { title: "Kac urun satisacaksiniz", desc: "Urun sayisini secin", options: [
       ["1-100", "1-100 urun", "En fazla 100"],
       ["101-500", "101-500 urun", "100den fazla 500e kadar"],
@@ -128,7 +129,7 @@
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
     if (a.marketplace === 'advanced') return 'Advanced';
-    if (a.products === '501+' || a.marketplace === 'local') return 'Signature';
+    if (a.products === '501+' || a.marketplace === 'local5' || a.marketplace === 'local2') return 'Signature';
     if (['both', 'abroad'].includes(a.market)) return 'Advanced';
     if (a.platform === 'ikas') return 'Starter';
     if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) return 'Signature';
