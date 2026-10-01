@@ -2336,7 +2336,7 @@
           "align": "left",
           "image": "/uploads/cekim-sofra-9.jpg",
           "imageSide": "right",
-          "imageColor": "sun",
+          "imageColor": "mint",
           "imageSticker": "camera",
           "button": {
             "label": "İşlerimize bak ↗",
@@ -2355,7 +2355,7 @@
           "ratio": "square",
           "images": [
             {
-              "image": "",
+              "image": "/uploads/cekim-sofra-9.jpg",
               "caption": ""
             }
           ]
