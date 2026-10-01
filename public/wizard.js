@@ -332,7 +332,7 @@
     const n = chips.filter((c) => kind(c) === 'n' && c[0] !== 'Proje notu'), p = chips.filter((c) => kind(c) === 'p'), m = chips.filter((c) => kind(c) === 'm');
     if (!chips.length) return '';
     return '<h3 class="wz-sub">Cevaplarınız</h3>'
-      + (p.length || m.length ? '<div class="wz-pm"><div class="wz-pm-col wz-pm-plus"><h4>Artılarınız <b>+</b></h4><div class="wz-chips">' + (p.map(tag).join('') || '<p class="wz-pm-empty">Henüz yok.</p>') + '</div></div><div class="wz-pm-col wz-pm-minus"><h4>Eksikleriniz <b>−</b></h4>' + (m.length ? '<span class="wz-hang" aria-hidden="true"><i></i><b>✓ Merak etmeyin bunları biz sizin için halledeceğiz</b></span>' : '') + '<div class="wz-chips">' + (m.map(tag).join('') || '<p class="wz-pm-empty">Eksik görünmüyor.</p>') + '</div></div></div>' : '')
+      + (p.length || m.length ? '<div class="wz-pm"><div class="wz-pm-col wz-pm-plus"><h4>Artılarınız <b>+</b></h4><div class="wz-chips">' + (p.map(tag).join('') || '<p class="wz-pm-empty">Henüz yok.</p>') + '</div></div><div class="wz-pm-col wz-pm-minus"><div style="display: flex; align-items: center; justify-content: space-between;"><h4>Eksikleriniz <b>−</b></h4>' + (m.length ? '<span class="wz-hang" aria-hidden="true"><i></i><b>✓ Merak etmeyin bunları biz sizin için halledeceğiz</b></span>' : '') + '</div><div class="wz-chips">' + (m.map(tag).join('') || '<p class="wz-pm-empty">Eksik görünmüyor.</p>') + '</div></div></div>' : '')
       + (n.length ? '<div class="wz-basic"><h4>E-ticaret bilgileriniz</h4><div class="wz-chips">' + n.map(tag).join('') + '</div></div>' : '')
       + (note.length ? '<div class="wz-basic wz-note"><h4>Proje notu</h4><p>' + esc(state.answers.brief || '') + '</p></div>' : '');
   };

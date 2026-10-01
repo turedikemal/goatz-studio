@@ -1370,7 +1370,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-pm-minus { position: relative; }
 .wz-hang { display: inline-block; pointer-events: auto; }
 .wz-hang i { display: none; }
-.wz-hang b { display: inline-block; padding: 8px 16px; border: none; border-radius: 20px; background: #10b981; color: #fff; font-size: 13px; font-weight: 600; line-height: 1.4; text-align: center; box-shadow: none; position: relative; }
+.wz-hang b { display: inline-block; padding: 8px 16px; border: 2px solid var(--carbon); border-radius: 20px; background: var(--sun); color: var(--carbon); font-size: 13px; font-weight: 600; line-height: 1.4; text-align: center; box-shadow: 2px 3px 0 var(--carbon); position: relative; }
 .wz-hang b::before { display: none; }
 @keyframes wzSwing { from { rotate: -7deg; } to { rotate: 7deg; } }
 @media (prefers-reduced-motion: reduce) { .wz-hang { animation: none; } }
