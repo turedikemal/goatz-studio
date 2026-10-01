@@ -114,8 +114,8 @@
     intl: { title: 'Yurt dışı satış planınız nedir?', desc: 'Uluslararası satışlar için strateji?', options: [
       ['tr-only', 'Yalnızca Türkiye\'ye satış', 'Yerli müşterilere.'],
       ['consider', 'İleride değerlendireceğim', 'Henüz hazır değil.'],
-      ['multilang', 'Şimdi farklı dil ve para', 'Dil+para birimi desteği.'],
-      ['advanced', 'Farklı fiyatlar ve döviz kuru', 'Gelişmiş fiyatlandırma.']] },
+      ['multilang', 'Farklı Dillerde Bir Site İstiyorum', 'Türkiye\'deki müşterilerim için sitem Türkçe dışında dillerde de görüntülenebilsin.'],
+      ['advanced', 'Yurt Dışına Satış Yapacağım', 'Farklı ülkelerdeki müşterilerime uygun dil, para birimi ve satış fiyatları sunmak istiyorum.']] },
   };
 
   const steps = () => {
