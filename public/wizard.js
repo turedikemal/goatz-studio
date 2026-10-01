@@ -66,10 +66,10 @@
       ["1000+", "1.000'den fazla", "Binden fazla"],
       ["unknown", "Belli değil", "Bilmiyorum"]] },
     prodtype: { title: "Web sitenizde hangi tür ürünler satacaksınız?", desc: "Ürününüzün karmaşıklığı ne seviyede?", options: [
-      ["physical", "Yalnızca fiziksel ürünler", "Standart ürünler."],
-      ["custom", "Müşteri özel yazı veya görsel eklenen", "Özelleştirme ile."],
-      ["packages", "Birden fazla üründen oluşturulmuş paketler", "Paket oluşturma."],
-      ["builder", "Müşteri tarafından oluşturacağı ürün takımları", "Dinamik yapı."]] },
+      ["physical", "Yalnızca Fiziksel Ürünler", "Kargoyla gönderilen ürünler satacağım."],
+      ["custom", "Fiziksel ve Dijital Ürünler", "Hem fiziksel hem de dijital ürünler satacağım."],
+      ["packages", "Hazır Ürün Paketleri", "Birden fazla ürünü paket halinde satacağım."],
+      ["builder", "Müşterinin Kendi Oluşturduğu Ürün Setleri", "Müşterilerim ürünleri seçerek kendi setlerini oluşturabilecek."]] },
     wholesale: { title: "Toptan veya bayi satışına ihtiyacınız var mi?", desc: "B2B satış kanalını düşünüyor musunuz?", options: [
       ["no", "Hayır, yalnızca perakende satış yapacağım", "Sadece nihai müşterilere."],
       ["manual", "Toplu siparişleri manuel alacağım", "El ile işlem."],
