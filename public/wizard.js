@@ -57,7 +57,7 @@
       ['custom', 'Özel proje', 'Hazır bir sitenin dışında, bana özel bir uygulama veya sistem gerekiyor.'],
       ['service', 'Sadece hizmet', 'Yeni site ya da taşıma istemiyorum, yalnızca ihtiyacım olan hizmeti almak istiyorum. Örneğin ürün fotoğrafı, Google kurulumu, SEO, yapay zekâ aramalarında görünürlük, metin ve tasarım, entegrasyon, bakım ve destek ya da danışmanlık.']] },
     platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
-      ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
+      ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
     products: { title: 'Tahmini kaç ürün satışa açılacak?', desc: 'Sitenize koyacağınız farklı ürünleri sayın. Aynı ürünün renklerini ve bedenlerini ayrı saymayın.', options: [
       ['1–250', '1–250 ürün', 'En fazla 250 farklı ürünü satışa koyacağım.'],
@@ -113,7 +113,7 @@
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
-  const card = (id, title, desc, selected, index, lock) => `<button type="button" class="wz-choice${lock ? ' wz-locked' : ''}" data-value="${esc(id)}" aria-pressed="${selected}" data-i="${index % 4}"${lock ? ' disabled aria-disabled="true"' : ''}><span class="wz-mark" aria-hidden="true">${lock ? '🔒' : selected ? '✓' : ''}</span><strong>${esc(title)}</strong>${desc ? `<small>${bold(desc)}</small>` : ''}${lock ? `<small class="wz-lock-note">${esc(lock)}</small>` : ''}</button>`;
+  const card = (id, title, desc, selected, index, lock) => `<button type="button" class="wz-choice${lock ? ' wz-locked' : ''}" data-value="${esc(id)}" aria-pressed="${selected}" data-i="${index % 4}"${lock ? ' disabled aria-disabled="true"' : ''}><span class="wz-mark" aria-hidden="true">${lock ? '🔒' : selected ? '✓' : ''}</span>${id === 'ikas' ? '<span class="wz-ikas" aria-hidden="true"><i></i>ikas</span>' : ''}<strong>${esc(title)}</strong>${desc ? `<small>${bold(desc)}</small>` : ''}${lock ? `<small class="wz-lock-note">${esc(lock)}</small>` : ''}</button>`;
   // Web sitesi varsa "yeni site", yoksa "platform geçişi" anlamsız: kilitlenir
   const routeLock = (id) => {
     if (id === 'new' && state.site.has === 'yes') return 'Web siteniz olduğu için bu seçenek kapalı. Platform geçişi ya da özel proje seçebilirsiniz.';
@@ -268,7 +268,7 @@
     const n = chips.filter((c) => kind(c) === 'n' && c[0] !== 'Proje notu'), p = chips.filter((c) => kind(c) === 'p'), m = chips.filter((c) => kind(c) === 'm');
     if (!chips.length) return '';
     return '<h3 class="wz-sub">Cevaplarınız</h3>'
-      + (p.length || m.length ? '<div class="wz-pm"><div class="wz-pm-col wz-pm-plus"><h4>Artılarınız <b>+</b></h4><div class="wz-chips">' + (p.map(tag).join('') || '<p class="wz-pm-empty">Henüz yok.</p>') + '</div></div><div class="wz-pm-col wz-pm-minus"><h4>Eksikleriniz <b>−</b></h4><div class="wz-chips">' + (m.map(tag).join('') || '<p class="wz-pm-empty">Eksik görünmüyor.</p>') + '</div></div></div>' : '')
+      + (p.length || m.length ? '<div class="wz-pm"><div class="wz-pm-col wz-pm-plus"><h4>Artılarınız <b>+</b></h4><div class="wz-chips">' + (p.map(tag).join('') || '<p class="wz-pm-empty">Henüz yok.</p>') + '</div></div><div class="wz-pm-col wz-pm-minus"><h4>Eksikleriniz <b>−</b></h4>' + (m.length ? '<span class="wz-hang" aria-hidden="true"><i></i><b>Merak etmeyin, biz halledeceğiz</b></span>' : '') + '<div class="wz-chips">' + (m.map(tag).join('') || '<p class="wz-pm-empty">Eksik görünmüyor.</p>') + '</div></div></div>' : '')
       + (n.length ? '<div class="wz-basic"><h4>E-ticaret bilgileriniz</h4><div class="wz-chips">' + n.map(tag).join('') + '</div></div>' : '')
       + (note.length ? '<div class="wz-basic wz-note"><h4>Proje notu</h4><p>' + esc(state.answers.brief || '') + '</p></div>' : '');
   };

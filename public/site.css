@@ -1364,3 +1364,18 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-peek.up.d1 { background: var(--sun); z-index: 2; }
 .wz-peek.down { align-items: flex-end; background: var(--sky); z-index: 3; }
 .wz-peek.down.d1 { background: var(--sun); z-index: 2; }
+
+/* Eksikleriniz kutusu: sağ üstte boşlukta sallanan "merak etmeyin" etiketi */
+.wz-pm-minus { position: relative; }
+.wz-hang { position: absolute; top: -6px; right: clamp(14px, 3vw, 34px); z-index: 3; display: block; transform-origin: 50% 0; animation: wzSwing 3.6s ease-in-out infinite alternate; pointer-events: none; }
+.wz-hang i { display: block; width: 2px; height: 26px; margin: 0 auto; background: var(--carbon); }
+.wz-hang b { display: block; max-width: 168px; padding: 9px 14px; border: 2px solid var(--carbon); border-radius: 12px; background: var(--sun); color: var(--carbon); font-size: 13px; font-weight: 900; line-height: 1.2; text-align: center; box-shadow: 3px 4px 0 var(--carbon); position: relative; }
+.wz-hang b::before { content: ''; position: absolute; top: -5px; left: 50%; translate: -50% 0; width: 8px; height: 8px; border: 2px solid var(--carbon); border-radius: 50%; background: #fff; }
+@keyframes wzSwing { from { rotate: -7deg; } to { rotate: 7deg; } }
+@media (prefers-reduced-motion: reduce) { .wz-hang { animation: none; } }
+@media (max-width: 700px) { .wz-pm-minus { margin-top: 34px; } }
+
+/* ikas işareti: seçenek kartında küçük rozet */
+.wz-ikas { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 8px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--violet, #5c4ade); color: #fff; font-size: 17px; font-weight: 900; font-style: italic; letter-spacing: -.02em; line-height: 1; box-shadow: 2px 3px 0 var(--carbon); rotate: -3deg; }
+.wz-ikas i { width: 14px; height: 14px; border: 2px solid var(--carbon); border-radius: 50%; background: var(--sun); }
+.wz-choice[aria-pressed="true"] .wz-ikas { border-color: #fff; box-shadow: 2px 3px 0 #fff; }
