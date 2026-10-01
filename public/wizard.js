@@ -75,6 +75,11 @@
       ["custom", "Musteri ozelu yazi veya gorsel eklenen", "Ozelestirme ile."],
       ["packages", "Birden fazla urunden olusturulmus paketler", "Paket olusturma."],
       ["builder", "Musteri tarafindan olusturacagi urun takimlari", "Dinamik yapı."]] },
+    wholesale: { title: "Toptan veya bayi satisina ihtiyaciniz var mi?", desc: "B2B satis kanalini dusunuyor musunuz?", options: [
+      ["no", "Hayir, yalnizca perakende satis yapacagim", "Sadece nihai musterilere."],
+      ["manual", "Toplu siparisleri manuel alacagim", "El ile islem."],
+      ["portal", "Bayilerim siteye giriş yapip ozel fiyatlarla siparis vermeli", "B2B portal sistemi."],
+      ["future", "Ileride degerlenderecegim", "Simdilik degil."]] },
     users: { title: "Yonetim panelini kac kisi kullanacak?", desc: "Sitedeki urun ve satis yonetimini kac kisi yapacak?", options: [
       ["1", "Yalnizca ben", "Ben tek basima yonetecegim."],
       ["2-5", "2-5 kisi", "Kucuk bir tim ile yonetecegiz."],
@@ -129,7 +134,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'prodtype', 'info', 'images', 'market', 'intl', 'support', 'users', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'prodtype', 'wholesale', 'info', 'images', 'market', 'intl', 'support', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -173,6 +178,10 @@
     if (a.prodtype === 'custom') scores.Core += 3;
     if (a.prodtype === 'packages') scores.Signature += 5;
     if (a.prodtype === 'builder') scores.Advanced += 5;
+    // Toptan/bayi satis puani
+    if (a.wholesale === 'no') { scores.Starter += 2; scores.Core += 2; }
+    if (a.wholesale === 'portal') scores.Advanced += 5;
+    
     
     
     // Destek tipi puanı
