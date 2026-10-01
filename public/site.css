@@ -1232,6 +1232,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-urlbox i { display: grid; place-items: center; padding: 0 4px 0 16px; font-style: normal; font-size: 16px; font-weight: 800; text-transform: none; letter-spacing: 0; color: #00000099; }
 .wz-form .wz-urlbox input { border: 0; border-radius: 0; padding-left: 2px; background: var(--sun) !important; color: #000; }
 .wz-form .wz-urlbox input:focus { outline: none; background: var(--sun) !important; }
+.wz-form .wz-urlbox input:-webkit-autofill, .wz-form .wz-urlbox input:-webkit-autofill:hover, .wz-form .wz-urlbox input:-webkit-autofill:focus { -webkit-box-shadow: 0 0 0 1000px var(--sun) inset !important; -webkit-text-fill-color: #000 !important; background: var(--sun) !important; }
 .wz-urlbox:focus-within { border-color: var(--sun); box-shadow: 0 0 0 2px var(--carbon); }
 
 /* Paketin tüm özellikleri: iki sütun, üstüne gelince sarı */
