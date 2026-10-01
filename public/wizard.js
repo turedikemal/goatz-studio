@@ -67,8 +67,15 @@
     products: { title: "Kac urun satisacaksiniz", desc: "Urun sayisini secin", options: [
       ["1-100", "1-100 urun", "En fazla 100"],
       ["101-500", "101-500 urun", "100den fazla 500e kadar"],
-      ["501+", "501+ urun", "500den fazla"],
+      ["501-1000", "501-1.000 urun", "Besten fazla bin"],
+      ["1000+", "1.000'den fazla", "Binden fazla"],
       ["unknown", "Belli degil", "Bilmiyorum"]] },
+    users: { title: "Yonetim panelini kac kisi kullanacak?", desc: "Sitedeki urun ve satis yonetimini kac kisi yapacak?", options: [
+      ["1", "Yalnizca ben", "Ben tek basima yonetecegim."],
+      ["2-5", "2-5 kisi", "Kucuk bir tim ile yonetecegiz."],
+      ["6-10", "6-10 kisi", "Orta buyuklukte bir tim."],
+      ["11+", "11 kisi veya daha fazla", "Buyuk bir kuruluş"],
+      ["unknown", "Belli degil", "Henuz bilmiyorum"]] },
     info: { title: 'Ürün bilgileriniz hazır mı?', desc: 'Her ürünün adı, fiyatı ve açıklaması elinizde var mı?', options: [
       ['ready', 'Hazır', 'Ürün adları, fiyatlar ve açıklamalar bir dosyada veya mevcut sitemde hazır.'],
       ['edit', 'Düzenlenmesi gerekiyor', 'Ürün bilgilerim var ama eksikler ve düzeltilmesi gereken yazılar bulunuyor.'],
@@ -112,7 +119,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'support', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'support', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -138,9 +145,10 @@
     if (a.marketplace === 'advanced') scores.Advanced += 1;
     
     // Ürün sayısı puanı
-    if (a.products === '1-100') scores.Starter += 1;
-    if (a.products === '101-500') scores.Core += 1;
-    if (a.products === '501+') { scores.Signature += 1; scores.Advanced += 1; }
+    if (a.products === '1-100') scores.Starter += 3;
+    if (a.products === '101-500') scores.Core += 5;
+    if (a.products === '501-1000') scores.Signature += 5;
+    if (a.products === '1000+') scores.Signature += 5;
     
     // Satış bölgesi puanı
     if (a.market === 'tr') { scores.Starter += 1; scores.Core += 1; }
@@ -151,8 +159,14 @@
     if (a.support === 'self') { scores.Starter += 1; scores.Core += 1; }
     if (a.support === 'consult') scores.Signature += 1;
     if (a.support === 'managed') scores.Advanced += 1;
-    
-// En yüksek puanı alan paket seçilir
+
+    // Yönetim paneli kullanıcı sayısı puanı
+    if (a.users === '1') { scores.Starter += 2; scores.Core += 2; }
+    if (a.users === '2-5') scores.Signature += 5;
+    if (a.users === '6-10') scores.Advanced += 5;
+    if (a.users === '11+') scores.Advanced += 5;
+
+    // En yüksek puanı alan paket seçilir
     const max = Math.max(...Object.values(scores));
     if (max === 0) return 'Starter';
     if (scores.Advanced === max) return 'Advanced';
