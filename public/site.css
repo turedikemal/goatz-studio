@@ -228,7 +228,7 @@
 
   /* ---------- Hizmet satırları ---------- */
   .features { padding-block: clamp(80px, 10vw, 140px); display: grid; gap: clamp(64px, 9vw, 128px); }
-  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
+  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: stretch; }
   .feature.rev .feature-media { order: 2; }
   .feature-media {
     aspect-ratio: 1; border: 1px solid var(--carbon); border-radius: var(--r-card);
