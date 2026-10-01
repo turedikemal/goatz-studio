@@ -1367,10 +1367,10 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 /* Eksikleriniz kutusu: sağ üstte boşlukta sallanan "merak etmeyin" etiketi */
 .wz-pm-minus { position: relative; }
-.wz-hang { position: absolute; top: -6px; right: clamp(14px, 3vw, 34px); z-index: 3; display: block; transform-origin: 50% 0; animation: wzSwing 3.6s ease-in-out infinite alternate; pointer-events: none; }
-.wz-hang i { display: block; width: 2px; height: 26px; margin: 0 auto; background: var(--carbon); }
-.wz-hang b { display: block; max-width: 168px; padding: 9px 14px; border: 2px solid var(--carbon); border-radius: 12px; background: var(--sun); color: var(--carbon); font-size: 13px; font-weight: 900; line-height: 1.2; text-align: center; box-shadow: 3px 4px 0 var(--carbon); position: relative; }
-.wz-hang b::before { content: ''; position: absolute; top: -5px; left: 50%; translate: -50% 0; width: 8px; height: 8px; border: 2px solid var(--carbon); border-radius: 50%; background: #fff; }
+.wz-hang { display: inline-block; pointer-events: auto; }
+.wz-hang i { display: none; }
+.wz-hang b { display: inline-block; padding: 8px 16px; border: none; border-radius: 20px; background: #10b981; color: #fff; font-size: 13px; font-weight: 600; line-height: 1.4; text-align: center; box-shadow: none; position: relative; }
+.wz-hang b::before { display: none; }
 @keyframes wzSwing { from { rotate: -7deg; } to { rotate: 7deg; } }
 @media (prefers-reduced-motion: reduce) { .wz-hang { animation: none; } }
 @media (max-width: 700px) { .wz-pm-minus { margin-top: 34px; } }
