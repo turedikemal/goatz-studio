@@ -2256,21 +2256,21 @@
           "cards": [
             {
               "title": "Fotoğraflar siteye uyar",
-              "text": "Çekimleri sitenin tasarımını bilerek yapıyoruz. Ölçü, kadraj ve fon baştan siteye göre seçilir.",
+              "text": "E-ticarete uygun fotoğraflar.",
               "color": "sun",
               "sticker": "camera",
               "image": ""
             },
             {
               "title": "Site fotoğrafları taşır",
-              "text": "Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
+              "text": "Fotoğraf ve tasarım bir arada\nÇektiğimiz ürün fotoğraflarını site tasarımının bir parçası olarak ele alıyor, ürünlerinizin detaylarını öne çıkaran sayfalar hazırlıyoruz.",
               "color": "lavender",
               "sticker": "layers",
               "image": ""
             },
             {
               "title": "Tek muhatap, tek takvim",
-              "text": "Fotoğrafçıyı tasarımcıyla, tasarımcıyı yazılımcıyla eşleştirmekle uğraşmazsınız. Her şey tek elden ve tek planla ilerler.",
+              "text": "Baştan sona aynı plan\nÜrün çekimi, web tasarımı ve teknik kurulum ortak bir takvimle ilerler. Ayrı kişiler arasında koordinasyon kurmanıza gerek kalmadan tüm süreç bir bütün olarak yürütülür.",
               "color": "mint",
               "sticker": "phone",
               "image": ""
