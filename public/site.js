@@ -544,13 +544,14 @@
   // Dev başlığı harflere böler (kerning korunur). Her harf kendi süzülüşünü alır.
   const splitTitle = () => {
     if (!titleEl || titleEl.classList.contains('ready')) return [];
-    const text = titleEl.textContent;
-    titleEl.setAttribute('aria-label', text.trim());
+    // <br> satır sonları korunur (textContent onları silip kelimeleri birleştirirdi)
+    const text = [...titleEl.childNodes].map((n) => (n.nodeName === 'BR' ? String.fromCharCode(10) : n.textContent)).join('');
+    titleEl.setAttribute('aria-label', text.replace(/\s+/g, ' ').trim());
     titleEl.textContent = '';
     const letters = [];
     text.split(/(\s+)/).forEach((part) => {
       if (!part) return;
-      if (/^\s+$/.test(part)) { titleEl.append(' '); return; }
+      if (/^\s+$/.test(part)) { titleEl.append(part.includes(String.fromCharCode(10)) ? document.createElement('br') : ' '); return; }
       const w = document.createElement('span');
       w.className = 'rw';
       w.setAttribute('aria-hidden', 'true');
@@ -1183,6 +1184,60 @@
   const rmIo = onceAt(ROOT80, (el) => el.classList.add('on'));
   document.querySelectorAll('[data-roadmap]').forEach((el) => rmIo.observe(el));
 
+  // Hizmetler: "Neler yapıyoruz?" düğmesi kutunun ayrıntılarını açar/kapatır
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('.svc-toggle');
+    if (!b) return;
+    const card = b.closest('.svc-card');
+    const open = !card.classList.contains('open');
+    card.classList.toggle('open', open);
+    b.setAttribute('aria-expanded', String(open));
+  });
+
+  // Ürün çekimi: sektör kartına tıklayınca fotoğraf penceresi açılır
+  document.addEventListener('click', (e) => {
+    const o = e.target.closest('[data-wp-open]');
+    if (o) { const d = document.getElementById(o.dataset.wpOpen); if (d && d.showModal) d.showModal(); return; }
+    if (e.target.closest('[data-wp-close]')) { const d = e.target.closest('dialog'); if (d) d.close(); return; }
+    if (e.target.classList && e.target.classList.contains('wp-dialog')) e.target.close();
+  });
+
+  // Ürün çekimi: pencere içindeki fotoğrafa tıklayınca büyür; oklar ve klavye ile gezilir
+  (() => {
+    let light = null, list = [], idx = 0;
+    const build = () => {
+      light = document.createElement('dialog');
+      light.className = 'wp-light';
+      light.setAttribute('aria-label', 'Fotoğraf');
+      light.innerHTML = '<button type="button" class="wp-light-x label" data-l="x" aria-label="Kapat">Kapat ×</button><button type="button" class="wp-light-a prev" data-l="p" aria-label="Önceki">‹</button><figure><img alt=""><figcaption class="label"></figcaption></figure><button type="button" class="wp-light-a next" data-l="n" aria-label="Sonraki">›</button>';
+      document.body.appendChild(light);
+      light.addEventListener('click', (e) => {
+        const t = e.target.closest('[data-l]');
+        if (t) { const k = t.dataset.l; if (k === 'x') light.close(); else show(idx + (k === 'n' ? 1 : -1)); return; }
+        if (e.target === light || e.target.tagName === 'FIGURE') light.close();
+      });
+      light.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') show(idx + 1); else if (e.key === 'ArrowLeft') show(idx - 1);
+      });
+    };
+    const show = (i) => {
+      idx = (i + list.length) % list.length;
+      const f = list[idx];
+      const im = f.querySelector('img'), cap = f.querySelector('figcaption');
+      light.querySelector('img').src = im.currentSrc || im.src;
+      light.querySelector('img').alt = im.alt;
+      light.querySelector('figcaption').textContent = (cap ? cap.textContent : '') + '  ·  ' + (idx + 1) + ' / ' + list.length;
+    };
+    document.addEventListener('click', (e) => {
+      const f = e.target.closest('.wp-dialog .wp-gallery figure');
+      if (!f) return;
+      if (!light) build();
+      list = [...f.closest('.wp-gallery').querySelectorAll('figure')];
+      show(list.indexOf(f));
+      light.showModal();
+    });
+  })();
+
   // 5) Kart grupları: 3D uçarak gelir, toplam 0,2 sn arayla
   if (on('cards')) {
     const io = onceAt(ROOT80, (wrap) => {
@@ -1283,6 +1338,7 @@
     s.onload = () => {
       if (!window.Lenis) return;
       const lenis = new window.Lenis({ lerp: 0.12 });
+      window.__lenis = lenis;
       const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
       requestAnimationFrame(raf);
       document.addEventListener('click', (e) => {

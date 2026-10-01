@@ -9,7 +9,7 @@
   const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', key: 'Anahtar', refresh: 'Yenileme', rocket: 'Roket', chart: 'Grafik', product: 'Ürün şişesi (MARKA)', signpost: 'Yön tabelası', vitrin: 'Fransız vitrin', foot: 'Ayak', shoe: 'İskarpin', sock: 'Beyaz çorap', code: 'Kod', phone: 'Telefon', layers: 'Katmanlar', type: 'Yazı (Aa)', bag: 'Alışveriş çantası', tag: 'Fiyat etiketi', bulb: 'Ampul (fikir)' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160', product: '0 0 100 160' };
   const TARGETS = [
-    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['works:web', 'İşler → Web siteleri'], ['works:app', 'İşler → Web uygulamaları'], ['works:consulting', 'İşler → Danışmanlık'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
+    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['work:web-sitesi-danismanligi', 'Web Sitesi Danışmanlığı (proje sayfası)'], ['work:aylik-site-yonetimi', 'Aylık Site Yönetimi (proje sayfası)'], ['works:photo', 'İşler → Ürün çekimi'], ['works:web', 'İşler → Web siteleri'], ['works:app', 'İşler → Web uygulamaları'], ['works:consulting', 'İşler → Danışmanlık'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
     ['#neden', 'Neden biz bölümü'], ['#surec', 'Süreç bölümü'], ['#iletisim', 'İletişim bölümü'],
     ['whatsapp', 'WhatsApp (iletişimdeki numara)'], ['instagram', 'Instagram (iletişimdeki hesap)'], ['email', 'E-posta (iletişimdeki adres)'],
   ];
@@ -198,7 +198,7 @@
           text: area('Yazı', { nostyle: true }),
           color: color('Kart rengi'),
           points: list('Maddeler', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Madde ekle', title: (v) => v.title || 'Madde', max: 6, newItem: { title: '', text: '' } }),
-          images: list('Çekim görselleri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
+          images: list('Çekim görselleri (kategoriye göre gruplanır)', group('', { image: image('Görsel', { hint: 'Kare gösterilir; konu ortada olsun.' }), category: text('Kategori (aynı adı yazanlar bir grupta toplanır)', { nostyle: true, compact: true }), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => [v.category, v.caption].filter(Boolean).join(' · ') || 'Görsel', max: 60, newItem: { image: '', caption: '', category: '' } }),
         }),
         approach: group('Ortak yaklaşım bölümü (listenin altında)', {
           visible: bool('Bölümü göster'),
@@ -375,24 +375,23 @@
     },
     {
       id: 'services', label: 'Hizmetler', path: ['services'], anchor: '#hizmetler', section: 'services',
-      intro: 'Sol ve sağa dönüşümlü dizilen hizmet satırları. İstediğin kadar hizmet ekleyebilirsin.',
+      intro: 'Hepsi aynı boyutta kutular. Her kutuda tek cümlelik özet var; "Neler yapıyoruz?" düğmesine basınca altındaki işler açılır.',
       schema: {
         background: color('Bölümün arka plan rengi'),
-        items: list('Hizmetler', group('', {
+        heading: text('Bölüm başlığı'),
+        more: list('Hizmet kutuları', group('', {
           title: area('Başlık', { hint: lineHint }),
-          text: area('Açıklama'),
-          button: group('Buton', { label: text('Buton yazısı', { compact: true, hint: 'Boş bırakırsan gizlenir.' }), target: target() }, { flat: true }),
-          visual: group('Görsel alanı', {
-            image: image('Fotoğraf', { hint: 'Fotoğraf yüklersen sticker\'ların yerine o görünür. Kare önerilir.' }),
-            color: color('Zemin rengi'),
-            media: select('Fotoğraf yokken', [['pattern', 'Sticker deseni'], ['sticker', 'Ortada büyük sticker']]),
-            stickerA: sticker('1. sticker'),
-            stickerB: sticker('2. sticker'),
-          }),
-        }), {
-          addLabel: 'Hizmet ekle', title: (v) => v.title.replace(/\n/g, ' '), max: 12,
-          newItem: { title: 'Yeni\nhizmet', text: 'Hizmet açıklaması.', button: { label: 'Fiyat sor ↗', target: '#iletisim' }, color: 'sun', image: '', media: 'sticker', stickerA: 'star', stickerB: 'check' },
-        }),
+          text: area('Tek cümlelik özet'),
+          color: color('Kutu rengi'),
+          sticker: sticker('Sticker'),
+          sticker2: sticker('2. sticker (isteğe bağlı, yanına eklenir)'),
+          button: group('Ayrıntıların altındaki buton', { label: text('Buton yazısı', { compact: true, hint: 'Boş bırakırsan gizlenir.' }), target: target() }, { flat: true }),
+          items: list('Açılınca görünen işler', group('', {
+            label: text('İş adı', { compact: true, nostyle: true }),
+            text: area('Açıklama', { nostyle: true }),
+            target: target(),
+          }), { addLabel: 'İş ekle', title: (v) => v.label, max: 12, newItem: { label: 'Yeni iş', text: 'Açıklama.', target: 'works:web' } }),
+        }), { addLabel: 'Kutu ekle', title: (v) => String(v.title).replace(/\n/g, ' '), max: 12, newItem: { title: 'Yeni kutu', text: 'Kısa açıklama.', color: 'sun', sticker: 'star', sticker2: '', button: { label: '', target: '#iletisim' }, items: [{ label: 'Yeni iş', text: 'Açıklama.', target: 'works:web' }] } }),
       },
     },
     {
@@ -528,7 +527,7 @@
   ];
 
   // ---------- Özel sayfalar: şema ----------
-  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri' };
+  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)' };
   const is = (...types) => (o) => types.includes(o.type);
   const BLOCK_FIELDS = {
     type: select('Blok türü', Object.entries(BLOCK_TYPES)),

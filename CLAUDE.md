@@ -38,3 +38,11 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - **Logo:** `brand.logoWordmark` açıkken işaret (favicon PNG, siyah çizgili) + yazı (`the-goatz-studio-logo.svg` yazı parçası, sprites.svg `lg-text`) görünür; aşağı kaydırınca yazı kapanır. Yazı rengi siyah. İşaretin siyah çizgisi önemli, düz SVG işaret kullanma.
 - **Tasarım dersleri:** Parlak/gölgeli/gradyanlı "3D" ikon ve tüylü şerit beğenilmedi ("yapay"). Site kimliği: düz renk, kalın siyah çizgi. Gölge istenmiyor. Şerit düz kalsın.
 - **Yedekler/betikler:** `.claude/*` yerel (git dışı). Uygulama kodunda kayıt: `data/content.json`.
+
+## Teklif sihirbazı (/teklif-al) — 2026-10-01 sonu
+- `public/wizard.js` (yalnız `data-wizard` bloklu sayfada yüklenir) + `B.wizard` (`lib/render.js`) + panelde blok türü "Teklif sihirbazı". Metinler/sorular koda gömülü (`questions`, `PACKAGES`, `ALL`, `DIFF`), panelden düzenlenmez.
+- Akış: kimlik (KVKK + pazarlama onayı önceden işaretli) → mevcut site (adres zorunlu, `POST /api/check-site` → `lib/sitecheck.js` www ile dener, yoksa www'suz; iç ağ adresleri engelli) → sorular → sonuç. Kimlik adımı geçilince yarım lead e-postası (`/api/contact`), sonuçta tam talep. 2 dk sayaç, sağ üstte.
+- Sonuç sayfası: paket yığını (seçilen ortada sabit, öteki paketler arkasında), cevaplar artı/eksi, alt paket avantajları (`DIFF`, ikas Lift/Scale/Scale Plus'a göre; Core=Lift, Signature=Scale, Advanced=Scale Plus varsayımı), paketin tüm özellikleri (pakete özel maddeler baş harf rozetli), seçilen hizmetler (Hepsini çıkar), ek öneriler (Hepsini ekle).
+- Sayfa açılışında otomatik aşağı inme: yazılar bitince 2 sn bekler, 3 sn'de iner; konsolda `[teklif]` logları. Gerçek Chrome'da çalıştığı doğrulanmadı.
+- Test panelindeki gizli tarayıcı ekran görüntüsü siyah, animasyonlar orada ölçülemez; görsel doğrulama kullanıcıdan istenir.
+- Açık: sonuç sayfasındaki yeni paket yığını ve renkler tarayıcıda görülmedi; "Ödeme, kargo" maddesi (`base()`); marka adı bazı sitelerde uzun başlık geliyor; test mesajları panelde silinecek; `.env.example` içindeki ADMIN_PASSWORD değiştirilmeli.

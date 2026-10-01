@@ -65,15 +65,19 @@
       "visible": true
     },
     {
-      "id": "showcase",
-      "visible": true
-    },
-    {
       "id": "statement",
       "visible": true
     },
     {
+      "id": "showcase",
+      "visible": true
+    },
+    {
       "id": "services",
+      "visible": true
+    },
+    {
+      "id": "process",
       "visible": true
     },
     {
@@ -82,10 +86,6 @@
     },
     {
       "id": "band",
-      "visible": true
-    },
-    {
-      "id": "process",
       "visible": true
     },
     {
@@ -133,7 +133,7 @@
     ],
     "cta": {
       "label": "Teklif Al",
-      "target": "#iletisim"
+      "target": "page:teklifal"
     },
     "hideLinksOnScroll": true
   },
@@ -199,7 +199,8 @@
     ],
     "titleStyle": {
       "tracking": "-3",
-      "leading": "93"
+      "leading": "93",
+      "italic": "on"
     },
     "taglineStyle": {
       "weight": "600"
@@ -250,7 +251,7 @@
     "card": {
       "visible": true,
       "label": "Teklif al",
-      "target": "#iletisim",
+      "target": "page:teklifal",
       "color": "violet"
     },
     "line2End": "stüdyoda",
@@ -264,45 +265,259 @@
   },
   "services": {
     "background": "paper",
-    "items": [
+    "heading": "Neler yapıyoruz?",
+    "more": [
       {
-        "title": "Ürün\nçekimi",
-        "text": "Beyaz fonda katalog çekimlerinden konsept kurgulara kadar, ürününü en iyi açısından gösteren fotoğraflar. E-ticaret sitelerine ve pazaryerlerine hazır teslim.",
+        "title": "Ürün çekimi",
+        "color": "mint",
+        "sticker": "camera",
+        "sticker2": "",
+        "text": "Ürününü en iyi açısından gösteren, e-ticaret sitelerine ve pazaryerlerine hazır fotoğraflar.",
+        "button": {
+          "label": "Çekimlerimiz ↗",
+          "target": "works:photo"
+        },
+        "items": [
+          {
+            "label": "Çanakkale Ürün Fotoğrafı",
+            "text": "Üreticiler, yerel markalar ve e-ticaret mağazaları için çekim yapıyoruz. Ürünlerini getirebilir ya da çekimi birlikte planlayabiliriz; fotoğraflar doğrudan web sitende kullanılacak şekilde hazırlanır.",
+            "target": "works:photo"
+          },
+          {
+            "label": "E-Ticaret Fotoğrafları",
+            "text": "Ürün listesi, ürün detay sayfası ve kampanya görsellerini aynı dilde hazırlıyoruz; mağazan tutarlı ve güvenilir görünür.",
+            "target": "works:photo"
+          },
+          {
+            "label": "Beyaz Fon Ürün Fotoğrafları",
+            "text": "Ürünü tek başına ve en temiz haliyle gösterir. Pazaryerlerinin ve ürün listelerinin istediği bu çekimlerde ürün net, dengeli ışıkta ve gerçek rengiyle görünür.",
+            "target": "works:photo"
+          },
+          {
+            "label": "Renkli Fon Ürün Fotoğrafları",
+            "text": "Markanın kişiliğini öne çıkarır. Ürüne ve marka renklerine uygun fonlarla ana sayfa, kampanya ve sosyal medya görselleri hazırlıyoruz.",
+            "target": "works:photo"
+          }
+        ]
+      },
+      {
+        "title": "Web sitesi",
+        "color": "lavender",
+        "sticker": "browser",
+        "sticker2": "",
+        "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler.",
         "button": {
           "label": "Web işlerimiz ↗",
           "target": "works:web"
         },
-        "color": "mint",
-        "image": "",
-        "media": "pattern",
-        "stickerA": "camera",
-        "stickerB": "coin"
+        "items": [
+          {
+            "label": "Markaya Özel Web Tasarım & UI/UX",
+            "text": "Sayfa düzenlerini, tipografiyi, içerik hiyerarşisini ve kullanıcı etkileşimlerini markayla uyumlu, sade ve anlaşılır hale getiriyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Mobil Uyumlu ve Satış Odaklı Tasarım",
+            "text": "Masaüstü, tablet ve mobilde tutarlı çalışan bir yapı kuruyor, mobil kullanıcıların ürünlere ve satın alma adımlarına hızlı ulaşması için kullanıcı deneyimini optimize ediyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Anahtar Teslim E-Ticaret Kurulumu",
+            "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını kuruyoruz.",
+            "target": "page:anahtarteslim"
+          }
+        ]
       },
       {
-        "title": "Web\nsitesi",
-        "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler. Tanıtım sitesinden e-ticarete kadar tasarımı da kurulumu da bizden.",
-        "button": {
-          "label": "Detayları gör ↗",
-          "target": "page:tekstudyo"
-        },
-        "color": "lavender",
-        "image": "",
-        "media": "pattern",
-        "stickerA": "browser",
-        "stickerB": "cursor"
-      },
-      {
-        "title": "İkisi\nbir arada",
-        "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz. Tek muhatap, tek takvim, baştan sona tutarlı bir marka görünümü.",
-        "button": {
-          "label": "Detayları gör ↗",
-          "target": "page:tekstudyo"
-        },
+        "title": "İkisi bir arada",
         "color": "blue",
-        "image": "",
-        "media": "sticker",
-        "stickerA": "star",
-        "stickerB": "camera"
+        "sticker": "camera",
+        "sticker2": "browser",
+        "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz.",
+        "button": {
+          "label": "Paketi incele ↗",
+          "target": "page:tekstudyo"
+        },
+        "items": [
+          {
+            "label": "Fotoğraflar siteye uyar",
+            "text": "Çekimleri sitenin tasarımını bilerek yapıyoruz. Ölçü, kadraj ve fon baştan siteye göre seçilir.",
+            "target": "page:tekstudyo"
+          },
+          {
+            "label": "Site fotoğrafları taşır",
+            "text": "Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
+            "target": "page:tekstudyo"
+          }
+        ]
+      },
+      {
+        "title": "Google'da görünürlük",
+        "color": "sun",
+        "sticker": "magnifier",
+        "text": "Sitenin arama sonuçlarında, Google Merchant Center'da ve ölçümlemede doğru görünmesi için çalışıyoruz.",
+        "items": [
+          {
+            "label": "SEO & Teknik SEO",
+            "text": "Sayfa başlıklarını, meta açıklamalarını, URL yapılarını ve iç bağlantıları düzenliyor, teknik SEO altyapısını arama motorlarının siteyi doğru taramasına göre optimize ediyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Google Arama Görünürlüğü",
+            "text": "Ürün, kategori ve içerik sayfalarını arama niyetine uygun hale getiriyor, anahtar kelime ve sayfa optimizasyonları yapıyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Google Merchant Center",
+            "text": "Ürünlerin Google'da listelenebilmesi için Merchant Center bağlantısını kuruyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Google Tag Manager & Ölçümleme",
+            "text": "Dönüşümleri ve ziyaretçi hareketlerini takip edebilmek için ölçümleme altyapısını Google Tag Manager ile düzenliyoruz.",
+            "target": "works:web"
+          }
+        ],
+        "sticker2": "",
+        "button": {
+          "label": "",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "title": "Görünürlük & içerik",
+        "color": "mint",
+        "sticker": "chart",
+        "text": "İçeriklerin arama ve yapay zekâ destekli yanıt motorları tarafından doğru anlaşılması için çalışıyoruz.",
+        "items": [
+          {
+            "label": "GEO Optimizasyonu",
+            "text": "İçeriklerin yapay zekâ destekli arama ve yanıt motorları tarafından da doğru anlaşılıp kullanılabilmesi için GEO optimizasyonu yapıyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Blog & Organik Trafik",
+            "text": "Arama niyetine uygun içerikler hazırlıyor, blog yazılarını ürün ve kategori sayfalarıyla bağlantılı hale getiriyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Türkçe & İngilizce Çok Dilli Site",
+            "text": "URL yapılarını, başlıkları, meta bilgilerini ve sayfa organizasyonunu iki dil için ayrı ayrı düzenliyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Site İçi Linkleme",
+            "text": "Kategori, ürün ve blog sayfaları arasında mantıklı bağlantılar kuruyoruz.",
+            "target": "works:web"
+          }
+        ],
+        "sticker2": "",
+        "button": {
+          "label": "",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "title": "Pazaryeri & entegrasyonlar",
+        "color": "ember",
+        "sticker": "cart",
+        "text": "Ürünleri pazaryerlerinde de satışa sunuyor, tüm satış kanallarını tek yerden yönetilebilir hale getiriyoruz.",
+        "items": [
+          {
+            "label": "Trendyol & Hepsiburada Entegrasyonu",
+            "text": "Ürünlerin Trendyol ve Hepsiburada'da da satışa sunulabilmesi için entegrasyon altyapısını kuruyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Ortak Yönetim Paneli",
+            "text": "Site ve pazaryerlerindeki satış süreçlerini tek yerden takip edebileceğin ortak bir yönetim paneli kuruyoruz.",
+            "target": "works:web"
+          }
+        ],
+        "sticker2": "",
+        "button": {
+          "label": "",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "title": "Kurulum & altyapı",
+        "color": "lavender",
+        "sticker": "layers",
+        "text": "Ürün ve kategori yapısından site hızına, bağlantılardan yönlendirmelere teknik altyapıyı düzenliyoruz.",
+        "items": [
+          {
+            "label": "Ürün & Kategori Sayfaları",
+            "text": "Ürün gruplarını, açıklamaları ve kategori hiyerarşilerini daha anlaşılır hale getiriyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "Site Hızı & Teknik Optimizasyon",
+            "text": "Sayfa yapıları, mobil kullanım ve teknik performans üzerinde iyileştirmeler yapıyoruz.",
+            "target": "works:web"
+          },
+          {
+            "label": "URL, Yönlendirme & Site Mimarisi",
+            "text": "Eski ve hatalı URL'leri analiz ediyor, 404 veren sayfalara doğru yönlendirmeler kuruyor, sitemap'i kontrol ediyoruz.",
+            "target": "works:web"
+          }
+        ],
+        "sticker2": "",
+        "button": {
+          "label": "",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "title": "Web uygulamaları",
+        "color": "blue",
+        "sticker": "cursor",
+        "text": "E-ticaret mağazalarına eklenen, satışı destekleyen özel uygulamalar geliştiriyoruz.",
+        "items": [
+          {
+            "label": "Kategori Yıldızı",
+            "text": "Çok satan ürünleri kategori ve ürün sayfalarında rozetlerle öne çıkarır.",
+            "target": "work:kategori-yildizi"
+          },
+          {
+            "label": "Yorum Merkezi",
+            "text": "Müşteri yorumlarını tek merkezde toplar ve mağaza vitrininde gösterir.",
+            "target": "work:yorum-merkezi"
+          },
+          {
+            "label": "Canlı Sipariş Haritası",
+            "text": "Türkiye genelindeki siparişleri interaktif harita üzerinde gösterir.",
+            "target": "work:canli-siparis-haritasi"
+          }
+        ],
+        "sticker2": "",
+        "button": {
+          "label": "",
+          "target": "#iletisim"
+        }
+      },
+      {
+        "title": "Danışmanlık & yönetim",
+        "color": "sun",
+        "sticker": "bulb",
+        "text": "Sitenin yol haritasını birlikte çıkarıyor, istersen tüm işlemlerini düzenli olarak biz yürütüyoruz.",
+        "items": [
+          {
+            "label": "Web Sitesi Danışmanlığı",
+            "text": "Sitenin satışa nasıl daha iyi hizmet edeceğini birlikte bulup net bir yol haritasına dönüştürüyoruz.",
+            "target": "work:web-sitesi-danismanligi"
+          },
+          {
+            "label": "Aylık Site Yönetimi",
+            "text": "İstersen sitenin tüm iş ve işlemlerini düzenli olarak biz yürütürüz.",
+            "target": "work:aylik-site-yonetimi"
+          }
+        ],
+        "sticker2": "",
+        "button": {
+          "label": "",
+          "target": "#iletisim"
+        }
       }
     ]
   },
@@ -464,7 +679,7 @@
         ],
         "button": {
           "label": "Paket teklifi al ↗",
-          "target": "#iletisim"
+          "target": "page:teklifal"
         }
       }
     ],
@@ -571,7 +786,7 @@
         "target": "page:kosullar"
       }
     ],
-    "companyInfo": ""
+    "companyInfo": "The Goatz Studio · Seçil TÜREDİ\nÇanakkale Vergi Dairesi\nMedrese Sokak, No: 1, Office: 2, Fevzipaşa Mahallesi, 17100 Çanakkale\nKEP: secil.turedi@hs01.kep.tr"
   },
   "works": {
     "visible": true,
@@ -1660,8 +1875,269 @@
       ],
       "images": [
         {
-          "image": "",
-          "caption": ""
+          "image": "/uploads/cekim-gida-1.jpg",
+          "caption": "Nar ekşisi · beyaz fon",
+          "category": "Gıda & zeytinyağı"
+        },
+        {
+          "image": "/uploads/cekim-gida-2.jpg",
+          "caption": "Acı biberli zeytinyağı · beyaz fon",
+          "category": "Gıda & zeytinyağı"
+        },
+        {
+          "image": "/uploads/cekim-gida-3.jpg",
+          "caption": "Aromalı zeytinyağı · renkli fon",
+          "category": "Gıda & zeytinyağı"
+        },
+        {
+          "image": "/uploads/cekim-gida-4.jpg",
+          "caption": "Acı biberli zeytinyağı · renkli fon",
+          "category": "Gıda & zeytinyağı"
+        },
+        {
+          "image": "/uploads/cekim-kahve-1.jpg",
+          "caption": "Kahve · kavurma",
+          "category": "Kahve"
+        },
+        {
+          "image": "/uploads/cekim-kahve-2.jpg",
+          "caption": "Kahve · paket içi",
+          "category": "Kahve"
+        },
+        {
+          "image": "/uploads/cekim-kahve-3.jpg",
+          "caption": "Kahve · çekirdek",
+          "category": "Kahve"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-1.jpg",
+          "caption": "Yüz kremi",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-2.jpg",
+          "caption": "Yüz serumu",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-3.jpg",
+          "caption": "Dudak balmı",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-4.jpg",
+          "caption": "Ürün serisi",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-5.jpg",
+          "caption": "Krem deodorant",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-6.jpg",
+          "caption": "Krem deodorant · açık",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-kozmetik-7.jpg",
+          "caption": "Nemlendirici krem",
+          "category": "Kozmetik"
+        },
+        {
+          "image": "/uploads/cekim-mum-1.jpg",
+          "caption": "Mum · beyaz fon",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-mum-2.jpg",
+          "caption": "Mum · renkli fon",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-mum-3.jpg",
+          "caption": "Mum · atölye",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-mum-4.jpg",
+          "caption": "Mum · el ile",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-mum-5.jpg",
+          "caption": "Mum · detay",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-mum-6.jpg",
+          "caption": "Mum · kapak",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-mum-7.jpg",
+          "caption": "Koku şişeleri",
+          "category": "Mum & aroma"
+        },
+        {
+          "image": "/uploads/cekim-seramik-1.jpg",
+          "caption": "Vazo · renkli fon",
+          "category": "Seramik & el yapımı"
+        },
+        {
+          "image": "/uploads/cekim-seramik-2.jpg",
+          "caption": "Vazo · konsept",
+          "category": "Seramik & el yapımı"
+        },
+        {
+          "image": "/uploads/cekim-seramik-3.jpg",
+          "caption": "Vazo · beyaz fon",
+          "category": "Seramik & el yapımı"
+        },
+        {
+          "image": "/uploads/cekim-seramik-4.jpg",
+          "caption": "Seramik kase · el ile",
+          "category": "Seramik & el yapımı"
+        },
+        {
+          "image": "/uploads/cekim-seramik-5.jpg",
+          "caption": "Seramik · atölye",
+          "category": "Seramik & el yapımı"
+        },
+        {
+          "image": "/uploads/cekim-taki-1.jpg",
+          "caption": "Takı · bileklik",
+          "category": "Takı & cam ürünler"
+        },
+        {
+          "image": "/uploads/cekim-cam-1.jpg",
+          "caption": "Parfüm şişesi",
+          "category": "Takı & cam ürünler"
+        },
+        {
+          "image": "/uploads/cekim-cam-2.jpg",
+          "caption": "Şişe ve bardak",
+          "category": "Takı & cam ürünler"
+        },
+        {
+          "image": "/uploads/cekim-sofra-1.jpg",
+          "caption": "Hindistan cevizi kase · detay",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-2.jpg",
+          "caption": "Hindistan cevizi kase · dörtlü",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-3.jpg",
+          "caption": "Hindistan cevizi kase · kaşıkla",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-4.jpg",
+          "caption": "Hindistan cevizi kase · tekli",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-5.jpg",
+          "caption": "Bambu bardak · renkli fon",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-6.jpg",
+          "caption": "Bambu bardak · pipetli",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-7.jpg",
+          "caption": "Bambu bardak · pipetli detay",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-8.jpg",
+          "caption": "Bambu bardak · yatık",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-sofra-9.jpg",
+          "caption": "Bambu bardak · ikili",
+          "category": "Mutfak & sofra"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-1.jpg",
+          "caption": "Kağıt bant",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-2.jpg",
+          "caption": "Bant makinesi",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-3.jpg",
+          "caption": "Bant makinesi · yan",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-4.jpg",
+          "caption": "Tahin kavanozu · paketleme",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-5.jpg",
+          "caption": "Bal kavanozu · paketleme",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-6.jpg",
+          "caption": "Bal kavanozu · sarma",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-7.jpg",
+          "caption": "Kavanozlar · kutu içi",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-8.jpg",
+          "caption": "Şişe · kutu içi",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-9.jpg",
+          "caption": "Koli · kapalı",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-10.jpg",
+          "caption": "Koli · küp",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-11.jpg",
+          "caption": "Koli · küp açık",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-ambalaj-12.jpg",
+          "caption": "Koli · açık",
+          "category": "Ambalaj & paketleme"
+        },
+        {
+          "image": "/uploads/cekim-yemek-1.jpg",
+          "caption": "Burger · tasarım afişi",
+          "category": "Restoran & yemek"
+        },
+        {
+          "image": "/uploads/cekim-yemek-2.jpg",
+          "caption": "Pizza · konsept görsel",
+          "category": "Restoran & yemek"
+        },
+        {
+          "image": "/uploads/cekim-yemek-3.jpg",
+          "caption": "Salata · konsept görsel",
+          "category": "Restoran & yemek"
         }
       ]
     }
@@ -1945,7 +2421,7 @@
           "imageSticker": "star",
           "button": {
             "label": "Paket teklifi al ↗",
-            "target": "#iletisim"
+            "target": "page:teklifal"
           },
           "columns": 3,
           "cards": [
@@ -2353,7 +2829,7 @@
           "background": "paper",
           "eyebrow": "Son güncelleme: 1 Ekim 2026",
           "heading": "Veri sorumlusu",
-          "text": "Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca, thegoatzstudio.com internet sitesini ziyaret eden ve iletişim formunu kullanan kişileri bilgilendirmek amacıyla hazırlanmıştır.\n\nVeri sorumlusu The Goatz Studio’dur. Bize ulaşmak için: hello@thegoatzstudio.com",
+          "text": "Bu aydınlatma metni, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca, thegoatzstudio.com internet sitesini ziyaret eden ve iletişim formunu kullanan kişileri bilgilendirmek amacıyla hazırlanmıştır.\n\nVeri sorumlusu, The Goatz Studio markası altında faaliyet gösteren Seçil TÜREDİ’dir.\n\nÇanakkale Vergi Dairesi, Vergi Kimlik No: 53659508922\nAdres: Medrese Sokak, No: 1, Office: 2, Fevzipaşa Mahallesi, 17100 Çanakkale\nE-posta: hello@thegoatzstudio.com\nTelefon: +90 544 569 89 85\nKayıtlı Elektronik Posta (KEP) Adresi: secil.turedi@hs01.kep.tr",
           "align": "left",
           "image": "",
           "imageSide": "left",
@@ -3609,6 +4085,113 @@
           "button": {
             "label": "Nasıl çalışıyoruz? ↗",
             "target": "page:nasilcalisiyoruz"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "teklifal",
+      "title": "Teklif Al",
+      "slug": "teklif-al",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Teklif Al — Projenizi Oluşturun — The Goatz Studio",
+      "seoDescription": "Birkaç kısa soruyla ihtiyacınıza uygun e-ticaret paketini ve hizmetleri belirleyin, teklif talebinizi gönderin.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Teklif",
+        "title": "Projenizi\noluşturalım",
+        "subtitle": "Birkaç kısa soruyla ihtiyacınıza uygun paketi ve hizmetleri belirleyelim. Teknik bilgiye ihtiyacınız yok.",
+        "titleSize": 9,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "bulb",
+            "x": 9,
+            "y": 30,
+            "mx": 5,
+            "my": 15,
+            "size": 90,
+            "rotate": -12,
+            "float": true
+          },
+          {
+            "type": "chat",
+            "x": 88,
+            "y": 28,
+            "mx": 78,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "check",
+            "x": 12,
+            "y": 66,
+            "mx": 6,
+            "my": 84,
+            "size": 80,
+            "rotate": -8,
+            "float": true
+          },
+          {
+            "type": "rocket",
+            "x": 86,
+            "y": 62,
+            "mx": 80,
+            "my": 84,
+            "size": 90,
+            "rotate": 14,
+            "float": true
+          }
+        ],
+        "titleStyle": {
+          "italic": "on",
+          "tracking": "-3",
+          "leading": "93"
+        }
+      },
+      "blocks": [
+        {
+          "type": "wizard",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
           },
           "columns": 3,
           "cards": [

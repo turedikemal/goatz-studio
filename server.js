@@ -71,6 +71,8 @@ function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {})
 const messages = require('./lib/messages');
 const mailer = require('./lib/mailer');
 const contactHits = new Map();
+const siteHits = new Map();
+const sitecheck = require('./lib/sitecheck');
 const json = (res, status, data, extra) => send(res, status, JSON.stringify(data), 'application/json; charset=utf-8', extra);
 
 function readBody(req, limit) {
@@ -121,6 +123,15 @@ async function api(req, res, url) {
     mailer.notify(saved, store.load().contact.email).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
     hits.push(now); contactHits.set(ip, hits);
     return json(res, 200, { ok: true });
+  }
+
+  if (route === 'POST /api/check-site') {
+    const now = Date.now();
+    const hits = (siteHits.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
+    if (hits.length >= 20) return json(res, 429, { ok: false, message: 'Çok fazla deneme. Biraz sonra tekrar deneyin.' });
+    hits.push(now); siteHits.set(ip, hits);
+    const body = await readJson(req, 2000);
+    return json(res, 200, await sitecheck.check(body && body.url));
   }
 
   if (route === 'GET /api/me') return json(res, 200, { authed: authed(req), configured: Boolean(ADMIN_PASSWORD) });
