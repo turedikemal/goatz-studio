@@ -122,9 +122,9 @@
     const r = state.answers.route;
     // Mevcut web sitesi olanlara erişim, yayın ve kurulum durumu da sorulur
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
-    if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
-    if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'products', 'prodtype', 'wholesale', 'info', 'images', 'intl', 'support', 'users', 'result'];
+    if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services'];
+    if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'products', 'prodtype', 'wholesale', 'info', 'images', 'intl', 'users'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
