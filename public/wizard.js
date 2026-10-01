@@ -59,33 +59,28 @@
     platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
       ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
-    marketplace: { title: "Hangi platformlarda satis yapmak istiyorsunuz?", desc: "Entegrasyon istiyor musunuz? Kac platform?", options: [
-      ["no", "Hayir, sadece kendi sitemde", "Yalnizca kendi sitemde satis"],
-      ["local2", "Trendyol ve Hepsiburada", "Trendyol, Hepsiburada"],
-      ["local5", "Trendyol, Hepsiburada, N11, Amazon, Etsy", "5 onemli pazaryeri"],
-      ["advanced", "19 Yurt ici, 7 Yurt disi", "Trendyol, Hepsiburada, N11, Amazon ve Etsy pazaryerleri dahil toplam 26 pazaryeri ile entegre olarak siparislerinizi ve stoklarinizi tek ekrandan yonetebilirsiniz."]] },
-    products: { title: "Kac urun satisacaksiniz", desc: "Urun sayisini secin", options: [
-      ["1-100", "1-100 urun", "En fazla 100"],
-      ["101-500", "101-500 urun", "100den fazla 500e kadar"],
-      ["501-1000", "501-1.000 urun", "Besten fazla bin"],
+    products: { title: "Kaç ürün satışacaksınız?", desc: "Ürün sayısını seçin", options: [
+      ["1-100", "1-100 ürün", "En fazla 100"],
+      ["101-500", "101-500 ürün", "100den fazla 500e kadar"],
+      ["501-1000", "501-1.000 ürün", "Besten fazla bin"],
       ["1000+", "1.000'den fazla", "Binden fazla"],
-      ["unknown", "Belli degil", "Bilmiyorum"]] },
-    prodtype: { title: "Web sitenizde hangi tur urunler satacaksiniz?", desc: "Urununuzun karmasikligi ne seviyede?", options: [
-      ["physical", "Yalnizca fiziksel urunler", "Standart urunler."],
-      ["custom", "Musteri ozelu yazi veya gorsel eklenen", "Ozelestirme ile."],
-      ["packages", "Birden fazla urunden olusturulmus paketler", "Paket olusturma."],
-      ["builder", "Musteri tarafindan olusturacagi urun takimlari", "Dinamik yapı."]] },
-    wholesale: { title: "Toptan veya bayi satisina ihtiyaciniz var mi?", desc: "B2B satis kanalini dusunuyor musunuz?", options: [
-      ["no", "Hayir, yalnizca perakende satis yapacagim", "Sadece nihai musterilere."],
-      ["manual", "Toplu siparisleri manuel alacagim", "El ile islem."],
-      ["portal", "Bayilerim siteye giriş yapip ozel fiyatlarla siparis vermeli", "B2B portal sistemi."],
-      ["future", "Ileride degerlenderecegim", "Simdilik degil."]] },
-    users: { title: "Yonetim panelini kac kisi kullanacak?", desc: "Sitedeki urun ve satis yonetimini kac kisi yapacak?", options: [
-      ["1", "Yalnizca ben", "Ben tek basima yonetecegim."],
-      ["2-5", "2-5 kisi", "Kucuk bir tim ile yonetecegiz."],
-      ["6-10", "6-10 kisi", "Orta buyuklukte bir tim."],
-      ["11+", "11 kisi veya daha fazla", "Buyuk bir kuruluş"],
-      ["unknown", "Belli degil", "Henuz bilmiyorum"]] },
+      ["unknown", "Belli değil", "Bilmiyorum"]] },
+    prodtype: { title: "Web sitenizde hangi tür ürünler satacaksınız?", desc: "Ürününüzün karmaşıklığı ne seviyede?", options: [
+      ["physical", "Yalnızca fiziksel ürünler", "Standart ürünler."],
+      ["custom", "Müşteri özel yazı veya görsel eklenen", "Özelleştirme ile."],
+      ["packages", "Birden fazla üründen oluşturulmuş paketler", "Paket oluşturma."],
+      ["builder", "Müşteri tarafından oluşturacağı ürün takımları", "Dinamik yapı."]] },
+    wholesale: { title: "Toptan veya bayi satışına ihtiyacınız var mi?", desc: "B2B satış kanalını düşünüyor musunuz?", options: [
+      ["no", "Hayır, yalnızca perakende satış yapacağım", "Sadece nihai müşterilere."],
+      ["manual", "Toplu siparişleri manuel alacağım", "El ile işlem."],
+      ["portal", "Bayilerim siteye giriş yapıp özel fiyatlarla sipariş vermeli", "B2B portal sistemi."],
+      ["future", "İleride değerlendireceğim", "Şimdilik değil."]] },
+    users: { title: "Yönetim panelini kaç kişi kullanacak?", desc: "Sitedeki ürün ve satış yönetimini kaç kişi yapacak?", options: [
+      ["1", "Yalnızca ben", "Ben tek başıma yönetecegim."],
+      ["2-5", "2-5 kişi", "Küçük bir tim ile yonetecegiz."],
+      ["6-10", "6-10 kişi", "Orta büyüklükte bir tim."],
+      ["11+", "11 kişi veya daha fazla", "Büyük bir kuruluş"],
+      ["unknown", "Belli değil", "Henüz bilmiyorum"]] },
     info: { title: 'Ürün bilgileriniz hazır mı?', desc: 'Her ürünün adı, fiyatı ve açıklaması elinizde var mı?', options: [
       ['ready', 'Hazır', 'Ürün adları, fiyatlar ve açıklamalar bir dosyada veya mevcut sitemde hazır.'],
       ['edit', 'Düzenlenmesi gerekiyor', 'Ürün bilgilerim var ama eksikler ve düzeltilmesi gereken yazılar bulunuyor.'],
@@ -116,11 +111,11 @@
       ['partial', 'Bazıları eksik', 'Bir kısmı kurulu, eksik ya da hatalı olanlar var.'],
       ['none', 'Neredeyse hiçbiri yok', 'Site var ama Google, Meta ve SEO kurulumları yapılmamış.'],
       ['unknown', 'Bilmiyorum', 'Bu kurulumların tam olup olmadığını bilmiyorum.']] },
-    intl: { title: 'Yurt disi satis planiniz nedir?', desc: 'Uluslararasi satislar icin strateji?', options: [
-      ['tr-only', 'Yalnizca Turkiye\'ye satis', 'Yerli musterilere.'],
-      ['consider', 'Ileride degerlenderebilirim', 'Henuz hazir degil.'],
-      ['multilang', 'Simdi farkli dil ve para', 'Dil+para birimi desteği.'],
-      ['advanced', 'Farkli fiyatlar ve doviz kuru', 'Gelismis fiyatlandirma.']] },
+    intl: { title: 'Yurt dışı satış planınız nedir?', desc: 'Uluslararası satışlar için strateji?', options: [
+      ['tr-only', 'Yalnızca Türkiye\'ye satış', 'Yerli müşterilere.'],
+      ['consider', 'İleride değerlendireceğim', 'Henüz hazır değil.'],
+      ['multilang', 'Şimdi farklı dil ve para', 'Dil+para birimi desteği.'],
+      ['advanced', 'Farklı fiyatlar ve döviz kuru', 'Gelişmiş fiyatlandırma.']] },
   };
 
   const steps = () => {
@@ -129,7 +124,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'prodtype', 'wholesale', 'info', 'images', 'intl', 'support', 'users', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'products', 'prodtype', 'wholesale', 'info', 'images', 'intl', 'support', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -147,29 +142,23 @@
     if (a.route === 'custom') return 'Custom';
     
     let scores = { Starter: 0, Core: 0, Signature: 0, Advanced: 0 };
-    
-    // Pazaryeri puanı
-    if (a.marketplace === 'no') scores.Starter += 1;
-    if (a.marketplace === 'local2') scores.Core += 1;
-    if (a.marketplace === 'local5') scores.Signature += 1;
-    if (a.marketplace === 'advanced') scores.Advanced += 1;
-    
+
     // Ürün sayısı puanı
     if (a.products === '1-100') scores.Starter += 3;
     if (a.products === '101-500') scores.Core += 5;
     if (a.products === '501-1000') scores.Signature += 5;
     if (a.products === '1000+') scores.Signature += 5;
     
-// Uluslararasi satis puani
+// Uluslararasi satış puani
     if (a.intl === 'tr-only') { scores.Starter += 2; scores.Core += 2; }
     if (a.intl === 'multilang') scores.Signature += 5;
     if (a.intl === 'advanced') scores.Signature += 5;
-    // Urun tipi puani
+    // Ürün tipi puani
     if (a.prodtype === 'physical') scores.Starter += 2;
     if (a.prodtype === 'custom') scores.Core += 3;
     if (a.prodtype === 'packages') scores.Signature += 5;
     if (a.prodtype === 'builder') scores.Advanced += 5;
-    // Toptan/bayi satis puani
+    // Toptan/bayi satış puani
     if (a.wholesale === 'no') { scores.Starter += 2; scores.Core += 2; }
     if (a.wholesale === 'portal') scores.Advanced += 5;
     
