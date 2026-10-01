@@ -1230,8 +1230,8 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 .wz-urlbox { display: flex; align-items: stretch; max-width: 700px; border: 2px solid var(--carbon); border-radius: 20px; background: var(--sun); overflow: hidden; box-shadow: 2px 3px 0 var(--carbon); }
 .wz-urlbox i { display: grid; place-items: center; padding: 0 4px 0 16px; font-style: normal; font-size: 16px; font-weight: 800; text-transform: none; letter-spacing: 0; color: #00000099; }
-.wz .wz-urlbox input { border: 0; border-radius: 0; padding-left: 2px; background: var(--sun); color: #000; }
-.wz .wz-urlbox input:focus { outline: none; background: var(--sun); }
+.wz-form .wz-urlbox input { border: 0; border-radius: 0; padding-left: 2px; background: var(--sun) !important; color: #000; }
+.wz-form .wz-urlbox input:focus { outline: none; background: var(--sun) !important; }
 .wz-urlbox:focus-within { border-color: var(--sun); box-shadow: 0 0 0 2px var(--carbon); }
 
 /* Paketin tüm özellikleri: iki sütun, üstüne gelince sarı */
