@@ -494,14 +494,21 @@
         const c = state.contact;
         status.className = 'wz-form-status'; sendBtn.disabled = true; status.textContent = 'Gönderiliyor…';
         try {
-          let screenshot = null;
+          let screenshot = null, pdf = null;
           if (window.html2canvas) {
             try {
-              const canvas = await html2canvas(el.screen, { backgroundColor: '#fff', scale: 1.5, logging: false });
-              screenshot = canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
-            } catch (e) { console.log('Screenshot alınamadı:', e.message); }
+              const canvas = await html2canvas(el.screen, { backgroundColor: '#fff', scale: 1.5, logging: false, ignoreElements: (n) => n.id === 'wz-send' || n.id === 'wz-send-status' });
+              const url = canvas.toDataURL('image/jpeg', 0.85);
+              screenshot = url.split(',')[1];
+              if (window.jspdf) {
+                const w = canvas.width, h = canvas.height;
+                const doc = new window.jspdf.jsPDF({ orientation: w > h ? 'l' : 'p', unit: 'px', format: [w, h], hotfixes: ['px_scaling'] });
+                doc.addImage(url, 'JPEG', 0, 0, w, h);
+                pdf = doc.output('datauristring').split(',')[1];
+              }
+            } catch (e) { console.log('[teklif] rapor görüntüsü alınamadı:', e.message); }
           }
-          const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: c.name.trim(), email: c.email.trim(), phone: c.phone.trim(), website: c.website, message: leadMessage(true), screenshot }) });
+          const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: c.name.trim(), email: c.email.trim(), phone: c.phone.trim(), website: c.website, message: leadMessage(true), screenshot, pdf }) });
           const j = await res.json().catch(() => ({}));
           if (!res.ok) throw new Error(j.error || 'Gönderilemedi, lütfen tekrar deneyin.');
           state.sent = true; sendBtn.textContent = 'Gönderildi ✓'; status.textContent = 'Teşekkürler! Teklif talebiniz bize ulaştı, en kısa sürede dönüş yapacağız.'; status.classList.add('ok');

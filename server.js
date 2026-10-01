@@ -117,10 +117,12 @@ async function api(req, res, url) {
     const now = Date.now();
     const hits = (contactHits.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
     if (hits.length >= 5) return json(res, 429, { error: 'Çok fazla mesaj gönderdin. Biraz sonra tekrar dene.' });
-    const body = await readJson(req, 20000);
+    const body = await readJson(req, 16 * 1024 * 1024);
     if (body && body.website) return json(res, 200, { ok: true }); // bot tuzağı
     const saved = messages.add(body || {});
-    mailer.notify(saved, store.load().contact.email).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
+    const b64 = (x, max) => (typeof x === 'string' && x.length <= max && /^[A-Za-z0-9+/=]+$/.test(x) ? x : null);
+    const files = { jpeg: b64(body.screenshot, 9e6), pdf: b64(body.pdf, 9e6) };
+    mailer.notify(saved, store.load().contact.email, files).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
     hits.push(now); contactHits.set(ip, hits);
     return json(res, 200, { ok: true });
   }
