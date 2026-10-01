@@ -59,11 +59,11 @@
     platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
       ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
-    products: { title: ‘Tahmini kaç ürün satışa açılacak?’, desc: ‘Sitenize koyacağınız farklı ürünleri sayın. Aynı ürünün renklerini ve bedenlerini ayrı saymayın.’, options: [
-      [‘1-100’, ‘1–100 ürün’, ‘En fazla 100 ürün.’],
-      [‘101-500’, ‘101–500 ürün’, ‘100’den fazla, 500’e kadar ürün.’],
-      [‘501+’, ‘501+ ürün’, ‘500’den fazla ürün.’],
-      [‘unknown’, ‘Henüz belli değil’, ‘Ürünleri henüz saymadım.’]] },
+    products: { title: "Kac urun satisacaksiniz", desc: "Urun sayisini secin", options: [
+      ["1-100", "1-100 urun", "En fazla 100"],
+      ["101-500", "101-500 urun", "100den fazla 500e kadar"],
+      ["501+", "501+ urun", "500den fazla"],
+      ["unknown", "Belli degil", "Bilmiyorum"]] },
     info: { title: 'Ürün bilgileriniz hazır mı?', desc: 'Her ürünün adı, fiyatı ve açıklaması elinizde var mı?', options: [
       ['ready', 'Hazır', 'Ürün adları, fiyatlar ve açıklamalar bir dosyada veya mevcut sitemde hazır.'],
       ['edit', 'Düzenlenmesi gerekiyor', 'Ürün bilgilerim var ama eksikler ve düzeltilmesi gereken yazılar bulunuyor.'],
