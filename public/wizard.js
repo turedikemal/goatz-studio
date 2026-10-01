@@ -497,7 +497,11 @@
           let screenshot = null, pdf = null;
           if (window.html2canvas) {
             try {
-              const canvas = await html2canvas(el.screen, { backgroundColor: '#fff', scale: 1.5, logging: false, ignoreElements: (n) => n.id === 'wz-send' || n.id === 'wz-send-status' });
+              const canvas = await html2canvas(el.screen, {
+                backgroundColor: '#fff', scale: 1.5, logging: false,
+                ignoreElements: (n) => n.id === 'wz-send' || n.id === 'wz-send-status',
+                onclone: (doc) => { const st = doc.createElement('style'); st.textContent = '*,*::before,*::after{animation:none!important;transition:none!important;opacity:1!important;filter:none!important}'; doc.head.appendChild(st); },
+              });
               const url = canvas.toDataURL('image/jpeg', 0.85);
               screenshot = url.split(',')[1];
               if (window.jspdf) {
