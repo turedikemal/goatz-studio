@@ -355,7 +355,7 @@
     if (result) {
       const b = base();
       html = `<h2 tabindex="-1">Size uygun paket ve hizmetler.</h2><p class="wz-lead">Cevaplarınıza göre hazırladığımız ilk kapsam. Ek hizmetleri ayrı ayrı ekleyip çıkarabilirsiniz.</p>
-        ${packTiers(`<div class="wz-pack"><div><small>SİZE UYGUN PAKET</small><h3>${packageName()}</h3><p>${esc(packageReason())}</p></div><span class="wz-pill">Ön öneri</span></div>`)}
+        ${packTiers(`<div class="wz-pack"><div><small>SİZE UYGUN PAKET</small><h3>${packageName()}</h3><p>${esc(packageReason())}</p></div><span class="wz-pill">Sizin için en uygun</span></div>`)}
         ${answerChips()}
         <h3 class="wz-sub">Sizin için yapacaklarımız</h3>${b.length ? '<ul class="wz-summary wz-todo">' + b.map((s) => '<li>✓ ' + esc(s) + '</li>').join('') + '</ul>' : '<p class="wz-lead">Yeni web sitesi kurulumu eklenmedi. Seçtiğiniz hizmetler aşağıda.</p>'}
         ${packageDiff()}
