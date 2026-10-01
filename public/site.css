@@ -1370,8 +1370,9 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-pm-minus { position: relative; }
 .wz-hang { display: inline-block; pointer-events: auto; }
 .wz-hang i { display: none; }
-.wz-hang b { display: inline-block; padding: 8px 16px; border: 2px solid var(--carbon); border-radius: 20px; background: var(--sun); color: var(--carbon); font-size: 13px; font-weight: 600; line-height: 1.4; text-align: center; box-shadow: 2px 3px 0 var(--carbon), 0 0 24px rgba(255, 200, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.08); position: relative; top: -6px; }
+.wz-hang b { display: inline-block; padding: 8px 16px; border: 2px solid var(--carbon); border-radius: 20px; background: var(--sun); color: var(--carbon); font-size: 13px; font-weight: 600; line-height: 1.4; text-align: center; box-shadow: 2px 3px 0 var(--carbon), 0 0 24px rgba(255, 200, 0, 0.5), 0 8px 16px rgba(0, 0, 0, 0.08); position: relative; top: -6px; animation: uzayBoşluğu 2.8s ease-in-out infinite; }
 .wz-hang b::before { display: none; }
+@keyframes uzayBoşluğu { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-5px); } }
 @keyframes wzSwing { from { rotate: -7deg; } to { rotate: 7deg; } }
 @media (prefers-reduced-motion: reduce) { .wz-hang { animation: none; } }
 @media (max-width: 700px) { .wz-pm-minus { margin-top: 34px; } }
