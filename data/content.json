@@ -50,7 +50,9 @@
     "logoSize": 56,
     "logoFrame": "none",
     "logoStyle": "original",
-    "logoTint": "carbon"
+    "logoTint": "carbon",
+    "logoWordmark": true,
+    "logoWordColor": "carbon"
   },
   "seo": {
     "title": "The Goatz Studio — Ürün Çekimi ve Web Tasarım",
@@ -140,30 +142,24 @@
     "title": "ANAHTAR TESLİM",
     "titleColor": "carbon",
     "titleSize": 12,
-    "tagline": "E-Ticaret Siteleri",
+    "tagline": "E-ticaret siteniz sizi bekliyor.",
     "ribbon": {
       "visible": true,
       "color": "blue"
     },
     "buttons": [
       {
-        "label": "İşleri gör",
-        "target": "#isler",
+        "label": "Anahtar teslim nedir? ↗",
+        "target": "page:anahtarteslim",
         "style": "outline",
         "whatsappIcon": false
-      },
-      {
-        "label": "WhatsApp'tan yaz",
-        "target": "whatsapp",
-        "style": "outline",
-        "whatsappIcon": true
       }
     ],
     "stickers": [
       {
         "type": "camera",
-        "x": 12,
-        "y": 20,
+        "x": 8,
+        "y": 24,
         "mx": 6,
         "my": 11,
         "size": 120,
@@ -172,18 +168,18 @@
       },
       {
         "type": "coin",
-        "x": 52,
-        "y": 22,
+        "x": 47,
+        "y": 19,
         "mx": 76,
         "my": 12,
-        "size": 110,
-        "rotate": 10,
+        "size": 150,
+        "rotate": 8,
         "float": true
       },
       {
         "type": "browser",
-        "x": 78,
-        "y": 36,
+        "x": 87,
+        "y": 30,
         "mx": 78,
         "my": 80,
         "size": 120,
@@ -192,15 +188,22 @@
       },
       {
         "type": "check",
-        "x": 13,
-        "y": 44,
+        "x": 9,
+        "y": 62,
         "mx": 6,
         "my": 80,
         "size": 100,
         "rotate": -8,
         "float": true
       }
-    ]
+    ],
+    "titleStyle": {
+      "tracking": "-3",
+      "leading": "93"
+    },
+    "taglineStyle": {
+      "weight": "600"
+    }
   },
   "showcase": {
     "background": "sky",
@@ -266,8 +269,8 @@
         "title": "Ürün\nçekimi",
         "text": "Beyaz fonda katalog çekimlerinden konsept kurgulara kadar, ürününü en iyi açısından gösteren fotoğraflar. E-ticaret sitelerine ve pazaryerlerine hazır teslim.",
         "button": {
-          "label": "Fiyat sor ↗",
-          "target": "#iletisim"
+          "label": "Web işlerimiz ↗",
+          "target": "works:web"
         },
         "color": "mint",
         "image": "",
@@ -279,8 +282,8 @@
         "title": "Web\nsitesi",
         "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler. Tanıtım sitesinden e-ticarete kadar tasarımı da kurulumu da bizden.",
         "button": {
-          "label": "Fiyat sor ↗",
-          "target": "#iletisim"
+          "label": "Detayları gör ↗",
+          "target": "page:tekstudyo"
         },
         "color": "lavender",
         "image": "",
@@ -292,8 +295,8 @@
         "title": "İkisi\nbir arada",
         "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz. Tek muhatap, tek takvim, baştan sona tutarlı bir marka görünümü.",
         "button": {
-          "label": "Paketi incele ↗",
-          "target": "#iletisim"
+          "label": "Detayları gör ↗",
+          "target": "page:tekstudyo"
         },
         "color": "blue",
         "image": "",
@@ -305,38 +308,43 @@
   },
   "why": {
     "background": "paper",
-    "heading": "Çek, tasarla, yayına al. Hepsi tek stüdyoda, sürpriz maliyet olmadan.",
-    "showButtons": true,
+    "heading": "Çalışırız,\nsiz kazanırsınız.",
+    "showButtons": false,
     "cards": [
       {
         "title": "Net\nfiyat",
         "color": "ember",
         "sticker": "coin",
-        "image": ""
+        "image": "",
+        "text": "Başlamadan önce neyin yapılacağını birlikte netleştiriyoruz. Fiyat da bu kapsama göre belirleniyor. Ne için ne ödediğinizi baştan bilirsiniz."
       },
       {
         "title": "Hızlı\nteslim",
         "color": "sun",
         "sticker": "camera",
-        "image": ""
+        "image": "",
+        "text": "Çekim ve tasarım aynı stüdyoda, tek takvimle ilerlediği için işler birbirini beklemez. Onay adımlarını kısa tutuyoruz."
       },
       {
         "title": "Mobilde\nkusursuz",
         "color": "blue",
         "sticker": "browser",
-        "image": ""
+        "image": "",
+        "text": "Ziyaretçileriniz çoğunlukla telefondan bakıyor. Siteyi telefonu düşünerek tasarlıyor, hem telefonda hem bilgisayarda test ediyoruz."
       },
       {
         "title": "Satışa\nhazır",
         "color": "lavender",
         "sticker": "check",
-        "image": ""
+        "image": "",
+        "text": "Ürün listesinden sepete, ödeme adımından sipariş takibine kadar müşterinin yolunu kolaylaştırıyoruz. Site yayına çıktığında satışa hazır olur."
       },
       {
         "title": "Tek\nmuhatap",
         "color": "mint",
         "sticker": "star",
-        "image": ""
+        "image": "",
+        "text": "Çekim, tasarım ve yayın için ayrı kişilerle uğraşmazsınız. Başından sonuna aynı ekiple çalışırsınız."
       }
     ]
   },
@@ -459,7 +467,38 @@
           "target": "#iletisim"
         }
       }
-    ]
+    ],
+    "intro": "",
+    "roadmap": [
+      {
+        "title": "Tanışma",
+        "text": "Ne istediğini, ürünlerini ve hedefini konuşuyoruz.",
+        "color": "sun",
+        "sticker": "chat"
+      },
+      {
+        "title": "Plan",
+        "text": "Ne yapılacağını, sırasını ve içeriği netleştiriyoruz.",
+        "color": "lavender",
+        "sticker": "pencil"
+      },
+      {
+        "title": "Üretim",
+        "text": "Çekim ve tasarım yapılıyor; taslakları sen görüp onaylıyorsun.",
+        "color": "mint",
+        "sticker": "camera"
+      },
+      {
+        "title": "Yayın",
+        "text": "Test edip yayına alıyoruz ya da dosyaları teslim ediyoruz.",
+        "color": "blue",
+        "sticker": "rocket"
+      }
+    ],
+    "button": {
+      "label": "Başlayalım ↗",
+      "target": "page:nasilcalisiyoruz"
+    }
   },
   "contact": {
     "background": "paper",
@@ -509,26 +548,6 @@
         "my": 4,
         "size": 90,
         "rotate": 8,
-        "float": true
-      },
-      {
-        "type": "shoe",
-        "x": 4,
-        "y": 50,
-        "mx": 4,
-        "my": 46,
-        "size": 110,
-        "rotate": -6,
-        "float": true
-      },
-      {
-        "type": "sock",
-        "x": 4,
-        "y": 9,
-        "mx": 2,
-        "my": 8,
-        "size": 85,
-        "rotate": -6,
         "float": true
       }
     ],
@@ -620,8 +639,8 @@
       },
       {
         "key": "consulting",
-        "label": "Danışmanlık",
-        "color": "sun",
+        "label": "Danışmanlık ve Yönetim",
+        "color": "blue",
         "sticker": "check"
       }
     ],
@@ -749,7 +768,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Haki Heal",
@@ -814,7 +834,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Maya Gusto",
@@ -884,7 +905,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Dengepak",
@@ -979,7 +1001,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Loogy",
@@ -1074,7 +1097,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "The Goatz Creative",
@@ -1169,7 +1193,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Çanakkale İli Damızlık Koyun Keçi Yetiştiricileri Birliği",
@@ -1244,7 +1269,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Kategori Yıldızı",
@@ -1314,7 +1340,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Yorum Merkezi",
@@ -1389,7 +1416,8 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
       },
       {
         "title": "Canlı Sipariş Haritası",
@@ -1459,7 +1487,120 @@
             "sticker": ""
           }
         ],
-        "visible": true
+        "visible": true,
+        "slogan": ""
+      },
+      {
+        "title": "Web Sitesi Danışmanlığı",
+        "slug": "",
+        "category": "consulting",
+        "year": "",
+        "client": "",
+        "summary": "Sitenizin satışa nasıl daha iyi hizmet edeceğini birlikte buluyoruz. Neyi değiştireceğinizi ve hangi sırayla yapacağınızı net bir yol haritasına dönüştürüyoruz.",
+        "description": "Neler yapıyoruz?\n\n* Mevcut sitenin ve hedeflerin incelenmesi\n* Ziyaretçi yolculuğunun ve satış adımlarının değerlendirilmesi\n* Öncelik sırasına göre iyileştirme önerileri\n* Adım adım uygulanabilir yol haritası\n* Uygulama sürecinde yönlendirme",
+        "image": "",
+        "url": "",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          ""
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "blue",
+        "featured": false,
+        "live": false,
+        "natural": false,
+        "badge": "Hizmet",
+        "premium": false,
+        "lang": "",
+        "story": "",
+        "closing": "",
+        "listLabel": "Neler yapıyoruz?",
+        "fun": "",
+        "sections": [
+          {
+            "title": "Web Sitesi Danışmanlığı Nedir?",
+            "text": "Siteniz var ama beklediğiniz sonucu vermiyorsa ya da yeni bir site kurmadan önce doğru kararı vermek istiyorsanız, sitenizi birlikte inceliyoruz. Neyin işe yaradığını, neyin ziyaretçiyi yorduğunu ve nereye odaklanmanız gerektiğini sade bir dille anlatıyoruz.",
+            "sticker": ""
+          },
+          {
+            "title": "Kimler İçin?",
+            "text": "Sitesi olup ondan daha fazla verim almak isteyenler, yeni bir site ya da e-ticaret yatırımı yapmadan önce yol haritası arayanlar ve neyi öncelikle düzeltmesi gerektiğinden emin olmayanlar için.",
+            "sticker": ""
+          },
+          {
+            "title": "Nasıl İlerliyoruz?",
+            "text": "Önce siteyi ve hedeflerinizi birlikte inceliyoruz. Ardından bulgularımızı anlaşılır biçimde paylaşıyor, öncelik sırasına göre bir yol haritası çıkarıyoruz. İsterseniz uygulamasında da yanınızda oluyoruz.",
+            "sticker": ""
+          },
+          {
+            "title": "Sonunda Elinizde Ne Kalır?",
+            "text": "Neyi neden değiştireceğinizi bilirsiniz ve adımlar net bir sıraya girer. Böylece zamanınızı ve bütçenizi en çok fark yaratacak işlere ayırırsınız.",
+            "sticker": ""
+          }
+        ],
+        "visible": true,
+        "slogan": "Dert etmeyin, her şey düzelir."
+      },
+      {
+        "title": "Aylık Site Yönetimi",
+        "slug": "",
+        "category": "consulting",
+        "year": "",
+        "client": "",
+        "summary": "İsterseniz sitenizin tüm iş ve işlemlerini düzenli olarak biz yürütürüz. Siz işinize odaklanın, siteniz hep güncel ve çalışır kalsın.",
+        "description": "Neleri üstleniyoruz?\n\n* Sitenin düzenli kontrolü\n* İçerik, ürün ve görsel güncellemeleri\n* Teknik işlemler ve düzenlemeler\n* İstediğiniz değişikliklerin yapılması\n* Sürekli tek muhatap",
+        "image": "",
+        "url": "",
+        "urlLabel": "Siteyi ziyaret et",
+        "tags": [
+          ""
+        ],
+        "gallery": [
+          {
+            "image": "",
+            "caption": ""
+          }
+        ],
+        "color": "mint",
+        "featured": false,
+        "live": false,
+        "natural": false,
+        "badge": "Hizmet",
+        "premium": false,
+        "lang": "",
+        "story": "",
+        "closing": "",
+        "listLabel": "Neleri üstleniyoruz?",
+        "fun": "",
+        "sections": [
+          {
+            "title": "Aylık Site Yönetimi Nedir?",
+            "text": "Siteyi kurmak işin yalnızca başlangıcı. Aylık site yönetiminde, sitenizin günlük işleyişini ve gerektiğinde yapılması gereken tüm işlemleri düzenli olarak biz üstleniyoruz.",
+            "sticker": ""
+          },
+          {
+            "title": "Kimler İçin?",
+            "text": "Sitesiyle ilgilenecek zamanı ya da ekibi olmayanlar, siteyi kurduran ama sonrasını da güvenli ellere bırakmak isteyenler ve işlerini büyütmeye odaklanmak isteyenler için.",
+            "sticker": ""
+          },
+          {
+            "title": "Nasıl Çalışıyoruz?",
+            "text": "İhtiyaçlarınızı birlikte konuşuyor, sitenizde düzenli yapılacak işleri belirliyoruz. Sonrasında bu işleri sizin adınıza düzenli olarak yürütüyoruz. Yeni bir ihtiyaç çıktığında tek bir yere söylemeniz yeterli.",
+            "sticker": ""
+          },
+          {
+            "title": "Neden Aylık Yönetim?",
+            "text": "Tasarımı ve kurulumu yapan ekip siteyi en iyi tanıyan ekiptir. Aynı ekiple devam etmek, iş bilgisinin kaybolmaması ve her işin tek muhatapla çözülmesi demektir.",
+            "sticker": ""
+          }
+        ],
+        "visible": true,
+        "slogan": "Siz işinize bakın, web siteniz bizde."
       }
     ],
     "approach": {
@@ -2827,6 +2968,647 @@
           "button": {
             "label": "",
             "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nasilcalisiyoruz",
+      "title": "Nasıl Çalışıyoruz?",
+      "slug": "nasil-calisiyoruz",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Nasıl Çalışıyoruz? Web Tasarım ve Ürün Çekimi Süreci — The Goatz Studio",
+      "seoDescription": "The Goatz Studio ile çalışma süreci: tanışma, plan, üretim ve yayın adımlarında ne yapıyoruz, sizden ne bekliyoruz, ne teslim ediyoruz.",
+      "background": "sky",
+      "showContact": true,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Süreç",
+        "title": "Nasıl çalışıyoruz?",
+        "subtitle": "Tanışmadan yayına dört adım. Her adımda ne yaptığımızı, sizden ne beklediğimizi ve ne teslim ettiğimizi anlatıyoruz.",
+        "titleSize": 7,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "browser",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "layers",
+            "x": 72,
+            "y": 14,
+            "mx": 60,
+            "my": 8,
+            "size": 70,
+            "rotate": 12,
+            "float": true
+          }
+        ],
+        "subtitleStyle": {
+          "size": 60
+        }
+      },
+      "blocks": [
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Yol haritası",
+          "heading": "Dört adımda, baştan sona.",
+          "text": "Ürün çekimi, web sitesi ya da ikisi birden: hepsi aynı yoldan ilerler. Hizmete göre değişen yalnızca üretim adımıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 4,
+          "cards": [
+            {
+              "title": "1. Tanışma",
+              "text": "Ne istediğinizi, ürünlerinizi ve hedefinizi konuşuyoruz.",
+              "color": "sun",
+              "sticker": "chat",
+              "image": ""
+            },
+            {
+              "title": "2. Plan",
+              "text": "Ne yapılacağını, sırasını ve içeriği netleştiriyoruz.",
+              "color": "lavender",
+              "sticker": "pencil",
+              "image": ""
+            },
+            {
+              "title": "3. Üretim",
+              "text": "Çekim ve tasarım yapılıyor; taslakları görüp onaylıyorsunuz.",
+              "color": "mint",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "4. Yayın",
+              "text": "Test edip yayına alıyoruz ya da dosyaları teslim ediyoruz.",
+              "color": "blue",
+              "sticker": "rocket",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "1 · Tanışma",
+          "heading": "Önce sizi dinliyoruz.",
+          "text": "İlk görüşmede ürünlerinizi, hedefinizi ve nerede kullanacağınızı konuşuyoruz. Web sitesi için hangi sayfalara ihtiyaç duyduğunuzu, ürün çekimi için fotoğrafların nerede yayınlanacağını netleştiriyoruz.\n\nBu aşamada bir şey hazırlamanız gerekmiyor. Ürünlerinizi ve ne istediğinizi anlatmanız yeterli.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "sun",
+          "imageSticker": "chat",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "2 · Plan",
+          "heading": "Ne yapılacağını birlikte netleştiriyoruz.",
+          "text": "Konuştuklarımızı bir plana çeviriyoruz: neyin çekileceği, sitenin sayfaları ve içeriği, işlerin sırası. Hizmetin kapsamını bu aşamada birlikte kesinleştiriyoruz.\n\nPaket seçtiyseniz çekimi ve siteyi tek planda birleştiriyoruz; böylece fotoğraflar siteye göre kurgulanıyor.",
+          "align": "left",
+          "image": "",
+          "imageSide": "right",
+          "imageColor": "lavender",
+          "imageSticker": "pencil",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "3 · Üretim",
+          "heading": "Çekim ve tasarım yapılıyor, siz onaylıyorsunuz.",
+          "text": "Ürün çekiminde ürünleriniz stüdyoya gelir ya da biz yerinde çekeriz; ardından rötuş ve boyutlandırma yapılır. Pazaryerlerinde satış yapıyorsanız çekimi pazaryerine özel kurguluyoruz: ürün listeleri için temiz beyaz fon görselleri hazırlıyor, ihtiyaca göre detay ve kampanya görsellerini ekliyoruz.\n\nWeb sitesinde önce tasarım taslağını görürsünüz, onayınızla siteyi kurarız. Siteyi telefonda ve bilgisayarda test ediyoruz. Onayınız olmadan bir sonraki adıma geçmiyoruz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "camera",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "4 · Yayın",
+          "heading": "Yayına alıyor ya da teslim ediyoruz.",
+          "text": "Siteyi alan adınıza bağlayıp yayına alıyoruz. Ürün çekimlerinde kullanıma hazır dosyaları size teslim ediyoruz.\n\nBöylece e-ticaret sitenize ve pazaryerlerine hazır, tutarlı bir marka görünümüyle çıkıyorsunuz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "right",
+          "imageColor": "blue",
+          "imageSticker": "rocket",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "lavender",
+          "eyebrow": "Yayından sonra",
+          "heading": "Yayın bitiş değil, başlangıç.",
+          "text": "Sitenizin başarısı yayına aldığımız gün başlıyor. İsterseniz sonrasında da yanınızdayız: ya size yol gösteririz ya da işi baştan sona üstleniriz.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "İşlerde incele ↗",
+            "target": "works:consulting"
+          },
+          "columns": 2,
+          "cards": [
+            {
+              "title": "Web sitesi danışmanlığı",
+              "text": "Sitenizin satışa nasıl daha iyi hizmet edeceğini birlikte buluyoruz. Neyi değiştireceğinizi, neyi öne çıkaracağınızı net bir yol haritasıyla anlatıyoruz.",
+              "color": "mint",
+              "sticker": "bulb",
+              "image": ""
+            },
+            {
+              "title": "Aylık site yönetimi",
+              "text": "İsterseniz sitenizin tüm iş ve işlemlerini düzenli olarak biz yürütürüz. Siz işinize odaklanın, siteniz hep güncel ve çalışır kalsın.",
+              "color": "sun",
+              "sticker": "check",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Hizmete göre",
+          "heading": "Üretim adımı hizmete göre değişir.",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Ürün çekimi",
+              "text": "Ürünlerinizi ve kullanım yerini konuşuyoruz. Çekim, rötuş ve boyutlandırma yapılıyor. Kullanıma hazır dosyalar teslim ediliyor.",
+              "color": "sun",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "Web sitesi",
+              "text": "Hedefi, sayfaları ve içeriği netleştiriyoruz. Tasarım taslağını onaylıyorsunuz. Siteyi kuruyor, test ediyor ve alan adına bağlayıp yayına alıyoruz.",
+              "color": "lavender",
+              "sticker": "browser",
+              "image": ""
+            },
+            {
+              "title": "Çekim + site",
+              "text": "Tek görüşmede ikisini planlıyoruz. Önce ürünleri çekiyoruz, siteyi bu fotoğraflarla tasarlıyoruz ve her şey tek seferde yayına çıkıyor.",
+              "color": "mint",
+              "sticker": "check",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Başlamak için bir mesaj yeterli.",
+          "text": "Ürünlerinizi ve hedefinizi anlatın, planı birlikte çıkaralım.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "İletişime geç ↗",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anahtarteslim",
+      "title": "Anahtar Teslim E-Ticaret Sitesi",
+      "slug": "anahtar-teslim-e-ticaret",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Anahtar Teslim E-Ticaret Sitesi Nedir? — The Goatz Studio",
+      "seoDescription": "Anahtar teslim e-ticaret sitesi: tasarım, kurulum, ürün çekimi ve yayın baştan sona bizde. Neler yaptığımızı ve nasıl çalıştığımızı anlatıyoruz.",
+      "background": "sky",
+      "showContact": true,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Anahtar teslim",
+        "title": "Anahtar teslim e-ticaret sitesi nedir?",
+        "subtitle": "Mağazanızı kurmanın tamamı bizde. Hazır olunca anahtarı size teslim ediyoruz.",
+        "titleSize": 7,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "browser",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "key",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "layers",
+            "x": 72,
+            "y": 14,
+            "mx": 60,
+            "my": 8,
+            "size": 70,
+            "rotate": 12,
+            "float": true
+          }
+        ],
+        "subtitleStyle": {
+          "size": 60
+        }
+      },
+      "blocks": [
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "lavender",
+          "eyebrow": "Partnerliğimiz",
+          "heading": "Sizi bir müşteri olarak değil,\n[[okeyin dördüncüsü|iş ortağımız]]\ngibi görüyoruz.",
+          "text": "İlk görüşmeden mağazanızın açılışına kadar aynı ekiple ilerlersiniz. Tüm kurulumu biz üstlenir, mağazanızı yönetmeye hazır olmanız için size yol gösteririz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Tek muhatap",
+              "text": "Çekim, tasarım ve yayın için ayrı kişilerle uğraşmazsınız. Her şey tek elden ve tek planla ilerler.",
+              "color": "mint",
+              "sticker": "chat",
+              "image": ""
+            },
+            {
+              "title": "Onayınızla ilerleriz",
+              "text": "Tasarım taslağını görüp onaylıyorsunuz. Onayınız olmadan bir sonraki adıma geçmiyoruz.",
+              "color": "sun",
+              "sticker": "check",
+              "image": ""
+            },
+            {
+              "title": "Yayından sonra da yanınızdayız",
+              "text": "İsterseniz web sitesi danışmanlığı ve aylık site yönetimiyle devam ediyoruz.",
+              "color": "blue",
+              "sticker": "bulb",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Kısaca",
+          "heading": "Siz işinize bakın, mağazanız hazır olsun.",
+          "text": "Anahtar teslim, e-ticaret sitenizi kurmanın baştan sona bizim işimiz olması demek. Tasarımı, kurulumu ve yayını biz yapıyoruz. Siz ürünlerinizi ve hedefinizi anlatıyorsunuz, mağazanız hazır olunca anahtarı size teslim ediyoruz.\n\nİşi parça parça farklı kişilere dağıtmak, birbirini bekleyen takvimlerle uğraşmak yok.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "store",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Ne yapıyoruz?",
+          "heading": "Mağazanız için gereken her adım.",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 4,
+          "cards": [
+            {
+              "title": "Tasarım",
+              "text": "Markanıza özel, hızlı açılan, telefonda kusursuz görünen bir site tasarlıyoruz.",
+              "color": "lavender",
+              "sticker": "palette",
+              "image": ""
+            },
+            {
+              "title": "Kurulum",
+              "text": "Ürün listesinden sepete, ödeme adımından sipariş takibine kadar müşterinin yolunu kuruyoruz.",
+              "color": "mint",
+              "sticker": "cart",
+              "image": ""
+            },
+            {
+              "title": "Ürün çekimi",
+              "text": "İsterseniz ürünlerinizi sitenize göre çekiyoruz. Fotoğraflar siteye uyar, site fotoğrafları taşır.",
+              "color": "blue",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "Yayın",
+              "text": "Siteyi telefonda ve bilgisayarda test ediyor, alan adınıza bağlayıp yayına alıyoruz.",
+              "color": "ember",
+              "sticker": "rocket",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Teslimden sonra",
+          "heading": "Yönetim sizde.",
+          "text": "Mağazanız yayına çıktığında yönetim panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz. Anahtar sizde olur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "right",
+          "imageColor": "lavender",
+          "imageSticker": "sliders",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mint",
+          "eyebrow": "",
+          "heading": "Süreci adım adım görmek ister misiniz?",
+          "text": "Tanışmadan yayına dört adımı ayrıca anlattık.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Nasıl çalışıyoruz? ↗",
+            "target": "page:nasilcalisiyoruz"
           },
           "columns": 3,
           "cards": [

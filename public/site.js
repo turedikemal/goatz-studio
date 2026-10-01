@@ -47,13 +47,14 @@
     dots.removeAttribute('aria-hidden');
     let current = 0;
     const centerOf = (c) => c.offsetLeft - (carousel.clientWidth - c.offsetWidth) / 2;
+    const setFlip = (c, on) => { if (!c.classList.contains('has-back')) return; c.classList.toggle('flipped', on); c.setAttribute('aria-pressed', String(on)); };
     const mark = () => {
       const mid = carousel.scrollLeft + carousel.clientWidth / 2;
       let best = 0, dist = Infinity;
       cards.forEach((c, i) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = i; } });
       current = best;
       bullets.forEach((b, i) => b.classList.toggle('on', i === best));
-      cards.forEach((c, i) => c.classList.toggle('active', i === best));
+      cards.forEach((c, i) => { c.classList.toggle('active', i === best); if (i !== best) setFlip(c, false); });
     };
     carousel.addEventListener('scroll', mark, { passive: true });
     mark();
@@ -81,6 +82,25 @@
     };
     bullets.forEach((b, i) => b.addEventListener('click', () => goTo(i)));
 
+    // Karta tıklayınca arka yüze döner; başka karta geçince ön yüze döner (sürüklemede çevirme)
+    let dragged = false;
+    const flipCard = (c) => {
+      const i = cards.indexOf(c), open = !c.classList.contains('flipped');
+      cards.forEach((x) => { if (x !== c) setFlip(x, false); });
+      if (open && i !== current) goTo(i);
+      setFlip(c, open);
+    };
+    carousel.addEventListener('click', (e) => {
+      const c = e.target.closest('.c-card.has-back');
+      if (c && !dragged) flipCard(c);
+    });
+    carousel.addEventListener('keydown', (e) => {
+      const c = e.target.closest && e.target.closest('.c-card.has-back');
+      if (!c || (e.key !== 'Enter' && e.key !== ' ')) return;
+      e.preventDefault();
+      flipCard(c);
+    });
+
     // Fareyle sürükleme
     let down = null;
     carousel.addEventListener('pointerdown', (e) => {
@@ -97,9 +117,40 @@
       if (!down) return;
       const moved = down.moved;
       down = null;
+      dragged = moved;
+      setTimeout(() => { dragged = false; }, 0);
       carousel.classList.remove('dragging');
       if (moved) goTo(current);
     });
+
+    // Fare kenara yaklaştıkça kartlar o yöne akıcı biçimde kayar (yalnızca fare; kenara yaklaştıkça hızlanır, bırakınca yavaşlayarak durur)
+    if (on('slider')) {
+      const ZONE = 0.3, MAX = 1100; // kenardaki %30'luk bölge, en fazla 1100 px/sn
+      let target = 0, vel = 0, pos = 0, raf = 0, last = 0, edge = false;
+      const tick = (now) => {
+        const dt = Math.min(0.05, (now - last) / 1000 || 0.016);
+        last = now;
+        vel += (target - vel) * Math.min(1, dt * 7); // hız yumuşakça hedefe yaklaşır
+        if (!target && Math.abs(vel) < 8) { raf = 0; vel = 0; edge = false; carousel.classList.remove('edge'); mark(); goTo(current); return; }
+        const max = carousel.scrollWidth - carousel.clientWidth;
+        pos = clamp(pos + vel * dt, 0, max);
+        carousel.scrollLeft = pos;
+        if ((pos <= 0 && vel < 0) || (pos >= max && vel > 0)) vel = 0;
+        raf = requestAnimationFrame(tick);
+      };
+      carousel.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse' || down) return;
+        const r = carousel.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+        const k = x < ZONE ? -(ZONE - x) / ZONE : x > 1 - ZONE ? (x - (1 - ZONE)) / ZONE : 0;
+        target = k * k * Math.sign(k) * MAX; // kareli eğri: kenara yaklaştıkça yumuşakça hızlanır
+        if (!target) { if (!raf && !edge) return; } else if (!edge) {
+          edge = true; cancelAnimationFrame(anim); carousel.classList.remove('animating'); carousel.classList.add('edge');
+          pos = carousel.scrollLeft; vel = 0;
+        }
+        if (!raf) { last = performance.now(); raf = requestAnimationFrame(tick); }
+      });
+      carousel.addEventListener('pointerleave', () => { target = 0; });
+    }
 
     // Otomatik oynatma (4 sn), üzerine gelince durur, ekranda değilken çalışmaz
     const every = parseFloat(carousel.dataset.autoplay) || 0;
@@ -716,22 +767,12 @@
   const shyFace = (el) => {
     if (busy(el, ms(3.2))) return;
     const g = fxLayer(el);
-    const eyeL = svgEl('circle', { cx: 37, cy: 42, r: 8, fill: '#fff', stroke: '#000', 'stroke-width': 2.5 });
-    const eyeR = svgEl('circle', { cx: 63, cy: 42, r: 8, fill: '#fff', stroke: '#000', 'stroke-width': 2.5 });
-    const pupL = svgEl('circle', { cx: 35, cy: 47, r: 3.5, fill: '#000' });
-    const pupR = svgEl('circle', { cx: 61, cy: 47, r: 3.5, fill: '#000' });
-    const patch = svgEl('rect', { x: 33, y: 57, width: 34, height: 15, fill: '#ffd731' });
-    const mouth = svgEl('path', { d: 'M41 65 q9 4 18 0', fill: 'none', stroke: '#000', 'stroke-width': 3, 'stroke-linecap': 'round' });
-    const bl = svgEl('ellipse', { cx: 25, cy: 56, rx: 10, ry: 6, fill: '#ff5d8f', opacity: 0 });
-    const br = svgEl('ellipse', { cx: 75, cy: 56, rx: 10, ry: 6, fill: '#ff5d8f', opacity: 0 });
-    const lines = svgEl('path', { d: 'M20 53 l4 4 M26 52 l4 4 M70 52 l4 4 M76 53 l4 4', stroke: '#fff', 'stroke-width': 1.6, 'stroke-linecap': 'round', opacity: 0 });
-    const scene = svgEl('g', { opacity: 0 });
-    scene.append(eyeL, eyeR, pupL, pupR, patch, mouth);
-    g.append(scene, bl, br, lines);
+    // Efekt katmanı 100x100 kutuda çizilir (jeton çizimi bu kutuya sığdırılmış)
+    const bl = svgEl('ellipse', { cx: 27, cy: 55, rx: 6, ry: 3.8, fill: '#ff5d8f', opacity: 0 });
+    const br = svgEl('ellipse', { cx: 74, cy: 53, rx: 6, ry: 3.8, fill: '#ff5d8f', opacity: 0 });
+    g.append(bl, br);
     const hold = 2.3;
-    scene.animate([{ opacity: 0 }, { opacity: 1, offset: 0.08 }, { opacity: 1, offset: 0.86 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' });
-    [bl, br].forEach((b) => b.animate([{ opacity: 0 }, { opacity: 0.95, offset: 0.22 }, { opacity: 0.7, offset: 0.5 }, { opacity: 0.95, offset: 0.7 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' }));
-    lines.animate([{ opacity: 0 }, { opacity: 0.9, offset: 0.3 }, { opacity: 0.9, offset: 0.8 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' });
+    [bl, br].forEach((x) => x.animate([{ opacity: 0 }, { opacity: 0.9, offset: 0.22 }, { opacity: 0.65, offset: 0.5 }, { opacity: 0.9, offset: 0.7 }, { opacity: 0 }], { duration: ms(hold), fill: 'forwards' }));
     const rot = restRot(el);
     el.animate([{ rotate: rot, scale: 1 }, { rotate: `calc(${rot} + 10deg)`, scale: 0.9, offset: 0.2 }, { rotate: `calc(${rot} + 7deg)`, scale: 0.92, offset: 0.8 }, { rotate: rot, scale: 1 }], { duration: ms(hold), easing: 'ease-in-out' });
     setTimeout(() => g.remove(), ms(hold) + 100);
@@ -1050,7 +1091,7 @@
   const CLICKS = {
     'st-camera': shootPhoto, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
-    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': noFx, 'st-shoe': noFx, 'st-sock': noFx, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
+    'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-key': spinMedal, 'st-refresh': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': noFx, 'st-shoe': noFx, 'st-sock': noFx, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
   const CLICK_SEL = Object.keys(CLICKS).map((k) => `.${k}`).join(', ');
   // Efektler fare üstüne gelince çalışır (dokunmatikte dokununca)
@@ -1137,6 +1178,10 @@
       io.observe(el);
     });
   }
+
+  // Süreç yol haritası: görününce çizgi çizilir, adımlar sırayla gelir
+  const rmIo = onceAt(ROOT80, (el) => el.classList.add('on'));
+  document.querySelectorAll('[data-roadmap]').forEach((el) => rmIo.observe(el));
 
   // 5) Kart grupları: 3D uçarak gelir, toplam 0,2 sn arayla
   if (on('cards')) {

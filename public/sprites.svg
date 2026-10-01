@@ -1,6 +1,9 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <filter id="soft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="14"/></filter>
+    <filter id="dk" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feColorMatrix type="matrix" values=".6 0 0 0 0  0 .6 0 0 0  0 0 .6 0 0  0 0 0 1 0"/>
+    </filter>
     <filter id="grain" x="0" y="0" width="100%" height="100%">
       <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="noise"/>
       <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
@@ -10,15 +13,60 @@
     </filter>
     <!-- Kamera -->
     <symbol id="s-camera" viewBox="0 0 120 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-camera">
       <rect x="8" y="24" width="104" height="68" rx="16" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <rect x="36" y="12" width="36" height="18" rx="6" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <circle cx="60" cy="58" r="24" fill="#fff" stroke="#000" stroke-width="3"/>
       <circle cx="60" cy="58" r="13" fill="#5c4ade" stroke="#000" stroke-width="3"/>
       <circle cx="55" cy="53" r="4" fill="#fff"/>
       <rect x="90" y="34" width="12" height="8" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
+    </g>    <!-- Anahtar -->
+    <symbol id="s-key" viewBox="0 0 512 512">
+  
+  <defs>
+    <linearGradient id="key-mint" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#65efbd"/>
+      <stop offset="1" stop-color="#31c997"/>
+    </linearGradient>
+    <linearGradient id="key-side" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#42d7a3"/>
+      <stop offset="1" stop-color="#1bbd88"/>
+    </linearGradient>
+      <!-- Logo -->
+    <g id="lg-mark" fill-rule="evenodd">
+      <path d="M 124 169 L 120 177 L 118 179 L 116 183 L 116 185 L 113 190 L 113 192 L 112 193 L 112 195 L 110 199 L 110 203 L 109 204 L 109 208 L 108 209 L 108 215 L 107 216 L 107 332 L 114 332 L 115 333 L 362 333 L 363 332 L 363 122 L 206 122 L 205 123 L 197 123 L 196 124 L 191 124 L 190 125 L 187 125 L 186 126 L 184 126 L 183 127 L 181 127 L 180 128 L 178 128 L 177 129 L 172 130 L 158 137 L 156 139 L 153 140 L 150 143 L 149 143 L 146 146 L 145 146 L 130 161 L 130 162 Z" fill="#4da2ff"/>
+      <path d="M 107 346 L 107 473 L 108 474 L 108 481 L 109 482 L 109 486 L 111 490 L 111 493 L 112 494 L 112 496 L 114 499 L 114 501 L 117 506 L 117 508 L 119 512 L 121 514 L 123 519 L 128 525 L 128 526 L 142 541 L 143 541 L 150 547 L 154 549 L 157 552 L 173 560 L 175 560 L 176 561 L 178 561 L 179 562 L 181 562 L 185 564 L 188 564 L 189 565 L 192 565 L 193 566 L 197 566 L 198 567 L 206 567 L 207 568 L 363 568 L 363 346 L 310 346 L 309 345 L 289 345 L 288 346 L 282 346 L 281 345 L 274 345 L 273 346 L 149 346 L 148 345 L 135 345 L 134 346 L 120 346 L 119 345 L 116 345 L 115 346 Z" fill="#5c4ade"/>
+      <path d="M 378 346 L 378 518 L 379 519 L 379 524 L 380 525 L 380 528 L 381 529 L 381 531 L 387 543 L 390 546 L 390 547 L 401 558 L 415 565 L 418 565 L 419 566 L 422 566 L 423 567 L 428 567 L 429 568 L 600 568 L 601 567 L 601 422 L 600 421 L 600 414 L 599 413 L 599 409 L 598 408 L 597 401 L 595 398 L 595 396 L 588 382 L 584 378 L 584 377 L 576 369 L 576 368 L 574 366 L 573 366 L 570 363 L 569 363 L 566 360 L 565 360 L 560 356 L 552 352 L 550 352 L 547 350 L 545 350 L 541 348 L 538 348 L 537 347 L 533 347 L 532 346 L 400 346 L 399 345 L 383 345 L 382 346 Z" fill="#55db9c"/>
+      <path d="M 480 111 L 479 112 L 472 112 L 471 113 L 462 114 L 461 115 L 458 115 L 457 116 L 455 116 L 454 117 L 449 118 L 446 120 L 444 120 L 432 126 L 430 128 L 429 128 L 427 130 L 423 132 L 415 139 L 414 139 L 404 149 L 404 150 L 396 159 L 393 165 L 391 167 L 386 177 L 386 179 L 383 184 L 383 186 L 382 187 L 382 190 L 381 191 L 381 194 L 380 195 L 380 198 L 379 199 L 379 203 L 378 204 L 378 210 L 377 211 L 377 234 L 378 235 L 378 241 L 379 242 L 379 246 L 380 247 L 380 250 L 382 254 L 382 257 L 385 263 L 385 265 L 388 270 L 388 272 L 389 274 L 391 276 L 393 281 L 396 284 L 397 287 L 400 290 L 400 291 L 413 305 L 414 305 L 418 309 L 419 309 L 422 312 L 423 312 L 429 317 L 443 324 L 445 324 L 448 326 L 450 326 L 451 327 L 453 327 L 454 328 L 456 328 L 460 330 L 463 330 L 464 331 L 468 331 L 469 332 L 475 332 L 476 333 L 498 333 L 499 332 L 506 332 L 507 331 L 511 331 L 512 330 L 515 330 L 516 329 L 518 329 L 519 328 L 521 328 L 522 327 L 524 327 L 525 326 L 530 325 L 535 322 L 537 322 L 539 320 L 546 317 L 548 315 L 552 313 L 555 310 L 556 310 L 559 307 L 560 307 L 574 293 L 574 292 L 580 285 L 580 284 L 584 279 L 586 274 L 588 272 L 589 270 L 589 268 L 594 258 L 594 256 L 595 255 L 596 250 L 597 249 L 597 245 L 598 244 L 598 240 L 599 239 L 599 231 L 600 230 L 600 213 L 599 212 L 599 205 L 598 204 L 598 199 L 597 198 L 596 191 L 595 190 L 594 185 L 592 182 L 592 180 L 590 177 L 590 175 L 587 169 L 585 167 L 584 164 L 580 159 L 580 158 L 573 150 L 573 149 L 563 139 L 562 139 L 557 134 L 556 134 L 550 129 L 547 128 L 545 126 L 531 119 L 529 119 L 526 117 L 523 117 L 519 115 L 516 115 L 515 114 L 512 114 L 511 113 L 507 113 L 506 112 L 498 112 L 497 111 Z" fill="#fb4903"/>
+    </g>
+    <g id="lg-text" fill-rule="evenodd"><path d="M 1318 402 L 1317 403 L 1317 435 L 1318 436 L 1318 438 L 1317 439 L 1317 566 L 1318 567 L 1347 567 L 1347 402 Z M 975 402 L 974 403 L 974 508 L 975 509 L 975 517 L 976 518 L 977 527 L 978 528 L 978 530 L 979 531 L 980 536 L 984 544 L 986 546 L 988 550 L 998 560 L 1004 563 L 1006 565 L 1008 566 L 1010 566 L 1013 568 L 1016 568 L 1017 569 L 1020 569 L 1021 570 L 1028 570 L 1029 571 L 1035 571 L 1036 570 L 1043 570 L 1044 569 L 1047 569 L 1048 568 L 1053 567 L 1061 563 L 1064 560 L 1065 560 L 1075 550 L 1075 549 L 1081 541 L 1084 535 L 1084 533 L 1086 530 L 1086 528 L 1088 527 L 1089 528 L 1089 563 L 1090 564 L 1090 567 L 1117 567 L 1118 565 L 1117 564 L 1117 520 L 1118 519 L 1118 509 L 1117 508 L 1117 402 L 1088 402 L 1088 484 L 1087 485 L 1087 492 L 1086 493 L 1086 497 L 1085 498 L 1085 501 L 1084 502 L 1083 507 L 1081 510 L 1081 512 L 1076 522 L 1074 524 L 1074 525 L 1062 537 L 1061 537 L 1057 540 L 1055 540 L 1051 542 L 1048 542 L 1047 543 L 1034 543 L 1033 542 L 1030 542 L 1022 538 L 1014 530 L 1007 516 L 1007 513 L 1006 512 L 1006 508 L 1005 507 L 1005 403 L 1004 402 Z M 1443 398 L 1442 399 L 1434 399 L 1433 400 L 1429 400 L 1428 401 L 1425 401 L 1421 403 L 1418 403 L 1417 404 L 1415 404 L 1405 409 L 1403 411 L 1402 411 L 1400 413 L 1396 415 L 1381 430 L 1381 431 L 1379 433 L 1378 436 L 1376 438 L 1372 446 L 1372 448 L 1370 451 L 1370 453 L 1369 454 L 1369 456 L 1367 460 L 1367 463 L 1366 464 L 1366 469 L 1365 470 L 1365 499 L 1366 500 L 1366 506 L 1367 507 L 1367 510 L 1368 511 L 1368 513 L 1369 514 L 1370 519 L 1372 522 L 1372 524 L 1375 530 L 1377 532 L 1378 535 L 1380 537 L 1382 541 L 1394 553 L 1395 553 L 1401 558 L 1413 564 L 1415 564 L 1418 566 L 1420 566 L 1424 568 L 1427 568 L 1428 569 L 1432 569 L 1433 570 L 1444 570 L 1445 571 L 1452 571 L 1453 570 L 1463 570 L 1464 569 L 1469 569 L 1470 568 L 1477 567 L 1480 565 L 1485 564 L 1493 560 L 1495 558 L 1498 557 L 1506 550 L 1507 550 L 1514 543 L 1514 542 L 1517 539 L 1517 538 L 1521 533 L 1527 521 L 1527 519 L 1528 518 L 1528 516 L 1530 512 L 1530 509 L 1531 508 L 1531 504 L 1532 503 L 1532 496 L 1533 495 L 1533 474 L 1532 473 L 1532 467 L 1531 466 L 1531 461 L 1530 460 L 1530 457 L 1529 456 L 1529 454 L 1528 453 L 1527 448 L 1522 438 L 1520 436 L 1520 435 L 1518 433 L 1516 429 L 1508 420 L 1507 420 L 1502 415 L 1501 415 L 1496 411 L 1482 404 L 1480 404 L 1476 402 L 1473 402 L 1472 401 L 1463 400 L 1462 399 L 1455 399 L 1454 398 Z M 1443 425 L 1453 425 L 1454 426 L 1460 426 L 1461 427 L 1464 427 L 1478 434 L 1490 446 L 1490 447 L 1492 449 L 1497 459 L 1497 461 L 1498 462 L 1498 465 L 1499 466 L 1499 469 L 1500 470 L 1500 474 L 1501 475 L 1501 495 L 1500 496 L 1500 500 L 1499 501 L 1499 504 L 1498 505 L 1498 507 L 1497 508 L 1496 513 L 1494 517 L 1492 519 L 1491 522 L 1489 524 L 1487 528 L 1484 531 L 1483 531 L 1479 535 L 1478 535 L 1473 539 L 1471 540 L 1469 540 L 1466 542 L 1463 542 L 1462 543 L 1458 543 L 1457 544 L 1441 544 L 1440 543 L 1436 543 L 1435 542 L 1432 542 L 1429 540 L 1427 540 L 1423 538 L 1417 533 L 1416 533 L 1411 528 L 1411 527 L 1408 524 L 1405 518 L 1403 516 L 1401 512 L 1401 510 L 1400 509 L 1400 506 L 1399 505 L 1399 502 L 1398 501 L 1398 497 L 1397 496 L 1397 473 L 1398 472 L 1398 469 L 1399 468 L 1399 465 L 1400 464 L 1400 461 L 1401 460 L 1401 458 L 1404 452 L 1406 450 L 1407 447 L 1410 444 L 1410 443 L 1418 435 L 1419 435 L 1421 433 L 1424 432 L 1426 430 L 1430 428 L 1432 428 L 1433 427 L 1436 427 L 1437 426 L 1442 426 Z M 885 365 L 885 400 L 883 402 L 857 402 L 857 427 L 880 427 L 882 429 L 882 522 L 883 523 L 883 528 L 884 529 L 884 533 L 885 534 L 886 539 L 890 547 L 898 557 L 899 557 L 902 560 L 914 566 L 916 566 L 917 567 L 921 567 L 922 568 L 927 568 L 928 569 L 946 569 L 947 568 L 954 568 L 955 567 L 959 567 L 960 566 L 963 566 L 963 539 L 960 539 L 959 540 L 954 540 L 953 541 L 946 541 L 945 542 L 938 542 L 937 541 L 932 541 L 931 540 L 929 540 L 925 538 L 918 532 L 918 531 L 916 529 L 914 525 L 914 523 L 913 522 L 913 518 L 912 517 L 912 429 L 914 427 L 962 427 L 962 402 L 913 402 L 912 401 L 912 365 Z M 724 358 L 714 363 L 712 365 L 706 368 L 695 379 L 695 380 L 691 385 L 688 391 L 688 393 L 686 397 L 686 401 L 685 402 L 685 420 L 686 421 L 686 425 L 687 426 L 688 431 L 691 435 L 692 438 L 695 441 L 695 442 L 703 450 L 704 450 L 712 456 L 720 460 L 722 460 L 730 464 L 732 464 L 733 465 L 735 465 L 739 467 L 742 467 L 746 469 L 749 469 L 750 470 L 753 470 L 754 471 L 757 471 L 758 472 L 761 472 L 762 473 L 765 473 L 766 474 L 770 474 L 774 476 L 781 477 L 785 479 L 788 479 L 789 480 L 794 481 L 797 483 L 799 483 L 802 485 L 804 485 L 810 488 L 817 494 L 817 495 L 819 497 L 821 501 L 821 503 L 822 504 L 822 516 L 821 517 L 821 520 L 819 524 L 817 526 L 817 527 L 812 532 L 811 532 L 806 536 L 800 539 L 798 539 L 795 541 L 792 541 L 791 542 L 788 542 L 787 543 L 783 543 L 782 544 L 772 544 L 771 545 L 764 545 L 763 544 L 754 544 L 753 543 L 748 543 L 747 542 L 745 542 L 744 541 L 741 541 L 738 539 L 736 539 L 732 537 L 730 535 L 726 533 L 723 530 L 722 530 L 718 526 L 718 525 L 713 519 L 710 513 L 710 511 L 708 507 L 708 504 L 707 503 L 707 498 L 706 497 L 706 493 L 704 493 L 703 494 L 696 494 L 695 495 L 688 495 L 687 496 L 681 496 L 680 497 L 678 497 L 678 507 L 679 508 L 679 511 L 680 512 L 681 519 L 684 525 L 684 527 L 688 535 L 691 538 L 691 539 L 705 553 L 706 553 L 711 557 L 721 562 L 723 562 L 726 564 L 728 564 L 732 566 L 735 566 L 736 567 L 739 567 L 740 568 L 744 568 L 745 569 L 751 569 L 752 570 L 784 570 L 785 569 L 791 569 L 792 568 L 801 567 L 802 566 L 804 566 L 805 565 L 807 565 L 808 564 L 813 563 L 816 561 L 818 561 L 824 558 L 826 556 L 829 555 L 835 550 L 836 550 L 845 541 L 845 540 L 847 538 L 852 528 L 852 526 L 853 525 L 853 522 L 854 521 L 854 517 L 855 516 L 855 502 L 854 501 L 854 496 L 853 495 L 853 493 L 852 492 L 852 490 L 851 489 L 851 487 L 850 485 L 848 483 L 846 479 L 838 471 L 837 471 L 829 465 L 819 460 L 817 460 L 814 458 L 812 458 L 811 457 L 809 457 L 805 455 L 798 454 L 794 452 L 791 452 L 790 451 L 787 451 L 786 450 L 783 450 L 782 449 L 779 449 L 778 448 L 775 448 L 774 447 L 771 447 L 770 446 L 763 445 L 759 443 L 752 442 L 751 441 L 746 440 L 743 438 L 741 438 L 738 436 L 736 436 L 732 434 L 726 429 L 725 429 L 719 423 L 717 419 L 717 416 L 716 415 L 716 404 L 717 403 L 717 400 L 720 396 L 720 395 L 729 386 L 730 386 L 732 384 L 738 381 L 740 381 L 744 379 L 748 379 L 749 378 L 756 378 L 757 377 L 770 377 L 771 378 L 777 378 L 778 379 L 782 379 L 783 380 L 786 380 L 787 381 L 789 381 L 799 386 L 812 399 L 813 402 L 815 404 L 815 406 L 816 407 L 816 409 L 818 413 L 819 422 L 824 422 L 825 421 L 831 421 L 832 420 L 837 420 L 838 419 L 843 419 L 844 418 L 848 418 L 848 415 L 847 414 L 847 409 L 846 408 L 845 401 L 841 393 L 841 391 L 839 387 L 837 385 L 835 381 L 831 377 L 831 376 L 829 374 L 828 374 L 823 369 L 822 369 L 817 365 L 805 359 L 803 359 L 797 356 L 794 356 L 793 355 L 790 355 L 789 354 L 785 354 L 784 353 L 777 353 L 776 352 L 751 352 L 750 353 L 743 353 L 742 354 L 738 354 L 737 355 L 734 355 L 733 356 L 730 356 L 729 357 Z M 1322 352 L 1317 357 L 1315 361 L 1315 364 L 1314 365 L 1314 369 L 1315 370 L 1315 373 L 1317 377 L 1322 382 L 1324 383 L 1326 383 L 1327 384 L 1338 384 L 1339 383 L 1341 383 L 1343 382 L 1349 376 L 1350 374 L 1350 372 L 1351 371 L 1351 364 L 1350 363 L 1349 358 L 1347 356 L 1347 355 L 1341 351 L 1339 351 L 1338 350 L 1327 350 L 1326 351 L 1324 351 Z M 1289 348 L 1260 348 L 1260 435 L 1261 436 L 1261 438 L 1260 439 L 1258 438 L 1258 436 L 1253 426 L 1251 424 L 1249 420 L 1240 410 L 1239 410 L 1234 406 L 1224 401 L 1221 401 L 1220 400 L 1217 400 L 1216 399 L 1208 399 L 1207 398 L 1201 398 L 1200 399 L 1192 399 L 1191 400 L 1188 400 L 1187 401 L 1185 401 L 1184 402 L 1179 403 L 1171 407 L 1169 409 L 1165 411 L 1159 417 L 1158 417 L 1148 429 L 1140 445 L 1140 447 L 1138 451 L 1138 454 L 1136 458 L 1136 462 L 1135 463 L 1135 468 L 1134 469 L 1134 481 L 1133 482 L 1133 490 L 1134 491 L 1134 501 L 1135 502 L 1135 507 L 1136 508 L 1137 515 L 1138 516 L 1138 518 L 1139 519 L 1139 521 L 1140 522 L 1141 527 L 1146 537 L 1148 539 L 1148 540 L 1150 542 L 1152 546 L 1163 557 L 1164 557 L 1169 561 L 1181 567 L 1183 567 L 1187 569 L 1191 569 L 1192 570 L 1202 570 L 1203 571 L 1206 571 L 1207 570 L 1216 570 L 1217 569 L 1220 569 L 1221 568 L 1226 567 L 1230 565 L 1232 563 L 1235 562 L 1238 559 L 1239 559 L 1247 551 L 1247 550 L 1252 544 L 1253 541 L 1255 539 L 1256 537 L 1256 535 L 1258 531 L 1260 530 L 1261 531 L 1261 566 L 1262 567 L 1289 567 Z M 1204 426 L 1220 426 L 1221 427 L 1224 427 L 1225 428 L 1227 428 L 1235 432 L 1237 434 L 1238 434 L 1245 441 L 1245 442 L 1248 445 L 1255 459 L 1255 462 L 1256 463 L 1256 465 L 1257 466 L 1257 469 L 1258 470 L 1258 475 L 1259 476 L 1259 492 L 1258 493 L 1258 498 L 1257 499 L 1257 502 L 1256 503 L 1256 505 L 1255 506 L 1254 511 L 1251 517 L 1249 519 L 1248 522 L 1246 524 L 1244 528 L 1234 537 L 1226 541 L 1224 541 L 1223 542 L 1219 542 L 1218 543 L 1204 543 L 1203 542 L 1200 542 L 1199 541 L 1197 541 L 1189 537 L 1186 534 L 1185 534 L 1177 525 L 1176 522 L 1174 520 L 1173 517 L 1171 515 L 1171 513 L 1170 512 L 1170 510 L 1168 506 L 1168 503 L 1167 502 L 1167 498 L 1166 497 L 1166 472 L 1167 471 L 1167 467 L 1168 466 L 1168 463 L 1169 462 L 1170 457 L 1175 447 L 1177 445 L 1177 444 L 1188 433 L 1189 433 L 1191 431 L 1197 428 L 1199 428 L 1200 427 L 1203 427 Z M 1823 174 L 1823 215 L 1897 215 L 1898 217 L 1888 226 L 1887 226 L 1872 241 L 1871 241 L 1863 249 L 1862 249 L 1854 257 L 1853 257 L 1842 268 L 1841 268 L 1822 286 L 1822 326 L 1967 326 L 1967 287 L 1966 286 L 1890 286 L 1889 285 L 1889 284 L 1899 274 L 1900 274 L 1905 269 L 1906 269 L 1917 258 L 1918 258 L 1923 253 L 1924 253 L 1934 243 L 1935 243 L 1943 235 L 1944 235 L 1951 228 L 1952 228 L 1962 218 L 1963 218 L 1966 215 L 1966 175 L 1965 174 Z M 1434 178 L 1422 184 L 1420 186 L 1416 188 L 1402 202 L 1402 203 L 1398 208 L 1395 214 L 1395 216 L 1393 219 L 1393 221 L 1391 225 L 1391 228 L 1390 229 L 1390 233 L 1389 234 L 1389 240 L 1388 241 L 1388 261 L 1389 262 L 1389 269 L 1390 270 L 1390 273 L 1392 277 L 1392 280 L 1393 281 L 1393 283 L 1395 286 L 1395 288 L 1398 294 L 1400 296 L 1402 300 L 1406 304 L 1406 305 L 1417 315 L 1425 319 L 1429 322 L 1431 322 L 1434 324 L 1436 324 L 1440 326 L 1447 327 L 1448 328 L 1453 328 L 1454 329 L 1481 329 L 1482 328 L 1488 328 L 1489 327 L 1492 327 L 1493 326 L 1500 325 L 1503 323 L 1505 323 L 1517 317 L 1519 315 L 1520 315 L 1525 310 L 1526 310 L 1531 305 L 1531 304 L 1537 297 L 1538 294 L 1540 292 L 1543 286 L 1543 284 L 1545 281 L 1545 279 L 1547 275 L 1547 272 L 1548 271 L 1548 264 L 1549 263 L 1549 240 L 1548 239 L 1548 232 L 1547 231 L 1547 228 L 1546 227 L 1546 224 L 1545 223 L 1544 218 L 1539 208 L 1537 206 L 1535 202 L 1531 198 L 1531 197 L 1525 191 L 1524 191 L 1517 185 L 1503 178 L 1501 178 L 1500 177 L 1498 177 L 1494 175 L 1490 175 L 1489 174 L 1484 174 L 1483 173 L 1455 173 L 1454 174 L 1449 174 L 1448 175 L 1444 175 L 1443 176 L 1440 176 L 1439 177 Z M 1463 213 L 1474 213 L 1475 214 L 1477 214 L 1481 216 L 1488 223 L 1488 224 L 1490 226 L 1492 230 L 1493 235 L 1494 236 L 1494 241 L 1495 242 L 1495 260 L 1494 261 L 1494 266 L 1493 267 L 1492 272 L 1489 278 L 1484 284 L 1483 284 L 1481 286 L 1477 288 L 1473 288 L 1472 289 L 1465 289 L 1464 288 L 1461 288 L 1460 287 L 1458 287 L 1456 285 L 1455 285 L 1449 279 L 1448 276 L 1446 274 L 1446 272 L 1444 268 L 1444 265 L 1443 264 L 1443 258 L 1442 257 L 1442 245 L 1443 244 L 1443 238 L 1444 237 L 1444 234 L 1445 233 L 1446 228 L 1448 226 L 1449 223 L 1455 217 Z M 1041 178 L 1027 185 L 1024 188 L 1023 188 L 1011 200 L 1011 201 L 1007 206 L 1002 216 L 1002 218 L 1001 219 L 1001 221 L 1000 222 L 1000 224 L 998 228 L 998 233 L 997 234 L 997 241 L 996 242 L 996 260 L 997 261 L 997 269 L 998 270 L 998 274 L 999 275 L 999 278 L 1000 279 L 1001 284 L 1007 296 L 1012 302 L 1012 303 L 1023 314 L 1024 314 L 1029 318 L 1039 323 L 1041 323 L 1042 324 L 1044 324 L 1045 325 L 1047 325 L 1051 327 L 1055 327 L 1056 328 L 1061 328 L 1062 329 L 1071 329 L 1072 330 L 1076 330 L 1077 329 L 1090 329 L 1091 328 L 1096 328 L 1097 327 L 1101 327 L 1102 326 L 1105 326 L 1106 325 L 1108 325 L 1109 324 L 1114 323 L 1124 318 L 1130 313 L 1131 313 L 1138 306 L 1138 305 L 1143 299 L 1145 295 L 1145 293 L 1146 292 L 1147 287 L 1148 286 L 1148 283 L 1149 282 L 1149 277 L 1150 275 L 1148 275 L 1147 274 L 1135 274 L 1134 273 L 1122 273 L 1121 272 L 1114 272 L 1113 271 L 1104 271 L 1103 270 L 1101 270 L 1100 271 L 1099 278 L 1097 282 L 1091 288 L 1087 290 L 1084 290 L 1083 291 L 1073 291 L 1072 290 L 1068 290 L 1067 289 L 1065 289 L 1063 288 L 1061 286 L 1060 286 L 1055 281 L 1050 271 L 1050 268 L 1049 267 L 1049 262 L 1050 261 L 1147 261 L 1147 259 L 1148 258 L 1148 250 L 1149 249 L 1149 237 L 1148 236 L 1148 229 L 1147 228 L 1147 224 L 1146 223 L 1145 216 L 1143 213 L 1143 211 L 1140 205 L 1138 203 L 1136 199 L 1131 194 L 1131 193 L 1129 192 L 1124 187 L 1123 187 L 1118 183 L 1108 178 L 1106 178 L 1102 176 L 1099 176 L 1098 175 L 1095 175 L 1094 174 L 1089 174 L 1088 173 L 1061 173 L 1060 174 L 1055 174 L 1054 175 L 1050 175 L 1049 176 L 1047 176 L 1046 177 Z M 1049 232 L 1050 231 L 1051 226 L 1053 222 L 1056 219 L 1056 218 L 1061 214 L 1065 212 L 1068 212 L 1069 211 L 1079 211 L 1080 212 L 1083 212 L 1087 214 L 1092 218 L 1092 219 L 1094 221 L 1096 225 L 1096 228 L 1097 229 L 1097 235 L 1096 236 L 1050 236 L 1049 235 Z M 1811 174 L 1774 174 L 1773 173 L 1773 141 L 1772 140 L 1726 140 L 1724 141 L 1724 168 L 1723 169 L 1723 171 L 1722 173 L 1715 179 L 1713 179 L 1712 180 L 1709 180 L 1708 181 L 1700 181 L 1700 201 L 1699 202 L 1699 213 L 1698 214 L 1696 213 L 1696 211 L 1695 210 L 1694 205 L 1692 201 L 1690 199 L 1690 198 L 1687 195 L 1687 194 L 1679 186 L 1678 186 L 1676 184 L 1664 178 L 1662 178 L 1661 177 L 1659 177 L 1655 175 L 1651 175 L 1650 174 L 1645 174 L 1644 173 L 1612 173 L 1611 174 L 1606 174 L 1605 175 L 1601 175 L 1600 176 L 1597 176 L 1596 177 L 1594 177 L 1591 179 L 1589 179 L 1577 185 L 1574 188 L 1573 188 L 1563 198 L 1558 208 L 1558 210 L 1557 211 L 1557 214 L 1556 215 L 1556 220 L 1555 221 L 1555 231 L 1565 231 L 1566 232 L 1580 232 L 1581 233 L 1593 233 L 1594 234 L 1603 234 L 1603 228 L 1604 227 L 1604 224 L 1607 220 L 1607 219 L 1612 214 L 1614 213 L 1616 213 L 1617 212 L 1620 212 L 1621 211 L 1632 211 L 1633 212 L 1636 212 L 1637 213 L 1639 213 L 1645 219 L 1646 221 L 1646 223 L 1647 224 L 1647 229 L 1643 233 L 1641 234 L 1639 234 L 1638 235 L 1636 235 L 1635 236 L 1630 236 L 1629 237 L 1624 237 L 1623 238 L 1619 238 L 1618 239 L 1611 239 L 1610 240 L 1604 240 L 1603 241 L 1598 241 L 1597 242 L 1594 242 L 1593 243 L 1586 244 L 1585 245 L 1580 246 L 1575 249 L 1573 249 L 1569 251 L 1564 255 L 1563 255 L 1559 259 L 1559 260 L 1554 266 L 1552 270 L 1552 272 L 1550 275 L 1550 280 L 1549 281 L 1549 291 L 1550 292 L 1550 297 L 1551 298 L 1551 301 L 1553 304 L 1553 306 L 1555 308 L 1556 311 L 1559 314 L 1559 315 L 1563 319 L 1564 319 L 1567 322 L 1575 326 L 1577 326 L 1581 328 L 1585 328 L 1586 329 L 1608 329 L 1609 328 L 1613 328 L 1614 327 L 1619 326 L 1627 322 L 1629 320 L 1633 318 L 1641 310 L 1641 309 L 1643 307 L 1644 304 L 1647 300 L 1648 295 L 1650 294 L 1651 295 L 1651 304 L 1652 305 L 1652 318 L 1653 319 L 1653 326 L 1702 326 L 1701 324 L 1701 317 L 1700 316 L 1700 307 L 1699 306 L 1699 227 L 1698 226 L 1698 219 L 1697 218 L 1697 216 L 1698 215 L 1719 215 L 1721 217 L 1721 220 L 1720 221 L 1720 230 L 1721 231 L 1721 286 L 1722 287 L 1722 291 L 1723 292 L 1723 295 L 1726 301 L 1726 303 L 1728 305 L 1730 309 L 1733 312 L 1733 313 L 1740 319 L 1741 319 L 1743 321 L 1751 325 L 1753 325 L 1754 326 L 1757 326 L 1758 327 L 1761 327 L 1762 328 L 1768 328 L 1769 329 L 1788 329 L 1789 328 L 1797 328 L 1798 327 L 1802 327 L 1803 326 L 1806 326 L 1807 325 L 1810 325 L 1812 324 L 1812 286 L 1810 285 L 1809 286 L 1806 286 L 1805 287 L 1800 287 L 1799 288 L 1791 288 L 1790 287 L 1786 287 L 1785 286 L 1783 286 L 1777 281 L 1777 280 L 1775 278 L 1775 276 L 1773 272 L 1773 216 L 1774 215 L 1811 215 L 1811 209 L 1812 208 L 1812 204 L 1811 203 Z M 1647 259 L 1647 266 L 1646 267 L 1646 271 L 1645 272 L 1645 274 L 1642 280 L 1640 282 L 1640 283 L 1635 288 L 1632 289 L 1630 291 L 1628 291 L 1624 293 L 1612 293 L 1608 291 L 1606 289 L 1605 289 L 1602 285 L 1602 283 L 1601 282 L 1601 276 L 1603 272 L 1609 266 L 1611 265 L 1613 265 L 1614 264 L 1616 264 L 1617 263 L 1621 263 L 1622 262 L 1625 262 L 1626 261 L 1631 261 L 1632 260 L 1637 260 L 1638 259 L 1642 259 L 1643 258 L 1646 258 Z M 671 139 L 671 183 L 674 183 L 675 184 L 718 184 L 719 185 L 719 324 L 720 325 L 776 325 L 776 185 L 777 184 L 788 184 L 789 183 L 824 183 L 825 182 L 825 145 L 824 144 L 824 139 Z M 1227 156 L 1216 167 L 1216 168 L 1210 176 L 1203 190 L 1203 192 L 1202 193 L 1202 195 L 1201 196 L 1201 198 L 1199 202 L 1199 206 L 1198 207 L 1198 212 L 1197 213 L 1197 221 L 1196 222 L 1196 244 L 1197 245 L 1197 253 L 1198 254 L 1198 259 L 1199 260 L 1200 269 L 1201 270 L 1202 275 L 1204 278 L 1204 280 L 1209 290 L 1211 292 L 1212 295 L 1215 298 L 1217 302 L 1230 314 L 1231 314 L 1236 318 L 1246 323 L 1248 323 L 1252 325 L 1255 325 L 1256 326 L 1259 326 L 1260 327 L 1263 327 L 1264 328 L 1290 328 L 1291 327 L 1296 327 L 1297 326 L 1299 326 L 1300 325 L 1305 324 L 1311 321 L 1316 317 L 1317 317 L 1327 307 L 1327 306 L 1331 301 L 1333 295 L 1335 294 L 1336 295 L 1336 308 L 1337 309 L 1337 325 L 1341 325 L 1342 326 L 1353 326 L 1354 325 L 1356 326 L 1379 326 L 1380 325 L 1380 227 L 1298 227 L 1297 228 L 1297 263 L 1307 263 L 1308 264 L 1327 264 L 1328 265 L 1328 268 L 1327 269 L 1327 271 L 1325 273 L 1325 274 L 1316 283 L 1312 285 L 1310 285 L 1309 286 L 1306 286 L 1305 287 L 1301 287 L 1300 288 L 1293 288 L 1292 287 L 1286 287 L 1285 286 L 1280 285 L 1274 282 L 1272 280 L 1271 280 L 1263 272 L 1263 271 L 1261 269 L 1259 265 L 1259 263 L 1258 262 L 1258 260 L 1257 259 L 1257 257 L 1255 253 L 1255 248 L 1254 247 L 1254 240 L 1253 239 L 1253 225 L 1254 224 L 1254 215 L 1255 214 L 1255 210 L 1256 209 L 1256 206 L 1257 205 L 1257 203 L 1262 193 L 1269 185 L 1270 185 L 1275 181 L 1277 180 L 1279 180 L 1280 179 L 1282 179 L 1283 178 L 1288 178 L 1289 177 L 1298 177 L 1299 178 L 1303 178 L 1304 179 L 1306 179 L 1312 182 L 1318 188 L 1321 194 L 1321 196 L 1322 197 L 1322 200 L 1323 201 L 1323 210 L 1329 210 L 1330 209 L 1335 209 L 1336 208 L 1343 208 L 1344 207 L 1350 207 L 1351 206 L 1358 206 L 1359 205 L 1366 205 L 1367 204 L 1373 204 L 1374 203 L 1378 203 L 1379 202 L 1379 194 L 1378 193 L 1378 187 L 1377 186 L 1377 182 L 1376 181 L 1375 176 L 1371 168 L 1369 166 L 1368 163 L 1365 160 L 1365 159 L 1358 152 L 1357 152 L 1351 147 L 1348 146 L 1344 143 L 1342 143 L 1336 140 L 1334 140 L 1330 138 L 1327 138 L 1326 137 L 1321 137 L 1320 136 L 1316 136 L 1315 135 L 1305 135 L 1304 134 L 1288 134 L 1287 135 L 1278 135 L 1277 136 L 1272 136 L 1271 137 L 1266 137 L 1265 138 L 1262 138 L 1261 139 L 1259 139 L 1258 140 L 1255 140 L 1252 142 L 1250 142 L 1240 147 L 1235 151 L 1232 152 L 1228 156 Z M 833 126 L 833 325 L 885 325 L 885 259 L 886 258 L 886 248 L 887 247 L 887 243 L 888 242 L 888 239 L 889 238 L 889 236 L 893 228 L 903 218 L 905 217 L 907 217 L 908 216 L 912 216 L 913 215 L 915 215 L 916 216 L 920 216 L 922 217 L 925 220 L 926 220 L 929 224 L 932 230 L 932 233 L 933 234 L 933 324 L 934 325 L 987 325 L 987 221 L 986 220 L 986 214 L 985 213 L 985 210 L 984 209 L 984 206 L 983 205 L 982 200 L 980 198 L 979 195 L 974 189 L 974 188 L 969 183 L 968 183 L 963 179 L 957 176 L 952 175 L 951 174 L 946 174 L 945 173 L 927 173 L 926 174 L 922 174 L 921 175 L 918 175 L 917 176 L 915 176 L 911 178 L 909 180 L 906 181 L 904 183 L 903 183 L 895 191 L 895 192 L 891 197 L 888 203 L 887 208 L 885 209 L 884 208 L 884 201 L 885 200 L 885 126 Z" fill="currentColor"/></g>
+    <!-- /Logo -->
+  </defs>
+  <g stroke="#080a0a" stroke-width="14" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="256" cy="309" rx="183" ry="134" fill="url(#key-side)"/>
+    <path d="M74 267 V312 C74 386 155 444 256 444 C357 444 438 386 438 312 V267" fill="url(#key-side)"/>
+    <ellipse cx="256" cy="255" rx="183" ry="134" fill="url(#key-mint)"/>
+    <ellipse cx="256" cy="255" rx="151" ry="109" fill="none"/>
+    <path d="M130 218 C154 182 184 158 220 147" fill="none" stroke="#bbf8e4" stroke-width="16"/>
+    <path d="M172 380 H232" fill="none" stroke="#bdf5e3" stroke-width="16"/>
+    <path d="M108 332 L111 394 M256 389 L256 442 M401 337 L396 399" fill="none" stroke-width="8"/>
+    <g transform="translate(256 252) rotate(-38)" fill="#080a0a" stroke="none" fill-rule="evenodd">
+      <path d="M-106 0a46 46 0 1 0 92 0a46 46 0 1 0-92 0ZM-82 0a22 22 0 1 0 44 0a22 22 0 1 0-44 0Z"/>
+      <path d="M-20-14H96a8 8 0 0 1 8 8V6a8 8 0 0 1-8 8H78V40a8 8 0 0 1-8 8H58a8 8 0 0 1-8-8V14H40V30a8 8 0 0 1-8 8H20a8 8 0 0 1-8-8V14H-20Z"/>
+    </g>
+  </g>
+</symbol>
+  </defs>
+        <use href="#x-camera" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-camera" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-camera"/>
+      </g>
     </symbol>
     <!-- Tarayıcı penceresi -->
     <symbol id="s-browser" viewBox="0 0 120 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-browser">
       <rect x="6" y="10" width="108" height="80" rx="14" fill="#5c4ade" stroke="#000" stroke-width="3"/>
       <path d="M6 32h108" stroke="#000" stroke-width="3"/>
       <circle cx="20" cy="21" r="4" fill="#fff" stroke="#000" stroke-width="2"/>
@@ -27,9 +75,16 @@
       <rect x="18" y="44" width="50" height="10" rx="5" fill="#fff" stroke="#000" stroke-width="2.5"/>
       <rect x="18" y="62" width="34" height="16" rx="8" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
       <rect x="74" y="44" width="28" height="34" rx="6" fill="#e9ccff" stroke="#000" stroke-width="2.5"/>
+    </g></defs>
+        <use href="#x-browser" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-browser" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-browser"/>
+      </g>
     </symbol>
     <!-- Fransız vitrin: çizgili tente, kemerli cam, kapı -->
     <symbol id="s-vitrin" viewBox="0 0 200 216">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-vitrin">
       <rect x="14" y="44" width="172" height="168" rx="4" fill="#4da2ff" stroke="#000" stroke-width="3"/>
       <rect class="sign" x="36" y="6" width="128" height="26" rx="13" fill="#fff" stroke="#000" stroke-width="3"/>
       <path d="M58 19h14M80 19h40M128 19h14" stroke="#000" stroke-width="5" stroke-linecap="round"/>
@@ -57,16 +112,30 @@
       <circle cx="147" cy="132.5" r="2.4" fill="#55db9c"/>
       <circle cx="165" cy="172" r="4" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
       <rect x="6" y="196" width="188" height="16" rx="3" fill="#000"/>
+    </g></defs>
+        <use href="#x-vitrin" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-vitrin" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-vitrin"/>
+      </g>
     </symbol>
     <!-- Kod -->
     <symbol id="s-code" viewBox="0 0 120 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-code">
       <rect x="6" y="12" width="108" height="76" rx="14" fill="#55db9c" stroke="#000" stroke-width="3"/>
       <path d="M46 34L26 50l20 16" fill="none" stroke="#000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M74 34l20 16-20 16" fill="none" stroke="#000" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M66 30L54 70" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" pathLength="1"/>
+    </g></defs>
+        <use href="#x-code" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-code" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-code"/>
+      </g>
     </symbol>
     <!-- Telefon -->
     <symbol id="s-phone" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-phone">
       <rect x="27" y="4" width="46" height="92" rx="11" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="33" y="16" width="34" height="68" rx="4" fill="#dceeff" stroke="#000" stroke-width="2.5"/>
       <rect x="37" y="22" width="26" height="11" rx="3" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
@@ -74,37 +143,72 @@
       <rect x="37" y="54" width="15" height="11" rx="3" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
       <rect x="37" y="70" width="26" height="9" rx="4.5" fill="#4da2ff" stroke="#000" stroke-width="2.5"/>
       <rect x="42" y="8" width="16" height="3" rx="1.5" fill="#000"/>
+    </g></defs>
+        <use href="#x-phone" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-phone" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-phone"/>
+      </g>
     </symbol>
     <!-- Katmanlar -->
     <symbol id="s-layers" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-layers">
       <path d="M50 46L92 66 50 86 8 66z" fill="#4da2ff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M50 30L92 50 50 70 8 50z" fill="#e9ccff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M50 14L92 34 50 54 8 34z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-layers" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-layers" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-layers"/>
+      </g>
     </symbol>
     <!-- Yazı (Aa) -->
     <symbol id="s-type" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-type">
       <rect x="6" y="10" width="88" height="80" rx="16" fill="#ffd731" stroke="#000" stroke-width="3"/>
       <path d="M16 72L34 26l18 46M23 56h22" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="72" cy="62" r="11" fill="#fff" stroke="#000" stroke-width="4"/>
       <path d="M83 50v24" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-type" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-type" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-type"/>
+      </g>
     </symbol>
     <!-- Alışveriş çantası -->
     <symbol id="s-bag" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-bag">
       <path d="M36 38V28a14 14 0 0 1 28 0v10" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round"/>
       <path d="M20 36h60l6 54H14z" fill="#4da2ff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M50 78C32 66 38 52 50 62 62 52 68 66 50 78z" fill="#fff" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-bag" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-bag" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-bag"/>
+      </g>
     </symbol>
     <!-- Fiyat etiketi -->
     <symbol id="s-tag" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-tag">
       <path d="M50 38C50 22 40 12 28 10" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
       <path d="M34 24h32l14 14v52H20V38z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <circle cx="50" cy="38" r="5" fill="#fff" stroke="#000" stroke-width="2.5"/>
       <circle cx="40" cy="60" r="5" fill="#fb4903" stroke="#000" stroke-width="2.5"/>
       <circle cx="60" cy="78" r="5" fill="#fb4903" stroke="#000" stroke-width="2.5"/>
       <path d="M62 54L38 84" fill="none" stroke="#000" stroke-width="5" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-tag" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-tag" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-tag"/>
+      </g>
     </symbol>
     <!-- Ampul (fikir) -->
     <symbol id="s-bulb" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-bulb">
       <g opacity="0" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round">
         <path d="M50 2v8M12 18l6 6M88 18l-6 6M4 46h8M96 46h-8"/>
       </g>
@@ -112,9 +216,16 @@
       <rect x="38" y="70" width="24" height="9" rx="3" fill="#e9ccff" stroke="#000" stroke-width="3"/>
       <rect x="42" y="80" width="16" height="9" rx="3" fill="#4da2ff" stroke="#000" stroke-width="3"/>
       <path d="M42 54l4-14 4 14 4-14 4 14" fill="none" stroke="#000" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-bulb" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-bulb" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-bulb"/>
+      </g>
     </symbol>
     <!-- Ayak (erkek, yandan, sağa bakan) -->
     <symbol id="s-foot" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-foot">
       <path d="M12 8 C12 22 11 36 9 49 C7 61 4 74 8 85 C11 92 20 94 28 94 L76 94 C88 94 97 90 97 82 C97 75 93 72 88 73 C86 69 81 68 79 70 C77 66 72 65 70 67 C68 63 64 63 62 65 C60 61 56 60 54 62 C48 54 40 44 34 32 C34 22 34 14 34 8 Z" fill="#f1bf98" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M12 8 C12 22 11 36 9 49 C7 61 4 74 8 85 C10 89 14 92 19 93 C13 84 14 70 16 56 C18 40 18 24 18 8 Z" fill="#000" fill-opacity=".10"/>
       <path d="M22 50 C20 55 21 60 25 63" fill="none" stroke="#000" stroke-opacity=".55" stroke-width="2.400" stroke-linecap="round"/>
@@ -131,9 +242,16 @@
       </g>
       <rect x="5" y="0" width="36" height="16" rx="3" fill="#5c4ade" stroke="#000" stroke-width="3"/>
       <path d="M10 5h26" stroke="#fff" stroke-opacity=".25" stroke-width="2" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-foot" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-foot" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-foot"/>
+      </g>
     </symbol>
     <!-- İskarpin (yandan) -->
     <symbol id="s-shoe" viewBox="0 0 120 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-shoe">
       <clipPath id="shoeClip"><path d="M16 80c0-12 6-18 16-19 10-1 17-5 23-11 6-6 15-10 25-10l14-2c5 0 7 4 7 10v32z"/></clipPath>
       <g class="sockleg">
         <rect x="84" y="0" width="22" height="22" rx="3" fill="#5c4ade" stroke="#000" stroke-width="3"/>
@@ -156,104 +274,209 @@
       </g>
       <path d="M14 80h92v6c0 3-2 4-5 4H22c-5 0-8-4-8-10z" fill="#2b1b10" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M78 90h24v6H82c-3 0-4-3-4-6z" fill="#2b1b10" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-shoe" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-shoe" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-shoe"/>
+      </g>
     </symbol>
     <!-- Beyaz çorap (düz yatan, fotoğraftaki gibi) -->
     <symbol id="s-sock" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-sock">
       <path d="M26 4h34v34c0 10 6 18 14 26 8 8 12 20 6 27-5 5-15 4-26-2C40 82 30 68 28 52c-1-8-2-14-2-20z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M31 4v34M37 4v34M43 4v34M49 4v34M55 4v34" stroke="#000" stroke-opacity=".10" stroke-width="1.600" fill="none"/>
       <path d="M26 15h34v9H26z" fill="#fb4903" stroke="#000" stroke-width="2"/>
       <path d="M26 30h34v9H26z" fill="#4da2ff" stroke="#000" stroke-width="2"/>
       <path d="M62 52c6 6 10 12 13 20" fill="none" stroke="#000" stroke-opacity=".09" stroke-width="7" stroke-linecap="round"/>
       <path d="M38 62c2 6 6 11 11 15M68 84c3 0 6-1 8-4" fill="none" stroke="#000" stroke-opacity=".16" stroke-width="2" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-sock" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-sock" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-sock"/>
+      </g>
     </symbol>
     <!-- G jetonu -->
-    <symbol id="s-coin" viewBox="0 0 100 100">
-      <ellipse cx="50" cy="56" rx="42" ry="40" fill="#e0b800" stroke="#000" stroke-width="3"/>
-      <circle cx="50" cy="48" r="42" fill="#ffd731" stroke="#000" stroke-width="3"/>
-      <circle cx="37" cy="42" r="8" fill="#fff" stroke="#000" stroke-width="2.5"/>
-      <circle cx="63" cy="42" r="8" fill="#fff" stroke="#000" stroke-width="2.5"/>
-      <circle cx="39" cy="43" r="3.5" fill="#000"/>
-      <circle cx="65" cy="43" r="3.5" fill="#000"/>
-      <path d="M36 62 q14 12 28 0" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round"/>
-    </symbol>
+    <symbol id="s-coin" viewBox="0 0 512 512">
+  
+  <defs>
+    <linearGradient id="smy-yellow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe535"/>
+      <stop offset="1" stop-color="#ffc400"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#09090b" stroke-width="14" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="256" cy="290" rx="174" ry="142" fill="#ffc400"/>
+    <ellipse cx="256" cy="240" rx="174" ry="142" fill="url(#smy-yellow)"/>
+    <path d="M86 253 C102 344 164 401 256 401 C348 401 410 344 426 253" fill="none"/>
+    <g>
+      <ellipse cx="220" cy="213" rx="47" ry="53" fill="#fff"/>
+      <ellipse cx="292" cy="205" rx="47" ry="53" fill="#fff"/>
+      <ellipse cx="237" cy="210" rx="27" ry="35" fill="#09090b" stroke="none"/>
+      <ellipse cx="309" cy="202" rx="27" ry="35" fill="#09090b" stroke="none"/>
+      <ellipse cx="224" cy="195" rx="9" ry="15" fill="#fff" stroke="none" transform="rotate(25 224 195)"/>
+      <ellipse cx="296" cy="187" rx="9" ry="15" fill="#fff" stroke="none" transform="rotate(25 296 187)"/>
+    </g>
+    <path d="M155 276 C188 333 317 349 365 272" fill="none"/>
+  </g>
+</symbol>
     <!-- Onay rozeti -->
     <symbol id="s-check" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-check">
       <path d="M50 6l11 9 14-3 4 14 13 7-5 13 5 13-13 7-4 14-14-3-11 9-11-9-14 3-4-14-13-7 5-13-5-13 13-7 4-14 14 3z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M33 51l12 12 23-25" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M33 51l12 12 23-25" fill="none" stroke="#000" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-check" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-check" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-check"/>
+      </g>
     </symbol>
     <!-- İmleç -->
     <symbol id="s-cursor" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-cursor">
       <path d="M22 10l58 38-26 6 16 28-12 7-16-28-20 18z" fill="#fff" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-cursor" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-cursor" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-cursor"/>
+      </g>
     </symbol>
     <!-- Yıldız -->
     <symbol id="s-star" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-star">
       <path d="M50 4c4 26 20 42 46 46-26 4-42 20-46 46-4-26-20-42-46-46 26-4 42-20 46-46z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-star" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-star" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-star"/>
+      </g>
     </symbol>
     <!-- Ürün şişesi (yer tutucu çekim) -->
     <symbol id="s-bottle" viewBox="0 0 100 160">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-bottle">
       <rect x="38" y="6" width="24" height="22" rx="4" fill="#000"/>
       <rect x="42" y="26" width="16" height="14" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="18" y="38" width="64" height="112" rx="18" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="26" y="76" width="48" height="40" rx="6" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <text x="50" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="15" fill="#fff" letter-spacing="-0.5">GOATZ</text>
+    </g></defs>
+        <use href="#x-bottle" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-bottle" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-bottle"/>
+      </g>
     </symbol>
     <!-- Konum pini -->
     <symbol id="s-pin" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-pin">
       <ellipse cx="50" cy="91" rx="20" ry="5" fill="#000" opacity=".18"/>
       <path d="M50 6C32 6 19 19 19 36c0 23 31 52 31 52s31-29 31-52C81 19 68 6 50 6z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <circle cx="50" cy="36" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-pin" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-pin" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-pin"/>
+      </g>
     </symbol>
     <!-- Katlanmış harita -->
     <symbol id="s-map" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-map">
       <path d="M8 26l27-12v60L8 86z" fill="#dceeff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M35 14l30 12v60L35 74z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M65 26l27-12v60L65 86z" fill="#e9ccff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M14 66q10-16 22-6" fill="none" stroke="#000" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round"/>
       <circle cx="50" cy="44" r="8" fill="#fb4903" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-map" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-map" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-map"/>
+      </g>
     </symbol>
     <!-- Paket (üst kapakları açılır) -->
     <symbol id="s-box" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-box">
       <path d="M14 42h72v44a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4z" fill="#e8b872" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <rect x="43" y="42" width="14" height="30" fill="#fff" stroke="#000" stroke-width="3"/>
       <path d="M50 24c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z" fill="#ffd731" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
       <rect x="14" y="30" width="38" height="12" rx="2" fill="#f2cc8f" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <rect x="48" y="30" width="38" height="12" rx="2" fill="#f2cc8f" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-box" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-box" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-box"/>
+      </g>
     </symbol>
     <!-- Kamyon -->
     <symbol id="s-truck" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-truck">
       <rect x="6" y="26" width="54" height="42" rx="7" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <path d="M16 42h26" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
       <path d="M60 38h19l15 16v14H60z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M68 44h9l8 10H68z" fill="#dceeff" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
       <circle cx="26" cy="72" r="10" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="26" cy="72" r="3.5" fill="#000"/>
       <circle cx="76" cy="72" r="10" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="76" cy="72" r="3.5" fill="#000"/>
+    </g></defs>
+        <use href="#x-truck" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-truck" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-truck"/>
+      </g>
     </symbol>
     <!-- Madalya -->
     <symbol id="s-medal" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-medal">
       <path d="M30 4h16l10 34H38z" fill="#5c4ade" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M70 4H54L44 38h18z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <circle cx="50" cy="62" r="28" fill="#ffd731" stroke="#000" stroke-width="3"/>
       <circle cx="50" cy="62" r="19" fill="#ffe680" stroke="#000" stroke-width="2.5"/>
       <path d="M50 48l4.5 9.5 10.5 1.4-7.7 7.3 2 10.3L50 71l-9.3 4.9 2-10.3-7.7-7.3 10.5-1.4z" fill="#fb4903" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-medal" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-medal" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-medal"/>
+      </g>
     </symbol>
     <!-- Dükkan -->
     <symbol id="s-store" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-store">
       <rect x="14" y="44" width="72" height="46" rx="4" fill="#fff" stroke="#000" stroke-width="3"/>
       <path d="M10 44l8-28h64l8 28z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M10 44q10 12 20 0q10 12 20 0q10 12 20 0q10 12 20 0" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <rect x="24" y="60" width="22" height="30" rx="3" fill="#55db9c" stroke="#000" stroke-width="3"/>
       <rect x="56" y="60" width="22" height="18" rx="3" fill="#dceeff" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-store" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-store" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-store"/>
+      </g>
     </symbol>
     <!-- Sepet -->
     <symbol id="s-cart" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-cart">
       <path d="M22 28h70l-9 34H32z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M40 28l4 34M57 28v34M74 28l-4 34" stroke="#000" stroke-width="2.5" fill="none"/>
       <path d="M6 14h14l12 48h46" fill="none" stroke="#000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
       <circle cx="38" cy="80" r="8" fill="#fff" stroke="#000" stroke-width="3"/><circle cx="72" cy="80" r="8" fill="#fff" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-cart" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-cart" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-cart"/>
+      </g>
     </symbol>
     <!-- Yorum balonu -->
     <symbol id="s-chat" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-chat">
       <rect x="8" y="12" width="84" height="58" rx="12" fill="#e9ccff" stroke="#000" stroke-width="3"/>
       <path d="M26 68v24l24-24z" fill="#e9ccff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M28 68h22" stroke="#e9ccff" stroke-width="5"/>
@@ -261,107 +484,248 @@
       <path transform="translate(50 36) scale(1.1)" d="M0 -9c.8 6 3 8.2 9 9-6 .8-8.2 3-9 9-.8-6-3-8.2-9-9 6-.8 8.2-3 9-9z" fill="#ffd731" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/>
       <path transform="translate(72 36) scale(.9)" d="M0 -9c.8 6 3 8.2 9 9-6 .8-8.2 3-9 9-.8-6-3-8.2-9-9 6-.8 8.2-3 9-9z" fill="#ffd731" stroke="#000" stroke-width="2.4" stroke-linejoin="round"/>
       <path d="M22 58h34M62 58h16" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-chat" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-chat" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-chat"/>
+      </g>
     </symbol>
     <!-- Zincir -->
     <symbol id="s-link" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-link">
       <g transform="rotate(-35 50 50)">
         <rect x="4" y="36" width="50" height="28" rx="14" fill="#55db9c" stroke="#000" stroke-width="3"/>
         <rect x="15" y="43" width="28" height="14" rx="7" fill="#fff" stroke="#000" stroke-width="3"/>
         <rect x="46" y="36" width="50" height="28" rx="14" fill="#ffd731" stroke="#000" stroke-width="3"/>
         <rect x="57" y="43" width="28" height="14" rx="7" fill="#fff" stroke="#000" stroke-width="3"/>
       </g>
+    </g></defs>
+        <use href="#x-link" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-link" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-link"/>
+      </g>
     </symbol>
     <!-- Ayar çubukları -->
     <symbol id="s-sliders" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-sliders">
       <rect x="8" y="16" width="84" height="12" rx="6" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="8" y="44" width="84" height="12" rx="6" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="8" y="72" width="84" height="12" rx="6" fill="#fff" stroke="#000" stroke-width="3"/>
       <circle cx="34" cy="22" r="11" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <circle cx="66" cy="50" r="11" fill="#ffd731" stroke="#000" stroke-width="3"/>
       <circle cx="44" cy="78" r="11" fill="#55db9c" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-sliders" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-sliders" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-sliders"/>
+      </g>
     </symbol>
     <!-- Fotoğraf -->
     <symbol id="s-photo" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-photo">
       <rect x="8" y="16" width="84" height="68" rx="9" fill="#dceeff" stroke="#000" stroke-width="3"/>
       <circle cx="68" cy="38" r="9" fill="#ffd731" stroke="#000" stroke-width="3"/>
       <path d="M12 82l20-26 16 18 12-14 28 22z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-photo" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-photo" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-photo"/>
+      </g>
     </symbol>
     <!-- Izgara -->
     <symbol id="s-grid" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-grid">
       <rect x="10" y="10" width="38" height="38" rx="8" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <rect x="52" y="10" width="38" height="38" rx="8" fill="#ffd731" stroke="#000" stroke-width="3"/>
       <rect x="10" y="52" width="38" height="38" rx="8" fill="#55db9c" stroke="#000" stroke-width="3"/>
       <rect x="52" y="52" width="38" height="38" rx="8" fill="#e9ccff" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-grid" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-grid" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-grid"/>
+      </g>
     </symbol>
     <!-- Renk paleti -->
     <symbol id="s-palette" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-palette">
       <path d="M50 8C26 8 8 26 8 50s17 42 40 42c9 0 13-5 11-11s1-11 9-11h7c13 0 19-8 19-19C94 27 76 8 50 8z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <circle cx="30" cy="46" r="7" fill="#fb4903" stroke="#000" stroke-width="2.5"/>
       <circle cx="46" cy="27" r="7" fill="#ffd731" stroke="#000" stroke-width="2.5"/>
       <circle cx="68" cy="30" r="7" fill="#55db9c" stroke="#000" stroke-width="2.5"/>
       <circle cx="76" cy="52" r="7" fill="#5c4ade" stroke="#000" stroke-width="2.5"/>
+    </g></defs>
+        <use href="#x-palette" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-palette" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-palette"/>
+      </g>
     </symbol>
     <!-- Kalp -->
     <symbol id="s-heart" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-heart">
       <path d="M50 88C18 64 8 46 8 32 8 18 19 10 31 10c9 0 15 5 19 12 4-7 10-12 19-12 12 0 23 8 23 22 0 14-10 32-42 56z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M24 32c0-7 4-11 10-11" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-heart" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-heart" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-heart"/>
+      </g>
     </symbol>
     <!-- Büyüteç -->
     <symbol id="s-magnifier" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-magnifier">
       <path d="M62 62L88 88" stroke="#000" stroke-width="12" stroke-linecap="round"/>
       <path d="M62 62L88 88" stroke="#fb4903" stroke-width="6" stroke-linecap="round"/>
       <circle cx="42" cy="42" r="30" fill="#dceeff" stroke="#000" stroke-width="3"/>
       <path d="M26 38a18 18 0 0 1 14-14" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-magnifier" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-magnifier" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-magnifier"/>
+      </g>
     </symbol>
     <!-- Dünya -->
     <symbol id="s-globe" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-globe">
       <circle cx="50" cy="50" r="40" fill="#55db9c" stroke="#000" stroke-width="3"/>
       <ellipse cx="50" cy="50" rx="17" ry="40" fill="none" stroke="#000" stroke-width="3"/>
       <path d="M10 50h80M16 30h68M16 70h68" fill="none" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-globe" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-globe" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-globe"/>
+      </g>
     </symbol>
     <!-- Kalem -->
     <symbol id="s-pencil" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-pencil">
       <path d="M18 82l6-22L64 20l16 16L40 76z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M18 82l6-22 16 16z" fill="#fde2b0" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M64 20l8-8a7 7 0 0 1 10 0l6 6a7 7 0 0 1 0 10l-8 8z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-pencil" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-pencil" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-pencil"/>
+      </g>
     </symbol>
     <!-- Dişli -->
     <symbol id="s-gear" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-gear">
       <g fill="#ccc" stroke="#000" stroke-width="3" stroke-linejoin="round">
         <rect x="43" y="6" width="14" height="20" rx="3"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(45 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(90 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(135 50 50)"/>
         <rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(180 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(225 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(270 50 50)"/><rect x="43" y="6" width="14" height="20" rx="3" transform="rotate(315 50 50)"/>
       </g>
       <circle cx="50" cy="50" r="30" fill="#ccc" stroke="#000" stroke-width="3"/>
       <circle cx="50" cy="50" r="12" fill="#fff" stroke="#000" stroke-width="3"/>
+    </g></defs>
+        <use href="#x-gear" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-gear" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-gear"/>
+      </g>
+    </symbol>
+    <!-- Yenileme -->
+    <symbol id="s-refresh" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-refresh">
+      <circle cx="50" cy="50" r="42" fill="#fff" stroke="#000" stroke-width="3.5"/>
+      <g>
+        <path d="M25.6 41.1A26 26 0 0 1 72.5 37" fill="none" stroke="#000" stroke-width="19" stroke-linecap="round"/>
+        <path d="M25.6 41.1A26 26 0 0 1 72.5 37" fill="none" stroke="#fb4903" stroke-width="12" stroke-linecap="round"/>
+        <polygon points="79.5,49.1 82,31.5 63,42.5" fill="#fb4903" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/>
+      </g>
+      <g transform="rotate(180 50 50)">
+        <path d="M25.6 41.1A26 26 0 0 1 72.5 37" fill="none" stroke="#000" stroke-width="19" stroke-linecap="round"/>
+        <path d="M25.6 41.1A26 26 0 0 1 72.5 37" fill="none" stroke="#fb4903" stroke-width="12" stroke-linecap="round"/>
+        <polygon points="79.5,49.1 82,31.5 63,42.5" fill="#fb4903" stroke="#000" stroke-width="3.5" stroke-linejoin="round"/>
+      </g>
+    </g></defs>
+        <use href="#x-refresh" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-refresh" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-refresh"/>
+      </g>
     </symbol>
     <!-- Roket -->
-    <symbol id="s-rocket" viewBox="0 0 100 100">
-      <path d="M40 54h20l-10 30z" fill="#ffd731" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M32 50l-16 16 8 6 14-6z M68 50l16 16-8 6-14-6z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-      <path d="M50 6c14 10 20 28 18 48H32C30 34 36 16 50 6z" fill="#fff" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
-      <circle cx="50" cy="34" r="8" fill="#4da2ff" stroke="#000" stroke-width="3"/>
-    </symbol>
+    <symbol id="s-rocket" viewBox="0 0 512 512">
+  
+  <defs>
+    <linearGradient id="rkt-orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff7a00"/>
+      <stop offset="1" stop-color="#ff4a00"/>
+    </linearGradient>
+    <linearGradient id="rkt-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#55b7ff"/>
+      <stop offset="1" stop-color="#1769df"/>
+    </linearGradient>
+    <linearGradient id="rkt-purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#b38cff"/>
+      <stop offset="1" stop-color="#7650e8"/>
+    </linearGradient>
+  </defs>
+  <g stroke="#09090b" stroke-width="14" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M212 145 C149 182 113 235 102 314 C132 296 161 284 195 278 Z" fill="url(#rkt-orange)"/>
+    <path d="M300 145 C363 182 399 235 410 314 C380 296 351 284 317 278 Z" fill="url(#rkt-orange)"/>
+    <path d="M256 55 C207 102 176 161 176 241 C176 310 206 360 256 390 C306 360 336 310 336 241 C336 161 305 102 256 55 Z" fill="#fff"/>
+    <path d="M256 55 C234 76 216 99 202 124 C235 111 277 111 310 124 C296 99 278 76 256 55 Z" fill="url(#rkt-orange)"/>
+    <circle cx="256" cy="195" r="58" fill="#83c9ff"/>
+    <circle cx="256" cy="195" r="40" fill="url(#rkt-blue)"/>
+    <ellipse cx="240" cy="178" rx="14" ry="24" fill="#fff" stroke="none" transform="rotate(35 240 178)"/>
+    <path d="M220 366 C232 386 244 396 256 401 C268 396 280 386 292 366 C277 355 235 355 220 366 Z" fill="#d9d7f4"/>
+    <path d="M256 392 C232 421 234 455 256 479 C278 455 280 421 256 392 Z" fill="url(#rkt-purple)"/>
+    <path d="M239 390 C243 411 248 426 256 437 C264 426 269 411 273 390 Z" fill="#ffda3b"/>
+    <ellipse cx="246" cy="425" rx="9" ry="18" fill="#dbc6ff" stroke="none" transform="rotate(-20 246 425)"/>
+  </g>
+</symbol>
     <!-- Grafik -->
     <symbol id="s-chart" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-chart">
       <rect x="12" y="54" width="20" height="32" rx="4" fill="#55db9c" stroke="#000" stroke-width="3"/>
       <rect x="40" y="36" width="20" height="50" rx="4" fill="#ffd731" stroke="#000" stroke-width="3"/>
       <rect x="68" y="14" width="20" height="72" rx="4" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <path d="M6 90h88" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+    </g></defs>
+        <use href="#x-chart" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-chart" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-chart"/>
+      </g>
     </symbol>
     <!-- Ürün şişesi (marka etiketli) -->
     <symbol id="s-product" viewBox="0 0 100 160">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-product">
       <rect x="38" y="6" width="24" height="22" rx="4" fill="#000"/>
       <rect x="42" y="26" width="16" height="14" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="18" y="38" width="64" height="112" rx="18" fill="#fff" stroke="#000" stroke-width="3"/>
       <rect x="26" y="76" width="48" height="40" rx="6" fill="#fb4903" stroke="#000" stroke-width="3"/>
       <text x="50" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-weight="900" font-size="14" fill="#fff" letter-spacing="-0.5">MARKA</text>
+    </g></defs>
+        <use href="#x-product" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-product" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-product"/>
+      </g>
     </symbol>
     <!-- Yön tabelası -->
     <symbol id="s-signpost" viewBox="0 0 100 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-signpost">
       <ellipse cx="50" cy="93" rx="20" ry="4.5" fill="#000" opacity=".18"/>
       <rect x="45" y="8" width="10" height="84" rx="3" fill="#e8b872" stroke="#000" stroke-width="3"/>
       <path d="M20 16h46l12 12-12 12H20z" fill="#fb4903" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
       <path d="M80 46H34L22 58l12 12h46z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
+    </g></defs>
+        <use href="#x-signpost" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-signpost" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-signpost"/>
+      </g>
     </symbol>
   </defs>
 </svg>

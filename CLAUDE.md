@@ -26,6 +26,15 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 ## Bekleyen / açık işler
 1. **Resend e-postası:** `thegoatzstudio.com` Resend'de doğrulanmamış (403). Domains'te hangi alan adı Verified bak; `MAIL_FROM` ayarla ya da DNS kaydı ekle. Railway'e RESEND_API_KEY, MAIL_TO, MAIL_FROM değişkenleri eklenecek.
 2. **Yasal sayfalar** taslak; avukat/muhasebeci kontrolü gerek. Firma ünvanı, vergi no, adres girilecek (panel: Alt bilgi → Firma bilgisi). Satış başlarsa mesafeli satış + iade/iptal eklenmeli.
-3. **"Nasıl çalışıyoruz?" bölümü** yeniden kurulacak. Fikir: "Bir seferde bir proje. Sizinki." (sınırlı sayıda proje, tek kişi odak). Doğru olmalı: aynı anda kaç proje, süre, destek bilgisi kullanıcıdan alınacak; "Müsaitlik" durum kartı düşünüldü.
-4. Footer stickers: çorap logonun soluna alınacaktı (dar ekranda biniyor, geniş ekranda sığar); çıplak ayak gerçekçi değil ama kullanıcı "kalsın" dedi.
+3. **Süre / adet / destek bilgisi** sayfalara hiç yazılmadı (uydurma yok). "Hızlı teslim" kartı ve süreç metinleri için kullanıcıdan gerçek bilgi alınınca eklenecek. "Randevulu üretim / müsaitlik" fikri bekliyor (aynı anda kaç proje? doğru olmalı).
+4. **İkonlar:** Slush'taki gibi gerçek 3D render istiyor; SVG ile olmuyor (denendi, beğenilmedi, geri alındı). Yol: kullanıcı ChatGPT vb. ile görsel/SVG üretir (`ikon-komutlari.md` hazır komutlar), biz bağlarız. Şu an coin (gülen jeton) ve rocket kullanıcının SVG'leri, `key` anahtar sticker'ı yeni. **Slush logolu/markalı çizim kullanma.**
 5. Yayındaki site (Railway) güncel mi kontrol edilmedi.
+
+## Yapılanlar / kararlar (2026-10-01)
+- **Sayfalar:** `/nasil-calisiyoruz` (süreç), `/anahtar-teslim-e-ticaret` (hero butonu "Anahtar teslim nedir?"); İşler'e "Danışmanlık ve Yönetim" kategorisi (Web Sitesi Danışmanlığı, Aylık Site Yönetimi, kapakta `slogan` alanı).
+- **Anasayfa:** Süreç bölümü artık tek yol haritası (`process.roadmap`); eski sekmeler `tabs` olarak kodda duruyor, `roadmap` boşsa geri gelir. "Neden biz" kartları tıklayınca çevrilir (arka yüz = kartın `text` alanı), fareyle kenara yaklaşınca akıcı kayar. Hizmet butonları işler/sayfalara gider (`works:web`, `page:...` hedefleri). Hero'da buton: "Anahtar teslim nedir?" (İşleri gör / WhatsApp kaldırıldı, tekrar demek).
+- **Başlıkta espri:** `[[yanlış|doğrusu]]` yazılırsa yanlış kısım turuncu çizgiyle çizilir, doğrusu sarı etiketle yanına eklenir (`brFix`).
+- **Satır aralığı:** `TIGHT_PAGES` (render.js) içindeki sayfalarda başlık satır arası 2 mm (noktalı harflerin tepesine göre).
+- **Logo:** `brand.logoWordmark` açıkken işaret (favicon PNG, siyah çizgili) + yazı (`the-goatz-studio-logo.svg` yazı parçası, sprites.svg `lg-text`) görünür; aşağı kaydırınca yazı kapanır. Yazı rengi siyah. İşaretin siyah çizgisi önemli, düz SVG işaret kullanma.
+- **Tasarım dersleri:** Parlak/gölgeli/gradyanlı "3D" ikon ve tüylü şerit beğenilmedi ("yapay"). Site kimliği: düz renk, kalın siyah çizgi. Gölge istenmiyor. Şerit düz kalsın.
+- **Yedekler/betikler:** `.claude/*` yerel (git dışı). Uygulama kodunda kayıt: `data/content.json`.

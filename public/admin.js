@@ -6,10 +6,10 @@
     carbon: 'Siyah', paper: 'Beyaz', sky: 'Açık mavi', concrete: 'Gri', mist: 'Açık gri',
     blue: 'Mavi', mint: 'Nane yeşili', lavender: 'Lavanta', ember: 'Turuncu', sun: 'Sarı', violet: 'Mor',
   };
-  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', rocket: 'Roket', chart: 'Grafik', product: 'Ürün şişesi (MARKA)', signpost: 'Yön tabelası', vitrin: 'Fransız vitrin', foot: 'Ayak', shoe: 'İskarpin', sock: 'Beyaz çorap', code: 'Kod', phone: 'Telefon', layers: 'Katmanlar', type: 'Yazı (Aa)', bag: 'Alışveriş çantası', tag: 'Fiyat etiketi', bulb: 'Ampul (fikir)' };
+  const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', key: 'Anahtar', refresh: 'Yenileme', rocket: 'Roket', chart: 'Grafik', product: 'Ürün şişesi (MARKA)', signpost: 'Yön tabelası', vitrin: 'Fransız vitrin', foot: 'Ayak', shoe: 'İskarpin', sock: 'Beyaz çorap', code: 'Kod', phone: 'Telefon', layers: 'Katmanlar', type: 'Yazı (Aa)', bag: 'Alışveriş çantası', tag: 'Fiyat etiketi', bulb: 'Ampul (fikir)' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160', product: '0 0 100 160' };
   const TARGETS = [
-    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
+    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['works:web', 'İşler → Web siteleri'], ['works:app', 'İşler → Web uygulamaları'], ['works:consulting', 'İşler → Danışmanlık'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
     ['#neden', 'Neden biz bölümü'], ['#surec', 'Süreç bölümü'], ['#iletisim', 'İletişim bölümü'],
     ['whatsapp', 'WhatsApp (iletişimdeki numara)'], ['instagram', 'Instagram (iletişimdeki hesap)'], ['email', 'E-posta (iletişimdeki adres)'],
   ];
@@ -134,6 +134,7 @@
           badge: text('Rozet (örn. Geliştirmede, Yakında yayında)', { nostyle: true, compact: true }),
           premium: bool('Premium proje etiketi (kartta ve proje sayfasında görünür)'),
           lang: select('Adın dili (BÜYÜK HARF yazımı için)', [['', 'Türkçe (HAKİ, İŞLER)'], ['en', 'İngilizce (FINE, FOODS)']]),
+          slogan: text('Kapak sloganı (görsel yoksa kapakta büyük yazılır)', { nostyle: true, compact: true }),
           listLabel: text('Açılır liste butonunun yazısı (boşsa “Yapılan işler”)', { nostyle: true, compact: true }),
           summary: area('Kısa açıklama (kartta görünür)', { nostyle: true }),
           image: image('Kapak görseli', { hint: 'Sitenin ekran görüntüsü önerilir (yatay, 16:10). Yüklemezsen renkli bir kart çıkar.' }),
@@ -278,6 +279,8 @@
           logoSize: number('Logo boyutu', 24, 160, 'px', 1, { hint: 'Menüdeki logonun yüksekliği. Telefonda en fazla 64px görünür.' }),
           logoFrame: select('Logo çerçevesi', [['circle', 'Yuvarlak çerçeve (varsayılan)'], ['rounded', 'Yuvarlatılmış kare çerçeve'], ['none', 'Çerçevesiz, logo olduğu gibi']]),
           logoStyle: select('Logoyu temaya uydur (isteğe bağlı)', [['original', 'Uydurma, logo olduğu gibi kalsın (varsayılan)'], ['sticker', 'Sticker gibi: beyaz kenar ve siyah kontur'], ['tint', 'Tek renge boya: logoyu aşağıdaki renkte silüet yap']]),
+          logoWordmark: bool('Logonun yanında yazıyı göster (sayfa başındayken görünür, aşağı kaydırınca yazı kapanır, sadece işaret kalır)'),
+          logoWordColor: color('Logo yazısının rengi'),
           logoTint: color('Tek renge boyama rengi', { hint: 'Yalnızca "Tek renge boya" seçiliyse kullanılır. Şeffaf zeminli logolarda düzgün sonuç verir.' }),
         }),
         seo: group('Google ve paylaşım', {
@@ -401,10 +404,11 @@
         showButtons: bool('Başlığın altında butonları göster'),
         cards: list('Kartlar', group('', {
           title: area('Kart yazısı', { hint: lineHint }),
+          text: area('Kartın arka yüzü (boş bırakırsan kart çevrilmez)'),
           color: color('Kart rengi'),
           sticker: sticker('Sticker'),
           image: image('Fotoğraf (isteğe bağlı)', { hint: 'Yüklersen sticker yerine kartın üst kısmında görünür.' }),
-        }), { addLabel: 'Kart ekle', title: (v) => v.title.replace(/\n/g, ' '), max: 12, newItem: { title: 'Yeni\nkart', color: 'sun', sticker: 'star', image: '' } }),
+        }), { addLabel: 'Kart ekle', title: (v) => v.title.replace(/\n/g, ' '), max: 12, newItem: { title: 'Yeni\nkart', text: '', color: 'sun', sticker: 'star', image: '' } }),
       },
     },
     {
@@ -425,7 +429,12 @@
       schema: {
         background: color('Arka plan rengi'),
         heading: text('Başlık'),
-        tabs: list('Sekmeler', group('', {
+        intro: area('Kısa açıklama (isteğe bağlı)'),
+        roadmap: list('Yol haritası adımları', group('', {
+          title: area('Başlık', { hint: lineHint }), text: area('Açıklama'), color: color('Renk'), sticker: sticker('Sticker'),
+        }), { addLabel: 'Adım ekle', title: (v) => (v.title || '').split('\n').join(' '), max: 6, newItem: { title: 'Yeni adım', text: 'Açıklama.', color: 'sun', sticker: 'star' } }),
+        button: group('Alttaki buton', { label: text('Buton yazısı', { compact: true, hint: 'Boş bırakırsan gizlenir.' }), target: target() }, { flat: true }),
+        tabs: list('Sekmeler (eski; yol haritası doluysa kullanılmaz)', group('', {
           tab: text('Sekme adı', { compact: true }),
           title: area('Büyük başlık', { hint: lineHint }),
           steps: list('Adımlar', area('', { nostyle: true }), { addLabel: 'Adım ekle', newItem: 'Yeni adım.', max: 10 }),
