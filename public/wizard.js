@@ -59,7 +59,7 @@
     platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
       ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
-    marketplace: { title: "Pazaryeri yonetimi", desc: "Hangi platformlarda", options: [
+    marketplace: { title: "Hangi platformlarda satis yapmak istiyorsunuz?", desc: "Entegrasyon istiyor musunuz? Kac platform?", options: [
       ["no", "Hayir, sadece kendi sitemde", "Yalnizca kendi sitemde satis"],
       ["local2", "Trendyol ve Hepsiburada", "Trendyol, Hepsiburada"],
       ["local5", "Trendyol, Hepsiburada, N11, Amazon, Etsy", "5 onemli pazaryeri"],
