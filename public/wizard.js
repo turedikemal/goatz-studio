@@ -70,6 +70,11 @@
       ["501-1000", "501-1.000 urun", "Besten fazla bin"],
       ["1000+", "1.000'den fazla", "Binden fazla"],
       ["unknown", "Belli degil", "Bilmiyorum"]] },
+    prodtype: { title: "Web sitenizde hangi tur urunler satacaksiniz?", desc: "Urununuzun karmasikligi ne seviyede?", options: [
+      ["physical", "Yalnizca fiziksel urunler", "Standart urunler."],
+      ["custom", "Musteri ozelu yazi veya gorsel eklenen", "Ozelestirme ile."],
+      ["packages", "Birden fazla urunden olusturulmus paketler", "Paket olusturma."],
+      ["builder", "Musteri tarafindan olusturacagi urun takimlari", "Dinamik yapı."]] },
     users: { title: "Yonetim panelini kac kisi kullanacak?", desc: "Sitedeki urun ve satis yonetimini kac kisi yapacak?", options: [
       ["1", "Yalnizca ben", "Ben tek basima yonetecegim."],
       ["2-5", "2-5 kisi", "Kucuk bir tim ile yonetecegiz."],
@@ -124,7 +129,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'intl', 'support', 'users', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'prodtype', 'info', 'images', 'market', 'intl', 'support', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -163,6 +168,12 @@
     if (a.intl === 'tr-only') { scores.Starter += 2; scores.Core += 2; }
     if (a.intl === 'multilang') scores.Signature += 5;
     if (a.intl === 'advanced') scores.Signature += 5;
+    // Urun tipi puani
+    if (a.prodtype === 'physical') scores.Starter += 2;
+    if (a.prodtype === 'custom') scores.Core += 3;
+    if (a.prodtype === 'packages') scores.Signature += 5;
+    if (a.prodtype === 'builder') scores.Advanced += 5;
+    
     
     // Destek tipi puanı
     if (a.support === 'self') { scores.Starter += 1; scores.Core += 1; }
