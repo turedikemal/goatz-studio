@@ -780,6 +780,11 @@
   .work-feat-h.display, .work-story-h.display { line-height: .96; }
   .wa-h.display, .work-closing.display { line-height: .98; }
   .work-group-h.display { line-height: .95; }
+  @media (max-width: 760px) {
+    .work-sec { grid-template-columns: 1fr; gap: 12px; padding: 26px 22px 28px; }
+    .work-sec h3.display { font-size: clamp(24px, 7vw, 30px); line-height: 1; padding-right: 48px; }
+    .work-sec p { font-size: 16px; line-height: 1.55; }
+  }
 
   /* Premium proje etiketi */
   .work-premium { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--carbon); color: var(--sun); font-size: 11px; white-space: nowrap; }
