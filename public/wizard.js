@@ -34,7 +34,7 @@
     };
   })();
   const state = { step: 0, answers: {}, services: new Set(), extras: new Set(), contact: { name: '', email: '', phone: '', consent: true, marketing: true, mkDefault: true, website: '' }, sent: false, leadSent: false, site: { has: '', url: '', ok: '', brand: '', host: '', msg: '', busy: false } };
-  const emailOk = (v) => /^[^s@<>"']+@[^s@<>"']+.[^s@<>"']+$/.test(v);
+  const emailOk = (v) => /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/.test(v);
   const contactOk = () => state.contact.name.trim().length >= 2 && emailOk(state.contact.email.trim()) && state.contact.consent;
 
   const serviceList = [
