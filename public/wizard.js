@@ -59,13 +59,11 @@
     platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
       ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
-    products: { title: 'Tahmini kaç ürün satışa açılacak?', desc: 'Sitenize koyacağınız farklı ürünleri sayın. Aynı ürünün renklerini ve bedenlerini ayrı saymayın.', options: [
-      ['1–250', '1–250 ürün', 'En fazla 250 farklı ürünü satışa koyacağım.'],
-      ['251–500', '251–500 ürün', 'Ürün sayım 250’den fazla, en fazla 500.'],
-      ['501–750', '501–750 ürün', 'Ürün sayım 500’den fazla, en fazla 750.'],
-      ['751–1.000', '751–1.000 ürün', 'Ürün sayım 750’den fazla, en fazla 1.000.'],
-      ['1.001+', '1.000 üzeri ürün', '1.000’den fazla farklı ürün satacağım.'],
-      ['unknown', 'Henüz belli değil', 'Ürünleri henüz saymadım veya listem tamamlanmadı.']] },
+    products: { title: ‘Tahmini kaç ürün satışa açılacak?’, desc: ‘Sitenize koyacağınız farklı ürünleri sayın. Aynı ürünün renklerini ve bedenlerini ayrı saymayın.’, options: [
+      [‘1-100’, ‘1–100 ürün’, ‘En fazla 100 ürün.’],
+      [‘101-500’, ‘101–500 ürün’, ‘100’den fazla, 500’e kadar ürün.’],
+      [‘501+’, ‘501+ ürün’, ‘500’den fazla ürün.’],
+      [‘unknown’, ‘Henüz belli değil’, ‘Ürünleri henüz saymadım.’]] },
     info: { title: 'Ürün bilgileriniz hazır mı?', desc: 'Her ürünün adı, fiyatı ve açıklaması elinizde var mı?', options: [
       ['ready', 'Hazır', 'Ürün adları, fiyatlar ve açıklamalar bir dosyada veya mevcut sitemde hazır.'],
       ['edit', 'Düzenlenmesi gerekiyor', 'Ürün bilgilerim var ama eksikler ve düzeltilmesi gereken yazılar bulunuyor.'],
@@ -125,7 +123,7 @@
     const a = state.answers;
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
-    if (a.products === '1.001+') return 'Signature';
+    if (a.products === '501+') return 'Signature';
     if (a.platform === 'ikas') return 'Starter';
     if (['both', 'abroad'].includes(a.market)) return 'Advanced';
     if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) return 'Signature';
