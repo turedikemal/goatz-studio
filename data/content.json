@@ -3543,31 +3543,31 @@
           "columns": 4,
           "cards": [
             {
-              "title": "1. Tanışma",
-              "text": "Ne istediğinizi, ürünlerinizi ve hedefinizi konuşuyoruz.",
+              "title": "1. Planlama",
+              "text": "İhtiyaçlarınızı beliriyor, ürün çekimini ve web sitesini birlikte planlıyoruz.",
               "color": "sun",
-              "sticker": "chat",
+              "sticker": "bulb",
               "image": ""
             },
             {
-              "title": "2. Plan",
-              "text": "Ne yapılacağını, sırasını ve içeriği netleştiriyoruz.",
-              "color": "lavender",
-              "sticker": "pencil",
-              "image": ""
-            },
-            {
-              "title": "3. Üretim",
-              "text": "Çekim ve tasarım yapılıyor; taslakları görüp onaylıyorsunuz.",
+              "title": "2. Ürün çekimi",
+              "text": "Ürünlerinizi fotoğraflıyor, görselleri düzenleyip siteye uygun boyutlarda hazırlıyoruz.",
               "color": "mint",
               "sticker": "camera",
               "image": ""
             },
             {
-              "title": "4. Yayın",
-              "text": "Test edip yayına alıyoruz ya da dosyaları teslim ediyoruz.",
+              "title": "3. Web tasarımı",
+              "text": "Fotoğrafları tasarıma yerleştiriyor, sitenin mobil ve masaüstü kullanımını test ediyoruz.",
+              "color": "lavender",
+              "sticker": "code",
+              "image": ""
+            },
+            {
+              "title": "4. Yayına geçiş",
+              "text": "Son kontrolleri tamamlıyor, sitenizi alanınıza bağlayarak satışa hazır hale getiriyoruz.",
               "color": "blue",
-              "sticker": "rocket",
+              "sticker": "tag",
               "image": ""
             }
           ],
