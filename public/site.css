@@ -531,7 +531,7 @@
   .sf-link:hover { background: var(--ft, #fff); color: var(--fb, #000); }
   .sf-big { margin: clamp(48px, 7vw, 110px) 0 clamp(20px, 3vw, 36px); font-size: 12vw; line-height: .8; text-align: center; text-transform: uppercase; white-space: nowrap; overflow: hidden; }
   .site-footer .foot { border-top: 1px solid color-mix(in srgb, var(--ft, #fff) 35%, transparent); color: inherit; }
-  @media (max-width: 800px) { .sf-top { grid-template-columns: 1fr 1fr; } .sf-brand { grid-column: 1 / -1; } }
+  @media (max-width: 800px) { .sf-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .sf-brand { grid-column: 1 / -1; } .sf-top > * { min-width: 0; } .sf-company { overflow-wrap: anywhere; } }
 
   /* Sticker tıklama oyunları */
   .st-camera, .st-coin, .st-check, .st-star { cursor: pointer; }
@@ -714,6 +714,7 @@
   .ws-c { right: clamp(10px, 3vw, 44px); top: clamp(10px, 2vw, 28px); rotate: 8deg; }
   .work-featpanel .work-feat, .work-secpanel .work-secs { margin: 0; }
   .work-end .work-pager { border-top: 0; padding-top: 0; }
+  .work-pager .btn { max-width: 100%; min-width: 0; white-space: normal; text-align: left; line-height: 1.2; }
   .work-end .g-grid { margin: 0 0 28px; }
 
   .work-mid { display: grid; gap: 10px; align-content: start; min-height: 88px; }
@@ -993,6 +994,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
   .fix { display: block; }
   .fix em { position: relative; left: auto; top: auto; margin: .35em 0 .15em; display: block; width: fit-content; font-size: .6em; translate: 0 0; }
 }
+@media (max-width: 480px) { .fix s { font-size: .8em; } .fix em { font-size: .5em; } }
 
 /* Yazılı logo: işaret + yazı (SVG). Aşağı kaydırınca yazı kapanır, işaret kalır */
 .logo.has-word { gap: calc(var(--logo, 44px) * .22); flex: none; overflow: visible; }
