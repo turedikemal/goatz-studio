@@ -341,7 +341,7 @@
   html:not(.mo-navhide) .nav.keep-links.scrolled .nav-links { opacity: 1; transform: none; pointer-events: auto; }
 
   /* ---------- Yazı stilleri: kutu içi yerleşim ---------- */
-  .feature > div:last-child { align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+  .feature > div:last-child { align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; overflow: hidden; }
   .hero .tagline, .hero h1 { max-width: 100%; }
 
   /* ---------- Hareketler (referans sitedeki akışa göre) ---------- */
