@@ -112,7 +112,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'support', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -146,7 +146,13 @@
     if (a.market === 'tr') { scores.Starter += 1; scores.Core += 1; }
     if (a.market === 'both') { scores.Signature += 1; scores.Advanced += 1; }
     
-    // En yüksek puanı alan paket seçilir
+    
+    // Destek tipi puanı
+    if (a.support === 'self') { scores.Starter += 1; scores.Core += 1; }
+    if (a.support === 'consult') scores.Signature += 1;
+    if (a.support === 'managed') scores.Advanced += 1;
+    
+// En yüksek puanı alan paket seçilir
     const max = Math.max(...Object.values(scores));
     if (max === 0) return 'Starter';
     if (scores.Advanced === max) return 'Advanced';
