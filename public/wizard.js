@@ -59,11 +59,10 @@
     platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
       ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
-    marketplace: { title: "Pazaryeri yonetimi", desc: "Trendyol gibi platformlar", options: [
+    marketplace: { title: "Pazaryeri yonetimi", desc: "Hangi platformlarda", options: [
       ["no", "Hayir, kendi sitem", "Yalnizca kendi sitemde"],
-      ["local", "Evet, Trendyol/Hepsi", "Trendyol, Hepsiburada, N11"],
-      ["abroad", "Evet, Amazon/Etsy", "Amazon, Etsy"],
-      ["advanced", "Evet, 19+7", "19 yerli + 7 uluslararasi"]] },
+      ["local", "Trendyol Hepsiburada Amazon Etsy", "Trendyol, Hepsiburada, Amazon, Etsy"],
+      ["advanced", "Tum pazaryerleri", "Tum yerli ve yurt disi pazaryerleri"]] },
     products: { title: "Kac urun satisacaksiniz", desc: "Urun sayisini secin", options: [
       ["1-100", "1-100 urun", "En fazla 100"],
       ["101-500", "101-500 urun", "100den fazla 500e kadar"],
@@ -129,7 +128,7 @@
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
     if (a.marketplace === 'advanced') return 'Advanced';
-    if (a.products === '501+' || a.marketplace === 'local' || a.marketplace === 'abroad') return 'Signature';
+    if (a.products === '501+' || a.marketplace === 'local') return 'Signature';
     if (['both', 'abroad'].includes(a.market)) return 'Advanced';
     if (a.platform === 'ikas') return 'Starter';
     if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) return 'Signature';
