@@ -2255,22 +2255,22 @@
           "columns": 3,
           "cards": [
             {
-              "title": "Fotoğraflar siteye uyar",
-              "text": "E-ticarete uygun fotoğraflar.",
+              "title": "SİTENİZE UYGUN FOTOĞRAFLAR",
+              "text": "Ürün sayfaları, ana sayfa ve kampanyalar için ihtiyacınıza uygun fotoğraflar çekiyoruz.",
               "color": "sun",
               "sticker": "camera",
               "image": ""
             },
             {
-              "title": "Site fotoğrafları taşır",
-              "text": "Fotoğraf ve tasarım bir arada\nÇektiğimiz ürün fotoğraflarını site tasarımının bir parçası olarak ele alıyor, ürünlerinizin detaylarını öne çıkaran sayfalar hazırlıyoruz.",
+              "title": "FOTOĞRAFLARININIZLA UYUMLU TASARIM",
+              "text": "Sayfa düzenlerini, ürün fotoğraflarının en iyi görüneceği şekilde tasarlıyoruz.",
               "color": "lavender",
               "sticker": "layers",
               "image": ""
             },
             {
-              "title": "Tek muhatap, tek takvim",
-              "text": "Baştan sona aynı plan\nÜrün çekimi, web tasarımı ve teknik kurulum ortak bir takvimle ilerler. Ayrı kişiler arasında koordinasyon kurmanıza gerek kalmadan tüm süreç bir bütün olarak yürütülür.",
+              "title": "ÇEKİMDEN YAYINA TEK STÜDYO",
+              "text": "Ürün çekimi, web tasarımı ve kurulumu birlikte yürütüyor, sitenizi satışa hazır teslim ediyoruz.",
               "color": "mint",
               "sticker": "phone",
               "image": ""
