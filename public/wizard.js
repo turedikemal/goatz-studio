@@ -70,7 +70,7 @@
       ["custom", "Fiziksel ve Dijital Ürünler", "Hem fiziksel hem de dijital ürünler satacağım."],
       ["packages", "Hazır Ürün Paketleri", "Birden fazla ürünü paket halinde satacağım."],
       ["builder", "Müşterinin Kendi Oluşturduğu Ürün Setleri", "Müşterilerim ürünleri seçerek kendi setlerini oluşturabilecek."]] },
-    wholesale: { title: "Toptan veya bayi satışına ihtiyacınız var mi?", desc: "B2B satış kanalını düşünüyor musunuz?", options: [
+    wholesale: { title: "Toptan veya bayi satışına ihtiyacınız var mı?", desc: "B2B satış kanalını düşünüyor musunuz?", options: [
       ["no", "Hayır, yalnızca perakende satış yapacağım", "Sadece nihai müşterilere."],
       ["manual", "Toplu siparişleri manuel alacağım", "El ile işlem."],
       ["portal", "Bayilerim siteye giriş yapıp özel fiyatlarla sipariş vermeli", "B2B portal sistemi."],
