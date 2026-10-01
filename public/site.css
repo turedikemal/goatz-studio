@@ -1228,11 +1228,11 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-reco-title { margin: 0 0 8px; font-size: clamp(30px, 4.6vw, 56px); line-height: .95; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.02em; }
 .wz-reco-lead { margin: 0 0 20px; font-size: clamp(16px, 1.6vw, 19px); font-weight: 700; }
 
-.wz-urlbox { display: flex; align-items: stretch; max-width: 700px; border: 1px solid var(--carbon); border-radius: 14px; background: #fff; overflow: hidden; }
+.wz-urlbox { display: flex; align-items: stretch; max-width: 700px; border: 2px solid var(--carbon); border-radius: 14px; background: #fff; overflow: hidden; transition: border-color 0.2s; }
 .wz-urlbox i { display: grid; place-items: center; padding: 0 4px 0 16px; font-style: normal; font-size: 16px; font-weight: 800; text-transform: none; letter-spacing: 0; color: #00000099; }
 .wz .wz-urlbox input { border: 0; border-radius: 0; padding-left: 2px; background: transparent; }
 .wz .wz-urlbox input:focus { outline: none; }
-.wz-urlbox:focus-within { outline: 2px solid var(--carbon); outline-offset: 2px; }
+.wz-urlbox:focus-within { border-color: var(--sun); }
 
 /* Paketin tüm özellikleri: iki sütun, üstüne gelince sarı */
 .wz-allgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
