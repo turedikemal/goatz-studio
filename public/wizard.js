@@ -116,11 +116,6 @@
       ['partial', 'Bazıları eksik', 'Bir kısmı kurulu, eksik ya da hatalı olanlar var.'],
       ['none', 'Neredeyse hiçbiri yok', 'Site var ama Google, Meta ve SEO kurulumları yapılmamış.'],
       ['unknown', 'Bilmiyorum', 'Bu kurulumların tam olup olmadığını bilmiyorum.']] },
-    market: { title: 'Nerelere satış yapmak istiyorsunuz?', desc: 'Siparişlerinizi hangi ülkelere göndermeyi planlıyorsunuz?', options: [
-      ['tr', 'Türkiye', 'Şimdilik yalnızca Türkiye’deki müşterilere satış yapacağım.'],
-      
-      ['both', 'Türkiye ve yurt dışı', 'Hem Türkiye’ye hem diğer ülkelere satış yapacağım.'],
-      ['unknown', 'Henüz karar vermedim', 'Nerelere satış yapacağıma henüz karar vermedim.']] },
     intl: { title: 'Yurt disi satis planiniz nedir?', desc: 'Uluslararasi satislar icin strateji?', options: [
       ['tr-only', 'Yalnizca Turkiye\'ye satis', 'Yerli musterilere.'],
       ['consider', 'Ileride degerlenderebilirim', 'Henuz hazir degil.'],
