@@ -125,6 +125,7 @@
     const a = state.answers;
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
+    if (a.products === '1.001+') return 'Signature';
     if (a.platform === 'ikas') return 'Starter';
     if (['both', 'abroad'].includes(a.market)) return 'Advanced';
     if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) return 'Signature';
