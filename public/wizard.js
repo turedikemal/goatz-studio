@@ -125,6 +125,7 @@
     const a = state.answers;
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
+    if (a.platform === 'ikas') return 'Starter';
     if (['both', 'abroad'].includes(a.market)) return 'Advanced';
     if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) return 'Signature';
     return 'Core';
@@ -133,6 +134,7 @@
     const a = state.answers;
     if (a.route === 'service') return 'Yalnızca seçtiğiniz bağımsız hizmetler.';
     if (a.route === 'custom') return 'Standart kurulumun dışında, işletmenize özel bir çalışma.';
+    if (packageName() === 'Starter') return 'ikas\'ın ücretsiz temasında minimum özelleştirme ve kurulum.';
     if (packageName() === 'Advanced') return 'Yurt dışı satış hedefiniz için daha kapsamlı mağaza hazırlığı.';
     if (a.route === 'migration') return 'Mevcut mağazanızın taşınması ve yeni yapının hazırlanması.';
     if (packageName() === 'Signature') return 'Mağaza kurulumuna ek olarak ürün bilgileriniz ve katalog yapınız hazırlanacak.';
@@ -140,20 +142,22 @@
   };
   // Paketlerin birbirinden farkı: her paket bir alttakinin tamamını içerir, üstüne "+" maddeleri ekler
   const PACKAGES = {
+    Starter: { lower: '', note: 'ikas temasında temel kurulum, çalışan bir mağaza.', plus: ['ikas ücretsiz teması kurulumu', 'Ürün yüklemesi ve kategori düzenlemesi', 'Temel özelleştirmeler (renk, yazı)'] },
     Core: { lower: '', note: 'Hazır temayla düzenli bir başlangıç.', plus: ['Tema düzeninin markanıza uyarlanması', 'Ana sayfa ve mağaza kurulumları', 'Ürün ve kategori sayfalarının düzenlenmesi'] },
     Signature: { lower: 'Core', note: 'Markanızı anlatan özel sayfa kurgusu.', plus: ['Markaya özel ana sayfa bölüm kurgusu', 'Daha ayrıntılı ürün anlatımı ve sayfa tasarımı'] },
     Advanced: { lower: 'Signature', note: 'Daha ayrıntılı bir mağaza deneyimi.', plus: ['Farklı ürün grupları için sayfa düzenleri', 'Özel bölümler ve ayrıntılı alışveriş akışları'] },
   };
   // Paketin tüm özellikleri: alt paketlerin maddeleri dahil (Advanced = Core + Signature + Advanced)
-  const packageChain = () => { const n = packageName(); return n === 'Advanced' ? ['Core', 'Signature', 'Advanced'] : n === 'Signature' ? ['Core', 'Signature'] : n === 'Core' ? ['Core'] : []; };
+  const packageChain = () => { const n = packageName(); return n === 'Advanced' ? ['Core', 'Signature', 'Advanced'] : n === 'Signature' ? ['Core', 'Signature'] : n === 'Core' ? ['Core'] : n === 'Starter' ? ['Starter'] : []; };
   // "Paketin tüm özellikleri" açılır listesi: kademeli, her paket bir alttakini içerir
   const ALL = {
+    Starter: ['ikas ücretsiz teması kurulumu', 'Ürün yüklemesi ve kategori düzenlemesi', 'Temel özelleştirmeler (renk, yazı)', 'Ödeme yöntemi kurulumu', 'Temel SEO ayarları', 'Mobil uyumlu tema'],
     Core: ['Tema düzeninin markanıza uyarlanması', 'Ana sayfa ve mağaza kurulumları', 'Ürün ve kategori sayfalarının düzenlenmesi', 'Sınırsız trafik ve web alanı', 'Kampanya ve indirim kurguları', 'Ürün kişiselleştirme: renk, yazı, görsel seçimi', 'Dijital ürün satışı', 'Sosyal hesapla hızlı giriş', 'Otomatik sepet hatırlatma', 'Panelden sipariş oluşturma', 'Blog ve içerik sayfaları', 'E-ticaret ve temel SEO eğitimi'],
     Signature: ['Markaya özel ana sayfa bölüm kurgusu', 'Daha ayrıntılı ürün anlatımı ve sayfa tasarımı', 'Pazaryeri entegrasyonu: Trendyol, Hepsiburada, N11, Amazon, Etsy', 'Sınırsız e-ihracat: ülkeye göre fiyat, döviz ve dil', 'Gelişmiş sepet hatırlatma', 'Cross-sell ve up-sell', 'Paket ürün (bundle) ve asorti satış', 'Bölge bazlı teslimat', 'Ürün yorumları: hatırlatma, cevap verme, görselli yorum', 'Sipariş düzenleme'],
     Advanced: ['Farklı ürün grupları için sayfa düzenleri', 'Özel bölümler ve ayrıntılı alışveriş akışları', '19 yurt içi + 7 yurt dışı pazaryeri entegrasyonu', 'B2B / toptan satış altyapısı', 'ERP entegrasyonları', 'WhatsApp ile sepet hatırlatma', 'Ödeme sayfasında ve sonrasında çapraz satış', 'Özelleştirilmiş arama sonuçları ve eş anlamlı kelimeler', 'Konfigüratör / ürün takımı', 'Mobil uygulama (ücretli)'],
   };
   // Paket merdiveni: üstte bir üst paket, ortada size uygun paket, altta bir alt paket (kaydırılabilir)
-  const ORDER = ['Core', 'Signature', 'Advanced'];
+  const ORDER = ['Starter', 'Core', 'Signature', 'Advanced'];
   const packTiers = (mid) => {
     const n = packageName(), i = ORDER.indexOf(n);
     if (i < 0) return mid;
@@ -180,6 +184,13 @@
   };
   // Bir alt pakete göre kazanımlar: [başlık, açıklama] (altyapı özellikleri, müşteri faydası diliyle)
   const DIFF = {
+    Core: [
+      ['Markanıza uygun bir mağaza', 'Tema renklerini ve yazı tiplerini markanıza göre özelleştiririz.'],
+      ['Profesyonel görünen ürün sayfaları', 'Her ürün ayrıntılı ve çekici şekilde sunulur.'],
+      ['Müşteriler kolayca alışveriş yapabilir', 'Basit ve hızlı ödeme süreci.'],
+      ['Kampanya yapabilirsiniz', 'İndirimler ve promosyonlar panelden yönetilebilir.'],
+      ['Sosyal ağlarda hızlı giriş', 'Müşteriler Facebook ya da Google ile giriş yapabilir.'],
+    ],
     Signature: [
       ['Pazaryerlerini tek panelden yönetirsiniz', 'Trendyol, Hepsiburada, N11, Amazon ve Etsy siparişleri ve stokları tek ekranda.'],
       ['Yurt dışına satış yapabilirsiniz', 'Ülkeye göre fiyat, döviz ve dil. Sınırsız e-ihracat.'],
