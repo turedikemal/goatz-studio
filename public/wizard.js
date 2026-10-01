@@ -514,7 +514,7 @@
     const box = q('#wz-selection');
     box.innerHTML = services.length
       ? '<div class="wz-selected">' + services.map((s) => '<div class="wz-item" data-id="' + s[0] + '" data-i="' + (serviceList.indexOf(s) % 4) + '"><div><strong>' + esc(s[1]) + '</strong><p>' + bold(s[2]) + '</p></div><button type="button" class="wz-btn" data-remove="' + s[0] + '" aria-label="' + esc(s[1]) + ' hizmetini çıkar">Çıkar</button></div>').join('') + '</div>'
-      : '<div class="wz-empty">Henüz bağımsız hizmet eklemediniz. Web sitenizin temel kapsamı yukarıda yer alıyor.</div>';
+      : '<div class="wz-empty">Paketinizi ihtiyaçlarınıza göre tamamlayın. Aşağıdan seçtiğiniz ek hizmetler paketinize eklenecek ve burada listelenecek.</div>';
     const top = q('#wz-sel-top');
     top.innerHTML = services.length ? '<button type="button" class="wz-btn" data-removeall>Hepsini çıkar ✕</button>' : '';
     const ra = top.querySelector('[data-removeall]');
