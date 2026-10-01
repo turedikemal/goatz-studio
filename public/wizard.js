@@ -360,6 +360,13 @@
     const head = (complete ? 'TEKLİF TALEBİ (proje oluşturucu)' : 'YARIM KALAN TEKLİF (sihirbaz başlatıldı, henüz tamamlanmadı)') + NL + 'Ticari elektronik ileti onayı: ' + (c.marketing ? 'EVET (kutu önceden işaretli geliyordu, kişi kaldırmadı)' : 'hayır (kişi kutuyu kaldırdı)');
     return (complete ? head + NL + NL + summaryText() : head).slice(0, 3900);
   };
+  const reportData = () => {
+    const a = state.answers, st = state.site;
+    const answers = [];
+    if (st.has) answers.push(['Mevcut web sitesi', st.has === 'yes' ? (st.url.trim() || 'Var (adres yazılmadı)') + (st.brand ? ' — ' + st.brand : '') : 'Yok']);
+    Object.entries(a).filter(([k]) => questions[k]).forEach(([k, v]) => answers.push([questions[k].title, (questions[k].options.find((o) => o[0] === v) || ['', v])[1]]));
+    return { route: a.route === 'service' ? 'Bağımsız hizmetler' : 'Paket', package: packageName(), scope: base(), services: selectedServices().map((x) => x[1]), answers, note: a.brief || '', marketing: !!state.contact.marketing };
+  };
   const post = (complete) => fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: state.contact.name.trim(), email: state.contact.email.trim(), phone: state.contact.phone.trim(), website: state.contact.website, message: leadMessage(complete) }) });
 
   const sendBox = () => `<div class="wz-send"><h3 class="wz-send-title">Teklif talebinizi gönderin</h3><p class="wz-lead">Bu özeti bize gönderirseniz <b>${esc(state.contact.name)}</b> adına hazırlayıp <b>${esc(state.contact.email)}</b> adresine dönüş yapalım. İlk görüşme ücretsizdir.</p>
@@ -512,7 +519,7 @@
               }
             } catch (e) { console.log('[teklif] rapor görüntüsü alınamadı:', e.message); }
           }
-          const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: c.name.trim(), email: c.email.trim(), phone: c.phone.trim(), website: c.website, message: leadMessage(true), screenshot, pdf }) });
+          const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: c.name.trim(), email: c.email.trim(), phone: c.phone.trim(), website: c.website, message: leadMessage(true), report: reportData(), screenshot, pdf }) });
           const j = await res.json().catch(() => ({}));
           if (!res.ok) throw new Error(j.error || 'Gönderilemedi, lütfen tekrar deneyin.');
           state.sent = true; sendBtn.textContent = 'Gönderildi ✓'; status.textContent = 'Teşekkürler! Teklif talebiniz bize ulaştı, en kısa sürede dönüş yapacağız.'; status.classList.add('ok');

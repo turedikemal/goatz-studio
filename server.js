@@ -122,7 +122,11 @@ async function api(req, res, url) {
     const saved = messages.add(body || {});
     const b64 = (x, max) => (typeof x === 'string' && x.length <= max && /^[A-Za-z0-9+/=]+$/.test(x) ? x : null);
     const files = { jpeg: b64(body.screenshot, 9e6), pdf: b64(body.pdf, 9e6) };
-    mailer.notify(saved, store.load().contact.email, files).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
+    const str = (x, n) => (typeof x === 'string' ? x.slice(0, n) : '');
+    const arr = (x, n) => (Array.isArray(x) ? x.slice(0, n) : []);
+    const r = body && typeof body.report === 'object' && body.report;
+    const report = r ? { route: str(r.route, 60), package: str(r.package, 80), scope: arr(r.scope, 40).map((x) => str(x, 300)), services: arr(r.services, 40).map((x) => str(x, 200)), answers: arr(r.answers, 40).filter(Array.isArray).map((x) => [str(x[0], 200), str(x[1], 300)]), note: str(r.note, 2000), marketing: !!r.marketing } : null;
+    mailer.notify(saved, store.load().contact.email, files, report).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
     hits.push(now); contactHits.set(ip, hits);
     return json(res, 200, { ok: true });
   }
