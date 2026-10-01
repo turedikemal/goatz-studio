@@ -421,6 +421,26 @@
     el.screen.innerHTML = '<div class="wz-scene' + (state.keep ? ' wz-keep' : '') + '">' + html + '</div>';
     if (result) timer.finish();
 
+    // Smooth scroll soruya
+    const h2 = el.screen.querySelector('h2');
+    if (h2 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const targetY = Math.max(0, Math.round(h2.getBoundingClientRect().top + window.scrollY - 90));
+      const fromY = window.scrollY;
+      if (Math.abs(targetY - fromY) > 40) {
+        if (window.__lenis && window.__lenis.scrollTo) {
+          window.__lenis.scrollTo(targetY, { duration: 1.5 });
+        } else {
+          const DUR = 1500, t0 = performance.now();
+          const timer = setInterval(() => {
+            const p = Math.min(1, (performance.now() - t0) / DUR);
+            const e = 1 - Math.pow(1 - p, 3);
+            window.scrollTo(0, fromY + (targetY - fromY) * e);
+            if (p >= 1) clearInterval(timer);
+          }, 16);
+        }
+      }
+    }
+
     el.screen.querySelectorAll('[data-value]').forEach((btn) => btn.addEventListener('click', () => {
       const v = btn.dataset.value;
       if (result || key === 'services') {
