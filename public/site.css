@@ -228,10 +228,10 @@
 
   /* ---------- Hizmet satırları ---------- */
   .features { padding-block: clamp(80px, 10vw, 140px); display: grid; gap: clamp(64px, 9vw, 128px); }
-  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: stretch; }
+  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 72px); align-items: center; }
   .feature.rev .feature-media { order: 2; }
   .feature-media {
-    aspect-ratio: 1; border: 1px solid var(--carbon); border-radius: var(--r-card);
+    aspect-ratio: 1; width: 100%; border: 1px solid var(--carbon); border-radius: var(--r-card);
     overflow: hidden; position: relative;
   }
   .feature h2 { font-size: var(--heading); }
@@ -341,7 +341,8 @@
   html:not(.mo-navhide) .nav.keep-links.scrolled .nav-links { opacity: 1; transform: none; pointer-events: auto; }
 
   /* ---------- Yazı stilleri: kutu içi yerleşim ---------- */
-  .feature > div:last-child { align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; overflow: hidden; }
+  .feature > div:last-child { align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; min-width: 0; container-type: inline-size; }
+  .feature > div:last-child h2 { font-size: min(var(--heading), 12.5cqi); }
   .hero .tagline, .hero h1 { max-width: 100%; }
 
   /* ---------- Hareketler (referans sitedeki akışa göre) ---------- */
