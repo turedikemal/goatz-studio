@@ -71,10 +71,10 @@
       ["packages", "Hazır Ürün Paketleri", "Birden fazla ürünü paket halinde satacağım."],
       ["builder", "Müşterinin Kendi Oluşturduğu Ürün Setleri", "Müşterilerim ürünleri seçerek kendi setlerini oluşturabilecek."]] },
     wholesale: { title: "Toptan veya bayi satışına ihtiyacınız var mı?", desc: "B2B satış kanalını düşünüyor musunuz?", options: [
-      ["no", "Hayır, yalnızca perakende satış yapacağım", "Sadece nihai müşterilere."],
-      ["manual", "Toplu siparişleri manuel alacağım", "El ile işlem."],
-      ["portal", "Bayilerim siteye giriş yapıp özel fiyatlarla sipariş vermeli", "B2B portal sistemi."],
-      ["future", "İleride değerlendireceğim", "Şimdilik değil."]] },
+      ["no", "Yalnızca Perakende Satış", "Ürünlerimi doğrudan son kullanıcıya satacağım."],
+      ["manual", "Toplu Siparişleri Kendim Yönetecegim", "Siparişleri müşterilerimle görüşerek alacağım."],
+      ["portal", "Bayilere Özel Online Satış", "Bayilerim siteye giriş yapıp özel fiyatlarla sipariş verebilmeli."],
+      ["future", "İleride Değerlendireceğim", "Şimdilik toptan veya bayi satışına ihtiyacım yok."]] },
     users: { title: "Yönetim panelini kaç kişi kullanacak?", desc: "Sitedeki ürün ve satış yönetimini kaç kişi yapacak?", options: [
       ["1", "Yalnızca ben", "Ben tek başıma yönetecegim."],
       ["2-5", "2-5 kişi", "Küçük bir tim ile yonetecegiz."],
