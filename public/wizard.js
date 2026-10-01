@@ -101,7 +101,7 @@
       ['unknown', 'Bilmiyorum', 'Bu kurulumların tam olup olmadığını bilmiyorum.']] },
     market: { title: 'Nerelere satış yapmak istiyorsunuz?', desc: 'Siparişlerinizi hangi ülkelere göndermeyi planlıyorsunuz?', options: [
       ['tr', 'Türkiye', 'Şimdilik yalnızca Türkiye’deki müşterilere satış yapacağım.'],
-      ['abroad', 'Yurt dışı', 'Türkiye dışındaki müşterilere satış yapacağım.'],
+      
       ['both', 'Türkiye ve yurt dışı', 'Hem Türkiye’ye hem diğer ülkelere satış yapacağım.'],
       ['unknown', 'Henüz karar vermedim', 'Nerelere satış yapacağıma henüz karar vermedim.']] },
   };
@@ -129,20 +129,30 @@
     if (a.route === 'service') return 'Seçtiğiniz hizmetler';
     if (a.route === 'custom') return 'Custom';
     
-    let score = 0;
-    if (a.marketplace === 'local2') score += 2;
-    if (a.marketplace === 'local5') score += 5;
-    if (a.marketplace === 'advanced') score += 7;
-    if (a.products === '101-500') score += 3;
-    if (a.products === '501+') score += 5;
-    if (['both', 'abroad'].includes(a.market)) score += 2;
-    if (a.route === 'migration' || ['edit', 'create'].includes(a.info)) score += 3;
-    if (a.platform === 'ikas') score += 1;
+    let scores = { Starter: 0, Core: 0, Signature: 0, Advanced: 0 };
     
-    if (score >= 7) return 'Advanced';
-    if (score >= 4) return 'Signature';
-    if (score >= 1) return 'Core';
-    return 'Core';
+    // Pazaryeri puanı
+    if (a.marketplace === 'no') scores.Starter += 1;
+    if (a.marketplace === 'local2') scores.Core += 1;
+    if (a.marketplace === 'local5') scores.Signature += 1;
+    if (a.marketplace === 'advanced') scores.Advanced += 1;
+    
+    // Ürün sayısı puanı
+    if (a.products === '1-100') scores.Starter += 1;
+    if (a.products === '101-500') scores.Core += 1;
+    if (a.products === '501+') { scores.Signature += 1; scores.Advanced += 1; }
+    
+    // Satış bölgesi puanı
+    if (a.market === 'tr') { scores.Starter += 1; scores.Core += 1; }
+    if (a.market === 'both') { scores.Signature += 1; scores.Advanced += 1; }
+    
+    // En yüksek puanı alan paket seçilir
+    const max = Math.max(...Object.values(scores));
+    if (max === 0) return 'Starter';
+    if (scores.Advanced === max) return 'Advanced';
+    if (scores.Signature === max) return 'Signature';
+    if (scores.Core === max) return 'Core';
+    return 'Starter';
   };
   const packageReason = () => {
     const a = state.answers;
