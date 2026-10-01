@@ -134,7 +134,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'prodtype', 'wholesale', 'info', 'images', 'market', 'intl', 'support', 'users', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'prodtype', 'wholesale', 'info', 'images', 'intl', 'support', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -165,11 +165,7 @@
     if (a.products === '501-1000') scores.Signature += 5;
     if (a.products === '1000+') scores.Signature += 5;
     
-    // Satış bölgesi puanı
-    if (a.market === 'tr') { scores.Starter += 1; scores.Core += 1; }
-    if (a.market === 'both') { scores.Signature += 1; scores.Advanced += 1; }
-    
-    // Uluslararasi satis puani
+// Uluslararasi satis puani
     if (a.intl === 'tr-only') { scores.Starter += 2; scores.Core += 2; }
     if (a.intl === 'multilang') scores.Signature += 5;
     if (a.intl === 'advanced') scores.Signature += 5;
