@@ -111,6 +111,11 @@
       
       ['both', 'Türkiye ve yurt dışı', 'Hem Türkiye’ye hem diğer ülkelere satış yapacağım.'],
       ['unknown', 'Henüz karar vermedim', 'Nerelere satış yapacağıma henüz karar vermedim.']] },
+    intl: { title: 'Yurt disi satis planiniz nedir?', desc: 'Uluslararasi satislar icin strateji?', options: [
+      ['tr-only', 'Yalnizca Turkiye\'ye satis', 'Yerli musterilere.'],
+      ['consider', 'Ileride degerlenderebilirim', 'Henuz hazir degil.'],
+      ['multilang', 'Simdi farkli dil ve para', 'Dil+para birimi desteği.'],
+      ['advanced', 'Farkli fiyatlar ve doviz kuru', 'Gelismis fiyatlandirma.']] },
   };
 
   const steps = () => {
@@ -119,7 +124,7 @@
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
     if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
     if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
-    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'support', 'users', 'result'];
+    return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'marketplace', 'products', 'info', 'images', 'market', 'intl', 'support', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const bold = (t) => esc(t).replace(/(Google|SEO)/g, '<b>$1</b>');
@@ -154,6 +159,10 @@
     if (a.market === 'tr') { scores.Starter += 1; scores.Core += 1; }
     if (a.market === 'both') { scores.Signature += 1; scores.Advanced += 1; }
     
+    // Uluslararasi satis puani
+    if (a.intl === 'tr-only') { scores.Starter += 2; scores.Core += 2; }
+    if (a.intl === 'multilang') scores.Signature += 5;
+    if (a.intl === 'advanced') scores.Signature += 5;
     
     // Destek tipi puanı
     if (a.support === 'self') { scores.Starter += 1; scores.Core += 1; }
