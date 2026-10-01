@@ -758,6 +758,8 @@
   /* Kelime vurgusu: üzerine gelince sitenin sarısı */
   .hw { border-radius: 6px; padding: 0 .1em; margin: 0 -.1em; transition: background .12s ease; }
   .hw:hover { background: var(--sun); }
+  .hw-pg .split-ready .w { border-radius: 8px; transition: background .12s ease; }
+  .hw-pg .split-ready .w:hover { background: var(--sun); }
 
   /* Çok satırlı başlıklar üst üste binmesin: satır aralığı açık */
   .work-sec h3.display, .work-body h3.display, .wa-point h3.display { line-height: 1.12; }
