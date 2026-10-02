@@ -853,16 +853,16 @@
   const unlockKey = (el) => {
     if (busy(el, ms(2.9))) return;
     const c = centerOf(el), rot = restRot(el), T = ms(2.7), W = parseFloat(getComputedStyle(el).width) || c.w;
-    const hw = Math.max(8, W * 0.22), hh = hw * 1.55; // anahtardan küçük: kısa kenar hw, uzun kenar hh (yatay yatar)
+    const hw = Math.max(9, W * 0.24), hh = hw * 1.55; // anahtardan küçük, dik duran delik
     const hx = c.x + Math.max(W * 0.8, 24); // deliğin merkezi: anahtarın sağında
     const hole = document.createElement('i');
     hole.className = 'key-hole';
-    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh / 2) + 'px;width:' + hw + 'px;height:' + hh + 'px;rotate:90deg'; // 90°: dar yarık (giriş) sola, anahtara bakar
+    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh / 2) + 'px;width:' + hw + 'px;height:' + hh + 'px'; // dik (ayakta) anahtar deliği
     hole.innerHTML = '<svg viewBox="0 0 20 30" width="100%" height="100%" aria-hidden="true"><path d="M10 2a6.4 6.4 0 0 1 3.1 12L16 28H4l2.9-14A6.4 6.4 0 0 1 10 2z" fill="#000"/></svg>';
     document.body.append(hole);
     hole.animate([{ scale: 0, opacity: 0 }, { scale: 1.2, opacity: 1, offset: 0.1 }, { scale: 1, opacity: 1, offset: 0.16 }, { scale: 1, opacity: 1, offset: 0.9 }, { scale: 0.5, opacity: 0 }], { duration: T, easing: 'ease-out' });
     // anahtar: düzelir (uç sağa bakar), deliğe kadar ilerler, deliğe girer, çevrilir, geri çıkar
-    const tip = W * 0.4, into = hx - hh * 0.16 - (c.x + tip); // uç, yarığın içine kadar girer
+    const tip = W * 0.4, into = hx - hw * 0.15 - (c.x + tip); // uç, deliğin içine kadar girer (deliğin arkasında kalır)
     const base = { rotate: rot, translate: '0px 0px', scale: '1 1' };
     const turn = (dx, sy) => ({ rotate: 'calc(' + rot + ' + 28deg)', translate: dx + 'px 0px', scale: '1 ' + sy });
     el.animate([
@@ -1807,7 +1807,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
         f.launchCd -= dt;
         if (f.launchCd <= 0) {
           f.launchCd = rnd(6, 10);
-          if (fl.filter((o) => o.host === f.host).length < 16) add(f.host, { kind: pick(KINDS[f.team]), team: f.team, x: f.x + f.w * 0.55, y: f.y + f.hh * 0.5, h: f.h + rnd(-0.7, 0.7), speed: rnd(64, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, keep: true, dogLife: rnd(22, 34), life: 70, z: f.z, vz: rnd(-0.05, 0.05) });
+          if (fl.filter((o) => o.host === f.host).length < 16) add(f.host, { noSpread: true, kind: pick(KINDS[f.team]), team: f.team, x: f.x + f.w * 0.55, y: f.y + f.hh * 0.5, h: f.h + rnd(-0.7, 0.7), speed: rnd(64, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, keep: true, dogLife: rnd(22, 34), life: 70, z: f.z, vz: rnd(-0.05, 0.05) });
         }
       }
       if (f.dodgeCd > 0) f.dodgeCd -= dt;
@@ -1838,6 +1838,15 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   };
   const add = (host, o) => {
     const team = o.team == null ? 2 : o.team;
+    // Kenardan girişte gemiler üst üste binmesin: yakında gemi varsa giriş noktası kenar boyunca kaydırılır / biraz daha dışarıdan başlar
+    if (!o.noSpread) {
+      const v = view(host), edge = o.x < 0 || o.x > v.W;
+      const near = () => fl.some((g) => g.host === host && Math.hypot(g.x - o.x, g.y - o.y) < (g.big ? 200 : 130) + (o.kind === 2 || o.kind === 7 || o.kind === 8 ? 90 : 0));
+      for (let t = 0; t < 14 && near(); t++) {
+        if (edge) { o.y = clamp(o.y + rnd(-1, 1) * 260, v.y0 + 20, v.y1 - 20); o.x += (o.x < 0 ? -1 : 1) * rnd(30, 110); }
+        else o.x = clamp(o.x + rnd(-1, 1) * 260, 20, v.W - 20);
+      }
+    }
     const { s, w } = makeShip(host, o.kind, pick(TEAM[team].col), o.h);
     const f = Object.assign({ el: s, host, w, hh: w * 0.64, age: 0, cool: rnd(1, 3), hp: 1, mode: 'cruise', team, range: team < 2 ? 230 : 0, big: false, life: 150, keep: false, turn: 2, dogLife: 38, z: rnd(-0.6, 0.6), vz: rnd(-0.05, 0.05), cur: 1, ph: rnd(0, 6.28), h0: o.h, dodgeCd: 0, hangar: o.kind === 8, launchCd: rnd(3, 6) }, o);
     if (!f.plan) f.plan = { t: rnd(2, 6), want: 1, ht: f.h, t0: 0 };
