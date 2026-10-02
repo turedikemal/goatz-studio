@@ -75,10 +75,18 @@
     + '<label class="cart-consent"><input type="checkbox" name="consent"><span>' + (KVKK ? '<a href="' + KVKK + '" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>' : 'KVKK Aydınlatma Metni') + '’ni okudum; bilgilerimin fiyat hazırlamak ve benimle iletişime geçmek amacıyla işlenmesini kabul ediyorum.</span></label>'
     + '<button class="cart-send" type="submit">Fiyat al ↗</button>'
     + '<p class="cart-status" role="status" aria-live="polite"></p>';
-  panel.append(head, list, empty, form);
+  let view = 'list';
+  const go = el('button', 'cart-go', 'Sepete git →'); go.type = 'button';
+  const backBtn = el('button', 'cart-backlink', '← Sepete dön'); backBtn.type = 'button';
+  form.prepend(backBtn);
+  const setView = (v) => { view = v; title.textContent = v === 'form' ? 'Fiyat al' : 'Sepetiniz'; apply(); panel.scrollTop = 0; };
+  const apply = () => { go.hidden = !(view === 'list' && items.length > 0); form.hidden = !(view === 'form' && items.length > 0); };
+  go.addEventListener('click', () => setView('form'));
+  backBtn.addEventListener('click', () => setView('list'));
+  panel.append(head, list, empty, go, form);
   document.body.append(back, panel);
 
-  const open = () => { place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
+  const open = () => { setView('list'); place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
   const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); fab.focus(); };
   fab.addEventListener('click', open);
   close.addEventListener('click', shut);
@@ -114,7 +122,8 @@
     if (items.length) empty.textContent = EMPTY_TXT;
     empty.hidden = items.length > 0;
     list.hidden = items.length === 0;
-    form.hidden = items.length === 0;
+    if (!items.length) view = 'list';
+    apply();
   }
 
   // ---- Fiyat al: sepet içeriği e-posta olarak bize gider ----
@@ -139,7 +148,7 @@
       const j = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(j.error || 'Gönderilemedi, lütfen tekrar deneyin.');
       items = []; save(); sync();
-      list.hidden = true; form.hidden = true; empty.hidden = false;
+      list.hidden = true; form.hidden = true; go.hidden = true; empty.hidden = false; view = 'list'; title.textContent = 'Sepetiniz';
       empty.textContent = 'Teşekkürler! Fiyat talebiniz bize ulaştı, en kısa sürede dönüş yapacağız.';
       form.reset();
     } catch (err) { status.textContent = err.message; status.classList.add('err'); }

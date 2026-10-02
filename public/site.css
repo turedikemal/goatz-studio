@@ -1544,3 +1544,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .cart-status.err { color: #b3261e; }
 html.cart-open { overflow: hidden; }
 @media (max-width: 900px) { .cart-rail { position: fixed !important; top: auto !important; height: auto !important; right: auto; left: 14px; bottom: 18px; } .cart-fab { position: static; width: 60px; height: 60px; } .cart-tip { display: none; } }
+
+.cart-go { padding: 14px 20px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--carbon); color: #fff; font: inherit; font-size: 16px; font-weight: 900; cursor: pointer; }
+.cart-go[hidden] { display: none; }
+.cart-backlink { justify-self: start; padding: 6px 12px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
