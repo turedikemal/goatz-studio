@@ -2001,7 +2001,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   wrap.className = 'cart-top';
   wrap.hidden = true;
   wrap.innerHTML = '<a class="btn icon-btn cart-top-btn" href="/hizmetler#sepet" aria-label="Hizmet sepeti"><svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 10h8l7 30h28l6-22H17" fill="#fff" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/><circle cx="46" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/></svg><b class="cart-top-n"></b></a>' +
-    '<span class="cart-top-bubble" aria-hidden="true"><span></span><svg class="cb-tail up" viewBox="0 0 34 26" aria-hidden="true"><path d="M30 25C30 10 22 4 3 4C16 10 19 16 17 25Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="18" y="23.4" width="11" height="2.6" fill="#fff"/></svg></span>';
+    '<span class="cart-top-bubble" aria-hidden="true"><span></span><svg class="cb-tail up" viewBox="0 0 34 26" aria-hidden="true"><path d="M30 25C30 12 24 8 8 8C18 12 20 17 17 25Z" fill="#fff" stroke="#000" stroke-width="3.6" stroke-linejoin="round"/><rect x="18" y="22" width="11" height="4" fill="#fff"/></svg></span>';
   theme.parentNode.insertBefore(wrap, theme);
   const link = wrap.querySelector('a'), num = wrap.querySelector('.cart-top-n'), bubble = wrap.querySelector('.cart-top-bubble'), txt = bubble.querySelector('span');
   let bubT = 0, bubOff = 0, last = -1, shown = false;
