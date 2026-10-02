@@ -37,7 +37,7 @@
         if (used < TOTAL) { set('win', '2 dakika bile sürmedi! Sadece ' + took + ' sürdü.', fmt(TOTAL - used)); bar.style.width = ((TOTAL - used) / TOTAL * 100) + '%'; }
         else { set('over', 'Biraz uzadı ama güzel bir plan çıktı. ' + took + ' sürdü.', '00:00'); }
       },
-      reset() { clearInterval(tick); tick = 0; t0 = 0; done = false; bar.style.width = '100%'; set('idle', 'Bu iş yaklaşık 2 dakika sürer', '02:00'); },
+      reset() { clearInterval(tick); tick = 0; t0 = 0; done = false; bar.style.width = '100%'; set('idle', 'En fazla 2 dakikanı alacağım', '02:00'); },
     };
   })();
   const state = { step: 0, answers: {}, services: new Set(), extras: new Set(), detail: {}, contact: { name: '', email: '', phone: '', consent: true, marketing: true, mkDefault: true, website: '' }, sent: false, leadSent: false, site: { has: '', url: '', ok: '', brand: '', host: '', msg: '', busy: false } };
