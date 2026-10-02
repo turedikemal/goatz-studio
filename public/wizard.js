@@ -103,7 +103,9 @@
       ['new', 'Yeni e-ticaret sitesi', 'Henüz sitem yok. Ürünlerimi internetten satabileceğim bir site istiyorum.'],
       ['migration', 'Platform geçişi', 'Sitem var. Ürünlerimi ve mağazamı ikas altyapısına taşımak istiyorum.'],
       ['custom', 'Özel proje', 'Hazır bir sitenin dışında, bana özel bir uygulama veya sistem gerekiyor.'],
-      ['service', 'Sadece hizmet', 'Yeni site ya da taşıma istemiyorum. Yalnızca ihtiyacım olan hizmeti almak istiyorum.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
+      ['service', 'Sadece hizmet', 'Yeni site ya da taşıma istemiyorum. Yalnızca ihtiyacım olan hizmeti almak istiyorum.']] },
+    platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
+      ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
     products: { title: "Kaç ürün satışacaksınız?", desc: "Ürün sayısını seçin", options: [
       ["1-100", "1-100 ürün", "En fazla 100"],
