@@ -1761,7 +1761,7 @@ html[data-theme="night"] .ns { display: block; }
 @media (prefers-reduced-motion: reduce) { .ns b { animation: none; } }
 
 html[data-theme="night"] .logo.has-word .logo-word { color: #fff !important; }
-.ns-moon { display: none; position: absolute; z-index: -1; top: calc(50% - 23vw); left: calc(50% + 23vw); translate: -50% 0; width: clamp(80px, 11vw, 170px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 40% 36%, #f3f2ea, #d9d8cf); border: 4px solid #000; box-shadow: 0 0 40px rgba(255, 246, 200, .5); cursor: pointer; pointer-events: auto; }
+.ns-moon { display: none; position: absolute; z-index: -1; top: calc(50% - 23vw); left: calc(50% + 23vw); translate: -50% 0; width: clamp(80px, 11vw, 170px); aspect-ratio: 1; border-radius: 50%; background: #14162b; border: 4px solid #000; box-shadow: 0 0 40px rgba(255, 246, 200, .5); cursor: pointer; pointer-events: auto; }
 .ns-moon canvas { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 50%; display: block; }
 @keyframes ns-moon-glow { 50% { box-shadow: 0 0 70px 6px rgba(255, 246, 200, .8); } }
 html[data-theme="night"] .ns-moon { display: block; animation: ns-moon-in .8s ease both, ns-moon-glow 3.5s ease-in-out .8s infinite; }
@@ -1783,3 +1783,9 @@ html[data-theme="night"] .partner .pt-x { color: #000; }
 .ns-glow { position: absolute; left: 20%; right: 20%; top: 80%; height: 6px; border-radius: 50%; background: radial-gradient(closest-side, rgba(180, 230, 255, .8), rgba(180, 230, 255, 0)); animation: ns-flame .9s ease-in-out infinite alternate; }
 .ns-lvl { display: block; rotate: var(--cr, 0deg); }
 .ns-trail { position: absolute; right: calc(100% - 4px); top: 50%; width: 52px; height: 1px; background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, .4)); pointer-events: none; }
+/* Gece: teklif sihirbazı seçenek kartları (renkli kartlarda siyah yazı) */
+html[data-theme="night"] .wz-choice, html[data-theme="night"] .wz-choice * { color: #000; }
+html[data-theme="night"] .wz-choice[aria-pressed="true"], html[data-theme="night"] .wz-choice[aria-pressed="true"] * { color: #fff; }
+html[data-theme="night"] .wz-choice[aria-pressed="true"] { background: #000; }
+html[data-theme="night"] .wz-choice[aria-pressed="true"] .wz-mark { background: var(--sun); color: #000; }
+html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choice .wz-ikas * { color: #fff; }

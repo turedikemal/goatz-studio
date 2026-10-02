@@ -1446,8 +1446,8 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       e.setAttribute('data-nt', '');
     });
   };
-  const later = () => { clearTimeout(timer); timer = setTimeout(scan, 350); };
-  new MutationObserver((m) => { if (m.some((x) => x.type === 'childList')) later(); }).observe(document.body, { childList: true, subtree: true });
+  const later = () => { if (!timer) timer = setTimeout(() => { timer = 0; scan(); }, 400); }; // sürekli değişen sayaç taramayı hiç geciktirmesin
+  new MutationObserver((m) => { if (m.some((x) => x.type === 'childList' && !(x.target.closest && x.target.closest('.ns, .wz-timer')))) later(); }).observe(document.body, { childList: true, subtree: true });
   document.getElementById('themeBtn')?.addEventListener('click', () => setTimeout(scan, 600));
   window.addEventListener('load', () => setTimeout(scan, 600));
 })();
@@ -1489,7 +1489,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 
 // Gece teması: ana sayfa kahraman bölümünün tepesinde ay. Tıklayınca gerçek bir küre gibi (yüzey soldan sağa kayarak, kenarlarda sıkışarak) yavaşça döner.
 (() => {
-  const hero = document.querySelector('[data-intro]') && document.querySelector('.panel.hero');
+  const hero = location.pathname === '/' && document.querySelector('[data-intro]') && document.querySelector('.panel.hero');
   if (!hero) return;
   const moon = document.createElement('i');
   moon.className = 'ns-moon';
