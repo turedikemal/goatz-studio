@@ -47,6 +47,7 @@
     const a = document.createElement('a');
     a.href = '#' + x.id;
     a.dataset.g = String(x.i);
+    a.style.setProperty('--k', String(x.i)); // giriş efektinde sırayla gelmesi için
     // Her kapsülün kendi süzülme hızı, mesafesi ve zamanı (birbirinden bağımsız, hafif); sol kenar hizası bozulmaz, yalnız yukarı-aşağı
     const R = (n) => { const v = Math.sin((x.i + 1) * 12.9898 * n) * 43758.5453; return v - Math.floor(v); };
     a.style.setProperty('--d', (-R(1) * 9).toFixed(2) + 's');
@@ -95,6 +96,7 @@
     const sy = window.scrollY, first = tops[0] - sy, last = lastBottom - sy; // konumlar önbellekte: kaydırırken her karede yerleşim okunmaz
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
+    rail.classList.toggle('show', inside); // bölüme girince filtre uzaklıktan (sonsuzluktan) gelir, çıkınca uzaklaşır
     let idx = 0;
     tops.forEach((t, i) => { if (t - sy <= vh * 0.4) idx = i; });
     if (idx !== current) {

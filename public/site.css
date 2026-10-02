@@ -1930,3 +1930,8 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .svc-bar a[data-g="6"] { --fc: color-mix(in srgb, var(--ember) 45%, var(--lavender)); }
 .svc-bar a[data-g="7"] { --fc: color-mix(in srgb, var(--mint) 50%, var(--blue)); }
 
+
+/* Filtre girişi: bölüme gelince kapsüller sonsuzluktan (uzaktan, küçük ve bulanık) sırayla yaklaşıp yerine oturur; bölümden çıkınca geri uzaklaşır */
+.svc-rail a { opacity: 0; scale: .12; filter: blur(7px); pointer-events: none; transition: transform .15s ease, background .15s ease, color .15s ease, opacity .35s ease, scale .45s ease, filter .35s ease; }
+.svc-rail.show a { opacity: 1; scale: 1; filter: blur(0); pointer-events: auto; transition: transform .15s ease, background .15s ease, color .15s ease, opacity 1s cubic-bezier(.16, .84, .3, 1) calc(var(--k, 0) * 110ms), scale 1.3s cubic-bezier(.16, .84, .3, 1) calc(var(--k, 0) * 110ms), filter 1s ease calc(var(--k, 0) * 110ms); }
+@media (prefers-reduced-motion: reduce) { .svc-rail a, .svc-rail.show a { transition: opacity .2s ease; scale: 1; filter: none; } }
