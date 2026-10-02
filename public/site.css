@@ -2015,3 +2015,26 @@ html[data-theme="night"] a.btn.solid[href="/teklif-al"]:hover, html[data-theme="
 .faq-a p { margin: 0; font-size: 16.5px; line-height: 1.55; font-weight: 500; }
 .faq-a a { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; color: #000; }
 @media (prefers-reduced-motion: reduce) { .faq-item summary i, .faq-item summary i::after { transition: none; } }
+
+/* SSS: başlık solda yapışkan, sorular sağda; her grup kendi renginde */
+@media (min-width: 1000px) {
+  .blk-faq .blk-in { display: grid; grid-template-columns: minmax(260px, 380px) minmax(0, 1fr); column-gap: clamp(32px, 5vw, 80px); align-items: start; }
+  .blk-faq .blk-in > :not(.faq-list) { grid-column: 1; position: sticky; top: 110px; }
+  .blk-faq .blk-in > .faq-list { grid-column: 2; grid-row: 1 / span 6; max-width: none; margin-top: 0; }
+  .blk-faq h2.display { font-size: clamp(34px, 3.6vw, 56px) !important; }
+}
+.blk-faq .faq-item { box-shadow: 4px 4px 0 #000; }
+.blk-faq .faq-item[open] { box-shadow: 6px 6px 0 #000; }
+
+
+/* Gece: panel lacivert; grup rengi gölge ve artı simgesinde kalır */
+html[data-theme="night"] .blk-faq[data-bg="sun"] { --acc: var(--sun); }
+html[data-theme="night"] .blk-faq[data-bg="mint"] { --acc: var(--mint); }
+html[data-theme="night"] .blk-faq[data-bg="lavender"] { --acc: var(--lavender); }
+html[data-theme="night"] .blk-faq[data-bg="blue"] { --acc: var(--blue); }
+html[data-theme="night"] .blk-faq[data-bg="ember"] { --acc: var(--ember); }
+html[data-theme="night"] .blk-faq[data-bg="sky"] { --acc: var(--sky); }
+html[data-theme="night"] .blk-faq[data-bg="paper"] { --acc: var(--sun); }
+html[data-theme="night"] .blk-faq .faq-item { box-shadow: 4px 4px 0 var(--acc, var(--sun)); border-color: var(--acc, var(--sun)); }
+html[data-theme="night"] .blk-faq .faq-item summary i { background: var(--acc, var(--sun)); }
+html[data-theme="night"] .blk-faq .faq-item[open] { box-shadow: 6px 6px 0 var(--acc, var(--sun)); }

@@ -6173,7 +6173,7 @@
         {
           "type": "faq",
           "visible": true,
-          "background": "paper",
+          "background": "sun",
           "eyebrow": "Stüdyo",
           "heading": "Genel",
           "text": "",
@@ -6228,7 +6228,7 @@
         {
           "type": "faq",
           "visible": true,
-          "background": "sky",
+          "background": "mint",
           "eyebrow": "E-ticaret sitesi",
           "heading": "Anahtar teslim e-ticaret",
           "text": "",
@@ -6311,7 +6311,7 @@
         {
           "type": "faq",
           "visible": true,
-          "background": "paper",
+          "background": "lavender",
           "eyebrow": "Başlarken",
           "heading": "Fiyat ve süreç",
           "text": "",
@@ -6366,7 +6366,7 @@
         {
           "type": "faq",
           "visible": true,
-          "background": "sky",
+          "background": "blue",
           "eyebrow": "Fotoğraf",
           "heading": "Ürün çekimi",
           "text": "",
@@ -6421,7 +6421,7 @@
         {
           "type": "faq",
           "visible": true,
-          "background": "paper",
+          "background": "ember",
           "eyebrow": "Görünürlük",
           "heading": "Google ve SEO",
           "text": "",
