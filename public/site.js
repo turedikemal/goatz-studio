@@ -1481,3 +1481,93 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   moon.setAttribute('aria-hidden', 'true');
   hero.append(moon);
 })();
+
+// Gece teması: arka planda mini uzay gemileri yavaşça gezer, ara sıra mini bir çatışma çıkar.
+// Zamanlama ve yer her seferinde rastgele; yalnız gece modunda, görünen panellerde çalışır.
+(() => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const root = document.documentElement;
+  const COLORS = ['#55db9c', '#e9ccff', '#ffd731', '#fb4903', '#4da2ff', '#fff6c8'];
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  let active = 0;
+
+  const shipSvg = (kind, col) => (kind === 0
+    ? `<svg viewBox="0 0 24 14" width="26" height="15"><path d="M1 7L9 2l11 3 3 2-3 2-11 3z" fill="${col}"/><path d="M9 2l11 3-5 2z" fill="#fff" opacity=".45"/><circle cx="18" cy="7" r="1.3" fill="#12163a"/></svg>`
+    : `<svg viewBox="0 0 24 14" width="24" height="14"><ellipse cx="12" cy="9" rx="11" ry="4" fill="${col}"/><ellipse cx="12" cy="6" rx="5" ry="4" fill="#dceeff"/><circle cx="7" cy="9" r="1" fill="#12163a"/><circle cx="12" cy="9.5" r="1" fill="#12163a"/><circle cx="17" cy="9" r="1" fill="#12163a"/></svg>`);
+
+  const makeShip = (host, x, y, dir) => {
+    const s = document.createElement('i');
+    s.className = 'ns-ship';
+    s.innerHTML = shipSvg(Math.round(Math.random()), pick(COLORS));
+    s.style.cssText = `left:${x}px;top:${y}px;scale:${dir} 1`;
+    host.append(s);
+    active++;
+    return s;
+  };
+  const drop = (s) => { s.remove(); active--; };
+  const fly = (s, dx, dy, ms) => s.animate([{ translate: '0 0' }, { translate: `${dx}px ${dy}px` }], { duration: ms, easing: 'linear', fill: 'forwards' }).finished;
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  const shot = (host, x, y, dx, col) => {
+    const l = document.createElement('i');
+    l.className = 'ns-shot';
+    l.style.cssText = `left:${x}px;top:${y}px;background:${col}`;
+    host.append(l);
+    return l.animate([{ translate: '0 0', opacity: 1 }, { translate: `${dx}px 0`, opacity: 1 }], { duration: Math.abs(dx) * 9, easing: 'linear' }).finished.then(() => l.remove());
+  };
+  const boom = (host, x, y) => {
+    const f = document.createElement('i');
+    f.className = 'ns-boom';
+    f.style.cssText = `left:${x}px;top:${y}px`;
+    host.append(f);
+    f.animate([{ scale: 0.2, opacity: 1 }, { scale: 1.6, opacity: 0 }], { duration: 700, easing: 'ease-out' }).finished.then(() => f.remove());
+    for (let i = 0; i < 7; i++) {
+      const p = document.createElement('i');
+      p.className = 'ns-spark';
+      p.style.cssText = `left:${x}px;top:${y}px`;
+      host.append(p);
+      const a = (i / 7) * Math.PI * 2 + rnd(0, 0.5), d = rnd(10, 22);
+      p.animate([{ translate: '0 0', opacity: 1 }, { translate: `${Math.cos(a) * d}px ${Math.sin(a) * d}px`, opacity: 0 }], { duration: 650, easing: 'ease-out' }).finished.then(() => p.remove());
+    }
+  };
+
+  const hostFor = () => {
+    const vh = innerHeight;
+    const list = [...document.querySelectorAll('.ns')].filter((n) => { const r = n.parentElement.getBoundingClientRect(); return r.bottom > 60 && r.top < vh - 60 && r.width > 200; });
+    return list.length ? pick(list) : null;
+  };
+
+  const cruise = (host) => {
+    const W = host.offsetWidth, H = host.offsetHeight;
+    const dir = Math.random() < 0.5 ? 1 : -1;
+    const y = rnd(H * 0.05, H * 0.95), dy = rnd(-H * 0.2, H * 0.2);
+    const s = makeShip(host, dir === 1 ? -40 : W + 14, y, dir);
+    fly(s, dir * (W + 60), dy, rnd(16000, 30000)).then(() => drop(s), () => drop(s));
+  };
+
+  const battle = async (host) => {
+    const W = host.offsetWidth, H = host.offsetHeight;
+    if (W < 360) return cruise(host);
+    const y = rnd(H * 0.15, H * 0.85), mid = rnd(W * 0.3, W * 0.7), gap = rnd(70, 110);
+    const a = makeShip(host, -40, y, 1), b = makeShip(host, W + 14, y + rnd(-14, 14), -1);
+    const ax = mid - gap / 2, bx = mid + gap / 2;
+    await Promise.all([fly(a, ax + 40, 0, rnd(4500, 6500)), fly(b, -(W + 14 - bx), 0, rnd(4500, 6500))]).catch(() => {});
+    const ay = y + 7, by = parseFloat(b.style.top) + 7;
+    for (let i = 0; i < 3; i++) { shot(host, ax + 24, ay, gap - 20, '#ffd731'); await wait(rnd(250, 500)); if (Math.random() < 0.7) { shot(host, bx - 6, by, -(gap - 20), '#fb4903'); await wait(rnd(200, 400)); } }
+    await wait(500);
+    boom(host, bx + 12, by);
+    drop(b);
+    const rest = a.animate([{ translate: `${ax + 40}px 0` }, { translate: `${W + 80}px ${rnd(-30, 30)}px` }], { duration: rnd(9000, 14000), easing: 'ease-in', fill: 'forwards' });
+    rest.finished.then(() => drop(a), () => drop(a));
+  };
+
+  const tick = () => {
+    if (root.dataset.theme === 'night' && !document.hidden && active < 4) {
+      const host = hostFor();
+      if (host) (Math.random() < 0.3 ? battle : cruise)(host);
+    }
+    setTimeout(tick, rnd(1800, 7000));
+  };
+  setTimeout(tick, 2500);
+})();
