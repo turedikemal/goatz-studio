@@ -527,7 +527,7 @@
   ];
 
   // ---------- Özel sayfalar: şema ----------
-  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)' };
+  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası' };
   const is = (...types) => (o) => types.includes(o.type);
   const BLOCK_FIELDS = {
     type: select('Blok türü', Object.entries(BLOCK_TYPES)),

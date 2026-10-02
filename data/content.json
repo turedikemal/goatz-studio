@@ -2530,6 +2530,40 @@
               "caption": ""
             }
           ]
+        },
+        {
+          "type": "map",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Konum",
+          "heading": "Ofisimiz Çanakkale’de.",
+          "text": "Fevzipaşa Mahallesi, Medrese Sokak, No: 1, Office: 2, 17100 Çanakkale. Gelmeden önce yazın ya da arayın, sizi bekleyelim.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Yol tarifi al",
+            "target": "https://www.google.com/maps/search/?api=1&query=The+Goatz+Creative+%C3%87anakkale"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
         }
       ]
     },
