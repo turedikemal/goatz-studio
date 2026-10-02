@@ -1500,38 +1500,42 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 })();
 
 // Gece teması: arka planda mini uzay gemileri yavaşça gezer, ara sıra mini bir çatışma çıkar.
-// Zamanlama ve yer her seferinde rastgele; yalnız gece modunda, görünen panellerde çalışır.
+// Yön, zamanlama ve yer her seferinde rastgele (her yöne uçarlar); yalnız gece modunda, görünen panellerde çalışır.
 (() => {
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   const root = document.documentElement;
   const COLORS = ['#55db9c', '#e9ccff', '#ffd731', '#fb4903', '#4da2ff', '#fff6c8'];
   const rnd = (a, b) => a + Math.random() * (b - a);
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const DEG = 180 / Math.PI;
   let active = 0;
 
   const shipSvg = (kind, col) => (kind === 0
     ? `<svg viewBox="0 0 24 14" width="26" height="15"><path d="M1 7L9 2l11 3 3 2-3 2-11 3z" fill="${col}"/><path d="M9 2l11 3-5 2z" fill="#fff" opacity=".45"/><circle cx="18" cy="7" r="1.3" fill="#12163a"/></svg>`
     : `<svg viewBox="0 0 24 14" width="24" height="14"><ellipse cx="12" cy="9" rx="11" ry="4" fill="${col}"/><ellipse cx="12" cy="6" rx="5" ry="4" fill="#dceeff"/><circle cx="7" cy="9" r="1" fill="#12163a"/><circle cx="12" cy="9.5" r="1" fill="#12163a"/><circle cx="17" cy="9" r="1" fill="#12163a"/></svg>`);
 
-  const makeShip = (host, x, y, dir) => {
+  // Savaşçı uçtuğu yöne bakar; uçan daire hep düz durur, yalnız hafifçe yatar
+  const makeShip = (host, x, y, heading) => {
     const s = document.createElement('i');
+    const kind = Math.round(Math.random());
     s.className = 'ns-ship';
-    s.innerHTML = shipSvg(Math.round(Math.random()), pick(COLORS));
-    s.style.cssText = `left:${x}px;top:${y}px;scale:${dir} 1`;
+    s.innerHTML = shipSvg(kind, pick(COLORS));
+    const tilt = Math.max(-14, Math.min(14, Math.cos(heading) * 10));
+    s.style.cssText = `left:${x}px;top:${y}px;rotate:${kind === 0 ? heading * DEG : tilt}deg`;
     host.append(s);
     active++;
     return s;
   };
   const drop = (s) => { s.remove(); active--; };
-  const fly = (s, dx, dy, ms) => s.animate([{ translate: '0 0' }, { translate: `${dx}px ${dy}px` }], { duration: ms, easing: 'linear', fill: 'forwards' }).finished;
+  const fly = (s, dx, dy, ms, easing = 'linear', from = [0, 0]) => s.animate([{ translate: `${from[0]}px ${from[1]}px` }, { translate: `${dx}px ${dy}px` }], { duration: ms, easing, fill: 'forwards' }).finished;
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
-  const shot = (host, x, y, dx, col) => {
+  const shot = (host, x, y, ux, uy, len, col) => {
     const l = document.createElement('i');
     l.className = 'ns-shot';
-    l.style.cssText = `left:${x}px;top:${y}px;background:${col}`;
+    l.style.cssText = `left:${x}px;top:${y}px;background:${col};rotate:${Math.atan2(uy, ux) * DEG}deg`;
     host.append(l);
-    return l.animate([{ translate: '0 0', opacity: 1 }, { translate: `${dx}px 0`, opacity: 1 }], { duration: Math.abs(dx) * 9, easing: 'linear' }).finished.then(() => l.remove());
+    return l.animate([{ translate: '0 0' }, { translate: `${ux * len}px ${uy * len}px` }], { duration: len * 9, easing: 'linear' }).finished.then(() => l.remove());
   };
   const boom = (host, x, y) => {
     const f = document.createElement('i');
@@ -1555,28 +1559,39 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     return list.length ? pick(list) : null;
   };
 
+  // Kenardan rastgele bir noktadan, panelin karşı tarafına doğru rastgele açıyla uçuş
+  const edgePoint = (W, H, edge, pad) => (edge === 0 ? [-pad, rnd(0, H)] : edge === 1 ? [W + pad, rnd(0, H)] : edge === 2 ? [rnd(0, W), -pad] : [rnd(0, W), H + pad]);
   const cruise = (host) => {
     const W = host.offsetWidth, H = host.offsetHeight;
-    const dir = Math.random() < 0.5 ? 1 : -1;
-    const y = rnd(H * 0.05, H * 0.95), dy = rnd(-H * 0.2, H * 0.2);
-    const s = makeShip(host, dir === 1 ? -40 : W + 14, y, dir);
-    fly(s, dir * (W + 60), dy, rnd(16000, 30000)).then(() => drop(s), () => drop(s));
+    const e1 = Math.floor(rnd(0, 4));
+    const e2 = Math.random() < 0.6 ? e1 ^ 1 : pick([0, 1, 2, 3].filter((e) => e !== e1));
+    const [x0, y0] = edgePoint(W, H, e1, 40), [x1, y1] = edgePoint(W, H, e2, 40);
+    const dx = x1 - x0, dy = y1 - y0, heading = Math.atan2(dy, dx);
+    const s = makeShip(host, x0, y0, heading);
+    const dist = Math.hypot(dx, dy);
+    fly(s, dx, dy, Math.max(14000, dist * rnd(22, 38))).then(() => drop(s), () => drop(s));
   };
 
   const battle = async (host) => {
     const W = host.offsetWidth, H = host.offsetHeight;
-    if (W < 360) return cruise(host);
-    const y = rnd(H * 0.15, H * 0.85), mid = rnd(W * 0.3, W * 0.7), gap = rnd(70, 110);
-    const a = makeShip(host, -40, y, 1), b = makeShip(host, W + 14, y + rnd(-14, 14), -1);
-    const ax = mid - gap / 2, bx = mid + gap / 2;
-    await Promise.all([fly(a, ax + 40, 0, rnd(4500, 6500)), fly(b, -(W + 14 - bx), 0, rnd(4500, 6500))]).catch(() => {});
-    const ay = y + 7, by = parseFloat(b.style.top) + 7;
-    for (let i = 0; i < 3; i++) { shot(host, ax + 24, ay, gap - 20, '#ffd731'); await wait(rnd(250, 500)); if (Math.random() < 0.7) { shot(host, bx - 6, by, -(gap - 20), '#fb4903'); await wait(rnd(200, 400)); } }
+    if (W < 360 || H < 160) return cruise(host);
+    // Çatışma ekseni rastgele bir açı: gemiler birbirine bu doğrultuda yaklaşır
+    const ang = rnd(0, Math.PI * 2), ux = Math.cos(ang), uy = Math.sin(ang);
+    const mx = rnd(W * 0.25, W * 0.75), my = rnd(H * 0.25, H * 0.75), gap = rnd(70, 110), far = Math.hypot(W, H) * 0.6;
+    const ax = mx - ux * gap / 2, ay = my - uy * gap / 2, bx = mx + ux * gap / 2, by = my + uy * gap / 2;
+    const sax = mx - ux * far, say = my - uy * far, sbx = mx + ux * far, sby = my + uy * far;
+    const a = makeShip(host, sax, say, ang), b = makeShip(host, sbx, sby, ang + Math.PI);
+    await Promise.all([fly(a, ax - sax, ay - say, rnd(4500, 6500)), fly(b, bx - sbx, by - sby, rnd(4500, 6500))]).catch(() => {});
+    for (let i = 0; i < 3; i++) {
+      shot(host, ax + ux * 14, ay + uy * 14, ux, uy, gap - 26, '#ffd731');
+      await wait(rnd(250, 500));
+      if (Math.random() < 0.7) { shot(host, bx - ux * 14, by - uy * 14, -ux, -uy, gap - 26, '#fb4903'); await wait(rnd(200, 400)); }
+    }
     await wait(500);
-    boom(host, bx + 12, by);
+    boom(host, bx + 12, by + 7);
     drop(b);
-    const rest = a.animate([{ translate: `${ax + 40}px 0` }, { translate: `${W + 80}px ${rnd(-30, 30)}px` }], { duration: rnd(9000, 14000), easing: 'ease-in', fill: 'forwards' });
-    rest.finished.then(() => drop(a), () => drop(a));
+    const rd = rnd(-0.6, 0.6), rx = Math.cos(ang + rd) * far * 1.4, ry = Math.sin(ang + rd) * far * 1.4;
+    fly(a, ax - sax + rx, ay - say + ry, rnd(9000, 14000), 'ease-in', [ax - sax, ay - say]).then(() => drop(a), () => drop(a));
   };
 
   const tick = () => {
