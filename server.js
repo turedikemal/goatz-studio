@@ -489,11 +489,13 @@ const server = http.createServer(async (req, res) => {
     }
     const origin = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
     if (url.pathname === '/robots.txt') {
-      return send(res, 200, `User-agent: *\nDisallow: /admin\nSitemap: ${origin}/sitemap.xml\n`);
+      // Yasal sayfalar (gizlilik, KVKK, çerez, kullanım koşulları) taranmasın; adresleri panelden değişse de burada güncel kalır
+      const legal = resolvePages(store.load().pages).filter((p) => ['gizlilik', 'kvkk', 'cerez', 'kosullar'].includes(p.id)).map((p) => `Disallow: /${p.slug}`);
+      return send(res, 200, `User-agent: *\nDisallow: /admin\n${legal.join('\n')}\nSitemap: ${origin}/sitemap.xml\n`);
     }
     if (url.pathname === '/sitemap.xml') {
       const c = store.load();
-      const urls = ['/', ...(c.works.visible ? ['/isler', ...resolveWorks(c.works.items).filter((v) => v.visible).map((v) => `/isler/${v.slug}`)] : []), ...resolvePages(c.pages).filter((p) => p.visible).map((p) => `/${p.slug}`)];
+      const urls = ['/', ...(c.works.visible ? ['/isler', ...resolveWorks(c.works.items).filter((v) => v.visible).map((v) => `/isler/${v.slug}`)] : []), ...resolvePages(c.pages).filter((p) => p.visible && !['gizlilik', 'kvkk', 'cerez', 'kosullar'].includes(p.id)).map((p) => `/${p.slug}`)];
       const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${origin}${u}</loc></url>`).join('\n')}\n</urlset>\n`;
       return send(res, 200, xml, 'application/xml; charset=utf-8');
     }
