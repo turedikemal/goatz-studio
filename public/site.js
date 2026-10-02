@@ -434,7 +434,8 @@
     };
     box.addEventListener('mouseenter', () => { hover = true; });
     box.addEventListener('mouseleave', () => { hover = false; });
-    if (!reduce) setInterval(() => { if (!hover && !document.hidden) show(cur + 1); }, 3400 + bi * 700);
+    // Web siteleri 3 sn'de bir sırayla değişir (üzerine gelince durmaz); uygulamalar biraz farklı ritimde, ikisi aynı anda değişmesin
+    setInterval(() => { if (!document.hidden) show(cur + 1); }, 3000 + bi * 600);
   });
 
   // ---------- Proje sayfasından geri dön: önceki sayfa işler listesiyse oraya dön ----------
