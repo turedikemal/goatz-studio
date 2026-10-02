@@ -1487,16 +1487,90 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   panels.forEach((p) => { const sky = document.createElement('div'); sky.className = 'ns'; sky.setAttribute('aria-hidden', 'true'); p.prepend(sky); });
 })();
 
-// Gece teması: ana sayfa kahraman bölümünün tepesinde ay
+// Gece teması: ana sayfa kahraman bölümünün tepesinde ay. Tıklayınca gerçek bir küre gibi (yüzey soldan sağa kayarak, kenarlarda sıkışarak) yavaşça döner.
 (() => {
   const hero = document.querySelector('[data-intro]') && document.querySelector('.panel.hero');
   if (!hero) return;
   const moon = document.createElement('i');
   moon.className = 'ns-moon';
   moon.setAttribute('aria-hidden', 'true');
+  const cv = document.createElement('canvas');
+  moon.append(cv);
   hero.append(moon);
-  // Aya tıklayınca yüzeyi yavaşça dönmeye başlar; tekrar tıklayınca durur/devam eder
-  moon.addEventListener('click', () => { if (!moon.classList.contains('spin')) moon.classList.add('spin'); else moon.classList.toggle('halt'); });
+
+  // Yüzey dokusu (düz harita, yatayda kesintisiz): deniz düzlükleri, kraterler, ışınlı Tycho
+  const TW = 512, TH = 256;
+  let seed = 11;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  const texSvg = () => {
+    const x3 = (x) => [x - TW, x, x + TW];
+    let s = `<svg xmlns="http://www.w3.org/2000/svg" width="${TW}" height="${TH}" viewBox="0 0 ${TW} ${TH}"><defs><filter id="b" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="7"/></filter><filter id="b2"><feGaussianBlur stdDeviation="1.1"/></filter></defs><rect width="${TW}" height="${TH}" fill="#ecebe2"/>`;
+    s += '<g filter="url(#b)" fill="#7d8085" opacity=".62">';
+    [[150, 90, 70, 40, -18], [250, 80, 44, 28, 8], [330, 125, 60, 34, 0], [120, 150, 46, 56, 14], [210, 140, 40, 22, 25], [420, 100, 50, 30, 0], [40, 120, 42, 30, 0], [290, 175, 36, 18, 0]].forEach(([x, y, rx, ry, a]) => { x3(x).forEach((xx) => { s += `<ellipse cx="${xx}" cy="${y}" rx="${rx}" ry="${ry}" transform="rotate(${a} ${xx} ${y})"/>`; }); });
+    s += '</g><g filter="url(#b2)">';
+    for (let i = 0; i < 150; i++) {
+      const x = rnd() * TW, y = 16 + rnd() * (TH - 32), rad = 1.8 + rnd() * rnd() * 9, big = rad > 6;
+      x3(x).forEach((xx) => { s += `<circle cx="${xx.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad.toFixed(1)}" fill="#6c6f74" fill-opacity=".4" stroke="#fff" stroke-opacity=".55" stroke-width="${big ? 1.8 : 1}"/><circle cx="${(xx + rad * 0.25).toFixed(1)}" cy="${(y + rad * 0.25).toFixed(1)}" r="${(rad * 0.55).toFixed(1)}" fill="#5c5f64" fill-opacity=".25"/>`; });
+    }
+    s += '</g>';
+    const tx = 256, ty = 205;
+    s += '<g stroke="#fff" stroke-opacity=".5" stroke-linecap="round">';
+    for (let i = 0; i < 18; i++) { const a = rnd() * Math.PI * 2, l = 30 + rnd() * 60; s += `<line x1="${tx}" y1="${ty}" x2="${(tx + Math.cos(a) * l).toFixed(1)}" y2="${(ty + Math.sin(a) * l).toFixed(1)}" stroke-width="${(1 + rnd() * 1.6).toFixed(1)}"/>`; }
+    s += `</g><circle cx="${tx}" cy="${ty}" r="6" fill="#fff" fill-opacity=".9"/><circle cx="${tx}" cy="${ty}" r="3" fill="#777" fill-opacity=".5"/></svg>`;
+    return s;
+  };
+
+  let tex = null, px = null, N = 0, size = 0, lonA, rowA, shadeA, rot = 0, speed = 0, running = false, spinning = false, last = 0;
+  const ctx = cv.getContext('2d');
+  // Her piksel için küre üzerindeki boylam, enlem satırı ve ışık payı bir kez hesaplanır
+  const setup = () => {
+    size = Math.max(40, Math.round(moon.clientWidth * Math.min(devicePixelRatio || 1, 2)));
+    cv.width = size; cv.height = size;
+    N = size * size;
+    lonA = new Float32Array(N); rowA = new Int16Array(N).fill(-1); shadeA = new Float32Array(N);
+    const L = [-0.55, -0.4, 0.73], ll = Math.hypot(...L);
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+      const nx = ((x + 0.5) / size) * 2 - 1, ny = ((y + 0.5) / size) * 2 - 1, r2 = nx * nx + ny * ny;
+      if (r2 > 1) continue;
+      const nz = Math.sqrt(1 - r2), i = y * size + x;
+      lonA[i] = Math.atan2(nx, nz);
+      rowA[i] = Math.min(TH - 1, Math.floor((Math.asin(ny) / Math.PI + 0.5) * TH));
+      const lam = Math.max(0, (nx * L[0] + ny * L[1] + nz * L[2]) / ll);
+      shadeA[i] = 0.2 + 0.8 * Math.pow(lam, 0.8);
+    }
+    px = ctx.createImageData(size, size);
+    draw();
+  };
+  const draw = () => {
+    if (!tex || !px) return;
+    const d = px.data, T = tex.data, k = TW / (Math.PI * 2);
+    for (let i = 0; i < N; i++) {
+      const row = rowA[i], o = i * 4;
+      if (row < 0) { d[o + 3] = 0; continue; }
+      let u = ((lonA[i] + rot) * k) % TW; if (u < 0) u += TW;
+      const t = (row * TW + (u | 0)) * 4, sh = shadeA[i];
+      d[o] = T[t] * sh; d[o + 1] = T[t + 1] * sh; d[o + 2] = T[t + 2] * sh; d[o + 3] = 255;
+    }
+    ctx.putImageData(px, 0, 0);
+  };
+  const frame = (now) => {
+    const dt = Math.min(0.1, (now - last) / 1000 || 0); last = now;
+    speed += ((spinning ? 0.09 : 0) - speed) * Math.min(1, dt * 0.8); // yavaş hızlanır, yavaş durur
+    rot += speed * dt;
+    draw();
+    if (spinning || speed > 0.002) requestAnimationFrame(frame); else running = false;
+  };
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement('canvas'); c.width = TW; c.height = TH;
+    const cc = c.getContext('2d'); cc.drawImage(img, 0, 0);
+    tex = cc.getImageData(0, 0, TW, TH);
+    setup();
+  };
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(texSvg());
+  if (window.ResizeObserver) new ResizeObserver(() => { if (moon.clientWidth && Math.abs(moon.clientWidth * Math.min(devicePixelRatio || 1, 2) - size) > 2 && tex) setup(); }).observe(moon);
+  // Tıklayınca dönmeye başlar, tekrar tıklayınca yavaşça durur
+  moon.addEventListener('click', () => { spinning = !spinning; if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); } });
 })();
 
 // Gece teması: arka planda mini uzay gemileri yavaşça gezer, ara sıra mini bir çatışma çıkar.
@@ -1519,9 +1593,9 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     const s = document.createElement('i');
     const kind = Math.round(Math.random());
     s.className = 'ns-ship';
-    s.innerHTML = shipSvg(kind, pick(COLORS));
-    const tilt = Math.max(-14, Math.min(14, Math.cos(heading) * 10));
-    s.style.cssText = `left:${x}px;top:${y}px;rotate:${kind === 0 ? heading * DEG : tilt}deg`;
+    s.innerHTML = '<u class="ns-trail"></u><span class="ns-wob">' + (kind === 0 ? '<u class="ns-fl"></u>' : '<u class="ns-glow"></u>') + '<span class="ns-lvl">' + shipSvg(kind, pick(COLORS)) + '</span></span>';
+    s._kind = kind;
+    s.style.cssText = `left:${x}px;top:${y}px;rotate:${heading * DEG}deg;--cr:${kind === 0 ? 0 : -heading * DEG}deg`;
     host.append(s);
     active++;
     return s;
@@ -1561,15 +1635,47 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 
   // Kenardan rastgele bir noktadan, panelin karşı tarafına doğru rastgele açıyla uçuş
   const edgePoint = (W, H, edge, pad) => (edge === 0 ? [-pad, rnd(0, H)] : edge === 1 ? [W + pad, rnd(0, H)] : edge === 2 ? [rnd(0, W), -pad] : [rnd(0, W), H + pad]);
+  // Uzay boşluğunda süzülme: gemiler sabit hızla akar, yönleri yavaşça döner; ay yakınından geçerken kütle çekimiyle kıvrılırlar
+  const drifters = [];
+  let last = 0;
+  const loop = (now) => {
+    const dt = Math.min(0.1, (now - last) / 1000 || 0); last = now;
+    for (let i = drifters.length - 1; i >= 0; i--) {
+      const d = drifters[i];
+      const moon = d.host.parentElement.querySelector('.ns-moon');
+      if (moon && root.dataset.theme === 'night') {
+        const hr = d.host.getBoundingClientRect(), mr = moon.getBoundingClientRect();
+        const mx = mr.left + mr.width / 2 - hr.left, my = mr.top + mr.height / 2 - hr.top, R = mr.width * 2.4;
+        const ex = mx - d.x, ey = my - d.y, dist = Math.hypot(ex, ey);
+        if (dist < R && dist > 1) { const g = 1.1 * (1 - dist / R); d.vx += (ex / dist) * g * dt * 10; d.vy += (ey / dist) * g * dt * 10; }
+      }
+      const sp = Math.hypot(d.vx, d.vy) || 1; d.vx = (d.vx / sp) * d.speed; d.vy = (d.vy / sp) * d.speed;
+      d.x += d.vx * dt; d.y += d.vy * dt; d.age += dt;
+      const target = Math.atan2(d.vy, d.vx);
+      let diff = target - d.h; diff = Math.atan2(Math.sin(diff), Math.cos(diff));
+      d.h += diff * Math.min(1, dt * 1.6);
+      const W = d.host.offsetWidth, H = d.host.offsetHeight;
+      const s = d.el;
+      s.style.translate = d.x + 'px ' + d.y + 'px';
+      s.style.rotate = d.h * DEG + 'deg';
+      if (s._kind !== 0) s.style.setProperty('--cr', -d.h * DEG + 'deg');
+      if (d.x < -80 || d.x > W + 80 || d.y < -80 || d.y > H + 80 || d.age > 150 || !s.isConnected) { drop(s); drifters.splice(i, 1); }
+    }
+    if (drifters.length) requestAnimationFrame(loop); else last = 0;
+  };
   const cruise = (host) => {
     const W = host.offsetWidth, H = host.offsetHeight;
     const e1 = Math.floor(rnd(0, 4));
     const e2 = Math.random() < 0.6 ? e1 ^ 1 : pick([0, 1, 2, 3].filter((e) => e !== e1));
-    const [x0, y0] = edgePoint(W, H, e1, 40), [x1, y1] = edgePoint(W, H, e2, 40);
-    const dx = x1 - x0, dy = y1 - y0, heading = Math.atan2(dy, dx);
-    const s = makeShip(host, x0, y0, heading);
-    const dist = Math.hypot(dx, dy);
-    fly(s, dx, dy, Math.max(30000, dist * rnd(55, 90))).then(() => drop(s), () => drop(s));
+    let [x0, y0] = edgePoint(W, H, e1, 40);
+    const [x1, y1] = edgePoint(W, H, e2, 40);
+    let heading = Math.atan2(y1 - y0, x1 - x0);
+    // Yarısı panelin içinde belirir (hemen görünsün), yarısı kenardan girer
+    if (Math.random() < 0.5) { x0 = rnd(W * 0.1, W * 0.9); y0 = rnd(H * 0.1, H * 0.9); heading = rnd(0, Math.PI * 2); }
+    const speed = rnd(16, 26);
+    const s = makeShip(host, 0, 0, heading);
+    drifters.push({ el: s, host, x: x0, y: y0, vx: Math.cos(heading) * speed, vy: Math.sin(heading) * speed, speed, h: heading, age: 0 });
+    if (drifters.length === 1) requestAnimationFrame(loop);
   };
 
   const battle = async (host) => {
@@ -1581,7 +1687,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     const ax = mx - ux * gap / 2, ay = my - uy * gap / 2, bx = mx + ux * gap / 2, by = my + uy * gap / 2;
     const sax = mx - ux * far, say = my - uy * far, sbx = mx + ux * far, sby = my + uy * far;
     const a = makeShip(host, sax, say, ang), b = makeShip(host, sbx, sby, ang + Math.PI);
-    await Promise.all([fly(a, ax - sax, ay - say, rnd(10000, 14000)), fly(b, bx - sbx, by - sby, rnd(10000, 14000))]).catch(() => {});
+    await Promise.all([fly(a, ax - sax, ay - say, rnd(8000, 11000)), fly(b, bx - sbx, by - sby, rnd(8000, 11000))]).catch(() => {});
     for (let i = 0; i < 3; i++) {
       shot(host, ax + ux * 14, ay + uy * 14, ux, uy, gap - 26, '#ffd731');
       await wait(rnd(250, 500));
@@ -1591,15 +1697,16 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     boom(host, bx + 12, by + 7);
     drop(b);
     const rd = rnd(-0.6, 0.6), rx = Math.cos(ang + rd) * far * 1.4, ry = Math.sin(ang + rd) * far * 1.4;
-    fly(a, ax - sax + rx, ay - say + ry, rnd(26000, 36000), 'ease-in', [ax - sax, ay - say]).then(() => drop(a), () => drop(a));
+    fly(a, ax - sax + rx, ay - say + ry, rnd(20000, 28000), 'ease-in', [ax - sax, ay - say]).then(() => drop(a), () => drop(a));
   };
 
   const tick = () => {
-    if (root.dataset.theme === 'night' && !document.hidden && active < 4) {
+    if (root.dataset.theme === 'night' && !document.hidden && active < 14) {
       const host = hostFor();
-      if (host) (Math.random() < 0.3 ? battle : cruise)(host);
+      // Panel başına en fazla 3 gemi: sayfada hangi bölüme bakılıyorsa orada hep birkaçı olur
+      if (host && host.querySelectorAll('.ns-ship').length < 3) (Math.random() < 0.25 ? battle : cruise)(host);
     }
-    setTimeout(tick, rnd(1800, 7000));
+    setTimeout(tick, rnd(1500, 5000));
   };
-  setTimeout(tick, 2500);
+  setTimeout(tick, 1200);
 })();
