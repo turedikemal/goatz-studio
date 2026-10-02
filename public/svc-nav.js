@@ -50,7 +50,7 @@
     a.dataset.g = String(x.i);
     a.style.setProperty('--d', (x.i * -0.8).toFixed(1) + 's');
     a.innerHTML = '<span class="v"></span>';
-    a.querySelector('.v').textContent = SHORT(x.name.trim());
+    a.querySelector('.v').textContent = x.name.trim();
     a.title = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
