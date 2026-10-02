@@ -167,7 +167,7 @@
         "float": true
       },
       {
-        "type": "coin",
+        "type": "key",
         "x": 47,
         "y": 19,
         "mx": 76,

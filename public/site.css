@@ -1484,3 +1484,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 /* Mobil: ana sayfa başlığında efekt yok (harf süzülmesi kapalı) */
 @media (max-width: 700px) { html.mo-idle [data-intro].ready .rl { animation: none !important; will-change: auto; } }
+
+/* Ana sayfa anahtarı: sarı gelir, üzerine gelince ya da basınca kendi yeşil rengine döner */
+.hero .sticker.st-key { filter: hue-rotate(-112deg) saturate(1.15) brightness(1.04); transition: filter .35s ease; cursor: pointer; }
+.hero .sticker.st-key:hover, .hero .sticker.st-key:active, .hero .sticker.st-key:focus-visible { filter: none; }
