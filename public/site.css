@@ -1968,6 +1968,6 @@ html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
 .cart-top-bubble { position: absolute; z-index: 60; top: calc(100% + 16px); right: -8px; padding: 8px 14px; border: 2px solid #000; border-radius: 16px; background: #fff; color: #000; font-family: inherit; font-size: 13px; font-weight: 800; line-height: 1.2; white-space: nowrap; opacity: 0; scale: .7; transform-origin: 90% 0; pointer-events: none; transition: opacity .3s ease, scale .4s cubic-bezier(.3, 1.6, .5, 1); }
 .cart-top-bubble.show { opacity: 1; scale: 1; }
 .cart-top-bubble .cb-tail { position: absolute; width: 34px; height: 26px; pointer-events: none; overflow: visible; }
-.cart-top-bubble .cb-tail.up { bottom: 100%; right: 10px; }
+.cart-top-bubble .cb-tail.up { bottom: 100%; right: 14px; }
 @media (prefers-reduced-motion: reduce) { .cart-top-bubble { transition: opacity .2s ease; scale: 1; } }
 @media (max-width: 600px) { .cart-top-bubble { white-space: normal; width: max-content; max-width: 170px; } }
