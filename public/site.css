@@ -1976,5 +1976,8 @@ html[data-theme="night"] body:not(:has([data-svc-cart])) .panel:not(.site-footer
 html[data-theme="night"] .cp-group .cp-desc, html[data-theme="night"] .cp-group .cp-info, html[data-theme="night"] .cp-group .cp-item, html[data-theme="night"] .cp-group .cp-chev, html[data-theme="night"] .cp-group .cp-toggle, html[data-theme="night"] .cp-group .cp-gname { color: #000; }
 html[data-theme="night"] .cp-group .cp-desc { opacity: .78; }
 /* Hizmetler: sepet önce üst menüdeki yerinde durur (docked), sonra yerine iner */
-.cart-fab.docked { position: fixed; z-index: 100; }
-.cart-fab.docked .cart-bubble { display: none; }
+
+.cart-fab.docked { position: relative; top: auto; width: 36px; height: 36px; border-width: 2px; flex: none; }
+.cart-fab.docked svg { width: 20px; height: 20px; }
+.cart-fab.docked .cart-bubble, .cart-fab.docked .cart-tip { display: none; }
+.cart-fab.docked .cart-count { top: -7px; right: -7px; }

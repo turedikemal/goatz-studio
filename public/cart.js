@@ -76,9 +76,9 @@
       const h2 = blocks[0].querySelector('h2');
       const m = main.getBoundingClientRect(), g = grid.getBoundingClientRect(), z = blocks[blocks.length - 1].getBoundingClientRect(), hh = (h2 || grid).getBoundingClientRect();
       rail.style.right = 'auto';
-      rail.style.left = Math.max(0, g.right - m.left - fab.offsetWidth) + 'px';
+      rail.style.left = Math.max(0, g.right - m.left - 68) + 'px';
       // Başlangıç: ilk başlık ile kartlar arasında, en sağdaki kartın sağ kenarına hizalı (başlığın yanına yukarı çıkmaz); kaydırınca ekranda sabit kalır
-      const startY = g.top - fab.offsetHeight - 6; // kartların hemen üstü
+      const startY = g.top - 68 - 6; // kartların hemen üstü
       rail.style.top = Math.max(0, startY - m.top) + 'px';
       rail.style.height = Math.max(120, z.bottom - startY) + 'px';
     };
@@ -100,31 +100,39 @@
     const open = () => { bubble.classList.remove('show'); place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); if (window.__lenis && window.__lenis.stop) window.__lenis.stop(); /* panel açıkken sayfa kaymaz, panel içeriği kayar */ close.focus(); };
     const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); if (window.__lenis && window.__lenis.start) window.__lenis.start(); fab.focus(); };
     fab.addEventListener('click', open);
-    // Sepette ürün varken Hizmetler'e girilince sepet önce üst menüdeki yerinde (gece/gündüz düğmesinin solunda) durur;
-    // sayfa aşağı kaydırılıp sepetin kendi yeri ekrana geldiğinde oradan aşağı süzülerek kendi yerine iner (bir kez)
-    if (items.length && !matchMedia('(prefers-reduced-motion: reduce)').matches && !matchMedia('(max-width: 900px)').matches) {
-      let dropped = false;
-      const th = document.getElementById('themeBtn');
-      const slot = () => { const tr = th ? th.getBoundingClientRect() : { left: innerWidth - 120, top: 24, height: 36 }; return { x: tr.left - 24, y: tr.top + tr.height / 2 }; };
-      const dock = () => { const p = slot(); fab.classList.add('docked'); fab.style.left = (p.x - 34) + 'px'; fab.style.top = (p.y - 34) + 'px'; fab.style.scale = '0.55'; };
-      const undock = () => { fab.classList.remove('docked'); fab.style.left = ''; fab.style.top = ''; fab.style.scale = ''; };
-      const finish = () => { dropped = true; window.removeEventListener('scroll', dropCheck); window.removeEventListener('resize', redock); };
-      const redock = () => { if (!dropped) dock(); };
-      const dropCheck = () => {
-        if (dropped) return;
-        if (!items.length) { finish(); undock(); return; } // sepet boşaldıysa sepet hemen yerine geçer
-        if (window.scrollY < 24) return; // ilk slayt aşağı kaydırılmaya başlanana kadar yukarıda kalır
-        const natTop = Math.max(rail.getBoundingClientRect().top, 120); // sepetin kendi yeri (yapışkan konum dahil)
-        if (natTop < 80 || natTop + 68 > innerHeight - 20) return; // kendi yeri tamamen görününce iner
-        const p = slot();
-        finish(); undock();
-        const fr = fab.getBoundingClientRect();
-        fab.animate([{ translate: (p.x - (fr.left + fr.width / 2)) + 'px ' + (p.y - (fr.top + fr.height / 2)) + 'px', scale: 0.55 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
+    // Sepet ilk sayfadayken (en üstteyken, sepette ürün varsa) üst menüde, gece/gündüz düğmesinin solunda durur; sayfa aşağı kaydırılıp
+    // kendi yeri ekrana gelince oradan aşağı süzülür; yukarı çıkıp ilk sayfaya dönünce tekrar üst menüye yükselir
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !matchMedia('(max-width: 900px)').matches) {
+      const th = document.getElementById('themeBtn'), navRight = th && th.parentElement;
+      let docked = false;
+      const center = (r) => [r.left + r.width / 2, r.top + r.height / 2];
+      const toRail = () => { fab.classList.remove('docked'); rail.append(fab); docked = false; };
+      const dock = (animate) => {
+        if (!navRight || docked) return;
+        const r0 = fab.getBoundingClientRect();
+        fab.classList.add('docked'); navRight.insertBefore(fab, th); docked = true;
+        if (!animate) return;
+        const [x0, yRaw] = center(r0), [x1, y1] = center(fab.getBoundingClientRect()), y0 = Math.min(yRaw, innerHeight + 40); // ekran dışındaysa alt kenardan yükselir
+        fab.animate([{ translate: (x0 - x1) + 'px ' + (y0 - y1) + 'px', scale: 68 / 36 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
       };
-      dock();
-      window.addEventListener('scroll', dropCheck, { passive: true });
-      window.addEventListener('resize', redock);
-      listeners.push(() => { if (!dropped && !items.length) dropCheck(); });
+      const drop = () => {
+        const r0 = fab.getBoundingClientRect(); // üst menüdeki yeri
+        toRail();
+        const [x0, y0] = center(r0), [x1, y1] = center(fab.getBoundingClientRect());
+        fab.animate([{ translate: (x0 - x1) + 'px ' + (y0 - y1) + 'px', scale: 0.55 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
+      };
+      const check = () => {
+        if (!items.length) { if (docked) toRail(); return; } // sepet boşsa sepet kendi yerinde durur
+        if (docked) {
+          if (window.scrollY < 24) return; // ilk slayt aşağı kaydırılmaya başlanana kadar yukarıda kalır
+          const natTop = Math.max(rail.getBoundingClientRect().top, 120); // sepetin kendi yeri (yapışkan konum dahil)
+          if (natTop < 80 || natTop + 68 > innerHeight - 20) return; // kendi yeri tamamen görününce iner
+          drop();
+        } else if (window.scrollY < 24) dock(true); // ilk sayfaya dönünce üst menüye yükselir
+      };
+      if (items.length) dock(false);
+      window.addEventListener('scroll', check, { passive: true });
+      listeners.push(check);
     }
     if (location.hash === '#sepet') setTimeout(open, 400); // üst menüdeki sepetten gelinirse panel açılır
     close.addEventListener('click', shut);
