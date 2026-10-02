@@ -1845,3 +1845,8 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 .blk-cards[data-g="5"] { --w0: 64%; --w1: 38%; --w2: 76%; --w3: 52%; }
 .blk-cards[data-g="6"] { --w0: 30%; --w1: 0%; --w2: 50%; --w3: 15%; }
 .blk-cards[data-g="7"] { --w0: 0%; --w1: 45%; --w2: 20%; --w3: 56%; }
+/* Hizmetler: kart ızgarası, buton ve "ilgili işler" satırı birbirine yapışmasın */
+.blk-cards .blk-in > .btn { margin-top: 28px; }
+.blk-cards .blk-in > .rel-works { margin-top: 22px; gap: 10px; }
+.blk-cards .blk-in > .btn + .rel-works { margin-top: 24px; }
+.blk-cards .blk-in > .rel-works:last-child { margin-bottom: 8px; }
