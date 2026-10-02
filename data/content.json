@@ -167,16 +167,6 @@
         "float": true
       },
       {
-        "type": "anahtar",
-        "x": 47,
-        "y": 19,
-        "mx": 76,
-        "my": 12,
-        "size": 130,
-        "rotate": 8,
-        "float": true
-      },
-      {
         "type": "browser",
         "x": 87,
         "y": 30,

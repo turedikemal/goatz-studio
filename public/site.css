@@ -1957,8 +1957,6 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .ns-planet.bands::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: repeating-linear-gradient(10deg, rgba(255, 255, 255, .15) 0 7%, rgba(0, 0, 0, .12) 7% 14%); }
 .ns-planet.ring::after { content: ""; position: absolute; left: -38%; right: -38%; top: 36%; bottom: 36%; border-radius: 50%; border: calc(var(--s) * .035) solid rgba(255, 255, 255, .38); rotate: -16deg; }
 html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
-/* Anahtar efekti: anahtarın sağında beliren siyah anahtar deliği */
-.key-hole { position: fixed; z-index: 60; pointer-events: none; display: block; transform-origin: 50% 40%; }
 /* Üst menü sepeti: gece/gündüz düğmesinin solunda; altında konuşma balonu (kuyruk üst sağ köşeden) */
 .cart-top { position: relative; display: inline-flex; }
 .cart-top[hidden] { display: none; }

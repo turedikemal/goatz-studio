@@ -849,36 +849,6 @@
     el.animate([{ rotate: rot, scale: 1 }, { rotate: `calc(${rot} + 360deg)`, scale: 1.3, offset: 0.55 }, { rotate: `calc(${rot} + 360deg)`, scale: 1 }], { duration: ms(1), easing: 'ease-in-out' });
     sparks(c.x, c.y, { n: 8, size: Math.max(12, c.w * 0.2), dist: Math.max(50, c.w * 0.8) });
   };
-  // Anahtar: üzerine gelince sağında siyah bir anahtar deliği belirir; anahtar düzelip deliğe girer, çeyrek tur çevrilir (açma + klik), geri çıkar; delik kaybolur
-  const unlockKey = (el) => {
-    if (busy(el, ms(2.9))) return;
-    const c = centerOf(el), rot = restRot(el), T = ms(2.7), W = parseFloat(getComputedStyle(el).width) || c.w;
-    const hw = Math.max(9, W * 0.24), hh = hw * 1.55; // anahtardan küçük, dik duran delik
-    const hx = c.x + Math.max(W * 0.8, 24); // deliğin merkezi: anahtarın sağında
-    const hole = document.createElement('i');
-    hole.className = 'key-hole';
-    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh / 2 + W * 0.12) + 'px;width:' + hw + 'px;height:' + hh + 'px'; // dik (ayakta) anahtar deliği
-    hole.innerHTML = '<svg viewBox="0 0 20 30" width="100%" height="100%" aria-hidden="true"><path d="M10 2a6.4 6.4 0 0 1 3.1 12L16 28H4l2.9-14A6.4 6.4 0 0 1 10 2z" fill="#000"/></svg>';
-    document.body.append(hole);
-    hole.animate([{ scale: 0, opacity: 0 }, { scale: 1.2, opacity: 1, offset: 0.1 }, { scale: 1, opacity: 1, offset: 0.16 }, { scale: 1, opacity: 1, offset: 0.9 }, { scale: 0.5, opacity: 0 }], { duration: T, easing: 'ease-out' });
-    // anahtar: düzelir (uç sağa bakar), deliğe kadar ilerler, deliğe girer, çevrilir, geri çıkar
-    const tip = W * 0.4, into = hx - hw * 0.15 - (c.x + tip); // uç, deliğin içine kadar girer (deliğin arkasında kalır)
-    const base = { rotate: rot, translate: '0px 0px', scale: '1 1' };
-    const turn = (dx, sy) => ({ rotate: 'calc(' + rot + ' + 28deg)', translate: dx + 'px 0px', scale: '1 ' + sy });
-    el.animate([
-      base,
-      { ...turn(0, 1), offset: 0.14 },
-      { ...turn(into * 0.7, 1), offset: 0.34 },
-      { ...turn(into, 1), offset: 0.44 },      // deliğe girdi
-      { ...turn(into, 0.12), offset: 0.58 },   // çevrilir (yan görünüşe döner)
-      { ...turn(into, 0.12), offset: 0.64 },   // klik
-      { ...turn(into, 1), offset: 0.76 },      // geri döner
-      { ...turn(into * 0.7, 1), offset: 0.84 },// dışarı çekilir
-      { ...turn(0, 1), offset: 0.92 },
-      base
-    ], { duration: T, easing: 'ease-in-out' });
-    setTimeout(() => hole.remove(), T + 60);
-  };
   const burstOf = (id) => (el) => {
     if (busy(el, ms(1.1))) return;
     const c = centerOf(el);
@@ -1161,7 +1131,7 @@
   }
   const CLICKS = {
     'st-pstar': noFx, 'st-pstore': noFx,
-    'st-camera': shootPhoto, 'st-anahtar': unlockKey, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
+    'st-camera': shootPhoto, 'st-anahtar': noFx, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
     'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-key': spinMedal, 'st-refresh': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': noFx, 'st-shoe': noFx, 'st-sock': noFx, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
   };
