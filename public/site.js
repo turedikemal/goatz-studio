@@ -857,7 +857,7 @@
     const hx = c.x + Math.max(W * 0.8, 24); // deliğin merkezi: anahtarın sağında
     const hole = document.createElement('i');
     hole.className = 'key-hole';
-    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh / 2) + 'px;width:' + hw + 'px;height:' + hh + 'px'; // dik (ayakta) anahtar deliği
+    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh / 2 + W * 0.12) + 'px;width:' + hw + 'px;height:' + hh + 'px'; // dik (ayakta) anahtar deliği
     hole.innerHTML = '<svg viewBox="0 0 20 30" width="100%" height="100%" aria-hidden="true"><path d="M10 2a6.4 6.4 0 0 1 3.1 12L16 28H4l2.9-14A6.4 6.4 0 0 1 10 2z" fill="#000"/></svg>';
     document.body.append(hole);
     hole.animate([{ scale: 0, opacity: 0 }, { scale: 1.2, opacity: 1, offset: 0.1 }, { scale: 1, opacity: 1, offset: 0.16 }, { scale: 1, opacity: 1, offset: 0.9 }, { scale: 0.5, opacity: 0 }], { duration: T, easing: 'ease-out' });
