@@ -1850,3 +1850,6 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 .blk-cards .blk-in > .rel-works { margin-top: 22px; gap: 10px; }
 .blk-cards .blk-in > .btn + .rel-works { margin-top: 24px; }
 .blk-cards .blk-in > .rel-works:last-child { margin-bottom: 8px; }
+
+/* Hizmetler: tüm başlıklar sağa yatık */
+.blk-cards[data-g] h2, .blk-cards[data-g] h2 .w, .blk-cards[data-g] h2 .ch { font-style: italic; }
