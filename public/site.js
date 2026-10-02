@@ -1991,7 +1991,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 // Üst menüde hizmet sepeti: Hizmetler sayfasından çıkınca sepette ürün varsa gece/gündüz düğmesinin soluna gelir; boşken yoktur.
 // Arada altında konuşma balonu (yalnız "dolu" cümleleri) çıkar; balonun kuyruğu üst sağ köşeden sepete uzanır.
 (() => {
-  if (document.querySelector('[data-svc-cart]')) return; // Hizmetler sayfasında kendi yüzen sepeti var
+  if (document.querySelector('[data-svc-cart], [data-cart-page]')) return; // Hizmetler sayfasında kendi yüzen sepeti var, /sepet sayfası zaten sepetin kendisi
   const theme = document.getElementById('themeBtn');
   if (!theme) return;
   const KEY = 'goatz-hizmet-sepeti';

@@ -1972,3 +1972,6 @@ html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
 
 /* Gece: renkli (lavanta, mint, sarı...) düz paneller de gece lacivertine döner; Hizmetler sayfası kendi renkli bölümlerini korur */
 html[data-theme="night"] body:not(:has([data-svc-cart])) .panel:not(.site-footer):not(.partner):is([style*="var(--lavender)"], [style*="var(--mint)"], [style*="var(--sun)"], [style*="var(--blue)"], [style*="var(--ember)"], [style*="var(--violet)"], [style*="var(--concrete)"], [style*="var(--mist)"]) { --carbon: #f4f1e8; --paper: #161b44; color: #f4f1e8; background: #161b44 !important; }
+/* Gece: /sepet sayfasındaki açık renkli hizmet kartlarında açıklama ve başlıklar koyu yazı (beyaz zeminde silik kalmasın) */
+html[data-theme="night"] .cp-group .cp-desc, html[data-theme="night"] .cp-group .cp-info, html[data-theme="night"] .cp-group .cp-item, html[data-theme="night"] .cp-group .cp-chev, html[data-theme="night"] .cp-group .cp-toggle, html[data-theme="night"] .cp-group .cp-gname { color: #000; }
+html[data-theme="night"] .cp-group .cp-desc { opacity: .78; }
