@@ -1518,7 +1518,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .cart-tip { position: absolute; right: 78px; top: 50%; translate: 0 -50%; padding: 6px 12px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font-size: 12px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; opacity: 0; pointer-events: none; transition: opacity .2s ease; white-space: nowrap; }
 .cart-fab:hover .cart-tip, .cart-fab:focus-visible .cart-tip { opacity: 1; }
 .cart-back { position: fixed; inset: 0; z-index: 90; background: rgba(0, 0, 0, .45); }
-.cart-panel { position: fixed; z-index: 91; top: 0; right: 0; bottom: 0; width: min(460px, 100vw); display: flex; flex-direction: column; gap: 14px; padding: 20px; overflow-y: auto; background: var(--paper); border-left: 3px solid var(--carbon); }
+.cart-panel { position: fixed; z-index: 91; top: 0; right: 0; bottom: 0; width: min(460px, 100vw); display: flex; flex-direction: column; gap: 14px; padding: 20px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; background: var(--paper); border-left: 3px solid var(--carbon); }
 .cart-panel[hidden], .cart-back[hidden] { display: none; }
 .cart-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .cart-title { margin: 0; font-size: clamp(30px, 5vw, 44px); line-height: .95; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.02em; }
