@@ -295,7 +295,7 @@
           + '<label><span>Telefon (isteğe bağlı)</span><input name="phone" type="tel" autocomplete="tel" maxlength="40"></label>'
           + '<label><span>İsteklerinizi ve notunuzu yazın (isteğe bağlı)</span><textarea name="note" maxlength="1200" rows="5"></textarea></label>'
           + '<input class="cart-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'
-          + '<label class="cp-consent"><input type="checkbox" name="consent"><span>' + (KVKK ? '<a href="' + KVKK + '" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>' : 'KVKK Aydınlatma Metni') + '’ni okudum; bilgilerimin fiyat hazırlamak ve benimle iletişime geçmek amacıyla işlenmesini kabul ediyorum.</span></label>'
+          + '<label class="cp-consent"><input type="checkbox" name="consent" checked><span>' + (KVKK ? '<a href="' + KVKK + '" target="_blank" rel="noopener">KVKK Aydınlatma Metni</a>' : 'KVKK Aydınlatma Metni') + '’ni okudum; bilgilerimin fiyat hazırlamak ve benimle iletişime geçmek amacıyla işlenmesini kabul ediyorum.</span></label>'
           + '<button class="cp-send" type="submit">Fiyat al ↗</button>'
           + '<p class="cp-status" role="status" aria-live="polite"></p>';
         side.append(form);
