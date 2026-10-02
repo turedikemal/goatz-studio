@@ -1438,3 +1438,8 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .map-info p { margin-block: 0 18px; }
 .map-btn { display: inline-flex; }
 @media (max-width: 800px) { .map-wrap { grid-template-columns: 1fr; } .map-card { aspect-ratio: 1 / 1; } }
+
+/* Alt bilgi konum kartı */
+.sf-map { position: relative; display: block; width: min(340px, 100%); aspect-ratio: 16 / 10; margin-top: 20px; border: 2px solid var(--ft, #fff); border-radius: var(--r-card); overflow: hidden; background: var(--mint); isolation: isolate; }
+.sf-map .map-pin b { padding: 5px 10px; font-size: 11px; border-width: 2px; }
+.sf-map .map-pin i { width: 16px; height: 16px; margin-top: 4px; border-width: 2px; }
