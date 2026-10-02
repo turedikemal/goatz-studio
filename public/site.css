@@ -1809,3 +1809,6 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 .cart-group[data-i="3"] { background: var(--blue); }
 .cart-group[data-i="4"] { background: var(--ember); }
 .cart-group[data-i="5"] { background: var(--sky); }
+
+/* İkon başlığın üstüne binmesin: ikon için üstte yer ayrılır */
+.k-card:has(> .k-st) { padding-top: 116px; }
