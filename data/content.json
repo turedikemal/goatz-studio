@@ -537,6 +537,13 @@
     "showButtons": false,
     "cards": [
       {
+        "title": "ikas\niş ortağı",
+        "color": "sky",
+        "sticker": "store",
+        "image": "",
+        "text": "ikas iş ortağıyız. Tüm e-ticaret sitelerimizi ikas altyapısında kuruyoruz ve bu konudaki uzmanlığımızla mağazanızı tasarlıyor, kurulumunu yapıp yayına alıyoruz."
+      },
+      {
         "title": "Net\nfiyat",
         "color": "ember",
         "sticker": "coin",
