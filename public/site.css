@@ -1702,7 +1702,7 @@ html.cart-open { overflow: hidden; }
 
 /* İş ortaklığı: ev -> gece, yıldız -> parlama */
 .partner { transition: background .6s ease, color .6s ease; }
-.partner.night { background: #1a1f4a; color: #fff; }
+.partner.night { background: #161b44; color: #fff; }
 .partner.night .pt-tag, .partner.night .pt-chips li { color: var(--carbon); }
 .pt-sky { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .6s ease; }
 .partner.night .pt-sky { opacity: 1; }
@@ -1744,9 +1744,9 @@ html.cart-open { overflow: hidden; }
 .theme-btn .t-moon, html[data-theme="night"] .theme-btn .t-sun { display: none; }
 html[data-theme="night"] .theme-btn .t-moon { display: block; }
 body, .panel { transition: background-color .5s ease, color .5s ease; }
-html[data-theme="night"] .panel:not(.site-footer)[style*="var(--paper)"], html[data-theme="night"] .panel:not(.site-footer)[style*="var(--sky)"] { --carbon: #f4f1e8; --paper: #12163a; color: #f4f1e8; }
-html[data-theme="night"] .panel:not(.site-footer)[style*="var(--paper)"] { background: #12163a !important; }
-html[data-theme="night"] .panel:not(.site-footer)[style*="var(--sky)"] { background: #1b2250 !important; }
+html[data-theme="night"] .panel:not(.site-footer)[style*="var(--paper)"], html[data-theme="night"] .panel:not(.site-footer)[style*="var(--sky)"] { --carbon: #f4f1e8; --paper: #161b44; color: #f4f1e8; }
+html[data-theme="night"] .panel:not(.site-footer)[style*="var(--paper)"] { background: #161b44 !important; }
+html[data-theme="night"] .panel:not(.site-footer)[style*="var(--sky)"] { background: #161b44 !important; }
 /* renkli kartlar ve kutular gündüz renginde kalır */
 html[data-theme="night"] .panel [style*="background:var(--"] { --carbon: #000; --paper: #fff; color: #000; }
 html[data-theme="night"] .nav .logo, html[data-theme="night"] .nav .logo b { color: #f4f1e8; }

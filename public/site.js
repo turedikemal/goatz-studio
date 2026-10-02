@@ -1452,24 +1452,39 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   window.addEventListener('load', () => setTimeout(scan, 600));
 })();
 
-// Gece teması: koyu panellerin tamamında (ikas bölümündeki gibi) parıldayan yıldızlar
+// Gece teması: koyu panellerin tamamında (ikas bölümündeki gibi) parıldayan yıldızlar.
+// Yıldızlar kartların arkasında kalmasın diye yalnız boş zemin alanlarına dağıtılır.
 (() => {
   const panels = [...document.querySelectorAll('.panel[style*="var(--paper)"], .panel[style*="var(--sky)"], .site-footer')].filter((p) => !p.classList.contains('partner'));
-  let seed = 7;
-  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
-  panels.forEach((p) => {
-    const sky = document.createElement('div');
-    sky.className = 'ns';
-    sky.setAttribute('aria-hidden', 'true');
-    const n = Math.max(5, Math.min(18, Math.round((p.offsetWidth * p.offsetHeight) / 60000)));
-    for (let i = 0; i < n; i++) {
+  const alphaOf = (c) => { const m = c.match(/[0-9.]+/g); return m ? (m.length < 4 ? 1 : +m[3]) : 0; };
+  const fill = (p) => {
+    let sky = p.querySelector(':scope > .ns');
+    if (!sky) { sky = document.createElement('div'); sky.className = 'ns'; sky.setAttribute('aria-hidden', 'true'); p.prepend(sky); }
+    sky.textContent = '';
+    const pr = p.getBoundingClientRect();
+    if (pr.width < 50 || pr.height < 50) return;
+    const covers = [...p.querySelectorAll('*')].filter((e) => !e.closest('.ns') && !e.closest('svg') && alphaOf(getComputedStyle(e).backgroundColor) > 0.5).map((e) => e.getBoundingClientRect()).filter((r) => r.width > 40 && r.height > 30);
+    const free = (x, y) => !covers.some((r) => x > r.left - pr.left - 10 && x < r.right - pr.left + 10 && y > r.top - pr.top - 10 && y < r.bottom - pr.top + 10);
+    const want = Math.max(8, Math.min(30, Math.round((pr.width * pr.height) / 30000)));
+    let seed = 7 + Math.round(pr.height);
+    const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    let placed = 0;
+    for (let t = 0; t < want * 25 && placed < want; t++) {
+      const x = rnd() * (pr.width - 16), y = rnd() * (pr.height - 16);
+      if (!free(x, y)) continue;
       const b = document.createElement('b');
       const big = rnd() < 0.3;
-      b.style.cssText = `left:${(rnd() * 98).toFixed(1)}%;top:${(rnd() * 96).toFixed(1)}%;width:${big ? 18 : 11}px;height:${big ? 18 : 11}px;animation-delay:${(-rnd() * 2.4).toFixed(2)}s;animation-duration:${(1.4 + rnd() * 1.2).toFixed(2)}s`;
+      b.style.cssText = `left:${x.toFixed(0)}px;top:${y.toFixed(0)}px;width:${big ? 18 : 11}px;height:${big ? 18 : 11}px;animation-delay:${(-rnd() * 2.4).toFixed(2)}s;animation-duration:${(1.4 + rnd() * 1.2).toFixed(2)}s`;
       sky.append(b);
+      placed++;
     }
-    p.prepend(sky);
-  });
+  };
+  const all = () => panels.forEach(fill);
+  let t = 0;
+  const later = () => { clearTimeout(t); t = setTimeout(all, 400); };
+  window.addEventListener('load', () => setTimeout(all, 1200));
+  window.addEventListener('resize', later);
+  panels.forEach((p) => { const sky = document.createElement('div'); sky.className = 'ns'; sky.setAttribute('aria-hidden', 'true'); p.prepend(sky); });
 })();
 
 // Gece teması: ana sayfa kahraman bölümünün tepesinde ay
