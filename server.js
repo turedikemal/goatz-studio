@@ -70,6 +70,7 @@ function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {})
 }
 const messages = require('./lib/messages');
 const mailer = require('./lib/mailer');
+const seo = require('./lib/seo');
 const contactHits = new Map();
 const siteHits = new Map();
 const sitecheck = require('./lib/sitecheck');
@@ -488,17 +489,10 @@ const server = http.createServer(async (req, res) => {
       return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
     }
     const origin = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
-    if (url.pathname === '/robots.txt') {
-      // Yasal sayfalar (gizlilik, KVKK, çerez, kullanım koşulları) taranmasın; adresleri panelden değişse de burada güncel kalır
-      const legal = resolvePages(store.load().pages).filter((p) => ['gizlilik', 'kvkk', 'cerez', 'kosullar'].includes(p.id)).map((p) => `Disallow: /${p.slug}`);
-      return send(res, 200, `User-agent: *\nDisallow: /admin\n${legal.join('\n')}\nSitemap: ${origin}/sitemap.xml\n`);
-    }
-    if (url.pathname === '/sitemap.xml') {
-      const c = store.load();
-      const urls = ['/', ...(c.works.visible ? ['/isler', ...resolveWorks(c.works.items).filter((v) => v.visible).map((v) => `/isler/${v.slug}`)] : []), ...resolvePages(c.pages).filter((p) => p.visible && !['gizlilik', 'kvkk', 'cerez', 'kosullar'].includes(p.id)).map((p) => `/${p.slug}`)];
-      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${origin}${u}</loc></url>`).join('\n')}\n</urlset>\n`;
-      return send(res, 200, xml, 'application/xml; charset=utf-8');
-    }
+    // Arama motoru ve yapay zekâ botları için: robots.txt, sitemap.xml, llms.txt (lib/seo.js, içerikten üretilir)
+    if (url.pathname === '/robots.txt') return send(res, 200, seo.robots(origin, store.load()), 'text/plain; charset=utf-8');
+    if (url.pathname === '/sitemap.xml') return send(res, 200, seo.sitemap(origin, store.load()), 'application/xml; charset=utf-8');
+    if (url.pathname === '/llms.txt') return send(res, 200, seo.llms(origin, store.load()), 'text/plain; charset=utf-8');
     // İşler: /isler ve /isler/proje-adi
     const wm = /^\/isler(?:\/([a-z0-9-]+))?\/?$/.exec(url.pathname);
     if (wm) {
