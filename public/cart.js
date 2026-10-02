@@ -92,6 +92,7 @@
       list.textContent = '';
       grouped().forEach((gr) => {
         const box = el('section', 'cart-group');
+        box.dataset.i = String(Math.max(0, [...new Set(cards.map((c) => c.g))].indexOf(gr.g)) % 6); // her bölümün kendi rengi
         box.append(el('h3', 'cart-gname', gr.g));
         gr.ts.forEach((t) => {
           const row = el('div', 'cart-row');

@@ -1801,3 +1801,11 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 .cart-clear { justify-self: start; padding: 9px 16px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
 .cart-clear:hover { background: var(--ember); color: #fff; }
 .cart-clear[hidden] { display: none; }
+
+/* Yan sepet: her bölümün ayrı rengi */
+.cart-group[data-i="0"] { background: var(--lavender); }
+.cart-group[data-i="1"] { background: var(--mint); }
+.cart-group[data-i="2"] { background: var(--sun); }
+.cart-group[data-i="3"] { background: var(--blue); }
+.cart-group[data-i="4"] { background: var(--ember); }
+.cart-group[data-i="5"] { background: var(--sky); }
