@@ -117,6 +117,8 @@
     let works = {};
     try { works = JSON.parse((document.getElementById('cart-works') || {}).textContent || '{}'); } catch (e) { works = {}; }
     const KVKK = host.dataset.kvkk || '';
+    const norm = (t) => String(t || '').toLocaleLowerCase('tr-TR').replace(/\s+/g, ' ').trim();
+    const descOf = (g, t) => ((works._svc || {})[norm(g) + '|' + norm(t)]) || '';
     const catOf = (g) => (/uygulama/i.test(g) ? 'app' : /danışmanlık/i.test(g) ? 'consulting' : /ürün çekimi/i.test(g) ? 'photo' : 'web');
     let done = false;
 
@@ -153,7 +155,11 @@
           box.append(el('h3', 'cp-gname', gr.g));
           gr.ts.forEach((t) => {
             const row = el('div', 'cp-row');
-            row.append(el('span', 'cp-item', '✓ ' + t));
+            const info = el('div', 'cp-info');
+            info.append(el('span', 'cp-item', '✓ ' + t));
+            const dd = descOf(gr.g, t);
+            if (dd) info.append(el('p', 'cp-desc', dd));
+            row.append(info);
             const rm = el('button', 'cp-rm', 'Çıkar'); rm.type = 'button'; rm.setAttribute('aria-label', t + ' hizmetini sepetten çıkar');
             rm.addEventListener('click', () => remove(gr.g, t));
             row.append(rm);

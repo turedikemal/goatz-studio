@@ -1589,3 +1589,10 @@ html.cart-open { overflow: hidden; }
 .cp-work-l { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
 .cp-work-t { font-size: 16px; font-weight: 900; line-height: 1.2; }
 @media (max-width: 900px) { .cp-grid { grid-template-columns: 1fr; } .cp-works { grid-template-columns: 1fr; } .cp-work { min-height: 180px; } }
+
+/* Sepet sayfası: hizmet açıklaması, üzerine gelince sarı bar */
+.cp-row { align-items: flex-start; transition: background .15s ease, translate .15s ease; }
+.cp-row:hover { background: var(--sun); }
+.cp-info { display: grid; gap: 4px; min-width: 0; }
+.cp-desc { margin: 0; font-size: 14px; line-height: 1.45; font-weight: 500; }
+.cp-row .cp-rm { margin-top: 2px; }
