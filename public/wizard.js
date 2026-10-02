@@ -61,7 +61,7 @@
       { lab: 'Ürün sayısı', q: 'Kaç ürünün fotoğrafı çekilecek?', type: 'one', o: ['1–10 ürün', '11–30 ürün', '31–100 ürün', '100’den fazla', 'Henüz belli değil'] },
       { lab: 'Mevcut fotoğraflar', q: 'Sitenizdeki mevcut ürün fotoğrafları için ne düşünüyorsunuz?', type: 'one', o: ['Sitemde hiç ürün fotoğrafı yok', 'Hepsi yenilenecek', 'Sadece eksik olanlar çekilecek', 'Birlikte karar verelim'] },
       { lab: 'Çekim tarzı', q: 'Nasıl bir çekim düşünüyorsunuz?', type: 'multi', o: ['Beyaz fon', 'Renkli fon', 'Ortam ve mekân çekimi', 'Birlikte karar verelim'] },
-      { lab: 'Çekim yeri', q: 'Çekim nerede yapılsın?', type: 'one', o: ['Ürünlerimi Çanakkale’deki stüdyoya getireceğim', 'Çekim benim yerimde yapılsın', 'Birlikte karar verelim'] },
+      { lab: 'Çekim yeri', q: 'Çekim nerede yapılsın?', type: 'one', o: ['Ürünlerimi Çanakkale’deki stüdyoya getireceğim', 'Çekim benim yerimde yapılsın', 'Birlikte karar verelim'], lock: { from: 'Çekim tarzı', ifAny: ['Beyaz fon', 'Renkli fon'], opts: ['Çekim benim yerimde yapılsın', 'Birlikte karar verelim'], note: 'Beyaz ve renkli fon çekimleri yalnızca stüdyomuzda yapılır.' } },
       { lab: 'Kullanım', q: 'Fotoğrafları nerede kullanacaksınız?', type: 'multi', o: ['Web sitemde', 'Pazaryerlerinde', 'Sosyal medyada', 'Katalog ve basılı işlerde'] },
     ],
     google: [
@@ -480,11 +480,13 @@
     if (key.startsWith('dq:')) {
       const [, did, dn] = key.split(':'), qd = qsOf(did)[+dn], cur = dAns(did, +dn), svc = serviceList.find((x) => x[0] === did);
       el.stage.textContent = svc[1] + ' · ' + (dqVisible(did).indexOf(+dn) + 1) + '/' + dqVisible(did).length;
+      const lk = (o) => { const L = qd.lock; if (!L) return ''; const src = qsOf(did).findIndex((x) => x.lab === L.from); return L.opts.includes(o) && dAns(did, src).some((p) => L.ifAny.includes(p)) ? L.note : ''; };
+      if (qd.lock) { const keep = cur.filter((o) => !lk(o)); cur.length = 0; keep.forEach((o) => cur.push(o)); }
       if (qd.type === 'text') {
         html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">İsteğe bağlı. Boş bırakıp devam edebilirsiniz.</p><div class="wz-form" style="max-width:none"><textarea id="wz-dq-text" maxlength="400" placeholder="Yazabilirsiniz…">' + esc(cur[0] || '') + '</textarea></div>';
         el.next.disabled = false;
       } else {
-        html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">' + (qd.type === 'multi' ? 'Birden fazla seçebilirsiniz.' : 'Birini seçin.') + '</p><div class="wz-grid">' + dqOptions(did, +dn).map((o, i) => card(o, o, '', cur.includes(o), i + (serviceList.indexOf(svc) % 4))).join('').split('data-value=').join('data-dqv=') + '</div>';
+        html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">' + (qd.type === 'multi' ? 'Birden fazla seçebilirsiniz.' : 'Birini seçin.') + '</p><div class="wz-grid">' + dqOptions(did, +dn).map((o, i) => card(o, o, '', cur.includes(o), i + (serviceList.indexOf(svc) % 4), lk(o))).join('').split('data-value=').join('data-dqv=') + '</div>';
         el.next.disabled = cur.length === 0;
       }
     }
