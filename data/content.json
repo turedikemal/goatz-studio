@@ -3587,7 +3587,7 @@
           "background": "paper",
           "eyebrow": "Ürün çekimi",
           "heading": "Ürün çekimi",
-          "text": "Ürününü en iyi açısından gösteren, e-ticaret sitelerine ve pazaryerlerine hazır fotoğraflar.\n\nÇanakkale’de ürün fotoğrafı çekiyoruz. Üreticiler, yerel markalar ve e-ticaret mağazaları için çekim yapıyoruz. Ürünlerini getirebilir ya da çekimi birlikte planlayabiliriz; fotoğraflar doğrudan web sitende kullanılacak şekilde hazırlanır.",
+          "text": "Çanakkale’de ürün fotoğrafı çekiyoruz. E-ticaret mağazaları, üreticiler ve yerel işletmeler için ürünlerinizi fotoğraflıyoruz. Çekimleri, fotoğrafları kullanacağınız alanlara göre birlikte planlıyoruz.",
           "align": "left",
           "image": "",
           "imageSide": "left",
@@ -3600,36 +3600,36 @@
           "columns": 3,
           "cards": [
             {
-              "title": "E-Ticaret Fotoğrafları",
-              "text": "Ürün listesi, ürün detay sayfası ve kampanya görsellerini aynı dilde hazırlıyoruz; mağazan tutarlı ve güvenilir görünür.",
+              "title": "E-ticaret için ürün fotoğrafları",
+              "text": "Ürünlerinizi farklı açılardan ve detaylarıyla fotoğraflıyoruz. Müşterileriniz ürünü daha yakından tanısın, ne satın aldığını kolayca anlasın.",
               "color": "lavender",
               "sticker": "photo",
               "image": ""
             },
             {
-              "title": "Beyaz Fon Ürün Fotoğrafları",
-              "text": "Ürünü tek başına ve en temiz haliyle gösterir. Pazaryerlerinin ve ürün listelerinin istediği bu çekimlerde ürün net, dengeli ışıkta ve gerçek rengiyle görünür.",
+              "title": "Beyaz fonda ürün çekimi",
+              "text": "Ürünlerinizi sade beyaz fonda, net ve gerçek renkleriyle fotoğraflıyoruz. Ürün sayfalarında ve pazaryeri listelerinde kullanabileceğiniz görseller hazırlıyoruz.",
               "color": "sun",
               "sticker": "bottle",
               "image": ""
             },
             {
-              "title": "Renkli Fon Ürün Fotoğrafları",
-              "text": "Markanın kişiliğini öne çıkarır. Ürüne ve marka renklerine uygun fonlarla ana sayfa, kampanya ve sosyal medya görselleri hazırlıyoruz.",
+              "title": "Renkli fonda ürün çekimi",
+              "text": "Ürünlerinizi markanızın renklerine uygun fonlarda fotoğraflıyoruz. Kampanyalarınızda, site bannerlarında ve sosyal medyada kullanabileceğiniz görseller hazırlıyoruz.",
               "color": "sky",
-              "sticker": "product",
+              "sticker": "bottle",
               "image": ""
             },
             {
-              "title": "Fotoğraflarım sitemle uyumlu olacak",
-              "text": "Çekimleri sitenin tasarımını bilerek yapıyoruz. Ölçü, kadraj ve fon baştan siteye göre seçilir.",
+              "title": "Sitenize uygun fotoğraf çekimi",
+              "text": "Mevcut sitenizin tasarımına göre çekim yapıyoruz. Fotoğrafların ölçüsünü, fonunu ve ürünün kadrajdaki yerini kullanılacağı alana göre belirliyoruz.",
               "color": "mint",
               "sticker": "camera",
               "image": ""
             },
             {
-              "title": "Site fotoğrafları taşır",
-              "text": "Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
+              "title": "Fotoğraflarınıza uygun web tasarım",
+              "text": "Elinizdeki ürün fotoğraflarına uygun sayfalar tasarlıyoruz. Görsellerin yerleşimini ve boyutlarını, ürünlerinizin net ve düzenli görünmesi için ayarlıyoruz.",
               "color": "lavender",
               "sticker": "photo",
               "image": ""
