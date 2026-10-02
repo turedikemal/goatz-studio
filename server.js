@@ -477,6 +477,10 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
   const url = new URL(req.url, 'http://localhost');
+  if (url.pathname.length > 1 && url.pathname.endsWith('/') && !url.pathname.startsWith('/api/') && (req.method === 'GET' || req.method === 'HEAD')) {
+    res.writeHead(301, { Location: url.pathname.replace(/\/+$/, '') + url.search, 'Cache-Control': 'public, max-age=86400' });
+    return res.end();
+  }
   try {
     if (url.pathname.startsWith('/api/')) return await api(req, res, url);
     if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'İzin verilmiyor');
@@ -505,7 +509,7 @@ const server = http.createServer(async (req, res) => {
       const file = safeJoin(store.UPLOAD_DIR, upName);
       return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
     }
-    const origin = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
+    const origin = canonicalOrigin(req);
     // Arama motoru ve yapay zekâ botları için: robots.txt, sitemap.xml, llms.txt (lib/seo.js, içerikten üretilir)
     if (url.pathname === '/robots.txt') return send(res, 200, seo.robots(origin, store.load()), 'text/plain; charset=utf-8');
     if (url.pathname === '/sitemap.xml') return send(res, 200, seo.sitemap(origin, store.load()), 'application/xml; charset=utf-8');
