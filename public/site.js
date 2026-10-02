@@ -1429,7 +1429,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 // Gece teması: okunmayan yazıları bulup düzeltir (açık renkli kartta siyah, koyu zeminde açık yazı)
 (() => {
   const root = document.documentElement;
-  const lum = (c) => { const m = c.match(/[0-9.]+/g); if (!m) return 0; const [r, g, b] = m.slice(0, 3).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const lum = (c) => { const m = c.match(/[0-9.]+/g); if (!m) return 0; const k = c.startsWith('color(') ? 255 : 1; const [r, g, b] = m.slice(0, 3).map((v) => { v = v * k / 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
   const bgOf = (e) => { while (e) { const b = getComputedStyle(e).backgroundColor; const m = b.match(/[0-9.]+/g); if (m && (m.length < 4 || +m[3] > 0.5)) return b; e = e.parentElement; } return 'rgb(0,0,0)'; };
   const clear = () => document.querySelectorAll('[data-nt]').forEach((e) => { e.style.color = ''; e.removeAttribute('data-nt'); });
   let timer = 0;
