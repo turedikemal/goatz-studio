@@ -1469,3 +1469,5 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .map-city, .sf-city { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .sf-city { margin-top: 6px; color: var(--ft, #fff); }
 .map-city { text-align: center; }
+
+.map-city, .sf-city { font-style: italic; font-weight: 900; }
