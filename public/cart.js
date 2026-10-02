@@ -161,14 +161,13 @@
             const info = el('div', 'cp-info');
             const dd = descOf(gr.g, t);
             const tg = el('button', 'cp-toggle'); tg.type = 'button';
-            tg.append(el('span', 'cp-item', '✓ ' + t));
+            tg.append(el('span', 'cp-item', '✓ ' + t), el('i', 'cp-chev', '▾'));
             info.append(tg);
-            if (dd) {
-              const p = el('p', 'cp-desc', dd); p.hidden = true;
-              tg.setAttribute('aria-expanded', 'false');
-              tg.addEventListener('click', () => { const on = p.hidden; p.hidden = !on; tg.setAttribute('aria-expanded', String(on)); row.classList.toggle('open', on); });
-              info.append(p);
-            } else tg.disabled = true;
+            const p = el('p', 'cp-desc', dd); p.hidden = true;
+            tg.setAttribute('aria-expanded', 'false');
+            info.append(p);
+            // satırın neresine tıklanırsa tıklansın açılır / kapanır ("Çıkar" hariç)
+            row.addEventListener('click', (ev) => { if (ev.target.closest('.cp-rm')) return; const on = p.hidden; p.hidden = !on; tg.setAttribute('aria-expanded', String(on)); row.classList.toggle('open', on); });
             row.append(info);
             const rm = el('button', 'cp-rm', 'Çıkar'); rm.type = 'button'; rm.setAttribute('aria-label', t + ' hizmetini sepetten çıkar');
             rm.addEventListener('click', () => remove(gr.g, t));

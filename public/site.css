@@ -1607,3 +1607,6 @@ html.cart-open { overflow: hidden; }
 .cp-row { cursor: pointer; }
 
 .cp-chev { display: none; }
+
+.cp-chev { display: inline-block; }
+.cp-row.open .cp-chev { rotate: 180deg; }
