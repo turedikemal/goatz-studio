@@ -54,6 +54,10 @@
     a.title = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
+    // Fare ile üstüne gelince (masaüstü) tıklamaya gerek kalmadan o bölüme gider; kısa bir bekleme, listeyi tararken sayfanın sıçramaması için
+    let hoverT = 0;
+    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 140); });
+    a.addEventListener('mouseleave', () => clearTimeout(hoverT));
     rail.append(a);
   });
   // Uzay boşluğu: çubuğun çevresinde hafifçe yanıp sönen birkaç minik yıldız
