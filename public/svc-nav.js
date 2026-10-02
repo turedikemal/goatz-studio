@@ -7,8 +7,8 @@
 
   const goTo = (b) => {
     const y = Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - 84));
-    if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(y, { duration: reduced ? 0 : 1.1 });
-    else window.scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' });
+    if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(y, { immediate: true, force: true }); // kategoriye tıklayınca doğrudan oraya gider (kayma animasyonu yok)
+    else window.scrollTo({ top: y, behavior: 'instant' });
   };
   // Bağlantılar
   const link = (a) => a.addEventListener('click', (e) => {
@@ -56,6 +56,8 @@
     link(a);
     rail.append(a);
   });
+  // Uzay boşluğu: çubuğun çevresinde hafifçe yanıp sönen birkaç minik yıldız
+  [[-4, 8], [102, 30], [-2, 58], [98, 84]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 0.9).toFixed(1) + 's'; rail.append(s); });
   document.body.append(rail);
   const railPills = [...rail.children];
 
