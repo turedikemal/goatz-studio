@@ -4674,6 +4674,98 @@
           ]
         }
       ]
+    },
+    {
+      "id": "sepet",
+      "title": "Sepet",
+      "slug": "sepet",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Sepetiniz — The Goatz Studio",
+      "seoDescription": "Seçtiğiniz hizmetleri gözden geçirin, isteklerinizi yazın ve fiyat alın.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Sepet",
+        "title": "Sepetiniz",
+        "subtitle": "Seçtiğiniz hizmetleri gözden geçirin, isteklerinizi yazın. Size fiyat hazırlayıp dönelim.",
+        "titleSize": 9,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "browser",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "layers",
+            "x": 72,
+            "y": 14,
+            "mx": 60,
+            "my": 8,
+            "size": 70,
+            "rotate": 12,
+            "float": true
+          }
+        ],
+        "subtitleStyle": {
+          "size": 60
+        },
+        "titleStyle": {
+          "italic": "on",
+          "tracking": "-3",
+          "leading": "106"
+        }
+      },
+      "blocks": [
+        {
+          "type": "cartpage",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
