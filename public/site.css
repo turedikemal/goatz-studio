@@ -1939,3 +1939,10 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .svc-rail a { opacity: 0; scale: 1; filter: none; left: -120px; pointer-events: none; transition: transform .15s ease, background .15s ease, color .15s ease, opacity .35s ease, left .45s cubic-bezier(.5, 0, .9, .5); }
 .svc-rail.show a { opacity: 1; scale: 1; filter: none; left: 0; pointer-events: auto; transition: transform .15s ease, background .15s ease, color .15s ease, opacity .7s ease calc(var(--k, 0) * 90ms), left 1s cubic-bezier(.16, .84, .3, 1) calc(var(--k, 0) * 90ms); }
 @media (prefers-reduced-motion: reduce) { .svc-rail a, .svc-rail.show a { left: 0; transition: opacity .2s ease; } }
+
+/* Sepet konuşma balonu: sepette ürün varken ara ara sepetin solunda, üst kısmında belirir; çerçevesi siyah */
+.cart-bubble { position: absolute; right: 76px; top: -18px; padding: 8px 14px; border: 2px solid #000; border-radius: 16px; background: #fff; color: #000; font-family: inherit; font-size: 13px; font-weight: 800; line-height: 1.2; white-space: nowrap; opacity: 0; scale: .7; transform-origin: 100% 100%; pointer-events: none; transition: opacity .3s ease, scale .4s cubic-bezier(.3, 1.6, .5, 1); }
+.cart-bubble::after { content: ''; position: absolute; right: -8px; bottom: 8px; width: 12px; height: 12px; background: #fff; border-top: 2px solid #000; border-right: 2px solid #000; rotate: 45deg; }
+.cart-bubble.show { opacity: 1; scale: 1; }
+@media (max-width: 900px) { .cart-bubble { right: auto; left: 0; top: auto; bottom: calc(100% + 12px); transform-origin: 20% 100%; } .cart-bubble::after { right: auto; left: 22px; bottom: -8px; border: 0; border-right: 2px solid #000; border-bottom: 2px solid #000; } }
+@media (prefers-reduced-motion: reduce) { .cart-bubble { transition: opacity .2s ease; scale: 1; } }

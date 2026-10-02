@@ -46,6 +46,20 @@
     fab.innerHTML = '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M6 10h8l7 30h28l6-22H17" fill="#fff" stroke="#000" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="52" r="5" fill="#ffd731" stroke="#000" stroke-width="4"/><circle cx="46" cy="52" r="5" fill="#ffd731" stroke="#000" stroke-width="4"/></svg>';
     const badge = el('b', 'cart-count', '0');
     fab.append(badge, el('span', 'cart-tip', 'Sepet'));
+    // Sepette ürün varken arada bir (yaklaşık 25-45 sn'de) beliren konuşma balonu: sepetin solunda, üst kısmında
+    const bubble = el('span', 'cart-bubble', 'Seni bekliyorum');
+    bubble.setAttribute('aria-hidden', 'true');
+    fab.append(bubble);
+    let bubT = 0, bubOff = 0;
+    const bubbleStop = () => { clearTimeout(bubT); clearTimeout(bubOff); bubble.classList.remove('show'); };
+    const bubbleNext = (ms) => { clearTimeout(bubT); bubT = setTimeout(() => {
+      if (!items.length) return;
+      const busy = document.hidden || document.documentElement.classList.contains('cart-open');
+      if (!busy) { bubble.classList.add('show'); clearTimeout(bubOff); bubOff = setTimeout(() => bubble.classList.remove('show'), 5000); }
+      bubbleNext(25000 + Math.random() * 20000);
+    }, ms); };
+    const bubbleSync = () => { if (!items.length) { bubbleStop(); bubSeen = false; } else if (!bubSeen) { bubSeen = true; bubbleNext(7000); } };
+    let bubSeen = false;
     rail.append(fab);
     main.append(rail);
     const place = () => {
@@ -77,7 +91,7 @@
     clearAll.addEventListener('click', () => { items = []; change(); });
     panel.append(head, list, empty, clearAll, go);
     document.body.append(back, panel);
-    const open = () => { place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
+    const open = () => { bubble.classList.remove('show'); place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
     const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); fab.focus(); };
     fab.addEventListener('click', open);
     close.addEventListener('click', shut);
@@ -94,6 +108,7 @@
       badge.textContent = String(items.length);
       badge.hidden = items.length === 0;
       fab.classList.toggle('has-items', items.length > 0);
+      bubbleSync();
       list.textContent = '';
       grouped().forEach((gr) => {
         const box = el('section', 'cart-group');
