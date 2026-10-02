@@ -1460,3 +1460,6 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .show-photo-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
 .show-photo.has-img .show-photo-cap { position: absolute; left: 12px; right: 12px; bottom: 12px; display: grid; gap: 6px; justify-items: start; padding: 10px 12px; background: var(--paper); border: 1px solid var(--carbon); border-radius: calc(var(--r-card) * .8); }
 .show-photo.has-img .show-photo-cap b { font-size: clamp(18px, 2vw, 22px); }
+
+.show-photo-img { opacity: 0; transition: opacity .6s ease; }
+.show-photo-img.on { opacity: 1; }

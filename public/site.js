@@ -438,6 +438,14 @@
     setInterval(() => { if (!document.hidden) show(cur + 1); }, 3000 + bi * 600);
   });
 
+  // ---------- Ana sayfa: Ürün fotoğrafları kartı farklı çekimler arasında sırayla geçer ----------
+  document.querySelectorAll('.show-photo.has-img').forEach((card) => {
+    const imgs = [...card.querySelectorAll('.show-photo-img')];
+    if (imgs.length < 2) return;
+    let cur = 0;
+    setInterval(() => { if (document.hidden) return; imgs[cur].classList.remove('on'); cur = (cur + 1) % imgs.length; imgs[cur].classList.add('on'); }, 3300);
+  });
+
   // ---------- Proje sayfasından geri dön: önceki sayfa işler listesiyse oraya dön ----------
   document.addEventListener('click', (e) => {
     const a = e.target.closest && e.target.closest('[data-back]');
