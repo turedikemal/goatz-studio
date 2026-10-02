@@ -1459,7 +1459,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     const sky = document.createElement('div');
     sky.className = 'ns';
     sky.setAttribute('aria-hidden', 'true');
-    const n = Math.max(10, Math.min(46, Math.round((p.offsetWidth * p.offsetHeight) / 22000)));
+    const n = Math.max(5, Math.min(18, Math.round((p.offsetWidth * p.offsetHeight) / 60000)));
     for (let i = 0; i < n; i++) {
       const b = document.createElement('b');
       const big = rnd() < 0.3;
