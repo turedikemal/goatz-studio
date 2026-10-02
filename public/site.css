@@ -1414,3 +1414,6 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-head .wz-count { margin-left: auto; }
 .wz-next-top { padding: 8px 16px; font-size: 13px; }
 .wz-next-top[hidden] { display: none; }
+
+/* İşler başlığı: sarı etiket iki satıra bölününce satırlar üst üste binmesin; tek kutu olarak durur */
+.show-hook-big mark { display: inline-block; max-width: 100%; padding: .1em .3em .16em; line-height: 1.08; text-wrap: balance; -webkit-box-decoration-break: slice; box-decoration-break: slice; }
