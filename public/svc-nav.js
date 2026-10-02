@@ -49,14 +49,13 @@
     a.href = '#' + x.id;
     a.dataset.g = String(x.i);
     a.style.setProperty('--d', (x.i * -0.8).toFixed(1) + 's');
-    a.innerHTML = '<i class="d"></i><span class="v"></span>';
+    a.innerHTML = '<span class="v"></span>';
     a.querySelector('.v').textContent = SHORT(x.name.trim());
     a.title = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     rail.append(a);
   });
-  [[70, 6], [74, 62]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 1.1).toFixed(1) + 's'; rail.append(s); });
   document.body.append(rail);
   const railPills = [...rail.children];
 

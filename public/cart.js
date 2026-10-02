@@ -57,8 +57,10 @@
       const m = main.getBoundingClientRect(), g = grid.getBoundingClientRect(), z = blocks[blocks.length - 1].getBoundingClientRect(), hh = (h2 || grid).getBoundingClientRect();
       rail.style.right = 'auto';
       rail.style.left = Math.max(0, g.right - m.left - fab.offsetWidth) + 'px';
-      rail.style.top = Math.max(0, hh.top + hh.height / 2 - m.top - 34) + 'px';
-      rail.style.height = Math.max(120, z.bottom - (hh.top + hh.height / 2) + 34) + 'px';
+      // Başlangıç: ilk başlık ile kartlar arasında, en sağdaki kartın sağ kenarına hizalı (başlığın yanına yukarı çıkmaz); kaydırınca ekranda sabit kalır
+      const startY = g.top - fab.offsetHeight - 6; // kartların hemen üstü
+      rail.style.top = Math.max(0, startY - m.top) + 'px';
+      rail.style.height = Math.max(120, z.bottom - startY) + 'px';
     };
 
     // Sepet paneli: yalnızca liste ve "Sepete git"
