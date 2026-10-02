@@ -794,6 +794,14 @@
       {
         "label": "Kullanım Koşulları",
         "target": "page:kosullar"
+      },
+      {
+        "label": "Mesafeli Satış Sözleşmesi",
+        "target": "page:mesafeli"
+      },
+      {
+        "label": "İade ve Cayma Koşulları",
+        "target": "page:iadecayma"
       }
     ],
     "companyInfo": ""
@@ -3760,6 +3768,748 @@
           "eyebrow": "Son güncelleme: 1 Ekim 2026",
           "heading": "Değişiklik ve uygulanacak hukuk",
           "text": "Bu koşulları gerektiğinde güncelleyebiliriz; güncel hali bu sayfada yayımlanır.\n\nBu koşullara Türkiye Cumhuriyeti hukuku uygulanır. Tüketici işlemlerinde Tüketici Hakem Heyetleri ve Tüketici Mahkemeleri, diğer uyuşmazlıklarda Çanakkale Mahkemeleri ve İcra Daireleri yetkilidir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iadecayma",
+      "title": "İade ve Cayma Koşulları",
+      "slug": "iade-ve-cayma-kosullari",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "İade ve Cayma Koşulları — The Goatz Studio",
+      "seoDescription": "Cayma hakkı, cayma bildirimi, ifa edilen hizmet bedeli, geri ödeme ve iptal koşulları: The Goatz Studio hizmetleri için iade ve cayma bilgileri.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Yasal",
+        "title": "İade ve cayma koşulları",
+        "subtitle": "Cayma hakkınızı nasıl kullanabileceğinizi ve geri ödemelerin nasıl yapıldığını açıklıyoruz. Son güncelleme: 2 Ekim 2026.",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "layers",
+            "x": 86,
+            "y": 30,
+            "mx": 78,
+            "my": 16,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 56,
+            "size": 85,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Kimler için geçerli?",
+          "text": "Bu sayfa, hizmeti ticari ya da mesleki amaç dışında satın alan tüketiciler için, 6502 sayılı Kanun ve Mesafeli Sözleşmeler Yönetmeliği hükümlerine göre hazırlanmıştır.\n\nHizmeti işletmesi için alan alıcılar bakımından cayma hakkı doğmaz. Bu alıcılar için iptal, değişiklik ve ödeme iadesi koşulları teklifte ya da yazılı sözleşmede belirtilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Cayma hakkı",
+          "text": "Tüketici, sözleşmenin kurulduğu tarihten itibaren 14 gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin sözleşmeden cayabilir. Cayma süresi içinde bildirimin yapılmış olması yeterlidir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Cayma hakkını nasıl kullanırsınız?",
+          "text": "Cayma bildiriminizi, ad soyad, iletişim bilgileriniz ve sözleşmeye ilişkin kısa bir açıklamayla birlikte yazılı olarak iletmeniz gerekir:\n\n• E-posta: hello@thegoatzstudio.com\n• KEP: secil.turedi@hs01.kep.tr\n• Posta: Medrese Sokak, No: 1, Office: 2, Fevzipaşa Mahallesi, 17100 Çanakkale\n\nAşağıdaki örnek cayma formunu kullanabilirsiniz; kullanmak zorunlu değildir:\n\n“Satıcı: The Goatz Studio (Seçil TÜREDİ)\nAşağıda belirtilen hizmete ilişkin sözleşmeden cayma hakkımı kullanıyorum.\nHizmetin adı / sözleşme tarihi: …\nAdı soyadı: …\nİletişim (e-posta / telefon): …\nTarih: …”",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Hizmetin ifasına başlanmışsa",
+          "text": "Hizmetin ifasına cayma süresi dolmadan başlanması, tüketicinin açık talebine ve onayına bağlıdır. Bu onayla ifaya başlanmışsa ve tüketici sonradan cayarsa, cayma tarihine kadar ifa edilen kısmın bedeli, sözleşmedeki toplam bedelle orantılı olarak tüketici tarafından ödenir.\n\nHizmetin ifasına tüketicinin onayıyla başlanmış ve cayma süresi sona ermeden hizmet tamamen ifa edilmişse, tüketici cayma hakkını kullanamaz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Cayma hakkının kullanılamayacağı hâller",
+          "text": "Mevzuat gereği şu hâllerde cayma hakkı kullanılamaz:\n\n• Tüketicinin istekleri ya da kişisel ihtiyaçları doğrultusunda hazırlanan ürün ve çalışmalar (ör. markaya özel hazırlanan tasarım, çekim ve içerikler).\n• Elektronik ortamda anında ifa edilen hizmetler ve tüketiciye anında teslim edilen gayrimaddi mallar.\n• Cayma süresi sona ermeden, tüketicinin onayıyla ifasına başlanan hizmetler.\n\nHangi hâlin hangi çalışmanız için geçerli olduğu, teklifte ve sözleşme onayında ayrıca belirtilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Geri ödeme",
+          "text": "Cayma bildirimi bize ulaştıktan sonra, ifa edilen kısmın bedeli mahsup edilerek kalan tutar en geç 14 gün içinde, ödemeyi yaptığınız yöntemle iade edilir. Geri ödemede ek bir ücret alınmaz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Teslim sonrası hatalar",
+          "text": "Teslim edilen çalışmada, teklifte kararlaştırılan kapsama uymayan bir eksiklik ya da hata görürseniz, teslimden itibaren makul bir süre içinde bize e-posta ile bildirin. Eksikliği önce düzeltmeye çalışırız. Tüketicinin ayıplı hizmete ilişkin kanundan doğan hakları saklıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Şikâyet ve başvuru",
+          "text": "Çözüm bulunamayan uyuşmazlıklarda, Ticaret Bakanlığınca her yıl ilan edilen parasal sınırlar dahilinde yerleşim yerinizdeki Tüketici Hakem Heyeti’ne ya da Tüketici Mahkemesi’ne başvurabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "İletişim",
+          "text": "Sorularınız için hello@thegoatzstudio.com adresine yazabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mesafeli",
+      "title": "Mesafeli Satış Sözleşmesi",
+      "slug": "mesafeli-satis-sozlesmesi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Mesafeli Satış Sözleşmesi ve Ön Bilgilendirme — The Goatz Studio",
+      "seoDescription": "Mesafeli hizmet satış sözleşmesi ve ön bilgilendirme: taraflar, hizmetin kapsamı, bedel, ifa, cayma hakkı ve uyuşmazlıkların çözümü.",
+      "background": "sky",
+      "showContact": false,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Yasal",
+        "title": "Mesafeli satış sözleşmesi",
+        "subtitle": "Web tasarım, e-ticaret kurulumu, ürün çekimi ve ilgili hizmetler için ön bilgilendirme ve sözleşme koşulları. Son güncelleme: 2 Ekim 2026.",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "layers",
+            "x": 86,
+            "y": 30,
+            "mx": 78,
+            "my": 16,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 8,
+            "y": 40,
+            "mx": 6,
+            "my": 56,
+            "size": 85,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "Kapsam ve ön bilgilendirme",
+          "text": "Bu metin, 6502 sayılı Tüketicinin Korunması Hakkında Kanun’un 48. maddesi ve Mesafeli Sözleşmeler Yönetmeliği uyarınca, internet ortamında ya da uzaktan iletişim araçlarıyla (e-posta, telefon, mesajlaşma) kurulan hizmet sözleşmelerinde tüketiciyi bilgilendirmek ve sözleşme koşullarını belirlemek amacıyla hazırlanmıştır.\n\nBu sözleşme, hizmeti ticari ya da mesleki amaçla almayan, yani tüketici sıfatıyla alım yapan kişiler için geçerlidir. Hizmeti işletmesi için alan alıcılar bakımından cayma hakkı gibi tüketici hükümleri uygulanmaz; bu durumda teklifte ya da ayrıca yazılı olarak kararlaştırılan koşullar geçerlidir.\n\nHizmetin kapsamı, süresi ve bedeli her iş için hazırlanan yazılı teklifte ve alıcının onayında belirlenir. Sitedeki bilgiler ve fiyat talebi bağlayıcı bir teklif değildir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "1. Taraflar",
+          "text": "SATICI (hizmet sağlayıcı):\n\nÜnvan: The Goatz Studio (Seçil TÜREDİ)\nAdres: Medrese Sokak, No: 1, Office: 2, Fevzipaşa Mahallesi, 17100 Çanakkale\nVergi Dairesi / Vergi Kimlik No: Çanakkale Vergi Dairesi / 53659508922\nTelefon: +90 544 569 89 85\nE-posta: hello@thegoatzstudio.com\nKayıtlı Elektronik Posta (KEP): secil.turedi@hs01.kep.tr\n\nALICI: Teklif, sipariş ya da onay aşamasında bildirdiği ad soyad, adres, telefon ve e-posta bilgilerine sahip kişidir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "2. Sözleşmenin konusu",
+          "text": "Sözleşmenin konusu, SATICI’nın ALICI’ya sunduğu web tasarım, e-ticaret sitesi kurulumu, ürün çekimi, görünürlük (SEO), entegrasyon, danışmanlık ve benzeri hizmetlerin, teklifte belirtilen nitelik, kapsam ve bedelle verilmesidir. Hizmetlerin temel nitelikleri thegoatzstudio.com/hizmetler sayfasında ve teklifte yer alır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "3. Bedel ve ödeme",
+          "text": "Hizmetin toplam bedeli, vergiler dahil ya da hariç olduğu belirtilerek teklifte yer alır. Ödeme yöntemi ve planı (peşin ya da aşamalı) teklifte ve ALICI’nın onayında netleştirilir.\n\nTeklifte yer almayan ek talepler için ayrıca onay ve bedel kararlaştırılır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "4. Hizmetin ifası",
+          "text": "Hizmetin başlangıç tarihi, teslim süresi ve teslim şekli (dijital teslim, ortak dosya bağlantısı, yayına alma vb.) teklifte belirtilir. Çekim ve tasarım çalışmaları, ALICI’nın sağlayacağı ürün, içerik, bilgi ve onayların zamanında iletilmesine bağlıdır; bunların gecikmesi teslim süresini uzatır.\n\nKişiye özel hazırlanan çalışmalar ALICI’nın onayına sunulur. Onaylanan kapsamın dışındaki değişiklikler ayrıca değerlendirilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "5. Cayma hakkı",
+          "text": "Tüketici sıfatındaki ALICI, 14 gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin sözleşmeden cayma hakkına sahiptir. Hizmet sözleşmelerinde cayma süresi sözleşmenin kurulduğu tarihte başlar.\n\nCayma hakkının nasıl kullanılacağı, hangi hâllerde kullanılamayacağı ve ifa edilen kısmın bedeli İade ve Cayma Koşulları sayfasında ayrıntılı olarak açıklanmıştır. ALICI, sözleşmeyi onaylamadan önce bu koşulları okuduğunu kabul eder.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "6. Fikri mülkiyet",
+          "text": "SATICI’nın hazırladığı tasarım, fotoğraf, yazılım ve içeriklerin kullanım hakkı, teklifte belirtilen koşullarla ve bedelin ödenmesiyle ALICI’ya geçer. ALICI’nın sağladığı marka, ürün, görsel ve içeriklerin sorumluluğu ALICI’ya aittir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "7. Kişisel veriler",
+          "text": "ALICI’ya ait kişisel veriler, sözleşmenin kurulması ve ifası amacıyla ve 6698 sayılı Kanun’a uygun olarak işlenir. Ayrıntılar KVKK Aydınlatma Metni ve Gizlilik Politikası sayfalarındadır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "8. Uyuşmazlıkların çözümü",
+          "text": "Bu sözleşmeden doğan uyuşmazlıklarda, Ticaret Bakanlığınca her yıl ilan edilen parasal sınırlar dahilinde ALICI’nın yerleşim yerindeki ya da işlemin yapıldığı yerdeki Tüketici Hakem Heyetleri, sınırı aşan uyuşmazlıklarda Tüketici Mahkemeleri yetkilidir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": "#iletisim"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Kart",
+              "text": "",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Son güncelleme: 1 Ekim 2026",
+          "heading": "9. Yürürlük",
+          "text": "ALICI, sözleşmeyi ve ön bilgilendirmeyi okuyup anladığını, elektronik ortamda ya da yazılı olarak onayladığı anda sözleşmenin yürürlüğe girdiğini kabul eder.",
           "align": "left",
           "image": "",
           "imageSide": "left",
