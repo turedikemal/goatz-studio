@@ -1569,7 +1569,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     const dx = x1 - x0, dy = y1 - y0, heading = Math.atan2(dy, dx);
     const s = makeShip(host, x0, y0, heading);
     const dist = Math.hypot(dx, dy);
-    fly(s, dx, dy, Math.max(14000, dist * rnd(22, 38))).then(() => drop(s), () => drop(s));
+    fly(s, dx, dy, Math.max(30000, dist * rnd(55, 90))).then(() => drop(s), () => drop(s));
   };
 
   const battle = async (host) => {
@@ -1577,11 +1577,11 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     if (W < 360 || H < 160) return cruise(host);
     // Çatışma ekseni rastgele bir açı: gemiler birbirine bu doğrultuda yaklaşır
     const ang = rnd(0, Math.PI * 2), ux = Math.cos(ang), uy = Math.sin(ang);
-    const mx = rnd(W * 0.25, W * 0.75), my = rnd(H * 0.25, H * 0.75), gap = rnd(70, 110), far = Math.hypot(W, H) * 0.6;
+    const mx = rnd(W * 0.25, W * 0.75), my = rnd(H * 0.25, H * 0.75), gap = rnd(70, 110), far = Math.hypot(W, H) * 0.4;
     const ax = mx - ux * gap / 2, ay = my - uy * gap / 2, bx = mx + ux * gap / 2, by = my + uy * gap / 2;
     const sax = mx - ux * far, say = my - uy * far, sbx = mx + ux * far, sby = my + uy * far;
     const a = makeShip(host, sax, say, ang), b = makeShip(host, sbx, sby, ang + Math.PI);
-    await Promise.all([fly(a, ax - sax, ay - say, rnd(4500, 6500)), fly(b, bx - sbx, by - sby, rnd(4500, 6500))]).catch(() => {});
+    await Promise.all([fly(a, ax - sax, ay - say, rnd(10000, 14000)), fly(b, bx - sbx, by - sby, rnd(10000, 14000))]).catch(() => {});
     for (let i = 0; i < 3; i++) {
       shot(host, ax + ux * 14, ay + uy * 14, ux, uy, gap - 26, '#ffd731');
       await wait(rnd(250, 500));
@@ -1591,7 +1591,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     boom(host, bx + 12, by + 7);
     drop(b);
     const rd = rnd(-0.6, 0.6), rx = Math.cos(ang + rd) * far * 1.4, ry = Math.sin(ang + rd) * far * 1.4;
-    fly(a, ax - sax + rx, ay - say + ry, rnd(9000, 14000), 'ease-in', [ax - sax, ay - say]).then(() => drop(a), () => drop(a));
+    fly(a, ax - sax + rx, ay - say + ry, rnd(26000, 36000), 'ease-in', [ax - sax, ay - say]).then(() => drop(a), () => drop(a));
   };
 
   const tick = () => {
