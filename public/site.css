@@ -1754,3 +1754,8 @@ html[data-theme="night"] mark, html[data-theme="night"] .show-appcap, html[data-
 html[data-theme="night"] .rm-no { color: #12163a; }
 html[data-theme="night"] .partner.night .pt-x { color: #000; }
 html[data-theme="night"] .sf-city { color: #f4f1e8 !important; }
+.ns { display: none; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+html[data-theme="night"] .panel:has(> .ns), html[data-theme="night"] .site-footer { isolation: isolate; }
+html[data-theme="night"] .ns { display: block; }
+.ns b { position: absolute; background: #ffd731; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: pt-twinkle 1.8s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .ns b { animation: none; } }

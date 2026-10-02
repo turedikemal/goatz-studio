@@ -1449,3 +1449,23 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   document.getElementById('themeBtn')?.addEventListener('click', () => setTimeout(scan, 600));
   window.addEventListener('load', () => setTimeout(scan, 600));
 })();
+
+// Gece teması: koyu panellerin tamamında (ikas bölümündeki gibi) parıldayan yıldızlar
+(() => {
+  const panels = [...document.querySelectorAll('.panel[style*="var(--paper)"], .panel[style*="var(--sky)"], .site-footer')].filter((p) => !p.classList.contains('partner'));
+  let seed = 7;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+  panels.forEach((p) => {
+    const sky = document.createElement('div');
+    sky.className = 'ns';
+    sky.setAttribute('aria-hidden', 'true');
+    const n = Math.max(10, Math.min(46, Math.round((p.offsetWidth * p.offsetHeight) / 22000)));
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement('b');
+      const big = rnd() < 0.3;
+      b.style.cssText = `left:${(rnd() * 98).toFixed(1)}%;top:${(rnd() * 96).toFixed(1)}%;width:${big ? 18 : 11}px;height:${big ? 18 : 11}px;animation-delay:${(-rnd() * 2.4).toFixed(2)}s;animation-duration:${(1.4 + rnd() * 1.2).toFixed(2)}s`;
+      sky.append(b);
+    }
+    p.prepend(sky);
+  });
+})();
