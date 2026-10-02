@@ -877,7 +877,6 @@
       { ...turn(0, 1), offset: 0.92 },
       base
     ], { duration: T, easing: 'ease-in-out' });
-    setTimeout(() => sparks(hx, c.y, { n: 7, size: Math.max(9, W * 0.34), dist: Math.max(30, W * 1.1) }), T * 0.6);
     setTimeout(() => hole.remove(), T + 60);
   };
   const burstOf = (id) => (el) => {
@@ -1753,6 +1752,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     if (root.dataset.theme !== 'night') { fl.splice(0).forEach((f) => f.el.remove()); running = false; return; }
     for (let i = fl.length - 1; i >= 0; i--) {
       const f = fl[i];
+      try {
       if (!f.el.isConnected || !f.host.isConnected) { f.el.remove(); fl.splice(i, 1); continue; }
       f.age += dt;
       if (f.mode === 'dog') {
@@ -1778,11 +1778,10 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
         if (pl.t0 !== now) { // plan grup başına karede bir kez ilerler (filo birlikte manevra yapar)
           pl.t0 = now; pl.t -= dt;
           if (pl.t <= 0) {
-            if (pl.want === 0) { pl.want = 1; pl.ht += rnd(-0.6, 0.6); pl.t = rnd(4, 8); } // duruştan sonra yeni bir yöne kalkar
+            if (pl.want === 0) { pl.want = 1; pl.t = rnd(4, 8); } // (güvenlik: gemiler hiçbir zaman durmaz)
             else {
               const r = Math.random();
               if (r < 0.34) { pl.ht += rnd(-0.6, 0.6) * (Math.random() < 0.15 ? 1.6 : 1); pl.t = rnd(6, 12); } // yumuşak bir dönüş
-              else if (r < 0.54) { pl.want = 0; pl.t = rnd(4, 8); } // yavaşça durur, olduğu yerde sallanır
               else pl.t = rnd(4, 9); // bir süre düz gider
             }
           }
@@ -1807,7 +1806,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
         f.launchCd -= dt;
         if (f.launchCd <= 0) {
           f.launchCd = rnd(6, 10);
-          if (fl.filter((o) => o.host === f.host).length < 16) add(f.host, { noSpread: true, kind: pick(KINDS[f.team]), team: f.team, x: f.x + f.w * 0.55, y: f.y + f.hh * 0.5, h: f.h + rnd(-0.7, 0.7), speed: rnd(64, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, keep: true, dogLife: rnd(22, 34), life: 70, z: f.z, vz: rnd(-0.05, 0.05) });
+          if (f.team < 2 && fl.filter((o) => o.host === f.host).length < 16) add(f.host, { noSpread: true, kind: pick(KINDS[f.team]), team: f.team, x: f.x + f.w * 0.55, y: f.y + f.hh * 0.5, h: f.h + rnd(-0.7, 0.7), speed: rnd(64, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, keep: true, dogLife: rnd(22, 34), life: 70, z: f.z, vz: rnd(-0.05, 0.05) });
         }
       }
       if (f.dodgeCd > 0) f.dodgeCd -= dt;
@@ -1833,6 +1832,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       }
       const W = f.host.offsetWidth, H = f.host.offsetHeight, m = f.keep ? 500 : 80;
       if (f.x < -m || f.x > W + m || f.y < -m || f.y > H + m || f.age > f.life) { f.dead = true; f.el.remove(); fl.splice(i, 1); }
+      } catch (err) { f.dead = true; if (f.el) f.el.remove(); const k = fl.indexOf(f); if (k >= 0) fl.splice(k, 1); } // bir geminin hatası döngüyü durdurmaz
     }
     if (fl.length) requestAnimationFrame(loop); else running = false;
   };

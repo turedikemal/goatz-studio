@@ -215,7 +215,7 @@
       back.addEventListener('click', shut);
       document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) shut(); });
       // başka sekmede sepet değişirse liste güncel kalsın
-      window.addEventListener('storage', (e) => { if (e.key === KEY) { items = load(); sync(); } });
+      window.addEventListener('storage', (e) => { if (e.key === KEY && e.isTrusted) { items = load(); sync(); } }); // yalnız gerçek (başka sekmeden gelen) olaylar; kendi bildirimimiz döngü yapmasın
     }
   }
 
