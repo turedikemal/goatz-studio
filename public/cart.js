@@ -48,7 +48,7 @@
     fab.append(badge, el('span', 'cart-tip', 'Sepet'));
     // Sepette ürün varken arada bir (yaklaşık 40-70 sn aralıkla) beliren konuşma balonu: sepetin solunda, üst kısmında
     const bubble = el('span', 'cart-bubble');
-    bubble.innerHTML = '<span>Seni bekliyorum</span><svg class="cb-tail" viewBox="0 0 34 26" aria-hidden="true"><path d="M4 1C4 14 12 22 30 10C20 12 15 8 17 1Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="0" width="11" height="2.6" fill="#fff"/></svg>';
+    bubble.innerHTML = '<span>Seni bekliyorum</span><svg class="cb-tail" viewBox="0 0 34 26" aria-hidden="true"><path d="M4 1C4 14 12 22 30 10C20 12 15 8 17 1Z" fill="#fff"/><path d="M4 1C4 14 12 22 30 10C20 12 15 8 17 1" fill="none" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="3.6" y="-1" width="14" height="3.6" fill="#fff"/></svg>';
     bubble.setAttribute('aria-hidden', 'true');
     fab.append(bubble);
     // Sepet boşken ve doluyken ayrı cümleler; sırayla karışık gelir, arka arkaya aynı cümle tekrarlanmaz
@@ -103,14 +103,14 @@
     // Sepet ilk sayfadayken (en üstteyken, sepette ürün varsa) üst menüde, gece/gündüz düğmesinin solunda durur; sayfa aşağı kaydırılıp
     // kendi yeri ekrana gelince oradan aşağı süzülür; yukarı çıkıp ilk sayfaya dönünce tekrar üst menüye yükselir
     if (!matchMedia('(prefers-reduced-motion: reduce)').matches && !matchMedia('(max-width: 900px)').matches) {
-      const th = document.getElementById('themeBtn'), navRight = th && th.parentElement;
+      const slotEl = document.getElementById('cartSlot'), html = document.documentElement; // menüde baştan ayrılmış boş yer: sepet oraya girip çıkınca menü kaymaz
       let docked = false;
       const center = (r) => [r.left + r.width / 2, r.top + r.height / 2];
       const toRail = () => { fab.classList.remove('docked'); rail.append(fab); docked = false; };
       const dock = (animate) => {
-        if (!navRight || docked) return;
+        if (!slotEl || docked) return;
         const r0 = fab.getBoundingClientRect();
-        fab.classList.add('docked'); navRight.insertBefore(fab, th); docked = true;
+        html.classList.add('cart-slot'); fab.classList.add('docked'); slotEl.append(fab); docked = true;
         if (!animate) return;
         const [x0, yRaw] = center(r0), [x1, y1] = center(fab.getBoundingClientRect()), y0 = Math.min(yRaw, innerHeight + 40); // ekran dışındaysa alt kenardan yükselir
         fab.animate([{ translate: (x0 - x1) + 'px ' + (y0 - y1) + 'px', scale: 68 / 36 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
@@ -122,7 +122,7 @@
         fab.animate([{ translate: (x0 - x1) + 'px ' + (y0 - y1) + 'px', scale: 0.55 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
       };
       const check = () => {
-        if (!items.length) { if (docked) toRail(); return; } // sepet boşsa sepet kendi yerinde durur
+        if (!items.length) { if (docked) toRail(); html.classList.remove('cart-slot'); return; } // sepet boşsa sepet kendi yerinde durur, menüdeki boş yer de kapanır
         if (docked) {
           if (window.scrollY < 24) return; // ilk slayt aşağı kaydırılmaya başlanana kadar yukarıda kalır
           const natTop = Math.max(rail.getBoundingClientRect().top, 120); // sepetin kendi yeri (yapışkan konum dahil)
