@@ -1994,3 +1994,6 @@ html.cart-slot .cart-ghost { display: grid; place-items: center; position: relat
 .cart-ghost svg { width: 20px; height: 20px; }
 .cart-ghost .cart-count { top: -7px; right: -7px; }
 .cart-ghost .cart-count:empty { display: none; }
+/* Gece: "Teklif al" düğmeleri sarı (siyah yazı, siyah çerçeve) */
+html[data-theme="night"] a.btn.solid[href="/teklif-al"], html[data-theme="night"] .nav-right .btn.solid { background: var(--sun); color: #000; border-color: #000; }
+html[data-theme="night"] a.btn.solid[href="/teklif-al"]:hover, html[data-theme="night"] .nav-right .btn.solid:hover { background: #ffe35c; color: #000; }
