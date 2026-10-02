@@ -4614,71 +4614,9 @@
           "type": "cards",
           "visible": true,
           "background": "paper",
-          "eyebrow": "Ürün çekimi",
-          "heading": "Ürün çekimi",
-          "text": "Çanakkale’de ürün fotoğrafı çekiyoruz. E-ticaret mağazaları, üreticiler ve yerel işletmeler için ürünlerinizi fotoğraflıyoruz. Çekimleri, fotoğrafları kullanacağınız alanlara göre birlikte planlıyoruz.",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Çekim örneklerini gör",
-            "target": "works:photo"
-          },
-          "columns": 3,
-          "cards": [
-            {
-              "title": "E-ticaret için ürün fotoğrafları",
-              "text": "Ürünlerinizi farklı açılardan ve detaylarıyla fotoğraflıyoruz. Müşterileriniz ürünü daha yakından tanısın, ne satın aldığını kolayca anlasın.",
-              "color": "lavender",
-              "sticker": "photo",
-              "image": ""
-            },
-            {
-              "title": "Beyaz fonda ürün çekimi",
-              "text": "Ürünlerinizi sade beyaz fonda, net ve gerçek renkleriyle fotoğraflıyoruz. Ürün sayfalarında ve pazaryeri listelerinde kullanabileceğiniz görseller hazırlıyoruz.",
-              "color": "sun",
-              "sticker": "bottle",
-              "image": ""
-            },
-            {
-              "title": "Renkli fonda ürün çekimi",
-              "text": "Ürünlerinizi markanızın renklerine uygun fonlarda fotoğraflıyoruz. Kampanyalarınızda, site bannerlarında ve sosyal medyada kullanabileceğiniz görseller hazırlıyoruz.",
-              "color": "sky",
-              "sticker": "bottle",
-              "image": ""
-            },
-            {
-              "title": "Sitenize uygun fotoğraf çekimi",
-              "text": "Mevcut sitenizin tasarımına göre çekim yapıyoruz. Fotoğrafların ölçüsünü, fonunu ve ürünün kadrajdaki yerini kullanılacağı alana göre belirliyoruz.",
-              "color": "mint",
-              "sticker": "camera",
-              "image": ""
-            },
-            {
-              "title": "Fotoğraflarınıza uygun web tasarım",
-              "text": "Elinizdeki ürün fotoğraflarına uygun sayfalar tasarlıyoruz. Görsellerin yerleşimini ve boyutlarını, ürünlerinizin net ve düzenli görünmesi için ayarlıyoruz.",
-              "color": "lavender",
-              "sticker": "photo",
-              "image": ""
-            }
-          ],
-          "ratio": "square",
-          "images": [
-            {
-              "image": "",
-              "caption": ""
-            }
-          ]
-        },
-        {
-          "type": "cards",
-          "visible": true,
-          "background": "sky",
-          "eyebrow": "Web sitesi",
-          "heading": "Web sitesi ve e-ticaret kurulumu",
-          "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler.",
+          "eyebrow": "",
+          "heading": "Web tasarım ve e-ticaret",
+          "text": "",
           "align": "left",
           "image": "",
           "imageSide": "left",
@@ -4689,164 +4627,36 @@
             "target": "page:anahtarteslim"
           },
           "columns": 3,
+          "ratio": "",
+          "images": [],
           "cards": [
             {
-              "title": "Markaya Özel Web Tasarım & UI/UX",
-              "text": "Sayfa düzenlerini, tipografiyi, içerik hiyerarşisini ve kullanıcı etkileşimlerini markayla uyumlu, sade ve anlaşılır hale getiriyoruz.",
+              "title": "Anahtar Teslim E-Ticaret Sitesi",
+              "text": "Tasarım, ürün yerleşimi, ödeme ve kargo ayarlarıyla sitenizi satışa hazır hale getiriyoruz.",
               "color": "mint",
+              "sticker": "key",
+              "image": ""
+            },
+            {
+              "title": "Kurumsal Web Sitesi",
+              "text": "İşinizi ve hizmetlerinizi anlatan, müşterilerin size kolayca ulaşabildiği web siteleri tasarlıyoruz.",
+              "color": "lavender",
               "sticker": "browser",
               "image": ""
             },
             {
-              "title": "Mobil Uyumlu ve Satış Odaklı Tasarım",
-              "text": "Masaüstü, tablet ve mobilde tutarlı çalışan bir yapı kuruyor, mobil kullanıcıların ürünlere ve satın alma adımlarına hızlı ulaşması için kullanıcı deneyimini optimize ediyoruz.",
-              "color": "lavender",
-              "sticker": "store",
-              "image": ""
-            },
-            {
-              "title": "Anahtar Teslim E-Ticaret Kurulumu",
-              "text": "Web sitesinin temel yapısından ürün sayfalarına, kategori sisteminden içerik alanlarına kadar tüm e-ticaret altyapısını kuruyoruz.",
+              "title": "Mevcut Siteyi Yenileme",
+              "text": "Sitenizin tasarımını, mobil görünümünü ve kullanımını markanızın ihtiyaçlarına göre yeniliyoruz.",
               "color": "sun",
-              "sticker": "cart",
+              "sticker": "refresh",
               "image": ""
             },
             {
-              "title": "Ürün & Kategori Sayfaları",
-              "text": "Ürün gruplarını, açıklamaları ve kategori hiyerarşilerini daha anlaşılır hale getiriyoruz.",
+              "title": "ikas’a Site Taşıma",
+              "text": "Ürün, içerik ve bağlantılarınızı değerlendiriyor; mevcut mağazanızın ikas’a geçişini yönetiyoruz.",
               "color": "sky",
-              "sticker": "check",
+              "sticker": "truck",
               "image": ""
-            },
-            {
-              "title": "Site Hızı & Teknik Optimizasyon",
-              "text": "Sayfa yapıları, mobil kullanım ve teknik performans üzerinde iyileştirmeler yapıyoruz.",
-              "color": "mint",
-              "sticker": "browser",
-              "image": ""
-            },
-            {
-              "title": "URL, Yönlendirme & Site Mimarisi",
-              "text": "Eski ve hatalı URL'leri analiz ediyor, 404 veren sayfalara doğru yönlendirmeler kuruyor, sitemap'i kontrol ediyoruz.",
-              "color": "lavender",
-              "sticker": "store",
-              "image": ""
-            }
-          ],
-          "ratio": "square",
-          "images": [
-            {
-              "image": "",
-              "caption": ""
-            }
-          ]
-        },
-        {
-          "type": "text",
-          "visible": true,
-          "background": "paper",
-          "eyebrow": "Paket",
-          "heading": "Çekim ve web tasarım bir arada",
-          "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz.\n\nFotoğraflar siteye uyar: Çekimleri sitenin tasarımını bilerek yapıyoruz. Ölçü, kadraj ve fon baştan siteye göre seçilir.\n\nSite fotoğrafları taşır: Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Paketi incele ↗",
-            "target": "page:tekstudyo"
-          },
-          "columns": 3,
-          "cards": [],
-          "ratio": "square",
-          "images": [
-            {
-              "image": "",
-              "caption": ""
-            }
-          ]
-        },
-        {
-          "type": "cards",
-          "visible": true,
-          "background": "paper",
-          "eyebrow": "Görünürlük",
-          "heading": "Google ve yapay zekâ görünürlüğü",
-          "text": "Sitenin arama sonuçlarında, Google Merchant Center'da ve ölçümlemede doğru görünmesi için çalışıyoruz.",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Teklif al",
-            "target": "page:teklifal"
-          },
-          "columns": 3,
-          "cards": [
-            {
-              "title": "SEO & Teknik SEO",
-              "text": "Sayfa başlıklarını, meta açıklamalarını, URL yapılarını ve iç bağlantıları düzenliyor, teknik SEO altyapısını arama motorlarının siteyi doğru taramasına göre optimize ediyoruz.",
-              "color": "mint",
-              "sticker": "magnifier",
-              "image": ""
-            },
-            {
-              "title": "Google Arama Görünürlüğü",
-              "text": "Ürün, kategori ve içerik sayfalarını arama niyetine uygun hale getiriyor, anahtar kelime ve sayfa optimizasyonları yapıyoruz.",
-              "color": "lavender",
-              "sticker": "globe",
-              "image": ""
-            },
-            {
-              "title": "Google Merchant Center",
-              "text": "Ürünlerin Google'da listelenebilmesi için Merchant Center bağlantısını kuruyoruz.",
-              "color": "sun",
-              "sticker": "chart",
-              "image": ""
-            },
-            {
-              "title": "Google Tag Manager & Ölçümleme",
-              "text": "Dönüşümleri ve ziyaretçi hareketlerini takip edebilmek için ölçümleme altyapısını Google Tag Manager ile düzenliyoruz.",
-              "color": "sky",
-              "sticker": "star",
-              "image": ""
-            },
-            {
-              "title": "GEO Optimizasyonu",
-              "text": "İçeriklerin yapay zekâ destekli arama ve yanıt motorları tarafından da doğru anlaşılıp kullanılabilmesi için GEO optimizasyonu yapıyoruz.",
-              "color": "mint",
-              "sticker": "magnifier",
-              "image": ""
-            },
-            {
-              "title": "Blog & Organik Trafik",
-              "text": "Arama niyetine uygun içerikler hazırlıyor, blog yazılarını ürün ve kategori sayfalarıyla bağlantılı hale getiriyoruz.",
-              "color": "lavender",
-              "sticker": "globe",
-              "image": ""
-            },
-            {
-              "title": "Türkçe & İngilizce Çok Dilli Site",
-              "text": "URL yapılarını, başlıkları, meta bilgilerini ve sayfa organizasyonunu iki dil için ayrı ayrı düzenliyoruz.",
-              "color": "sun",
-              "sticker": "chart",
-              "image": ""
-            },
-            {
-              "title": "Site İçi Linkleme",
-              "text": "Kategori, ürün ve blog sayfaları arasında mantıklı bağlantılar kuruyoruz.",
-              "color": "sky",
-              "sticker": "star",
-              "image": ""
-            }
-          ],
-          "ratio": "square",
-          "images": [
-            {
-              "image": "",
-              "caption": ""
             }
           ]
         },
@@ -4854,9 +4664,145 @@
           "type": "cards",
           "visible": true,
           "background": "sky",
-          "eyebrow": "Entegrasyon",
-          "heading": "Pazaryeri ve entegrasyon",
-          "text": "Ürünleri pazaryerlerinde de satışa sunuyor, tüm satış kanallarını tek yerden yönetilebilir hale getiriyoruz.",
+          "eyebrow": "",
+          "heading": "Fotoğraf ve görsel üretimi",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Çekim örneklerini gör",
+            "target": "works:photo"
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "Ürün Fotoğrafı Çekimi",
+              "text": "E-ticaret ve pazaryerleri için ürünlerinizin rengini, dokusunu ve detaylarını gösteren fotoğraflar çekiyoruz.",
+              "color": "mint",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "Konsept Ürün Çekimi",
+              "text": "Ürünlerinizi markanıza uygun dekorlar ve kullanım sahneleri içinde fotoğraflıyoruz.",
+              "color": "lavender",
+              "sticker": "bottle",
+              "image": ""
+            },
+            {
+              "title": "Yapay Zekâ ile Ürün ve Kampanya Görselleri",
+              "text": "Ürün fotoğraflarınızdan yola çıkarak siteniz, reklamlarınız ve sosyal medya için gerçekçi görseller hazırlıyoruz.",
+              "color": "sun",
+              "sticker": "palette",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Metin ve içerik yazımı",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "Web Sitesi Metinleri",
+              "text": "Ana sayfa, hakkımızda ve hizmet sayfalarınız için işinizi açıkça anlatan, markanıza uygun metinler yazıyoruz.",
+              "color": "mint",
+              "sticker": "pencil",
+              "image": ""
+            },
+            {
+              "title": "Ürün ve Kategori Açıklamaları",
+              "text": "Ürünlerin özelliklerini, kullanım alanlarını ve farklarını anlaşılır açıklamalara dönüştürüyoruz.",
+              "color": "lavender",
+              "sticker": "box",
+              "image": ""
+            },
+            {
+              "title": "Blog Yazıları",
+              "text": "Müşterilerinizin sorularına yanıt veren, araştırmaya dayalı blog yazıları hazırlıyoruz.",
+              "color": "sun",
+              "sticker": "chat",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "",
+          "heading": "Marka ve kurumsal kimlik",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "Logo Tasarımı",
+              "text": "Markanızın karakterini yansıtan, farklı boyutlarda ve kullanım alanlarında çalışabilen logolar tasarlıyoruz.",
+              "color": "mint",
+              "sticker": "medal",
+              "image": ""
+            },
+            {
+              "title": "Kurumsal Kimlik Tasarımı",
+              "text": "Logo, renk ve yazı tipleriyle markanızın basılı ve dijital materyallerinde tutarlı bir görünüm oluşturuyoruz.",
+              "color": "lavender",
+              "sticker": "layers",
+              "image": ""
+            },
+            {
+              "title": "Alan Adı Seçimi ve Satın Alma Desteği",
+              "text": "Uygun alan adını seçme, satın alma ve sitenize bağlama adımlarında destek oluyoruz.",
+              "color": "sun",
+              "sticker": "globe",
+              "image": ""
+            },
+            {
+              "title": "Marka Tescil Süreci Koordinasyonu",
+              "text": "Gerekli hazırlıkları ve yetkili uzmanla iletişimi koordine ediyor, sürecin takibine destek oluyoruz.",
+              "color": "sky",
+              "sticker": "check",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Pazaryeri kurulumu ve entegrasyonlar",
+          "text": "",
           "align": "left",
           "image": "",
           "imageSide": "left",
@@ -4866,28 +4812,80 @@
             "label": "Teklif al",
             "target": "page:teklifal"
           },
-          "columns": 2,
+          "columns": 3,
+          "ratio": "",
+          "images": [],
           "cards": [
             {
-              "title": "Trendyol & Hepsiburada Entegrasyonu",
-              "text": "Ürünlerin Trendyol ve Hepsiburada'da da satışa sunulabilmesi için entegrasyon altyapısını kuruyoruz.",
+              "title": "Pazaryerinde Mağaza Kurulumu",
+              "text": "Pazaryeri başvurusu, mağaza bilgileri ve temel satış ayarlarının hazırlanmasına destek oluyoruz.",
               "color": "mint",
+              "sticker": "store",
+              "image": ""
+            },
+            {
+              "title": "Pazaryeri Mağaza Tasarımı ve Ürün Yükleme",
+              "text": "Mağaza görsellerinizi hazırlıyor; ürünlerinizi açıklama, görsel ve kategori bilgileriyle yüklüyoruz.",
+              "color": "lavender",
+              "sticker": "tag",
+              "image": ""
+            },
+            {
+              "title": "Pazaryeri Entegrasyonu",
+              "text": "Sitenizle pazaryeri mağazalarınız arasındaki ürün, stok ve sipariş bağlantılarını kuruyoruz.",
+              "color": "sun",
               "sticker": "link",
               "image": ""
             },
             {
-              "title": "Ortak Yönetim Paneli",
-              "text": "Site ve pazaryerlerindeki satış süreçlerini tek yerden takip edebileceğin ortak bir yönetim paneli kuruyoruz.",
-              "color": "lavender",
-              "sticker": "truck",
+              "title": "Ödeme ve Kargo Entegrasyonları",
+              "text": "Ödeme ve kargo hesaplarınızı sitenize bağlıyor, gerekli ayarları ve kontrolleri yapıyoruz.",
+              "color": "sky",
+              "sticker": "cart",
               "image": ""
             }
-          ],
-          "ratio": "square",
-          "images": [
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "",
+          "heading": "SEO ve ölçümleme",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
             {
-              "image": "",
-              "caption": ""
+              "title": "SEO Çalışması",
+              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz.",
+              "color": "mint",
+              "sticker": "magnifier",
+              "image": ""
+            },
+            {
+              "title": "Google Merchant Center Kurulumu",
+              "text": "Ürünlerinizi Google’a aktaran veri akışını kuruyor; hesap, site bağlantısı ve ürün verilerini kontrol ediyoruz.",
+              "color": "lavender",
+              "sticker": "chart",
+              "image": ""
+            },
+            {
+              "title": "Ziyaretçi ve Satış Ölçümleme",
+              "text": "Ziyaret kaynaklarını, alışveriş adımlarını ve satışları takip edebilmeniz için ölçümleme araçlarını kuruyoruz.",
+              "color": "sun",
+              "sticker": "sliders",
+              "image": ""
             }
           ]
         },
@@ -4895,9 +4893,45 @@
           "type": "cards",
           "visible": true,
           "background": "paper",
-          "eyebrow": "Uygulama",
-          "heading": "Web uygulamaları",
-          "text": "E-ticaret mağazalarına eklenen, satışı destekleyen özel uygulamalar geliştiriyoruz.",
+          "eyebrow": "",
+          "heading": "Danışmanlık ve site yönetimi",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Danışmanlık işlerini gör",
+            "target": "works:consulting"
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "Site Değerlendirme ve Danışmanlık",
+              "text": "Sitenizi değerlendiriyor, eksikleri belirliyor ve öncelikli geliştirmeler için yol haritası hazırlıyoruz.",
+              "color": "mint",
+              "sticker": "bulb",
+              "image": ""
+            },
+            {
+              "title": "Aylık Site Yönetimi",
+              "text": "Ürün, içerik ve kampanya güncellemelerini belirlediğimiz aylık çalışma kapsamına göre yürütüyoruz.",
+              "color": "lavender",
+              "sticker": "rocket",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "",
+          "heading": "E-ticaret uygulamaları",
+          "text": "",
           "align": "left",
           "image": "",
           "imageSide": "left",
@@ -4908,75 +4942,29 @@
             "target": "works:app"
           },
           "columns": 3,
+          "ratio": "",
+          "images": [],
           "cards": [
             {
               "title": "Kategori Yıldızı",
-              "text": "Çok satan ürünleri kategori ve ürün sayfalarında rozetlerle öne çıkarır.",
+              "text": "",
               "color": "mint",
-              "sticker": "rocket",
+              "sticker": "star",
               "image": ""
             },
             {
               "title": "Yorum Merkezi",
-              "text": "Müşteri yorumlarını tek merkezde toplar ve mağaza vitrininde gösterir.",
+              "text": "Müşteri yorumlarını sitenizin tasarımına uygun kartlarla ziyaretçilerinize sunun.",
               "color": "lavender",
-              "sticker": "sliders",
+              "sticker": "heart",
               "image": ""
             },
             {
               "title": "Canlı Sipariş Haritası",
-              "text": "Türkiye genelindeki siparişleri interaktif harita üzerinde gösterir.",
+              "text": "Sipariş gelen şehirleri harita üzerinde gösterin; mağazanızın ulaştığı yerleri ziyaretçilerinizle paylaşın.",
               "color": "sun",
-              "sticker": "gear",
+              "sticker": "map",
               "image": ""
-            }
-          ],
-          "ratio": "square",
-          "images": [
-            {
-              "image": "",
-              "caption": ""
-            }
-          ]
-        },
-        {
-          "type": "cards",
-          "visible": true,
-          "background": "sky",
-          "eyebrow": "Danışmanlık",
-          "heading": "Danışmanlık ve site yönetimi",
-          "text": "Sitenin yol haritasını birlikte çıkarıyor, istersen tüm işlemlerini düzenli olarak biz yürütüyoruz.",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Danışmanlık işlerini gör",
-            "target": "works:consulting"
-          },
-          "columns": 2,
-          "cards": [
-            {
-              "title": "Web Sitesi Danışmanlığı",
-              "text": "Sitenin satışa nasıl daha iyi hizmet edeceğini birlikte bulup net bir yol haritasına dönüştürüyoruz.",
-              "color": "mint",
-              "sticker": "bulb",
-              "image": ""
-            },
-            {
-              "title": "Aylık Site Yönetimi",
-              "text": "İstersen sitenin tüm iş ve işlemlerini düzenli olarak biz yürütürüz.",
-              "color": "lavender",
-              "sticker": "refresh",
-              "image": ""
-            }
-          ],
-          "ratio": "square",
-          "images": [
-            {
-              "image": "",
-              "caption": ""
             }
           ]
         }

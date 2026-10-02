@@ -35,6 +35,9 @@
       return { b, g, t };
     }).filter(Boolean);
 
+    // Sayfada artık olmayan hizmetler (eski adlarla eklenmiş) sepetten temizlenir
+    const before = items.length; items = items.filter((x) => cards.some((c) => c.g === x.g && c.t === x.t)); if (items.length !== before) save();
+
     // Sağ kenarda sepet düğmesi: yatayda kartların sağ kenarıyla aynı çizgide, dikeyde "Ürün çekimi" başlığıyla aynı hizada, sayfa boyunca yapışkan
     const main = document.getElementById('top') || document.body;
     const rail = el('div', 'cart-rail');
