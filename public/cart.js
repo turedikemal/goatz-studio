@@ -100,21 +100,31 @@
     const open = () => { bubble.classList.remove('show'); place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); if (window.__lenis && window.__lenis.stop) window.__lenis.stop(); /* panel açıkken sayfa kaymaz, panel içeriği kayar */ close.focus(); };
     const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); if (window.__lenis && window.__lenis.start) window.__lenis.start(); fab.focus(); };
     fab.addEventListener('click', open);
-    // Sepette ürün varken Hizmetler'e girilince sepet, üst menüdeki yerinden (gece/gündüz düğmesinin solundan) aşağı süzülüp kendi yerine gelir; ilk göründüğü anda bir kez
+    // Sepette ürün varken Hizmetler'e girilince sepet önce üst menüdeki yerinde (gece/gündüz düğmesinin solunda) durur;
+    // sayfa aşağı kaydırılıp sepetin kendi yeri ekrana geldiğinde oradan aşağı süzülerek kendi yerine iner (bir kez)
     if (items.length && !matchMedia('(prefers-reduced-motion: reduce)').matches && !matchMedia('(max-width: 900px)').matches) {
       let dropped = false;
+      const th = document.getElementById('themeBtn');
+      const slot = () => { const tr = th ? th.getBoundingClientRect() : { left: innerWidth - 120, top: 24, height: 36 }; return { x: tr.left - 24, y: tr.top + tr.height / 2 }; };
+      const dock = () => { const p = slot(); fab.classList.add('docked'); fab.style.left = (p.x - 34) + 'px'; fab.style.top = (p.y - 34) + 'px'; fab.style.scale = '0.55'; };
+      const undock = () => { fab.classList.remove('docked'); fab.style.left = ''; fab.style.top = ''; fab.style.scale = ''; };
+      const finish = () => { dropped = true; window.removeEventListener('scroll', dropCheck); window.removeEventListener('resize', redock); };
+      const redock = () => { if (!dropped) dock(); };
       const dropCheck = () => {
         if (dropped) return;
+        if (!items.length) { finish(); undock(); return; } // sepet boşaldıysa sepet hemen yerine geçer
+        if (window.scrollY < 24) return; // ilk slayt aşağı kaydırılmaya başlanana kadar yukarıda kalır
+        const natTop = Math.max(rail.getBoundingClientRect().top, 120); // sepetin kendi yeri (yapışkan konum dahil)
+        if (natTop < 80 || natTop + 68 > innerHeight - 20) return; // kendi yeri tamamen görününce iner
+        const p = slot();
+        finish(); undock();
         const fr = fab.getBoundingClientRect();
-        if (window.scrollY < 24) return; // ilk slayt aşağı kaydırılmaya başlanana kadar inmez
-        if (fr.top < 80 || fr.bottom > innerHeight - 20) return; // tamamen görünür olunca
-        dropped = true; window.removeEventListener('scroll', dropCheck);
-        const th = document.getElementById('themeBtn'), tr = th ? th.getBoundingClientRect() : { left: innerWidth - 120, top: 24, height: 36 };
-        const dx = (tr.left - 24) - (fr.left + fr.width / 2), dy = (tr.top + tr.height / 2) - (fr.top + fr.height / 2);
-        fab.animate([{ translate: dx + 'px ' + dy + 'px', scale: 0.55 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
+        fab.animate([{ translate: (p.x - (fr.left + fr.width / 2)) + 'px ' + (p.y - (fr.top + fr.height / 2)) + 'px', scale: 0.55 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
       };
+      dock();
       window.addEventListener('scroll', dropCheck, { passive: true });
-      setTimeout(dropCheck, 600);
+      window.addEventListener('resize', redock);
+      listeners.push(() => { if (!dropped && !items.length) dropCheck(); });
     }
     if (location.hash === '#sepet') setTimeout(open, 400); // üst menüdeki sepetten gelinirse panel açılır
     close.addEventListener('click', shut);

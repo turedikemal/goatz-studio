@@ -1975,3 +1975,6 @@ html[data-theme="night"] body:not(:has([data-svc-cart])) .panel:not(.site-footer
 /* Gece: /sepet sayfasındaki açık renkli hizmet kartlarında açıklama ve başlıklar koyu yazı (beyaz zeminde silik kalmasın) */
 html[data-theme="night"] .cp-group .cp-desc, html[data-theme="night"] .cp-group .cp-info, html[data-theme="night"] .cp-group .cp-item, html[data-theme="night"] .cp-group .cp-chev, html[data-theme="night"] .cp-group .cp-toggle, html[data-theme="night"] .cp-group .cp-gname { color: #000; }
 html[data-theme="night"] .cp-group .cp-desc { opacity: .78; }
+/* Hizmetler: sepet önce üst menüdeki yerinde durur (docked), sonra yerine iner */
+.cart-fab.docked { position: fixed; z-index: 100; }
+.cart-fab.docked .cart-bubble { display: none; }
