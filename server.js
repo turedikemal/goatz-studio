@@ -464,14 +464,25 @@ async function api(req, res, url) {
 }
 
 // ---------- Sunucu ----------
+// Kanonik adres: SITE_URL ya da isteğin ana alan adı (www'suz). Yerelde http://localhost kullanılır.
+const canonicalOrigin = (req) => {
+  if (process.env.SITE_URL) return process.env.SITE_URL.replace(/\/+$/, '');
+  const h = String(req.headers.host || '').replace(/^www\./i, '');
+  return /^(localhost|127\.|\[::1\])/.test(h) ? `http://${h}` : `https://${h}`;
+};
 const server = http.createServer(async (req, res) => {
+  // www.thegoatzstudio.com -> thegoatzstudio.com (aynı içerik iki adreste açılmasın)
+  if (/^www\./i.test(String(req.headers.host || '')) && !/^www\.(localhost)/i.test(String(req.headers.host))) {
+    res.writeHead(301, { Location: `${canonicalOrigin(req)}${req.url}`, 'Cache-Control': 'public, max-age=86400' });
+    return res.end();
+  }
   const url = new URL(req.url, 'http://localhost');
   try {
     if (url.pathname.startsWith('/api/')) return await api(req, res, url);
     if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'İzin verilmiyor');
 
     if (url.pathname === '/') {
-      return send(res, 200, render(store.load()), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      return send(res, 200, render(store.load(), { origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
     }
     // Panel önizlemeyi tarayıcıda üretir; bu yüzden şablon dosyaları küçük bir CommonJS sarmalıyla tarayıcıya verilir.
     if (url.pathname === '/render-bundle.js') {
@@ -504,9 +515,9 @@ const server = http.createServer(async (req, res) => {
     if (wm) {
       const c = store.load();
       if (c.works.visible) {
-        if (!wm[1]) return send(res, 200, render(c, { page: 'works' }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+        if (!wm[1]) return send(res, 200, render(c, { page: 'works', origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
         const it = resolveWorks(c.works.items).find((v) => v.visible && v.slug === wm[1]);
-        if (it) return send(res, 200, render(c, { work: it.slug }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+        if (it) return send(res, 200, render(c, { work: it.slug, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
       }
       return send(res, 404, 'Sayfa bulunamadı');
     }
@@ -515,7 +526,7 @@ const server = http.createServer(async (req, res) => {
     if (pm) {
       const c = store.load();
       const page = resolvePages(c.pages).find((p) => p.visible && p.slug === pm[1]);
-      if (page) return send(res, 200, render(c, { page: page.id }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      if (page) return send(res, 200, render(c, { page: page.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
     }
     const file = safeJoin(PUBLIC_DIR, decodeURIComponent(url.pathname.slice(1)));
     if (file && fs.existsSync(file) && fs.statSync(file).isFile()) return serveFile(res, file);

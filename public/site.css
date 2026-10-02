@@ -1610,3 +1610,11 @@ html.cart-open { overflow: hidden; }
 
 .cp-chev { display: inline-block; }
 .cp-row.open .cp-chev { rotate: 180deg; }
+
+/* Ekmek kırıntısı (sayfa yolu) */
+.crumbs { position: relative; z-index: 3; margin: 0 0 14px; }
+.crumbs ol { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 13px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+.crumbs li + li::before { content: "›"; margin-right: 6px; opacity: .6; }
+.crumbs a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
+.crumbs a:hover { border-bottom-color: currentColor; background: var(--sun); }
+.crumbs [aria-current] { opacity: .75; }
