@@ -43,7 +43,6 @@
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
   rail.setAttribute('aria-label', 'Hizmet filtresi');
-  rail.hidden = true;
   items.forEach((x) => {
     const a = document.createElement('a');
     a.href = '#' + x.id;
@@ -65,7 +64,24 @@
   });
   // Uzay boşluğu: çubuğun çevresinde hafifçe yanıp sönen birkaç minik yıldız
   [[-4, 8], [102, 30], [-2, 58], [98, 84]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 0.9).toFixed(1) + 's'; rail.append(s); });
-  document.body.append(rail);
+  // Filtre listesi ilk bölüm başlığının hizasında başlar (sepet işareti gibi), aşağı inerken ekranda sabit kalır
+  const wrap = document.createElement('div');
+  wrap.className = 'svc-rail-wrap';
+  wrap.append(rail);
+  const main = document.getElementById('top') || document.body;
+  main.append(wrap);
+  const placeRail = () => {
+    const h = blocks[0].querySelector('h2') || blocks[0];
+    const m = main.getBoundingClientRect(), hr = h.getBoundingClientRect(), lb = blocks[blocks.length - 1].getBoundingClientRect();
+    wrap.style.top = Math.max(0, hr.top - m.top) + 'px';
+    wrap.style.height = Math.max(120, lb.bottom - hr.top) + 'px';
+  };
+  placeRail();
+  window.addEventListener('resize', placeRail);
+  window.addEventListener('load', placeRail);
+  if (window.ResizeObserver) new ResizeObserver(placeRail).observe(main);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeRail);
+  [300, 900, 1800, 3500].forEach((ms) => setTimeout(placeRail, ms));
   const railPills = [...rail.children];
 
   let current = -1;
@@ -79,7 +95,6 @@
     const sy = window.scrollY, first = tops[0] - sy, last = lastBottom - sy; // konumlar önbellekte: kaydırırken her karede yerleşim okunmaz
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
-    rail.hidden = !inside;
     let idx = 0;
     tops.forEach((t, i) => { if (t - sy <= vh * 0.4) idx = i; });
     if (idx !== current) {
