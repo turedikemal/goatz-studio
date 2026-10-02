@@ -1480,3 +1480,6 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 /* Başlık harfleri: İ / Ö / Ü noktaları satır kutusunun üstüne taşar; iOS Safari harf katmanını kutu sınırında kesiyordu. Katman yukarı doğru genişletilir (satır yüksekliği değişmez) */
 .rl, .rl > .rc { padding-top: .24em; margin-top: -.24em; }
 .rw { padding-top: .02em; }
+
+/* Mobil: ana sayfa başlığı bir tık küçük */
+@media (max-width: 700px) { .hero h1[data-intro] { font-size: calc(clamp(64px, 12vw, 200px) * .88) !important; } }
