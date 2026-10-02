@@ -597,12 +597,13 @@
   if (introEl) {
     const run = () => {
       const letters = splitTitle();
+      const quick = matchMedia('(max-width: 700px)').matches ? 0.82 : 1; // mobilde başlık biraz daha hızlı belirir
       letters.forEach((l, i) => {
         const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
         l.querySelector('.rc').animate([
           { opacity: 0, filter: 'blur(18px)', scale: 0.86, rotate: `${((rnd(i, 8) - 0.5) * 16).toFixed(1)}deg`, translate: `${dx}em ${dy}em` },
           { opacity: 1, filter: 'blur(0px)', scale: 1, rotate: '0deg', translate: '0em 0em' },
-        ], { duration: ms(2.4), delay: ms(0.15 + rnd(i, 9) * 0.9), easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'both' });
+        ], { duration: ms(2.4 * quick), delay: ms((0.15 + rnd(i, 9) * 0.9) * quick), easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'both' });
       });
 
       const start = ms(0.6);
