@@ -599,7 +599,8 @@
     const run = () => {
       const letters = splitTitle();
       const quick = matchMedia('(max-width: 700px)').matches ? 0.55 : 1; // mobilde başlık ve altındakiler belirgin biçimde daha hızlı gelir
-      letters.forEach((l, i) => {
+      const mobile = matchMedia('(max-width: 700px)').matches; // telefonda başlık harf efekti yok, doğrudan görünür
+      (mobile ? [] : letters).forEach((l, i) => {
         const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
         l.querySelector('.rc').animate([
           { opacity: 0, filter: 'blur(18px)', scale: 0.86, rotate: `${((rnd(i, 8) - 0.5) * 16).toFixed(1)}deg`, translate: `${dx}em ${dy}em` },
