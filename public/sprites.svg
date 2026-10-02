@@ -321,7 +321,24 @@
   </g>
 </symbol>
     <!-- Onay rozeti -->
-    <symbol id="s-check" viewBox="0 0 100 100">
+    <symbol id="s-anahtar" viewBox="0 0 120 100">
+      <g transform="translate(1 .5) scale(.93)">
+        <defs><g id="x-anahtar">
+      <g transform="rotate(-28 60 45)">
+        <rect x="84" y="48" width="10" height="19" rx="3" fill="#55db9c" stroke="#000" stroke-width="3"/>
+        <rect x="99" y="48" width="10" height="13" rx="3" fill="#55db9c" stroke="#000" stroke-width="3"/>
+        <rect x="42" y="37" width="70" height="14" rx="7" fill="#55db9c" stroke="#000" stroke-width="3"/>
+        <path d="M3 44.5a25 25 0 1 0 50 0a25 25 0 1 0 -50 0ZM18 44.5a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z" fill-rule="evenodd" fill="#55db9c" stroke="#000" stroke-width="3"/>
+        <path d="M11 38a20 20 0 0 1 11-12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".85"/>
+        <path d="M50 42h30" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
+      </g>
+    </g></defs>
+        <use href="#x-anahtar" transform="translate(3.2 4.2)" filter="url(#dk)"/>
+        <use href="#x-anahtar" transform="translate(1.6 2.1)" filter="url(#dk)"/>
+        <use href="#x-anahtar"/>
+      </g>
+    </symbol>
+<symbol id="s-check" viewBox="0 0 100 100">
       <g transform="translate(1 .5) scale(.93)">
         <defs><g id="x-check">
       <path d="M50 6l11 9 14-3 4 14 13 7-5 13 5 13-13 7-4 14-14-3-11 9-11-9-14 3-4-14-13-7 5-13-5-13 13-7 4-14 14 3z" fill="#55db9c" stroke="#000" stroke-width="3" stroke-linejoin="round"/>
