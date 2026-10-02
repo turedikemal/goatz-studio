@@ -40,17 +40,18 @@
   fab.append(badge, tip);
   rail.append(fab);
   main.append(rail);
-  // Sepet, ilk kart satırının (Çanakkale · E-Ticaret · Beyaz Fon fotoğrafları) sağ üst köşesine oturur; sayfa boyunca yapışkan kalır
+  // Sepet: yatayda ilk kart satırının sağ köşesinde, dikeyde "Ürün çekimi" başlığıyla aynı hizada; sayfa boyunca yapışkan kalır
   const place = () => {
     if (matchMedia('(max-width: 900px)').matches) { rail.style.top = rail.style.left = rail.style.height = rail.style.right = ''; return; }
     const blocks = [...document.querySelectorAll('.blk-cards')];
     const grid = blocks[0] && blocks[0].querySelector('.k-grid');
     if (!grid || !blocks.length) return;
-    const m = main.getBoundingClientRect(), g = grid.getBoundingClientRect(), z = blocks[blocks.length - 1].getBoundingClientRect();
+    const h2 = blocks[0].querySelector('h2');
+    const m = main.getBoundingClientRect(), g = grid.getBoundingClientRect(), z = blocks[blocks.length - 1].getBoundingClientRect(), hh = (h2 || grid).getBoundingClientRect();
     rail.style.right = 'auto';
     rail.style.left = Math.max(0, g.right - m.left - 34) + 'px';
-    rail.style.top = Math.max(0, g.top - m.top - 34) + 'px';
-    rail.style.height = Math.max(120, z.bottom - g.top) + 'px';
+    rail.style.top = Math.max(0, hh.top + hh.height / 2 - m.top - 34) + 'px'; // dikeyde "Ürün çekimi" başlığıyla aynı hizada
+    rail.style.height = Math.max(120, z.bottom - (hh.top + hh.height / 2) + 34) + 'px';
   };
 
   // ---- Sepet paneli ----
