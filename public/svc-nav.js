@@ -39,6 +39,7 @@
   const pills = [...track.children];
 
   // Sol kenarda mini filtre (geniş ekranda): numaralı yuvarlaklar, üstüne gelince başlık açılır, aktif olan kendi renginde dolu
+  const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
   rail.setAttribute('aria-label', 'Hizmet filtresi');
@@ -47,12 +48,15 @@
     const a = document.createElement('a');
     a.href = '#' + x.id;
     a.dataset.g = String(x.i);
-    a.innerHTML = '<b>' + String(x.i + 1).padStart(2, '0') + '</b><span></span>';
-    a.querySelector('span').textContent = x.name.trim();
+    a.style.setProperty('--d', (x.i * -0.8).toFixed(1) + 's');
+    a.innerHTML = '<i class="d"></i><span class="v"></span>';
+    a.querySelector('.v').textContent = SHORT(x.name.trim());
+    a.title = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     rail.append(a);
   });
+  [[70, 6], [74, 62]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 1.1).toFixed(1) + 's'; rail.append(s); });
   document.body.append(rail);
   const railPills = [...rail.children];
 
