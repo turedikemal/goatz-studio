@@ -446,6 +446,9 @@
     <button class="wz-btn primary" id="wz-send" type="button"${state.sent ? ' disabled' : ''}>${state.sent ? 'Gönderildi ✓' : 'Teklif talebini gönder ↗'}</button>
     <p class="wz-form-status${state.sent ? ' ok' : ''}" id="wz-send-status" role="status" aria-live="polite">${state.sent ? 'Teşekkürler! Teklif talebiniz bize ulaştı, en kısa sürede dönüş yapacağız.' : ''}</p></div>`;
 
+  // Seçimden hemen sonra (kısa bir geri bildirimden sonra) sonraki adıma geç
+  const advance = () => { const s = state.step; setTimeout(() => { if (state.step === s && !el.next.disabled) el.next.click(); }, 220); };
+
   function render() {
     const seq = steps();
     if (state.step >= seq.length) state.step = seq.length - 1;
@@ -457,7 +460,10 @@
     el.fill.style.width = pct + '%';
     el.track.setAttribute('aria-valuenow', pct);
     el.back.disabled = state.step === 0;
-    el.next.hidden = result;
+    // Tek seçimli sayfalarda seçimden sonra otomatik geçilir, bu yüzden Devam et yok; çoklu seçim, yazı ve form sayfalarında durur
+    const dqk = key.startsWith('dq:') ? qsOf(key.split(':')[1])[+key.split(':')[2]] : null;
+    const autoPage = key === 'route' || !!questions[key] || (dqk && dqk.type === 'one') || (key === 'site' && state.site.has !== 'yes');
+    el.next.hidden = result || autoPage;
     el.hint.textContent = result ? 'Özetiniz siz göndermeden bize iletilmez.' : 'Seçiminizi daha sonra değiştirebilirsiniz.';
     let html = '';
     if (key === 'site') {
@@ -562,9 +568,10 @@
         }
       } else {
         if (key === 'site') { state.site.has = v; if (v === 'no' && ['service', 'migration'].includes(state.answers.route)) { delete state.answers.route; state.services.clear(); state.extras.clear(); }
-        if (v === 'no') SITE_BOUND.forEach((id) => { state.services.delete(id); state.extras.delete(id); }); state.site.ok = ''; state.site.brand = ''; state.site.msg = ''; if (v === 'no') state.site.url = ''; render(); return; }
+        if (v === 'no') SITE_BOUND.forEach((id) => { state.services.delete(id); state.extras.delete(id); }); state.site.ok = ''; state.site.brand = ''; state.site.msg = ''; if (v === 'no') state.site.url = ''; render(); if (v === 'no') advance(); return; }
         if (key === 'route' && state.answers.route !== v) { state.answers = { route: v }; state.services.clear(); state.extras.clear(); } else state.answers[key] = v;
         render();
+        if (key === 'route' || questions[key]) advance();
       }
     }));
     if (key === 'contact') {
@@ -583,6 +590,7 @@
         qsOf(did).forEach((x, xi) => { if (x.cond && x.cond.from === qd.lab && !cur.includes(x.cond.has)) dAns(did, xi).length = 0; });
         el.screen.querySelectorAll('[data-dqv]').forEach((x) => { const on = cur.includes(x.dataset.dqv); x.setAttribute('aria-pressed', on); x.querySelector('.wz-mark').textContent = on ? '✓' : ''; });
         el.next.disabled = cur.length === 0;
+        if (qd.type === 'one') advance();
       }));
     }
     if (key === 'brief') q('#wz-brief').addEventListener('input', (e) => { state.answers.brief = e.target.value; });
