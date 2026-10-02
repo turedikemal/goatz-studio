@@ -1473,3 +1473,6 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .map-city, .sf-city { font-style: italic; font-weight: 900; }
 
 @media (max-width: 700px) { .statement { padding-top: 72px; } }
+
+/* Mobil: Anahtar teslim başlığında İ noktası üstteki satıra çarpmasın */
+@media (max-width: 700px) { .hero h1[data-intro] { line-height: 1.07 !important; } }
