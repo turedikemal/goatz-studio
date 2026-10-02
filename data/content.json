@@ -3587,7 +3587,7 @@
           "background": "paper",
           "eyebrow": "Ürün çekimi",
           "heading": "Ürün çekimi",
-          "text": "Ürününü en iyi açısından gösteren, e-ticaret sitelerine ve pazaryerlerine hazır fotoğraflar.",
+          "text": "Ürününü en iyi açısından gösteren, e-ticaret sitelerine ve pazaryerlerine hazır fotoğraflar.\n\nÇanakkale’de ürün fotoğrafı çekiyoruz. Üreticiler, yerel markalar ve e-ticaret mağazaları için çekim yapıyoruz. Ürünlerini getirebilir ya da çekimi birlikte planlayabiliriz; fotoğraflar doğrudan web sitende kullanılacak şekilde hazırlanır.",
           "align": "left",
           "image": "",
           "imageSide": "left",
@@ -3599,13 +3599,6 @@
           },
           "columns": 3,
           "cards": [
-            {
-              "title": "Çanakkale Ürün Fotoğrafı",
-              "text": "Üreticiler, yerel markalar ve e-ticaret mağazaları için çekim yapıyoruz. Ürünlerini getirebilir ya da çekimi birlikte planlayabiliriz; fotoğraflar doğrudan web sitende kullanılacak şekilde hazırlanır.",
-              "color": "mint",
-              "sticker": "camera",
-              "image": ""
-            },
             {
               "title": "E-Ticaret Fotoğrafları",
               "text": "Ürün listesi, ürün detay sayfası ve kampanya görsellerini aynı dilde hazırlıyoruz; mağazan tutarlı ve güvenilir görünür.",
