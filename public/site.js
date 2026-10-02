@@ -1120,6 +1120,13 @@
     if (house && panel) { house.addEventListener('mouseenter', () => panel.classList.add('night')); house.addEventListener('mouseleave', () => panel.classList.remove('night')); }
   };
   partnerFx();
+  // Ev efekti 5 saniyede bir kendiliğinden: gündüz <-> gece (üstüne gelince de gece olur)
+  const autoNight = document.querySelector('.partner');
+  if (autoNight && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let hov = false; const hs = autoNight.querySelector('.st-pstore');
+    if (hs) { hs.addEventListener('mouseenter', () => { hov = true; }); hs.addEventListener('mouseleave', () => { hov = false; }); }
+    setInterval(() => { if (!hov) autoNight.classList.toggle('night'); }, 5000);
+  }
   const CLICKS = {
     'st-pstar': noFx, 'st-pstore': noFx,
     'st-camera': shootPhoto, 'st-anahtar': spinMedal, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,

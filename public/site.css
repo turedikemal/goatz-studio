@@ -1730,3 +1730,8 @@ html.cart-open { overflow: hidden; }
 .pt-text { padding: 0; margin-left: 0; }
 .pt-h .w, .pt-text .pw { border-radius: 8px; transition: background-color .2s ease, color .2s ease; }
 .pt-h .w:hover, .pt-text .pw:hover, .partner.night .pt-h .w:hover, .partner.night .pt-text .pw:hover { background: var(--mint); color: var(--carbon); }
+
+/* Gece: soldaki yıldız gece yıldızına dönüşür (soluk mavi-beyaz, parıldar) */
+.partner .st-pstar { transition: filter .6s ease, scale .35s ease; }
+.partner.night .st-pstar { filter: grayscale(.55) brightness(1.25) hue-rotate(160deg) drop-shadow(0 0 12px #cfe0ff); animation: pt-nstar 1.8s ease-in-out infinite alternate; }
+@keyframes pt-nstar { to { filter: grayscale(.55) brightness(1.4) hue-rotate(160deg) drop-shadow(0 0 22px #e8f0ff); scale: 1.12; } }
