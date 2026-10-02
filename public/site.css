@@ -1408,3 +1408,9 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-det-note { display: grid; gap: 6px; margin-top: 16px; font-size: 13px; font-weight: 800; }
 .wz-det-note input { width: 100%; padding: 12px 16px; border: 1px solid var(--carbon); border-radius: 14px; background: #fff; font: inherit; font-size: 16px; font-weight: 500; }
 .wz-item-det { font-weight: 700; }
+
+/* Üstteki Devam et */
+.wz-head { align-items: center; }
+.wz-head .wz-count { margin-left: auto; }
+.wz-next-top { padding: 8px 16px; font-size: 13px; }
+.wz-next-top[hidden] { display: none; }

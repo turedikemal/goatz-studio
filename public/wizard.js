@@ -4,6 +4,14 @@
   if (!root) return;
   const q = (s) => root.querySelector(s);
   const el = { stage: q('.wz-stage'), count: q('.wz-count'), track: q('.wz-track'), fill: q('.wz-fill'), back: q('.wz-back'), next: q('.wz-next'), hint: q('.wz-hint'), screen: q('.wz-screen') };
+  // Üstte ikinci "Devam et" butonu: alttakiyle aynı durumda (kapalı / gizli) ve aynı işi yapar
+  const topNext = document.createElement('button');
+  topNext.type = 'button'; topNext.className = 'wz-btn primary wz-next-top'; topNext.textContent = 'Devam et →';
+  topNext.addEventListener('click', () => { if (!el.next.disabled) el.next.click(); });
+  const headEl = q('.wz-head'); if (headEl) headEl.appendChild(topNext);
+  const syncTop = () => { topNext.disabled = el.next.disabled; topNext.hidden = el.next.hidden; };
+  new MutationObserver(syncTop).observe(el.next, { attributes: true, attributeFilter: ['disabled', 'hidden'] });
+  syncTop();
   const KVKK = root.dataset.kvkk || '';
 
   // Sayaç: kişi yazmaya başlayınca 2 dakikadan geri sayar, sonuç ekranında erken bittiyse tebrik eder
@@ -43,7 +51,14 @@
   const NOTE = { lab: 'Not', q: 'Eklemek istediğiniz bir şey var mı?', type: 'text' };
   const DETAILS = {
     photo: [
-      { lab: 'Sektör', q: 'Hangi sektörde çalışıyorsunuz?', type: 'one', o: ['Gıda ve yemek', 'Kahve', 'Kozmetik', 'Ambalaj', 'Mum', 'Seramik ve sofra', 'Cam', 'Takı ve aksesuar', 'Başka bir sektör'] },
+      { lab: 'Sektör', q: 'Hangi sektörde çalışıyorsunuz?', type: 'one', o: ['Gıda ve içecek', 'Güzellik ve kişisel bakım', 'Ev ve yaşam', 'Moda ve aksesuar', 'Ambalaj ve endüstriyel ürünler', 'El yapımı ve hediyelik', 'Başka bir sektör'] },
+      { lab: 'Ürün türü', q: 'Hangi tür ürünlerin fotoğrafı çekilecek?', type: 'multi', dep: { from: 0, map: {
+        'Gıda ve içecek': ['Yemek ve tabak çekimi', 'Kahve ve çay', 'Tatlı ve fırın ürünleri', 'Paketli gıda', 'Başka bir ürün'],
+        'Güzellik ve kişisel bakım': ['Cilt bakımı', 'Saç bakımı', 'Makyaj', 'Sabun ve doğal ürünler', 'Başka bir ürün'],
+        'Ev ve yaşam': ['Mum ve oda kokusu', 'Seramik ve sofra', 'Cam ürünler', 'Dekorasyon', 'Başka bir ürün'],
+        'Moda ve aksesuar': ['Takı', 'Çanta ve aksesuar', 'Giyim', 'Başka bir ürün'],
+        'Ambalaj ve endüstriyel ürünler': ['Kutu ve karton ambalaj', 'Şişe ve cam ambalaj', 'Endüstriyel ürün', 'Başka bir ürün'],
+        'El yapımı ve hediyelik': ['El yapımı ürünler', 'Hediyelik setler', 'Başka bir ürün'] } } },
       { lab: 'Ürün sayısı', q: 'Kaç ürünün fotoğrafı çekilecek?', type: 'one', o: ['1–10 ürün', '11–30 ürün', '31–100 ürün', '100’den fazla', 'Henüz belli değil'] },
       { lab: 'Mevcut fotoğraflar', q: 'Sitenizdeki mevcut ürün fotoğrafları için ne düşünüyorsunuz?', type: 'one', o: ['Sitemde hiç ürün fotoğrafı yok', 'Hepsi yenilenecek', 'Sadece eksik olanlar çekilecek', 'Birlikte karar verelim'] },
       { lab: 'Çekim tarzı', q: 'Nasıl bir çekim düşünüyorsunuz?', type: 'multi', o: ['Beyaz fon', 'Renkli fon', 'Ortam ve mekân çekimi', 'Birlikte karar verelim'] },
@@ -84,7 +99,10 @@
     ],
   };
   const qsOf = (id) => (DETAILS[id] || []).concat([NOTE]);
-  const dqSteps = () => (['service', 'custom'].includes(state.answers.route) ? selectedServices() : []).flatMap((x) => qsOf(x[0]).map((_, i) => 'dq:' + x[0] + ':' + i));
+  const dqSkip = (id, i) => { const d = qsOf(id)[i].dep; return !!d && !!dAns(id, d.from)[0] && !d.map[dAns(id, d.from)[0]]; };
+  const dqVisible = (id) => qsOf(id).map((_, i) => i).filter((i) => !dqSkip(id, i));
+  const dqOptions = (id, i) => { const qd = qsOf(id)[i]; return qd.dep ? (qd.dep.map[dAns(id, qd.dep.from)[0]] || []) : qd.o; };
+  const dqSteps = () => (['service', 'custom'].includes(state.answers.route) ? selectedServices() : []).flatMap((x) => dqVisible(x[0]).map((i) => 'dq:' + x[0] + ':' + i));
   const dAns = (id, i) => ((state.detail[id] = state.detail[id] || {})[i] = (state.detail[id] || {})[i] || []);
   const detailLine = (id) => qsOf(id).map((qd, i) => { const a = dAns(id, i).filter(Boolean); return a.length ? qd.lab + ': ' + a.join(', ') : ''; }).filter(Boolean).join(' | ');
   const noSiteOnly = () => state.answers.route === 'service' && state.site.has === 'no';
@@ -461,12 +479,12 @@
     }
     if (key.startsWith('dq:')) {
       const [, did, dn] = key.split(':'), qd = qsOf(did)[+dn], cur = dAns(did, +dn), svc = serviceList.find((x) => x[0] === did);
-      el.stage.textContent = svc[1] + ' · ' + (+dn + 1) + '/' + qsOf(did).length;
+      el.stage.textContent = svc[1] + ' · ' + (dqVisible(did).indexOf(+dn) + 1) + '/' + dqVisible(did).length;
       if (qd.type === 'text') {
         html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">İsteğe bağlı. Boş bırakıp devam edebilirsiniz.</p><div class="wz-form" style="max-width:none"><textarea id="wz-dq-text" maxlength="400" placeholder="Yazabilirsiniz…">' + esc(cur[0] || '') + '</textarea></div>';
         el.next.disabled = false;
       } else {
-        html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">' + (qd.type === 'multi' ? 'Birden fazla seçebilirsiniz.' : 'Birini seçin.') + '</p><div class="wz-grid">' + qd.o.map((o, i) => card(o, o, '', cur.includes(o), i + (serviceList.indexOf(svc) % 4))).join('').split('data-value=').join('data-dqv=') + '</div>';
+        html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">' + (qd.type === 'multi' ? 'Birden fazla seçebilirsiniz.' : 'Birini seçin.') + '</p><div class="wz-grid">' + dqOptions(did, +dn).map((o, i) => card(o, o, '', cur.includes(o), i + (serviceList.indexOf(svc) % 4))).join('').split('data-value=').join('data-dqv=') + '</div>';
         el.next.disabled = cur.length === 0;
       }
     }
@@ -546,6 +564,7 @@
       if (qd.type === 'text') q('#wz-dq-text').addEventListener('input', (e) => { cur[0] = e.target.value; });
       el.screen.querySelectorAll('[data-dqv]').forEach((b) => b.addEventListener('click', () => {
         const v = b.dataset.dqv, k = cur.indexOf(v);
+        if (qsOf(did).some((x) => x.dep && x.dep.from === +dn)) qsOf(did).forEach((x, xi) => { if (x.dep && x.dep.from === +dn) dAns(did, xi).length = 0; });
         if (qd.type === 'one') { cur.length = 0; cur.push(v); } else if (k >= 0) cur.splice(k, 1); else cur.push(v);
         el.screen.querySelectorAll('[data-dqv]').forEach((x) => { const on = cur.includes(x.dataset.dqv); x.setAttribute('aria-pressed', on); x.querySelector('.wz-mark').textContent = on ? '✓' : ''; });
         el.next.disabled = cur.length === 0;
