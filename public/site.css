@@ -1942,7 +1942,13 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 
 /* Sepet konuşma balonu: sepette ürün varken ara ara sepetin solunda, üst kısmında belirir; çerçevesi siyah */
 .cart-bubble { position: absolute; right: 76px; top: -18px; padding: 8px 14px; border: 2px solid #000; border-radius: 16px; background: #fff; color: #000; font-family: inherit; font-size: 13px; font-weight: 800; line-height: 1.2; white-space: nowrap; opacity: 0; scale: .7; transform-origin: 100% 100%; pointer-events: none; transition: opacity .3s ease, scale .4s cubic-bezier(.3, 1.6, .5, 1); }
-.cart-bubble::after { content: ''; position: absolute; right: -8px; bottom: 8px; width: 12px; height: 12px; background: #fff; border-top: 2px solid #000; border-right: 2px solid #000; rotate: 45deg; }
 .cart-bubble.show { opacity: 1; scale: 1; }
-@media (max-width: 900px) { .cart-bubble { right: auto; left: 0; top: auto; bottom: calc(100% + 12px); transform-origin: 20% 100%; } .cart-bubble::after { right: auto; left: 22px; bottom: -8px; border: 0; border-right: 2px solid #000; border-bottom: 2px solid #000; } }
+@media (max-width: 900px) { .cart-bubble { right: auto; left: 0; top: auto; bottom: calc(100% + 26px); transform-origin: 20% 100%; } .cart-bubble .cb-tail { right: auto; left: 18px; } }
 @media (prefers-reduced-motion: reduce) { .cart-bubble { transition: opacity .2s ease; scale: 1; } }
+/* Başlık kelimeleri (Entegrasyonları, Koordinasyonu...) hiçbir ekranda bölünmesin: yazı boyutu kart genişliğine göre sınırlanır */
+.blk-cards[data-g] .k-card { container-type: inline-size; }
+.blk-cards[data-g] .k-card h3 { font-size: min(clamp(22px, 2.35vw, 36px), 11.2cqw); }
+@media (max-width: 1199px) { .blk-cards[data-g] .k-card h3 { font-size: min(clamp(26px, 3vw, 40px), 11.2cqw); } }
+@media (max-width: 480px) { .blk-cards[data-g] .k-card h3 { font-size: min(clamp(24px, 7.2vw, 32px), 11.2cqw); } }
+.cart-bubble { overflow: visible; }
+.cart-bubble .cb-tail { position: absolute; top: 100%; right: -4px; width: 34px; height: 26px; pointer-events: none; overflow: visible; }

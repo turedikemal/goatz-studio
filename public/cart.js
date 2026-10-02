@@ -46,8 +46,9 @@
     fab.innerHTML = '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M6 10h8l7 30h28l6-22H17" fill="#fff" stroke="#000" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="52" r="5" fill="#ffd731" stroke="#000" stroke-width="4"/><circle cx="46" cy="52" r="5" fill="#ffd731" stroke="#000" stroke-width="4"/></svg>';
     const badge = el('b', 'cart-count', '0');
     fab.append(badge, el('span', 'cart-tip', 'Sepet'));
-    // Sepette ürün varken arada bir (yaklaşık 25-45 sn'de) beliren konuşma balonu: sepetin solunda, üst kısmında
-    const bubble = el('span', 'cart-bubble', 'Seni bekliyorum');
+    // Sepette ürün varken arada bir (yaklaşık 70-120 sn aralıkla) beliren konuşma balonu: sepetin solunda, üst kısmında
+    const bubble = el('span', 'cart-bubble');
+    bubble.innerHTML = '<span>Seni bekliyorum</span><svg class="cb-tail" viewBox="0 0 34 26" aria-hidden="true"><path d="M4 1C4 14 12 22 30 10C20 12 15 8 17 1Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="0" width="11" height="2.6" fill="#fff"/></svg>';
     bubble.setAttribute('aria-hidden', 'true');
     fab.append(bubble);
     let bubT = 0, bubOff = 0;
@@ -56,9 +57,9 @@
       if (!items.length) return;
       const busy = document.hidden || document.documentElement.classList.contains('cart-open');
       if (!busy) { bubble.classList.add('show'); clearTimeout(bubOff); bubOff = setTimeout(() => bubble.classList.remove('show'), 5000); }
-      bubbleNext(25000 + Math.random() * 20000);
+      bubbleNext(70000 + Math.random() * 50000);
     }, ms); };
-    const bubbleSync = () => { if (!items.length) { bubbleStop(); bubSeen = false; } else if (!bubSeen) { bubSeen = true; bubbleNext(7000); } };
+    const bubbleSync = () => { if (!items.length) { bubbleStop(); bubSeen = false; } else if (!bubSeen) { bubSeen = true; bubbleNext(20000); } };
     let bubSeen = false;
     rail.append(fab);
     main.append(rail);
