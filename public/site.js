@@ -1485,7 +1485,8 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 // Gece teması: koyu panellerin tamamında (ikas bölümündeki gibi) parıldayan yıldızlar.
 // Yıldızlar kartların arkasında kalmasın diye yalnız boş zemin alanlarına dağıtılır.
 (() => {
-  const panels = [...document.querySelectorAll('.panel[style*="var(--paper)"], .panel[style*="var(--sky)"], .site-footer')].filter((p) => !p.classList.contains('partner'));
+  const colored = document.querySelector('[data-svc-cart]') ? '' : ', .panel[style*="var(--lavender)"], .panel[style*="var(--mint)"], .panel[style*="var(--sun)"], .panel[style*="var(--blue)"], .panel[style*="var(--ember)"], .panel[style*="var(--violet)"], .panel[style*="var(--concrete)"], .panel[style*="var(--mist)"]'; // renkli düz paneller de gecede yıldızlı lacivert
+  const panels = [...document.querySelectorAll('.panel[style*="var(--paper)"], .panel[style*="var(--sky)"]' + colored)].filter((p) => !p.classList.contains('partner') && !p.classList.contains('site-footer')); // footer'da uzay/yıldız yok
   const alphaOf = (c) => { const m = c.match(/[0-9.]+/g); return m ? (m.length < 4 ? 1 : +m[3]) : 0; };
   const fill = (p) => {
     let sky = p.querySelector(':scope > .ns');

@@ -1971,3 +1971,6 @@ html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
 .cart-top-bubble .cb-tail.up { bottom: 100%; right: 14px; }
 @media (prefers-reduced-motion: reduce) { .cart-top-bubble { transition: opacity .2s ease; scale: 1; } }
 @media (max-width: 600px) { .cart-top-bubble { white-space: normal; width: max-content; max-width: 170px; } }
+
+/* Gece: renkli (lavanta, mint, sarı...) düz paneller de gece lacivertine döner; Hizmetler sayfası kendi renkli bölümlerini korur */
+html[data-theme="night"] body:not(:has([data-svc-cart])) .panel:not(.site-footer):not(.partner):is([style*="var(--lavender)"], [style*="var(--mint)"], [style*="var(--sun)"], [style*="var(--blue)"], [style*="var(--ember)"], [style*="var(--violet)"], [style*="var(--concrete)"], [style*="var(--mist)"]) { --carbon: #f4f1e8; --paper: #161b44; color: #f4f1e8; background: #161b44 !important; }
