@@ -50,7 +50,7 @@
     main.append(rail);
     const place = () => {
       if (matchMedia('(max-width: 900px)').matches) { rail.style.top = rail.style.left = rail.style.height = rail.style.right = ''; return; }
-      const blocks = [...document.querySelectorAll('.blk-cards')].filter((bl) => !bl.hidden);
+      const blocks = [...document.querySelectorAll('.blk-cards')];
       const grid = blocks[0] && blocks[0].querySelector('.k-grid');
       if (!grid || !blocks.length) return;
       const h2 = blocks[0].querySelector('h2');

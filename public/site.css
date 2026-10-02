@@ -1859,51 +1859,45 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .blk-cards[data-g="3"] { --pt: 42%; }
 .blk-cards[data-g="5"] { --pt: 14%; }
 
-
-/* Hizmetler: soldaki kategori filtresi (dar ekranda üstte yatay kaydırılan seçenekler) */
+/* Hizmetler: sol mini filtre ve (dar ekranda) alttaki kategori çubuğu */
+.svc-bar a, .svc-rail a[data-g="0"], .svc-bar a[data-g="0"], .svc-bar[data-g="0"] { --gb: var(--blue); }
+.svc-rail a[data-g="1"], .svc-bar a[data-g="1"], .svc-bar[data-g="1"] { --gb: var(--sun); }
+.svc-rail a[data-g="2"], .svc-bar a[data-g="2"], .svc-bar[data-g="2"] { --gb: var(--mint); }
+.svc-rail a[data-g="3"], .svc-bar a[data-g="3"], .svc-bar[data-g="3"] { --gb: var(--lavender); }
+.svc-rail a[data-g="4"], .svc-bar a[data-g="4"], .svc-bar[data-g="4"] { --gb: var(--ember); }
+.svc-rail a[data-g="5"], .svc-bar a[data-g="5"], .svc-bar[data-g="5"] { --gb: color-mix(in srgb, var(--violet) 55%, #fff); }
+.svc-rail a[data-g="6"], .svc-bar a[data-g="6"], .svc-bar[data-g="6"] { --gb: color-mix(in srgb, var(--mint) 50%, var(--blue)); }
+.svc-rail a[data-g="7"], .svc-bar a[data-g="7"], .svc-bar[data-g="7"] { --gb: color-mix(in srgb, var(--ember) 45%, var(--lavender)); }
+.svc-bar { position: fixed; z-index: 45; left: 50%; bottom: 18px; translate: -50% 0; max-width: calc(100vw - 180px); padding: 6px; border: 2px solid #000; border-radius: var(--r-pill); background: color-mix(in srgb, var(--gb, var(--blue)) 55%, #fff); color: #000; transition: background .35s ease; }
+.svc-bar[hidden] { display: none; }
+.svc-bar-track { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+.svc-bar-track::-webkit-scrollbar { display: none; }
+.svc-bar a { flex: none; padding: 8px 14px; border: 2px solid transparent; border-radius: var(--r-pill); color: #000; text-decoration: none; font-weight: 800; font-size: 13px; white-space: nowrap; transition: background .2s ease, border-color .2s ease; }
+.svc-bar a:hover { border-color: #000; }
+.svc-bar a.on { background: var(--gb); border-color: #000; }
 .blk-cards[data-g] { scroll-margin-top: 84px; }
-.blk-cards[hidden] { display: none !important; }
-.svc-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 8px; align-items: start; }
-.svc-main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
-.svc-filter { position: sticky; top: 84px; padding: 16px 14px 14px; border: 2px solid #000; border-radius: var(--r-panel); background: var(--paper); color: #000; }
-.svc-filter-h { margin: 0 6px 10px; font-size: 12px; opacity: .7; }
-.svc-filter ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
-.svc-row { --gb: var(--paper); width: 100%; display: grid; grid-template-columns: 14px 1fr auto; align-items: center; gap: 10px; padding: 11px 12px; border: 2px solid transparent; border-radius: 16px; background: transparent; color: inherit; font: inherit; font-weight: 800; font-size: 15px; line-height: 1.2; text-align: left; cursor: pointer; transition: background .2s ease, border-color .2s ease, translate .15s ease; }
-.svc-row .svc-dot { width: 14px; height: 14px; border: 2px solid #000; border-radius: 50%; background: var(--gb); }
-.svc-row small { min-width: 24px; padding: 2px 7px; border-radius: var(--r-pill); background: rgba(0, 0, 0, .08); font-size: 12px; font-weight: 900; text-align: center; }
-.svc-row:hover { background: color-mix(in srgb, var(--gb) 35%, #fff); }
-.svc-row.spy { border-color: rgba(0, 0, 0, .35); background: color-mix(in srgb, var(--gb) 28%, #fff); }
-.svc-row.on { border-color: #000; background: var(--gb); }
-.svc-row.on small { background: #000; color: #fff; }
-.svc-row[data-sel="all"] { --gb: #fff; }
-.svc-row[data-sel="all"].on { background: #000; color: #fff; }
-.svc-row[data-sel="all"].on .svc-dot { background: var(--sun); border-color: #fff; }
-.svc-row[data-sel="all"].on small { background: #fff; color: #000; }
-.svc-row[data-g="0"] { --gb: var(--blue); }
-.svc-row[data-g="1"] { --gb: var(--sun); }
-.svc-row[data-g="2"] { --gb: var(--mint); }
-.svc-row[data-g="3"] { --gb: var(--lavender); }
-.svc-row[data-g="4"] { --gb: var(--ember); }
-.svc-row[data-g="5"] { --gb: color-mix(in srgb, var(--violet) 55%, #fff); }
-.svc-row[data-g="6"] { --gb: color-mix(in srgb, var(--mint) 50%, var(--blue)); }
-.svc-row[data-g="7"] { --gb: color-mix(in srgb, var(--ember) 45%, var(--lavender)); }
-@media (max-width: 1099px) {
-  .svc-layout { grid-template-columns: minmax(0, 1fr); }
-  .svc-filter { min-width: 0; max-width: 100%; }
-  .svc-filter { position: sticky; top: 64px; z-index: 30; padding: 8px; border-radius: 22px; }
-  .svc-filter-h { display: none; }
-  .svc-filter ul { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
-  .svc-filter ul::-webkit-scrollbar { display: none; }
-  .svc-filter li { flex: none; }
-  .svc-row { width: auto; grid-template-columns: 12px auto auto; padding: 8px 12px; border-color: rgba(0, 0, 0, .18); white-space: nowrap; font-size: 13px; }
-}
-html[data-theme="night"] .svc-filter { background: #161b44; border-color: #f4f1e8; color: #f4f1e8; }
-html[data-theme="night"] .svc-row .svc-dot { border-color: #f4f1e8; }
-html[data-theme="night"] .svc-row small { background: rgba(244, 241, 232, .16); }
-html[data-theme="night"] .svc-row:hover { background: color-mix(in srgb, var(--gb) 30%, #161b44); }
-html[data-theme="night"] .svc-row.spy { border-color: rgba(244, 241, 232, .45); background: color-mix(in srgb, var(--gb) 25%, #161b44); }
-html[data-theme="night"] .svc-row.on { border-color: #f4f1e8; background: var(--gb); color: #000; }
-html[data-theme="night"] .svc-row.on small { background: #000; color: #fff; }
-html[data-theme="night"] .svc-row[data-sel="all"] { --gb: #161b44; }
-html[data-theme="night"] .svc-row[data-sel="all"].on { background: #f4f1e8; color: #161b44; }
-html[data-theme="night"] .svc-row[data-sel="all"].on small { background: #161b44; color: #f4f1e8; }
+@media (max-width: 900px) { .svc-bar { max-width: calc(100vw - 150px); bottom: 14px; } }
+
+@media (min-width: 1100px) { .svc-bar { display: none; } }
+
+/* Sol kategori filtresi: kartların solundaki boşlukta süzülen ikonlu duraklar, yazılar hep açık */
+@media (min-width: 1100px) { .blk-cards[data-g] { margin-left: 80px; } }
+.svc-rail { --p: 0; position: fixed; z-index: 45; left: 6px; top: 50%; translate: 0 -50%; width: 68px; display: grid; gap: 12px; justify-items: center; padding: 8px 0; pointer-events: none; }
+.svc-rail[hidden] { display: none; }
+.svc-rail::before, .svc-rail::after { content: ''; position: absolute; left: 50%; top: 22px; bottom: 22px; width: 2px; margin-left: -1px; border-radius: 2px; background: repeating-linear-gradient(to bottom, rgba(244, 241, 232, .5) 0 3px, transparent 3px 8px); opacity: .45; }
+.svc-rail::after { opacity: 1; bottom: auto; height: calc((100% - 44px) * var(--p)); background: #f4f1e8; transition: height .15s linear; }
+.svc-rail a { --gb: var(--blue); position: relative; z-index: 1; display: grid; justify-items: center; gap: 3px; text-decoration: none; pointer-events: auto; animation: svc-drift 7s ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
+.svc-rail .dot { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid #000; border-radius: 50%; background: color-mix(in srgb, var(--gb) 38%, #fff); transition: background .3s ease, scale .3s cubic-bezier(.3, 1.6, .5, 1), box-shadow .3s ease; }
+.svc-rail .ic { width: 16px; height: 16px; opacity: .7; }
+.svc-rail .lb { max-width: 66px; font-size: 9.5px; font-weight: 800; line-height: 1.1; letter-spacing: .01em; text-align: center; color: #f4f1e8; opacity: .62; transition: opacity .3s ease; text-shadow: 0 0 6px #000; }
+.svc-rail a.done .dot { background: color-mix(in srgb, var(--gb) 70%, #fff); }
+.svc-rail a.done .lb { opacity: .8; }
+.svc-rail a.on .dot { background: var(--gb); scale: 1.25; box-shadow: 0 0 0 3px rgba(244, 241, 232, .18), 0 0 16px 2px var(--gb); }
+.svc-rail a.on .ic { opacity: 1; }
+.svc-rail a.on .lb { opacity: 1; font-weight: 900; }
+.svc-rail a:hover .dot { scale: 1.18; }
+.svc-rail a:hover .lb { opacity: 1; }
+.svc-rail .sp { position: absolute; width: 5px; height: 5px; background: #ffd731; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: pt-twinkle 2.4s ease-in-out infinite; pointer-events: none; }
+@keyframes svc-drift { from { translate: -2px -3px; } to { translate: 2px 3px; } }
+@media (prefers-reduced-motion: reduce) { .svc-rail a, .svc-rail .sp { animation: none; } }
+@media (max-width: 1099px) { .svc-rail { display: none; } }

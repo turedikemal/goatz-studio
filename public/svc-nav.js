@@ -1,52 +1,94 @@
-// Hizmetler sayfası: kategori filtresi. Soldaki (dar ekranda üstteki) listeden bir kategori seçilince yalnız o kategori gösterilir,
-// "Tümü" ile hepsi görünür. Hepsi görünürken kaydırdıkça bulunulan kategori listede işaretlenir.
+// Hizmetler sayfası: aşağı inerken hangi kategoride olunduğunu gösteren yüzen çubuk (rengi kategoriyle değişir) ve tıklayınca bölüme gitme
 (() => {
   const blocks = [...document.querySelectorAll('.blk-cards[data-g]')];
-  const filter = document.querySelector('.svc-filter');
-  if (!blocks.length || !filter) return;
-  const layout = document.querySelector('.svc-layout');
+  if (!blocks.length) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const rows = [...filter.querySelectorAll('[data-sel]')];
-  const ids = blocks.map((b) => b.id);
-  let sel = 'all';
+  const items = blocks.map((b, i) => ({ b, i, id: b.id, name: (b.querySelector('h2') || {}).textContent || '' }));
 
-  const scrollToTop = () => {
-    const y = Math.max(0, Math.round((layout || blocks[0]).getBoundingClientRect().top + window.scrollY - 84));
-    if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(y, { duration: reduced ? 0 : 0.9 });
+  const goTo = (b) => {
+    const y = Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - 84));
+    if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(y, { duration: reduced ? 0 : 1.1 });
     else window.scrollTo({ top: y, behavior: reduced ? 'auto' : 'smooth' });
   };
-  const apply = (next, go) => {
-    sel = next;
-    blocks.forEach((b, i) => { b.hidden = sel !== 'all' && i !== sel; });
-    rows.forEach((r) => {
-      const on = (r.dataset.sel === 'all' && sel === 'all') || r.dataset.sel === String(sel);
-      r.classList.toggle('on', on);
-      r.setAttribute('aria-pressed', on ? 'true' : 'false');
-    });
-    filter.classList.toggle('is-filtered', sel !== 'all');
-    try { history.replaceState(null, '', sel === 'all' ? location.pathname : '#' + ids[sel]); } catch (e) { /* adres çubuğu güncellenemezse sorun değil */ }
-    window.dispatchEvent(new Event('resize')); // sepet işareti konumunu yeniden hesaplar
-    if (go) scrollToTop();
-    spy();
-  };
-  rows.forEach((r) => r.addEventListener('click', (e) => {
+  // Bağlantılar
+  const link = (a) => a.addEventListener('click', (e) => {
+    const t = items.find((x) => '#' + x.id === a.getAttribute('href'));
+    if (!t) return;
     e.preventDefault();
-    const v = r.dataset.sel === 'all' ? 'all' : +r.dataset.sel;
-    apply(v === sel ? 'all' : v, true); // seçili kategoriye tekrar tıklayınca filtre kalkar
-  }));
+    goTo(t.b);
+    history.replaceState(null, '', '#' + t.id);
+  });
 
-  // Hepsi görünürken: ekranda hangi kategori varsa listede hafifçe işaretlenir
-  function spy() {
+  // Yüzen çubuk
+  const bar = document.createElement('nav');
+  bar.className = 'svc-bar';
+  bar.setAttribute('aria-label', 'Hizmet kategorileri');
+  bar.hidden = true;
+  const track = document.createElement('div');
+  track.className = 'svc-bar-track';
+  items.forEach((x) => {
+    const a = document.createElement('a');
+    a.href = '#' + x.id;
+    a.dataset.g = String(x.i);
+    a.textContent = x.name.trim();
+    link(a);
+    track.append(a);
+  });
+  bar.append(track);
+  document.body.append(bar);
+  const pills = [...track.children];
+
+  // Sol kenarda, kartların dışındaki boşlukta (uzay boşluğu gibi) süzülen mini filtre: her kategori ikonlu bir durak, yazısı hep açık.
+  // Aralarında ilerleme çizgisi var; geçilenler dolu, bulunulan parlıyor
+  const ICONS = ['browser', 'camera', 'pencil', 'medal', 'store', 'magnifier', 'bulb', 'gear'];
+  const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
+  const rail = document.createElement('nav');
+  rail.className = 'svc-rail';
+  rail.setAttribute('aria-label', 'Hizmet kategorileri');
+  rail.hidden = true;
+  items.forEach((x) => {
+    const a = document.createElement('a');
+    a.href = '#' + x.id;
+    a.dataset.g = String(x.i);
+    a.style.setProperty('--d', (x.i * -0.9).toFixed(1) + 's');
+    a.innerHTML = '<span class="dot"><svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#s-' + (ICONS[x.i] || 'star') + '"/></svg></span><span class="lb"></span>';
+    a.querySelector('.lb').textContent = SHORT(x.name.trim());
+    a.title = x.name.trim();
+    a.setAttribute('aria-label', x.name.trim());
+    link(a);
+    rail.append(a);
+  });
+  // Arkada hafifçe yanıp sönen küçük yıldızlar
+  [[10, 4], [88, 18], [18, 36], [84, 52], [8, 70], [90, 86]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 0.7).toFixed(1) + 's'; rail.append(s); });
+  document.body.append(rail);
+  const railPills = [...rail.querySelectorAll('a')];
+
+  let current = -1;
+  const update = () => {
     const vh = window.innerHeight;
-    let idx = -1;
-    if (sel === 'all') blocks.forEach((b, i) => { if (b.getBoundingClientRect().top <= vh * 0.4) idx = i; });
-    rows.forEach((r) => r.classList.toggle('spy', sel === 'all' && r.dataset.sel === String(idx)));
-  }
+    const first = blocks[0].getBoundingClientRect().top;
+    const last = blocks[blocks.length - 1].getBoundingClientRect().bottom;
+    const inside = first < vh * 0.55 && last > vh * 0.3;
+    bar.hidden = !inside;
+    rail.hidden = !inside;
+    const span = Math.max(1, last - first);
+    rail.style.setProperty('--p', Math.max(0, Math.min(1, (vh * 0.4 - first) / (span + vh * 0.0))).toFixed(3));
+    let idx = 0;
+    blocks.forEach((b, i) => { if (b.getBoundingClientRect().top <= vh * 0.4) idx = i; });
+    if (idx !== current) {
+      current = idx;
+      pills.forEach((p, i) => p.classList.toggle('on', i === idx));
+      railPills.forEach((p, i) => { p.classList.toggle('on', i === idx); p.classList.toggle('done', i < idx); });
+      bar.dataset.g = String(idx); // çubuğun rengi aktif kategoriye göre değişir
+      const p = pills[idx];
+      if (p && track.scrollTo) track.scrollTo({ left: Math.max(0, p.offsetLeft - track.clientWidth / 2 + p.offsetWidth / 2), behavior: reduced ? 'auto' : 'smooth' });
+    }
+  };
   let tick = 0;
-  window.addEventListener('scroll', () => { if (!tick) tick = requestAnimationFrame(() => { tick = 0; spy(); }); }, { passive: true });
-  window.addEventListener('resize', spy);
-
-  // Adreste #kategori varsa yalnız o kategori açılır
-  const h = ids.indexOf(location.hash.slice(1));
-  if (h >= 0) apply(h, false); else apply('all', false);
+  const on = () => { if (!tick) tick = requestAnimationFrame(() => { tick = 0; update(); }); };
+  window.addEventListener('scroll', on, { passive: true });
+  window.addEventListener('resize', on);
+  update();
+  // Adreste #bölüm varsa oraya git
+  if (location.hash) { const t = items.find((x) => '#' + x.id === location.hash); if (t) setTimeout(() => goTo(t.b), 400); }
 })();
