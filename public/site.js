@@ -1794,8 +1794,8 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
         const hw = f.h0 + Math.sin(f.age * 0.9 + f.ph) * 0.12; // düz gitmez: hafif yılan gibi salınır
         f.h = hw; f.vx = Math.cos(hw) * f.speed; f.vy = Math.sin(hw) * f.speed;
       }
-      const sc = zs(f.z);
-      f.x += f.vx * dt * sc; f.y += f.vy * dt * sc;
+      const sc = zs(f.z), SLOW = 0.88; // gemiler biraz daha yavaş (genel hız çarpanı)
+      f.x += f.vx * dt * sc * SLOW; f.y += f.vy * dt * sc * SLOW;
       if (f.dodgeCd > 0) f.dodgeCd -= dt;
       if (f.dodge) { const d = f.dodge, k = Math.sin(Math.PI * (1 - d.t / d.T)) * d.mag * dt * 1.6; f.x += d.nx * k; f.y += d.ny * k; d.t -= dt; if (d.t <= 0) f.dodge = null; } // yan kayış
       f.z += f.vz * dt;
