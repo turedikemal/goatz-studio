@@ -708,7 +708,7 @@
         "sticker": "pencil"
       },
       {
-        "title": "Üretim",
+        "title": "Tasarım + Üretim",
         "text": "Çekim ve tasarım yapılıyor; taslakları sen görüp onaylıyorsun.",
         "color": "mint",
         "sticker": "camera"
@@ -5315,7 +5315,7 @@
           "type": "imagetext",
           "visible": true,
           "background": "paper",
-          "eyebrow": "3 · Üretim",
+          "eyebrow": "3 · Tasarım + üretim",
           "heading": "Çekim ve tasarım yapılıyor, siz onaylıyorsunuz.",
           "text": "Ürün çekiminde ürünleriniz stüdyoya gelir ya da biz yerinde çekeriz; ardından rötuş ve boyutlandırma yapılır. Pazaryerlerinde satış yapıyorsanız çekimi pazaryerine özel kurguluyoruz: ürün listeleri için temiz beyaz fon görselleri hazırlıyor, ihtiyaca göre detay ve kampanya görsellerini ekliyoruz.\n\nWeb sitesinde önce tasarım taslağını görürsünüz, onayınızla siteyi kurarız. Siteyi telefonda ve bilgisayarda test ediyoruz. Onayınız olmadan bir sonraki adıma geçmiyoruz.",
           "align": "left",
