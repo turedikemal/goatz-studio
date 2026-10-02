@@ -1860,7 +1860,8 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .blk-cards[data-g="5"] { --pt: 14%; }
 
 /* Hizmetler: sol mini filtre ve (dar ekranda) alttaki kategori çubuğu */
-.svc-bar a, .svc-rail a[data-g="0"], .svc-bar a[data-g="0"], .svc-bar[data-g="0"] { --gb: var(--blue); }
+.svc-bar a, .svc-rail a { --gb: var(--blue); }
+.svc-rail a[data-g="0"], .svc-bar a[data-g="0"], .svc-bar[data-g="0"] { --gb: var(--blue); }
 .svc-rail a[data-g="1"], .svc-bar a[data-g="1"], .svc-bar[data-g="1"] { --gb: var(--sun); }
 .svc-rail a[data-g="2"], .svc-bar a[data-g="2"], .svc-bar[data-g="2"] { --gb: var(--mint); }
 .svc-rail a[data-g="3"], .svc-bar a[data-g="3"], .svc-bar[data-g="3"] { --gb: var(--lavender); }
@@ -1878,35 +1879,13 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .blk-cards[data-g] { scroll-margin-top: 84px; }
 @media (max-width: 900px) { .svc-bar { max-width: calc(100vw - 150px); bottom: 14px; } }
 
-@media (min-width: 1100px) { .svc-bar { display: none; } }
-
-/* Sol kategori filtresi: kartların solundaki boşlukta süzülen ikonlu duraklar, yazılar hep açık */
-/* Siyah boşluk yok: filtre kartların solunda, bölüm zemininin üstünde durur; kartlar ona yer açmak için biraz içeri alınır */
-@media (min-width: 1100px) { .blk-cards[data-g] .blk-in { padding-left: calc(clamp(16px, 4vw, 48px) + 34px); } }
-.svc-rail { --p: 0; position: fixed; z-index: 45; left: 6px; top: 50%; translate: 0 -50%; width: 68px; display: grid; gap: 12px; justify-items: center; padding: 8px 0; pointer-events: none; }
+.svc-rail { position: fixed; z-index: 45; left: 3px; top: 50%; translate: 0 -50%; display: grid; gap: 5px; padding: 4px; border: 2px solid #000; border-radius: 24px; background: #fff; }
 .svc-rail[hidden] { display: none; }
-.svc-rail::before, .svc-rail::after { content: ''; position: absolute; left: 50%; top: 22px; bottom: 22px; width: 2px; margin-left: -1px; border-radius: 2px; background: repeating-linear-gradient(to bottom, rgba(0, 0, 0, .55) 0 3px, transparent 3px 8px); opacity: .5; }
-.svc-rail::after { opacity: 1; bottom: auto; height: calc((100% - 44px) * var(--p)); background: #000; transition: height .15s linear; }
-.svc-rail a { --gb: var(--blue); position: relative; z-index: 1; display: grid; justify-items: center; gap: 3px; text-decoration: none; pointer-events: auto; animation: svc-drift 7s ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
-.svc-rail .dot { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid #000; border-radius: 50%; background: color-mix(in srgb, var(--gb) 38%, #fff); transition: background .3s ease, scale .3s cubic-bezier(.3, 1.6, .5, 1), box-shadow .3s ease; }
-.svc-rail .ic { width: 16px; height: 16px; opacity: .7; }
-.svc-rail .lb { max-width: 66px; font-size: 9.5px; font-weight: 800; line-height: 1.1; letter-spacing: .01em; text-align: center; color: #000; opacity: .7; transition: opacity .3s ease; }
-.svc-rail a.done .dot { background: color-mix(in srgb, var(--gb) 70%, #fff); }
-.svc-rail a.done .lb { opacity: .8; }
-.svc-rail a.on .dot { background: var(--gb); scale: 1.25; box-shadow: 0 0 0 3px rgba(0, 0, 0, .12), 0 0 14px 2px var(--gb); }
-.svc-rail a.on .ic { opacity: 1; }
-.svc-rail a.on .lb { opacity: 1; font-weight: 900; }
-.svc-rail a:hover .dot { scale: 1.18; }
-.svc-rail a:hover .lb { opacity: 1; }
-.svc-rail .sp { position: absolute; width: 5px; height: 5px; background: #ffd731; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: pt-twinkle 2.4s ease-in-out infinite; pointer-events: none; }
-@keyframes svc-drift { from { translate: -2px -3px; } to { translate: 2px 3px; } }
-@media (prefers-reduced-motion: reduce) { .svc-rail a, .svc-rail .sp { animation: none; } }
+.svc-rail a { position: relative; display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid #000; border-radius: 50%; background: color-mix(in srgb, var(--gb) 40%, #fff); color: #000; text-decoration: none; font-weight: 900; font-size: 10px; transition: background .2s ease, scale .15s ease; }
+.svc-rail a:hover { scale: 1.1; }
+.svc-rail a.on { background: var(--gb); }
+.svc-rail a span { position: absolute; left: calc(100% + 10px); top: 50%; translate: -6px -50%; padding: 7px 14px; border: 2px solid #000; border-radius: var(--r-pill); background: var(--gb); color: #000; font-size: 13px; font-weight: 800; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease, translate .15s ease; }
+.svc-rail a:hover span, .svc-rail a:focus-visible span { opacity: 1; translate: 0 -50%; }
 @media (max-width: 1099px) { .svc-rail { display: none; } }
-
-/* Gece: koyu bölüm zemininde açık renk yazı ve çizgi */
-html[data-theme="night"] .svc-rail::before { background: repeating-linear-gradient(to bottom, rgba(244, 241, 232, .6) 0 3px, transparent 3px 8px); }
-html[data-theme="night"] .svc-rail::after { background: #f4f1e8; }
-html[data-theme="night"] .svc-rail .lb { color: #f4f1e8; }
-html[data-theme="night"] .svc-rail .sp { background: #ffd731; opacity: 1; }
-html[data-theme="night"] .svc-rail .dot { border-color: #f4f1e8; }
-html[data-theme="night"] .svc-rail a.on .dot { box-shadow: 0 0 0 3px rgba(244, 241, 232, .18), 0 0 16px 2px var(--gb); }
+@media (min-width: 1100px) { .svc-bar { display: none; } }
+html[data-theme="night"] .svc-rail { background: #161b44; border-color: #f4f1e8; }

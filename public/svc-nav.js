@@ -38,30 +38,23 @@
   document.body.append(bar);
   const pills = [...track.children];
 
-  // Sol kenarda, kartların dışındaki boşlukta (uzay boşluğu gibi) süzülen mini filtre: her kategori ikonlu bir durak, yazısı hep açık.
-  // Aralarında ilerleme çizgisi var; geçilenler dolu, bulunulan parlıyor
-  const ICONS = ['browser', 'camera', 'pencil', 'medal', 'store', 'magnifier', 'bulb', 'gear'];
-  const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
+  // Sol kenarda mini filtre (geniş ekranda): numaralı yuvarlaklar, üstüne gelince başlık açılır, aktif olan kendi renginde dolu
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
-  rail.setAttribute('aria-label', 'Hizmet kategorileri');
+  rail.setAttribute('aria-label', 'Hizmet filtresi');
   rail.hidden = true;
   items.forEach((x) => {
     const a = document.createElement('a');
     a.href = '#' + x.id;
     a.dataset.g = String(x.i);
-    a.style.setProperty('--d', (x.i * -0.9).toFixed(1) + 's');
-    a.innerHTML = '<span class="dot"><svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#s-' + (ICONS[x.i] || 'star') + '"/></svg></span><span class="lb"></span>';
-    a.querySelector('.lb').textContent = SHORT(x.name.trim());
-    a.title = x.name.trim();
+    a.innerHTML = '<b>' + String(x.i + 1).padStart(2, '0') + '</b><span></span>';
+    a.querySelector('span').textContent = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     rail.append(a);
   });
-  // Arkada hafifçe yanıp sönen küçük yıldızlar
-  [[10, 4], [88, 18], [18, 36], [84, 52], [8, 70], [90, 86]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 0.7).toFixed(1) + 's'; rail.append(s); });
   document.body.append(rail);
-  const railPills = [...rail.querySelectorAll('a')];
+  const railPills = [...rail.children];
 
   let current = -1;
   const update = () => {
@@ -71,14 +64,12 @@
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
     rail.hidden = !inside;
-    const span = Math.max(1, last - first);
-    rail.style.setProperty('--p', Math.max(0, Math.min(1, (vh * 0.4 - first) / (span + vh * 0.0))).toFixed(3));
     let idx = 0;
     blocks.forEach((b, i) => { if (b.getBoundingClientRect().top <= vh * 0.4) idx = i; });
     if (idx !== current) {
       current = idx;
       pills.forEach((p, i) => p.classList.toggle('on', i === idx));
-      railPills.forEach((p, i) => { p.classList.toggle('on', i === idx); p.classList.toggle('done', i < idx); });
+      railPills.forEach((p, i) => p.classList.toggle('on', i === idx));
       bar.dataset.g = String(idx); // çubuğun rengi aktif kategoriye göre değişir
       const p = pills[idx];
       if (p && track.scrollTo) track.scrollTo({ left: Math.max(0, p.offsetLeft - track.clientWidth / 2 + p.offsetWidth / 2), behavior: reduced ? 'auto' : 'smooth' });
