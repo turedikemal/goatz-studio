@@ -1716,3 +1716,9 @@ html.cart-open { overflow: hidden; }
 @keyframes pt-glow { to { filter: drop-shadow(0 0 16px #fff) drop-shadow(0 0 40px #ffd731); } }
 
 .pt-tag { background: var(--mint); }
+
+/* İş ortaklığı: yazıların üstüne gelince yeşil vurgu */
+.pt-h, .pt-text { transition: background-color .25s ease, color .25s ease; -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 10px; }
+.pt-text { padding: 6px 10px; margin-left: -10px; margin-right: -10px; }
+.pt-h:hover, .pt-text:hover { background: var(--mint); color: var(--carbon); }
+.partner.night .pt-h:hover, .partner.night .pt-text:hover { background: var(--mint); color: var(--carbon); }
