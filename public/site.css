@@ -1497,3 +1497,6 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 /* Hizmetler sayfası: başlık harfleri birbirine girmesin */
 .pg-loose .display { letter-spacing: -0.03em; }
 .pg-loose .k-card h3.display { line-height: calc(1em + 2mm); }
+
+/* Hizmetler: başlıklarda alt-üst satır aralığı yalnızca 0,2 mm */
+.pg-loose h1.display, .pg-loose h2.display, .pg-loose h3.display, .pg-loose .k-card h3.display { line-height: calc(.95em + .2mm) !important; }
