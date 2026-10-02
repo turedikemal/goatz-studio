@@ -1904,11 +1904,14 @@ html[data-theme="night"] .svc-rail .sp { background: #ffd731; opacity: .9; }
 .svc-rail a[data-g="2"] { --fc: var(--mint); }
 .svc-rail a[data-g="3"] { --fc: var(--lavender); }
 .svc-rail a[data-g="4"] { --fc: var(--ember); }
-.svc-rail a[data-g="5"] { --fc: var(--violet); color: #fff; }
-.svc-rail a[data-g="6"] { --fc: var(--sky); }
-.svc-rail a[data-g="7"] { --fc: var(--mint); }
+.svc-rail a[data-g="5"] { --fc: color-mix(in srgb, var(--violet) 62%, #fff); }
+.svc-rail a[data-g="6"] { --fc: color-mix(in srgb, var(--mint) 50%, var(--blue)); }
+.svc-rail a[data-g="7"] { --fc: color-mix(in srgb, var(--ember) 45%, var(--lavender)); }
 html[data-theme="night"] .svc-rail a { border-color: #f4f1e8; }
 
 /* Aktif kategori siyaha dönmez: kendi renginde kalır, biraz öne çıkar ve çerçevesi kalınlaşır */
 .svc-rail a.on { border-width: 3px; padding: 7px 14px; font-weight: 900; transform: translateX(8px); }
 .svc-rail a.on:hover { transform: translateX(8px) translateY(-2px); }
+
+/* İlgili işler ve sayfalar: üzerine gelince sitenin sarısı, yazı hep siyah (gece modunda da) */
+.rel-works a:hover, .work-svc a:hover { background: var(--sun); color: #000; border-color: #000; }
