@@ -1772,7 +1772,7 @@ html[data-theme="night"] .partner .pt-x { color: #000; }
 /* Gece teması: mini uzay gemileri ve çatışma */
 .ns-ship { position: absolute; display: block; opacity: .92; }
 .ns-ship svg { display: block; }
-.ns-shot { position: absolute; width: 9px; height: 2px; border-radius: 2px; }
+.ns-shot { position: absolute; width: 12px; height: 2.5px; border-radius: 2px; box-shadow: 0 0 6px 1px currentColor; }
 .ns-boom { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: radial-gradient(circle, #fff 0 30%, #ffd731 31% 60%, #fb4903 61%); }
 .ns-spark { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #ffd731; }
 
@@ -1952,3 +1952,17 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 @media (max-width: 480px) { .blk-cards[data-g] .k-card h3 { font-size: min(clamp(24px, 7.2vw, 32px), 11.2cqw); } }
 .cart-bubble { overflow: visible; }
 .cart-bubble .cb-tail { position: absolute; top: 100%; right: -4px; width: 34px; height: 26px; pointer-events: none; overflow: visible; }
+
+/* Gece evreni: gezegenler (uzak küçük, yakın büyük; yavaş geçer) */
+.ns-planet { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 32% 30%, color-mix(in srgb, var(--c1) 80%, #fff) 0, var(--c1) 40%, var(--c2) 100%); box-shadow: inset calc(var(--s) * -.1) calc(var(--s) * -.08) calc(var(--s) * .22) rgba(0, 0, 0, .55), 0 0 calc(var(--s) * .25) color-mix(in srgb, var(--c1) 22%, transparent); }
+.ns-planet.bands::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: repeating-linear-gradient(10deg, rgba(255, 255, 255, .15) 0 7%, rgba(0, 0, 0, .12) 7% 14%); }
+.ns-planet.ring::after { content: ""; position: absolute; left: -38%; right: -38%; top: 36%; bottom: 36%; border-radius: 50%; border: calc(var(--s) * .035) solid rgba(255, 255, 255, .38); rotate: -16deg; }
+/* Kablosu kopmuş astronot: kablo arkada uzanıp dalgalanır, gövde kendi ekseninde (3 eksende) döner */
+.ns-astro { position: absolute; display: flex; align-items: center; pointer-events: none; }
+.ns-cable { display: block; transform-origin: 100% 50%; animation: ns-cable 2.8s ease-in-out infinite alternate; opacity: .9; }
+.ns-cable svg, .ns-abody svg { display: block; }
+@keyframes ns-cable { from { transform: scaleY(.7) skewX(-7deg); } to { transform: scaleY(1.35) skewX(7deg); } }
+.ns-abody { display: block; margin-left: -4px; animation: ns-tumble 26s linear infinite; }
+@keyframes ns-tumble { from { transform: perspective(160px) rotate3d(.4, .7, .5, 0deg); } to { transform: perspective(160px) rotate3d(.4, .7, .5, 360deg); } }
+@media (prefers-reduced-motion: reduce) { .ns-cable, .ns-abody { animation: none; } }
+html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
