@@ -598,7 +598,7 @@
   if (introEl) {
     const run = () => {
       const letters = splitTitle();
-      const quick = matchMedia('(max-width: 700px)').matches ? 0.82 : 1; // mobilde başlık biraz daha hızlı belirir
+      const quick = matchMedia('(max-width: 700px)').matches ? 0.55 : 1; // mobilde başlık ve altındakiler belirgin biçimde daha hızlı gelir
       letters.forEach((l, i) => {
         const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
         l.querySelector('.rc').animate([
@@ -607,7 +607,7 @@
         ], { duration: ms(2.4 * quick), delay: ms((0.15 + rnd(i, 9) * 0.9) * quick), easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'both' });
       });
 
-      const start = ms(0.6);
+      const start = ms(0.6 * quick);
       const fin = (el) => { el.classList.add('shown'); };
       // Alt yazı: cümleler 1,5 sn sonra sırayla yukarıdan gelir
       const sub = document.querySelector('.hero [data-sub]');
@@ -620,7 +620,7 @@
           s.textContent = t;
           sub.append(s);
           if (k < segs.length - 1) sub.append(' ');
-          s.animate([{ translate: '0 2em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1), delay: ms(1.5 + k * 0.3), easing: BOUNCE, fill: 'both' });
+          s.animate([{ translate: '0 2em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1 * quick), delay: ms((1.5 + k * 0.3) * quick), easing: BOUNCE, fill: 'both' });
         });
         fin(sub);
       }
