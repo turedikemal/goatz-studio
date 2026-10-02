@@ -46,3 +46,8 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Sayfa açılışında otomatik aşağı inme: yazılar bitince 2 sn bekler, 3 sn'de iner; konsolda `[teklif]` logları. Gerçek Chrome'da çalıştığı doğrulanmadı.
 - Test panelindeki gizli tarayıcı ekran görüntüsü siyah, animasyonlar orada ölçülemez; görsel doğrulama kullanıcıdan istenir.
 - Açık: sonuç sayfasındaki yeni paket yığını ve renkler tarayıcıda görülmedi; "Ödeme, kargo" maddesi (`base()`); marka adı bazı sitelerde uzun başlık geliyor; test mesajları panelde silinecek; `.env.example` içindeki ADMIN_PASSWORD değiştirilmeli.
+
+## Hizmetler sayfası ve sepet (2026-10-02)
+- `/hizmetler` (panelde "Hizmetler" sayfası): 6 kart bölümü, metinler ana sayfadaki "Neler yapıyoruz?" kutularından; blok başlığından otomatik bağlantı noktası (`#urun-cekimi`). Menüdeki "Hizmetler" bu sayfaya gider. Geri dönüş etiketi: `donus-noktasi-hizmetler-oncesi`.
+- Hizmet sepeti: `public/cart.js` (yalnız bu sayfada, `data-svc-cart` işaretiyle yüklenir). Kartlarda "Sepete ekle", sağda yapışkan sepet düğmesi, panelde "Fiyat al" formu → `POST /api/contact`, mesaj `FİYAT TALEBİ (hizmet sepeti)` ile başlar (`lib/mailer.js` konu satırı buna göre). Sepet `localStorage`'ta tutulur. Formda pazarlama onayı yok, yalnız KVKK.
+- SEO dosyaları `lib/seo.js` (robots.txt: arama motorları + yapay zekâ botları, sitemap.xml, llms.txt); yasal sayfalar robots'ta kapalı.
