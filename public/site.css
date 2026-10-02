@@ -1624,3 +1624,9 @@ html.cart-open { overflow: hidden; }
 .rel-works .label, .work-svc .label { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; opacity: .8; }
 .rel-works a, .work-svc a { padding: 7px 14px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); color: var(--carbon); font-size: 14px; font-weight: 800; text-decoration: none; transition: background .15s ease; }
 .rel-works a:hover, .work-svc a:hover { background: var(--sun); }
+
+/* Neden biz: başlığın üstünde küçük iş ortağı şeridi (ikas sarısı) */
+.why-partner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px 14px; width: fit-content; max-width: min(900px, calc(100% - 32px)); margin: 0 auto 28px; padding: 10px 18px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); color: var(--carbon); }
+.why-partner-tag { padding: 5px 12px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font-size: 13px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.why-partner p { margin: 0; font-size: clamp(14px, 1.5vw, 17px); font-weight: 700; line-height: 1.35; text-align: left; }
+@media (max-width: 700px) { .why-partner { border-radius: var(--r-card); justify-content: flex-start; } }

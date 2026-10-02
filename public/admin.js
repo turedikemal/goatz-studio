@@ -401,6 +401,9 @@
         background: color('Arka plan rengi'),
         heading: area('Başlık'),
         showButtons: bool('Başlığın altında butonları göster'),
+        partnerShow: bool('Başlığın üstünde iş ortağı şeridini göster'),
+        partnerTitle: text('İş ortağı şeridi: etiket (örn. ikas iş ortağı)'),
+        partnerText: area('İş ortağı şeridi: yazı'),
         cards: list('Kartlar', group('', {
           title: area('Kart yazısı', { hint: lineHint }),
           text: area('Kartın arka yüzü (boş bırakırsan kart çevrilmez)'),
