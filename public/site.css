@@ -1789,3 +1789,11 @@ html[data-theme="night"] .wz-choice[aria-pressed="true"], html[data-theme="night
 html[data-theme="night"] .wz-choice[aria-pressed="true"] { background: #000; }
 html[data-theme="night"] .wz-choice[aria-pressed="true"] .wz-mark { background: var(--sun); color: #000; }
 html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choice .wz-ikas * { color: #fff; }
+/* Dar telefonlarda menü (logo + tema + menü + Teklif Al) ekrana sığsın */
+@media (max-width: 430px) {
+  .nav { left: 10px; right: 10px; }
+  .nav-right { gap: 3px; min-width: 0; }
+  .nav-right .icon-btn { width: 36px; height: 36px; font-size: 20px; }
+  .nav-right .btn.solid { padding: 10px 13px; font-size: 12px; }
+  .logo.has-word .logo-word { height: calc(var(--logo, 44px) * .8); width: calc(var(--logo, 44px) * .8 * 2.87); }
+}

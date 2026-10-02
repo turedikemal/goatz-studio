@@ -673,6 +673,7 @@
   if (!target) return;
   const log = (m) => { try { console.info('[teklif] ' + m); } catch (e) {} };
   if (location.hash) { log('adreste # var, otomatik inme kapalı'); return; }
+  if (window.matchMedia('(max-width: 800px), (pointer: coarse)').matches) { log('mobil: otomatik inme kapalı'); return; }
   let cancelled = false;
   const stop = (e) => { if (!cancelled) log('kullanıcı ' + e.type + ' yaptı, otomatik inme iptal'); cancelled = true; };
   ['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, stop, { once: true, passive: true }));
