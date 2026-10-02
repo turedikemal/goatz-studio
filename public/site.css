@@ -1759,3 +1759,5 @@ html[data-theme="night"] .panel:has(> .ns), html[data-theme="night"] .site-foote
 html[data-theme="night"] .ns { display: block; }
 .ns b { position: absolute; background: #ffd731; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: pt-twinkle 1.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .ns b { animation: none; } }
+
+html[data-theme="night"] .logo.has-word .logo-word { color: #fff !important; }
