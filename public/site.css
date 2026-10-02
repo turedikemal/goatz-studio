@@ -1813,3 +1813,26 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 
 /* İkon başlığın üstüne binmesin: ikon için üstte yer ayrılır */
 .k-card:has(> .k-st) { padding-top: 116px; }
+
+/* Hizmetler: her ana kategori kendi renk grubunda, alt hizmetler o rengin tonlarında */
+.blk-cards[data-g] .k-card { background: color-mix(in srgb, var(--gb) calc(100% - var(--tw, 0%)), var(--tc, #fff)) !important; }
+.blk-cards[data-g] .k-card[data-t="0"] { --tw: var(--w0, 0%); }
+.blk-cards[data-g] .k-card[data-t="1"] { --tw: var(--w1, 22%); }
+.blk-cards[data-g] .k-card[data-t="2"] { --tw: var(--w2, 40%); }
+.blk-cards[data-g] .k-card[data-t="3"] { --tw: var(--w3, 56%); }
+.blk-cards[data-g="0"] { --gb: var(--blue); }
+.blk-cards[data-g="1"] { --gb: var(--sun); }
+.blk-cards[data-g="2"] { --gb: var(--mint); }
+.blk-cards[data-g="3"] { --gb: var(--lavender); --tc: var(--violet); --w1: 9%; --w2: 18%; --w3: 27%; }
+.blk-cards[data-g="4"] { --gb: var(--ember); }
+.blk-cards[data-g="5"] { --gb: var(--violet); --w0: 38%; --w1: 52%; --w2: 64%; --w3: 76%; }
+.blk-cards[data-g="6"] { --gb: color-mix(in srgb, var(--mint) 50%, var(--blue)); }
+.blk-cards[data-g="7"] { --gb: color-mix(in srgb, var(--ember) 45%, var(--lavender)); }
+.cart-group[data-i="0"] { background: color-mix(in srgb, var(--blue) 80%, #fff); }
+.cart-group[data-i="1"] { background: color-mix(in srgb, var(--sun) 80%, #fff); }
+.cart-group[data-i="2"] { background: color-mix(in srgb, var(--mint) 80%, #fff); }
+.cart-group[data-i="3"] { background: var(--lavender); }
+.cart-group[data-i="4"] { background: color-mix(in srgb, var(--ember) 75%, #fff); }
+.cart-group[data-i="5"] { background: color-mix(in srgb, var(--violet) 45%, #fff); }
+.cart-group[data-i="6"] { background: color-mix(in srgb, color-mix(in srgb, var(--mint) 50%, var(--blue)) 80%, #fff); }
+.cart-group[data-i="7"] { background: color-mix(in srgb, color-mix(in srgb, var(--ember) 45%, var(--lavender)) 80%, #fff); }
