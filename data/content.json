@@ -533,7 +533,7 @@
   },
   "why": {
     "background": "paper",
-    "heading": "Biz Çalışırız,\nsiz para + zaman kazanırsınız.",
+    "heading": "Biz Çalışırız,\nsiz\npara + zaman kazanırsınız.",
     "showButtons": false,
     "cards": [
       {
