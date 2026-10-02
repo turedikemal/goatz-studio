@@ -1735,3 +1735,12 @@ html.cart-open { overflow: hidden; }
 .partner .st-pstar { transition: filter .6s ease, scale .35s ease; }
 .partner.night .st-pstar { filter: grayscale(.55) brightness(1.25) hue-rotate(160deg) drop-shadow(0 0 12px #cfe0ff); animation: pt-nstar 1.8s ease-in-out infinite alternate; }
 @keyframes pt-nstar { to { filter: grayscale(.55) brightness(1.4) hue-rotate(160deg) drop-shadow(0 0 22px #e8f0ff); scale: 1.12; } }
+
+/* Gece: sis gibi bulutlar */
+.pt-fog { position: absolute; width: 60%; height: 55%; border-radius: 50%; background: radial-gradient(closest-side, rgba(190,205,255,.34), rgba(190,205,255,0)); filter: blur(18px); text-decoration: none; animation: pt-fogmove 14s ease-in-out infinite alternate; }
+.pt-fog.f1 { left: -10%; top: 8%; }
+.pt-fog.f2 { left: 38%; top: 40%; width: 70%; animation-duration: 18s; animation-direction: alternate-reverse; }
+.pt-fog.f3 { left: 15%; top: 62%; width: 50%; height: 45%; animation-duration: 16s; }
+@keyframes pt-fogmove { to { translate: 12% -6%; } }
+.pt-sky b:nth-of-type(3n) { width: 7px; height: 7px; animation-delay: -.4s; }
+.pt-sky b:nth-of-type(4n) { animation-duration: 2.2s; }
