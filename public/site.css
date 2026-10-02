@@ -992,7 +992,8 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 /* Dar ekranda etiket kelimenin yanına sığmaz: kelimenin altında kendi satırında durur */
 @media (max-width: 900px) {
   .fix { display: block; }
-  .fix em { position: relative; left: auto; top: auto; margin: .35em 0 .15em; display: block; width: fit-content; font-size: .6em; translate: 0 0; }
+  .fix + br { display: none; } /* blok etiketten sonraki satır sonu fazladan boş satır açmasın */
+  .fix em { position: relative; left: auto; top: auto; margin: .35em 0 .45em; display: block; width: fit-content; font-size: .6em; translate: 0 0; }
 }
 @media (max-width: 480px) { .fix s { font-size: .8em; } .fix em { font-size: .5em; } }
 
