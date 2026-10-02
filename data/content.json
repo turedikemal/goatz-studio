@@ -195,6 +195,16 @@
         "size": 100,
         "rotate": -8,
         "float": true
+      },
+      {
+        "type": "coin",
+        "x": 74,
+        "y": 66,
+        "mx": 78,
+        "my": 67,
+        "size": 120,
+        "rotate": 8,
+        "float": true
       }
     ],
     "titleStyle": {
