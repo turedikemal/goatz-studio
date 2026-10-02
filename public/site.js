@@ -1469,3 +1469,13 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     p.prepend(sky);
   });
 })();
+
+// Gece teması: ana sayfa kahraman bölümünün tepesinde ay
+(() => {
+  const hero = document.querySelector('[data-intro]') && document.querySelector('.panel.hero');
+  if (!hero) return;
+  const moon = document.createElement('i');
+  moon.className = 'ns-moon';
+  moon.setAttribute('aria-hidden', 'true');
+  hero.append(moon);
+})();
