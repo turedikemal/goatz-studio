@@ -561,8 +561,9 @@
   const splitTitle = () => {
     if (!titleEl || titleEl.classList.contains('ready')) return [];
     // <br> satır sonları korunur (textContent onları silip kelimeleri birleştirirdi)
-    const text = [...titleEl.childNodes].map((n) => (n.nodeName === 'BR' ? String.fromCharCode(10) : n.textContent)).join('');
-    titleEl.setAttribute('aria-label', text.replace(/\s+/g, ' ').trim());
+    const srNodes = [...titleEl.children].filter((n) => n.classList.contains('sr-only')); // görünmez devam (arama motoru için) harflere bölünmez
+    const text = [...titleEl.childNodes].filter((n) => !srNodes.includes(n)).map((n) => (n.nodeName === 'BR' ? String.fromCharCode(10) : n.textContent)).join('');
+    titleEl.setAttribute('aria-label', (text + srNodes.map((n) => n.textContent).join('')).replace(/\s+/g, ' ').trim());
     titleEl.textContent = '';
     const letters = [];
     text.split(/(\s+)/).forEach((part) => {
@@ -590,6 +591,7 @@
       titleEl.append(w);
     });
     titleEl.querySelectorAll('.rw').forEach((wd) => kernWord(wd, [...wd.querySelectorAll('.rl')].map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))));
+    srNodes.forEach((n) => titleEl.append(n));
     titleEl.classList.add('ready');
     return letters;
   };
