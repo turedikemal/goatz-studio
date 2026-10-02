@@ -1669,3 +1669,20 @@ html.cart-open { overflow: hidden; }
 .pt-goatz b { font-size: clamp(22px, 3.4vw, 50px); }
 .pt-h { font-size: clamp(30px, 3.9vw, 56px); }
 @media (max-width: 900px) { .partner-in { grid-template-columns: 1fr; } .pt-h, .pt-right { grid-column: 1; } }
+
+/* İş ortaklığı: daha küçük; ikas rozeti Teklif Al'daki ikas ikonuyla aynı (yatık, sert gölge); iki işaretin etrafında nefes payı; Goatz gerçek logo + yazı */
+.partner { padding: clamp(30px, 4.4vw, 62px) clamp(18px, 4vw, 56px); }
+.partner-in { row-gap: clamp(18px, 2.4vw, 30px); }
+.pt-lockup { align-items: center; gap: clamp(16px, 2.4vw, 32px); padding: 6px 0 12px; }
+.pt-ikas { font-size: clamp(32px, 4.4vw, 64px); font-style: italic; letter-spacing: -.03em; gap: .32em; padding: .3em .62em .34em .46em; border-width: 3px; box-shadow: .07em .1em 0 var(--carbon); rotate: -3deg; }
+.pt-ikas i { width: .46em; height: .46em; border-width: 3px; }
+.pt-x { width: clamp(34px, 3.6vw, 54px); font-size: clamp(20px, 2.4vw, 32px); box-shadow: 3px 4px 0 var(--carbon); }
+.pt-goatz { gap: .5em; padding: .34em .9em .34em .5em; border-width: 3px; background: #fff; box-shadow: 4px 6px 0 var(--carbon); rotate: 2deg; font-size: clamp(32px, 4.4vw, 64px); }
+.pt-goatz img { height: 1.14em; width: auto; }
+.pt-word { height: 1.02em; width: auto; color: var(--carbon); display: block; }
+.pt-h { font-size: clamp(24px, 3vw, 44px); }
+.pt-text { font-size: clamp(16px, 1.55vw, 21px); margin-bottom: 16px; }
+.pt-chips { margin-bottom: 18px; gap: 8px; }
+.pt-chips li { padding: 7px 14px; font-size: 14px; }
+.pt-tag { margin-bottom: 10px; }
+@media (max-width: 700px) { .pt-ikas, .pt-goatz { font-size: clamp(30px, 10vw, 44px); } .pt-lockup { gap: 14px; } }
