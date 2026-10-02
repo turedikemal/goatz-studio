@@ -1836,3 +1836,12 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 .cart-group[data-i="5"] { background: color-mix(in srgb, var(--violet) 45%, #fff); }
 .cart-group[data-i="6"] { background: color-mix(in srgb, color-mix(in srgb, var(--mint) 50%, var(--blue)) 80%, #fff); }
 .cart-group[data-i="7"] { background: color-mix(in srgb, color-mix(in srgb, var(--ember) 45%, var(--lavender)) 80%, #fff); }
+/* Tonlar sıralı değil karışık: her grupta açık ve koyu tonlar iç içe */
+.blk-cards[data-g="0"] { --w0: 40%; --w1: 0%; --w2: 56%; --w3: 22%; }
+.blk-cards[data-g="1"] { --w0: 22%; --w1: 56%; --w2: 0%; --w3: 40%; }
+.blk-cards[data-g="2"] { --w0: 0%; --w1: 40%; --w2: 22%; --w3: 56%; }
+.blk-cards[data-g="3"] { --w0: 18%; --w1: 0%; --w2: 27%; --w3: 9%; }
+.blk-cards[data-g="4"] { --w0: 56%; --w1: 22%; --w2: 40%; --w3: 0%; }
+.blk-cards[data-g="5"] { --w0: 64%; --w1: 38%; --w2: 76%; --w3: 52%; }
+.blk-cards[data-g="6"] { --w0: 30%; --w1: 0%; --w2: 50%; --w3: 15%; }
+.blk-cards[data-g="7"] { --w0: 0%; --w1: 45%; --w2: 20%; --w3: 56%; }
