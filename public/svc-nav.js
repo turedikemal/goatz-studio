@@ -5,11 +5,25 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const items = blocks.map((b, i) => ({ b, i, id: b.id, name: (b.querySelector('h2') || {}).textContent || '' }));
 
-  const goTo = (b) => {
-    const y = Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - 84));
-    if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(y, { immediate: true, force: true }); // kategoriye tıklayınca doğrudan oraya gider (kayma animasyonu yok)
-    else window.scrollTo({ top: y, behavior: 'instant' });
+  // Yumuşak geçiş: yavaş başlar, ortada hızlanır, yavaş biter (ease-in-out). Mesafe uzadıkça süre biraz uzar; yeni bir hedef gelirse mevcut kaymadan devam eder.
+  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+  let anim = 0;
+  const smoothTo = (y) => {
+    cancelAnimationFrame(anim);
+    const from = window.scrollY, dist = y - from;
+    if (Math.abs(dist) < 2) return;
+    if (reduced) { window.scrollTo({ top: y, behavior: 'instant' }); return; }
+    const dur = Math.min(1700, 800 + Math.abs(dist) * 0.09);
+    if (window.__lenis && window.__lenis.scrollTo) { window.__lenis.scrollTo(y, { duration: dur / 1000, easing: ease, force: true }); return; }
+    const t0 = performance.now();
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      window.scrollTo({ top: from + dist * ease(p), behavior: 'instant' });
+      if (p < 1) anim = requestAnimationFrame(step);
+    };
+    anim = requestAnimationFrame(step);
   };
+  const goTo = (b) => smoothTo(Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - 84)));
   // Bağlantılar
   const link = (a) => a.addEventListener('click', (e) => {
     const t = items.find((x) => '#' + x.id === a.getAttribute('href'));
@@ -48,15 +62,20 @@
     const a = document.createElement('a');
     a.href = '#' + x.id;
     a.dataset.g = String(x.i);
-    a.style.setProperty('--d', (x.i * -0.8).toFixed(1) + 's');
+    // Her kapsülün kendi süzülme hızı, mesafesi ve zamanı (birbirinden bağımsız, hafif); sol kenar hizası bozulmaz, yalnız yukarı-aşağı
+    const R = (n) => { const v = Math.sin((x.i + 1) * 12.9898 * n) * 43758.5453; return v - Math.floor(v); };
+    a.style.setProperty('--d', (-R(1) * 9).toFixed(2) + 's');
+    a.style.setProperty('--t', (7 + R(2) * 6).toFixed(1) + 's');
+    a.style.setProperty('--amp', (2 + R(3) * 2.5).toFixed(1) + 'px');
     a.innerHTML = '<span class="v"></span>';
     a.querySelector('.v').textContent = x.name.trim();
+    const sk = document.createElement('i'); sk.className = 'sk'; sk.style.setProperty('--kd', (-R(4) * 3).toFixed(2) + 's'); sk.style.setProperty('--kt', (2 + R(5) * 2).toFixed(1) + 's'); a.append(sk);
     a.title = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     // Fare ile üstüne gelince (masaüstü) tıklamaya gerek kalmadan o bölüme gider; kısa bir bekleme, listeyi tararken sayfanın sıçramaması için
     let hoverT = 0;
-    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 140); });
+    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 120); });
     a.addEventListener('mouseleave', () => clearTimeout(hoverT));
     rail.append(a);
   });
