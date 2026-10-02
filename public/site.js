@@ -634,7 +634,10 @@
       // Sticker'lar: küçük ve dönmüş halden, rastgele sırayla
       shuffle([...document.querySelectorAll('.hero [data-pop]')]).forEach((el, k) => popIn(el, start + ms(k * 0.1), 1));
     };
-    (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(run);
+    // Yazı tipleri yavaş inen (mobil) bağlantıda başlık beklemesin: en geç 0,9 sn'de başlar; yazı tipi sonradan gelirse harf aralıkları yeniden hesaplanır
+    const fr = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    const rekern = () => { if (!titleEl) return; titleEl.querySelectorAll('.rw').forEach((wd) => { const ls = [...wd.querySelectorAll('.rl')]; ls.forEach((n) => { n.style.marginLeft = ''; }); kernWord(wd, ls.map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))); }); };
+    Promise.race([fr, new Promise((r) => setTimeout(r, 900))]).then(() => { run(); fr.then(rekern); });
   } else if (titleEl && on('idle')) {
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(splitTitle);
   }
