@@ -4665,6 +4665,49 @@
           "visible": true,
           "background": "sky",
           "eyebrow": "",
+          "heading": "SEO ve ölçümleme",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "SEO Çalışması",
+              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz.",
+              "color": "mint",
+              "sticker": "magnifier",
+              "image": ""
+            },
+            {
+              "title": "Google Merchant Center Kurulumu",
+              "text": "Ürünlerinizi Google’a aktaran veri akışını kuruyor; hesap, site bağlantısı ve ürün verilerini kontrol ediyoruz.",
+              "color": "lavender",
+              "sticker": "chart",
+              "image": ""
+            },
+            {
+              "title": "Ziyaretçi ve Satış Ölçümleme",
+              "text": "Ziyaret kaynaklarını, alışveriş adımlarını ve satışları takip edebilmeniz için ölçümleme araçlarını kuruyoruz.",
+              "color": "sun",
+              "sticker": "sliders",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "",
           "heading": "Fotoğraf ve görsel üretimi",
           "text": "",
           "align": "left",
@@ -4699,6 +4742,92 @@
               "text": "Ürün fotoğraflarınızdan yola çıkarak siteniz, reklamlarınız ve sosyal medya için gerçekçi görseller hazırlıyoruz.",
               "color": "sun",
               "sticker": "palette",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Pazaryeri kurulumu ve entegrasyonlar",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "Pazaryerinde Mağaza Kurulumu",
+              "text": "Pazaryeri başvurusu, mağaza bilgileri ve temel satış ayarlarının hazırlanmasına destek oluyoruz.",
+              "color": "mint",
+              "sticker": "store",
+              "image": ""
+            },
+            {
+              "title": "Pazaryeri Mağaza Tasarımı ve Ürün Yükleme",
+              "text": "Mağaza görsellerinizi hazırlıyor; ürünlerinizi açıklama, görsel ve kategori bilgileriyle yüklüyoruz.",
+              "color": "lavender",
+              "sticker": "tag",
+              "image": ""
+            },
+            {
+              "title": "Pazaryeri Entegrasyonu",
+              "text": "Sitenizle pazaryeri mağazalarınız arasındaki ürün, stok ve sipariş bağlantılarını kuruyoruz.",
+              "color": "sun",
+              "sticker": "link",
+              "image": ""
+            },
+            {
+              "title": "Ödeme ve Kargo Entegrasyonları",
+              "text": "Ödeme ve kargo hesaplarınızı sitenize bağlıyor, gerekli ayarları ve kontrolleri yapıyoruz.",
+              "color": "sky",
+              "sticker": "cart",
+              "image": ""
+            }
+          ]
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Danışmanlık ve site yönetimi",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Danışmanlık işlerini gör",
+            "target": "works:consulting"
+          },
+          "columns": 3,
+          "ratio": "",
+          "images": [],
+          "cards": [
+            {
+              "title": "Site Değerlendirme ve Danışmanlık",
+              "text": "Sitenizi değerlendiriyor, eksikleri belirliyor ve öncelikli geliştirmeler için yol haritası hazırlıyoruz.",
+              "color": "mint",
+              "sticker": "bulb",
+              "image": ""
+            },
+            {
+              "title": "Aylık Site Yönetimi",
+              "text": "Ürün, içerik ve kampanya güncellemelerini belirlediğimiz aylık çalışma kapsamına göre yürütüyoruz.",
+              "color": "lavender",
+              "sticker": "rocket",
               "image": ""
             }
           ]
@@ -4792,135 +4921,6 @@
               "text": "Gerekli hazırlıkları ve yetkili uzmanla iletişimi koordine ediyor, sürecin takibine destek oluyoruz.",
               "color": "sky",
               "sticker": "check",
-              "image": ""
-            }
-          ]
-        },
-        {
-          "type": "cards",
-          "visible": true,
-          "background": "paper",
-          "eyebrow": "",
-          "heading": "Pazaryeri kurulumu ve entegrasyonlar",
-          "text": "",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Teklif al",
-            "target": "page:teklifal"
-          },
-          "columns": 3,
-          "ratio": "",
-          "images": [],
-          "cards": [
-            {
-              "title": "Pazaryerinde Mağaza Kurulumu",
-              "text": "Pazaryeri başvurusu, mağaza bilgileri ve temel satış ayarlarının hazırlanmasına destek oluyoruz.",
-              "color": "mint",
-              "sticker": "store",
-              "image": ""
-            },
-            {
-              "title": "Pazaryeri Mağaza Tasarımı ve Ürün Yükleme",
-              "text": "Mağaza görsellerinizi hazırlıyor; ürünlerinizi açıklama, görsel ve kategori bilgileriyle yüklüyoruz.",
-              "color": "lavender",
-              "sticker": "tag",
-              "image": ""
-            },
-            {
-              "title": "Pazaryeri Entegrasyonu",
-              "text": "Sitenizle pazaryeri mağazalarınız arasındaki ürün, stok ve sipariş bağlantılarını kuruyoruz.",
-              "color": "sun",
-              "sticker": "link",
-              "image": ""
-            },
-            {
-              "title": "Ödeme ve Kargo Entegrasyonları",
-              "text": "Ödeme ve kargo hesaplarınızı sitenize bağlıyor, gerekli ayarları ve kontrolleri yapıyoruz.",
-              "color": "sky",
-              "sticker": "cart",
-              "image": ""
-            }
-          ]
-        },
-        {
-          "type": "cards",
-          "visible": true,
-          "background": "sky",
-          "eyebrow": "",
-          "heading": "SEO ve ölçümleme",
-          "text": "",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Teklif al",
-            "target": "page:teklifal"
-          },
-          "columns": 3,
-          "ratio": "",
-          "images": [],
-          "cards": [
-            {
-              "title": "SEO Çalışması",
-              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz.",
-              "color": "mint",
-              "sticker": "magnifier",
-              "image": ""
-            },
-            {
-              "title": "Google Merchant Center Kurulumu",
-              "text": "Ürünlerinizi Google’a aktaran veri akışını kuruyor; hesap, site bağlantısı ve ürün verilerini kontrol ediyoruz.",
-              "color": "lavender",
-              "sticker": "chart",
-              "image": ""
-            },
-            {
-              "title": "Ziyaretçi ve Satış Ölçümleme",
-              "text": "Ziyaret kaynaklarını, alışveriş adımlarını ve satışları takip edebilmeniz için ölçümleme araçlarını kuruyoruz.",
-              "color": "sun",
-              "sticker": "sliders",
-              "image": ""
-            }
-          ]
-        },
-        {
-          "type": "cards",
-          "visible": true,
-          "background": "paper",
-          "eyebrow": "",
-          "heading": "Danışmanlık ve site yönetimi",
-          "text": "",
-          "align": "left",
-          "image": "",
-          "imageSide": "left",
-          "imageColor": "mint",
-          "imageSticker": "star",
-          "button": {
-            "label": "Danışmanlık işlerini gör",
-            "target": "works:consulting"
-          },
-          "columns": 3,
-          "ratio": "",
-          "images": [],
-          "cards": [
-            {
-              "title": "Site Değerlendirme ve Danışmanlık",
-              "text": "Sitenizi değerlendiriyor, eksikleri belirliyor ve öncelikli geliştirmeler için yol haritası hazırlıyoruz.",
-              "color": "mint",
-              "sticker": "bulb",
-              "image": ""
-            },
-            {
-              "title": "Aylık Site Yönetimi",
-              "text": "Ürün, içerik ve kampanya güncellemelerini belirlediğimiz aylık çalışma kapsamına göre yürütüyoruz.",
-              "color": "lavender",
-              "sticker": "rocket",
               "image": ""
             }
           ]

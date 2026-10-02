@@ -28,7 +28,7 @@
   items.forEach((x) => {
     const a = document.createElement('a');
     a.href = '#' + x.id;
-    a.dataset.g = String(x.i);
+    a.dataset.g = x.b.dataset.g || String(x.i);
     a.textContent = x.name.trim();
     link(a);
     track.append(a);
@@ -46,7 +46,7 @@
   items.forEach((x) => {
     const a = document.createElement('a');
     a.href = '#' + x.id;
-    a.dataset.g = String(x.i);
+    a.dataset.g = x.b.dataset.g || String(x.i);
     a.style.setProperty('--k', String(x.i)); // giriş efektinde sırayla gelmesi için
     // Her kapsülün kendi süzülme hızı, mesafesi ve zamanı (birbirinden bağımsız, hafif); sol kenar hizası bozulmaz, yalnız yukarı-aşağı
     const R = (n) => { const v = Math.sin((x.i + 1) * 12.9898 * n) * 43758.5453; return v - Math.floor(v); };
@@ -103,7 +103,7 @@
       current = idx;
       pills.forEach((p, i) => p.classList.toggle('on', i === idx));
       railPills.forEach((p, i) => p.classList.toggle('on', i === idx));
-      bar.dataset.g = String(idx); // çubuğun rengi aktif kategoriye göre değişir
+      bar.dataset.g = blocks[idx].dataset.g || String(idx); // çubuğun rengi aktif kategoriye göre değişir
       const p = pills[idx];
       if (p && track.scrollTo) track.scrollTo({ left: Math.max(0, p.offsetLeft - track.clientWidth / 2 + p.offsetWidth / 2), behavior: reduced ? 'auto' : 'smooth' });
     }
