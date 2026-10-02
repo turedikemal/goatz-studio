@@ -63,6 +63,7 @@
       { lab: 'Çekim tarzı', q: 'Nasıl bir çekim düşünüyorsunuz?', type: 'multi', o: ['Beyaz fon', 'Renkli fon', 'Ortam ve mekân çekimi', 'Birlikte karar verelim'] },
       { lab: 'Çekim yeri', q: 'Çekim nerede yapılsın?', type: 'one', o: ['Ürünlerimi Çanakkale’deki stüdyoya getireceğim', 'Çekim benim yerimde yapılsın', 'Birlikte karar verelim'], lock: { from: 'Çekim tarzı', ifAny: ['Beyaz fon', 'Renkli fon'], opts: ['Çekim benim yerimde yapılsın', 'Birlikte karar verelim'], note: 'Beyaz ve renkli fon çekimleri yalnızca stüdyomuzda yapılır.' } },
       { lab: 'Kullanım', q: 'Fotoğrafları nerede kullanacaksınız?', type: 'multi', o: ['Web sitemde', 'Pazaryerlerinde', 'Sosyal medyada', 'Katalog ve basılı işlerde'] },
+      { lab: 'Pazaryeri', q: 'Hangi pazaryerlerinde satış yapıyorsunuz ya da yapacaksınız?', type: 'multi', cond: { from: 'Kullanım', has: 'Pazaryerlerinde' }, o: ['Trendyol', 'Hepsiburada', 'N11 ve diğer yurt içi pazaryerleri', 'Etsy ve Amazon (yurt dışı)'] },
     ],
     google: [
       { lab: 'İhtiyaç', q: 'Google tarafında neye ihtiyacınız var?', type: 'multi', o: ['Ziyaret ve satış ölçümü (Analytics)', 'Ürünlerimin Google’da listelenmesi (Merchant Center)', 'Arama performansını izlemek (Search Console)', 'Dönüşüm takibi (Tag Manager)', 'Emin değilim'] },
@@ -98,12 +99,16 @@
     ],
   };
   const qsOf = (id) => (DETAILS[id] || []).concat([NOTE]);
-  const dqSkip = (id, i) => { const d = qsOf(id)[i].dep; return !!d && !!dAns(id, d.from)[0] && !d.map[dAns(id, d.from)[0]]; };
+  const dqSkip = (id, i) => {
+    const qd = qsOf(id)[i], d = qd.dep, c = qd.cond;
+    if (c) return !dAns(id, qsOf(id).findIndex((x) => x.lab === c.from)).includes(c.has);
+    return !!d && !!dAns(id, d.from)[0] && !d.map[dAns(id, d.from)[0]];
+  };
   const dqVisible = (id) => qsOf(id).map((_, i) => i).filter((i) => !dqSkip(id, i));
   const dqOptions = (id, i) => { const qd = qsOf(id)[i]; return qd.dep ? (qd.dep.map[dAns(id, qd.dep.from)[0]] || []) : qd.o; };
   const dqSteps = () => (['service', 'custom'].includes(state.answers.route) ? selectedServices() : []).flatMap((x) => dqVisible(x[0]).map((i) => 'dq:' + x[0] + ':' + i));
   const dAns = (id, i) => ((state.detail[id] = state.detail[id] || {})[i] = (state.detail[id] || {})[i] || []);
-  const detailLine = (id) => qsOf(id).map((qd, i) => { const a = dAns(id, i).filter(Boolean); return a.length ? qd.lab + ': ' + a.join(', ') : ''; }).filter(Boolean).join(' | ');
+  const detailLine = (id) => qsOf(id).map((qd, i) => { if (dqSkip(id, i)) return ''; const a = dAns(id, i).filter(Boolean); return a.length ? qd.lab + ': ' + a.join(', ') : ''; }).filter(Boolean).join(' | ');
   const noSiteOnly = () => state.answers.route === 'service' && state.site.has === 'no';
   const serviceList = [
     ['photo', 'Ürün fotoğrafı', 'Ürünleriniz için yeni fotoğraflar çekilir. Hangi ürünlerin, nasıl çekileceğini sizinle konuşarak netleştiririz.'],
@@ -568,6 +573,7 @@
         const v = b.dataset.dqv, k = cur.indexOf(v);
         if (qsOf(did).some((x) => x.dep && x.dep.from === +dn)) qsOf(did).forEach((x, xi) => { if (x.dep && x.dep.from === +dn) dAns(did, xi).length = 0; });
         if (qd.type === 'one') { cur.length = 0; cur.push(v); } else if (k >= 0) cur.splice(k, 1); else cur.push(v);
+        qsOf(did).forEach((x, xi) => { if (x.cond && x.cond.from === qd.lab && !cur.includes(x.cond.has)) dAns(did, xi).length = 0; });
         el.screen.querySelectorAll('[data-dqv]').forEach((x) => { const on = cur.includes(x.dataset.dqv); x.setAttribute('aria-pressed', on); x.querySelector('.wz-mark').textContent = on ? '✓' : ''; });
         el.next.disabled = cur.length === 0;
       }));
