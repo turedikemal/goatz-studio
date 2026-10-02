@@ -1625,8 +1625,47 @@ html.cart-open { overflow: hidden; }
 .rel-works a, .work-svc a { padding: 7px 14px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); color: var(--carbon); font-size: 14px; font-weight: 800; text-decoration: none; transition: background .15s ease; }
 .rel-works a:hover, .work-svc a:hover { background: var(--sun); }
 
-/* Neden biz: başlığın üstünde küçük iş ortağı şeridi (ikas sarısı) */
-.why-partner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px 14px; width: fit-content; max-width: min(900px, calc(100% - 32px)); margin: 0 auto 28px; padding: 10px 18px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); color: var(--carbon); }
-.why-partner-tag { padding: 5px 12px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font-size: 13px; font-weight: 900; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
-.why-partner p { margin: 0; font-size: clamp(14px, 1.5vw, 17px); font-weight: 700; line-height: 1.35; text-align: left; }
-@media (max-width: 700px) { .why-partner { border-radius: var(--r-card); justify-content: flex-start; } }
+
+/* İş ortaklığı bölümü: ikas × The Goatz Studio */
+.partner { position: relative; overflow: hidden; padding: clamp(44px, 6.5vw, 96px) clamp(18px, 4vw, 56px); background: var(--sun); color: var(--carbon); }
+.partner-in { position: relative; z-index: 2; max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(26px, 4.5vw, 72px); align-items: center; }
+.pt-lockup { display: flex; align-items: center; flex-wrap: wrap; gap: clamp(10px, 1.8vw, 22px); }
+.pt-ikas { display: inline-flex; align-items: center; gap: .26em; padding: .12em .46em .16em .3em; border: 3px solid var(--carbon); border-radius: 999px; background: var(--violet); color: #fff; font-weight: 900; font-size: clamp(46px, 7.4vw, 108px); line-height: 1; letter-spacing: -.05em; rotate: -3deg; }
+.pt-ikas i { width: .44em; height: .44em; border: 3px solid var(--carbon); border-radius: 50%; background: var(--sun); }
+.pt-x { display: grid; place-items: center; width: clamp(44px, 5vw, 76px); aspect-ratio: 1; border: 3px solid var(--carbon); border-radius: 50%; background: #fff; font-size: clamp(26px, 3.4vw, 46px); font-weight: 900; line-height: 1; }
+.pt-goatz { display: inline-flex; align-items: center; gap: .3em; padding: .1em .44em .1em .16em; border: 3px solid var(--carbon); border-radius: 999px; background: #fff; rotate: 2deg; }
+.pt-goatz img { height: clamp(46px, 6.2vw, 90px); width: auto; display: block; }
+.pt-goatz b { font-size: clamp(22px, 3.2vw, 46px); font-weight: 900; font-style: italic; line-height: .92; text-transform: uppercase; letter-spacing: -.03em; }
+.pt-h { margin: clamp(20px, 2.6vw, 34px) 0 0; font-size: clamp(30px, 4.3vw, 62px); line-height: 1.02; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.03em; }
+.pt-tag { display: inline-block; margin: 0 0 14px; padding: 6px 14px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: #fff; font-size: 13px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+.pt-text { margin: 0 0 20px; font-size: clamp(18px, 1.9vw, 26px); line-height: 1.4; font-weight: 600; }
+.pt-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 24px; padding: 0; list-style: none; }
+.pt-chips li { padding: 9px 16px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font-size: 15px; font-weight: 800; line-height: 1.2; transition: translate .15s ease, background .15s ease; }
+.pt-chips li:hover { translate: 0 -3px; background: var(--mint); }
+.pt-chips li:nth-child(2):hover { background: var(--lavender); } .pt-chips li:nth-child(3):hover { background: var(--sky); }
+.pt-btn { display: inline-flex; }
+.pt-st { position: absolute; z-index: 1; height: auto; }
+@media (max-width: 900px) { .partner-in { grid-template-columns: 1fr; } .pt-st { opacity: .9; } }
+
+/* İş ortaklığı: ikas × The Goatz Studio tek satıra sığsın, daha dengeli */
+.partner-in { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+.pt-lockup { flex-wrap: nowrap; }
+.pt-ikas { font-size: clamp(38px, 5.6vw, 84px); }
+.pt-x { width: clamp(38px, 4vw, 62px); font-size: clamp(22px, 2.8vw, 38px); flex: none; }
+.pt-goatz img { height: clamp(38px, 4.8vw, 72px); }
+.pt-goatz b { font-size: clamp(18px, 2.6vw, 38px); white-space: nowrap; }
+.pt-h { font-size: clamp(30px, 4vw, 58px); }
+@media (max-width: 700px) { .pt-lockup { flex-wrap: wrap; } .pt-ikas { font-size: clamp(44px, 16vw, 72px); } .pt-goatz img { height: 44px; } .pt-goatz b { font-size: 22px; } .pt-x { width: 44px; } }
+
+/* İş ortaklığı: ikas × The Goatz Studio üstte tam genişlikte tek satır; altında başlık ve yazı yan yana */
+.partner-in { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; row-gap: clamp(22px, 3vw, 40px); }
+.pt-left { display: contents; }
+.pt-lockup { grid-column: 1 / -1; flex-wrap: wrap; }
+.pt-h { grid-column: 1; margin: 0; align-self: center; }
+.pt-right { grid-column: 2; align-self: center; }
+.pt-ikas { font-size: clamp(46px, 7.2vw, 108px); }
+.pt-x { width: clamp(44px, 5vw, 76px); font-size: clamp(26px, 3.4vw, 46px); }
+.pt-goatz img { height: clamp(46px, 6.2vw, 92px); }
+.pt-goatz b { font-size: clamp(22px, 3.4vw, 50px); }
+.pt-h { font-size: clamp(30px, 3.9vw, 56px); }
+@media (max-width: 900px) { .partner-in { grid-template-columns: 1fr; } .pt-h, .pt-right { grid-column: 1; } }
