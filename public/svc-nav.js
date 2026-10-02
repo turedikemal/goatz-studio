@@ -38,7 +38,9 @@
   document.body.append(bar);
   const pills = [...track.children];
 
-  // Sol kenarda mini filtre (geniş ekranda): numaralı yuvarlaklar, üstüne gelince başlık açılır, aktif olan kendi renginde dolu
+  // Sol kenarda mini filtre (geniş ekran): her kategori kendi renginde ve ikonlu bir durak; aralarında ilerleme çizgisi,
+  // geçilenler dolu, bulunulan büyük, üstüne gelince başlık ve hizmet sayısı açılır
+  const ICONS = ['browser', 'camera', 'pencil', 'medal', 'store', 'magnifier', 'bulb', 'gear'];
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
   rail.setAttribute('aria-label', 'Hizmet filtresi');
@@ -47,8 +49,9 @@
     const a = document.createElement('a');
     a.href = '#' + x.id;
     a.dataset.g = String(x.i);
-    a.innerHTML = '<b>' + String(x.i + 1).padStart(2, '0') + '</b><span></span>';
-    a.querySelector('span').textContent = x.name.trim();
+    const n = x.b.querySelectorAll('.k-card').length;
+    a.innerHTML = '<svg class="ic" viewBox="0 0 100 100" aria-hidden="true"><use href="#s-' + (ICONS[x.i] || 'star') + '"/></svg><span class="tip"><b></b><small>' + n + ' hizmet</small></span>';
+    a.querySelector('b').textContent = x.name.trim();
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     rail.append(a);
@@ -64,12 +67,14 @@
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
     rail.hidden = !inside;
+    const span = Math.max(1, last - first);
+    rail.style.setProperty('--p', Math.max(0, Math.min(1, (vh * 0.4 - first) / (span + vh * 0.0))).toFixed(3));
     let idx = 0;
     blocks.forEach((b, i) => { if (b.getBoundingClientRect().top <= vh * 0.4) idx = i; });
     if (idx !== current) {
       current = idx;
       pills.forEach((p, i) => p.classList.toggle('on', i === idx));
-      railPills.forEach((p, i) => p.classList.toggle('on', i === idx));
+      railPills.forEach((p, i) => { p.classList.toggle('on', i === idx); p.classList.toggle('done', i < idx); });
       bar.dataset.g = String(idx); // çubuğun rengi aktif kategoriye göre değişir
       const p = pills[idx];
       if (p && track.scrollTo) track.scrollTo({ left: Math.max(0, p.offsetLeft - track.clientWidth / 2 + p.offsetWidth / 2), behavior: reduced ? 'auto' : 'smooth' });

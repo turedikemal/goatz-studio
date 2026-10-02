@@ -1860,8 +1860,7 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .blk-cards[data-g="5"] { --pt: 14%; }
 
 /* Hizmetler: sol mini filtre ve (dar ekranda) alttaki kategori çubuğu */
-.svc-bar a, .svc-rail a { --gb: var(--blue); }
-.svc-rail a[data-g="0"], .svc-bar a[data-g="0"], .svc-bar[data-g="0"] { --gb: var(--blue); }
+.svc-bar a, .svc-rail a[data-g="0"], .svc-bar a[data-g="0"], .svc-bar[data-g="0"] { --gb: var(--blue); }
 .svc-rail a[data-g="1"], .svc-bar a[data-g="1"], .svc-bar[data-g="1"] { --gb: var(--sun); }
 .svc-rail a[data-g="2"], .svc-bar a[data-g="2"], .svc-bar[data-g="2"] { --gb: var(--mint); }
 .svc-rail a[data-g="3"], .svc-bar a[data-g="3"], .svc-bar[data-g="3"] { --gb: var(--lavender); }
@@ -1879,13 +1878,28 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .blk-cards[data-g] { scroll-margin-top: 84px; }
 @media (max-width: 900px) { .svc-bar { max-width: calc(100vw - 150px); bottom: 14px; } }
 
-.svc-rail { position: fixed; z-index: 45; left: 3px; top: 50%; translate: 0 -50%; display: grid; gap: 5px; padding: 4px; border: 2px solid #000; border-radius: 24px; background: #fff; }
-.svc-rail[hidden] { display: none; }
-.svc-rail a { position: relative; display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid #000; border-radius: 50%; background: color-mix(in srgb, var(--gb) 40%, #fff); color: #000; text-decoration: none; font-weight: 900; font-size: 10px; transition: background .2s ease, scale .15s ease; }
-.svc-rail a:hover { scale: 1.1; }
-.svc-rail a.on { background: var(--gb); }
-.svc-rail a span { position: absolute; left: calc(100% + 10px); top: 50%; translate: -6px -50%; padding: 7px 14px; border: 2px solid #000; border-radius: var(--r-pill); background: var(--gb); color: #000; font-size: 13px; font-weight: 800; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease, translate .15s ease; }
-.svc-rail a:hover span, .svc-rail a:focus-visible span { opacity: 1; translate: 0 -50%; }
-@media (max-width: 1099px) { .svc-rail { display: none; } }
 @media (min-width: 1100px) { .svc-bar { display: none; } }
-html[data-theme="night"] .svc-rail { background: #161b44; border-color: #f4f1e8; }
+/* Sol kategori filtresi: ikonlu duraklar + ilerleme çizgisi */
+.svc-rail { --p: 0; position: fixed; z-index: 45; left: 4px; top: 50%; translate: 0 -50%; display: grid; gap: 9px; padding: 8px 0; }
+.svc-rail[hidden] { display: none; }
+.svc-rail::before, .svc-rail::after { content: ''; position: absolute; left: 50%; top: 14px; bottom: 14px; width: 3px; margin-left: -1.5px; border-radius: 3px; background: #000; opacity: .18; }
+.svc-rail::after { opacity: 1; bottom: auto; height: calc((100% - 28px) * var(--p)); background: #000; transition: height .15s linear; }
+.svc-rail a { --gb: var(--blue); position: relative; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; border: 2px solid #000; border-radius: 50%; background: #fff; color: #000; text-decoration: none; transition: background .25s ease, scale .25s cubic-bezier(.3, 1.6, .5, 1); }
+.svc-rail a .ic { width: 22px; height: 22px; opacity: .55; transition: opacity .2s ease; }
+.svc-rail a.done { background: color-mix(in srgb, var(--gb) 55%, #fff); }
+.svc-rail a.done .ic { opacity: .9; }
+.svc-rail a.on { background: var(--gb); scale: 1.22; }
+.svc-rail a.on .ic { opacity: 1; }
+.svc-rail a:hover { scale: 1.15; }
+.svc-rail a.on:hover { scale: 1.26; }
+.svc-rail .tip { position: absolute; left: calc(100% + 14px); top: 50%; translate: -8px -50%; display: grid; gap: 1px; padding: 8px 16px 9px; border: 2px solid #000; border-radius: 18px; background: var(--gb); color: #000; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .15s ease, translate .2s cubic-bezier(.3, 1.4, .5, 1); }
+.svc-rail .tip b { font-size: 14px; font-weight: 900; letter-spacing: -.01em; }
+.svc-rail .tip small { font-size: 11px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; opacity: .7; }
+.svc-rail a:hover .tip, .svc-rail a:focus-visible .tip { opacity: 1; translate: 0 -50%; }
+@media (max-width: 1099px) { .svc-rail { display: none; } }
+html[data-theme="night"] .svc-rail::before { background: #f4f1e8; }
+html[data-theme="night"] .svc-rail::after { background: #f4f1e8; }
+html[data-theme="night"] .svc-rail a { background: #161b44; border-color: #f4f1e8; }
+html[data-theme="night"] .svc-rail a .ic { opacity: .8; }
+html[data-theme="night"] .svc-rail a.done { background: color-mix(in srgb, var(--gb) 55%, #161b44); }
+html[data-theme="night"] .svc-rail a.on { background: var(--gb); }
