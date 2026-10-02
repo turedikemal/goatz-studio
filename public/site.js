@@ -1495,6 +1495,8 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   moon.className = 'ns-moon';
   moon.setAttribute('aria-hidden', 'true');
   hero.append(moon);
+  // Aya tıklayınca yüzeyi yavaşça dönmeye başlar; tekrar tıklayınca durur/devam eder
+  moon.addEventListener('click', () => { if (!moon.classList.contains('spin')) moon.classList.add('spin'); else moon.classList.toggle('halt'); });
 })();
 
 // Gece teması: arka planda mini uzay gemileri yavaşça gezer, ara sıra mini bir çatışma çıkar.
