@@ -62,8 +62,6 @@
     a.addEventListener('mouseleave', () => clearTimeout(hoverT));
     rail.append(a);
   });
-  // Uzay boşluğu: çubuğun çevresinde hafifçe yanıp sönen birkaç minik yıldız
-  [[-4, 8], [102, 30], [-2, 58], [98, 84]].forEach(([x, y], i) => { const s = document.createElement('i'); s.className = 'sp'; s.style.cssText = 'left:' + x + '%;top:' + y + '%;animation-delay:' + (-i * 0.9).toFixed(1) + 's'; rail.append(s); });
   // Filtre listesi ilk bölüm başlığının hizasında başlar (sepet işareti gibi), aşağı inerken ekranda sabit kalır
   const wrap = document.createElement('div');
   wrap.className = 'svc-rail-wrap';
