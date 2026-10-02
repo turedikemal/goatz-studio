@@ -124,7 +124,7 @@
       },
       {
         "label": "Süreç",
-        "target": "#surec"
+        "target": "page:nasilcalisiyoruz"
       },
       {
         "label": "İletişim",
