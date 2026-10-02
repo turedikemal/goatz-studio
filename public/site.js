@@ -1528,7 +1528,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     cv.width = size; cv.height = size;
     N = size * size;
     lonA = new Float32Array(N); rowA = new Int16Array(N).fill(-1); shadeA = new Float32Array(N);
-    const L = [-0.55, -0.4, 0.73], ll = Math.hypot(...L);
+    const L = [0, 0, 1], ll = 1; // ışık tam karşıdan: bize bakan yüz aydınlık, kenarlar ve arka taraf karanlık
     for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
       const nx = ((x + 0.5) / size) * 2 - 1, ny = ((y + 0.5) / size) * 2 - 1, r2 = nx * nx + ny * ny;
       if (r2 > 1) continue;
@@ -1536,7 +1536,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       lonA[i] = Math.atan2(nx, nz);
       rowA[i] = Math.min(TH - 1, Math.floor((Math.asin(ny) / Math.PI + 0.5) * TH));
       const lam = Math.max(0, (nx * L[0] + ny * L[1] + nz * L[2]) / ll);
-      shadeA[i] = 0.2 + 0.8 * Math.pow(lam, 0.8);
+      shadeA[i] = 0.08 + 0.92 * Math.pow(lam, 1.15);
     }
     px = ctx.createImageData(size, size);
     draw();
