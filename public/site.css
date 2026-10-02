@@ -1724,3 +1724,9 @@ html.cart-open { overflow: hidden; }
 .partner.night .pt-h:hover, .partner.night .pt-text:hover { background: var(--mint); color: var(--carbon); }
 .pt-h, .pt-text { width: fit-content; max-width: 100%; }
 .pt-text { padding: 2px 6px; margin-left: -6px; margin-right: 0; }
+
+/* Yeşil vurgu kelime kelime (tüm alan değil) */
+.pt-h:hover, .pt-text:hover, .partner.night .pt-h:hover, .partner.night .pt-text:hover { background: none; color: inherit; }
+.pt-text { padding: 0; margin-left: 0; }
+.pt-h .w, .pt-text .pw { border-radius: 8px; transition: background-color .2s ease, color .2s ease; }
+.pt-h .w:hover, .pt-text .pw:hover, .partner.night .pt-h .w:hover, .partner.night .pt-text .pw:hover { background: var(--mint); color: var(--carbon); }

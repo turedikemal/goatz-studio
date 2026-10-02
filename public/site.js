@@ -1386,3 +1386,19 @@
     document.head.append(s);
   }
 })();
+
+// İş ortaklığı: sağdaki açıklama kelime kelime sarılır (üstüne gelince her kelime yeşil olur)
+document.querySelectorAll('.partner .pt-text').forEach((p) => {
+  const walk = (node) => [...node.childNodes].forEach((n) => {
+    if (n.nodeType === 3) {
+      const frag = document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part) return;
+        if (/^\s+$/.test(part)) { frag.append(document.createTextNode(' ')); return; }
+        const s = document.createElement('span'); s.className = 'pw'; s.textContent = part; frag.append(s);
+      });
+      n.replaceWith(frag);
+    } else if (n.nodeType === 1) walk(n);
+  });
+  walk(p);
+});
