@@ -117,6 +117,10 @@
     place();
     window.addEventListener('resize', place);
     window.addEventListener('load', place);
+    // Sayfa yüklenirken yükseklikler değişir (yazı tipi, başlık animasyonu, görseller): sepet hep ilk başlıkla aynı hizada kalsın diye konum yeniden hesaplanır
+    if (window.ResizeObserver) new ResizeObserver(() => place()).observe(main);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+    [300, 900, 1800, 3500].forEach((ms) => setTimeout(place, ms));
     setTimeout(place, 800);
     if (window.ResizeObserver) new ResizeObserver(place).observe(main);
   }
