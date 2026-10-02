@@ -4,7 +4,10 @@
   const NL = String.fromCharCode(10);
   const KEY = 'goatz-hizmet-sepeti';
   const load = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v.filter((x) => x && typeof x.g === 'string' && typeof x.t === 'string') : []; } catch (e) { return []; } };
-  let items = load();
+  // Hizmetler sayfasında kart adları değişti: eski adlarla sepete eklenmiş hizmetler yeni adlara taşınır
+  const RENAME = { 'Ürün çekimi': { 'e-ticaret fotoğrafları': 'E-ticaret için ürün fotoğrafları', 'beyaz fon ürün fotoğrafları': 'Beyaz fonda ürün çekimi', 'renkli fon ürün fotoğrafları': 'Renkli fonda ürün çekimi', 'fotoğraflar siteye uyar': 'Sitenize uygun fotoğraf çekimi', 'fotoğraflarım sitemle uyumlu olacak': 'Sitenize uygun fotoğraf çekimi', 'site fotoğrafları taşır': 'Fotoğraflarınıza uygun web tasarım', 'çanakkale ürün fotoğrafı': 'E-ticaret için ürün fotoğrafları' } };
+  let items = load().map((x) => { const m = RENAME[x.g]; const k = m && m[x.t.toLocaleLowerCase('tr-TR')]; return k ? { g: x.g, t: k } : x; });
+  items = items.filter((x, i) => items.findIndex((y) => y.g === x.g && y.t === x.t) === i);
   const listeners = [];
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) { /* sepet yalnızca bu sayfada kalır */ } };
   const change = () => { save(); listeners.forEach((f) => f()); };
@@ -118,7 +121,7 @@
     try { works = JSON.parse((document.getElementById('cart-works') || {}).textContent || '{}'); } catch (e) { works = {}; }
     const KVKK = host.dataset.kvkk || '';
     const norm = (t) => String(t || '').toLocaleLowerCase('tr-TR').replace(/\s+/g, ' ').trim();
-    const descOf = (g, t) => ((works._svc || {})[norm(g) + '|' + norm(t)]) || '';
+    const descOf = (g, t) => ((works._svc || {})[norm(g) + '|' + norm(t)]) || 'Bu hizmetin ayrıntılarını fiyat görüşmesinde birlikte netleştiririz.';
     const catOf = (g) => (/uygulama/i.test(g) ? 'app' : /danışmanlık/i.test(g) ? 'consulting' : /ürün çekimi/i.test(g) ? 'photo' : 'web');
     let done = false;
 
@@ -162,7 +165,6 @@
             info.append(tg);
             if (dd) {
               const p = el('p', 'cp-desc', dd); p.hidden = true;
-              tg.append(el('i', 'cp-chev', '▾'));
               tg.setAttribute('aria-expanded', 'false');
               tg.addEventListener('click', () => { const on = p.hidden; p.hidden = !on; tg.setAttribute('aria-expanded', String(on)); row.classList.toggle('open', on); });
               info.append(p);

@@ -71,6 +71,9 @@ function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {})
 const messages = require('./lib/messages');
 const mailer = require('./lib/mailer');
 const seo = require('./lib/seo');
+// Eski görsel adresleri -> yeni (SEO'lu, WebP) adresler; data/image-redirects.json
+let imgRedirCache = null;
+const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
 const contactHits = new Map();
 const siteHits = new Map();
 const sitecheck = require('./lib/sitecheck');
@@ -485,7 +488,10 @@ const server = http.createServer(async (req, res) => {
       return serveFile(res, path.join(PUBLIC_DIR, 'admin.html'));
     }
     if (url.pathname.startsWith('/uploads/')) {
-      const file = safeJoin(store.UPLOAD_DIR, decodeURIComponent(url.pathname.slice('/uploads/'.length)));
+      const upName = decodeURIComponent(url.pathname.slice('/uploads/'.length));
+      const moved = imageRedirects()[upName];
+      if (moved && moved !== upName) { res.writeHead(301, { Location: '/uploads/' + encodeURIComponent(moved), 'Cache-Control': 'public, max-age=31536000' }); return res.end(); }
+      const file = safeJoin(store.UPLOAD_DIR, upName);
       return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
     }
     const origin = `${req.headers['x-forwarded-proto'] || 'http'}://${req.headers.host}`;
