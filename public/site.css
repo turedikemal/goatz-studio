@@ -1958,8 +1958,6 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .ns-planet.ring::after { content: ""; position: absolute; left: -38%; right: -38%; top: 36%; bottom: 36%; border-radius: 50%; border: calc(var(--s) * .035) solid rgba(255, 255, 255, .38); rotate: -16deg; }
 html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
 /* Üst menü sepeti: gece/gündüz düğmesinin solunda; altında konuşma balonu (kuyruk üst sağ köşeden) */
-.cart-top { position: relative; display: inline-flex; }
-.cart-top[hidden] { display: none; }
 .cart-top-btn { position: relative; background: var(--mint); }
 .cart-top-btn svg { width: 20px; height: 20px; }
 .cart-top-n { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; padding: 0 4px; border: 2px solid #000; border-radius: 9px; background: var(--ember); color: #fff; font-size: 11px; font-weight: 900; line-height: 14px; text-align: center; }
@@ -1983,3 +1981,16 @@ html[data-theme="night"] .cp-group .cp-desc { opacity: .78; }
 .cart-slot-el { display: none; }
 html.cart-slot .cart-slot-el { display: inline-block; position: relative; width: 36px; height: 36px; flex: none; }
 .cart-fab.docked { position: absolute; top: 0; left: 0; width: 36px; height: 36px; border-width: 2px; }
+
+/* Menü yazı tipi hazır olana kadar görünmez (düğme genişlikleri değişip kaymasın); kaydırma çubuğu gelip gidince de menü oynamasın */
+html.js:not(.fnt) .nav { opacity: 0; }
+html { scrollbar-gutter: stable; }
+
+.cart-top { display: none; position: relative; }
+html.cart-top-on .cart-top { display: inline-flex; }
+.cart-top-n:empty { display: none; }
+.cart-ghost { display: none; }
+html.cart-slot .cart-ghost { display: grid; place-items: center; position: relative; width: 36px; height: 36px; border: 2px solid var(--carbon, #000); border-radius: 50%; background: var(--mint); }
+.cart-ghost svg { width: 20px; height: 20px; }
+.cart-ghost .cart-count { top: -7px; right: -7px; }
+.cart-ghost .cart-count:empty { display: none; }

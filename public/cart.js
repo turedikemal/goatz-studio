@@ -110,7 +110,7 @@
       const dock = (animate) => {
         if (!slotEl || docked) return;
         const r0 = fab.getBoundingClientRect();
-        html.classList.add('cart-slot'); fab.classList.add('docked'); slotEl.append(fab); docked = true;
+        html.classList.add('cart-slot'); const gh = slotEl.querySelector('.cart-ghost'); if (gh) gh.remove(); /* baştan çizilen simge gerçek sepetle yer değiştirir */ fab.classList.add('docked'); slotEl.append(fab); docked = true;
         if (!animate) return;
         const [x0, yRaw] = center(r0), [x1, y1] = center(fab.getBoundingClientRect()), y0 = Math.min(yRaw, innerHeight + 40); // ekran dışındaysa alt kenardan yükselir
         fab.animate([{ translate: (x0 - x1) + 'px ' + (y0 - y1) + 'px', scale: 68 / 36 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });

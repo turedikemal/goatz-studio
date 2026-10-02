@@ -1997,12 +1997,9 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const KEY = 'goatz-hizmet-sepeti';
   const count = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v.filter((x) => x && typeof x.g === 'string' && typeof x.t === 'string').length : 0; } catch (e) { return 0; } };
   const SAYS = ['Doldurdun, gittin.', 'Eklerken iyiydik.', 'Gözüm hâlâ sende.', 'Beni de götür.', 'Seçtiklerinle baş başa kaldık.', 'Ara sıra bana da bak.', 'Unutuldum galiba.', 'İçim doldu, bekleyişim bitmedi.', 'Hâlâ aynı köşedeyim.', 'Bir tıklayıp hâlimi sorsan.'];
-  const wrap = document.createElement('span');
-  wrap.className = 'cart-top';
-  wrap.hidden = true;
-  wrap.innerHTML = '<a class="btn icon-btn cart-top-btn" href="/hizmetler#sepet" aria-label="Hizmet sepeti"><svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 10h8l7 30h28l6-22H17" fill="#fff" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/><circle cx="46" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/></svg><b class="cart-top-n"></b></a>' +
-    '<span class="cart-top-bubble" aria-hidden="true"><span></span><svg class="cb-tail up" viewBox="0 0 34 26" aria-hidden="true"><path d="M30 25C30 12 24 8 8 8C18 12 20 17 17 25Z" fill="#fff"/><path d="M30 25C30 12 24 8 8 8C18 12 20 17 17 25" fill="none" stroke="#000" stroke-width="3.6" stroke-linejoin="round"/><rect x="16.6" y="21.4" width="13.8" height="5" fill="#fff"/></svg></span>';
-  theme.parentNode.insertBefore(wrap, theme);
+  let wrap = document.querySelector('.cart-top'); // sunucu tarafından baştan çizilir: sayfa yenilenince sepet yanıp sönmesin
+  if (!wrap) { wrap = document.createElement('span'); wrap.className = 'cart-top'; wrap.innerHTML = '<a class="btn icon-btn cart-top-btn" href="/hizmetler#sepet" aria-label="Hizmet sepeti"><svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 10h8l7 30h28l6-22H17" fill="#fff" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/><circle cx="46" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/></svg><b class="cart-top-n"></b></a>' +
+    '<span class="cart-top-bubble" aria-hidden="true"><span></span><svg class="cb-tail up" viewBox="0 0 34 26" aria-hidden="true"><path d="M30 25C30 12 24 8 8 8C18 12 20 17 17 25Z" fill="#fff"/><path d="M30 25C30 12 24 8 8 8C18 12 20 17 17 25" fill="none" stroke="#000" stroke-width="3.6" stroke-linejoin="round"/><rect x="16.6" y="21.4" width="13.8" height="5" fill="#fff"/></svg></span>'; theme.parentNode.insertBefore(wrap, theme); }
   const link = wrap.querySelector('a'), num = wrap.querySelector('.cart-top-n'), bubble = wrap.querySelector('.cart-top-bubble'), txt = bubble.querySelector('span');
   let bubT = 0, bubOff = 0, last = -1, shown = false;
   const stop = () => { clearTimeout(bubT); clearTimeout(bubOff); bubble.classList.remove('show'); };
@@ -2017,7 +2014,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   }, ms); };
   const sync = () => {
     const n = count();
-    wrap.hidden = n === 0;
+    document.documentElement.classList.toggle('cart-top-on', n > 0);
     num.textContent = String(n);
     link.setAttribute('aria-label', 'Hizmet sepeti: ' + n + ' ürün');
     if (n === 0) { stop(); shown = false; } else if (!shown) { shown = true; next(15000); }
@@ -2025,4 +2022,10 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   window.addEventListener('storage', (e) => { if (!e.key || e.key === KEY) sync(); });
   window.addEventListener('pageshow', sync);
   sync();
+})();
+
+// Üst menü, yazı tipi yüklenene kadar gizli kalır: yazı tipi değişince düğme genişlikleri değişip menünün sağa sola oynamasını önler
+(() => {
+  const show = () => document.documentElement.classList.add('fnt');
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(show), show);
 })();
