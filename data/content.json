@@ -55,8 +55,8 @@
     "logoWordColor": "carbon"
   },
   "seo": {
-    "title": "The Goatz Studio — Ürün Çekimi ve Web Tasarım",
-    "description": "The Goatz Studio: ürün fotoğrafçılığı ve web sitesi tasarımı. Ürününü çekiyor, markanı yayına alıyoruz.",
+    "title": "Çanakkale Ürün Çekimi ve Web Tasarım — The Goatz Studio",
+    "description": "The Goatz Studio: Çanakkale’de ürün fotoğrafçılığı ve web sitesi tasarımı. Ürününüzü çekiyor, e-ticaret sitenizi kurup yayına alıyoruz.",
     "shareImage": ""
   },
   "sections": [
@@ -284,8 +284,8 @@
         "sticker2": "",
         "text": "Ürününü en iyi açısından gösteren, e-ticaret sitelerine ve pazaryerlerine hazır fotoğraflar.",
         "button": {
-          "label": "Çekimlerimiz ↗",
-          "target": "works:photo"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#urun-cekimi"
         },
         "items": [
           {
@@ -317,8 +317,8 @@
         "sticker2": "",
         "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler.",
         "button": {
-          "label": "Web işlerimiz ↗",
-          "target": "works:web"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#web-sitesi-ve-e-ticaret-kurulumu"
         },
         "items": [
           {
@@ -345,8 +345,8 @@
         "sticker2": "browser",
         "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz.",
         "button": {
-          "label": "Paketi incele ↗",
-          "target": "page:tekstudyo"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#urun-cekimi"
         },
         "items": [
           {
@@ -390,8 +390,8 @@
         ],
         "sticker2": "",
         "button": {
-          "label": "",
-          "target": "#iletisim"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#google-ve-yapay-zeka-gorunurlugu"
         }
       },
       {
@@ -423,8 +423,8 @@
         ],
         "sticker2": "",
         "button": {
-          "label": "",
-          "target": "#iletisim"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#google-ve-yapay-zeka-gorunurlugu"
         }
       },
       {
@@ -446,8 +446,8 @@
         ],
         "sticker2": "",
         "button": {
-          "label": "",
-          "target": "#iletisim"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#pazaryeri-ve-entegrasyon"
         }
       },
       {
@@ -474,8 +474,8 @@
         ],
         "sticker2": "",
         "button": {
-          "label": "",
-          "target": "#iletisim"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#web-sitesi-ve-e-ticaret-kurulumu"
         }
       },
       {
@@ -502,8 +502,8 @@
         ],
         "sticker2": "",
         "button": {
-          "label": "",
-          "target": "#iletisim"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#web-uygulamalari"
         }
       },
       {
@@ -525,8 +525,8 @@
         ],
         "sticker2": "",
         "button": {
-          "label": "",
-          "target": "#iletisim"
+          "label": "Hizmeti incele ↗",
+          "target": "page:hizmetler#danismanlik-ve-site-yonetimi"
         }
       }
     ]
@@ -801,8 +801,8 @@
   "works": {
     "visible": true,
     "background": "sky",
-    "seoTitle": "İşler — The Goatz Studio",
-    "seoDescription": "The Goatz Studio işleri: web siteleri, web uygulamaları, Çanakkale ürün fotoğrafı ve ürün fotoğrafçılığı, e-ticaret fotoğrafları, beyaz fon ve renkli fon ürün fotoğrafları.",
+    "seoTitle": "İşlerimiz: Web Siteleri ve Ürün Çekimi — The Goatz Studio",
+    "seoDescription": "The Goatz Studio işleri: e-ticaret web siteleri, web uygulamaları, danışmanlık ve Çanakkale ürün fotoğrafı çekimleri.",
     "hero": {
       "visible": true,
       "eyebrow": "Portföy",
@@ -2469,8 +2469,8 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "İletişim — The Goatz Studio",
-      "seoDescription": "The Goatz Studio ile iletişime geçin: web tasarım, e-ticaret sitesi ve ürün çekimi için mesaj bırakın.",
+      "seoTitle": "İletişim ve Konum: Çanakkale — The Goatz Studio",
+      "seoDescription": "The Goatz Studio ile iletişime geçin: Çanakkale’deki ofisimiz, web tasarım, e-ticaret sitesi ve ürün çekimi için mesaj bırakın.",
       "background": "sky",
       "showContact": false,
       "hero": {
@@ -3090,7 +3090,7 @@
       "inNav": false,
       "navLabel": "",
       "seoTitle": "Çerez Politikası — The Goatz Studio",
-      "seoDescription": "The Goatz Studio çerez politikası.",
+      "seoDescription": "Çerez politikası: sitemizde kullanılan çerezler, amaçları, saklama süreleri ve çerez tercihlerinizi nasıl yönetebileceğiniz.",
       "background": "sky",
       "showContact": false,
       "hero": {
@@ -3274,7 +3274,7 @@
       "inNav": false,
       "navLabel": "",
       "seoTitle": "Kullanım Koşulları — The Goatz Studio",
-      "seoDescription": "The Goatz Studio site kullanım koşulları.",
+      "seoDescription": "Site kullanım koşulları: site içeriği, sunulan hizmetler, sorumluluk sınırları, bağlantılar ve uygulanacak hukuk.",
       "background": "sky",
       "showContact": false,
       "hero": {
@@ -3525,8 +3525,8 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "Hizmetler: Ürün Çekimi, Web Tasarım ve E-Ticaret — The Goatz Studio",
-      "seoDescription": "The Goatz Studio hizmetleri: ürün çekimi, web sitesi ve anahtar teslim e-ticaret kurulumu, Google ve yapay zekâ görünürlüğü, pazaryeri entegrasyonu, web uygulamaları, danışmanlık.",
+      "seoTitle": "Hizmetler: Ürün Çekimi, Web Tasarım, E-Ticaret — The Goatz Studio",
+      "seoDescription": "Ürün çekimi, web sitesi ve anahtar teslim e-ticaret kurulumu, Google ve yapay zekâ görünürlüğü, pazaryeri entegrasyonu, web uygulamaları ve danışmanlık.",
       "background": "sky",
       "showContact": true,
       "hero": {
@@ -3704,6 +3704,32 @@
               "image": ""
             }
           ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Paket",
+          "heading": "Çekim ve web tasarım bir arada",
+          "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz.\n\nFotoğraflar siteye uyar: Çekimleri sitenin tasarımını bilerek yapıyoruz. Ölçü, kadraj ve fon baştan siteye göre seçilir.\n\nSite fotoğrafları taşır: Siteyi, çektiğimiz ürün fotoğraflarının öne çıkacağı şekilde tasarlıyoruz. Ürün, sayfanın yıldızı olur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Paketi incele ↗",
+            "target": "page:tekstudyo"
+          },
+          "columns": 3,
+          "cards": [],
           "ratio": "square",
           "images": [
             {
@@ -3928,6 +3954,160 @@
       ]
     },
     {
+      "id": "uruncekimi",
+      "title": "Ürün Çekimi",
+      "slug": "urun-cekimi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Çanakkale Ürün Çekimi ve E-Ticaret Fotoğrafı — The Goatz Studio",
+      "seoDescription": "Çanakkale’de ürün fotoğrafı çekimi: e-ticaret, beyaz fon ve renkli fon çekimleri, siteye uygun fotoğraflar. Çekimleri birlikte planlıyoruz.",
+      "background": "sky",
+      "showContact": true,
+      "hero": {
+        "visible": true,
+        "eyebrow": "Hizmet",
+        "title": "Çanakkale ürün çekimi",
+        "subtitle": "E-ticaret mağazaları, üreticiler ve yerel işletmeler için ürün fotoğrafı çekiyoruz. Çekimleri, fotoğrafları kullanacağınız alanlara göre birlikte planlıyoruz.",
+        "titleSize": 8,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "browser",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "layers",
+            "x": 72,
+            "y": 14,
+            "mx": 60,
+            "my": 8,
+            "size": 70,
+            "rotate": 12,
+            "float": true
+          }
+        ],
+        "subtitleStyle": {
+          "size": 60
+        },
+        "titleStyle": {
+          "italic": "on",
+          "tracking": "-3",
+          "leading": "106"
+        }
+      },
+      "blocks": [
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Ürün çekimi",
+          "heading": "Ürün çekimi hizmetlerimiz",
+          "text": "Çanakkale’de ürün fotoğrafı çekiyoruz. E-ticaret mağazaları, üreticiler ve yerel işletmeler için ürünlerinizi fotoğraflıyoruz. Çekimleri, fotoğrafları kullanacağınız alanlara göre birlikte planlıyoruz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Çekim örneklerini gör",
+            "target": "works:photo"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "E-ticaret için ürün fotoğrafları",
+              "text": "Ürünlerinizi farklı açılardan ve detaylarıyla fotoğraflıyoruz. Müşterileriniz ürünü daha yakından tanısın, ne satın aldığını kolayca anlasın.",
+              "color": "lavender",
+              "sticker": "photo",
+              "image": ""
+            },
+            {
+              "title": "Beyaz fonda ürün çekimi",
+              "text": "Ürünlerinizi sade beyaz fonda, net ve gerçek renkleriyle fotoğraflıyoruz. Ürün sayfalarında ve pazaryeri listelerinde kullanabileceğiniz görseller hazırlıyoruz.",
+              "color": "sun",
+              "sticker": "bottle",
+              "image": ""
+            },
+            {
+              "title": "Renkli fonda ürün çekimi",
+              "text": "Ürünlerinizi markanızın renklerine uygun fonlarda fotoğraflıyoruz. Kampanyalarınızda, site bannerlarında ve sosyal medyada kullanabileceğiniz görseller hazırlıyoruz.",
+              "color": "sky",
+              "sticker": "bottle",
+              "image": ""
+            },
+            {
+              "title": "Sitenize uygun fotoğraf çekimi",
+              "text": "Mevcut sitenizin tasarımına göre çekim yapıyoruz. Fotoğrafların ölçüsünü, fonunu ve ürünün kadrajdaki yerini kullanılacağı alana göre belirliyoruz.",
+              "color": "mint",
+              "sticker": "camera",
+              "image": ""
+            },
+            {
+              "title": "Fotoğraflarınıza uygun web tasarım",
+              "text": "Elinizdeki ürün fotoğraflarına uygun sayfalar tasarlıyoruz. Görsellerin yerleşimini ve boyutlarını, ürünlerinizin net ve düzenli görünmesi için ayarlıyoruz.",
+              "color": "lavender",
+              "sticker": "photo",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Süreç",
+          "heading": "Çekim nasıl ilerler?",
+          "text": "Tanışmadan teslime kadar çekimin her adımını Nasıl çalışıyoruz? sayfasında anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Nasıl çalışıyoruz?",
+            "target": "page:nasilcalisiyoruz"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
       "id": "nasilcalisiyoruz",
       "title": "Nasıl Çalışıyoruz?",
       "slug": "nasil-calisiyoruz",
@@ -3935,7 +4115,7 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "Nasıl Çalışıyoruz? Web Tasarım ve Ürün Çekimi Süreci — The Goatz Studio",
+      "seoTitle": "Çalışma Sürecimiz: Plan, Çekim, Tasarım, Yayın — The Goatz Studio",
       "seoDescription": "The Goatz Studio ile çalışma süreci: tanışma, plan, üretim ve yayın adımlarında ne yapıyoruz, sizden ne bekliyoruz, ne teslim ediyoruz.",
       "background": "sky",
       "showContact": true,

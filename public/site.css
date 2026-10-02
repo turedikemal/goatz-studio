@@ -1618,3 +1618,9 @@ html.cart-open { overflow: hidden; }
 .crumbs a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; }
 .crumbs a:hover { border-bottom-color: currentColor; background: var(--sun); }
 .crumbs [aria-current] { opacity: .75; }
+
+/* Hizmet <-> iş bağlantıları */
+.rel-works, .work-svc { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 22px 0 0; }
+.rel-works .label, .work-svc .label { font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; opacity: .8; }
+.rel-works a, .work-svc a { padding: 7px 14px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); color: var(--carbon); font-size: 14px; font-weight: 800; text-decoration: none; transition: background .15s ease; }
+.rel-works a:hover, .work-svc a:hover { background: var(--sun); }
