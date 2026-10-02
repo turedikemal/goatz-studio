@@ -9,9 +9,8 @@
   topNext.type = 'button'; topNext.className = 'wz-btn primary wz-next-top'; topNext.textContent = 'Devam et →';
   topNext.addEventListener('click', () => { if (!el.next.disabled) el.next.click(); });
   const headEl = q('.wz-head'); if (headEl) headEl.appendChild(topNext);
-  const syncTop = () => { topNext.disabled = el.next.disabled; topNext.hidden = el.next.hidden; };
+  const syncTop = () => { topNext.disabled = el.next.disabled; topNext.hidden = el.next.hidden || ['contact', 'site'].includes(steps()[state.step]); }; // kimlik ve site adımında yalnızca alttaki buton
   new MutationObserver(syncTop).observe(el.next, { attributes: true, attributeFilter: ['disabled', 'hidden'] });
-  syncTop();
   const KVKK = root.dataset.kvkk || '';
 
   // Sayaç: kişi yazmaya başlayınca 2 dakikadan geri sayar, sonuç ekranında erken bittiyse tebrik eder
@@ -446,6 +445,7 @@
     const seq = steps();
     if (state.step >= seq.length) state.step = seq.length - 1;
     const key = seq[state.step], result = key === 'result';
+    topNext.hidden = result || key === 'contact' || key === 'site';
     el.stage.textContent = key.startsWith('dq:') ? 'Amaçlarınız' : key === 'contact' ? 'Sizi tanıyalım' : key === 'site' ? 'Mevcut siteniz' : key === 'route' ? 'Başlangıç' : result ? 'Proje özeti' : 'İhtiyaçlarınız';
     el.count.textContent = `${state.step + 1} / ${seq.length}`;
     const pct = Math.round(((state.step + 1) / seq.length) * 100);
