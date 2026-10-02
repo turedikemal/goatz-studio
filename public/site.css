@@ -1854,7 +1854,7 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
 /* Hizmetler: tüm başlıklar sağa yatık */
 .blk-cards[data-g] h2, .blk-cards[data-g] h2 .w, .blk-cards[data-g] h2 .ch { font-style: italic; }
 /* Hizmetler, gündüz teması: bölüm zemini grubunun rengine uygun açık ton (beyaz-mavi-beyaz-mavi gitmesin) */
-.blk-cards[data-g] { background: color-mix(in srgb, var(--gb) var(--pt, 16%), #fff) !important; }
+html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srgb, var(--gb) var(--pt, 16%), #fff) !important; }
 .blk-cards[data-g="1"] { --pt: 22%; }
 .blk-cards[data-g="3"] { --pt: 42%; }
 .blk-cards[data-g="5"] { --pt: 14%; }
