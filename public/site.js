@@ -1409,3 +1409,43 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   });
   walk(p);
 });
+
+// Gece / gündüz teması: seçim tarayıcıda saklanır, ilk açılışta cihaz ayarına bakılır
+(() => {
+  const btn = document.getElementById('themeBtn');
+  if (!btn) return;
+  const root = document.documentElement;
+  btn.setAttribute('aria-pressed', root.dataset.theme === 'night' ? 'true' : 'false');
+  btn.addEventListener('click', () => {
+    const night = root.dataset.theme !== 'night';
+    if (night) root.setAttribute('data-theme', 'night'); else root.removeAttribute('data-theme');
+    btn.setAttribute('aria-pressed', night ? 'true' : 'false');
+    try { localStorage.setItem('goatz-tema', night ? 'night' : 'day'); } catch (e) { /* kayıt yoksa sorun değil */ }
+  });
+})();
+
+// Gece teması: okunmayan yazıları bulup düzeltir (açık renkli kartta siyah, koyu zeminde açık yazı)
+(() => {
+  const root = document.documentElement;
+  const lum = (c) => { const m = c.match(/[0-9.]+/g); if (!m) return 0; const [r, g, b] = m.slice(0, 3).map((v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }); return 0.2126 * r + 0.7152 * g + 0.0722 * b; };
+  const bgOf = (e) => { while (e) { const b = getComputedStyle(e).backgroundColor; const m = b.match(/[0-9.]+/g); if (m && (m.length < 4 || +m[3] > 0.5)) return b; e = e.parentElement; } return 'rgb(0,0,0)'; };
+  const clear = () => document.querySelectorAll('[data-nt]').forEach((e) => { e.style.color = ''; e.removeAttribute('data-nt'); });
+  let timer = 0;
+  const scan = () => {
+    clear();
+    if (root.dataset.theme !== 'night') return;
+    document.querySelectorAll('body *').forEach((e) => {
+      if (e.closest('.sr-only, script, style, svg') || ![...e.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim())) return;
+      const s = getComputedStyle(e);
+      if (s.display === 'none' || s.visibility === 'hidden') return;
+      const a = lum(s.color), bg = lum(bgOf(e));
+      if ((Math.max(a, bg) + 0.05) / (Math.min(a, bg) + 0.05) >= 3) return;
+      e.style.color = bg > 0.3 ? '#000' : '#f4f1e8';
+      e.setAttribute('data-nt', '');
+    });
+  };
+  const later = () => { clearTimeout(timer); timer = setTimeout(scan, 350); };
+  new MutationObserver((m) => { if (m.some((x) => x.type === 'childList')) later(); }).observe(document.body, { childList: true, subtree: true });
+  document.getElementById('themeBtn')?.addEventListener('click', () => setTimeout(scan, 600));
+  window.addEventListener('load', () => setTimeout(scan, 600));
+})();

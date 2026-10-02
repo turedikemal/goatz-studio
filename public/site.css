@@ -1736,11 +1736,21 @@ html.cart-open { overflow: hidden; }
 .partner.night .st-pstar { filter: grayscale(.55) brightness(1.25) hue-rotate(160deg) drop-shadow(0 0 12px #cfe0ff); animation: pt-nstar 1.8s ease-in-out infinite alternate; }
 @keyframes pt-nstar { to { filter: grayscale(.55) brightness(1.4) hue-rotate(160deg) drop-shadow(0 0 22px #e8f0ff); scale: 1.12; } }
 
-/* Gece: sis gibi bulutlar */
-.pt-fog { position: absolute; width: 60%; height: 55%; border-radius: 50%; background: radial-gradient(closest-side, rgba(190,205,255,.34), rgba(190,205,255,0)); filter: blur(18px); text-decoration: none; animation: pt-fogmove 14s ease-in-out infinite alternate; }
-.pt-fog.f1 { left: -10%; top: 8%; }
-.pt-fog.f2 { left: 38%; top: 40%; width: 70%; animation-duration: 18s; animation-direction: alternate-reverse; }
-.pt-fog.f3 { left: 15%; top: 62%; width: 50%; height: 45%; animation-duration: 16s; }
-@keyframes pt-fogmove { to { translate: 12% -6%; } }
 .pt-sky b:nth-of-type(3n) { width: 7px; height: 7px; animation-delay: -.4s; }
 .pt-sky b:nth-of-type(4n) { animation-duration: 2.2s; }
+
+/* ---------- Gece / gündüz teması ---------- */
+.theme-btn svg { width: 20px; height: 20px; }
+.theme-btn .t-moon, html[data-theme="night"] .theme-btn .t-sun { display: none; }
+html[data-theme="night"] .theme-btn .t-moon { display: block; }
+body, .panel { transition: background-color .5s ease, color .5s ease; }
+html[data-theme="night"] .panel:not(.site-footer)[style*="var(--paper)"], html[data-theme="night"] .panel:not(.site-footer)[style*="var(--sky)"] { --carbon: #f4f1e8; --paper: #12163a; color: #f4f1e8; }
+html[data-theme="night"] .panel:not(.site-footer)[style*="var(--paper)"] { background: #12163a !important; }
+html[data-theme="night"] .panel:not(.site-footer)[style*="var(--sky)"] { background: #1b2250 !important; }
+/* renkli kartlar ve kutular gündüz renginde kalır */
+html[data-theme="night"] .panel [style*="background:var(--"] { --carbon: #000; --paper: #fff; color: #000; }
+html[data-theme="night"] .nav .logo, html[data-theme="night"] .nav .logo b { color: #f4f1e8; }
+html[data-theme="night"] mark, html[data-theme="night"] .show-appcap, html[data-theme="night"] .c-face, html[data-theme="night"] .c-face * { color: #000; }
+html[data-theme="night"] .rm-no { color: #12163a; }
+html[data-theme="night"] .partner.night .pt-x { color: #000; }
+html[data-theme="night"] .sf-city { color: #f4f1e8 !important; }
