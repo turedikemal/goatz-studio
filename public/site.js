@@ -1112,7 +1112,16 @@
     const rot = restRot(el);
     el.animate([{ scale: '1 1', rotate: rot }, { scale: '1.35 .85', rotate: rot, offset: 0.35 }, { scale: '.9 1.08', rotate: rot, offset: 0.65 }, { scale: '1 1', rotate: rot }], { duration: ms(1), easing: 'ease-in-out' });
   };
+  // İş ortaklığı paneli: yıldız parlar, ev üstüne gelince panel geceye döner (dönme yok)
+  const partnerFx = () => {
+    const star = document.querySelector('.st-pstar'), house = document.querySelector('.st-pstore');
+    const panel = house && house.closest('.partner');
+    if (star) { star.addEventListener('mouseenter', () => star.classList.add('glow')); star.addEventListener('mouseleave', () => star.classList.remove('glow')); }
+    if (house && panel) { house.addEventListener('mouseenter', () => panel.classList.add('night')); house.addEventListener('mouseleave', () => panel.classList.remove('night')); }
+  };
+  partnerFx();
   const CLICKS = {
+    'st-pstar': noFx, 'st-pstore': noFx,
     'st-camera': shootPhoto, 'st-anahtar': spinMedal, 'st-coin': shyFace, 'st-check': tickCheck, 'st-star': sparkleStar,
     'st-pin': dropPin, 'st-truck': driveTruck, 'st-medal': spinMedal, 'st-heart': burstOf('heart'), 'st-chat': burstOf('star'), 'st-palette': paintPalette, 'st-box': openBox,
     'st-product': uncap('product'), 'st-bottle': uncap('bottle'), 'st-magnifier': zoomLens, 'st-pencil': writePencil, 'st-globe': spinMedal, 'st-gear': turnGear, 'st-key': spinMedal, 'st-refresh': turnGear, 'st-rocket': flyRocket, 'st-signpost': swingSign, 'st-chart': fillBars, 'st-browser': fillBrowser, 'st-map': foldMap, 'st-store': burstOf('coin'), 'st-vitrin': waveShop, 'st-cursor': clickCursor, 'st-foot': noFx, 'st-shoe': noFx, 'st-sock': noFx, 'st-code': writeCode, 'st-phone': loadPhone, 'st-layers': fanLayers, 'st-type': bounceType, 'st-bag': swingBag, 'st-tag': swingTag, 'st-bulb': lightBulb, 'st-cart': rollCart, 'st-link': pullLink, 'st-sliders': slideKnobs, 'st-photo': sunset, 'st-grid': fillGrid,
