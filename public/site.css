@@ -1797,3 +1797,7 @@ html[data-theme="night"] .wz-choice .wz-ikas, html[data-theme="night"] .wz-choic
   .nav-right .btn.solid { padding: 10px 13px; font-size: 12px; }
   .logo.has-word .logo-word { height: calc(var(--logo, 44px) * .8); width: calc(var(--logo, 44px) * .8 * 2.87); }
 }
+
+.cart-clear { justify-self: start; padding: 9px 16px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--paper); font: inherit; font-size: 14px; font-weight: 800; cursor: pointer; }
+.cart-clear:hover { background: var(--ember); color: #fff; }
+.cart-clear[hidden] { display: none; }

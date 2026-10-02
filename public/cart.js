@@ -68,7 +68,9 @@
     const list = el('div', 'cart-list');
     const empty = el('p', 'cart-empty', 'Sepetiniz boş. Hizmet kartlarındaki "Sepete ekle" düğmesiyle istediğiniz hizmetleri buraya ekleyin.');
     const go = el('a', 'cart-go', 'Sepete git →'); go.href = CART_URL;
-    panel.append(head, list, empty, go);
+    const clearAll = el('button', 'cart-clear', 'Hepsini çıkar ✕'); clearAll.type = 'button';
+    clearAll.addEventListener('click', () => { items = []; change(); });
+    panel.append(head, list, empty, clearAll, go);
     document.body.append(back, panel);
     const open = () => { place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
     const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); fab.focus(); };
@@ -104,6 +106,7 @@
       empty.hidden = items.length > 0;
       list.hidden = items.length === 0;
       go.hidden = items.length === 0;
+      clearAll.hidden = items.length === 0;
     };
     listeners.push(sync);
     sync();
