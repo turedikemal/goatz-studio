@@ -33,10 +33,59 @@
       reset() { clearInterval(tick); tick = 0; t0 = 0; done = false; bar.style.width = '100%'; set('idle', 'Bu iş yaklaşık 2 dakika sürer', '02:00'); },
     };
   })();
-  const state = { step: 0, answers: {}, services: new Set(), extras: new Set(), contact: { name: '', email: '', phone: '', consent: true, marketing: true, mkDefault: true, website: '' }, sent: false, leadSent: false, site: { has: '', url: '', ok: '', brand: '', host: '', msg: '', busy: false } };
+  const state = { step: 0, answers: {}, services: new Set(), extras: new Set(), detail: {}, contact: { name: '', email: '', phone: '', consent: true, marketing: true, mkDefault: true, website: '' }, sent: false, leadSent: false, site: { has: '', url: '', ok: '', brand: '', host: '', msg: '', busy: false } };
   const emailOk = (v) => /^[^\s@<>"']+@[^\s@<>"']+\.[^\s@<>"']+$/.test(v);
   const contactOk = () => state.contact.name.trim().length >= 2 && emailOk(state.contact.email.trim()) && state.contact.consent;
 
+  // Siteye bağlı hizmetler: "Sadece hizmet" yolunda sitesi olmayana gösterilmez
+  const SITE_BOUND = ['google', 'seo', 'geo', 'cro', 'integration'];
+  // Her hizmet için adım adım sorular. type: one = tek seçim, multi = çoklu, text = serbest yazı (isteğe bağlı)
+  const NOTE = { lab: 'Not', q: 'Eklemek istediğiniz bir şey var mı?', type: 'text' };
+  const DETAILS = {
+    photo: [
+      { lab: 'Sektör', q: 'Hangi sektörde çalışıyorsunuz?', type: 'one', o: ['Gıda ve yemek', 'Kahve', 'Kozmetik', 'Ambalaj', 'Mum', 'Seramik ve sofra', 'Cam', 'Takı ve aksesuar', 'Başka bir sektör'] },
+      { lab: 'Ürün sayısı', q: 'Kaç ürünün fotoğrafı çekilecek?', type: 'one', o: ['1–10 ürün', '11–30 ürün', '31–100 ürün', '100’den fazla', 'Henüz belli değil'] },
+      { lab: 'Çekim tarzı', q: 'Nasıl bir çekim düşünüyorsunuz?', type: 'multi', o: ['Beyaz fon', 'Renkli fon', 'Ortam ve mekân çekimi', 'Birlikte karar verelim'] },
+      { lab: 'Kullanım', q: 'Fotoğrafları nerede kullanacaksınız?', type: 'multi', o: ['Web sitemde', 'Pazaryerlerinde', 'Sosyal medyada', 'Katalog ve basılı işlerde'] },
+    ],
+    google: [
+      { lab: 'İhtiyaç', q: 'Google tarafında neye ihtiyacınız var?', type: 'multi', o: ['Ziyaret ve satış ölçümü (Analytics)', 'Ürünlerimin Google’da listelenmesi (Merchant Center)', 'Arama performansını izlemek (Search Console)', 'Dönüşüm takibi (Tag Manager)', 'Emin değilim'] },
+      { lab: 'Mevcut durum', q: 'Şu an Google araçlarından kurulu olan var mı?', type: 'one', o: ['Hiçbiri kurulu değil', 'Bir kısmı kurulu', 'Hepsi kurulu ama düzenlenmeli', 'Bilmiyorum'] },
+    ],
+    seo: [
+      { lab: 'Beklenti', q: 'SEO’dan beklentiniz nedir?', type: 'multi', o: ['Google’da daha üst sıralara çıkmak', 'Ürün ve kategori sayfalarımın bulunması', 'Teknik sorunların düzeltilmesi', 'Blog ve içerikle trafik çekmek', 'Emin değilim'] },
+      { lab: 'Öncelikli sayfalar', q: 'Hangi sayfalar öncelikli?', type: 'multi', o: ['Ana sayfa', 'Kategori sayfaları', 'Ürün sayfaları', 'Blog', 'Hepsi'] },
+    ],
+    geo: [
+      { lab: 'Araçlar', q: 'Hangi yapay zekâ araçlarında görünmek istiyorsunuz?', type: 'multi', o: ['ChatGPT', 'Google yapay zekâ özetleri', 'Gemini, Perplexity ve benzerleri', 'Hepsi'] },
+      { lab: 'Amaç', q: 'Ne istiyorsunuz?', type: 'multi', o: ['Markamın tanınması', 'Ürünlerimin önerilmesi', 'Doğru bilgilerle anılmak', 'Emin değilim'] },
+    ],
+    content: [
+      { lab: 'İçerik', q: 'Hangi içeriklere ihtiyacınız var?', type: 'multi', o: ['Ürün açıklamaları', 'Site yazıları (hakkımızda, SSS vb.)', 'Kampanya görselleri', 'Marka dili ve ton belirleme', 'Emin değilim'] },
+      { lab: 'Hacim', q: 'Kaç ürün ya da sayfa için?', type: 'one', o: ['1–10', '11–50', '51–200', '200’den fazla', 'Henüz belli değil'] },
+    ],
+    cro: [
+      { lab: 'Sorun', q: 'Hangi sorunu yaşıyorsunuz?', type: 'multi', o: ['Ziyaretçi geliyor ama satın almıyor', 'Sepetten vazgeçiliyor', 'Mobilde kullanım zor', 'Ürünler zor bulunuyor', 'Emin değilim'] },
+      { lab: 'Ziyaretçi', q: 'Sitenize aylık yaklaşık kaç kişi geliyor?', type: 'one', o: ['1.000’den az', '1.000–10.000', '10.000’den fazla', 'Bilmiyorum'] },
+    ],
+    integration: [
+      { lab: 'Bağlantı', q: 'Neyle bağlantı kurmak istiyorsunuz?', type: 'multi', o: ['Pazaryerleri', 'Muhasebe programı', 'Stok ve sipariş programı (ERP)', 'Başka bir sistem', 'Emin değilim'] },
+      { lab: 'Mevcut sistem', q: 'Şu an kullandığınız bir sistem var mı?', type: 'one', o: ['Evet, çalışıyor', 'Evet, ama sorunlu', 'Hayır, sıfırdan kurulacak'] },
+    ],
+    software: [
+      { lab: 'Araç', q: 'Nasıl bir araç düşünüyorsunuz?', type: 'multi', o: ['Yönetim ekranı', 'Otomatik çalışan araç (rapor, bildirim vb.)', 'Müşteri ya da bayi uygulaması', 'Henüz bilmiyorum'] },
+      { lab: 'Kullanıcı', q: 'Kimler kullanacak?', type: 'multi', o: ['Ben ve ekibim', 'Müşterilerim', 'Bayilerim'] },
+    ],
+    consult: [
+      { lab: 'Konu', q: 'Ne için danışmanlık istiyorsunuz?', type: 'multi', o: ['Nereden başlayacağımı bilmiyorum', 'Mevcut işimi değerlendirmek', 'Satışı büyütme planı', 'Pazaryeri ya da yurt dışı satışa açılmak', 'Doğru altyapıyı seçmek'] },
+      { lab: 'Zamanlama', q: 'Ne zaman başlamak istersiniz?', type: 'one', o: ['Hemen', '1 ay içinde', 'Sadece bilgi alıyorum'] },
+    ],
+  };
+  const qsOf = (id) => (DETAILS[id] || []).concat([NOTE]);
+  const dqSteps = () => (['service', 'custom'].includes(state.answers.route) ? selectedServices() : []).flatMap((x) => qsOf(x[0]).map((_, i) => 'dq:' + x[0] + ':' + i));
+  const dAns = (id, i) => ((state.detail[id] = state.detail[id] || {})[i] = (state.detail[id] || {})[i] || []);
+  const detailLine = (id) => qsOf(id).map((qd, i) => { const a = dAns(id, i).filter(Boolean); return a.length ? qd.lab + ': ' + a.join(', ') : ''; }).filter(Boolean).join(' | ');
+  const noSiteOnly = () => state.answers.route === 'service' && state.site.has === 'no';
   const serviceList = [
     ['photo', 'Ürün fotoğrafı', 'Ürünleriniz için yeni fotoğraflar çekilir. Hangi ürünlerin, nasıl çekileceğini sizinle konuşarak netleştiririz.'],
     ['google', 'Google kurulumu', 'Sitenizin Google bağlantıları kurulur; ziyaretleri ve satışları takip edebilirsiniz.'],
@@ -46,7 +95,6 @@
     ['cro', 'Satış deneyimi', 'Müşterinin ürünü bulmasını ve alışverişini tamamlamasını kolaylaştıran düzenlemeler yapılır.'],
     ['integration', 'Entegrasyonlar', 'Mağazanızın pazaryerleri ve kullandığınız diğer sistemlerle bağlantıları değerlendirilir.'],
     ['software', 'Özel yazılım', 'İşinize özel bir uygulama, yönetim ekranı veya otomatik çalışan araç geliştirilir.'],
-    ['care', 'Bakım & destek', 'Site açıldıktan sonra güncellemeler ve teknik işler için düzenli destek alırsınız.'],
     ['consult', 'Danışmanlık', 'Nereden başlayacağınızı ve hangi işleri önce yapacağınızı birlikte belirleriz.'],
   ];
 
@@ -55,9 +103,7 @@
       ['new', 'Yeni e-ticaret sitesi', 'Henüz sitem yok. Ürünlerimi internetten satabileceğim bir site istiyorum.'],
       ['migration', 'Platform geçişi', 'Sitem var. Ürünlerimi ve mağazamı ikas altyapısına taşımak istiyorum.'],
       ['custom', 'Özel proje', 'Hazır bir sitenin dışında, bana özel bir uygulama veya sistem gerekiyor.'],
-      ['service', 'Sadece hizmet', 'Yeni site ya da taşıma istemiyorum, yalnızca ihtiyacım olan hizmeti almak istiyorum. Örneğin ürün fotoğrafı, Google kurulumu, SEO, yapay zekâ aramalarında görünürlük, metin ve tasarım, entegrasyon, bakım ve destek ya da danışmanlık.']] },
-    platform: { title: 'Şu anda hangi altyapıyı kullanıyorsunuz?', desc: 'Veri taşıma kapsamını belirlemek için.', options: [
-      ['ikas', 'ikas', 'Mağazam zaten ikas altyapısında.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
+      ['service', 'Sadece hizmet', 'Yeni site ya da taşıma istemiyorum. Yalnızca ihtiyacım olan hizmeti almak istiyorum.'], ['Shopify', 'Shopify', ''], ['WooCommerce', 'WooCommerce', ''], ['Ticimax / IdeaSoft', 'Ticimax / IdeaSoft', ''],
       ['other', 'Başka bir altyapı', 'Görüşmede birlikte değerlendirelim.'], ['unknown', 'Emin değilim', 'Bu bilgiyi daha sonra netleştirebiliriz.']] },
     products: { title: "Kaç ürün satışacaksınız?", desc: "Ürün sayısını seçin", options: [
       ["1-100", "1-100 ürün", "En fazla 100"],
@@ -122,8 +168,8 @@
     const r = state.answers.route;
     // Mevcut web sitesi olanlara erişim, yayın ve kurulum durumu da sorulur
     const existing = state.site.has === 'yes' ? ['access', 'domain', 'active', 'setup'] : [];
-    if (r === 'service') return ['contact', 'site', 'route', ...existing, 'services', 'result'];
-    if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', 'result'];
+    if (r === 'service') return ['contact', 'site', 'route', 'services', ...dqSteps(), 'result'];
+    if (r === 'custom') return ['contact', 'site', 'route', 'brief', ...existing, 'services', ...dqSteps(), 'result'];
     return ['contact', 'site', 'route', ...(r === 'migration' ? ['platform'] : []), ...existing, 'products', 'prodtype', 'wholesale', 'info', 'images', 'intl', 'users', 'result'];
   };
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -301,7 +347,7 @@
   const resultServiceCards = () => {
     const selected = new Set(selectedServices().map((s) => s[0]));
     const recommended = suggested().filter((id) => !selected.has(id));
-    const available = serviceList.filter((s) => !selected.has(s[0]));
+    const available = serviceList.filter((s) => !selected.has(s[0]) && !(noSiteOnly() && SITE_BOUND.includes(s[0])));
     const main = available.filter((s) => recommended.includes(s[0]));
     const other = available.filter((s) => !recommended.includes(s[0]));
     const all = [...main, ...other];
@@ -339,7 +385,7 @@
   const summaryText = () => {
     const a = state.answers;
     return 'THE GOATZ STUDIO — PROJE ÖZETİ\n\n' + (a.route === 'service' ? 'Bağımsız hizmetler' : 'Önerilen paket: ' + packageName()) + '\n\n'
-      + base().map((s) => '• ' + s).join('\n') + '\n\nSEÇİLEN HİZMETLER\n' + (selectedServices().map((s) => '• ' + s[1]).join('\n') || '—') + '\n\nCEVAPLAR\n' + siteLine()
+      + base().map((s) => '• ' + s).join('\n') + '\n\nSEÇİLEN HİZMETLER\n' + (selectedServices().map((s) => '• ' + s[1] + (detailLine(s[0]) ? '\n    ' + detailLine(s[0]) : '')).join('\n') || '—') + '\n\nCEVAPLAR\n' + siteLine()
       + Object.entries(a).filter(([k]) => questions[k]).map(([k, v]) => questions[k].title + ' → ' + (questions[k].options.find((o) => o[0] === v) || ['', v])[1]).join('\n')
       + (a.brief ? '\n\nProje notu: ' + a.brief : '') + '\n\nÖn kapsamdır. Fiyatlar ve nihai kapsam görüşmede belirlenir.';
   };
@@ -365,7 +411,7 @@
     const answers = [];
     if (st.has) answers.push(['Mevcut web sitesi', st.has === 'yes' ? (st.url.trim() || 'Var (adres yazılmadı)') + (st.brand ? ' — ' + st.brand : '') : 'Yok']);
     Object.entries(a).filter(([k]) => questions[k]).forEach(([k, v]) => answers.push([questions[k].title, (questions[k].options.find((o) => o[0] === v) || ['', v])[1]]));
-    return { route: a.route === 'service' ? 'Bağımsız hizmetler' : 'Paket', package: packageName(), scope: base(), services: selectedServices().map((x) => x[1]), answers, note: a.brief || '', marketing: !!state.contact.marketing };
+    return { route: a.route === 'service' ? 'Bağımsız hizmetler' : 'Paket', package: packageName(), scope: base(), services: selectedServices().map((x) => x[1] + (detailLine(x[0]) ? ' — ' + detailLine(x[0]) : '')), answers, note: a.brief || '', marketing: !!state.contact.marketing };
   };
   const post = (complete) => fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: state.contact.name.trim(), email: state.contact.email.trim(), phone: state.contact.phone.trim(), website: state.contact.website, message: leadMessage(complete) }) });
 
@@ -377,7 +423,7 @@
     const seq = steps();
     if (state.step >= seq.length) state.step = seq.length - 1;
     const key = seq[state.step], result = key === 'result';
-    el.stage.textContent = key === 'contact' ? 'Sizi tanıyalım' : key === 'site' ? 'Mevcut siteniz' : key === 'route' ? 'Başlangıç' : result ? 'Proje özeti' : 'İhtiyaçlarınız';
+    el.stage.textContent = key.startsWith('dq:') ? 'Amaçlarınız' : key === 'contact' ? 'Sizi tanıyalım' : key === 'site' ? 'Mevcut siteniz' : key === 'route' ? 'Başlangıç' : result ? 'Proje özeti' : 'İhtiyaçlarınız';
     el.count.textContent = `${state.step + 1} / ${seq.length}`;
     const pct = Math.round(((state.step + 1) / seq.length) * 100);
     el.fill.style.width = pct + '%';
@@ -408,8 +454,19 @@
       html = '<h2 tabindex="-1">Aklınızdaki projeyi anlatın.</h2><p class="wz-lead">Ne yapmak istiyorsunuz? Kısa bir açıklama yeterli. Henüz net değilse boş bırakabilirsiniz.</p><label class="wz-sr" for="wz-brief">Proje açıklaması</label><textarea id="wz-brief" maxlength="1200" placeholder="Örneğin: Bayilerimin sipariş verebildiği özel bir sistem istiyorum.">' + esc(state.answers.brief || '') + '</textarea>';
       el.next.disabled = false;
     }
+    if (key.startsWith('dq:')) {
+      const [, did, dn] = key.split(':'), qd = qsOf(did)[+dn], cur = dAns(did, +dn), svc = serviceList.find((x) => x[0] === did);
+      el.stage.textContent = svc[1] + ' · ' + (+dn + 1) + '/' + qsOf(did).length;
+      if (qd.type === 'text') {
+        html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">İsteğe bağlı. Boş bırakıp devam edebilirsiniz.</p><div class="wz-form" style="max-width:none"><textarea id="wz-dq-text" maxlength="400" placeholder="Yazabilirsiniz…">' + esc(cur[0] || '') + '</textarea></div>';
+        el.next.disabled = false;
+      } else {
+        html = '<h2 tabindex="-1">' + esc(qd.q) + '</h2><p class="wz-lead">' + (qd.type === 'multi' ? 'Birden fazla seçebilirsiniz.' : 'Birini seçin.') + '</p><div class="wz-grid">' + qd.o.map((o, i) => card(o, o, '', cur.includes(o), i + (serviceList.indexOf(svc) % 4))).join('').split('data-value=').join('data-dqv=') + '</div>';
+        el.next.disabled = cur.length === 0;
+      }
+    }
     if (key === 'services') {
-      html = '<h2 tabindex="-1">Hangi konularda destek istiyorsunuz?</h2><p class="wz-lead">İhtiyacınız olan kartları seçin. Birden fazla seçebilirsiniz. Emin değilseniz Danışmanlık seçeneğiyle başlayın.</p><div class="wz-grid">' + serviceList.map((o, i) => card(o[0], o[1], o[2], state.services.has(o[0]), i)).join('') + '</div>';
+      html = '<h2 tabindex="-1">' + (state.answers.route === 'service' ? (noSiteOnly() ? 'Hangi hizmeti almak istiyorsunuz?' : 'Sitenizde hangi hizmeti almak istiyorsunuz?') : 'Hangi konularda destek istiyorsunuz?') + '</h2><p class="wz-lead">İhtiyacınız olan kartları seçin. Birden fazla seçebilirsiniz. Emin değilseniz Danışmanlık seçeneğiyle başlayın.' + (noSiteOnly() ? ' Web siteniz olmadığı için yalnızca siteden bağımsız hizmetler gösteriliyor.' : '') + '</p><div class="wz-grid">' + serviceList.map((o, i) => [o, i]).filter(([o]) => !(noSiteOnly() && SITE_BOUND.includes(o[0]))).map(([o, i]) => card(o[0], o[1], o[2], state.services.has(o[0]), i)).join('') + '</div>';
       el.next.disabled = state.services.size === 0;
     }
     if (result) {
@@ -417,7 +474,7 @@
       html = `<h2 tabindex="-1">Size uygun paket ve hizmetler.</h2><p class="wz-lead">Cevaplarınıza göre hazırladığımız ilk kapsam. Ek hizmetleri ayrı ayrı ekleyip çıkarabilirsiniz.</p>
         ${packTiers(`<div class="wz-pack"><div><small>SİZE UYGUN PAKET</small><h3>${packageName()}</h3><p>${esc(packageReason())}</p></div><span class="wz-pill">Sizin için en uygun</span></div>`)}
         ${answerChips()}
-        <h3 class="wz-sub">Sizin için yapacaklarımız</h3>${b.length ? '<ul class="wz-summary wz-todo">' + b.map((s) => '<li>✓ ' + esc(s) + '</li>').join('') + '</ul>' : '<p class="wz-lead">Yeni web sitesi kurulumu eklenmedi. Seçtiğiniz hizmetler aşağıda.</p>'}
+        ${b.length ? '<h3 class="wz-sub">Sizin için yapacaklarımız</h3><ul class="wz-summary wz-todo">' + b.map((x) => '<li>✓ ' + esc(x) + '</li>').join('') + '</ul>' : ''}
         ${packageDiff()}
         ${packageFeatures()}
         <div class="wz-sel"><div class="wz-sel-top" id="wz-sel-top"></div><h3 class="wz-sel-title">Seçtiğiniz bağımsız hizmetler</h3><div id="wz-selection"></div></div>${resultServiceCards()}
@@ -467,7 +524,7 @@
           }
         }
       } else {
-        if (key === 'site') { state.site.has = v; state.site.ok = ''; state.site.brand = ''; state.site.msg = ''; if (v === 'no') state.site.url = ''; render(); return; }
+        if (key === 'site') { state.site.has = v; if (v === 'no') SITE_BOUND.forEach((id) => { state.services.delete(id); state.extras.delete(id); }); state.site.ok = ''; state.site.brand = ''; state.site.msg = ''; if (v === 'no') state.site.url = ''; render(); return; }
         if (key === 'route' && state.answers.route !== v) { state.answers = { route: v }; state.services.clear(); state.extras.clear(); } else state.answers[key] = v;
         render();
       }
@@ -478,6 +535,16 @@
       fm.addEventListener('input', () => { timer.start(); state.contact.name = f('name').value; state.contact.email = f('email').value; state.contact.phone = f('phone').value; state.contact.website = f('website').value; state.contact.consent = f('consent').checked; state.contact.marketing = f('marketing').checked; el.next.disabled = !contactOk(); });
     }
     if (key === 'site') { const u = el.screen.querySelector('[name="siteurl"]'); if (u) u.addEventListener('blur', () => { const st = state.site; if (st.has === 'yes' && st.url.trim() && !st.ok) checkSite(); }); if (u) u.addEventListener('input', () => { const st = state.site; u.value = u.value.replace(/^\s*(https?:\/\/)?(www\.)?/i, ''); st.url = u.value; st.ok = ''; st.brand = ''; st.msg = ''; el.next.disabled = true; clearTimeout(st.deb); if (st.url.trim().length > 3) st.deb = setTimeout(checkSite, 900); const p = el.screen.querySelector('.wz-site-status'); if (p) { p.textContent = ''; p.className = 'wz-site-status'; } }); }
+    if (key.startsWith('dq:')) {
+      const [, did, dn] = key.split(':'), qd = qsOf(did)[+dn], cur = dAns(did, +dn);
+      if (qd.type === 'text') q('#wz-dq-text').addEventListener('input', (e) => { cur[0] = e.target.value; });
+      el.screen.querySelectorAll('[data-dqv]').forEach((b) => b.addEventListener('click', () => {
+        const v = b.dataset.dqv, k = cur.indexOf(v);
+        if (qd.type === 'one') { cur.length = 0; cur.push(v); } else if (k >= 0) cur.splice(k, 1); else cur.push(v);
+        el.screen.querySelectorAll('[data-dqv]').forEach((x) => { const on = cur.includes(x.dataset.dqv); x.setAttribute('aria-pressed', on); x.querySelector('.wz-mark').textContent = on ? '✓' : ''; });
+        el.next.disabled = cur.length === 0;
+      }));
+    }
     if (key === 'brief') q('#wz-brief').addEventListener('input', (e) => { state.answers.brief = e.target.value; });
 
     if (result) {
@@ -538,7 +605,7 @@
     const services = selectedServices();
     const box = q('#wz-selection');
     box.innerHTML = services.length
-      ? '<div class="wz-selected">' + services.map((s) => '<div class="wz-item" data-id="' + s[0] + '" data-i="' + (serviceList.indexOf(s) % 4) + '"><div><strong>' + esc(s[1]) + '</strong><p>' + bold(s[2]) + '</p></div><button type="button" class="wz-btn" data-remove="' + s[0] + '" aria-label="' + esc(s[1]) + ' hizmetini çıkar">Çıkar</button></div>').join('') + '</div>'
+      ? '<div class="wz-selected">' + services.map((s) => '<div class="wz-item" data-id="' + s[0] + '" data-i="' + (serviceList.indexOf(s) % 4) + '"><div><strong>' + esc(s[1]) + '</strong><p>' + bold(s[2]) + '</p>' + (detailLine(s[0]) ? '<p class="wz-item-det">' + esc(detailLine(s[0])) + '</p>' : '') + '</div><button type="button" class="wz-btn" data-remove="' + s[0] + '" aria-label="' + esc(s[1]) + ' hizmetini çıkar">Çıkar</button></div>').join('') + '</div>'
       : '<div class="wz-empty">Paketinizi ihtiyaçlarınıza göre tamamlayın. Aşağıdan seçtiğiniz ek hizmetler paketinize eklenecek ve burada listelenecek.</div>';
     const top = q('#wz-sel-top');
     top.innerHTML = services.length ? '<button type="button" class="wz-btn" data-removeall>Hepsini çıkar ✕</button>' : '';

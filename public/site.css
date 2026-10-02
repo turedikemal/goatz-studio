@@ -1394,3 +1394,17 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wz-ikas { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px 5px 8px; border: 2px solid var(--carbon); border-radius: var(--r-pill); background: var(--violet, #5c4ade); color: #fff; font-size: 17px; font-weight: 900; font-style: italic; letter-spacing: -.02em; line-height: 1; box-shadow: 2px 3px 0 var(--carbon); rotate: -3deg; }
 .wz-ikas i { width: 14px; height: 14px; border: 2px solid var(--carbon); border-radius: 50%; background: var(--sun); }
 .wz-choice[aria-pressed="true"] .wz-ikas { border-color: #fff; box-shadow: 2px 3px 0 #fff; }
+
+/* Hizmet amaç soruları */
+.wz-dets { display: grid; gap: 14px; }
+.wz-det { padding: clamp(16px, 2vw, 24px); border: 2px solid var(--carbon); border-radius: var(--r-card); background: var(--sky); }
+.wz-det[data-i="1"] { background: var(--mint); } .wz-det[data-i="2"] { background: var(--lavender); } .wz-det[data-i="3"] { background: var(--sun); }
+.wz-det h3 { margin: 0 0 8px; font-size: clamp(24px, 3vw, 36px); line-height: .95; font-weight: 900; font-style: italic; text-transform: uppercase; letter-spacing: -.02em; }
+.wz-det-q { margin: 14px 0 8px; font-size: 16px; font-weight: 800; }
+.wz-picks { display: flex; flex-wrap: wrap; gap: 8px; }
+.wz-pick { padding: 10px 16px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: #fff; color: var(--carbon); font: inherit; font-size: 15px; font-weight: 700; cursor: pointer; transition: translate .15s ease; }
+.wz-pick:hover { translate: 0 -2px; }
+.wz-pick[aria-pressed="true"] { background: var(--carbon); color: #fff; }
+.wz-det-note { display: grid; gap: 6px; margin-top: 16px; font-size: 13px; font-weight: 800; }
+.wz-det-note input { width: 100%; padding: 12px 16px; border: 1px solid var(--carbon); border-radius: 14px; background: #fff; font: inherit; font-size: 16px; font-weight: 500; }
+.wz-item-det { font-weight: 700; }
