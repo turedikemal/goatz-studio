@@ -51,16 +51,21 @@
     bubble.innerHTML = '<span>Seni bekliyorum</span><svg class="cb-tail" viewBox="0 0 34 26" aria-hidden="true"><path d="M4 1C4 14 12 22 30 10C20 12 15 8 17 1Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="0" width="11" height="2.6" fill="#fff"/></svg>';
     bubble.setAttribute('aria-hidden', 'true');
     fab.append(bubble);
-    let bubT = 0, bubOff = 0;
+    // Sepet boşken ve doluyken ayrı cümleler; sırayla karışık gelir, arka arkaya aynı cümle tekrarlanmaz
+    const SAYS_EMPTY = ['Seni bekliyorum.', 'Bakışıyoruz ama boşum.', 'Aramızda bir boşluk var.', 'Gez sen, ben beklerim.', 'Bir şey beğendin sanki.', 'Bana da bir şey ayır.', 'Boş gezmek de bir yere kadar.', 'İçime güzel şeyler doğsun.'];
+    const SAYS_FULL = ['Doldurdun, gittin.', 'Eklerken iyiydik.', 'Gözüm hâlâ sende.', 'Beni de götür.', 'Seçtiklerinle baş başa kaldık.', 'Ara sıra bana da bak.', 'Unutuldum galiba.', 'İçim doldu, bekleyişim bitmedi.', 'Hâlâ aynı köşedeyim.', 'Bir tıklayıp hâlimi sorsan.'];
+    const lastSaid = { e: -1, f: -1 };
+    const pick = () => { const full = items.length > 0, list = full ? SAYS_FULL : SAYS_EMPTY, k = full ? 'f' : 'e'; let n; do { n = Math.floor(Math.random() * list.length); } while (n === lastSaid[k] && list.length > 1); lastSaid[k] = n; return list[n]; };
+    const bubText = bubble.querySelector('span');
+    let bubT = 0, bubOff = 0, bubFull = null;
     const bubbleStop = () => { clearTimeout(bubT); clearTimeout(bubOff); bubble.classList.remove('show'); };
     const bubbleNext = (ms) => { clearTimeout(bubT); bubT = setTimeout(() => {
-      if (!items.length) return;
       const busy = document.hidden || document.documentElement.classList.contains('cart-open');
-      if (!busy) { bubble.classList.add('show'); clearTimeout(bubOff); bubOff = setTimeout(() => bubble.classList.remove('show'), 5000); }
+      if (!busy) { bubText.textContent = pick(); bubble.classList.add('show'); clearTimeout(bubOff); bubOff = setTimeout(() => bubble.classList.remove('show'), 5000); }
       bubbleNext(70000 + Math.random() * 50000);
     }, ms); };
-    const bubbleSync = () => { if (!items.length) { bubbleStop(); bubSeen = false; } else if (!bubSeen) { bubSeen = true; bubbleNext(20000); } };
-    let bubSeen = false;
+    // Boşken ilk cümle ~30 sn sonra, doluya geçince ~20 sn sonra; sonrası 70-120 sn aralıkla
+    const bubbleSync = () => { const full = items.length > 0; if (full !== bubFull) { bubFull = full; bubble.classList.remove('show'); bubbleNext(full ? 20000 : 30000); } };
     rail.append(fab);
     main.append(rail);
     const place = () => {
