@@ -4688,8 +4688,8 @@
               "image": ""
             },
             {
-              "title": "Google Merchant Center Kurulumu",
-              "text": "Ürünlerinizi Google’a aktaran veri akışını kuruyor; hesap, site bağlantısı ve ürün verilerini kontrol ediyoruz.",
+              "title": "Google Entegrasyonları Kurulumu",
+              "text": "Bir e-ticaret sitesi için gerekli tüm Google bağlantılarını kuruyoruz: Merchant Center, Search Console, Tag Manager ve diğer entegrasyonlar.",
               "color": "lavender",
               "sticker": "chart",
               "image": ""
