@@ -1117,15 +1117,17 @@
     const star = document.querySelector('.st-pstar'), house = document.querySelector('.st-pstore');
     const panel = house && house.closest('.partner');
     if (star) { star.addEventListener('mouseenter', () => star.classList.add('glow')); star.addEventListener('mouseleave', () => star.classList.remove('glow')); }
-    if (house && panel) { house.addEventListener('mouseenter', () => panel.classList.add('night')); house.addEventListener('mouseleave', () => panel.classList.remove('night')); }
   };
   partnerFx();
-  // Ev efekti 5 saniyede bir kendiliğinden: gündüz <-> gece (üstüne gelince de gece olur)
-  const autoNight = document.querySelector('.partner');
-  if (autoNight && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    let hov = false; const hs = autoNight.querySelector('.st-pstore');
-    if (hs) { hs.addEventListener('mouseenter', () => { hov = true; }); hs.addEventListener('mouseleave', () => { hov = false; }); }
-    setInterval(() => { if (!hov) autoNight.classList.toggle('night'); }, 5000);
+  // İş ortaklığı paneli site temasını izler: site geceyse panel de gece (ev üstüne gelince gündüzde de gece olur)
+  const ptPanel = document.querySelector('.partner');
+  if (ptPanel) {
+    let hov = false;
+    const sync = () => ptPanel.classList.toggle('night', hov || document.documentElement.dataset.theme === 'night');
+    const hs = ptPanel.querySelector('.st-pstore');
+    if (hs) { hs.addEventListener('mouseenter', () => { hov = true; sync(); }); hs.addEventListener('mouseleave', () => { hov = false; sync(); }); }
+    new MutationObserver(sync).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    sync();
   }
   const CLICKS = {
     'st-pstar': noFx, 'st-pstore': noFx,
