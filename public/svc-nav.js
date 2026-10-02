@@ -5,24 +5,31 @@
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const items = blocks.map((b, i) => ({ b, i, id: b.id, name: (b.querySelector('h2') || {}).textContent || '' }));
 
-  // Yumuşak geçiş: yavaş başlar, ortada hızlanır, yavaş biter (ease-in-out). Mesafe uzadıkça süre biraz uzar; yeni bir hedef gelirse mevcut kaymadan devam eder.
-  const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
-  let anim = 0;
-  const smoothTo = (y) => {
-    cancelAnimationFrame(anim);
-    const from = window.scrollY, dist = y - from;
-    if (Math.abs(dist) < 2) return;
-    if (reduced) { window.scrollTo({ top: y, behavior: 'instant' }); return; }
-    const dur = Math.min(1700, 800 + Math.abs(dist) * 0.09);
-    if (window.__lenis && window.__lenis.scrollTo) { window.__lenis.scrollTo(y, { duration: dur / 1000, easing: ease, force: true }); return; }
-    const t0 = performance.now();
-    const step = (now) => {
-      const p = Math.min(1, (now - t0) / dur);
-      window.scrollTo({ top: from + dist * ease(p), behavior: 'instant' });
-      if (p < 1) anim = requestAnimationFrame(step);
-    };
-    anim = requestAnimationFrame(step);
+  // Yumuşak geçiş: sönümlü yay hareketi. Yavaş kalkar, ortada hızlanır, yavaş oturur; kayma sürerken yeni hedef gelirse hız korunur,
+  // durup yeniden başlamaz (takılma olmaz). Uzak hedeflerde daha yumuşak (daha uzun) gider.
+  let pos = 0, vel = 0, target = 0, w = 5, raf = 0, last = 0;
+  const setY = (v) => { if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(v, { immediate: true, force: true }); else window.scrollTo({ top: v, behavior: 'instant' }); };
+  const stopAnim = () => { cancelAnimationFrame(raf); raf = 0; vel = 0; };
+  const animTick = (now) => {
+    const dt = Math.min(0.034, (now - last) / 1000 || 0.016); last = now;
+    const acc = -w * w * (pos - target) - 2 * w * vel; // kritik sönümlü yay
+    vel += acc * dt; pos += vel * dt;
+    if (Math.abs(pos - target) < 0.5 && Math.abs(vel) < 8) { setY(target); raf = 0; vel = 0; return; }
+    setY(pos);
+    raf = requestAnimationFrame(animTick);
   };
+  const smoothTo = (y) => {
+    if (reduced) { setY(y); return; }
+    if (!raf) { pos = window.scrollY; vel = 0; last = performance.now(); }
+    target = y;
+    // Uzak hedef: aradaki bölümlerin hepsini tek tek kaydırıp (hepsinin animasyonlarını birden tetikleyip) takılmaya yol açmak yerine,
+    // hedefin hemen yakınına geçilir ve son kısım yumuşakça süzülerek oturur. Süre her mesafede aynı kalır.
+    const GLIDE = 900;
+    if (Math.abs(target - pos) > GLIDE * 1.6) { pos = target - Math.sign(target - pos) * GLIDE; setY(pos); vel = 0; }
+    w = 7.5;
+    if (!raf) raf = requestAnimationFrame(animTick);
+  };
+  ['wheel', 'touchstart', 'keydown'].forEach((ev) => window.addEventListener(ev, () => { if (raf) stopAnim(); }, { passive: true })); // kullanıcı kaydırmaya başlarsa bırakır
   const goTo = (b) => smoothTo(Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - 84)));
   // Bağlantılar
   const link = (a) => a.addEventListener('click', (e) => {
@@ -53,6 +60,7 @@
   const pills = [...track.children];
 
   // Sol kenarda mini filtre (geniş ekranda): numaralı yuvarlaklar, üstüne gelince başlık açılır, aktif olan kendi renginde dolu
+  let hoverT = 0; // tek ortak zamanlayıcı: listeyi tararken yalnız durulan kategori için gidilir
   const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
@@ -74,8 +82,7 @@
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     // Fare ile üstüne gelince (masaüstü) tıklamaya gerek kalmadan o bölüme gider; kısa bir bekleme, listeyi tararken sayfanın sıçramaması için
-    let hoverT = 0;
-    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 120); });
+    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 200); });
     a.addEventListener('mouseleave', () => clearTimeout(hoverT));
     rail.append(a);
   });
@@ -85,15 +92,19 @@
   const railPills = [...rail.children];
 
   let current = -1;
+  let tops = [], lastBottom = 0;
+  const measure = () => { const s = window.scrollY; tops = blocks.map((b) => b.getBoundingClientRect().top + s); lastBottom = blocks[blocks.length - 1].getBoundingClientRect().bottom + s; };
+  measure();
+  setInterval(measure, 800); // içerik yüklenirken yükseklikler değişir
+  window.addEventListener('resize', measure);
   const update = () => {
     const vh = window.innerHeight;
-    const first = blocks[0].getBoundingClientRect().top;
-    const last = blocks[blocks.length - 1].getBoundingClientRect().bottom;
+    const sy = window.scrollY, first = tops[0] - sy, last = lastBottom - sy; // konumlar önbellekte: kaydırırken her karede yerleşim okunmaz
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
     rail.hidden = !inside;
     let idx = 0;
-    blocks.forEach((b, i) => { if (b.getBoundingClientRect().top <= vh * 0.4) idx = i; });
+    tops.forEach((t, i) => { if (t - sy <= vh * 0.4) idx = i; });
     if (idx !== current) {
       current = idx;
       pills.forEach((p, i) => p.classList.toggle('on', i === idx));
