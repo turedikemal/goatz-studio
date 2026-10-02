@@ -51,7 +51,9 @@
     const R = (n) => { const v = Math.sin((x.i + 1) * 12.9898 * n) * 43758.5453; return v - Math.floor(v); };
     a.style.setProperty('--d', (-R(1) * 9).toFixed(2) + 's');
     a.style.setProperty('--t', (7 + R(2) * 6).toFixed(1) + 's');
-    a.style.setProperty('--amp', (2 + R(3) * 2.5).toFixed(1) + 'px');
+    a.style.setProperty('--amp', (1.8 + R(3) * 1.2).toFixed(1) + 'px');
+    a.style.setProperty('--sx', (2.5 + R(6) * 2.5).toFixed(1) + 'px');
+    a.style.setProperty('--rot', (0.7 + R(7) * 0.6).toFixed(2) + 'deg');
     a.innerHTML = '<span class="v"></span>';
     a.querySelector('.v').textContent = x.name.trim();
     a.title = x.name.trim();

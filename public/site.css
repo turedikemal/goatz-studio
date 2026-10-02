@@ -1884,12 +1884,12 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 /* Sol kategori filtresi: alt alta liste, her biri kendi çerçevesinde; hafifçe süzülür. Kartlar ona yer açmak için içeri alınır (siyah boşluk yok) */
 @media (min-width: 1200px) { .blk-cards[data-g] .blk-in { padding-left: calc(clamp(16px, 4vw, 48px) + 236px); } }
 .svc-rail-wrap { position: absolute; z-index: 45; left: 30px; width: 280px; pointer-events: none; }
-.svc-rail { position: sticky; top: 130px; display: grid; gap: 9px; justify-items: start; pointer-events: none; }
+.svc-rail { position: sticky; top: 130px; display: grid; gap: 8px; justify-items: start; pointer-events: none; }
 .svc-rail[hidden] { display: none; }
-.svc-rail a { --fc: var(--paper); display: block; padding: 8px 15px; white-space: nowrap; border: 2px solid var(--carbon, #000); border-radius: var(--r-pill, 1600px); background: var(--fc); color: #000; text-decoration: none; font-weight: 800; font-size: 11.5px; line-height: 1.2; text-align: left; pointer-events: auto; transition: transform .15s ease, background .15s ease, color .15s ease; position: relative; animation: svc-float var(--t, 9s) ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
+.svc-rail a { --fc: var(--paper); display: block; padding: 8px 15px; white-space: nowrap; border: 2px solid var(--carbon, #000); border-radius: var(--r-pill, 1600px); background: var(--fc); color: #000; text-decoration: none; font-weight: 800; font-size: 11.5px; line-height: 1.2; text-align: left; pointer-events: auto; transition: transform .15s ease, background .15s ease, color .15s ease; position: relative; transform-origin: 20% 50%; animation: svc-float var(--t, 9s) ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
 .svc-rail .v { display: block; }
 .svc-rail a:hover { transform: translateY(-2px); }
-@keyframes svc-float { from { translate: 0 calc(var(--amp, 3px) * -1); } to { translate: 0 var(--amp, 3px); } }
+@keyframes svc-float { 0% { translate: 0 calc(var(--amp, 3px) * -1); rotate: calc(var(--rot, 2deg) * -1); } 50% { translate: calc(var(--sx, 3px) * -1) 0; rotate: 0deg; } 100% { translate: var(--sx, 3px) var(--amp, 3px); rotate: var(--rot, 2deg); } }
 @media (prefers-reduced-motion: reduce) { .svc-rail a { animation: none; } }
 @media (max-width: 1199px) { .svc-rail-wrap { display: none; } }
 /* Gece: koyu çerçeveler, açık yazı */
