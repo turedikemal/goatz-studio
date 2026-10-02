@@ -1488,4 +1488,4 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 /* Gülen yüz: alt bilgideki büyük yazının en alt tarafında */
 .sf-bigwrap { position: relative; }
-.sf-coin { position: absolute; right: 3%; bottom: -14%; width: clamp(60px, 9vw, 120px); height: auto; z-index: 2; cursor: pointer; }
+.sf-coin { z-index: 2; cursor: pointer; }
