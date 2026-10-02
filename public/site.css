@@ -1777,8 +1777,7 @@ html[data-theme="night"] .partner .pt-x { color: #000; }
 .ns-spark { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #ffd731; }
 
 /* Mekikler: motor alevi, süzülme sallantısı */
-.ns-wob { display: block; position: relative; animation: ns-wob 7s ease-in-out infinite alternate; }
-@keyframes ns-wob { from { translate: 0 -1.5px; rotate: -2deg; } to { translate: 0 1.5px; rotate: 2deg; } }
+.ns-wob { display: block; position: relative; }
 .ns-fl { position: absolute; right: 94%; top: 50%; width: 14px; height: 5px; margin-top: -2.5px; border-radius: 50% 0 0 50%; background: linear-gradient(90deg, rgba(251,73,3,0), #fb4903 45%, #ffd731); transform-origin: right center; animation: ns-flame .18s ease-in-out infinite alternate; }
 @keyframes ns-flame { from { scale: .6 .8; opacity: .7; } to { scale: 1.2 1; opacity: 1; } }
 .ns-glow { position: absolute; left: 20%; right: 20%; top: 80%; height: 6px; border-radius: 50%; background: radial-gradient(closest-side, rgba(180, 230, 255, .8), rgba(180, 230, 255, 0)); animation: ns-flame .9s ease-in-out infinite alternate; }
@@ -1957,13 +1956,6 @@ html:not([data-theme="night"]) .blk-cards[data-g] { background: color-mix(in srg
 .ns-planet { position: absolute; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 32% 30%, color-mix(in srgb, var(--c1) 80%, #fff) 0, var(--c1) 40%, var(--c2) 100%); box-shadow: inset calc(var(--s) * -.1) calc(var(--s) * -.08) calc(var(--s) * .22) rgba(0, 0, 0, .55), 0 0 calc(var(--s) * .25) color-mix(in srgb, var(--c1) 22%, transparent); }
 .ns-planet.bands::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: repeating-linear-gradient(10deg, rgba(255, 255, 255, .15) 0 7%, rgba(0, 0, 0, .12) 7% 14%); }
 .ns-planet.ring::after { content: ""; position: absolute; left: -38%; right: -38%; top: 36%; bottom: 36%; border-radius: 50%; border: calc(var(--s) * .035) solid rgba(255, 255, 255, .38); rotate: -16deg; }
-/* Kablosu kopmuş astronot: kablo arkada uzanıp dalgalanır, gövde kendi ekseninde (3 eksende) döner */
-.ns-astro { position: absolute; display: flex; align-items: center; pointer-events: none; }
-.ns-cable { display: block; transform-origin: 100% 50%; animation: ns-cable 2.8s ease-in-out infinite alternate; opacity: .9; }
-.ns-cable svg, .ns-abody svg { display: block; }
-@keyframes ns-cable { from { transform: scaleY(.7) skewX(-7deg); } to { transform: scaleY(1.35) skewX(7deg); } }
-.ns-abody { display: block; margin-left: -4px; }
-@media (prefers-reduced-motion: reduce) { .ns-cable, .ns-abody { animation: none; } }
 html.ns-aim, html.ns-aim body, html.ns-aim .panel { cursor: crosshair; }
 /* Anahtar efekti: anahtarın sağında beliren siyah anahtar deliği */
 .key-hole { position: fixed; z-index: 60; pointer-events: none; display: block; transform-origin: 50% 40%; }

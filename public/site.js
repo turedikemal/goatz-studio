@@ -853,16 +853,16 @@
   const unlockKey = (el) => {
     if (busy(el, ms(2.9))) return;
     const c = centerOf(el), rot = restRot(el), T = ms(2.7), W = parseFloat(getComputedStyle(el).width) || c.w;
-    const hw = Math.max(18, W * 0.6), hh = hw * 1.55;
-    const hx = c.x + Math.max(W * 1.15, 30); // deliğin merkezi: anahtarın sağında
+    const hw = Math.max(8, W * 0.22), hh = hw * 1.55; // anahtardan küçük: kısa kenar hw, uzun kenar hh (yatay yatar)
+    const hx = c.x + Math.max(W * 0.8, 24); // deliğin merkezi: anahtarın sağında
     const hole = document.createElement('i');
     hole.className = 'key-hole';
-    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh * 0.38) + 'px;width:' + hw + 'px;height:' + hh + 'px';
-    hole.innerHTML = '<svg viewBox="0 0 20 30" width="100%" height="100%" aria-hidden="true"><path d="M10 2a6.4 6.4 0 0 1 3.1 12L16 28H4l2.9-14A6.4 6.4 0 0 1 10 2z" fill="#000" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+    hole.style.cssText = 'left:' + (hx - hw / 2) + 'px;top:' + (c.y - hh / 2) + 'px;width:' + hw + 'px;height:' + hh + 'px;rotate:90deg'; // 90°: dar yarık (giriş) sola, anahtara bakar
+    hole.innerHTML = '<svg viewBox="0 0 20 30" width="100%" height="100%" aria-hidden="true"><path d="M10 2a6.4 6.4 0 0 1 3.1 12L16 28H4l2.9-14A6.4 6.4 0 0 1 10 2z" fill="#000"/></svg>';
     document.body.append(hole);
     hole.animate([{ scale: 0, opacity: 0 }, { scale: 1.2, opacity: 1, offset: 0.1 }, { scale: 1, opacity: 1, offset: 0.16 }, { scale: 1, opacity: 1, offset: 0.9 }, { scale: 0.5, opacity: 0 }], { duration: T, easing: 'ease-out' });
     // anahtar: düzelir (uç sağa bakar), deliğe kadar ilerler, deliğe girer, çevrilir, geri çıkar
-    const tip = W * 0.4, into = hx - hw * 0.12 - (c.x + tip);
+    const tip = W * 0.4, into = hx - hh * 0.16 - (c.x + tip); // uç, yarığın içine kadar girer
     const base = { rotate: rot, translate: '0px 0px', scale: '1 1' };
     const turn = (dx, sy) => ({ rotate: 'calc(' + rot + ' + 28deg)', translate: dx + 'px 0px', scale: '1 ' + sy });
     el.animate([
@@ -1622,7 +1622,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     // 1 TIE tipi: yuvarlak gövde, iki büyük altıgen panel
     (c) => ({ w: 26, svg: '<svg viewBox="0 0 32 20" width="26" height="16"><path d="M10 0.6h10l2.4 3.4-2.4 3H10l-2.4-3z" fill="#4a4e5c"/><path d="M10 19.4h10l2.4-3.4-2.4-3H10l-2.4 3z" fill="#4a4e5c"/><path d="M10 0.6l5 3.4 5-3.4M10 19.4l5-3.4 5 3.4" fill="none" stroke="#2a2d38" stroke-width=".7"/><rect x="14" y="6" width="2" height="8" fill="#6f7580"/><circle cx="15" cy="10" r="4.6" fill="#9097a4"/><circle cx="15" cy="10" r="2.5" fill="#12163a"/><path d="M12.5 10h5M15 7.5v5" stroke="#4a4e5c" stroke-width=".7"/><circle cx="15" cy="10" r="1" fill="' + c + '"/></svg>' }),
     // 2 Yıldız destroyeri: uzun hançer gövde, köprü kulesi (ana gemi)
-    (c, g) => ({ w: 88, svg: '<svg viewBox="0 0 32 20" width="88" height="55"><path d="M1 3L31 10 1 17 3.5 10z" fill="' + g + '"/><path d="M3.5 10L31 10 1 17z" fill="#00000026"/><path d="M5 10H27" stroke="#ffffff40" stroke-width=".6"/><path d="M7 6.6L23 9.3M7 13.4L23 10.7M10 5.4L21 8.6M10 14.6L21 11.4" stroke="#00000030" stroke-width=".5"/><rect x="2.6" y="7.2" width="5" height="5.6" rx=".8" fill="#7a808b"/><rect x="3.4" y="5.8" width="1.4" height="1.6" fill="#c7cbd3"/><rect x="5.6" y="5.8" width="1.4" height="1.6" fill="#c7cbd3"/><rect x="3.4" y="12.6" width="1.4" height="1.6" fill="#c7cbd3"/><rect x="5.6" y="12.6" width="1.4" height="1.6" fill="#c7cbd3"/><circle cx="1.6" cy="7.6" r=".9" fill="#8fd3ff"/><circle cx="1.6" cy="10" r=".9" fill="#8fd3ff"/><circle cx="1.6" cy="12.4" r=".9" fill="#8fd3ff"/></svg>' }),
+    (c, g) => ({ w: 160, svg: '<svg viewBox="0 0 32 20" width="160" height="100"><path d="M1 3L31 10 1 17 3.5 10z" fill="' + g + '"/><path d="M3.5 10L31 10 1 17z" fill="#00000026"/><path d="M5 10H27" stroke="#ffffff40" stroke-width=".6"/><path d="M7 6.6L23 9.3M7 13.4L23 10.7M10 5.4L21 8.6M10 14.6L21 11.4" stroke="#00000030" stroke-width=".5"/><rect x="2.6" y="7.2" width="5" height="5.6" rx=".8" fill="#7a808b"/><rect x="3.4" y="5.8" width="1.4" height="1.6" fill="#c7cbd3"/><rect x="5.6" y="5.8" width="1.4" height="1.6" fill="#c7cbd3"/><rect x="3.4" y="12.6" width="1.4" height="1.6" fill="#c7cbd3"/><rect x="5.6" y="12.6" width="1.4" height="1.6" fill="#c7cbd3"/><circle cx="1.6" cy="7.6" r=".9" fill="#8fd3ff"/><circle cx="1.6" cy="10" r=".9" fill="#8fd3ff"/><circle cx="1.6" cy="12.4" r=".9" fill="#8fd3ff"/></svg>' }),
     // 3 Disk kargo gemisi (iki çatallı ön, yandan kokpit tüpü)
     (c) => ({ w: 34, svg: '<svg viewBox="0 0 32 20" width="34" height="21"><path d="M21 4.2L31 6.4v2.6L22.4 8.8zM21 15.8L31 13.6v-2.6L22.4 11.2z" fill="#b9bcc4"/><circle cx="14" cy="10.4" r="8.6" fill="#d3d6dd"/><rect x="14" y="0.4" width="10" height="2.6" rx="1.3" fill="#b9bcc4"/><circle cx="23" cy="1.7" r="1.1" fill="#12163a"/><circle cx="12" cy="10.4" r="3.2" fill="#9aa0aa"/><path d="M5 10.4h4M13 3.4v3.2M13 14.2v3.2" stroke="#8d929b" stroke-width=".8"/><rect x="9" y="14.6" width="5" height="1.6" fill="' + c + '"/><rect x="3.4" y="7.4" width="1.2" height="6" fill="#8fd3ff"/></svg>' }),
     // 4 Çekiç başlı: uzun gövde, küre komuta modülü, motor halkası
@@ -1632,7 +1632,9 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     // 6 Ok başlı keşif gemisi: kalın altıgen gövde, parlayan motor, kokpit camı
     (c) => ({ w: 32, svg: '<svg viewBox="0 0 32 20" width="32" height="20"><path d="M31 10L12 2.5 3 5.5v9l9 3z" fill="' + c + '"/><path d="M31 10L12 2.5V10z" fill="#ffffff44"/><path d="M3 5.5L1 7v6l2 1.5z" fill="#6f7580"/><rect x="0" y="7.4" width="1.8" height="5.2" fill="#8fd3ff"/><path d="M9 7h12M9 13h12" stroke="#00000033" stroke-width=".8"/><ellipse cx="19" cy="10" rx="3.2" ry="1.9" fill="#12163a"/></svg>' }),
     // 7 Korvet: yuvarlak gövdeli kırmızı çizgili ana gemi (çekiç başlı)
-    (c) => ({ w: 70, svg: '<svg viewBox="0 0 32 20" width="70" height="44"><path d="M2 5.8h21l7.4 4.2-7.4 4.2H2z" fill="#eceef3"/><path d="M2 8.4h22" stroke="' + c + '" stroke-width="1.6"/><path d="M2 11.6h22" stroke="#cfd3dc" stroke-width=".7"/><rect x="0.8" y="4.6" width="3.2" height="10.8" rx="1.2" fill="#9aa0aa"/><rect x="1.4" y="5.6" width="1.6" height="2" fill="#8fd3ff"/><rect x="1.4" y="12.4" width="1.6" height="2" fill="#8fd3ff"/><path d="M20 6.4l5 3.6-5 3.6z" fill="#cfd3dc"/><circle cx="16" cy="10" r="1.3" fill="#12163a"/><rect x="9" y="3.6" width="6" height="2" rx=".8" fill="#b9bcc4"/><rect x="9" y="14.4" width="6" height="2" rx=".8" fill="#b9bcc4"/></svg>' }),
+    (c) => ({ w: 124, svg: '<svg viewBox="0 0 32 20" width="124" height="78"><path d="M2 5.8h21l7.4 4.2-7.4 4.2H2z" fill="#eceef3"/><path d="M2 8.4h22" stroke="' + c + '" stroke-width="1.6"/><path d="M2 11.6h22" stroke="#cfd3dc" stroke-width=".7"/><rect x="0.8" y="4.6" width="3.2" height="10.8" rx="1.2" fill="#9aa0aa"/><rect x="1.4" y="5.6" width="1.6" height="2" fill="#8fd3ff"/><rect x="1.4" y="12.4" width="1.6" height="2" fill="#8fd3ff"/><path d="M20 6.4l5 3.6-5 3.6z" fill="#cfd3dc"/><circle cx="16" cy="10" r="1.3" fill="#12163a"/><rect x="9" y="3.6" width="6" height="2" rx=".8" fill="#b9bcc4"/><rect x="9" y="14.4" width="6" height="2" rx=".8" fill="#b9bcc4"/></svg>' }),
+    // 8 Taşıyıcı: uzun ana gemi, hangar bölmeleri, arka motor bloğu ve köprü kulesi
+    (c, g) => ({ w: 176, svg: '<svg viewBox="0 0 32 20" width="176" height="110"><path d="M1 4h22l8 6-8 6H1z" fill="' + g + '"/><path d="M1 4h22l8 6H1z" fill="#ffffff26"/><rect x="5.4" y="6.2" width="14" height="7.6" rx="1" fill="#2a2d38"/><path d="M6.4 8h12M6.4 10h12M6.4 12h12" stroke="#8fd3ff" stroke-width=".7"/><path d="M9 4.2V6M13 4.2V6M17 4.2V6M9 14V15.8M13 14V15.8M17 14V15.8" stroke="#00000040" stroke-width=".6"/><rect x="0.6" y="2.6" width="4.6" height="14.8" rx="1.2" fill="#6f7580"/><rect x="1.2" y="3.6" width="2.2" height="2.4" fill="#8fd3ff"/><rect x="1.2" y="8.8" width="2.2" height="2.4" fill="#8fd3ff"/><rect x="1.2" y="14" width="2.2" height="2.4" fill="#8fd3ff"/><rect x="2.6" y="0.6" width="2.6" height="2.2" rx=".6" fill="#c7cbd3"/><rect x="2.6" y="17.2" width="2.6" height="2.2" rx=".6" fill="#c7cbd3"/><rect x="21" y="8.2" width="6" height="3.6" fill="' + c + '"/></svg>' }),
   ];
   const shipSvg = (kind, col) => DESIGNS[kind](col, pick(GREY));
 
@@ -1657,6 +1659,12 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const fl = []; // canlı gemiler
   const angDiff = (a, b) => Math.atan2(Math.sin(a - b), Math.cos(a - b));
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+  // Uzaya özgü dönüş: gemi önce yavaşça dönmeye başlar (açısal ivme), hedef yöne yaklaşırken yavaşlar ve durur; düz gidiyorsa hiç yalpalamaz
+  const turnTo = (f, want, wmax, dt) => {
+    const wd = clamp(angDiff(want, f.h) * 1.4, -wmax, wmax);
+    f.om = (f.om || 0) + clamp(wd - (f.om || 0), -1.1 * dt, 1.1 * dt); // f.w gemi genişliği: açısal hız f.om
+    f.h += f.om * dt;
+  };
   const C = (f) => [f.x + f.w / 2, f.y + f.hh / 2];
   // 3 boyut: z -1 (uzak, küçük, soluk) ... +1 (yakın, büyük, parlak). Yakın gemiler ekranda hızlı, uzaklar yavaş akar; üçüncü eksende de giderler
   const zs = (z) => 1 + 0.5 * z;
@@ -1761,7 +1769,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
           if (f.box && (cx < f.box.x0 || cx > f.box.x1 || cy < f.box.y0 || cy > f.box.y1)) want = Math.atan2((f.box.y0 + f.box.y1) / 2 - cy, (f.box.x0 + f.box.x1) / 2 - cx); // görünen alanda kal
           if (f.tgt) f.vz += clamp((f.tgt.z - f.z) * 0.8 - f.vz, -0.3, 0.3) * dt * 2; // derinlikte de hedefe yaklaşır
           f.vz = clamp(f.vz, -0.25, 0.25);
-          f.h += clamp(angDiff(want, f.h), -f.turn * dt, f.turn * dt);
+          turnTo(f, want, f.turn, dt);
           const ik = Math.min(1, dt * 1.5); // eylemsizlik: yön döner ama hız hemen dönmez, geniş kavisle savrulur
           f.vx += (Math.cos(f.h) * f.speed - f.vx) * ik; f.vy += (Math.sin(f.h) * f.speed - f.vy) * ik;
         }
@@ -1786,23 +1794,29 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
           const ex = mx - f.x, ey = my - f.y, dist = Math.hypot(ex, ey);
           if (dist < R && dist > 1) pl.ht += angDiff(Math.atan2(ey, ex), pl.ht) * 1.1 * (1 - dist / R) * dt * 0.8; // ay yakınında kütle çekimiyle kıvrılır
         }
-        f.h += clamp(angDiff(pl.ht, f.h) * 0.8, -0.35 * dt, 0.35 * dt); // en fazla ~20°/sn: geniş, yumuşak kavisler
+        turnTo(f, pl.ht, 0.35, dt); // en fazla ~20°/sn: geniş, yumuşak kavisler
         f.cur += (pl.want - f.cur) * Math.min(1, dt * 0.7); // hız yumuşakça artar/azalır
         const ik = Math.min(1, dt * 0.9); // eylemsizlik: uzayda savrularak döner
         f.vx += (Math.cos(f.h) * f.speed * f.cur - f.vx) * ik; f.vy += (Math.sin(f.h) * f.speed * f.cur - f.vy) * ik;
       } else if (f.mode === 'fleet') {
-        const hw = f.h0 + Math.sin(f.age * 0.9 + f.ph) * 0.12; // düz gitmez: hafif yılan gibi salınır
-        f.h = hw; f.vx = Math.cos(hw) * f.speed; f.vy = Math.sin(hw) * f.speed;
+        f.vx = Math.cos(f.h) * f.speed; f.vy = Math.sin(f.h) * f.speed; // filo gemileri düz gider (sağa sola yalpalamaz)
       }
       const sc = zs(f.z), SLOW = 0.88; // gemiler biraz daha yavaş (genel hız çarpanı)
       f.x += f.vx * dt * sc * SLOW; f.y += f.vy * dt * sc * SLOW;
+      if (f.hangar) { // taşıyıcı: arada hangarından bir avcı fırlatır
+        f.launchCd -= dt;
+        if (f.launchCd <= 0) {
+          f.launchCd = rnd(6, 10);
+          if (fl.filter((o) => o.host === f.host).length < 16) add(f.host, { kind: pick(KINDS[f.team]), team: f.team, x: f.x + f.w * 0.55, y: f.y + f.hh * 0.5, h: f.h + rnd(-0.7, 0.7), speed: rnd(64, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, keep: true, dogLife: rnd(22, 34), life: 70, z: f.z, vz: rnd(-0.05, 0.05) });
+        }
+      }
       if (f.dodgeCd > 0) f.dodgeCd -= dt;
       if (f.dodge) { const d = f.dodge, k = Math.sin(Math.PI * (1 - d.t / d.T)) * d.mag * dt * 1.6; f.x += d.nx * k; f.y += d.ny * k; d.t -= dt; if (d.t <= 0) f.dodge = null; } // yan kayış
       f.z += f.vz * dt;
       if (f.z > 1) { f.z = 1; f.vz = -Math.abs(f.vz); } else if (f.z < -1) { f.z = -1; f.vz = Math.abs(f.vz); }
       const idle = 1 - f.cur, sw = Math.sin(f.age * 1.4 + f.ph) * 6 * idle; // durunca perdeye dik yönde sağa sola sallanır
       f.el.style.translate = (f.x - Math.sin(f.h) * sw) + 'px ' + (f.y + Math.cos(f.h) * sw) + 'px';
-      f.el.style.scale = zs(f.z);
+      f.el.style.scale = zs(f.z) * (f.big ? 1 : 0.78); // yalnız ana gemiler büyük; avcılar ve nakliyeler küçük
       f.el.style.opacity = 0.55 + 0.4 * (f.z + 1) / 2;
       f.el.style.zIndex = Math.round(f.z * 10);
       f.el.style.rotate = (f.h * DEG + Math.sin(f.age * 1.1 + f.ph * 1.7) * 4 * idle) + 'deg';
@@ -1825,11 +1839,11 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const add = (host, o) => {
     const team = o.team == null ? 2 : o.team;
     const { s, w } = makeShip(host, o.kind, pick(TEAM[team].col), o.h);
-    const f = Object.assign({ el: s, host, w, hh: w * 0.64, age: 0, cool: rnd(1, 3), hp: 1, mode: 'cruise', team, range: team < 2 ? 230 : 0, big: false, life: 150, keep: false, turn: 2, dogLife: 38, z: rnd(-0.6, 0.6), vz: rnd(-0.05, 0.05), cur: 1, ph: rnd(0, 6.28), h0: o.h, dodgeCd: 0 }, o);
+    const f = Object.assign({ el: s, host, w, hh: w * 0.64, age: 0, cool: rnd(1, 3), hp: 1, mode: 'cruise', team, range: team < 2 ? 230 : 0, big: false, life: 150, keep: false, turn: 2, dogLife: 38, z: rnd(-0.6, 0.6), vz: rnd(-0.05, 0.05), cur: 1, ph: rnd(0, 6.28), h0: o.h, dodgeCd: 0, hangar: o.kind === 8, launchCd: rnd(3, 6) }, o);
     if (!f.plan) f.plan = { t: rnd(2, 6), want: 1, ht: f.h, t0: 0 };
     f.vx = Math.cos(f.h) * f.speed; f.vy = Math.sin(f.h) * f.speed;
     s.style.translate = f.x + 'px ' + f.y + 'px';
-    s.style.scale = zs(f.z);
+    s.style.scale = zs(f.z) * (f.big ? 1 : 0.78);
     s.animate([{ opacity: 0 }, { opacity: 0.92 }], { duration: 700 }); // aniden belirmesin, hızla görünsün
     fl.push(f);
     if (!running) { running = true; last = 0; requestAnimationFrame(loop); }
@@ -1862,7 +1876,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const flyby = (host) => {
     const v = view(host), dir = Math.random() < 0.5 ? 1 : -1, n = v.W < 640 ? 2 : Math.floor(rnd(2, 5));
     const y = rnd(v.y0 + v.h * 0.2, v.y1 - v.h * 0.2), h = (dir > 0 ? 0 : Math.PI) + rnd(-0.3, 0.3);
-    if (Math.random() < 0.3 && v.W > 520) add(host, { kind: pick([2, 7]), team: 2, x: dir > 0 ? -90 : v.W + 90, y: y + rnd(-60, 60), h: h + rnd(-0.1, 0.1), speed: rnd(11, 16), big: true, hp: 99, z: rnd(0.2, 0.8), vz: -0.01, life: 200 });
+    if (Math.random() < 0.3 && v.W > 520) add(host, { kind: pick([2, 7, 8]), team: 2, x: dir > 0 ? -140 : v.W + 140, y: y + rnd(-60, 60), h: h + rnd(-0.1, 0.1), speed: rnd(11, 16), big: true, hp: 99, z: rnd(0.2, 0.8), vz: -0.01, life: 200 });
     for (let i = 0; i < n; i++) setTimeout(() => { if (host.isConnected) add(host, { kind: pick([0, 6, 1, 4, 5, 3]), team: 2, x: (dir > 0 ? -50 : v.W + 50) - dir * rnd(0, 140), y: y + rnd(-110, 110), h: h + rnd(-0.35, 0.35), speed: rnd(20, 36), life: 140, z: rnd(-0.8, 0.8), vz: rnd(-0.06, 0.06) }); }, i * rnd(300, 1600));
   };
   // İki filonun karşılaşması: iki filo karşı kenarlardan girer (ortada aniden belirmez), gevşek kümeler, farklı hız/yönler, aralıklı gelirler; arkadan ana gemiler (korvet ↔ yıldız destroyeri)
@@ -1877,7 +1891,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
         const x = ex + (ex < 0 ? -1 : 1) * rnd(0, 120), y = my + rnd(-170, 170), T = Math.abs(mx - x) / sp, zStart = (side ? 1 : -1) * rnd(0.3, 0.75);
         add(host, { kind: pick(KINDS[side]), team: side, x, y, h: Math.atan2(my + rnd(-60, 60) - y, mx - x) + rnd(-0.2, 0.2), speed: sp * rnd(0.8, 1.2), mode: 'fleet', hp: Math.random() < 0.25 ? 2 : 1, keep: true, range: 230, life: 80, z: zStart, vz: -zStart / T });
       }, i * rnd(200, 1000));
-      if (v.W > 640 && Math.random() < 0.75) setTimeout(() => { if (host.isConnected) { const x = ex + (ex < 0 ? -1 : 1) * 140; add(host, { kind: side ? 2 : 7, team: side, x, y: my + rnd(-90, 90), h: ex < 0 ? rnd(-0.1, 0.1) : Math.PI + rnd(-0.1, 0.1), speed: rnd(14, 20), mode: 'fleet', hp: side ? 9 : 8, big: true, keep: true, range: 360, life: 110, z: side ? 0.7 : 0.55, vz: -0.01 }); } }, rnd(500, 1500));
+      if (v.W > 640 && Math.random() < 0.75) setTimeout(() => { if (host.isConnected) { const x = ex + (ex < 0 ? -1 : 1) * 140; add(host, { kind: side ? pick([2, 2, 8]) : pick([7, 8]), team: side, x, y: my + rnd(-90, 90), h: ex < 0 ? rnd(-0.1, 0.1) : Math.PI + rnd(-0.1, 0.1), speed: rnd(14, 20), mode: 'fleet', hp: side ? 9 : 8, big: true, keep: true, range: 360, life: 110, z: side ? 0.7 : 0.55, vz: -0.01 }); } }, rnd(500, 1500));
     });
   };
   // İt dalaşı: avcılar iki kenardan girer, ortada kıvrılarak birbirini kovalar
@@ -1897,7 +1911,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     if (v.W < 520 || v.h < 220) return flyby(host);
     const dir = Math.random() < 0.5 ? 1 : -1, y = rnd(v.y0 + v.h * 0.4, v.y1 - v.h * 0.4), h0 = dir > 0 ? 0 : Math.PI, sx = dir > 0 ? -100 : v.W + 100;
     const box = { x0: 30, x1: v.W - 30, y0: Math.max(v.y0 + 20, y - 170), y1: Math.min(v.y1 - 20, y + 170) };
-    add(host, { kind: 7, team: 0, x: sx, y, h: h0, speed: rnd(15, 20), mode: 'fleet', hp: 9, big: true, keep: true, range: 340, life: 120, z: rnd(0.3, 0.8), vz: -0.012 });
+    add(host, { kind: pick([7, 8, 8]), team: 0, x: sx, y, h: h0, speed: rnd(13, 18), mode: 'fleet', hp: 10, big: true, keep: true, range: 340, life: 120, z: rnd(0.3, 0.8), vz: -0.012 });
     for (let i = 0; i < 2; i++) setTimeout(() => { if (host.isConnected) add(host, { kind: pick([0, 6, 5]), team: 0, x: sx - dir * rnd(10, 90), y: y + (i ? 70 : -70), h: h0, speed: rnd(60, 80), mode: 'dog', turn: 0.65, range: 250, box, keep: true, dogLife: 40, life: 80 }); }, 500 + i * 700);
     const nB = Math.floor(rnd(3, 6));
     for (let i = 0; i < nB; i++) setTimeout(() => { if (host.isConnected) add(host, { kind: pick(KINDS[1]), team: 1, x: dir > 0 ? v.W + 60 : -60, y: y + rnd(-120, 120), h: (dir > 0 ? Math.PI : 0) + rnd(-0.3, 0.3), speed: rnd(60, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, box, keep: true, dogLife: rnd(26, 40), life: 80 }); }, 1200 + i * rnd(900, 1800));
@@ -1908,8 +1922,8 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     const v = view(host);
     if (v.W < 640 || v.h < 240) return capital(host);
     const dir = Math.random() < 0.5 ? 1 : -1, y = rnd(v.y0 + v.h * 0.4, v.y1 - v.h * 0.4), gap = rnd(110, 170), h0 = dir > 0 ? 0 : Math.PI;
-    add(host, { kind: 7, team: 0, x: dir > 0 ? -100 : v.W + 100, y: y - gap / 2, h: h0 + rnd(-0.06, 0.06), speed: rnd(15, 20), mode: 'fleet', hp: 9, big: true, keep: true, range: 380, life: 120, z: 0.6, vz: -0.01 });
-    add(host, { kind: 2, team: 1, x: dir > 0 ? v.W + 100 : -100, y: y + gap / 2, h: h0 + Math.PI + rnd(-0.06, 0.06), speed: rnd(15, 20), mode: 'fleet', hp: 10, big: true, keep: true, range: 380, life: 120, z: 0.65, vz: -0.01 });
+    add(host, { kind: pick([7, 8]), team: 0, x: dir > 0 ? -140 : v.W + 140, y: y - gap / 2, h: h0 + rnd(-0.06, 0.06), speed: rnd(15, 20), mode: 'fleet', hp: 9, big: true, keep: true, range: 380, life: 120, z: 0.6, vz: -0.01 });
+    add(host, { kind: pick([2, 2, 8]), team: 1, x: dir > 0 ? v.W + 140 : -140, y: y + gap / 2, h: h0 + Math.PI + rnd(-0.06, 0.06), speed: rnd(15, 20), mode: 'fleet', hp: 10, big: true, keep: true, range: 380, life: 120, z: 0.65, vz: -0.01 });
     const box = { x0: 30, x1: v.W - 30, y0: Math.max(v.y0 + 20, y - 190), y1: Math.min(v.y1 - 20, y + 190) };
     for (let i = 0; i < 4; i++) setTimeout(() => { if (host.isConnected) { const team = i % 2, left = Math.random() < 0.5; add(host, { kind: pick(KINDS[team]), team, x: left ? -60 : v.W + 60, y: y + rnd(-140, 140), h: left ? rnd(-0.3, 0.3) : Math.PI + rnd(-0.3, 0.3), speed: rnd(60, 84), mode: 'dog', turn: rnd(0.5, 0.75), range: 250, box, keep: true, dogLife: rnd(24, 36), life: 80, z: rnd(-0.6, 0.6), vz: rnd(-0.08, 0.08) }); } }, 1500 + i * rnd(900, 1700));
   };
@@ -1927,23 +1941,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     host.prepend(p);
     const x0 = dir > 0 ? -size * 1.4 : v.W + size * 0.4, x1 = dir > 0 ? v.W + size * 0.4 : -size * 1.4;
     p.animate([{ translate: `${x0}px ${y}px` }, { translate: `${x1}px ${y + rnd(-40, 40)}px` }], { duration: near ? rnd(110000, 160000) : rnd(80000, 120000), easing: 'linear', fill: 'forwards' }).finished.then(() => p.remove(), () => p.remove());
-  };
-
-  // Kablosu kopmuş astronot: arkasında kopuk kablosuyla boşlukta tümbek atarak sonsuza doğru uzaklaşır (3 eksende: küçülür, silikleşir)
-  const ASTRO = '<svg viewBox="0 0 30 34" width="52" height="59"><rect x="3.5" y="10" width="5" height="11" rx="2.2" fill="#b9bcc4"/><rect x="7" y="7" width="16" height="17" rx="6" fill="#f4f4f8"/><rect x="10.5" y="13" width="5" height="3.2" rx="1" fill="#fb4903"/><rect x="9" y="22" width="5.2" height="10" rx="2.5" fill="#e8e9ef" transform="rotate(-14 11 22)"/><rect x="16" y="22" width="5.2" height="10" rx="2.5" fill="#e8e9ef" transform="rotate(16 18 22)"/><rect x="20" y="10" width="10" height="4.2" rx="2.1" fill="#e8e9ef" transform="rotate(-28 21 12)"/><rect x="20" y="15" width="10" height="4.2" rx="2.1" fill="#d9dce3" transform="rotate(24 21 17)"/><circle cx="17" cy="9" r="7.5" fill="#f7f7fa"/><ellipse cx="19.2" cy="9" rx="4.6" ry="3.8" fill="#12163a"/><ellipse cx="20.4" cy="7.9" rx="1.6" ry="1" fill="#8fd3ff" opacity=".85"/></svg>';
-  const CABLE = '<svg viewBox="0 0 96 16" width="150" height="25"><path d="M95 8C84 1 74 15 62 8S40 2 28 9 12 12 6 7" fill="none" stroke="#e6e9f2" stroke-width="2.2" stroke-linecap="round"/><path d="M6 7l-4-4M6 7l-5 1.5M6 7l-3 5" fill="none" stroke="#fb4903" stroke-width="1.4" stroke-linecap="round"/></svg>';
-  const astronaut = (host) => {
-    const v = view(host);
-    if (v.W < 360 || v.h < 220 || host.querySelector(':scope > .ns-astro')) return;
-    const dir = Math.random() < 0.5 ? 1 : -1, y0 = rnd(v.y0 + v.h * 0.15, v.y1 - v.h * 0.15), dy = rnd(-120, 120), h = (dir > 0 ? 0 : Math.PI) + rnd(-0.2, 0.2);
-    const a = document.createElement('i');
-    a.className = 'ns-astro';
-    a.style.cssText = 'left:0;top:0;rotate:' + (h * DEG) + 'deg';
-    a.innerHTML = '<span class="ns-cable">' + CABLE + '</span><span class="ns-abody">' + ASTRO + '</span>';
-    host.append(a);
-    const x0 = dir > 0 ? -60 : v.W + 60, x1 = dir > 0 ? v.W * rnd(0.55, 1.1) : v.W * rnd(-0.1, 0.45);
-    const near = rnd(1.3, 2);
-    a.animate([{ translate: x0 + 'px ' + y0 + 'px', scale: near, opacity: 0 }, { translate: (x0 + (x1 - x0) * 0.08) + 'px ' + (y0 + dy * 0.08) + 'px', scale: near, opacity: 0.95, offset: 0.06 }, { translate: (x0 + (x1 - x0) * 0.62) + 'px ' + (y0 + dy * 0.62) + 'px', scale: near * 0.85, opacity: 0.95, offset: 0.62 }, { translate: x1 + 'px ' + (y0 + dy) + 'px', scale: 0.1, opacity: 0 }], { duration: rnd(70000, 110000), easing: 'cubic-bezier(.25,.1,.6,1)', fill: 'forwards' }).finished.then(() => a.remove(), () => a.remove());
   };
 
   // Gemiye tıklayınca patlar. Gemiler sayfa içeriğinin arkasındadır: yazıların (başlık, metin) altında kalanlara da tıklanır;
@@ -1985,7 +1982,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       (r < 0.26 ? fleetClash : r < 0.46 ? dogfight : r < 0.68 ? capital : r < 0.82 ? duel : r < 0.92 ? flyby : cruise)(host);
     } else if (n < 8 && Math.random() < 0.75) (Math.random() < 0.25 ? flyby : cruise)(host);
     if (Math.random() < 0.18) planet(host);
-    if (Math.random() < 0.3) astronaut(host);
   };
   // Boş görünen panelleri hemen doldur (sayfa açılışı, geceye geçiş, başka bölüme kaydırma)
   let live = false; // sayfa açıldıktan 2 sn sonra evren canlanır (açılışta hemen savaş başlamaz)
@@ -2025,7 +2021,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   wrap.className = 'cart-top';
   wrap.hidden = true;
   wrap.innerHTML = '<a class="btn icon-btn cart-top-btn" href="/hizmetler#sepet" aria-label="Hizmet sepeti"><svg viewBox="0 0 64 64" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 10h8l7 30h28l6-22H17" fill="#fff" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><circle cx="25" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/><circle cx="46" cy="52" r="5.5" fill="#ffd731" stroke="currentColor" stroke-width="4.5"/></svg><b class="cart-top-n"></b></a>' +
-    '<span class="cart-top-bubble" aria-hidden="true"><span></span><svg class="cb-tail up" viewBox="0 0 34 26" aria-hidden="true"><path d="M4 25C4 12 12 4 30 16C20 14 15 18 17 25Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="23.4" width="11" height="2.6" fill="#fff"/></svg></span>';
+    '<span class="cart-top-bubble" aria-hidden="true"><span></span><svg class="cb-tail up" viewBox="0 0 34 26" aria-hidden="true"><path d="M4 25C4 10 12 4 31 4C18 10 15 16 17 25Z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/><rect x="5" y="23.4" width="11" height="2.6" fill="#fff"/></svg></span>';
   theme.parentNode.insertBefore(wrap, theme);
   const link = wrap.querySelector('a'), num = wrap.querySelector('.cart-top-n'), bubble = wrap.querySelector('.cart-top-bubble'), txt = bubble.querySelector('span');
   let bubT = 0, bubOff = 0, last = -1, shown = false;

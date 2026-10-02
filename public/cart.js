@@ -100,6 +100,21 @@
     const open = () => { bubble.classList.remove('show'); place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
     const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); fab.focus(); };
     fab.addEventListener('click', open);
+    // Sepette ürün varken Hizmetler'e girilince sepet, üst menüdeki yerinden (gece/gündüz düğmesinin solundan) aşağı süzülüp kendi yerine gelir; ilk göründüğü anda bir kez
+    if (items.length && !matchMedia('(prefers-reduced-motion: reduce)').matches && !matchMedia('(max-width: 900px)').matches) {
+      let dropped = false;
+      const dropCheck = () => {
+        if (dropped) return;
+        const fr = fab.getBoundingClientRect();
+        if (fr.top < 80 || fr.bottom > innerHeight - 20) return; // tamamen görünür olunca
+        dropped = true; window.removeEventListener('scroll', dropCheck);
+        const th = document.getElementById('themeBtn'), tr = th ? th.getBoundingClientRect() : { left: innerWidth - 120, top: 24, height: 36 };
+        const dx = (tr.left - 24) - (fr.left + fr.width / 2), dy = (tr.top + tr.height / 2) - (fr.top + fr.height / 2);
+        fab.animate([{ translate: dx + 'px ' + dy + 'px', scale: 0.55 }, { translate: '0px 0px', scale: 1 }], { duration: 1200, easing: 'cubic-bezier(.22, .9, .28, 1.08)' });
+      };
+      window.addEventListener('scroll', dropCheck, { passive: true });
+      setTimeout(dropCheck, 600);
+    }
     if (location.hash === '#sepet') setTimeout(open, 400); // üst menüdeki sepetten gelinirse panel açılır
     close.addEventListener('click', shut);
     back.addEventListener('click', shut);
@@ -147,6 +162,61 @@
     [300, 900, 1800, 3500].forEach((ms) => setTimeout(place, ms));
     setTimeout(place, 800);
     if (window.ResizeObserver) new ResizeObserver(place).observe(main);
+  }
+
+  // =========================================================== Diğer sayfalar: üst menüdeki sepet bulunduğu sayfada panel açar (Hizmetler sayfasına gitmek gerekmez)
+  if (!mark && !document.querySelector('[data-cart-page]')) {
+    const topBtn = document.querySelector('.cart-top-btn');
+    if (topBtn) {
+      const GID = [[/web tasar/i, 0], [/foto|görsel/i, 1], [/metin|içerik/i, 2], [/marka|kurumsal/i, 3], [/pazaryeri/i, 4], [/seo|ölçüm/i, 5], [/danışman/i, 6], [/uygulama/i, 7]];
+      const back = el('div', 'cart-back'); back.hidden = true;
+      const panel = el('aside', 'cart-panel'); panel.hidden = true;
+      panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-modal', 'true'); panel.setAttribute('aria-label', 'Hizmet sepeti');
+      const head = el('div', 'cart-head');
+      const close = el('button', 'cart-close', '×'); close.type = 'button'; close.setAttribute('aria-label', 'Sepeti kapat');
+      head.append(el('h2', 'cart-title', 'Sepetiniz'), close);
+      const list = el('div', 'cart-list');
+      const empty = el('p', 'cart-empty', 'Sepetiniz boş. Hizmetler sayfasındaki "Sepete ekle" düğmesiyle istediğiniz hizmetleri buraya ekleyin.');
+      const go = el('a', 'cart-go', 'Sepete git →'); go.href = CART_URL;
+      const clearAll = el('button', 'cart-clear', 'Hepsini çıkar ✕'); clearAll.type = 'button';
+      panel.append(head, list, empty, clearAll, go);
+      document.body.append(back, panel);
+      const tell = () => { try { window.dispatchEvent(new StorageEvent('storage', { key: KEY })); } catch (e) { /* üst menü bir sonraki yüklemede güncellenir */ } };
+      const sync = () => {
+        list.textContent = '';
+        grouped().forEach((gr) => {
+          const box = el('section', 'cart-group');
+          const m = GID.find(([re]) => re.test(gr.g));
+          box.dataset.i = String(m ? m[1] : 0);
+          box.append(el('h3', 'cart-gname', gr.g));
+          gr.ts.forEach((t) => {
+            const row = el('div', 'cart-row');
+            row.append(el('span', 'cart-item', t));
+            const rm = el('button', 'cart-rm', 'Çıkar'); rm.type = 'button'; rm.setAttribute('aria-label', t + ' hizmetini sepetten çıkar');
+            rm.addEventListener('click', () => remove(gr.g, t));
+            row.append(rm);
+            box.append(row);
+          });
+          list.append(box);
+        });
+        empty.hidden = items.length > 0;
+        list.hidden = items.length === 0;
+        go.hidden = items.length === 0;
+        clearAll.hidden = items.length === 0;
+        tell();
+      };
+      listeners.push(sync);
+      clearAll.addEventListener('click', () => { items = []; change(); });
+      sync();
+      const open = () => { sync(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
+      const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); topBtn.focus(); };
+      topBtn.addEventListener('click', (e) => { if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; e.preventDefault(); open(); });
+      close.addEventListener('click', shut);
+      back.addEventListener('click', shut);
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) shut(); });
+      // başka sekmede sepet değişirse liste güncel kalsın
+      window.addEventListener('storage', (e) => { if (e.key === KEY) { items = load(); sync(); } });
+    }
   }
 
   // =========================================================== /sepet sayfası
