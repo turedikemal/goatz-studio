@@ -1417,3 +1417,8 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 /* İşler başlığı: sarı etiket iki satıra bölününce satırlar üst üste binmesin; tek kutu olarak durur */
 .show-hook-big mark { display: inline-block; max-width: 100%; padding: .1em .3em .16em; line-height: 1.08; text-wrap: balance; -webkit-box-decoration-break: slice; box-decoration-break: slice; }
+
+/* Dokunmatik kaydırma: kart kaydırıcısı titremesin */
+.carousel { -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+.c-card { -webkit-transform: translateZ(0); transform: translateZ(0); }
+@media (hover: none) { .c-card, .c-card:hover { transition: none; } .c-card:hover { rotate: none; } }

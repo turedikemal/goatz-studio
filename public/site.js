@@ -161,6 +161,12 @@
       new IntersectionObserver((es) => { visible = es[0].isIntersecting; arm(); }).observe(carousel);
       carousel.addEventListener('mouseenter', () => { hover = true; stop(); });
       carousel.addEventListener('mouseleave', () => { hover = false; arm(); });
+      // Dokunmatikte: parmak kartlara değdiği anda otomatik kayma durur ve çalışan kaydırma animasyonu iptal edilir (parmakla çakışıp titremesin)
+      let resume = 0;
+      carousel.addEventListener('touchstart', () => { hover = true; stop(); clearTimeout(resume); cancelAnimationFrame(anim); carousel.classList.remove('animating'); }, { passive: true });
+      const touchDone = () => { clearTimeout(resume); resume = setTimeout(() => { hover = false; arm(); }, 4000); };
+      carousel.addEventListener('touchend', touchDone, { passive: true });
+      carousel.addEventListener('touchcancel', touchDone, { passive: true });
     }
   }
 
