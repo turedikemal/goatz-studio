@@ -1769,7 +1769,7 @@ html[data-theme="night"] .ns-moon { display: block; animation: ns-moon-in .8s ea
 /* İş ortaklığı paneli: site gecedeyken kendisi de gece (tema ile birlikte) */
 html[data-theme="night"] .partner .pt-x { color: #000; }
 /* Gece teması: mini uzay gemileri ve çatışma */
-.ns-ship { position: absolute; display: block; width: 26px; height: 15px; opacity: .9; }
+.ns-ship { position: absolute; display: block; opacity: .92; }
 .ns-ship svg { display: block; }
 .ns-shot { position: absolute; width: 9px; height: 2px; border-radius: 2px; }
 .ns-boom { position: absolute; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%; background: radial-gradient(circle, #fff 0 30%, #ffd731 31% 60%, #fb4903 61%); }

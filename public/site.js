@@ -1584,18 +1584,35 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const DEG = 180 / Math.PI;
   let active = 0;
 
-  const shipSvg = (kind, col) => (kind === 0
-    ? `<svg viewBox="0 0 24 14" width="26" height="15"><path d="M1 7L9 2l11 3 3 2-3 2-11 3z" fill="${col}"/><path d="M9 2l11 3-5 2z" fill="#fff" opacity=".45"/><circle cx="18" cy="7" r="1.3" fill="#12163a"/></svg>`
-    : `<svg viewBox="0 0 24 14" width="24" height="14"><ellipse cx="12" cy="9" rx="11" ry="4" fill="${col}"/><ellipse cx="12" cy="6" rx="5" ry="4" fill="#dceeff"/><circle cx="7" cy="9" r="1" fill="#12163a"/><circle cx="12" cy="9.5" r="1" fill="#12163a"/><circle cx="17" cy="9" r="1" fill="#12163a"/></svg>`);
+  // Yedi farklı mini mekik (üstten görünüm, sağa bakar). Her biri başka silüet: avcı, ikiz panelli, destroyer, kargo diski, mekik, kanatlı ve ok biçimli
+  const GREY = ['#b9bcc4', '#9aa0aa', '#d9dce3'];
+  const DESIGNS = [
+    // 0 avcı (X kanatlı)
+    (c) => ({ w: 30, svg: '<svg viewBox="0 0 32 20" width="30" height="19"><path d="M3 10L14 8.4 28 9.4 31 10 28 10.6 14 11.6z" fill="#e9e9ee"/><path d="M12 8.4L5 1.5l3.5-.2L18 8zM12 11.6L5 18.5l3.5.2L18 12z" fill="' + c + '"/><circle cx="23" cy="10" r="1.2" fill="#12163a"/></svg>' }),
+    // 1 ikiz panelli keşif
+    () => ({ w: 22, svg: '<svg viewBox="0 0 32 20" width="22" height="14"><path d="M9 1h5l2 3v12l-2 3H9l-2-3V4z" fill="#6f7580"/><path d="M9 1h5l2 3H7z" fill="#8d929b"/><circle cx="16" cy="10" r="3.6" fill="#c7cbd3"/><circle cx="17" cy="10" r="1.5" fill="#12163a"/><rect x="2" y="9.4" width="12" height="1.2" fill="#8d929b"/></svg>' }),
+    // 2 destroyer (uzun üçgen gövde)
+    (c, g) => ({ w: 46, svg: '<svg viewBox="0 0 32 20" width="46" height="29"><path d="M1 3.5L31 10 1 16.5 3 10z" fill="' + g + '"/><path d="M3 10L31 10 1 16.5z" fill="#00000026"/><rect x="3.5" y="7.6" width="4" height="4.8" fill="#6f7580"/><rect x="4.6" y="6.2" width="2" height="1.6" fill="#c7cbd3"/><circle cx="2" cy="7.5" r=".8" fill="#8fd3ff"/><circle cx="2" cy="12.5" r=".8" fill="#8fd3ff"/></svg>' }),
+    // 3 kargo diski (iki çatallı ön)
+    (c) => ({ w: 28, svg: '<svg viewBox="0 0 32 20" width="28" height="18"><path d="M4 10a8 8 0 0 1 8-8h6l11 3v2l-9 2.4 9 2.4v2l-11 3h-6a8 8 0 0 1-8-8z" fill="' + c + '"/><path d="M29 7l-9 2.4v1.2L29 13z" fill="#12163a" opacity=".35"/><circle cx="13" cy="10" r="3" fill="#00000030"/><circle cx="21" cy="14.6" r="1.6" fill="#dceeff"/></svg>' }),
+    // 4 mekik (üçgen kanatlı)
+    (c, g) => ({ w: 30, svg: '<svg viewBox="0 0 32 20" width="30" height="19"><path d="M6 10L22 1l-5 9 5 9z" fill="' + g + '"/><rect x="2" y="8.6" width="26" height="2.8" rx="1" fill="#e9e9ee"/><path d="M26 8.6L31 10l-5 1.4z" fill="' + c + '"/><rect x="9" y="7" width="2" height="6" fill="#6f7580"/></svg>' }),
+    // 5 Y kanatlı (uzun gövde, iki motor)
+    (c) => ({ w: 34, svg: '<svg viewBox="0 0 32 20" width="34" height="21"><rect x="6" y="8.6" width="24" height="2.8" rx="1.2" fill="#d9dce3"/><rect x="1" y="3" width="14" height="3" rx="1.2" fill="' + c + '"/><rect x="1" y="14" width="14" height="3" rx="1.2" fill="' + c + '"/><path d="M12 6l4 2.6M12 14l4-2.6" stroke="#9aa0aa" stroke-width="1.6"/><circle cx="27" cy="10" r="1.2" fill="#12163a"/></svg>' }),
+    // 6 ok biçimli hızlı avcı
+    (c) => ({ w: 24, svg: '<svg viewBox="0 0 32 20" width="24" height="15"><path d="M2 10L10 4l21 5.4v1.2L10 16z" fill="' + c + '"/><path d="M10 4l21 5.4L16 10z" fill="#ffffff55"/><path d="M2 10l6-1.6v3.2z" fill="#fb4903"/><circle cx="21" cy="10" r="1.3" fill="#12163a"/></svg>' }),
+  ];
+  const shipSvg = (kind, col) => DESIGNS[kind](col, pick(GREY));
 
-  // Savaşçı uçtuğu yöne bakar; uçan daire hep düz durur, yalnız hafifçe yatar
+  // Mekik uçtuğu yöne bakar
   const makeShip = (host, x, y, heading) => {
     const s = document.createElement('i');
-    const kind = Math.round(Math.random());
+    const kind = Math.floor(Math.random() * DESIGNS.length);
     s.className = 'ns-ship';
-    s.innerHTML = '<u class="ns-trail"></u><span class="ns-wob">' + (kind === 0 ? '<u class="ns-fl"></u>' : '<u class="ns-glow"></u>') + '<span class="ns-lvl">' + shipSvg(kind, pick(COLORS)) + '</span></span>';
+    const d = shipSvg(kind, pick(COLORS));
+    s.innerHTML = '<u class="ns-trail"></u><span class="ns-wob"><u class="ns-fl"></u>' + d.svg + '</span>';
     s._kind = kind;
-    s.style.cssText = `left:${x}px;top:${y}px;rotate:${heading * DEG}deg;--cr:${kind === 0 ? 0 : -heading * DEG}deg`;
+    s.style.cssText = `left:${x}px;top:${y}px;rotate:${heading * DEG}deg;width:${d.w}px`;
     host.append(s);
     active++;
     return s;
@@ -1658,7 +1675,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       const s = d.el;
       s.style.translate = d.x + 'px ' + d.y + 'px';
       s.style.rotate = d.h * DEG + 'deg';
-      if (s._kind !== 0) s.style.setProperty('--cr', -d.h * DEG + 'deg');
       if (d.x < -80 || d.x > W + 80 || d.y < -80 || d.y > H + 80 || d.age > 150 || !s.isConnected) { drop(s); drifters.splice(i, 1); }
     }
     if (drifters.length) requestAnimationFrame(loop); else last = 0;
