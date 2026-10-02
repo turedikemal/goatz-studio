@@ -515,9 +515,16 @@
     el.screen.innerHTML = '<div class="wz-scene' + (state.keep ? ' wz-keep' : '') + '">' + html + '</div>';
     if (result) timer.finish();
 
-    // Smooth scroll soruya
+    // Smooth scroll soruya (mobilde kayarak inme yok: sayfa ilk açılışta hiç kaymaz, sonraki adımlarda soru ekranda değilse anında yerine gelir)
     const h2 = el.screen.querySelector('h2');
-    if (h2 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const mobileView = matchMedia('(max-width: 800px), (pointer: coarse)').matches;
+    const firstPaint = !window.__wzPainted; window.__wzPainted = true;
+    if (h2 && mobileView) {
+      if (!firstPaint) {
+        const top = h2.getBoundingClientRect().top;
+        if (top < 0 || top > window.innerHeight * 0.6) window.scrollTo(0, Math.max(0, Math.round(top + window.scrollY - 90)));
+      }
+    } else if (h2 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const targetY = Math.max(0, Math.round(h2.getBoundingClientRect().top + window.scrollY - 90));
       const fromY = window.scrollY;
       if (Math.abs(targetY - fromY) > 40) {
@@ -646,7 +653,7 @@
     if (ra) ra.onclick = () => { (only() ? state.services : state.extras).clear(); softRender(); };
     box.querySelectorAll('[data-remove]').forEach((btn) => { btn.onclick = () => { (only() ? state.services : state.extras).delete(btn.dataset.remove); softRender(); }; });
   }
-  const focusH2 = () => { const h = el.screen.querySelector('h2'); if (h) h.focus(); };
+  const focusH2 = () => { const h = el.screen.querySelector('h2'); if (h) h.focus({ preventScroll: true }); };
   const checkSite = () => { const st = state.site; if (!st.pending) st.pending = runCheck().finally(() => { st.pending = null; }); return st.pending; };
   const runCheck = async () => {
     const st = state.site; const asked = st.url; st.busy = true; st.msg = '';
