@@ -163,7 +163,7 @@
     text-align: center;
     padding: 120px 16px 72px;
   }
-  .hero h1 { position: relative; z-index: 2; font-size: var(--display); }
+  .hero h1, .hero h2[data-intro] { position: relative; z-index: 2; font-size: var(--display); }
   .hero .tagline {
     position: relative; z-index: 2;
     font-size: clamp(24px, 4.4vw, 64px); font-weight: 500; letter-spacing: -0.03em; line-height: 1;
@@ -345,7 +345,7 @@
   /* ---------- Yazı stilleri: kutu içi yerleşim ---------- */
   .feature > div:last-child { align-self: stretch; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; min-width: 0; container-type: inline-size; }
   .feature > div:last-child h2 { font-size: min(var(--heading), 12.5cqi); }
-  .hero .tagline, .hero h1 { max-width: 100%; }
+  .hero .tagline, .hero h1, .hero h2[data-intro] { max-width: 100%; }
 
   /* ---------- Hareketler (referans sitedeki akışa göre) ---------- */
   /* Hız eğrileri: "slush" = cubic-bezier(.65,.05,0,1); "bounce" = yerine oturmadan önce aşıp geri gelen eğri (JS'te ve burada aynı). */
@@ -1475,7 +1475,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 @media (max-width: 700px) { .statement { padding-top: 72px; } }
 
 /* Mobil: Anahtar teslim başlığında İ noktası üstteki satıra çarpmasın */
-@media (max-width: 700px) { .hero h1[data-intro] { line-height: 1.07 !important; } }
+@media (max-width: 700px) { .hero h2[data-intro] { line-height: 1.07 !important; } }
 
 /* Başlık harfleri: İ / Ö / Ü noktaları satır kutusunun üstüne taşar; iOS Safari harf katmanını kutu sınırında kesiyordu. Katman yukarı doğru genişletilir (satır yüksekliği değişmez) */
 .rl, .rl > .rc { padding-top: .24em; margin-top: -.24em; }
@@ -1489,3 +1489,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 /* Gülen yüz: alt bilgideki büyük yazının en alt tarafında */
 .sf-bigwrap { position: relative; }
 .sf-coin { z-index: 2; cursor: pointer; }
+
+/* Ana sayfada H1 = logo (marka adı); hero büyük başlığı H2 */
+.logo-h1 { margin: 0; font: inherit; display: flex; flex: none; align-items: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
