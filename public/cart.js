@@ -106,6 +106,7 @@
       const dropCheck = () => {
         if (dropped) return;
         const fr = fab.getBoundingClientRect();
+        if (window.scrollY < 24) return; // ilk slayt aşağı kaydırılmaya başlanana kadar inmez
         if (fr.top < 80 || fr.bottom > innerHeight - 20) return; // tamamen görünür olunca
         dropped = true; window.removeEventListener('scroll', dropCheck);
         const th = document.getElementById('themeBtn'), tr = th ? th.getBoundingClientRect() : { left: innerWidth - 120, top: 24, height: 36 };
