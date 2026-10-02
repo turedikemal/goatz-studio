@@ -1722,3 +1722,5 @@ html.cart-open { overflow: hidden; }
 .pt-text { padding: 6px 10px; margin-left: -10px; margin-right: -10px; }
 .pt-h:hover, .pt-text:hover { background: var(--mint); color: var(--carbon); }
 .partner.night .pt-h:hover, .partner.night .pt-text:hover { background: var(--mint); color: var(--carbon); }
+.pt-h, .pt-text { width: fit-content; max-width: 100%; }
+.pt-text { padding: 2px 6px; margin-left: -6px; margin-right: 0; }
