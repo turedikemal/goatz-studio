@@ -1931,7 +1931,3 @@ html[data-theme="night"] .svc-rail .sp { background: #ffd731; opacity: .9; }
 .svc-bar a[data-g="6"] { --fc: color-mix(in srgb, var(--ember) 45%, var(--lavender)); }
 .svc-bar a[data-g="7"] { --fc: color-mix(in srgb, var(--mint) 50%, var(--blue)); }
 
-/* Her kapsülün ucunda kendi ritminde yanıp sönen minik kıvılcım */
-.svc-rail .sk { position: absolute; right: -10px; top: -4px; width: 6px; height: 6px; background: #000; opacity: .25; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); animation: pt-twinkle var(--kt, 3s) ease-in-out infinite; animation-delay: var(--kd, 0s); pointer-events: none; }
-html[data-theme="night"] .svc-rail .sk { background: #ffd731; opacity: .9; }
-@media (prefers-reduced-motion: reduce) { .svc-rail .sk { animation: none; } }
