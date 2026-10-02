@@ -28,7 +28,7 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 2. **Yasal sayfalar** taslak; avukat/muhasebeci kontrolü gerek. Firma ünvanı, vergi no, adres girilecek (panel: Alt bilgi → Firma bilgisi). Satış başlarsa mesafeli satış + iade/iptal eklenmeli.
 3. **Süre / adet / destek bilgisi** sayfalara hiç yazılmadı (uydurma yok). "Hızlı teslim" kartı ve süreç metinleri için kullanıcıdan gerçek bilgi alınınca eklenecek. "Randevulu üretim / müsaitlik" fikri bekliyor (aynı anda kaç proje? doğru olmalı).
 4. **İkonlar:** Slush'taki gibi gerçek 3D render istiyor; SVG ile olmuyor (denendi, beğenilmedi, geri alındı). Yol: kullanıcı ChatGPT vb. ile görsel/SVG üretir (`ikon-komutlari.md` hazır komutlar), biz bağlarız. Şu an coin (gülen jeton) ve rocket kullanıcının SVG'leri, `key` anahtar sticker'ı yeni. **Slush logolu/markalı çizim kullanma.**
-5. Yayındaki site (Railway) güncel mi kontrol edilmedi.
+5. Yayındaki site (Railway) 2026-10-02/03 itibarıyla güncel; `SITE_URL=https://thegoatzstudio.com` production ortamında tanımlı (canonical/sitemap/robots buna göre).
 
 ## Yapılanlar / kararlar (2026-10-01)
 - **Sayfalar:** `/nasil-calisiyoruz` (süreç), `/anahtar-teslim-e-ticaret` (hero butonu "Anahtar teslim nedir?"); İşler'e "Danışmanlık ve Yönetim" kategorisi (Web Sitesi Danışmanlığı, Aylık Site Yönetimi, kapakta `slogan` alanı).
@@ -51,3 +51,9 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - `/hizmetler` (panelde "Hizmetler" sayfası): 6 kart bölümü, metinler ana sayfadaki "Neler yapıyoruz?" kutularından; blok başlığından otomatik bağlantı noktası (`#urun-cekimi`). Menüdeki "Hizmetler" bu sayfaya gider. Geri dönüş etiketi: `donus-noktasi-hizmetler-oncesi`.
 - Hizmet sepeti: `public/cart.js` (yalnız bu sayfada, `data-svc-cart` işaretiyle yüklenir). Kartlarda "Sepete ekle", sağda yapışkan sepet düğmesi, panelde "Fiyat al" formu → `POST /api/contact`, mesaj `FİYAT TALEBİ (hizmet sepeti)` ile başlar (`lib/mailer.js` konu satırı buna göre). Sepet `localStorage`'ta tutulur. Formda pazarlama onayı yok, yalnız KVKK.
 - SEO dosyaları `lib/seo.js` (robots.txt: arama motorları + yapay zekâ botları, sitemap.xml, llms.txt); yasal sayfalar robots'ta kapalı.
+
+## Gece evreni, sepet, SEO (2026-10-02/03)
+- **Gece evreni** (, "Mekik uçtuğu yöne bakar" bölümünden dosya sonuna): filolar, it dalaşı, ana gemi/taşıyıcı/düello, gezegenler; tüm gemiler tek döngüde (), gemi başına try/catch (tek hata döngüyü durdurmasın: bir kez tüm gemiler donmuştu). Sayfa açıldıktan 2 sn sonra başlar, gemiler hep kenardan girer, hiç durmaz, footer'da uzay yok.  gemi genişliğidir (açısal hız ). Yalnız ana gemiler büyük.
+- **Sepet** (): Hizmetler'de yüzen sepet; sepette ürün varken üst menüdeki baştan ayrılmış yere (, ) girer, kaydırınca kendi yerine iner, en üste dönünce geri çıkar. Diğer sayfalarda üst menü sepeti sunucuda çizilir (, ), tıklayınca bulunduğu sayfada panel açılır. Sepet anahtarı .
+- **Başlangıç kodu** ( head inline script) bir şablon dizesinin içinde: düzenli ifadelerde ters eğik çizgi kaybolur ( →  yorum satırı olup tüm kodu bozmuştu). Regex kullanma.
+- **SEO**: anasayfa h1 = logo başlığı "The Goatz Studio"; title ≤60 karakter; og:image yoksa logo; sonda eğik çizgi 301;  şeması (adres/telefon yasal sayfalardan, çalışma saati yok). Denetim betiği yerelde .
