@@ -45,7 +45,9 @@
     photo: [
       { lab: 'Sektör', q: 'Hangi sektörde çalışıyorsunuz?', type: 'one', o: ['Gıda ve yemek', 'Kahve', 'Kozmetik', 'Ambalaj', 'Mum', 'Seramik ve sofra', 'Cam', 'Takı ve aksesuar', 'Başka bir sektör'] },
       { lab: 'Ürün sayısı', q: 'Kaç ürünün fotoğrafı çekilecek?', type: 'one', o: ['1–10 ürün', '11–30 ürün', '31–100 ürün', '100’den fazla', 'Henüz belli değil'] },
+      { lab: 'Mevcut fotoğraflar', q: 'Sitenizdeki mevcut ürün fotoğrafları için ne düşünüyorsunuz?', type: 'one', o: ['Sitemde hiç ürün fotoğrafı yok', 'Hepsi yenilenecek', 'Sadece eksik olanlar çekilecek', 'Birlikte karar verelim'] },
       { lab: 'Çekim tarzı', q: 'Nasıl bir çekim düşünüyorsunuz?', type: 'multi', o: ['Beyaz fon', 'Renkli fon', 'Ortam ve mekân çekimi', 'Birlikte karar verelim'] },
+      { lab: 'Çekim yeri', q: 'Çekim nerede yapılsın?', type: 'one', o: ['Ürünlerimi Çanakkale’deki stüdyoya getireceğim', 'Çekim benim yerimde yapılsın', 'Birlikte karar verelim'] },
       { lab: 'Kullanım', q: 'Fotoğrafları nerede kullanacaksınız?', type: 'multi', o: ['Web sitemde', 'Pazaryerlerinde', 'Sosyal medyada', 'Katalog ve basılı işlerde'] },
     ],
     google: [
