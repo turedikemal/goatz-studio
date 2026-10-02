@@ -532,7 +532,8 @@
   const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const onceAt = (rootMargin, cb) => new IntersectionObserver((es, o) => es.forEach((e) => { if (e.isIntersecting) { o.unobserve(e.target); cb(e.target); } }), { rootMargin });
-  const ROOT80 = '0px 0px -20% 0px'; // elemanın üstü ekranın %80'ine gelince
+  // Elemanın üstü ekranın %80'ine gelince; telefonda ekrana girer girmez (altı boş görünen bölüm 'yüklenmedi' izlenimi vermesin)
+  const ROOT80 = matchMedia('(max-width: 700px)').matches ? '0px 0px 6% 0px' : '0px 0px -20% 0px';
 
   // Metni harflere böler (yazı düğümleri; sticker, link ve satır sonları korunur)
   const split = (el) => splitChars(el);
