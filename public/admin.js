@@ -483,6 +483,7 @@
         cols: group('Sütunlar', {
           showLinks: bool('Sayfa linkleri sütununu göster'),
           linksTitle: text('Sayfa linkleri sütun başlığı', { compact: true, hint: 'Linkler menüden ve "Menüye ekle" işaretli sayfalardan kendiliğinden gelir.' }),
+          extraLinks: list('Alt bilgiye ek bağlantılar (menüde görünmez)', group('', { label: text('Yazı', { nostyle: true }), target: target() }), { addLabel: 'Bağlantı ekle', title: (v) => v.label || 'Bağlantı', max: 10, newItem: { label: '', target: '#iletisim' } }),
           showContact: bool('İletişim sütununu göster'),
           contactTitle: text('İletişim sütun başlığı', { compact: true, hint: 'WhatsApp, Instagram ve e-posta, İletişim sayfasında girdiklerinden gelir.' }),
         }, { flat: true }),
@@ -534,7 +535,7 @@
   ];
 
   // ---------- Özel sayfalar: şema ----------
-  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası', cartpage: 'Sepet sayfası içeriği' };
+  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', faq: 'Sık sorulan sorular', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası', cartpage: 'Sepet sayfası içeriği' };
   const is = (...types) => (o) => types.includes(o.type);
   const BLOCK_FIELDS = {
     type: select('Blok türü', Object.entries(BLOCK_TYPES)),
@@ -542,7 +543,7 @@
     background: color('Blok arka plan rengi'),
     eyebrow: text('Küçük üst yazı', { compact: true }),
     heading: area('Başlık', { hint: lineHint }),
-    text: area('Metin', { hint: 'Boş bir satır bırakarak yeni paragraf açarsın.', showIf: is('text', 'imagetext', 'cards', 'gallery', 'form') }),
+    text: area('Metin', { hint: 'Boş bir satır bırakarak yeni paragraf açarsın.', showIf: is('text', 'imagetext', 'cards', 'faq', 'gallery', 'form') }),
     align: select('Hizalama', [['left', 'Sola yaslı'], ['center', 'Ortalı']]),
     image: image('Görsel', { hint: 'Kare ya da yatay bir görsel iyi durur.', showIf: is('imagetext') }),
     imageSide: select('Görsel hangi tarafta?', [['left', 'Solda'], ['right', 'Sağda']]),
@@ -556,8 +557,8 @@
       color: color('Kart rengi'),
       sticker: sticker('Sticker'),
       image: image('Fotoğraf (isteğe bağlı)', { hint: 'Yüklersen sticker yerine kartın üstünde görünür.' }),
-    }), { addLabel: 'Kart ekle', max: 12, title: (v) => v.title.replace(/\n/g, ' '), showIf: is('cards'),
-      newItem: { title: 'Yeni kart', text: 'Kısa açıklama.', color: 'sun', sticker: 'star', image: '' } }),
+    }), { addLabel: 'Kart ekle', max: 12, title: (v) => v.title.replace(/\n/g, ' '), showIf: is('cards', 'faq'),
+      newItem: { title: 'Yeni soru', text: 'Cevap. Bağlantı için {{Metin|/adres}} yazabilirsin.', color: 'sun', sticker: 'star', image: '' } }),
     ratio: select('Görsel oranı', [['square', 'Kare'], ['portrait', 'Dikey (4:5)'], ['wide', 'Yatay (16:10)'], ['natural', 'Orijinal oran']]),
     bulk: { type: 'gallerybulk', hint: 'Birden çok fotoğrafı tek seferde seçip yükleyebilirsin (en fazla 40 görsel).' },
     images: list('Görseller', group('', { image: image('Görsel'), caption: text('Alt yazı (isteğe bağlı)', { nostyle: true }) }),
@@ -568,7 +569,7 @@
   BLOCK_FIELDS.imageSide.showIf = is('imagetext');
   BLOCK_FIELDS.imageColor.showIf = is('imagetext');
   BLOCK_FIELDS.imageSticker.showIf = is('imagetext');
-  BLOCK_FIELDS.button.showIf = is('text', 'imagetext', 'form');
+  BLOCK_FIELDS.button.showIf = is('text', 'imagetext', 'form', 'faq');
   BLOCK_FIELDS.ratio.showIf = is('gallery');
   BLOCK_FIELDS.bulk.showIf = is('gallery');
   BLOCK_FIELDS.images.showIf = is('gallery');
@@ -618,6 +619,7 @@
         { title: 'Marka\ndanışmanlığı', text: 'Kısa açıklama.', color: 'sun', sticker: 'star', image: '' },
       ];
     }
+    if (type === 'faq') { b.heading = 'Sık sorulan sorular'; b.eyebrow = 'SSS'; b.text = ''; b.cards = [{ title: 'Örnek soru?', text: 'Örnek cevap.', color: 'sun', sticker: 'star', image: '' }]; }
     if (type === 'gallery') { b.heading = 'Galeri'; b.text = ''; }
     return b;
   };
