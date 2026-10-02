@@ -156,9 +156,17 @@
           gr.ts.forEach((t) => {
             const row = el('div', 'cp-row');
             const info = el('div', 'cp-info');
-            info.append(el('span', 'cp-item', '✓ ' + t));
             const dd = descOf(gr.g, t);
-            if (dd) info.append(el('p', 'cp-desc', dd));
+            const tg = el('button', 'cp-toggle'); tg.type = 'button';
+            tg.append(el('span', 'cp-item', '✓ ' + t));
+            info.append(tg);
+            if (dd) {
+              const p = el('p', 'cp-desc', dd); p.hidden = true;
+              tg.append(el('i', 'cp-chev', '▾'));
+              tg.setAttribute('aria-expanded', 'false');
+              tg.addEventListener('click', () => { const on = p.hidden; p.hidden = !on; tg.setAttribute('aria-expanded', String(on)); row.classList.toggle('open', on); });
+              info.append(p);
+            } else tg.disabled = true;
             row.append(info);
             const rm = el('button', 'cp-rm', 'Çıkar'); rm.type = 'button'; rm.setAttribute('aria-label', t + ' hizmetini sepetten çıkar');
             rm.addEventListener('click', () => remove(gr.g, t));

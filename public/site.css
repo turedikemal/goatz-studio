@@ -1596,3 +1596,12 @@ html.cart-open { overflow: hidden; }
 .cp-info { display: grid; gap: 4px; min-width: 0; }
 .cp-desc { margin: 0; font-size: 14px; line-height: 1.45; font-weight: 500; }
 .cp-row .cp-rm { margin-top: 2px; }
+
+/* Sepet sayfası: satıra tıklayınca hizmetin içeriği altta açılır */
+.cp-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.cp-toggle:disabled { cursor: default; }
+.cp-chev { flex: none; font-style: normal; font-size: 16px; transition: rotate .2s ease; }
+.cp-toggle[aria-expanded="true"] .cp-chev { rotate: 180deg; }
+.cp-desc[hidden] { display: none; }
+.cp-desc { padding-top: 6px; border-top: 1px dashed var(--carbon); margin-top: 4px; }
+.cp-row { cursor: pointer; }
