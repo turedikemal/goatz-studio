@@ -100,6 +100,7 @@
     const open = () => { bubble.classList.remove('show'); place(); back.hidden = false; panel.hidden = false; document.documentElement.classList.add('cart-open'); close.focus(); };
     const shut = () => { back.hidden = true; panel.hidden = true; document.documentElement.classList.remove('cart-open'); fab.focus(); };
     fab.addEventListener('click', open);
+    if (location.hash === '#sepet') setTimeout(open, 400); // üst menüdeki sepetten gelinirse panel açılır
     close.addEventListener('click', shut);
     back.addEventListener('click', shut);
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) shut(); });
