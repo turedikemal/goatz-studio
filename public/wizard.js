@@ -180,7 +180,8 @@
   // Web sitesi varsa "yeni site", yoksa "platform geçişi" anlamsız: kilitlenir
   const routeLock = (id) => {
     if (id === 'new' && state.site.has === 'yes') return 'Web siteniz olduğu için bu seçenek kapalı. Platform geçişi ya da özel proje seçebilirsiniz.';
-    if (id === 'migration' && state.site.has === 'no') return 'Henüz web siteniz olmadığı için bu seçenek kapalı. Yeni e-ticaret sitesini seçebilirsiniz.';
+    if (id === 'service' && state.site.has === 'no') return 'Henüz web siteniz olmadığı için bu seçenek kapalı. Yeni e-ticaret sitesi ya da özel proje seçebilirsiniz.';
+    if (id === 'migration' && state.site.has === 'no') return 'Henüz web siteniz olmadığı için bu seçenek kapalı. Yeni e-ticaret sitesi ya da özel proje seçebilirsiniz.';
     return '';
   };
 
@@ -526,7 +527,8 @@
           }
         }
       } else {
-        if (key === 'site') { state.site.has = v; if (v === 'no') SITE_BOUND.forEach((id) => { state.services.delete(id); state.extras.delete(id); }); state.site.ok = ''; state.site.brand = ''; state.site.msg = ''; if (v === 'no') state.site.url = ''; render(); return; }
+        if (key === 'site') { state.site.has = v; if (v === 'no' && ['service', 'migration'].includes(state.answers.route)) { delete state.answers.route; state.services.clear(); state.extras.clear(); }
+        if (v === 'no') SITE_BOUND.forEach((id) => { state.services.delete(id); state.extras.delete(id); }); state.site.ok = ''; state.site.brand = ''; state.site.msg = ''; if (v === 'no') state.site.url = ''; render(); return; }
         if (key === 'route' && state.answers.route !== v) { state.answers = { route: v }; state.services.clear(); state.extras.clear(); } else state.answers[key] = v;
         render();
       }
