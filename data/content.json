@@ -56,7 +56,7 @@
   },
   "seo": {
     "title": "Çanakkale Web Tasarım ve Ürün Çekimi — The Goatz Studio",
-    "description": "The Goatz Studio: Çanakkale’de ürün fotoğrafçılığı ve web sitesi tasarımı. Ürününüzü çekiyor, e-ticaret sitenizi kurup yayına alıyoruz.",
+    "description": "Çanakkale web tasarım ve ürün çekimi stüdyosu. E-ticaret sitenizi kuruyor, ürünlerinizi çekip yayına alıyoruz. ikas’ın resmi iş ortağıyız.",
     "shareImage": ""
   },
   "sections": [
@@ -265,7 +265,7 @@
   },
   "services": {
     "background": "paper",
-    "heading": "Neler yapıyoruz?",
+    "heading": "Çanakkale’de neler yapıyoruz?",
     "more": [
       {
         "title": "Ürün çekimi",
@@ -4974,8 +4974,8 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "Çanakkale Ürün Çekimi ve Ürün Fotoğrafı — The Goatz Studio",
-      "seoDescription": "Çanakkale’de ürün fotoğrafı çekimi: e-ticaret, beyaz fon ve renkli fon çekimleri, siteye uygun fotoğraflar. Çekimleri birlikte planlıyoruz.",
+      "seoTitle": "Çanakkale Ürün Çekimi, Ürün Fotoğrafçısı — The Goatz Studio",
+      "seoDescription": "Çanakkale ürün fotoğrafçısı: e-ticaret ve pazaryeri için beyaz fon ve renkli fon ürün çekimi. Ürünlerinizi stüdyoda ya da yerinde çekiyoruz.",
       "background": "sky",
       "showContact": true,
       "hero": {
@@ -5035,7 +5035,7 @@
           "visible": true,
           "background": "paper",
           "eyebrow": "Ürün çekimi",
-          "heading": "Ürün çekimi hizmetlerimiz",
+          "heading": "E-ticaret ürün çekimi hizmetlerimiz",
           "text": "Çanakkale’de ürün fotoğrafı çekiyoruz. E-ticaret mağazaları, üreticiler ve yerel işletmeler için ürünlerinizi fotoğraflıyoruz. Çekimleri, fotoğrafları kullanacağınız alanlara göre birlikte planlıyoruz.",
           "align": "left",
           "image": "",
@@ -5097,7 +5097,7 @@
           "visible": true,
           "background": "sky",
           "eyebrow": "SSS",
-          "heading": "Sık sorulan sorular",
+          "heading": "Ürün çekimi hakkında sık sorulanlar",
           "text": "",
           "align": "left",
           "image": "",
