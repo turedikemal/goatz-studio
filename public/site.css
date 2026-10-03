@@ -1020,6 +1020,8 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 /* Google SEO, ikas, blog: harf aralığı 0, satır arası 2 mm (alt satırın en üst noktası ile üst satırın tabanı arası) */
 .pg-spaced .display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { letter-spacing: 0 !important; }
 .pg-spaced h1.display, .pg-spaced h2.display, .pg-spaced h3.display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { line-height: calc(.95em + 2mm) !important; }
+/* Web tasarım + ürün çekimi: üst etiket sarı zemin, siyah çerçeve, siyah yazı */
+.page-hero.eyebrow-sun .page-eyebrow { background: var(--sun); color: var(--carbon); border-color: var(--carbon); }
 
 /* Başlıkta çizili kelime + araya sıkıştırılmış düzeltme (elle düzeltilmiş gibi) */
 .has-fix { padding-top: 0; }
