@@ -2461,6 +2461,77 @@
           ]
         },
         {
+          "type": "faq",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "SSS",
+          "heading": "Web tasarım ve ürün çekimi soruları",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Ürün çekimi ile web sitesini aynı stüdyoda yaptırmanın avantajı nedir?",
+              "text": "Fotoğraflar sitenin ölçüsüne, fonuna ve kadrajına göre çekilir, sayfa düzenleri de fotoğrafların en iyi görüneceği şekilde tasarlanır. İşi farklı kişilere dağıtmak ve birbirini bekleyen takvimlerle uğraşmak gerekmez.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Sadece ürün çekimi ya da sadece web sitesi yaptırabilir miyim?",
+              "text": "Evet. Ürün çekimi, web sitesi ya da ikisini birden yaptırabilirsiniz. Hepsi aynı yoldan ilerler, yalnızca üretim adımı hizmete göre değişir.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Siteniz telefonda düzgün görünüyor mu?",
+              "text": "Tasarımı en baştan telefona göre düşünüyoruz. Yayından önce siteyi telefonda ve bilgisayarda test ediyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Ürün çekimi nerede yapılıyor?",
+              "text": "Ürünleriniz stüdyoya gelir ya da biz yerinde çekeriz. Çekimden sonra rötuş ve boyutlandırma yapılır, kullanıma hazır dosyalar size teslim edilir.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Siteyi yayına almadan önce görebilir miyim?",
+              "text": "Evet. Tasarım taslağını görüp onaylıyorsunuz. Onayınız olmadan bir sonraki adıma geçmiyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Site metinlerini de siz mi yazıyorsunuz?",
+              "text": "İsterseniz evet. Ana sayfa, hakkımızda ve hizmet sayfası metinlerini, ürün ve kategori açıklamalarını hazırlıyoruz. Metinleriniz hazırsa onları da kullanabiliriz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Fiyatı nasıl belirliyorsunuz?",
+              "text": "Başlamadan önce neyin yapılacağını birlikte netleştiriyoruz, fiyat da bu kapsama göre belirleniyor. Böylece ne için ne ödediğinizi baştan bilirsiniz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
           "type": "text",
           "visible": true,
           "background": "sun",
@@ -5008,6 +5079,70 @@
               "image": ""
             }
           ]
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "SSS",
+          "heading": "Hizmetlerle ilgili sorular",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Hizmetleri ayrı ayrı alabilir miyim?",
+              "text": "Evet. Bu sayfadaki her hizmeti tek başına ya da birkaçını birlikte alabilirsiniz. İhtiyacınız olmayan bir hizmeti pakete eklemiyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Seçtiğim hizmetler için nasıl fiyat alırım?",
+              "text": "Kartlardaki “Sepete ekle” ile istediğiniz hizmetleri seçin, ardından sepetteki “Fiyat al” formunu doldurun. Seçtiğiniz hizmetlere göre size dönüş yapıyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Hangi hizmetle başlamam gerektiğini bilmiyorum, ne yapmalıyım?",
+              "text": "Bir şey hazırlamanız gerekmiyor. İlk görüşmede ürünlerinizi ve hedefinizi anlatmanız yeterli, hangi hizmetlerin işinize yarayacağını birlikte belirliyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çalışma süreci nasıl işliyor?",
+              "text": "Planlama, ürün çekimi, web tasarımı ve yayına geçiş olmak üzere dört adımda ilerliyoruz. Ayrıntılar {{Nasıl çalışıyoruz?|/nasil-calisiyoruz}} sayfasında.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Yayından sonra da destek veriyor musunuz?",
+              "text": "İsterseniz evet. Web sitesi danışmanlığında sitenizi değerlendirip yol haritası hazırlıyoruz; aylık site yönetiminde ürün, içerik ve kampanya güncellemelerini belirlediğimiz kapsamda biz yürütüyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Logo ve kurumsal kimlik de tasarlıyor musunuz?",
+              "text": "Evet. Logo ve kurumsal kimlik tasarlıyor, alan adını seçme, satın alma ve sitenize bağlama adımlarında destek oluyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
         }
       ]
     },
@@ -5247,6 +5382,20 @@
             {
               "title": "Pazaryerleri için çekim ve mağaza desteği veriyor musunuz?",
               "text": "Evet. Pazaryerlerinde satış yapıyorsanız çekimi pazaryerine özel kurguluyor, temiz beyaz fon görselleri hazırlıyoruz. Pazaryeri başvurusu ve mağaza ayarlarına destek oluyor, mağaza görsellerinizi hazırlıyor, ürünlerinizi açıklama, görsel ve kategori bilgileriyle yüklüyor, sitenizle pazaryeri mağazalarınız arasındaki ürün, stok ve sipariş bağlantılarını kuruyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çekimden sonra ne teslim ediyorsunuz?",
+              "text": "Çekimden sonra rötuş ve boyutlandırma yapılır, ardından kullanıma hazır dosyalar size teslim edilir.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Beyaz fon mu renkli fon mu seçmeliyim?",
+              "text": "Ürün sayfaları ve pazaryerleri için genelde beyaz fon, kampanya, banner ve sosyal medya için markanıza uygun renkli fon kullanılır. Farkları {{Beyaz fon mu renkli fon mu?|/blog/beyaz-fon-mu-renkli-fon-mu}} yazısında anlattık.",
               "color": "mint",
               "sticker": "star",
               "image": ""
@@ -5983,6 +6132,27 @@
             {
               "title": "Site yayına çıktıktan sonra siteyi kim yönetiyor?",
               "text": "Mağazanız yayına çıktığında yönetim panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz. Anahtar sizde olur. İsterseniz web sitesi danışmanlığı ve aylık site yönetimiyle de yanınızda oluruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Ödeme ve kargo ayarlarını da yapıyor musunuz?",
+              "text": "Evet. Ödeme ve kargo hesaplarınızı sitenize bağlıyor, gerekli ayarları ve kontrolleri yapıyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Kurulum için benden neler istiyorsunuz?",
+              "text": "Ürün listesi, şirket bilgileri, ödeme ve kargo tercihleriniz ile varsa logo ve kurumsal renkler. Eksik olanları birlikte listeleyip hangi sırayla tamamlanacağını planlıyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Yasal metinleri de hazırlıyor musunuz?",
+              "text": "Mesafeli satış sözleşmesi, iade ve cayma koşulları, KVKK ve çerez metinlerinin taslaklarını sitede yerine koyuyoruz. İşletmenize özel bilgiler içerdikleri için yayından önce bir hukukçuya ya da mali müşavirinize kontrol ettirmenizi öneriyoruz.",
               "color": "mint",
               "sticker": "star",
               "image": ""
@@ -6900,6 +7070,27 @@
               "color": "mint",
               "sticker": "star",
               "image": ""
+            },
+            {
+              "title": "Search Console ve Merchant Center kurulumu yapıyor musunuz?",
+              "text": "Evet. Search Console, Merchant Center ve Tag Manager kurulumlarını yapıyoruz. Sitenizin Google’daki durumunu bu verilerle takip ediyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "SEO sonuçları ne zaman görülür?",
+              "text": "Hemen değil; SEO reklam gibi açılıp kapanan bir şey değildir. Yeni sitelerin Google’da yer edinmesi zaman alır, düzenli içerik ve sağlam bir teknik altyapı bu süreyi kısaltır.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Yapay zekâ aramalarında da görünebilir miyim?",
+              "text": "Sitenizin içeriğini ChatGPT ve Gemini gibi yanıt motorlarının da doğru anlayabileceği şekilde düzenliyoruz (GEO). Sorulara net cevap veren sayfalar her iki tarafta da işe yarar.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
             }
           ],
           "ratio": "square",
@@ -7177,6 +7368,27 @@
             {
               "title": "Mağaza yayına çıktıktan sonra kim yönetiyor?",
               "text": "Mağazanız yayına çıktığında ikas panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz. İsterseniz web sitesi danışmanlığı ve aylık site yönetimiyle de yanınızda oluruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "ikas’ta Trendyol ve Hepsiburada’da da satış yapabilir miyim?",
+              "text": "Evet. Ürünlerin Trendyol ve Hepsiburada’da da satışa sunulabilmesi için entegrasyon altyapısını kuruyoruz, böylece ürün ve stok bilgileri tek yerden yönetilebilir.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "ikas temasını markama göre değiştirebilir misiniz?",
+              "text": "Evet. Renkleri, yazı karakterlerini, ana sayfa düzenini ve ürün sayfasının yapısını markanıza göre tasarlıyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Mağazam taşınırken satışlarım durur mu?",
+              "text": "Yeni mağaza hazırlanırken eski siteniz çalışmaya devam eder. Her şey kontrol edildikten sonra alan adınızı yeni mağazaya yönlendiriyor, eski adreslerden yenilerine yönlendirmeleri kuruyoruz.",
               "color": "mint",
               "sticker": "star",
               "image": ""
