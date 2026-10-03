@@ -2461,6 +2461,70 @@
           ]
         },
         {
+          "type": "faq",
+          "visible": true,
+          "background": "mint",
+          "eyebrow": "SSS",
+          "heading": "Sık Sorulan Sorular",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Diğer sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "ratio": "square",
+          "images": [],
+          "cards": [
+            {
+              "title": "Web tasarımı ne kadar sürer?",
+              "text": "Projenin kapsamına göre değişiyor. Basit projeler bir ayda, karmaşık e-ticaret siteleri 2-3 ayda tamamlanabilir. Başlangıçta birlikte bir takvim çıkarıyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Siteme kaç sayfa konur?",
+              "text": "Kategori sayısına göre. Sabit bir limit yok. Az kategori daha hızlı yüklenen, daha rahat okunan bir site demek. Google SEO açısından da daha iyi.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Fiyat ne kadar?",
+              "text": "Teklif üzerine. Sizin ihtiyacınız ne, onu yapıyoruz. Gerekmez diye bir şey için fazladan para istemiyoruz. İlk görüşmede scope netleşir, fiyat o zaman belli olur.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Neden profesyonel ürün fotoğrafı lazım?",
+              "text": "Müşteri satın almadan önce ürünü görmek istiyor. Kaliteli fotoğraf ve satış oranı doğrudan bağlantılı. Biz ürünlerinizi doğru açıdan, iyi ışıkta, sitenize uygun boyutlarda çekiyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Telefonda da düzgün görünür mü?",
+              "text": "Evet, zorunlu. Ziyaretçilerinizin çoğu telefonda giriyor. Site mobilde kusursuz çalışır.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Sitedeki bilgileri ben güncelleyebilir miyim?",
+              "text": "Evet. Yönetim panelinden ürün ekleyip çıkarabilir, fiyat değiştirebilirsiniz. Metin ve tasarım değişikliği için bize yazarsanız hallettiriz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ]
+        },
+        {
           "type": "text",
           "visible": true,
           "background": "sun",
@@ -4946,6 +5010,70 @@
           ]
         },
         {
+          "type": "faq",
+          "visible": true,
+          "background": "lavender",
+          "eyebrow": "SSS",
+          "heading": "Sık Sorulan Sorular",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "lavender",
+          "imageSticker": "star",
+          "button": {
+            "label": "Diğer sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "ratio": "square",
+          "images": [],
+          "cards": [
+            {
+              "title": "Hizmetleri bir arada yaptırabilirim?",
+              "text": "Evet, hepsi bir stüdyoda yapılır. Web tasarım, ürün çekimi, SEO, pazaryeri, metin yazımı, marka tasarımı… Hangisine ihtiyacınız varsa.",
+              "color": "lavender",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Sadece bir hizmet seçebilirim?",
+              "text": "Tabii. Yalnız fotoğrafçılık, yalnız tasarım, yalnız SEO… Diğer hizmetleri seçmezseniz, o parayı ödemezsiniz.",
+              "color": "lavender",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Pazaryeri entegrasyonu nedir?",
+              "text": "Sitenizin ürünleri Trendyol, Hepsiburada, N11 ve diğer pazaryerlere bağlanıyor. Stok güncellerse, hepsi güncellenir. Tüm sipariş ve stok bir panelden yönetilir.",
+              "color": "lavender",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Fiyatlandırma nasıl çalışıyor?",
+              "text": "Teklif üzerine. Neyin yapılacağını netleştirelim, size özel bir teklif hazırlayacağız. Paket sistemi yerine ihtiyaca göre fiyat yapıyoruz.",
+              "color": "lavender",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Yayından sonra da destek var mı?",
+              "text": "Evet. Hizmetin türü, pazaryeri sayısı, dil ve ürün miktarına göre destek planları var. Danışmanlık ya da aylık yönetim seçebilirsiniz.",
+              "color": "lavender",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Başlamak için hazırlık lazım mı?",
+              "text": "Hayır. Projenizi anlatmanız yeterli. Ürün fotoğrafları, metin, markalaşma… Bunları birlikte yapabiliriz ya da siz sağlayabilirsiniz.",
+              "color": "lavender",
+              "sticker": "star",
+              "image": ""
+            }
+          ]
+        },
+        {
           "type": "cards",
           "visible": true,
           "background": "sky",
@@ -5939,30 +6067,58 @@
           "columns": 3,
           "cards": [
             {
-              "title": "Sitemi hangi altyapıyla kuruyorsunuz?",
-              "text": "ikas’ın resmi iş ortağı olarak e-ticaret sitenizi ikas ile kuruyoruz.",
-              "color": "mint",
+              "title": "Sitemi hangi platformda kuruyorsunuz?",
+              "text": "IKAS'ın resmi iş ortağı olarak IKAS platformunu kullanıyoruz. Türkiye'nin lider e-ticaret platformu. Güvenlik, hız ve pazaryeri entegrasyonları sağlıyor.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Mevcut mağazamı ikas’a taşıyabilir misiniz?",
-              "text": "Evet. Ürün, içerik ve bağlantılarınızı değerlendiriyor, mevcut mağazanızın ikas’a geçişini yönetiyoruz.",
-              "color": "mint",
+              "title": "Mevcut mağazamı IKAS'a taşıyabilir misiniz?",
+              "text": "Evet. Ürünlerinizi, açıklamalarınızı, fotoğraflarınızı değerlendiriyor, eski adresinizden yenisine 301 yönlendirme kuruyoruz. Google görünürlüğünüz korunur.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Siteyi yayına almadan önce görebilir miyim?",
-              "text": "Evet. Tasarım taslağını görüp onaylıyorsunuz. Onayınız olmadan bir sonraki adıma geçmiyoruz.",
-              "color": "mint",
+              "title": "Siteme kaç günde kurulum yapılır?",
+              "text": "Ürün sayısı, tasarım, içerik hazırlık ve entegrasyon türüne göre değişir. Teslim takvimi, proje kapsamı netleştikten sonra belirlenecek.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Site yayına çıktıktan sonra siteyi kim yönetiyor?",
-              "text": "Mağazanız yayına çıktığında yönetim panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz. Anahtar sizde olur. İsterseniz web sitesi danışmanlığı ve aylık site yönetimiyle de yanınızda oluruz.",
-              "color": "mint",
+              "title": "Dropshipping mi normal e-ticaret mi?",
+              "text": "Dropshipping, stok riski almadan başlamak. Ama marjlar düşük, müşteri memnuniyeti zor. Normal e-ticaret daha çok çalışma ama daha karlı. Hedefinize göre danışıyoruz.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Siteyi kurulumdan sonra ben yönetebilir miyim?",
+              "text": "Evet, tamamen. Yönetim panelinden ürün ekleyip çıkarabilir, fiyat, stok, sipariş yönetebilirsiniz. Yazılı rehber ve eğitim veriyoruz.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Hangi ödeme sistemleri eklenebilir?",
+              "text": "iyzico, PayTR, Paratika, Tami ve Moka United seçenekleri mevcut. Müşteriye uygun sağlayıcıyı kuruyoruz. İşlem komisyonları sağlayıcının koşullarına bağlıdır.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Yurt dışına satış yapabilir miyim?",
+              "text": "Evet. IKAS çok dilli destek ve çoklu para birimi sunuyor. Amazon, Etsy gibi uluslararası pazaryerlere bağlanabilir.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Site yavaşsa ne yapıyorsunuz?",
+              "text": "IKAS altyapısı genellikle hızlı. Ama görselleri optimize ediyor, cache ayarlarını kontrol ediyoruz. Gerekirse ek iyileştirmeler yapabiliriz.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             }
@@ -6832,30 +6988,51 @@
           "columns": 3,
           "cards": [
             {
-              "title": "SEO çalışması neleri kapsıyor?",
-              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz: hız ve mobil uyum, sayfa başlıkları ve açıklamaları, iç bağlantılar, site haritası, yapılandırılmış veri ve Google hesaplarının kurulumu.",
-              "color": "mint",
+              "title": "SEO ne kadar zaman alır?",
+              "text": "İlk farklar 4-6 hafta içinde görülmeye başlar. Ama SEO uzun vadeli. 3-6 ayda sonuçlar netleşir. Sitenizin yaşı, sektör rekabeti ve başlangıç durumu değişken.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Google’da ilk sıraya çıkmayı garanti ediyor musunuz?",
-              "text": "Hayır. Arama sonuçlarındaki sıralamayı Google belirlediği için belirli bir sıra vaat edemeyiz. Yaptığımız işleri ve sitenizin Google’daki durumunu Search Console verileriyle birlikte takip ediyoruz.",
-              "color": "mint",
+              "title": "Çanakkale'de nasıl öne çıkarız?",
+              "text": "Sayfa başlıklarına yerel terimler ekliyoruz. Metin içinde \"Çanakkale\" ve ilgili arama terimleri yazıyoruz. Google İşletme Profili ve şema markaşında konum tanımlıyoruz.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Sadece SEO çalışması yaptırabilir miyim, sitemi siz yapmadınız?",
-              "text": "Evet. Mevcut sitenizi inceleyip neyin düzenlenmesi gerektiğini birlikte netleştiriyoruz.",
-              "color": "mint",
+              "title": "Backlink nedir ve niye önemli?",
+              "text": "Başka sitenin sizin sitenize verdiği bağlantı. Çok sitenin sizden bahsetmesi, Google için güven işareti. Kaliteli backlink'ler sıralamayı etkiler. Ama doğal bağlantı lazım, uygunsuzlar kötü etki yapabilir.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Google İşletme Profili neden önemli?",
-              "text": "Haritalar’da ve “yakınımdaki” türü yerel aramalarda çıkan işletme kutusu bu profilden gelir. Doğru kategori, eksiksiz bilgi, fotoğraflar ve müşteri yorumları yerel görünürlüğü doğrudan etkiler.",
-              "color": "mint",
+              "title": "Backlink stratejiniz nedir?",
+              "text": "Önce sektörünüzü ve rakiplerinizi analiz ediyoruz. Marka ile ilgili yayınları ve işbirlikleri belirliyoruz. Faydalı içerik ve sektörel ilişkilerden kaliteli bağlantı kazandırıyoruz. Sonuçları ziyaretçi, organik görünürlük ve müşteri talepleriyle takip ediyoruz.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Teknik SEO nedir?",
+              "text": "Site hızı, mobil uyum, SSL, robots.txt, sitemap gibi ayarlamalar. Google'ın sitenizi rahat crawl etmesi için. Hiçbiri opsiyonel değil.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Anahtar kelimeleri kim seçiyor?",
+              "text": "Birlikte. Müşteriler sizin işinizle ilgili neyi aradığını araştırıyoruz. En uygun kelimeleri seçip siteyi buna göre yapıyoruz.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Google'da birinci sıra garantisi var mı?",
+              "text": "Hayır. Sıralama Google algoritması belirliyor. Ama bizim çalışmamız sıralamalarınızı artıracak. İyi içerik, hızlı site, iyi kullanıcı deneyimi = Google sizi öne çıkarır.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             }
@@ -7098,23 +7275,51 @@
           "columns": 3,
           "cards": [
             {
-              "title": "Sitemi hangi altyapıyla kuruyorsunuz?",
-              "text": "ikas’ın resmi iş ortağı olarak e-ticaret sitenizi ikas ile kuruyoruz.",
-              "color": "mint",
+              "title": "IKAS kurulumu ne kadar sürer?",
+              "text": "Ürün sayısı, tasarım, içerik hazırlık ve entegrasyon türüne göre değişir. Teslim takvimi, proje kapsamı belirlendikten sonra netlenir. Hep beraber takvim yapıyoruz.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Mevcut mağazamı ikas’a taşıyabilir misiniz?",
-              "text": "Evet. Ürün, içerik ve bağlantılarınızı değerlendiriyor, mevcut mağazanızın ikas’a geçişini yönetiyoruz.",
-              "color": "mint",
+              "title": "Hangi pazaryerlerine bağlanıyor?",
+              "text": "Trendyol, Hepsiburada, Amazon, Etsy gibi kanallara bağlanabiliyor. Kullandığınız IKAS paketine ve istediğiniz entegrasyonlara göre değişir.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             },
             {
-              "title": "Mağaza yayına çıktıktan sonra kim yönetiyor?",
-              "text": "Mağazanız yayına çıktığında ikas panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz. İsterseniz web sitesi danışmanlığı ve aylık site yönetimiyle de yanınızda oluruz.",
-              "color": "mint",
+              "title": "Pazaryeri komisyonları ne kadar?",
+              "text": "Bizim hizmet bedelimiz ayrı. Pazaryeri komisyonları, platform, kategori ve satıcı koşullarına göre değişir. Başlangıçta detaylı açıkıyoruz.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Hangi ödeme sistemleri var?",
+              "text": "iyzico, PayTR, Paratika, Tami ve Moka United seçenekleri mevcut. Müşteriye uygun sağlayıcıyı kuruyoruz. İşlem komisyonları sağlayıcıya göre değişir.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Ürün senkronizasyonu otomatik mi?",
+              "text": "Evet. Stoğu azaltırsanız, hepsi güncellenir. Fiyat değiştirirseniz, tüm pazaryerlerde değişir. Elle giriş yok.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Pazarlama kararlarını kim alıyor?",
+              "text": "Siz. IKAS platformu ve ürün listeleme bize ait. Kampanya, promosyon, fiyatlandırma tamamen sizin. İsterseniz danışmanlık da yapıyoruz.",
+              "color": "sky",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "İadeleri nasıl yönetiyoruz?",
+              "text": "Müşteri sitenizden iade talebi oluşturuyor. Talepleri IKAS panelinden takip ediyorsunuz. Kabul edilen iadeleri sonuçlandırıyor, ürünü stokuya geri ekliyorsunuz. Kargo ve ücret iadesi, kargo ve ödeme entegrasyonlarınıza göre yürütülür.",
+              "color": "sky",
               "sticker": "star",
               "image": ""
             }
