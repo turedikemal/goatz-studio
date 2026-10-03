@@ -2,6 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const zlib = require('zlib');
 const { render } = require('./lib/render');
 const store = require('./lib/content');
 const { resolvePages, resolveWorks } = require('./lib/schema');
@@ -59,14 +60,18 @@ function tooManyAttempts(ip) {
 }
 
 // ---------- Yardımcılar ----------
+// Metin yanıtları (HTML, CSS, JS, JSON, XML, SVG) tarayıcı destekliyorsa gzip ile sıkıştırılır
+const COMPRESSIBLE = /^(text\/|application\/(json|xml|javascript)|image\/svg)/;
 function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {}) {
-  res.writeHead(status, {
-    'Content-Type': type,
-    'X-Content-Type-Options': 'nosniff',
-    'Referrer-Policy': 'strict-origin-when-cross-origin',
-    ...extra,
-  });
-  res.end(body);
+  const headers = { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin', ...extra };
+  const accepts = /\bgzip\b/.test(String((res.req && res.req.headers['accept-encoding']) || ''));
+  if (accepts && body && body.length > 1024 && COMPRESSIBLE.test(type)) {
+    body = zlib.gzipSync(body, { level: 6 });
+    headers['Content-Encoding'] = 'gzip';
+    headers.Vary = 'Accept-Encoding';
+  }
+  res.writeHead(status, headers);
+  res.end(res.req && res.req.method === 'HEAD' ? undefined : body);
 }
 const messages = require('./lib/messages');
 const mailer = require('./lib/mailer');
@@ -74,6 +79,9 @@ const seo = require('./lib/seo');
 // Eski görsel adresleri -> yeni (SEO'lu, WebP) adresler; data/image-redirects.json
 let imgRedirCache = null;
 const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
+const { optimize } = require('./lib/optimize');
+// Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
+const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects());
 const contactHits = new Map();
 const siteHits = new Map();
 const sitecheck = require('./lib/sitecheck');
@@ -486,7 +494,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') return send(res, 405, 'İzin verilmiyor');
 
     if (url.pathname === '/') {
-      return send(res, 200, render(store.load(), { origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      return send(res, 200, pageHtml(store.load(), { origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
     }
     // Panel önizlemeyi tarayıcıda üretir; bu yüzden şablon dosyaları küçük bir CommonJS sarmalıyla tarayıcıya verilir.
     if (url.pathname === '/render-bundle.js') {
@@ -519,9 +527,9 @@ const server = http.createServer(async (req, res) => {
     if (wm) {
       const c = store.load();
       if (c.works.visible) {
-        if (!wm[1]) return send(res, 200, render(c, { page: 'works', origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+        if (!wm[1]) return send(res, 200, pageHtml(c, { page: 'works', origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
         const it = resolveWorks(c.works.items).find((v) => v.visible && v.slug === wm[1]);
-        if (it) return send(res, 200, render(c, { work: it.slug, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+        if (it) return send(res, 200, pageHtml(c, { work: it.slug, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
       }
       return send(res, 404, 'Sayfa bulunamadı');
     }
@@ -530,10 +538,14 @@ const server = http.createServer(async (req, res) => {
     if (pm) {
       const c = store.load();
       const page = resolvePages(c.pages).find((p) => p.visible && p.slug === pm[1]);
-      if (page) return send(res, 200, render(c, { page: page.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      if (page) return send(res, 200, pageHtml(c, { page: page.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
     }
     const file = safeJoin(PUBLIC_DIR, decodeURIComponent(url.pathname.slice(1)));
-    if (file && fs.existsSync(file) && fs.statSync(file).isFile()) return serveFile(res, file);
+    if (file && fs.existsSync(file) && fs.statSync(file).isFile()) {
+      // Sürümlü (?v=) CSS/JS bir yıl önbellekte kalır; sürümsüz dosyalar her seferinde doğrulanır, panel dosyaları hiç tutulmaz
+      const cache = url.searchParams.has('v') ? 'public, max-age=31536000, immutable' : (/^admin/.test(path.basename(file)) ? 'no-store' : 'no-cache');
+      return serveFile(res, file, cache);
+    }
     return send(res, 404, 'Sayfa bulunamadı');
   } catch (e) {
     if (!res.headersSent) json(res, e.status || 500, { error: e.status ? e.message : 'Sunucu hatası.' });

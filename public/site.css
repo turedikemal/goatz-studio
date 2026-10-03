@@ -34,6 +34,8 @@
     -webkit-font-smoothing: antialiased;
   }
   img, svg { display: block; }
+  /* width/height öznitelikleri yalnız oran için: CSS genişlik verince yükseklik orantılı kalsın (:where = hiçbir kuralı ezmez) */
+  :where(img[width][height]) { height: auto; }
   a { color: inherit; }
   :focus-visible { outline: 3px solid var(--violet); outline-offset: 3px; }
 
