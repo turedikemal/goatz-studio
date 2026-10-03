@@ -9,7 +9,7 @@
   const STICKERS = { camera: 'Kamera', browser: 'Tarayıcı', coin: 'Gülen jeton', check: 'Onay rozeti', cursor: 'İmleç', star: 'Yıldız', bottle: 'Şişe', pin: 'Konum pini', map: 'Harita', box: 'Paket', truck: 'Kamyon', medal: 'Madalya', store: 'Dükkan', cart: 'Sepet', chat: 'Yorum balonu', link: 'Zincir', sliders: 'Ayar çubukları', photo: 'Fotoğraf', grid: 'Izgara', palette: 'Renk paleti', heart: 'Kalp', magnifier: 'Büyüteç', globe: 'Dünya', pencil: 'Kalem', gear: 'Dişli', key: 'Anahtar', anahtar: 'Anahtar (tek başına)', refresh: 'Yenileme', rocket: 'Roket', chart: 'Grafik', product: 'Ürün şişesi (MARKA)', signpost: 'Yön tabelası', vitrin: 'Fransız vitrin', foot: 'Ayak', shoe: 'İskarpin', sock: 'Beyaz çorap', code: 'Kod', phone: 'Telefon', layers: 'Katmanlar', type: 'Yazı (Aa)', bag: 'Alışveriş çantası', tag: 'Fiyat etiketi', bulb: 'Ampul (fikir)' };
   const STICKER_VB = { camera: '0 0 120 100', browser: '0 0 120 100', bottle: '0 0 100 160', product: '0 0 100 160' };
   const TARGETS = [
-    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['work:web-sitesi-danismanligi', 'Web Sitesi Danışmanlığı (proje sayfası)'], ['work:aylik-site-yonetimi', 'Aylık Site Yönetimi (proje sayfası)'], ['works:photo', 'İşler → Ürün çekimi'], ['works:web', 'İşler → Web siteleri'], ['works:app', 'İşler → Web uygulamaları'], ['works:consulting', 'İşler → Danışmanlık'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
+    ['#top', 'Sayfanın başı'], ['works', 'İşler sayfası (portföy)'], ['work:web-sitesi-danismanligi', 'Web Sitesi Danışmanlığı (proje sayfası)'], ['work:aylik-site-yonetimi', 'Aylık Site Yönetimi (proje sayfası)'], ['work:kategori-yildizi', 'Kategori Yıldızı (proje sayfası)'], ['work:yorum-merkezi', 'Yorum Merkezi (proje sayfası)'], ['work:canli-siparis-haritasi', 'Canlı Sipariş Haritası (proje sayfası)'], ['works:photo', 'İşler → Ürün çekimi'], ['works:web', 'İşler → Web siteleri'], ['works:app', 'İşler → Web uygulamaları'], ['works:consulting', 'İşler → Danışmanlık'], ['#isler', 'İşler bölümü (ana sayfada)'], ['#hizmetler', 'Hizmetler bölümü'],
     ['#neden', 'Neden biz bölümü'], ['#surec', 'Süreç bölümü'], ['#iletisim', 'İletişim bölümü'],
     ['whatsapp', 'WhatsApp (iletişimdeki numara)'], ['instagram', 'Instagram (iletişimdeki hesap)'], ['email', 'E-posta (iletişimdeki adres)'],
   ];
@@ -26,7 +26,7 @@
   const hex = (label) => ({ type: 'hex', label });
   const image = (label, o = {}) => ({ type: 'image', label, ...o });
   const sticker = (label, o = {}) => ({ type: 'sticker', label, ...o });
-  const target = (label = 'Tıklayınca nereye gitsin?') => ({ type: 'target', label });
+  const target = (label = 'Tıklayınca nereye gitsin?', o = {}) => ({ type: 'target', label, ...o });
   const select = (label, options) => ({ type: 'select', label, options });
   const group = (label, fields, o = {}) => ({ type: 'group', label, fields, ...o });
   const list = (label, item, o = {}) => ({ type: 'list', label, item, ...o });
@@ -148,6 +148,8 @@
             gallery: list('Galeri', group('', { image: image('Görsel'), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => v.caption || 'Görsel', max: 12, newItem: { image: '', caption: '' } }),
             story: area('Hikaye (proje sayfasının girişi; paragraflar arasına boş satır)', { nostyle: true }),
             closing: area('Kapanış cümlesi', { nostyle: true }),
+            aboutHeading: text('Uzun açıklama başlığı', { nostyle: true, hint: 'Boş bırakırsan "<Proje adı> hakkında" yazılır.' }),
+            about: area('Uzun proje açıklaması (Devamını oku)', { nostyle: true, hint: 'Sayfanın altında, "Devamını oku" ile açılır. "## " ile ara başlık, [metin](page:kimlik) ile iç bağlantı.' }),
             sections: list('Proje sayfası bölümleri (başlık + yazı)', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }), sticker: select('Köşedeki sticker', [['', 'Konuya göre otomatik'], ...Object.entries(STICKERS)]) }), { addLabel: 'Bölüm ekle', title: (v) => v.title || 'Bölüm', max: 12, newItem: { title: '', text: '', sticker: '' } }),
             fun: select('Küçük eğlenceli gösterim', [['', 'Yok'], ['map', 'Sipariş haritası (şehir pini)'], ['reviews', 'Yorum yıldızları (parlar)'], ['delivery', 'Teslimat adımları (kamyon)'], ['badges', 'Rozet şablonları (çok satan)']]),
             slug: text('Sayfa adresi', { nostyle: true, hint: 'Boş bırakırsan proje adından üretilir. Örn. pati-mama → /isler/pati-mama' }),
@@ -545,6 +547,7 @@
     heading: area('Başlık', { hint: lineHint }),
     text: area('Metin', { hint: 'Boş bir satır bırakarak yeni paragraf açarsın.', showIf: is('text', 'imagetext', 'cards', 'faq', 'gallery', 'form') }),
     align: select('Hizalama', [['left', 'Sola yaslı'], ['center', 'Ortalı']]),
+    collapse: bool('Uzun metni kısalt ("Devamını oku" düğmesiyle açılır)', { showIf: is('text') }),
     image: image('Görsel', { hint: 'Kare ya da yatay bir görsel iyi durur.', showIf: is('imagetext') }),
     imageSide: select('Görsel hangi tarafta?', [['left', 'Solda'], ['right', 'Sağda']]),
     imageColor: color('Görsel yokken zemin rengi'),
@@ -557,6 +560,7 @@
       color: color('Kart rengi'),
       sticker: sticker('Sticker'),
       image: image('Fotoğraf (isteğe bağlı)', { hint: 'Yüklersen sticker yerine kartın üstünde görünür.' }),
+      target: target('"Detaylı bilgi" bağlantısı (isteğe bağlı)', { optional: true }),
     }), { addLabel: 'Kart ekle', max: 12, title: (v) => v.title.replace(/\n/g, ' '), showIf: is('cards', 'faq'),
       newItem: { title: 'Yeni soru', text: 'Cevap. Bağlantı için {{Metin|/adres}} yazabilirsin.', color: 'sun', sticker: 'star', image: '' } }),
     ratio: select('Görsel oranı', [['square', 'Kare'], ['portrait', 'Dikey (4:5)'], ['wide', 'Yatay (16:10)'], ['natural', 'Orijinal oran']]),
@@ -578,7 +582,8 @@
   const PAGE_SCHEMA = {
     settings: group('Sayfa ayarları', {
       visible: bool('Sayfayı sitede yayında göster'),
-      kind: select('Sayfa türü', [['page', 'Normal sayfa'], ['blog', 'Blog yazısı (adresi /blog/... olur, Blog listesinde görünür)']]),
+      kind: select('Sayfa türü', [['page', 'Normal sayfa'], ['blog', 'Blog yazısı (adresi /blog/... olur, Blog listesinde görünür)'], ['service', 'Hizmet / kategori sayfası (adresi /hizmetler/... olur)']]),
+      parent: text('Bağlı olduğu kategori sayfası (hizmet sayfası)', { nostyle: true, hint: 'Kategori sayfasının kimliği (örn. kmarka). Kategori sayfalarında boş kalır.', max: 24 }),
       date: text('Yayın tarihi (blog yazısı)', { nostyle: true, hint: 'YYYY-AA-GG biçiminde. Örnek: 2026-10-03', max: 10 }),
       title: text('Sayfa adı', { nostyle: true, hint: 'Menüde ve tarayıcı sekmesinde görünür.', max: 60 }),
       slugAuto: bool('Sayfa adresini sayfa adından otomatik oluştur', { rerender: true }),
@@ -1337,7 +1342,7 @@
   }
 
   function targetField(def, value, onSet) {
-    const targets = [...TARGETS, ...state.pages.map((p) => [`page:${p.id}`, `Sayfa: ${p.title || 'adsız'}`])];
+    const targets = [...(def.optional ? [['', 'Bağlantı yok']] : []), ...TARGETS, ...state.pages.map((p) => [`page:${p.id}`, `Sayfa: ${p.title || 'adsız'}`])];
     const known = targets.some(([v]) => v === value);
     const sel = h('select', { 'aria-label': def.label },
       targets.map(([v, l]) => h('option', { value: v, selected: v === value }, l)),

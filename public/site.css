@@ -2095,3 +2095,21 @@ html[data-theme="night"] .blk-faq .faq-item[open] { box-shadow: 6px 6px 0 var(--
 .page-hero h1.t-hang .t-lean { transform: none; }
 /* Kapı müşterisi: harfler birbirine girmesin */
 .page-hero h1.t-hang { letter-spacing: .04em !important; }
+/* "Devamını oku": kesilmiş açıklama alttan soluklaşır, düğmeyle tamamı açılır */
+.txt-more.is-cut { position: relative; max-height: var(--more-h, 340px); overflow: hidden; }
+.txt-more.is-cut::after { content: ""; position: absolute; inset: auto 0 0 0; height: 120px; background: linear-gradient(to bottom, transparent, var(--more-bg, var(--paper, #fff))); pointer-events: none; }
+.txt-more.is-cut.is-open { max-height: none; }
+.txt-more.is-cut.is-open::after { display: none; }
+.blk-more .txt-more-btn { margin-top: 18px; }
+.blk-more .txt-more > :first-child { margin-top: 0; }
+/* Kartın altındaki "Detaylı bilgi" bağlantısı */
+.k-card .k-link { align-self: flex-start; padding: 7px 14px; border: 1px solid #000; border-radius: var(--r-pill, 999px); background: #fff; color: #000; font-size: 14px; font-weight: 800; text-decoration: none; transition: background .15s ease; }
+.k-card .k-link:hover, .k-card .k-link:focus-visible { background: var(--sun, #ffd731); }
+/* Uzun açıklamalar geniş ekranda iki sütun (sol, sonra sağ). Kısaltılmışken önce sol sütun dolar, sonra sağ; "Devamını oku" ile tamamı açılır. */
+@media (min-width: 900px) {
+  .blk-more .txt-more { column-count: 2; column-gap: 56px; column-fill: balance; }
+  .blk-more .txt-more.is-cut:not(.is-open) { column-fill: auto; height: var(--more-h, 340px); }
+  .blk-more .txt-more p { max-width: none; }
+  .blk-more .txt-more .txt-h { break-after: avoid; margin-top: 0; }
+  .blk-more .txt-more .txt-h { break-inside: avoid-column; }
+}

@@ -556,12 +556,20 @@ const server = http.createServer(async (req, res) => {
       if (post) return send(res, 200, pageHtml(c, { page: post.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
       return notFound(res, req);
     }
+    // Hizmet ve kategori sayfaları: /hizmetler/hizmet-adresi
+    const sm = /^\/hizmetler\/([a-z0-9-]+)$/.exec(url.pathname);
+    if (sm) {
+      const c = store.load();
+      const svc = resolvePages(c.pages).find((p) => p.visible && p.kind === 'service' && p.slug === sm[1]);
+      if (svc) return send(res, 200, pageHtml(c, { page: svc.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      return notFound(res, req);
+    }
     // Özel sayfalar: /hakkimizda
     const pm = /^\/([a-z0-9-]+)\/?$/.exec(url.pathname);
     if (pm) {
       const c = store.load();
       const page = resolvePages(c.pages).find((p) => p.visible && p.slug === pm[1]);
-      if (page && page.kind === 'blog') { res.writeHead(301, { Location: pagePath(page), 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
+      if (page && (page.kind === 'blog' || page.kind === 'service')) { res.writeHead(301, { Location: pagePath(page), 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
       if (page) return send(res, 200, pageHtml(c, { page: page.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
     }
     const file = safeJoin(PUBLIC_DIR, decodeURIComponent(url.pathname.slice(1)));

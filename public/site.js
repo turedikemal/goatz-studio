@@ -2051,3 +2051,30 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const show = () => document.documentElement.classList.add('fnt');
   (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(show), show);
 })();
+// "Devamını oku": uzun açıklamaların ilk kısmı görünür, gerisi düğmeyle açılır. Metnin tamamı sayfada durur (Google okur).
+(() => {
+  document.querySelectorAll('[data-more]').forEach((box) => {
+    const btn = box.parentElement.querySelector('[data-more-btn]');
+    if (!btn) return;
+    // Kısa metinde kesme yok
+    // İki sütunda (geniş ekran) kesilen yükseklik her sütunda geçerli olduğu için görünen metin iki katına çıkar
+    const cut = () => Math.min(Math.max(window.innerHeight * 0.45, 260), 420);
+    if (box.scrollHeight <= cut() + 120) return;
+    box.classList.add('is-cut');
+    box.style.setProperty('--more-h', cut() + 'px');
+    btn.hidden = false;
+    btn.addEventListener('click', () => {
+      const open = box.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', String(open));
+      btn.textContent = open ? 'Daha az göster' : 'Devamını oku';
+      if (!open) {
+        const top = box.getBoundingClientRect().top;
+        if (top < 0) {
+          const y = top + window.scrollY - 120;
+          if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(y, { immediate: true, force: true }); else window.scrollTo(0, y);
+        }
+      }
+      if (window.__lenis && window.__lenis.resize) window.__lenis.resize();
+    });
+  });
+})();

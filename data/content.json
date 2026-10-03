@@ -2584,7 +2584,8 @@
           "columns": 3,
           "cards": [],
           "ratio": "square",
-          "images": []
+          "images": [],
+          "collapse": true
         }
       ]
     },
@@ -4747,28 +4748,32 @@
               "text": "Tasarım, ürün yerleşimi, ödeme ve kargo ayarlarıyla sitenizi satışa hazır hale getiriyoruz.",
               "color": "mint",
               "sticker": "anahtar",
-              "image": ""
+              "image": "",
+              "target": "page:anahtarteslim"
             },
             {
               "title": "Kurumsal Web Sitesi",
               "text": "İşinizi ve hizmetlerinizi anlatan, müşterilerin size kolayca ulaşabildiği web siteleri tasarlıyoruz.",
               "color": "lavender",
               "sticker": "browser",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Mevcut Siteyi Yenileme",
               "text": "Sitenizin tasarımını, mobil görünümünü ve kullanımını markanızın ihtiyaçlarına göre yeniliyoruz.",
               "color": "sun",
               "sticker": "refresh",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "ikas’a Site Taşıma",
               "text": "Ürün, içerik ve bağlantılarınızı değerlendiriyor; mevcut mağazanızın ikas’a geçişini yönetiyoruz.",
               "color": "sky",
               "sticker": "truck",
-              "image": ""
+              "image": "",
+              "target": ""
             }
           ]
         },
@@ -4797,21 +4802,24 @@
               "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz.",
               "color": "mint",
               "sticker": "magnifier",
-              "image": ""
+              "image": "",
+              "target": "page:googleseo"
             },
             {
               "title": "Google Entegrasyonları Kurulumu",
               "text": "Bir e-ticaret sitesi için gerekli tüm Google bağlantılarını kuruyoruz: Merchant Center, Search Console, Tag Manager ve diğer entegrasyonlar.",
               "color": "lavender",
               "sticker": "chart",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Ziyaretçi ve Satış Ölçümleme",
               "text": "Ziyaret kaynaklarını, alışveriş adımlarını ve satışları takip edebilmeniz için ölçümleme araçlarını kuruyoruz.",
               "color": "sun",
               "sticker": "sliders",
-              "image": ""
+              "image": "",
+              "target": ""
             }
           ]
         },
@@ -4840,21 +4848,24 @@
               "text": "E-ticaret ve pazaryerleri için ürünlerinizin rengini, dokusunu ve detaylarını gösteren fotoğraflar çekiyoruz.",
               "color": "mint",
               "sticker": "camera",
-              "image": ""
+              "image": "",
+              "target": "page:uruncekimi"
             },
             {
               "title": "Konsept Ürün Çekimi",
               "text": "Ürünlerinizi markanıza uygun dekorlar ve kullanım sahneleri içinde fotoğraflıyoruz.",
               "color": "lavender",
               "sticker": "bottle",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Yapay Zekâ ile Ürün ve Kampanya Görselleri",
               "text": "Ürün fotoğraflarınızdan yola çıkarak siteniz, reklamlarınız ve sosyal medya için gerçekçi görseller hazırlıyoruz.",
               "color": "sun",
               "sticker": "palette",
-              "image": ""
+              "image": "",
+              "target": ""
             }
           ]
         },
@@ -4883,28 +4894,32 @@
               "text": "Pazaryeri başvurusu, mağaza bilgileri ve temel satış ayarlarının hazırlanmasına destek oluyoruz.",
               "color": "mint",
               "sticker": "store",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Pazaryeri Mağaza Tasarımı ve Ürün Yükleme",
               "text": "Mağaza görsellerinizi hazırlıyor; ürünlerinizi açıklama, görsel ve kategori bilgileriyle yüklüyoruz.",
               "color": "lavender",
               "sticker": "tag",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Pazaryeri Entegrasyonu",
               "text": "Sitenizle pazaryeri mağazalarınız arasındaki ürün, stok ve sipariş bağlantılarını kuruyoruz.",
               "color": "sun",
               "sticker": "link",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Ödeme ve Kargo Entegrasyonları",
               "text": "Ödeme ve kargo hesaplarınızı sitenize bağlıyor, gerekli ayarları ve kontrolleri yapıyoruz.",
               "color": "sky",
               "sticker": "cart",
-              "image": ""
+              "image": "",
+              "target": ""
             }
           ]
         },
@@ -4933,14 +4948,16 @@
               "text": "Sitenizi değerlendiriyor, eksikleri belirliyor ve öncelikli geliştirmeler için yol haritası hazırlıyoruz.",
               "color": "mint",
               "sticker": "bulb",
-              "image": ""
+              "image": "",
+              "target": "work:web-sitesi-danismanligi"
             },
             {
               "title": "Aylık Site Yönetimi",
               "text": "Ürün, içerik ve kampanya güncellemelerini belirlediğimiz aylık çalışma kapsamına göre yürütüyoruz.",
               "color": "lavender",
               "sticker": "rocket",
-              "image": ""
+              "image": "",
+              "target": "work:aylik-site-yonetimi"
             }
           ]
         },
@@ -4969,21 +4986,24 @@
               "text": "Ana sayfa, hakkımızda ve hizmet sayfalarınız için işinizi açıkça anlatan, markanıza uygun metinler yazıyoruz.",
               "color": "mint",
               "sticker": "pencil",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Ürün ve Kategori Açıklamaları",
               "text": "Ürünlerin özelliklerini, kullanım alanlarını ve farklarını anlaşılır açıklamalara dönüştürüyoruz.",
               "color": "lavender",
               "sticker": "box",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Blog Yazıları",
               "text": "Müşterilerinizin sorularına yanıt veren, araştırmaya dayalı blog yazıları hazırlıyoruz.",
               "color": "sun",
               "sticker": "chat",
-              "image": ""
+              "image": "",
+              "target": ""
             }
           ]
         },
@@ -5012,28 +5032,32 @@
               "text": "Markanızın karakterini yansıtan, farklı boyutlarda ve kullanım alanlarında çalışabilen logolar tasarlıyoruz.",
               "color": "mint",
               "sticker": "medal",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Kurumsal Kimlik Tasarımı",
               "text": "Logo, renk ve yazı tipleriyle markanızın basılı ve dijital materyallerinde tutarlı bir görünüm oluşturuyoruz.",
               "color": "lavender",
               "sticker": "layers",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Alan Adı Seçimi ve Satın Alma Desteği",
               "text": "Uygun alan adını seçme, satın alma ve sitenize bağlama adımlarında destek oluyoruz.",
               "color": "sun",
               "sticker": "globe",
-              "image": ""
+              "image": "",
+              "target": ""
             },
             {
               "title": "Marka Tescil Süreci Koordinasyonu",
               "text": "Gerekli hazırlıkları ve yetkili uzmanla iletişimi koordine ediyor, sürecin takibine destek oluyoruz.",
               "color": "sky",
               "sticker": "check",
-              "image": ""
+              "image": "",
+              "target": ""
             }
           ]
         },
@@ -5062,21 +5086,24 @@
               "text": "",
               "color": "mint",
               "sticker": "star",
-              "image": ""
+              "image": "",
+              "target": "work:kategori-yildizi"
             },
             {
               "title": "Yorum Merkezi",
               "text": "Müşteri yorumlarını sitenizin tasarımına uygun kartlarla ziyaretçilerinize sunun.",
               "color": "lavender",
               "sticker": "heart",
-              "image": ""
+              "image": "",
+              "target": "work:yorum-merkezi"
             },
             {
               "title": "Canlı Sipariş Haritası",
               "text": "Sipariş gelen şehirleri harita üzerinde gösterin; mağazanızın ulaştığı yerleri ziyaretçilerinizle paylaşın.",
               "color": "sun",
               "sticker": "map",
-              "image": ""
+              "image": "",
+              "target": "work:canli-siparis-haritasi"
             }
           ]
         },
@@ -6219,7 +6246,8 @@
           "columns": 3,
           "cards": [],
           "ratio": "square",
-          "images": []
+          "images": [],
+          "collapse": true
         }
       ]
     },
@@ -7136,7 +7164,8 @@
           "columns": 3,
           "cards": [],
           "ratio": "square",
-          "images": []
+          "images": [],
+          "collapse": true
         }
       ]
     },
@@ -7437,7 +7466,8 @@
           "columns": 3,
           "cards": [],
           "ratio": "square",
-          "images": []
+          "images": [],
+          "collapse": true
         }
       ]
     },
