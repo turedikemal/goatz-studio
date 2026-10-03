@@ -64,4 +64,5 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - **Yeni sayfalar:** `/google-seo` (id `googleseo`), `/ikas` (id `ikas`), `/blog` + 5 yazı. Hizmet sayfalarında `Service` şeması (render.js `SERVICE`), Hizmetler'de `OfferCatalog`.
 - **404:** menülü sayfa, noindex (`notFound`, server.js). İş adresi değişince `WORK_MOVED` ile 301.
 - Adres: iş yeri (iletişim, SSS, şema) Fatih Sok. No: 39 İş Yeri: 4; yasal sayfalarda fatura adresi Medrese Sok. No: 1 İş Yeri: 2 kalır.
+- Google İşletme Profili: `GBP_URL` (render.js, share.google bağlantısı) harita kartları, iletişim haritası butonu, şemada hasMap/sameAs. Eskiden harita "The Goatz Creative" (müşteri markası) arıyordu, düzeltildi.
 - Harita konumu (geo) ve çalışma saati şemada yok: bilinmiyor, uydurulmadı.
