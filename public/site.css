@@ -1017,6 +1017,8 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 /* Başlık satırları arasında 2 mm boşluk: satır yüksekliği = noktalı harflerin (İ, Ü, Ö) tepesi + 2 mm */
 .pg-tight h1.display, .pg-tight h2.display, .pg-tight h3.display { line-height: calc(.95em + 2mm); }
+.pg-spaced .display { letter-spacing: -0.03em; }
+.pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { line-height: calc(.95em + 2mm); }
 
 /* Başlıkta çizili kelime + araya sıkıştırılmış düzeltme (elle düzeltilmiş gibi) */
 .has-fix { padding-top: 0; }
