@@ -584,13 +584,15 @@
     const srNodes = [...titleEl.children].filter((n) => n.classList.contains('sr-only')); // görünmez devam (arama motoru için) harflere bölünmez
     const text = [...titleEl.childNodes].filter((n) => !srNodes.includes(n)).map((n) => (n.nodeName === 'BR' ? String.fromCharCode(10) : n.textContent)).join('');
     titleEl.setAttribute('aria-label', (text + srNodes.map((n) => n.textContent).join('')).replace(/\s+/g, ' ').trim());
+    const leanEl = titleEl.querySelector('.t-lean'); // sağa yatık kelimeler (kapı müşterisi) bölünse de yatık kalır
+    let leanN = leanEl ? leanEl.textContent.trim().split(/\s+/).length : 0;
     titleEl.textContent = '';
     const letters = [];
     text.split(/(\s+)/).forEach((part) => {
       if (!part) return;
       if (/^\s+$/.test(part)) { titleEl.append(part.includes(String.fromCharCode(10)) ? document.createElement('br') : ' '); return; }
       const w = document.createElement('span');
-      w.className = 'rw';
+      w.className = leanN-- > 0 ? 'rw t-lean' : 'rw';
       w.setAttribute('aria-hidden', 'true');
       for (const ch of part) {
         const l = document.createElement('span');

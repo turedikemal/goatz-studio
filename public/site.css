@@ -1021,8 +1021,9 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .pg-spaced .display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { letter-spacing: 0 !important; }
 .pg-spaced h1.display, .pg-spaced h2.display, .pg-spaced h3.display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { line-height: calc(.95em + 2mm) !important; }
 /* Kapı müşterisi beklemeye son: sarı zemin, siyah çerçeve, yuvarlak köşe, sağ tarafı hafif yukarıda, boşlukta sallanır */
-.page-hero h1.t-hang { position: relative; z-index: 5; width: fit-content; max-width: min(100%, 9.2em); margin: .15em auto .35em; box-sizing: border-box; padding: .1em .3em .08em; border: 3px solid var(--carbon); border-radius: .22em; background: var(--sun); color: var(--carbon); rotate: -3deg; animation: uzayBoşluğu 2.8s ease-in-out infinite; }
+.page-hero h1.t-hang { position: relative; z-index: 5; width: fit-content; max-width: 100%; white-space: nowrap; font-size: clamp(15px, 4.7vw, 100px) !important; margin: .15em auto .35em; box-sizing: border-box; padding: .1em .3em .08em; border: 3px solid var(--carbon); border-radius: .22em; background: var(--sun); color: var(--carbon); rotate: -3deg; animation: uzayBoşluğu 2.8s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .page-hero h1.t-hang { animation: none; } }
+.page-hero h1.t-hang .t-lean { display: inline-block; transform: skewX(-12deg); }
 
 /* Başlıkta çizili kelime + araya sıkıştırılmış düzeltme (elle düzeltilmiş gibi) */
 .has-fix { padding-top: 0; }
