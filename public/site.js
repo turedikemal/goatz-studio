@@ -582,8 +582,11 @@
     if (!titleEl || titleEl.classList.contains('ready')) return [];
     // <br> satır sonları korunur (textContent onları silip kelimeleri birleştirirdi)
     const srNodes = [...titleEl.children].filter((n) => n.classList.contains('sr-only')); // görünmez devam (arama motoru için) harflere bölünmez
+    // ikas rozeti bölünmez: yerine tek bir işaret karakteri konur, harfler kurulurken rozet olduğu gibi geri takılır
+    const MARK = String.fromCharCode(1);
+    const marks = [...titleEl.querySelectorAll('.ikas-mark')].map((m) => { const c = m.cloneNode(true); m.replaceWith(MARK); return c; });
     const text = [...titleEl.childNodes].filter((n) => !srNodes.includes(n)).map((n) => (n.nodeName === 'BR' ? String.fromCharCode(10) : n.textContent)).join('');
-    titleEl.setAttribute('aria-label', (text + srNodes.map((n) => n.textContent).join('')).replace(/\s+/g, ' ').trim());
+    titleEl.setAttribute('aria-label', (text + srNodes.map((n) => n.textContent).join('')).split(MARK).join('ikas').replace(/\s+/g, ' ').trim());
     const leanEl = titleEl.querySelector('.t-lean'); // sağa yatık kelimeler (kapı müşterisi) bölünse de yatık kalır
     let leanN = leanEl ? leanEl.textContent.trim().split(/\s+/).length : 0;
     titleEl.textContent = '';
@@ -599,7 +602,7 @@
         l.className = 'rl';
         const real = document.createElement('span');
         real.className = 'rc';
-        real.textContent = ch;
+        if (ch === MARK && marks.length) real.append(marks.shift()); else real.textContent = ch;
         l.append(real);
         const i = letters.length;
         l.style.setProperty('--lx', ((rnd(i, 1) - 0.5) * 0.04 * K).toFixed(4));
@@ -637,12 +640,12 @@
       // Alt yazı: cümleler 1,5 sn sonra sırayla yukarıdan gelir
       const sub = document.querySelector('.hero [data-sub]');
       if (sub) {
-        const segs = sub.textContent.trim().split(/(?<=[.!?])\s+/);
+        const segs = sub.innerHTML.trim().split(/(?<=[.!?])\s+/); // içindeki ikas rozeti korunur
         sub.textContent = '';
         segs.forEach((t, k) => {
           const s = document.createElement('span');
           s.className = 'u-ib';
-          s.textContent = t;
+          s.innerHTML = t;
           sub.append(s);
           if (k < segs.length - 1) sub.append(' ');
           s.animate([{ translate: '0 2em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1 * quick), delay: ms((1.5 + k * 0.3) * quick), easing: BOUNCE, fill: 'both' });
@@ -2077,4 +2080,30 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       if (window.__lenis && window.__lenis.resize) window.__lenis.resize();
     });
   });
+})();
+
+// ---------- Yazılarda kelime vurgusu: her sayfada aynı (üzerine gelince sitenin sarısı) ----------
+// Paragraf ve liste kelimeleri sarmalanır; bağlantılar, ikas rozeti, kartlar, formlar ve araçlar (sihirbaz, sepet) dışarıda kalır.
+(() => {
+  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; // dokunmatikte üzerine gelme yok
+  const SKIP = 'a, button, .ikas-mark, .hw, svg, script, style, input, textarea, select, label';
+  const OUT = '.k-card, form, [data-wizard], .wz, .cart-panel, .cp-, footer, .sf, .ck, .cookie, nav, .svc-card, .work-card, .pt-lockup, .work-chips, [data-reveal], .display, .label, .band, .ticker';
+  const wrap = (el) => {
+    if (el.closest(OUT) || el.querySelector('.hw, .ch')) return;
+    const walk = (n) => [...n.childNodes].forEach((x) => {
+      if (x.nodeType === 3) {
+        if (!x.textContent.trim()) return;
+        const frag = document.createDocumentFragment();
+        x.textContent.split(/(\s+)/).forEach((w) => {
+          if (!w) return;
+          if (/^\s+$/.test(w)) { frag.append(w); return; }
+          const s = document.createElement('span'); s.className = 'hw'; s.textContent = w; frag.append(s);
+        });
+        x.replaceWith(frag);
+      } else if (x.nodeType === 1 && !x.matches(SKIP)) walk(x);
+    });
+    walk(el);
+  };
+  const run = () => document.querySelectorAll('main p, main li').forEach(wrap);
+  (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
 })();

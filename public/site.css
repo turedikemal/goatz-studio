@@ -2117,3 +2117,23 @@ html[data-theme="night"] .blk-faq .faq-item[open] { box-shadow: 6px 6px 0 var(--
 /* İşler: Hizmetler'deki sol filtre (svc-nav.js); geniş ekranda işler filtreye yer açmak için sağa alınır */
 .work-group[data-g] { scroll-margin-top: 84px; }
 @media (min-width: 1200px) { .works.has-rail > .works-in { max-width: calc(1240px + 236px); padding-left: calc(clamp(16px, 3vw, 40px) + 236px); } }
+
+/* ---------- Ortak yapı (tüm sayfalar aynı) ---------- */
+/* Kelime vurgusu: üzerine gelince sarı, yazı her temada siyah (gece de okunur) */
+.hw:hover, .hw-pg .split-ready .w:hover { background: var(--sun); color: #000; }
+/* Yazı içi bağlantılar: SSS cevabı, açıklama, proje metni hepsi aynı (altı çizili, üzerine gelince sarı, yazı siyah) */
+.faq-a a:hover, .blk-in a.txt-link:hover, .work-story a:hover { background: var(--sun, #ffd731); color: #000; }
+/* SSS ve uzun açıklama başlıkları: her sayfada aynı harf aralığı ve satır yüksekliği (harfler birbirine girmez) */
+.blk-faq h2.display, .blk-more h2.display { letter-spacing: 0 !important; line-height: calc(.95em + 2mm) !important; }
+/* ikas rozeti (Neden biz'deki iş ortaklığı rozetinin yazı içi küçük hâli) */
+.ikas-mark { display: inline-flex; align-items: center; gap: .22em; padding: .02em .42em .06em .26em; margin: 0 .06em; border: 2px solid #000; border-radius: 999px; background: var(--violet); color: #fff; font-weight: 900; font-style: normal; letter-spacing: -.02em; line-height: 1.15; text-transform: none; vertical-align: .04em; white-space: nowrap; }
+.ikas-mark i { width: .5em; height: .5em; border: 2px solid #000; border-radius: 50%; background: var(--sun); flex: none; }
+summary .ikas-mark { font-size: .92em; }
+html[data-theme="night"] .ikas-mark { border-color: #fff; }
+html[data-theme="night"] .ikas-mark i { border-color: #000; }
+
+/* "Kapı Müşterisi Beklemeye Son!!!" (ana sayfa İşler): Seçili işler etiketi gibi oval çerçeve, çerçeve her temada siyah, sağı biraz yukarıda */
+.show-hook-big mark { border: 3px solid #000 !important; border-radius: 999px !important; box-shadow: 4px 5px 0 #000 !important; padding: .1em .62em .16em !important; rotate: -2.5deg; word-spacing: .12em; color: #000 !important; }
+/* Büyük başlıkta ikas rozeti: başlıkla aynı boyda, çizgi kalın */
+.display .ikas-mark { border-width: .05em; padding: 0 .3em .04em .2em; letter-spacing: -.02em; vertical-align: .02em; line-height: 1; }
+.display .ikas-mark i { border-width: .05em; }

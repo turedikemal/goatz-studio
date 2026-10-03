@@ -15,7 +15,7 @@
   ];
   const SECTION_NAMES = {
     hero: 'Giriş (dev başlık)', showcase: 'İşler vitrini', statement: 'Büyük italik yazı', services: 'Hizmetler',
-    why: 'Neden biz (kartlar)', band: 'Siyah etiket bandı', process: 'Süreç sekmeleri', contact: 'İletişim', footer: 'Alt bilgi (footer)',
+    why: 'Neden biz (kartlar)', band: 'Siyah etiket bandı', process: 'Süreç sekmeleri', faq: 'Sık sorulan sorular', contact: 'İletişim', footer: 'Alt bilgi (footer)',
   };
 
   const text = (label, o = {}) => ({ type: 'text', label, ...o });
@@ -150,6 +150,8 @@
             closing: area('Kapanış cümlesi', { nostyle: true }),
             aboutHeading: text('Uzun açıklama başlığı', { nostyle: true, hint: 'Boş bırakırsan "<Proje adı> hakkında" yazılır.' }),
             about: area('Uzun proje açıklaması (Devamını oku)', { nostyle: true, hint: 'Sayfanın altında, "Devamını oku" ile açılır. "## " ile ara başlık, [metin](page:kimlik) ile iç bağlantı.' }),
+            faqHeading: text('SSS başlığı', { nostyle: true, hint: 'Boş bırakırsan "<Proje adı> soruları" yazılır.' }),
+            faq: list('Sorular', group('', { title: text('Soru', { nostyle: true }), text: area('Cevap', { nostyle: true }) }), { addLabel: 'Soru ekle', title: (v) => v.title || 'Soru', max: 12, newItem: { title: 'Yeni soru?', text: '' } }),
             sections: list('Proje sayfası bölümleri (başlık + yazı)', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }), sticker: select('Köşedeki sticker', [['', 'Konuya göre otomatik'], ...Object.entries(STICKERS)]) }), { addLabel: 'Bölüm ekle', title: (v) => v.title || 'Bölüm', max: 12, newItem: { title: '', text: '', sticker: '' } }),
             fun: select('Küçük eğlenceli gösterim', [['', 'Yok'], ['map', 'Sipariş haritası (şehir pini)'], ['reviews', 'Yorum yıldızları (parlar)'], ['delivery', 'Teslimat adımları (kamyon)'], ['badges', 'Rozet şablonları (çok satan)']]),
             slug: text('Sayfa adresi', { nostyle: true, hint: 'Boş bırakırsan proje adından üretilir. Örn. pati-mama → /isler/pati-mama' }),
@@ -202,6 +204,8 @@
           points: list('Maddeler', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Madde ekle', title: (v) => v.title || 'Madde', max: 6, newItem: { title: '', text: '' } }),
           images: list('Çekim görselleri (kategoriye göre gruplanır)', group('', { image: image('Görsel', { hint: 'Kare gösterilir; konu ortada olsun.' }), category: text('Kategori (aynı adı yazanlar bir grupta toplanır)', { nostyle: true, compact: true }), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => [v.category, v.caption].filter(Boolean).join(' · ') || 'Görsel', max: 60, newItem: { image: '', caption: '', category: '' } }),
         }),
+        faqHeading: text('SSS başlığı (listenin altında)', { nostyle: true, hint: 'Boş bırakırsan "İşlerle ilgili sorular" yazılır.' }),
+        faq: list('Sorular', group('', { title: text('Soru', { nostyle: true }), text: area('Cevap', { nostyle: true }) }), { addLabel: 'Soru ekle', title: (v) => v.title || 'Soru', max: 12, newItem: { title: 'Yeni soru?', text: '' } }),
         aboutHeading: text('Uzun açıklama başlığı (listenin en altında)', { nostyle: true }),
         about: area('Uzun açıklama (Devamını oku)', { nostyle: true, hint: '"## " ile ara başlık, [metin](page:kimlik) ile iç bağlantı.' }),
         approach: group('Ortak yaklaşım bölümü (listenin altında)', {
@@ -422,6 +426,14 @@
       },
     },
     {
+      id: 'faq', label: 'Sık sorulan sorular', path: ['faq'], anchor: '.blk-faq', section: 'faq',
+      intro: 'Ana sayfadaki SSS. Görünümü sitedeki diğer SSS bölümleriyle aynıdır (sarı zemin, "Tüm sorular" butonu).',
+      schema: {
+        heading: text('Başlık', { nostyle: true }),
+        cards: list('Sorular', group('', { title: text('Soru', { nostyle: true }), text: area('Cevap', { nostyle: true }) }), { addLabel: 'Soru ekle', title: (v) => v.title || 'Soru', max: 12, newItem: { title: 'Yeni soru?', text: '' } }),
+      },
+    },
+    {
       id: 'band', label: 'Etiket bandı', path: ['band'], anchor: '.band', section: 'band',
       intro: 'Siyah zeminde iki sıra halinde kayan renkli etiketler.',
       schema: {
@@ -628,7 +640,7 @@
         { title: 'Marka\ndanışmanlığı', text: 'Kısa açıklama.', color: 'sun', sticker: 'star', image: '' },
       ];
     }
-    if (type === 'faq') { b.heading = 'Sık sorulan sorular'; b.eyebrow = 'SSS'; b.text = ''; b.cards = [{ title: 'Örnek soru?', text: 'Örnek cevap.', color: 'sun', sticker: 'star', image: '' }]; }
+    if (type === 'faq') { b.heading = 'Sık sorulan sorular'; b.eyebrow = 'SSS'; b.text = ''; b.background = 'sun'; b.button = { label: 'Tüm sorular ↗', target: 'page:sss' }; b.cards = [{ title: 'Örnek soru?', text: 'Örnek cevap.', color: 'sun', sticker: 'star', image: '' }]; }
     if (type === 'gallery') { b.heading = 'Galeri'; b.text = ''; }
     return b;
   };
