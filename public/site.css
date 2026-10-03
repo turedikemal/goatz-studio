@@ -2113,3 +2113,7 @@ html[data-theme="night"] .blk-faq .faq-item[open] { box-shadow: 6px 6px 0 var(--
   .blk-more .txt-more .txt-h { break-after: avoid; margin-top: 0; }
   .blk-more .txt-more .txt-h { break-inside: avoid-column; }
 }
+
+/* İşler: Hizmetler'deki sol filtre (svc-nav.js); geniş ekranda işler filtreye yer açmak için sağa alınır */
+.work-group[data-g] { scroll-margin-top: 84px; }
+@media (min-width: 1200px) { .works.has-rail > .works-in { max-width: calc(1240px + 236px); padding-left: calc(clamp(16px, 3vw, 40px) + 236px); } }

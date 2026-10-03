@@ -1,6 +1,6 @@
-// Hizmetler sayfası: aşağı inerken hangi kategoride olunduğunu gösteren yüzen çubuk (rengi kategoriyle değişir) ve tıklayınca bölüme gitme
+// Hizmetler ve İşler sayfaları: aşağı inerken hangi kategoride olunduğunu gösteren yüzen çubuk (rengi kategoriyle değişir) ve tıklayınca bölüme gitme
 (() => {
-  const blocks = [...document.querySelectorAll('.blk-cards[data-g]')];
+  const blocks = [...document.querySelectorAll('.blk-cards[data-g], .work-group[data-g]')];
   if (!blocks.length) return;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const items = blocks.map((b, i) => ({ b, i, id: b.id, name: (b.querySelector('h2') || {}).textContent || '' }));
@@ -21,7 +21,8 @@
   // Yüzen çubuk
   const bar = document.createElement('nav');
   bar.className = 'svc-bar';
-  bar.setAttribute('aria-label', 'Hizmet kategorileri');
+  const isWorks = blocks[0].classList.contains('work-group');
+  bar.setAttribute('aria-label', isWorks ? 'İş kategorileri' : 'Hizmet kategorileri');
   bar.hidden = true;
   const track = document.createElement('div');
   track.className = 'svc-bar-track';
@@ -42,7 +43,7 @@
   const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
-  rail.setAttribute('aria-label', 'Hizmet filtresi');
+  rail.setAttribute('aria-label', isWorks ? 'İş filtresi' : 'Hizmet filtresi');
   items.forEach((x) => {
     const a = document.createElement('a');
     a.href = '#' + x.id;
@@ -114,5 +115,5 @@
   window.addEventListener('resize', on);
   update();
   // Adreste #bölüm varsa oraya git
-  if (location.hash) { const t = items.find((x) => '#' + x.id === location.hash); if (t) setTimeout(() => goTo(t.b), 400); }
+  if (location.hash) { const h = decodeURIComponent(location.hash.slice(1)); const t = items.find((x) => x.id === h || x.b.dataset.cat === h); if (t) setTimeout(() => goTo(t.b), 400); }
 })();
