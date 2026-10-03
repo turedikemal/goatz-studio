@@ -67,3 +67,9 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Google İşletme Profili: `GBP_URL` (render.js, share.google bağlantısı) harita kartları, iletişim haritası butonu, şemada hasMap/sameAs. Eskiden harita "The Goatz Creative" (müşteri markası) arıyordu, düzeltildi.
 - Başlık aralığı: `SPACED_PAGES` (googleseo, ikas, blog + blog yazıları, tekstudyo) `.pg-spaced` harf aralığı 0, satır yüksekliği `.95em + 2mm`. 1.16em+2mm "aşırı boş" bulundu; asıl şikâyet harflerin birbirine girmesiydi (negatif harf aralığı). /web-tasarim-urun-cekimi üst etiketi diğer sayfalar gibi beyaz; h1 sarı kutu (`t-hang`, tek satır, sağı yukarıda, sallanır; ilk iki kelime `t-lean` sağa yatık); h1 "Kapı müşterisi beklemeye son!" kalsın.
 - Harita konumu (geo) ve çalışma saati şemada yok: bilinmiyor, uydurulmadı.
+
+## Hizmet ve kategori sayfaları (2026-10-03 gece)
+- Sayfa türü `kind: 'service'` → adres `/hizmetler/<adres>` (`pagePath`), `/<adres>` 301 ile oraya gider; `parent` = kategori sayfası kimliği (ekmek kırıntısı Ana sayfa > Hizmetler > kategori > hizmet, `Service` şeması otomatik).
+- 8 kategori sayfası (`kweb, kseo, kfoto, kpazar, kdanis, kmetin, kmarka, kuygulama`; başlıkları Hizmetler'deki bölüm başlığıyla birebir aynı olmalı, `categoryPage` bununla eşleşir) + 18 hizmet sayfası (`h...`). Hizmetler kartlarında `target` alanı → "Detaylı bilgi" bağlantısı; anahtar teslim, Google SEO, ürün çekimi mevcut sayfalarına, danışmanlık ve uygulamalar iş sayfalarına gider.
+- Metin bloğunda `collapse: true` → "Devamını oku" (site.js `[data-more]`), geniş ekranda iki sütun. İşlerde `about`/`aboutHeading` uzun proje açıklaması aynı biçimde.
+- Metin kuralları (kullanıcı): yapay zekâ izi bırakmayan doğal dil, her anahtar kelime öbeği sayfada 1 kez, bir sayfada her iç bağlantı hedefi 1 kez, ana sayfaya/marka adına bağlantı yok, sayfadaki butonlarla aynı bağlantı yok, kategori ≥700 / hizmet ≥350 kelime, uydurma yok.
