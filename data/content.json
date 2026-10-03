@@ -305,10 +305,10 @@
         "color": "lavender",
         "sticker": "browser",
         "sticker2": "",
-        "text": "Hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler.",
+        "text": "Çanakkale’de web sitesi yapımı: hızlı açılan, telefonda kusursuz görünen, markana özel tasarlanmış siteler.",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#web-sitesi-ve-e-ticaret-kurulumu"
+          "target": "page:tekstudyo"
         },
         "items": [
           {
@@ -381,7 +381,7 @@
         "sticker2": "",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#google-ve-yapay-zeka-gorunurlugu"
+          "target": "page:googleseo"
         }
       },
       {
@@ -414,7 +414,7 @@
         "sticker2": "",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#google-ve-yapay-zeka-gorunurlugu"
+          "target": "page:googleseo"
         }
       },
       {
@@ -437,7 +437,7 @@
         "sticker2": "",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#pazaryeri-ve-entegrasyon"
+          "target": "page:hizmetler#pazaryeri-kurulumu-ve-entegrasyonlar"
         }
       },
       {
@@ -493,7 +493,7 @@
         "sticker2": "",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#web-uygulamalari"
+          "target": "page:hizmetler#e-ticaret-uygulamalari"
         }
       },
       {
@@ -818,6 +818,18 @@
       {
         "label": "SSS",
         "target": "page:sss"
+      },
+      {
+        "label": "Google SEO",
+        "target": "page:googleseo"
+      },
+      {
+        "label": "ikas iş ortağı",
+        "target": "page:ikas"
+      },
+      {
+        "label": "Blog",
+        "target": "page:blog"
       }
     ]
   },
@@ -1446,7 +1458,7 @@
       },
       {
         "title": "Çanakkale İli Damızlık Koyun Keçi Yetiştiricileri Birliği",
-        "slug": "",
+        "slug": "canakkale-koyun-keci-birligi",
         "category": "web",
         "year": "",
         "client": "",
@@ -2190,10 +2202,10 @@
       "showContact": true,
       "hero": {
         "visible": true,
-        "eyebrow": "Tek stüdyo",
-        "title": "Kapı müşterisi beklemeye son!",
+        "eyebrow": "Kapı müşterisi beklemeye son!",
+        "title": "Çanakkale web sitesi yapımı ve ürün çekimi",
         "subtitle": "Web tasarımından ürün çekimine, markanızın dijital vitrini aynı stüdyoda şekilleniyor.",
-        "titleSize": 7,
+        "titleSize": 6,
         "ribbon": {
           "visible": true,
           "color": "blue"
@@ -2323,7 +2335,7 @@
           "background": "paper",
           "eyebrow": "1 · Web tasarım",
           "heading": "Markanızı anlatan, alışverişi kolaylaştıran bir site.",
-          "text": "Markanızın kimliğini yansıtan, hızlı açılan ve mobilde rahat kullanılan e-ticaret siteleri tasarlıyoruz. Ürünleri incelemekten ödemeyi tamamlamaya kadar her adımı müşterileriniz için kolay ve anlaşılır hale getiriyoruz.\n\nTasarım ve kurulumu tamamlayıp sitenizi satışa hazır teslim ediyoruz. Siz de ürünlerinizi, stoklarınızı ve siparişlerinizi yönetim panelinden kolayca yönetiyorsunuz.",
+          "text": "Çanakkale’de web sitesi yapımı ve e-ticaret sitesi tasarımı yapıyoruz. Markanızın kimliğini yansıtan, hızlı açılan ve mobilde rahat kullanılan e-ticaret siteleri tasarlıyoruz. Ürünleri incelemekten ödemeyi tamamlamaya kadar her adımı müşterileriniz için kolay ve anlaşılır hale getiriyoruz.\n\nTasarım ve kurulumu tamamlayıp sitenizi satışa hazır teslim ediyoruz. Siz de ürünlerinizi, stoklarınızı ve siparişlerinizi yönetim panelinden kolayca yönetiyorsunuz.",
           "align": "left",
           "image": "/uploads/dardanos-fine-foods-e-ticaret-sitesi.webp",
           "imageSide": "left",
@@ -5105,6 +5117,81 @@
           ]
         },
         {
+          "type": "gallery",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Çekim örnekleri",
+          "heading": "Çanakkale’de çektiğimiz ürün fotoğrafları",
+          "text": "Beyaz fon, renkli fon ve konsept çekimlerden birkaç örnek. Görsele tıklayınca büyür.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm çekim örnekleri ↗",
+            "target": "works:photo"
+          },
+          "columns": 4,
+          "cards": [],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "/uploads/nar-eksisi-beyaz-fon-urun-fotografi.webp",
+              "caption": "Nar ekşisi, beyaz fon ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/aromali-zeytinyagi-renkli-fon-urun-fotografi.webp",
+              "caption": "Aromalı zeytinyağı, renkli fon ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/kahve-kavurma-urun-fotografi.webp",
+              "caption": "Kahve, kavurma ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/yuz-serumu-urun-fotografi.webp",
+              "caption": "Yüz serumu ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/mum-renkli-fon-urun-fotografi.webp",
+              "caption": "Mum, renkli fon ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/vazo-konsept-urun-fotografi.webp",
+              "caption": "Vazo, konsept ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/parfum-sisesi-urun-fotografi.webp",
+              "caption": "Parfüm şişesi ürün fotoğrafı"
+            },
+            {
+              "image": "/uploads/bal-kavanozu-paketleme-urun-fotografi.webp",
+              "caption": "Bal kavanozu, paketleme ürün fotoğrafı"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mint",
+          "eyebrow": "Ürün türleri",
+          "heading": "Hangi ürünleri çektik?",
+          "text": "Bugüne kadar şu ürün gruplarında çekim yaptık: gıda & zeytinyağı, kahve, kozmetik, mum & aroma, seramik & el yapımı, takı & cam ürünler, mutfak & sofra, ambalaj & paketleme, restoran & yemek.\n\nYerel üreticilerin zeytinyağı, nar ekşisi, bal ve tahin gibi ürünlerinden kozmetik, mum ve seramiğe kadar farklı ürünlerin ışığını ve fonunu ürünün yapısına göre kuruyoruz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
           "type": "faq",
           "visible": true,
           "background": "sky",
@@ -6271,7 +6358,7 @@
             },
             {
               "title": "Sitemi hangi altyapıyla kuruyorsunuz?",
-              "text": "ikas’ın resmi iş ortağı olarak e-ticaret sitenizi ikas ile kuruyoruz.",
+              "text": "ikas’ın resmi iş ortağı olarak e-ticaret sitenizi ikas ile kuruyoruz. Ayrıntılar {{ikas iş ortağı|/ikas}} sayfasında.",
               "color": "mint",
               "sticker": "star",
               "image": ""
@@ -6450,7 +6537,7 @@
           "cards": [
             {
               "title": "SEO çalışması neleri kapsıyor?",
-              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz. Arama sonuçlarındaki sıralamayı Google belirlediği için belirli bir sıra vaat edemeyiz.",
+              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz. Arama sonuçlarındaki sıralamayı Google belirlediği için belirli bir sıra vaat edemeyiz. Ayrıntılar {{Google SEO|/google-seo}} sayfasında.",
               "color": "mint",
               "sticker": "star",
               "image": ""
@@ -6559,6 +6646,1655 @@
               "caption": ""
             }
           ]
+        }
+      ]
+    },
+    {
+      "id": "googleseo",
+      "title": "Google SEO",
+      "slug": "google-seo",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Çanakkale SEO Hizmeti, Google SEO — The Goatz Studio",
+      "seoDescription": "Çanakkale SEO hizmeti: teknik SEO, sayfa ve içerik düzenlemeleri, Google İşletme Profili, Search Console ve Merchant Center kurulumu.",
+      "background": "mint",
+      "showContact": true,
+      "kind": "page",
+      "date": "",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Hizmet",
+        "title": "Çanakkale SEO ve Google görünürlüğü",
+        "subtitle": "Sitenizin Google’da doğru taranması, anlaşılması ve bulunması için teknik yapıyı, içerikleri ve Google hesaplarını birlikte düzenliyoruz.",
+        "titleSize": 7,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "magnifier",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "chart",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "medal",
+            "x": 72,
+            "y": 14,
+            "mx": 60,
+            "my": 8,
+            "size": 70,
+            "rotate": 12,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Ne yapıyoruz?",
+          "heading": "Google SEO çalışmasında neler var?",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Teknik SEO",
+              "text": "Site hızını, mobil görünümü, sayfa adreslerini, site haritasını ve yönlendirmeleri arama motorlarının siteyi doğru taramasına göre düzenliyoruz.",
+              "color": "mint",
+              "sticker": "gear",
+              "image": ""
+            },
+            {
+              "title": "Sayfa ve içerik",
+              "text": "Sayfa başlıklarını, açıklamaları ve içerikleri insanların gerçekten aradığı kelimelere göre düzenliyor, sayfalar arasında mantıklı bağlantılar kuruyoruz.",
+              "color": "lavender",
+              "sticker": "pencil",
+              "image": ""
+            },
+            {
+              "title": "Yapılandırılmış veri",
+              "text": "İşletme, hizmet, ürün ve sık sorulan sorular bilgilerini Google’ın okuyabileceği şekilde (schema) siteye ekliyoruz.",
+              "color": "sun",
+              "sticker": "code",
+              "image": ""
+            },
+            {
+              "title": "Google İşletme Profili",
+              "text": "Haritalar’da ve yerel aramalarda görünmeniz için işletme profilinizin bilgilerini, kategorilerini ve hizmetlerini düzenliyoruz.",
+              "color": "blue",
+              "sticker": "pin",
+              "image": ""
+            },
+            {
+              "title": "Search Console ve Merchant Center",
+              "text": "Search Console, Merchant Center ve Tag Manager bağlantılarını kuruyor; sitenin Google’daki durumunu takip edilebilir hale getiriyoruz.",
+              "color": "ember",
+              "sticker": "medal",
+              "image": ""
+            },
+            {
+              "title": "Ölçümleme",
+              "text": "Ziyaretçilerin nereden geldiğini, hangi sayfalara baktığını ve satışları takip edebilmeniz için ölçümleme araçlarını kuruyoruz.",
+              "color": "violet",
+              "sticker": "chart",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "Yerel SEO",
+          "heading": "Çanakkale’de arayan sizi bulsun.",
+          "text": "“Çanakkale web tasarım”, “Çanakkale ürün çekimi” ya da kendi işinizle ilgili bir arama yapan kişi çoğu zaman hemen hizmet almak ister. Bu aramalarda öne çıkmak için site, Google İşletme Profili ve yerel kayıtların aynı adı, adresi ve telefonu taşıması gerekir.\n\nSitenizin sayfalarını yerel aramalara göre düzenliyor, işletme bilgilerinizi her yerde tutarlı hale getiriyor ve müşteri yorumlarını toplamanız için yol gösteriyoruz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "right",
+          "imageColor": "mint",
+          "imageSticker": "map",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Yapay zekâ aramaları",
+          "heading": "ChatGPT ve Gemini de sizi tanısın.",
+          "text": "İnsanlar artık yalnızca Google’a değil, yapay zekâ destekli yanıt motorlarına da soruyor. Sitenizin içeriğini bu sistemlerin de doğru anlayabileceği şekilde düzenliyoruz (GEO).",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "lavender",
+          "imageSticker": "bulb",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "SSS",
+          "heading": "SEO soruları",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "SEO çalışması neleri kapsıyor?",
+              "text": "Sitenizin teknik yapısını ve içeriklerini düzenleyerek arama görünürlüğünü geliştirmek için çalışıyoruz: hız ve mobil uyum, sayfa başlıkları ve açıklamaları, iç bağlantılar, site haritası, yapılandırılmış veri ve Google hesaplarının kurulumu.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Google’da ilk sıraya çıkmayı garanti ediyor musunuz?",
+              "text": "Hayır. Arama sonuçlarındaki sıralamayı Google belirlediği için belirli bir sıra vaat edemeyiz. Yaptığımız işleri ve sitenizin Google’daki durumunu Search Console verileriyle birlikte takip ediyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Sadece SEO çalışması yaptırabilir miyim, sitemi siz yapmadınız?",
+              "text": "Evet. Mevcut sitenizi inceleyip neyin düzenlenmesi gerektiğini birlikte netleştiriyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Google İşletme Profili neden önemli?",
+              "text": "Haritalar’da ve “yakınımdaki” türü yerel aramalarda çıkan işletme kutusu bu profilden gelir. Doğru kategori, eksiksiz bilgi, fotoğraflar ve müşteri yorumları yerel görünürlüğü doğrudan etkiler.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Sitenizi birlikte inceleyelim.",
+          "text": "Sitenizin adresini ve hedeflediğiniz aramaları yazın, neyin düzenlenmesi gerektiğini birlikte konuşalım.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "ikas",
+      "title": "ikas İş Ortağı",
+      "slug": "ikas",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "ikas İş Ortağı, ikas Mağaza Kurulumu — The Goatz Studio",
+      "seoDescription": "ikas’ın resmi iş ortağı olarak ikas mağazanızı kuruyoruz: tasarım, ürün yerleşimi, ödeme ve kargo ayarları, ikas’a taşıma ve ürün çekimi.",
+      "background": "lavender",
+      "showContact": true,
+      "kind": "page",
+      "date": "",
+      "hero": {
+        "visible": true,
+        "eyebrow": "ikas resmi iş ortağı",
+        "title": "ikas mağazanızı biz kuralım",
+        "subtitle": "ikas’ın resmi iş ortağı olarak e-ticaret sitenizi ikas ile kuruyor, satışa hazır halde teslim ediyoruz.",
+        "titleSize": 7,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "store",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "cart",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          },
+          {
+            "type": "key",
+            "x": 72,
+            "y": 14,
+            "mx": 60,
+            "my": 8,
+            "size": 70,
+            "rotate": 12,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Ne yapıyoruz?",
+          "heading": "ikas mağaza kurulumu, baştan sona.",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 4,
+          "cards": [
+            {
+              "title": "Mağaza tasarımı",
+              "text": "Markanıza özel, hızlı açılan ve telefonda rahat kullanılan bir ikas mağazası tasarlıyoruz.",
+              "color": "lavender",
+              "sticker": "palette",
+              "image": ""
+            },
+            {
+              "title": "Ürün ve kategori",
+              "text": "Ürünlerinizi, kategorilerinizi ve açıklamalarınızı müşterinin kolayca bulacağı şekilde yerleştiriyoruz.",
+              "color": "mint",
+              "sticker": "product",
+              "image": ""
+            },
+            {
+              "title": "Ödeme ve kargo",
+              "text": "Ödeme ve kargo hesaplarınızı mağazanıza bağlıyor, gerekli ayarları ve kontrolleri yapıyoruz.",
+              "color": "sun",
+              "sticker": "truck",
+              "image": ""
+            },
+            {
+              "title": "Yayın",
+              "text": "Mağazayı telefonda ve bilgisayarda test ediyor, alan adınıza bağlayıp yayına alıyoruz.",
+              "color": "blue",
+              "sticker": "rocket",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "ikas’a geçiş",
+          "heading": "Mevcut mağazanızı ikas’a taşıyalım.",
+          "text": "Ürün, içerik ve bağlantılarınızı değerlendiriyor; mevcut mağazanızın ikas’a geçişini yönetiyoruz. Eski adreslerden yenilerine yönlendirmeleri kurarak Google’daki görünürlüğünüzü korumaya çalışıyoruz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "right",
+          "imageColor": "lavender",
+          "imageSticker": "refresh",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "imagetext",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Ürün çekimi",
+          "heading": "Fotoğraflar da mağazaya göre çekilsin.",
+          "text": "İsterseniz ürünlerinizi ikas mağazanızın tasarımına göre çekiyoruz. Ölçü, fon ve kadraj baştan mağazaya göre seçilir; beyaz fonlu ürün fotoğrafları pazaryerlerinde de kullanılabilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "camera",
+          "button": {
+            "label": "Ürün çekimi",
+            "target": "page:uruncekimi"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "cards",
+          "visible": true,
+          "background": "mint",
+          "eyebrow": "Yayından sonra",
+          "heading": "Mağazanız açıldıktan sonra da yanınızdayız.",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Google bağlantıları",
+              "text": "Search Console, Merchant Center ve Tag Manager kurulumuyla ürünleriniz Google’da da listelenebilir.",
+              "color": "paper",
+              "sticker": "medal",
+              "image": ""
+            },
+            {
+              "title": "Pazaryeri entegrasyonu",
+              "text": "Ürünlerin Trendyol ve Hepsiburada’da da satışa sunulabilmesi için entegrasyon altyapısını kuruyoruz.",
+              "color": "paper",
+              "sticker": "link",
+              "image": ""
+            },
+            {
+              "title": "Aylık site yönetimi",
+              "text": "İsterseniz mağazanızın iş ve işlemlerini düzenli olarak biz yürütüyoruz.",
+              "color": "paper",
+              "sticker": "gear",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sky",
+          "eyebrow": "SSS",
+          "heading": "ikas soruları",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Sitemi hangi altyapıyla kuruyorsunuz?",
+              "text": "ikas’ın resmi iş ortağı olarak e-ticaret sitenizi ikas ile kuruyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Mevcut mağazamı ikas’a taşıyabilir misiniz?",
+              "text": "Evet. Ürün, içerik ve bağlantılarınızı değerlendiriyor, mevcut mağazanızın ikas’a geçişini yönetiyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Mağaza yayına çıktıktan sonra kim yönetiyor?",
+              "text": "Mağazanız yayına çıktığında ikas panelinden ürününüzü, stoğunuzu ve siparişlerinizi kendiniz yönetirsiniz. İsterseniz web sitesi danışmanlığı ve aylık site yönetimiyle de yanınızda oluruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "ikas mağazanızı konuşalım.",
+          "text": "Birkaç kısa soruyla ihtiyacınıza uygun paketi ve hizmetleri belirleyin.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blog",
+      "title": "Blog",
+      "slug": "blog",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Blog: E-Ticaret, Web Tasarım, Ürün Çekimi — The Goatz Studio",
+      "seoDescription": "E-ticaret sitesi kurmak, web tasarım, ürün fotoğrafçılığı ve Google’da görünürlük üzerine rehber yazılar. The Goatz Studio, Çanakkale.",
+      "background": "sun",
+      "showContact": true,
+      "kind": "page",
+      "date": "",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Yazılar",
+        "subtitle": "E-ticaret, web tasarım, ürün çekimi ve Google üzerine bildiklerimizi yazıyoruz.",
+        "titleSize": 10,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "pencil",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "bulb",
+            "x": 5,
+            "y": 34,
+            "mx": 4,
+            "my": 14,
+            "size": 95,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "bloglist",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogeticaret",
+      "title": "E-ticaret sitesi kurmak için ne gerekir?",
+      "slug": "e-ticaret-sitesi-kurmak-icin-ne-gerekir",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "E-Ticaret Sitesi Kurmak İçin Ne Gerekir? Adım Adım Liste",
+      "seoDescription": "E-ticaret sitesi kurmadan önce gerekenler: şirket ve vergi kaydı, ödeme altyapısı, alan adı, yasal metinler, ETBİS kaydı, kargo ve fotoğraflar.",
+      "background": "sky",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-03",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "E-ticaret sitesi kurmak için ne gerekir?",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "cart",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Önce kısa cevap",
+          "text": "Bir e-ticaret sitesinin yayına çıkması için yalnızca tasarım yetmez. Satış yapabilmek için yasal bir işletme kaydına, ödeme alabileceğiniz bir altyapıya, alan adına, sitede bulunması gereken yasal metinlere, kargo anlaşmasına ve iyi ürün fotoğraflarına ihtiyacınız var. Aşağıda bunları sırayla anlattık.\n\nBu yazı genel bir rehberdir; şirket türü ve vergi konularında kendi durumunuz için mutlaka mali müşavirinize danışın.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "1. Şirket ve vergi kaydı",
+          "text": "Türkiye’de internetten düzenli satış yapmak için bir işletme kaydı gerekir. Çoğu küçük işletme şahıs şirketiyle başlar; büyümeyi planlayanlar limited ya da anonim şirket kurabilir. Vergi levhanız ve fatura kesebileceğiniz bir düzen (e-arşiv fatura gibi) hazır olmalıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "2. Ödeme altyapısı",
+          "text": "Müşteriden kartla ödeme alabilmek için bir sanal POS ya da ödeme kuruluşu hesabı gerekir. Başvuru sırasında genellikle şirket bilgileri, vergi levhası ve sitenizin yasal metinleri istenir. Bu yüzden ödeme başvurusunu site kurulumuyla paralel planlamak zaman kazandırır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "3. Alan adı",
+          "text": "Markanızın adını taşıyan, kısa ve kolay yazılan bir alan adı (örneğin markaniz.com) seçin. Alan adı sizin adınıza kayıtlı olmalı; ajans ya da tasarımcı adına alınmış bir alan adı ileride sorun çıkarabilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "4. Yasal metinler",
+          "text": "Bir e-ticaret sitesinde KVKK aydınlatma metni, gizlilik ve çerez politikası, mesafeli satış sözleşmesi, ön bilgilendirme formu ve iade/cayma koşulları bulunmalıdır. Bu metinler işletmenize göre hazırlanmalı; başka bir siteden kopyalamak hem yanlış hem risklidir. Bir hukukçuya kontrol ettirmenizi öneririz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "5. ETBİS kaydı",
+          "text": "Türkiye’de internet üzerinden satış yapan işletmelerin Elektronik Ticaret Bilgi Sistemi’ne (ETBİS) kayıt olması gerekir. Kayıt e-Devlet üzerinden yapılır ve site yayına çıktığında tamamlanmış olmalıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "6. Kargo ve paketleme",
+          "text": "Hangi kargo firmasıyla çalışacağınızı, kargo ücretini kimin ödeyeceğini ve ürünlerin nasıl paketleneceğini baştan belirleyin. Kargo hesabınız siteye bağlanınca gönderi süreçleri kolaylaşır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "7. Ürün bilgileri ve fotoğraflar",
+          "text": "Her ürün için net bir ad, açıklama, fiyat, stok ve varsa seçenekler (beden, renk, gramaj) hazırlayın. Müşteri ürünü elle tutamadığı için fotoğraflar satışın en önemli parçasıdır: ürünü farklı açılardan, gerçek rengiyle ve tutarlı bir fonla gösteren fotoğraflar güven verir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "8. Altyapı ve tasarım",
+          "text": "Son olarak sitenin hangi altyapıyla kurulacağına karar verilir. Biz ikas’ın resmi iş ortağı olarak siteleri ikas ile kuruyoruz; tasarım, ürün yerleşimi, ödeme ve kargo ayarlarıyla siteyi satışa hazır hale getiriyoruz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Bu adımları birlikte yapalım.",
+          "text": "Anahtar teslim kurulumda tasarımdan yayına kadar tüm süreci biz yürütüyoruz.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Anahtar teslim e-ticaret",
+            "target": "page:anahtarteslim"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogfiyat",
+      "title": "E-ticaret sitesi fiyatını neler belirler?",
+      "slug": "e-ticaret-sitesi-fiyatini-neler-belirler",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "E-Ticaret Sitesi Fiyatını Neler Belirler? 7 Etken",
+      "seoDescription": "E-ticaret sitesi kaça yapılır? Cevap kapsama bağlı. Fiyatı belirleyen etkenler: altyapı, tasarım, ürün sayısı, fotoğraf, entegrasyonlar, destek.",
+      "background": "lavender",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-03",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "E-ticaret sitesi fiyatını neler belirler?",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "coin",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Neden tek bir fiyat yok?",
+          "text": "“E-ticaret sitesi kaça yapılır?” sorusunun tek bir cevabı yoktur, çünkü iki site aynı işi içermez. Birinde 20 ürün ve hazır bir düzen yeterlidir; diğerinde yüzlerce ürün, özel tasarım, ürün çekimi ve pazaryeri bağlantıları gerekir. Fiyatı belirleyen şey yapılacak işin kapsamıdır. Aşağıda en çok etkileyen kalemleri sıraladık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "1. Altyapı ve paket",
+          "text": "Sitenin kurulacağı altyapının (örneğin ikas) paket ücreti ayrı bir kalemdir ve genellikle aylık ya da yıllık ödenir. Seçilen paket, kullanılabilecek özellikleri de belirler.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "2. Tasarım",
+          "text": "Hazır bir temanın düzenlenmesi ile markaya özel tasarlanmış sayfalar aynı emeği istemez. Ana sayfa, kategori ve ürün sayfalarının ne kadar özel olacağı fiyatı doğrudan etkiler.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "3. Ürün sayısı ve içerik",
+          "text": "Ürünlerin siteye kimin gireceği, açıklamaların yazılıp yazılmayacağı ve kategori yapısının ne kadar ayrıntılı olacağı iş yükünü değiştirir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "4. Ürün fotoğrafları",
+          "text": "Fotoğraflar hazırsa bu kalem yoktur; ürün çekimi gerekiyorsa ürün sayısı, fon türü (beyaz fon, renkli fon, konsept) ve rötuş ihtiyacı fiyata eklenir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "5. Entegrasyonlar",
+          "text": "Ödeme ve kargo bağlantıları, Google Merchant Center, Trendyol ve Hepsiburada gibi pazaryeri entegrasyonları, ölçümleme araçları ayrı iş kalemleridir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "6. Taşıma",
+          "text": "Mevcut bir mağazadan geçiş yapılıyorsa ürünlerin, içeriklerin ve eski adreslerin yeni siteye taşınması ve yönlendirilmesi gerekir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "7. Yayından sonra destek",
+          "text": "Site açıldıktan sonra danışmanlık ya da düzenli site yönetimi isteyip istemediğiniz de toplam maliyeti etkiler.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Doğru fiyatı nasıl alırsınız?",
+          "text": "En sağlıklısı, başlamadan önce neyin yapılacağını yazılı olarak netleştirmek ve fiyatı bu kapsama göre almaktır. Böylece ne için ne ödediğinizi baştan bilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Kendi siteniz için fiyat alın.",
+          "text": "Birkaç kısa soruyu cevaplayın, ihtiyacınıza uygun paketi ve hizmetleri birlikte belirleyelim.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogikas",
+      "title": "ikas mı Shopify mı? Türkiye’de e-ticaret altyapısı seçmek",
+      "slug": "ikas-mi-shopify-mi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "ikas mı Shopify mı? Türkiye İçin Altyapı Seçimi",
+      "seoDescription": "ikas ve Shopify arasında seçim yaparken bakılacaklar: Türkiye’deki ödeme ve kargo bağlantıları, dil ve destek, maliyet, yurt dışı satış ve uygulamalar.",
+      "background": "mint",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-03",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "ikas mı Shopify mı? Türkiye’de e-ticaret altyapısı seçmek",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "store",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Önce bir not",
+          "text": "Biz ikas’ın resmi iş ortağıyız ve siteleri ikas ile kuruyoruz. Bu yazıyı yine de karar verirken nelere bakmanız gerektiğini anlatmak için yazdık; her işletme için doğru cevap aynı değildir. Fiyat ve özellikler zamanla değiştiği için güncel bilgiyi her iki platformun kendi sitesinden kontrol edin.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Nerede satış yapacaksınız?",
+          "text": "İlk soru budur. Müşterilerinizin büyük kısmı Türkiye’deyse yerel ödeme kuruluşları, kargo firmaları, e-fatura ve Türkçe destek gibi konular öne çıkar. ikas Türkiye pazarı için geliştirilmiş bir altyapıdır ve bu bağlantıları hazır sunar. Shopify ise dünya genelinde kullanılan bir platformdur; yurt dışına satış odaklı markalar için güçlü bir seçenektir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Ödeme ve kargo",
+          "text": "Türkiye’de satış yaparken kullandığınız ödeme kuruluşunun ve kargo firmasının altyapıya kolayca bağlanabilmesi önemlidir. Seçmeyi düşündüğünüz platformda kendi çalıştığınız firmaların desteklenip desteklenmediğine bakın.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Dil, destek ve yönetim",
+          "text": "Siteyi her gün siz yöneteceksiniz. Panelin Türkçe olması, destek ekibine Türkçe ulaşabilmek ve Türkiye’deki yasal süreçlere uygun çalışma, özellikle ilk kez e-ticarete başlayanlar için işi kolaylaştırır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Maliyet",
+          "text": "Platform paket ücretine ek olarak, ihtiyaç duyduğunuz özellikler için uygulama ya da eklenti ücretleri, işlem komisyonları ve döviz kuru da toplam maliyeti etkiler. Karşılaştırırken yalnızca paket fiyatına değil, kullanacağınız tüm özelliklerin toplamına bakın.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Kısacası",
+          "text": "Türkiye’de satış yapacak, yerel ödeme ve kargo bağlantılarıyla hızlıca başlamak isteyen işletmeler için ikas güçlü bir seçenektir. Ağırlıklı olarak yurt dışına satış yapacaksanız Shopify’ı da değerlendirin. Kararsızsanız hedeflerinizi konuşup birlikte karar verebiliriz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "ikas mağazanızı biz kuralım.",
+          "text": "ikas’ın resmi iş ortağı olarak mağazanızı kuruyor, satışa hazır halde teslim ediyoruz.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "ikas iş ortağı",
+            "target": "page:ikas"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogfon",
+      "title": "Beyaz fon mu renkli fon mu? Ürün fotoğrafında doğru seçim",
+      "slug": "beyaz-fon-mu-renkli-fon-mu",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Beyaz Fon mu Renkli Fon mu? Ürün Fotoğrafı Rehberi",
+      "seoDescription": "Ürün çekiminde beyaz fon ve renkli fon ne zaman kullanılır? Ürün sayfası, pazaryeri, kampanya ve sosyal medya için hangi fotoğraf türü gerekir?",
+      "background": "sun",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-03",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Beyaz fon mu renkli fon mu? Ürün fotoğrafında doğru seçim",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "camera",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Kısa cevap: ikisine de ihtiyacınız var",
+          "text": "Beyaz fon ve renkli fon farklı işler görür. Beyaz fon ürünü olduğu gibi, sade ve net gösterir; ürün sayfalarının ve pazaryerlerinin temelidir. Renkli fon ise markanın kişiliğini anlatır; ana sayfada, kampanyalarda ve sosyal medyada dikkat çeker. Çoğu e-ticaret sitesi ikisini birlikte kullanır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Beyaz fon ne zaman?",
+          "text": "Ürün detay sayfası, kategori listeleri ve pazaryeri ilanları için beyaz fon en güvenli seçimdir. Ürün tek başına, gerçek rengiyle ve dengeli ışıkta görünür; müşteri ne aldığını net görür. Pazaryerlerinin çoğu ana ürün görseli için sade ve açık renkli fon ister; güncel kuralları satıcı panelinden kontrol edin.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Renkli fon ne zaman?",
+          "text": "Ana sayfa bannerları, kampanya görselleri, sosyal medya paylaşımları ve reklamlar için renkli fon daha etkilidir. Fon rengi markanın renklerinden ya da ürünün kendi tonlarından seçilir; böylece fotoğraflar sitenin tasarımıyla bütün olur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Konsept çekim",
+          "text": "Ürünü kullanıldığı ortamda, dekor ve aksesuarlarla gösteren konsept çekimler hikâye anlatır. Özellikle gıda, kozmetik, mum ve el yapımı ürünlerde müşterinin ürünü hayal etmesini kolaylaştırır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Tutarlılık en önemlisi",
+          "text": "Hangi fonu seçerseniz seçin, aynı sayfadaki ürünlerin ışığı, açısı ve kadrajı tutarlı olmalıdır. Farklı yerlerde, farklı ışıkta çekilmiş fotoğraflar mağazanın dağınık görünmesine yol açar. Çekimi sitenin tasarımını bilerek planlamak bu yüzden önemlidir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Ürünlerinizi Çanakkale’de çekelim.",
+          "text": "Beyaz fon, renkli fon ve konsept çekimleri sitenizin tasarımına göre planlıyoruz.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Ürün çekimi",
+            "target": "page:uruncekimi"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogharita",
+      "title": "Çanakkale’deki işletmeler Google Haritalar’da nasıl öne çıkar?",
+      "slug": "canakkale-isletmeler-google-haritalar",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Çanakkale’de Google Haritalar’da Öne Çıkmak: Yerel SEO",
+      "seoDescription": "Çanakkale’deki işletmeler için yerel SEO rehberi: Google İşletme Profili, doğru kategori, tutarlı adres ve telefon, müşteri yorumları ve web sitesi.",
+      "background": "blue",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-03",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Çanakkale’deki işletmeler Google Haritalar’da nasıl öne çıkar?",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "pin",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Yerel aramalar neden önemli?",
+          "text": "“Çanakkale’de kahvaltı”, “Çanakkale web tasarım” ya da “yakınımdaki fotoğrafçı” gibi aramalarda Google, sonuçların en üstünde bir harita ve birkaç işletme gösterir. Bu kutuda çıkan işletmeler tıklamaların ve aramaların büyük kısmını alır. Bu kutuya girmenin yolu web sitesinden çok Google İşletme Profili’nden geçer.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "1. Google İşletme Profili’ni açın ve doğrulayın",
+          "text": "business.google.com adresinden işletmenizi ekleyin ve Google’ın istediği yöntemle doğrulayın. İşletme adı tabelanızdaki ve sitenizdeki adla birebir aynı olmalı; adın yanına anahtar kelime eklemek Google kurallarına aykırıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "2. Doğru kategoriyi seçin",
+          "text": "Ana kategori, hangi aramalarda görüneceğinizi en çok etkileyen ayardır. İşinizi en iyi anlatan ana kategoriyi seçin, sunduğunuz diğer hizmetler için ek kategoriler ekleyin.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "3. Bilgileri eksiksiz doldurun",
+          "text": "Adres, telefon, çalışma saatleri, web sitesi, hizmetler ve işletme açıklaması eksiksiz olmalı. Ofisinizin, ekibinizin ve işlerinizin gerçek fotoğraflarını ekleyin.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "4. Ad, adres ve telefon her yerde aynı olsun",
+          "text": "Google, işletmenizi farklı kaynaklarda (web siteniz, sosyal medya, rehberler, haritalar) görür. Bu bilgilerin her yerde aynı yazılması güven verir. Web sitenizin iletişim sayfasında adres ve telefonun açıkça yazdığından emin olun.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "5. Müşterilerinizden yorum isteyin",
+          "text": "Yorum sayısı ve puanı yerel sıralamada önemli bir etkendir. Memnun müşterilerinize yorum bağlantınızı gönderin ve gelen her yoruma, olumsuz olanlar dahil, nazikçe cevap verin. Sahte ya da satın alınmış yorumlar Google kurallarına aykırıdır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "6. Profilinizi canlı tutun",
+          "text": "Yeni ürünler, işler ve kampanyalar için profilinizde gönderi paylaşın. Düzenli güncellenen profiller hem müşterilere hem Google’a işletmenin aktif olduğunu gösterir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "7. Web sitenizi yerel aramalara göre düzenleyin",
+          "text": "Sitenizin sayfa başlıklarında ve içeriklerinde şehrinizi ve hizmetlerinizi doğal bir dille geçirin, iletişim sayfasına adres ve harita ekleyin, işletme bilgilerinizi yapılandırılmış veriyle (schema) siteye işleyin.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Yerel SEO çalışmasını birlikte yapalım.",
+          "text": "Sitenizi ve Google İşletme Profili’nizi Çanakkale aramalarına göre düzenliyoruz.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Google SEO hizmeti",
+            "target": "page:googleseo"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
         }
       ]
     }

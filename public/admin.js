@@ -535,7 +535,7 @@
   ];
 
   // ---------- Özel sayfalar: şema ----------
-  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', faq: 'Sık sorulan sorular', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası', cartpage: 'Sepet sayfası içeriği' };
+  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', faq: 'Sık sorulan sorular', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası', cartpage: 'Sepet sayfası içeriği', bloglist: 'Blog yazıları listesi' };
   const is = (...types) => (o) => types.includes(o.type);
   const BLOCK_FIELDS = {
     type: select('Blok türü', Object.entries(BLOCK_TYPES)),
@@ -578,6 +578,8 @@
   const PAGE_SCHEMA = {
     settings: group('Sayfa ayarları', {
       visible: bool('Sayfayı sitede yayında göster'),
+      kind: select('Sayfa türü', [['page', 'Normal sayfa'], ['blog', 'Blog yazısı (adresi /blog/... olur, Blog listesinde görünür)']]),
+      date: text('Yayın tarihi (blog yazısı)', { nostyle: true, hint: 'YYYY-AA-GG biçiminde. Örnek: 2026-10-03', max: 10 }),
       title: text('Sayfa adı', { nostyle: true, hint: 'Menüde ve tarayıcı sekmesinde görünür.', max: 60 }),
       slugAuto: bool('Sayfa adresini sayfa adından otomatik oluştur', { rerender: true }),
       slug: text('Sayfa adresi', { nostyle: true, hint: 'Yalnızca küçük harf, rakam ve tire. Örnek: hakkimizda', max: 40 }),

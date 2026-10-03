@@ -5,7 +5,7 @@ const crypto = require('crypto');
 const zlib = require('zlib');
 const { render } = require('./lib/render');
 const store = require('./lib/content');
-const { resolvePages, resolveWorks } = require('./lib/schema');
+const { resolvePages, resolveWorks, pagePath } = require('./lib/schema');
 const db = require('./lib/db');
 const salesRoutes = require('./lib/sales-routes');
 
@@ -82,6 +82,20 @@ const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.
 const { optimize } = require('./lib/optimize');
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
 const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects());
+// Bulunamayan adres: menülü, hizmetlere bağlantılı 404 sayfası (arama motorlarına noindex)
+function notFound(res, req) {
+  const c = store.load();
+  const ids = new Set(c.pages.map((p) => p.id));
+  const go = [['Ana sayfa', '/'], ...['hizmetler', 'tekstudyo', 'uruncekimi', 'anahtarteslim', 'googleseo', 'blog', 'iletisim'].filter((id) => ids.has(id)).map((id) => { const p = c.pages.find((x) => x.id === id); return [p.title, pagePath(p)]; })];
+  c.pages.push({ ...structuredClone(store.DEFAULTS.pages.__item), id: 'bulunamadi', slug: 'bulunamadi', title: 'Sayfa bulunamadı', inNav: false, showContact: false,
+    hero: { ...structuredClone(store.DEFAULTS.pages.__item.hero), eyebrow: '404', title: 'Aradığınız sayfa\nburada değil.', subtitle: '', titleSize: 10 },
+    blocks: [{ ...structuredClone(store.DEFAULTS.pages.__item.blocks[0]), heading: 'Şuralara bakabilirsiniz', text: 'Adres değişmiş ya da yanlış yazılmış olabilir. Aşağıdaki sayfalardan devam edebilirsiniz.', button: { label: '', target: '' } }] });
+  let html = pageHtml(c, { page: 'bulunamadi', origin: canonicalOrigin(req), path: '/bulunamadi', noindex: true });
+  html = html.replace(/<link rel="canonical"[^>]*>\n?/, '').replace(/(Aşağıdaki sayfalardan devam edebilirsiniz\.<\/p>)/, `$1<p class="rel-works">${go.map(([t, u]) => `<a href="${u}">${t}</a>`).join('')}</p>`);
+  return send(res, 404, html, 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+}
+// Adresi değişen işler: eski adres -> yeni adres (301)
+const WORK_MOVED = { 'canakkale-ili-damizlik-koyun-keci-yetist': 'canakkale-koyun-keci-birligi' };
 const contactHits = new Map();
 const siteHits = new Map();
 const sitecheck = require('./lib/sitecheck');
@@ -524,6 +538,7 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === '/llms.txt') return send(res, 200, seo.llms(origin, store.load()), 'text/plain; charset=utf-8');
     // İşler: /isler ve /isler/proje-adi
     const wm = /^\/isler(?:\/([a-z0-9-]+))?\/?$/.exec(url.pathname);
+    if (wm && WORK_MOVED[wm[1]]) { res.writeHead(301, { Location: `/isler/${WORK_MOVED[wm[1]]}`, 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
     if (wm) {
       const c = store.load();
       if (c.works.visible) {
@@ -531,13 +546,22 @@ const server = http.createServer(async (req, res) => {
         const it = resolveWorks(c.works.items).find((v) => v.visible && v.slug === wm[1]);
         if (it) return send(res, 200, pageHtml(c, { work: it.slug, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
       }
-      return send(res, 404, 'Sayfa bulunamadı');
+      return notFound(res, req);
+    }
+    // Blog yazıları: /blog/yazi-adresi
+    const bm = /^\/blog\/([a-z0-9-]+)$/.exec(url.pathname);
+    if (bm) {
+      const c = store.load();
+      const post = resolvePages(c.pages).find((p) => p.visible && p.kind === 'blog' && p.slug === bm[1]);
+      if (post) return send(res, 200, pageHtml(c, { page: post.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      return notFound(res, req);
     }
     // Özel sayfalar: /hakkimizda
     const pm = /^\/([a-z0-9-]+)\/?$/.exec(url.pathname);
     if (pm) {
       const c = store.load();
       const page = resolvePages(c.pages).find((p) => p.visible && p.slug === pm[1]);
+      if (page && page.kind === 'blog') { res.writeHead(301, { Location: pagePath(page), 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
       if (page) return send(res, 200, pageHtml(c, { page: page.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
     }
     const file = safeJoin(PUBLIC_DIR, decodeURIComponent(url.pathname.slice(1)));
@@ -546,7 +570,7 @@ const server = http.createServer(async (req, res) => {
       const cache = url.searchParams.has('v') ? 'public, max-age=31536000, immutable' : (/^admin/.test(path.basename(file)) ? 'no-store' : 'no-cache');
       return serveFile(res, file, cache);
     }
-    return send(res, 404, 'Sayfa bulunamadı');
+    return notFound(res, req);
   } catch (e) {
     if (!res.headersSent) json(res, e.status || 500, { error: e.status ? e.message : 'Sunucu hatası.' });
     if (!e.status) console.error(e);

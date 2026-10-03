@@ -57,3 +57,11 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - **Sepet** (`public/cart.js`): Hizmetler'de yüzen sepet; sepette ürün varken üst menüdeki baştan ayrılmış yere (`#cartSlot`, `html.cart-slot`) girer, kaydırınca kendi yerine iner, en üste dönünce geri çıkar. Diğer sayfalarda üst menü sepeti sunucuda çizilir (`CART_TOP_HTML`, `html.cart-top-on`), tıklayınca bulunduğu sayfada panel açılır. Sepet anahtarı `localStorage['goatz-hizmet-sepeti']`.
 - **Başlangıç kodu** (`lib/render.js` head inline script) bir şablon dizesinin içinde: düzenli ifadelerde ters eğik çizgi kaybolur (bir kez `//` yorum satırına dönüp tüm başlangıç kodunu bozmuştu). Orada regex kullanma.
 - **SEO**: anasayfa h1 = logo başlığı "The Goatz Studio"; title ≤60 karakter; og:image yoksa logo; sonda eğik çizgi 301; `ProfessionalService` şeması (adres/telefon yasal sayfalardan, çalışma saati yok). Denetim betiği yerelde `.claude/audit.js`. Railway'de `SITE_URL=https://thegoatzstudio.com` tanımlı.
+
+## SEO düzeltmeleri (2026-10-03)
+- **Hız:** `send()` metin yanıtlarını gzip'ler. `lib/optimize.js` (yalnız sunucu, `pageHtml`): CSS/JS'e `?v=<özet>` ekler (sürümlü dosya 1 yıl önbellek, sürümsüz `no-cache`, panel `no-store`), `/uploads` görsellerine gerçek width/height yazar, eski görsel adlarını `image-redirects.json`'a göre yeni adla değiştirir. CSS: `:where(img[width][height]){height:auto}`.
+- **Blog:** sayfa türü `kind: 'blog'` + `date` (panel: Sayfa ayarları). Adres `/blog/<adres>` (`pagePath`, `lib/schema.js`); `/<adres>` 301 ile oraya gider. `/blog` sayfası `bloglist` bloğuyla listeler. BlogPosting şeması, yazı altında "Diğer yazılar".
+- **Yeni sayfalar:** `/google-seo` (id `googleseo`), `/ikas` (id `ikas`), `/blog` + 5 yazı. Hizmet sayfalarında `Service` şeması (render.js `SERVICE`), Hizmetler'de `OfferCatalog`.
+- **404:** menülü sayfa, noindex (`notFound`, server.js). İş adresi değişince `WORK_MOVED` ile 301.
+- Adres: iş yeri (iletişim, SSS, şema) Fatih Sok. No: 39 İş Yeri: 4; yasal sayfalarda fatura adresi Medrese Sok. No: 1 İş Yeri: 2 kalır.
+- Harita konumu (geo) ve çalışma saati şemada yok: bilinmiyor, uydurulmadı.

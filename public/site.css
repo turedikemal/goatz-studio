@@ -511,6 +511,20 @@
   @media (max-width: 900px) { .k-grid { grid-template-columns: repeat(min(var(--cols, 3), 2), 1fr); } .g-grid { grid-template-columns: repeat(min(var(--cols, 3), 3), 1fr); } }
   @media (max-width: 600px) { .k-grid { grid-template-columns: 1fr; } .g-grid { grid-template-columns: repeat(2, 1fr); } .page-hero { padding-top: 150px; } }
   .blk-in .k-grid .k-card p { margin: 0; font-size: 15px; max-width: 34ch; }
+  /* Blog: liste kartları ve yazı tarihi */
+  .bl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; width: 100%; margin: 32px 0 24px; text-align: left; }
+  .bl-card { display: flex; flex-direction: column; border: 1px solid var(--carbon); border-radius: var(--r-card); overflow: hidden; background: var(--paper); color: var(--carbon); text-decoration: none; transition: rotate .3s var(--slush, ease); }
+  .bl-card:hover { rotate: -1.5deg; }
+  .bl-card > img, .bl-ph { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-bottom: 1px solid var(--carbon); background: var(--bc, var(--sky)); }
+  .bl-ph { display: grid; place-items: center; }
+  .bl-st { width: 22%; height: auto; }
+  .bl-body { display: flex; flex-direction: column; gap: 10px; padding: 20px 22px 22px; flex: 1; }
+  .bl-body h3 { font-size: clamp(24px, 2.4vw, 32px); line-height: .95; margin: 0; }
+  .bl-body p { margin: 0; font-size: 15px; }
+  .bl-more { margin-top: auto; font-weight: 700; }
+  .blog-date { position: relative; margin-top: 18px; font-size: 13px; }
+  @media (max-width: 900px) { .bl-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .bl-grid { grid-template-columns: 1fr; } }
   .blk-in .k-grid .k-card h3 { margin: 0; }
 
   /* Kare kalitesi: hareket eden katmanlar önceden ayrı katmana alınır (kaydırırken yeniden boyanmaz) */
