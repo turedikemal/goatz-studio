@@ -2082,3 +2082,7 @@ html[data-theme="night"] .blk-faq[data-bg="paper"] { --acc: var(--sun); }
 html[data-theme="night"] .blk-faq .faq-item { box-shadow: 4px 4px 0 var(--acc, var(--sun)); border-color: var(--acc, var(--sun)); }
 html[data-theme="night"] .blk-faq .faq-item summary i { background: var(--acc, var(--sun)); }
 html[data-theme="night"] .blk-faq .faq-item[open] { box-shadow: 6px 6px 0 var(--acc, var(--sun)); }
+
+/* Tüm büyük başlıklar: satır arası 2 mm (alt satırdaki İ/Ü/Ö noktasının tepesi ile üst satırın tabanı arası) */
+:is(h1, h2, h3).display, .hero h2[data-intro], .why .why-h, .svc-h, .svc-card h3, .rm-step h3, .bl-body h3, .work-slogan, .show-title, .wp-dialog-head h3,
+.wz h2, .wz-pack h3, .wz-reco-title, .wz-sel-title, .wz-tier-head h3, .wz-send-title, .wz-det h3, .cart-title, .cp-h, .pt-h { line-height: calc(.95em + 2mm) !important; }
