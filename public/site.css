@@ -1017,10 +1017,9 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 
 /* Başlık satırları arasında 2 mm boşluk: satır yüksekliği = noktalı harflerin (İ, Ü, Ö) tepesi + 2 mm */
 .pg-tight h1.display, .pg-tight h2.display, .pg-tight h3.display { line-height: calc(.95em + 2mm); }
-/* Google SEO, ikas, blog: üst satırın en alt noktası (Ç, Ş çengeli) ile alt satırın en üst noktası (İ, Ü, Ö noktası) arasında 2 mm.
-   Inter 900'de noktalı harf tepesi .95em, çengel altı .21em: satır yüksekliği 1.16em + 2mm */
+/* Google SEO, ikas, blog: harf aralığı 0, satır arası 2 mm (alt satırın en üst noktası ile üst satırın tabanı arası) */
 .pg-spaced .display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { letter-spacing: 0 !important; }
-.pg-spaced h1.display, .pg-spaced h2.display, .pg-spaced h3.display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { line-height: calc(1.16em + 2mm) !important; }
+.pg-spaced h1.display, .pg-spaced h2.display, .pg-spaced h3.display, .pg-spaced .k-card h3.display, .pg-spaced .bl-body h3.display { line-height: calc(.95em + 2mm) !important; }
 
 /* Başlıkta çizili kelime + araya sıkıştırılmış düzeltme (elle düzeltilmiş gibi) */
 .has-fix { padding-top: 0; }
