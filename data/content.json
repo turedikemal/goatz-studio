@@ -2202,10 +2202,10 @@
       "showContact": true,
       "hero": {
         "visible": true,
-        "eyebrow": "Kapı müşterisi beklemeye son!",
-        "title": "Çanakkale web sitesi yapımı ve ürün çekimi",
+        "eyebrow": "Çanakkale web sitesi yapımı + ürün çekimi",
+        "title": "Kapı müşterisi beklemeye son!",
         "subtitle": "Web tasarımından ürün çekimine, markanızın dijital vitrini aynı stüdyoda şekilleniyor.",
-        "titleSize": 6,
+        "titleSize": 7,
         "ribbon": {
           "visible": true,
           "color": "blue"
