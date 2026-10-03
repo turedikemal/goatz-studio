@@ -475,6 +475,9 @@
   .blk-in p { font-size: 18px; line-height: 1.55; max-width: 62ch; margin: 0 0 1em; }
   .blk-in > .btn { margin-top: 12px; }
   .blk-in.is-center p { margin-inline: auto; }
+  .blk-in h3.txt-h { font-size: clamp(22px, 2.6vw, 30px); line-height: calc(.95em + 2mm); letter-spacing: 0; font-style: italic; margin: 1.4em 0 .6em; max-width: 34ch; }
+  .blk-in a.txt-link { color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  .blk-in a.txt-link:hover { background: var(--sun, #ffd731); }
   .nav-links .btn[aria-current="page"], .menu .btn[aria-current="page"] { background: var(--carbon); color: var(--paper); }
 
   /* Kart ızgarası */
