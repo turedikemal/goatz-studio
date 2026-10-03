@@ -2137,3 +2137,5 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 /* Büyük başlıkta ikas rozeti: başlıkla aynı boyda, çizgi kalın */
 .display .ikas-mark { border-width: .05em; padding: 0 .3em .04em .2em; letter-spacing: -.02em; vertical-align: .02em; line-height: 1; }
 .display .ikas-mark i { border-width: .05em; }
+/* Telefonda SSS ve uzun açıklama başlıkları ekrana sığar (uzun kelimeler taşmaz) */
+@media (max-width: 600px) { .blk-more h2.display, .blk-faq h2.display { font-size: clamp(26px, 8.6vw, 44px) !important; overflow-wrap: break-word; } }

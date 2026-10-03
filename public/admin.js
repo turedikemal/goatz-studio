@@ -15,7 +15,7 @@
   ];
   const SECTION_NAMES = {
     hero: 'Giriş (dev başlık)', showcase: 'İşler vitrini', statement: 'Büyük italik yazı', services: 'Hizmetler',
-    why: 'Neden biz (kartlar)', band: 'Siyah etiket bandı', process: 'Süreç sekmeleri', faq: 'Sık sorulan sorular', contact: 'İletişim', footer: 'Alt bilgi (footer)',
+    why: 'Neden biz (kartlar)', band: 'Siyah etiket bandı', process: 'Süreç sekmeleri', faq: 'Sık sorulan sorular', about: 'Uzun açıklama (Devamını oku)', contact: 'İletişim', footer: 'Alt bilgi (footer)',
   };
 
   const text = (label, o = {}) => ({ type: 'text', label, ...o });
@@ -431,6 +431,15 @@
       schema: {
         heading: text('Başlık', { nostyle: true }),
         cards: list('Sorular', group('', { title: text('Soru', { nostyle: true }), text: area('Cevap', { nostyle: true }) }), { addLabel: 'Soru ekle', title: (v) => v.title || 'Soru', max: 12, newItem: { title: 'Yeni soru?', text: '' } }),
+      },
+    },
+    {
+      id: 'about', label: 'Uzun açıklama', path: ['about'], anchor: '.blk-more', section: 'about',
+      intro: 'Ana sayfadaki uzun açıklama. "Devamını oku" ile açılır, geniş ekranda iki sütun. "## " ile ara başlık, [metin](page:kimlik) ile iç bağlantı.',
+      schema: {
+        eyebrow: text('Küçük üst yazı', { nostyle: true }),
+        heading: text('Başlık', { nostyle: true }),
+        text: area('Yazı', { nostyle: true }),
       },
     },
     {
