@@ -202,6 +202,8 @@
           points: list('Maddeler', group('', { title: text('Başlık', { nostyle: true }), text: area('Yazı', { nostyle: true }) }), { addLabel: 'Madde ekle', title: (v) => v.title || 'Madde', max: 6, newItem: { title: '', text: '' } }),
           images: list('Çekim görselleri (kategoriye göre gruplanır)', group('', { image: image('Görsel', { hint: 'Kare gösterilir; konu ortada olsun.' }), category: text('Kategori (aynı adı yazanlar bir grupta toplanır)', { nostyle: true, compact: true }), caption: text('Alt yazı', { nostyle: true }) }), { addLabel: 'Görsel ekle', title: (v) => [v.category, v.caption].filter(Boolean).join(' · ') || 'Görsel', max: 60, newItem: { image: '', caption: '', category: '' } }),
         }),
+        aboutHeading: text('Uzun açıklama başlığı (listenin en altında)', { nostyle: true }),
+        about: area('Uzun açıklama (Devamını oku)', { nostyle: true, hint: '"## " ile ara başlık, [metin](page:kimlik) ile iç bağlantı.' }),
         approach: group('Ortak yaklaşım bölümü (listenin altında)', {
           visible: bool('Bölümü göster'),
           eyebrow: text('Küçük üst yazı', { nostyle: true }),
