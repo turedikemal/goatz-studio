@@ -518,7 +518,9 @@
         ${sendBox()}
         <div class="wz-actions"><button class="wz-btn" id="wz-download" type="button">Özeti indir ↓</button><button class="wz-btn" id="wz-copy" type="button">Özeti kopyala</button><button class="wz-btn" id="wz-restart" type="button">Yeniden başla</button></div><div class="wz-status" role="status" id="wz-status"></div>`;
     }
-    el.screen.innerHTML = '<div class="wz-scene' + (state.keep ? ' wz-keep' : '') + '">' + html + '</div>';
+    // Aynı adım yeniden çizilince (seçim tıklaması) giriş animasyonu oynamasın: her tıklamada parlama yapıyordu
+    const sameStep = state.shown === key + ':' + state.step; state.shown = key + ':' + state.step;
+    el.screen.innerHTML = '<div class="wz-scene' + (state.keep || sameStep ? ' wz-keep' : '') + '">' + html + '</div>';
     if (result) timer.finish();
 
     // Smooth scroll soruya (mobilde kayarak inme yok: sayfa ilk açılışta hiç kaymaz, sonraki adımlarda soru ekranda değilse anında yerine gelir)
