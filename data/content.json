@@ -275,7 +275,7 @@
         "text": "Ürününü en iyi açısından gösteren, e-ticaret sitelerine ve pazaryerlerine hazır fotoğraflar.",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#urun-cekimi"
+          "target": "page:uruncekimi"
         },
         "items": [
           {
@@ -336,7 +336,7 @@
         "text": "Ürünlerini çekiyoruz, o fotoğraflarla siteni kuruyoruz.",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#urun-cekimi"
+          "target": "page:tekstudyo"
         },
         "items": [
           {
@@ -465,7 +465,7 @@
         "sticker2": "",
         "button": {
           "label": "Hizmeti incele ↗",
-          "target": "page:hizmetler#web-sitesi-ve-e-ticaret-kurulumu"
+          "target": "page:anahtarteslim"
         }
       },
       {
@@ -803,6 +803,18 @@
     ],
     "companyInfo": "",
     "extraLinks": [
+      {
+        "label": "Ürün çekimi",
+        "target": "page:uruncekimi"
+      },
+      {
+        "label": "Anahtar teslim e-ticaret",
+        "target": "page:anahtarteslim"
+      },
+      {
+        "label": "Web tasarım + ürün çekimi",
+        "target": "page:tekstudyo"
+      },
       {
         "label": "SSS",
         "target": "page:sss"
@@ -2172,8 +2184,8 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "Web Tasarım ve Ürün Çekimi Tek Stüdyoda — The Goatz Studio",
-      "seoDescription": "E-ticaret siteniz için web tasarım ve ürün çekimi aynı stüdyoda. Çanakkale ürün fotoğrafçılığı, beyaz fon ve renkli fon ürün fotoğrafları, mobil uyumlu e-ticaret siteleri.",
+      "seoTitle": "Çanakkale Web Tasarım ve E-Ticaret Sitesi — The Goatz Studio",
+      "seoDescription": "Çanakkale’de web sitesi ve e-ticaret sitesi tasarımı ile ürün çekimi aynı stüdyoda. Markanıza özel, mobil uyumlu siteler ve siteye uygun ürün fotoğrafları.",
       "background": "sky",
       "showContact": true,
       "hero": {
@@ -4550,7 +4562,7 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "Hizmetler: Web Tasarım ve Ürün Çekimi — The Goatz Studio",
+      "seoTitle": "Web Tasarım ve Ürün Çekimi Hizmetleri — The Goatz Studio",
       "seoDescription": "Ürün çekimi, web sitesi ve anahtar teslim e-ticaret kurulumu, Google ve yapay zekâ görünürlüğü, pazaryeri entegrasyonu, web uygulamaları ve danışmanlık.",
       "background": "sky",
       "showContact": true,
@@ -4712,8 +4724,8 @@
           "imageColor": "mint",
           "imageSticker": "star",
           "button": {
-            "label": "Çekim örneklerini gör",
-            "target": "works:photo"
+            "label": "Ürün çekimi sayfası ↗",
+            "target": "page:uruncekimi"
           },
           "columns": 3,
           "ratio": "",
@@ -5097,7 +5109,7 @@
           "visible": true,
           "background": "sky",
           "eyebrow": "SSS",
-          "heading": "Ürün çekimi hakkında sık sorulanlar",
+          "heading": "Ürün çekimi soruları",
           "text": "",
           "align": "left",
           "image": "",
@@ -5512,7 +5524,7 @@
           "visible": true,
           "background": "paper",
           "eyebrow": "SSS",
-          "heading": "Sık sorulan sorular",
+          "heading": "Süreçle ilgili sorular",
           "text": "",
           "align": "left",
           "image": "",
@@ -5599,8 +5611,8 @@
       "visible": true,
       "inNav": false,
       "navLabel": "",
-      "seoTitle": "Anahtar Teslim E-Ticaret Sitesi Nedir? — The Goatz Studio",
-      "seoDescription": "Anahtar teslim e-ticaret sitesi: tasarım, kurulum, ürün çekimi ve yayın baştan sona bizde. Neler yaptığımızı ve nasıl çalıştığımızı anlatıyoruz.",
+      "seoTitle": "Anahtar Teslim E-Ticaret Sitesi Kurulumu — The Goatz Studio",
+      "seoDescription": "E-ticaret sitesi kurmak ya da yaptırmak isteyenlere anahtar teslim kurulum: tasarım, kurulum, ürün çekimi ve yayın baştan sona bizde.",
       "background": "sky",
       "showContact": true,
       "hero": {
@@ -5737,7 +5749,7 @@
           "visible": true,
           "background": "sky",
           "eyebrow": "Ne yapıyoruz?",
-          "heading": "Mağazanız için gereken her adım.",
+          "heading": "E-ticaret sitesi kurulumu, adım adım.",
           "text": "",
           "align": "left",
           "image": "",
@@ -5826,7 +5838,7 @@
           "visible": true,
           "background": "sky",
           "eyebrow": "SSS",
-          "heading": "Sık sorulan sorular",
+          "heading": "E-ticaret sitesi soruları",
           "text": "",
           "align": "left",
           "image": "",
