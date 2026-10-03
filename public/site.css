@@ -803,6 +803,27 @@
   .to-top.show:hover { background: var(--carbon); color: var(--sun); translate: 0 -4px; }
   .work-premium-inline { padding: 5px 11px; font-size: 11px; }
 
+  /* Çerez bildirimi: altta ortada, ince ve uzun sticker şerit */
+  .ck-bar { position: fixed; left: 50%; bottom: clamp(12px, 2vw, 24px); z-index: 60; width: min(780px, calc(100% - 32px)); display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 12px; border: 2.5px solid #000; border-radius: var(--r-pill); background: #fff; color: #000; box-shadow: 3px 4px 0 #000; translate: -50% calc(100% + 40px); opacity: 0; transition: translate .5s var(--slush, ease), opacity .3s ease; }
+  .ck-bar.show { translate: -50% 0; opacity: 1; }
+  .ck-bar[hidden] { display: none; }
+  .ck-ico { flex: none; width: 34px; height: 34px; }
+  .ck-text { flex: 1; min-width: 0; margin: 0; font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .ck-text a { font-weight: 800; white-space: nowrap; text-decoration-thickness: 2px; text-underline-offset: 2px; }
+  .ck-act { flex: none; display: flex; gap: 6px; }
+  .ck-btn { padding: 10px 14px; font-size: 11px; border: 2px solid #000; background: #fff; color: #000; }
+  .ck-btn.ck-ok { background: var(--mint); }
+  .ck-btn:hover { background: #000; color: #fff; }
+  html.ck-on .to-top { bottom: calc(clamp(12px, 2vw, 24px) + 72px); }
+  @media (max-width: 640px) {
+    .ck-bar { border-radius: 24px; flex-wrap: wrap; gap: 8px 10px; padding: 10px 12px; }
+    .ck-text { flex-basis: calc(100% - 46px); }
+    .ck-act { width: 100%; }
+    .ck-act .ck-btn { flex: 1; justify-content: center; }
+    html.ck-on .to-top { bottom: calc(clamp(12px, 2vw, 24px) + 132px); }
+  }
+  @media (prefers-reduced-motion: reduce) { .ck-bar { transition: opacity .2s ease; } }
+
   /* Premium proje etiketi: sitenin sarı hap diliyle, alan adının altında */
   .work-ptag { display: inline-flex; align-items: center; gap: 8px; justify-self: start; padding: 7px 16px 7px 10px; border: 1px solid var(--carbon); border-radius: var(--r-pill); background: var(--sun); color: var(--carbon); font-size: 11px; font-weight: 900; letter-spacing: .06em; box-shadow: 2px 3px 0 var(--carbon); rotate: -1.5deg; transition: rotate .3s var(--slush, ease), translate .3s var(--slush, ease); white-space: nowrap; }
   .work-ptag .pt-star { width: 20px; height: 20px; flex: none; background: var(--paper); border: 1px solid var(--carbon); border-radius: 50%; padding: 2px; }
