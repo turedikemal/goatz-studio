@@ -464,6 +464,26 @@
     check();
   }
 
+  // ---------- Çerez bildirimi: seçim yapılmadıysa altta ince şerit ----------
+  const ckBar = document.getElementById('ckBar');
+  if (ckBar) {
+    let chosen = null;
+    try { chosen = localStorage.getItem('goatz-cerez'); } catch (e) { /* depolama yoksa her seferinde görünür */ }
+    if (!chosen) {
+      ckBar.hidden = false;
+      document.documentElement.classList.add('ck-on');
+      setTimeout(() => ckBar.classList.add('show'), 900);
+      ckBar.addEventListener('click', (e) => {
+        const b = e.target.closest('[data-ck]');
+        if (!b) return;
+        try { localStorage.setItem('goatz-cerez', b.dataset.ck); } catch (err) { /* kayıt yoksa sorun değil */ }
+        ckBar.classList.remove('show');
+        document.documentElement.classList.remove('ck-on');
+        setTimeout(() => { ckBar.hidden = true; }, 450);
+      });
+    }
+  }
+
   // ---------- İletişim formu ----------
   document.querySelectorAll('[data-contact-form]').forEach((form) => {
     const status = form.querySelector('.cf-status'), btn = form.querySelector('button[type="submit"]');
