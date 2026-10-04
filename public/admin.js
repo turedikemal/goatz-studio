@@ -560,7 +560,7 @@
   ];
 
   // ---------- Özel sayfalar: şema ----------
-  const BLOCK_TYPES = { form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', faq: 'Sık sorulan sorular', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası', cartpage: 'Sepet sayfası içeriği', bloglist: 'Blog yazıları listesi' };
+  const BLOCK_TYPES = { why: 'Neden biz (ana sayfadaki kartlar ve ikas paneli)', form: 'İletişim formu', text: 'Başlık ve metin', imagetext: 'Görsel + metin', cards: 'Kart ızgarası', faq: 'Sık sorulan sorular', gallery: 'Galeri', wizard: 'Teklif sihirbazı (proje oluşturucu)', map: 'Konum haritası', cartpage: 'Sepet sayfası içeriği', bloglist: 'Blog yazıları listesi' };
   const is = (...types) => (o) => types.includes(o.type);
   const BLOCK_FIELDS = {
     type: select('Blok türü', Object.entries(BLOCK_TYPES)),

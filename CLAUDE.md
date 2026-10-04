@@ -84,3 +84,4 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - **ikas rozeti:** gövdede (`ikasMarks`, render.js) p/li/summary/h1-h3 içindeki "ikas" kelimesi Neden biz'deki rozetin küçüğü (`.ikas-mark`, mor, sarı nokta). Hero başlığı/alt yazı harflere bölünürken rozet korunur (site.js `MARK`).
 - **"Kapı Müşterisi Beklemeye Son!!!"** (ana sayfa İşler): oval, siyah çerçeve, sağı yukarıda (-2.5deg).
 
+- **Neden Biz sayfası** (`/neden-biz`, id `nedenbiz`): üst menü "Neden Biz" buraya gider (`page:nedenbiz`). Blok türü `why` ana sayfadaki kartları + ikas panelini (`S.why`) sayfaya koyar; altında SSS ve açıklama. Ana sayfanın alt açıklaması artık "Stüdyoda neler oluyor?" (tekrar olmasın diye).

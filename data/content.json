@@ -128,7 +128,7 @@
       },
       {
         "label": "Neden Biz",
-        "target": "#neden"
+        "target": "page:nedenbiz"
       },
       {
         "label": "Süreç",
@@ -10661,6 +10661,164 @@
       ]
     },
     {
+      "id": "nedenbiz",
+      "title": "Neden Biz",
+      "slug": "neden-biz",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Neden Biz? Çanakkale Web Tasarım Stüdyosu",
+      "seoDescription": "Net fiyat, tek muhatap ve satışa hazır teslim. Çanakkale’de web tasarım, e-ticaret ve ürün çekimini aynı stüdyoda neden topladığımızı anlatıyoruz.",
+      "background": "lavender",
+      "showContact": true,
+      "kind": "page",
+      "date": "",
+      "parent": "",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Neden biz",
+        "title": "Neden biz?",
+        "subtitle": "Çekim, tasarım ve yayın aynı stüdyoda, aynı ekiple. Ne için ne ödediğinizi baştan bilirsiniz.",
+        "titleSize": 9,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "coin",
+            "x": 86,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 100,
+            "rotate": 10,
+            "float": true
+          },
+          {
+            "type": "check",
+            "x": 6,
+            "y": 36,
+            "mx": 4,
+            "my": 14,
+            "size": 90,
+            "rotate": -10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "why",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Neden biz soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Teklifte yazmayan bir iş çıkarsa fiyat değişir mi?",
+              "text": "Başlamadan önce yapılacak işleri tek tek yazıyoruz ve fiyat bu listeye göre çıkıyor. Liste aynı kaldıkça rakam da aynı kalıyor. Yolda yeni bir şey eklemek isterseniz, örneğin ikinci bir dil ya da ek bir çekim, onu yapmadan önce konuşuyor, kapsamla birlikte fiyatı da sizinle güncelliyoruz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Hızlı teslim dediğiniz şey neye dayanıyor?",
+              "text": "Gün sayısı vermiyoruz, çünkü süre işin büyüklüğüne göre değişiyor ve bunu ilk görüşmede birlikte netleştiriyoruz. Hızı sağlayan şey düzenin kendisi. Çekim ve tasarım aynı stüdyoda, tek takvimle yürüyor. Kimse başka bir ekipten dosya beklemiyor, onay adımlarını da kısa tutuyoruz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Sitenin telefonda düzgün çalıştığını nasıl kontrol ediyorsunuz?",
+              "text": "Tasarıma telefon ekranından başlıyoruz, bilgisayar görünümünü sonra kuruyoruz. Yayından önce sayfaları hem telefonda hem bilgisayarda açıp gerçekten kullanıyoruz. Menünün parmakla açılmasına, görsellerin yerine oturmasına ve sepet düğmesinin göz önünde kalmasına tek tek bakıyoruz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Site yayına girdiği gün sipariş alabilir mi?",
+              "text": "Amacımız bu. Ürün listesi, sepet, ödeme adımı ve sipariş takibi yayından önce kurulmuş oluyor. Ödeme ve kargo hesaplarınız da siteye bağlanıyor. Yasal metinlerin taslaklarını yerine koyuyoruz ama işletmenize özel bilgiler içerdikleri için bir hukukçuya ya da mali müşavirinize kontrol ettirmenizi istiyoruz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "ikas iş ortağı olmanız benim için ne anlama geliyor?",
+              "text": "E-ticaret sitelerimizi ikas altyapısıyla kuruyoruz ve ikas’ın resmi iş ortağıyız. Sizin açınızdan karşılığı günlük işlerde görülüyor. Sayfalar hızlı açılıyor, yapı mobil alışverişe uygun. Ürün, sipariş, ödeme ve kargo işlerini tek panelden takip ediyorsunuz, mağazayı yönetmek için her seferinde bize yazmanız gerekmiyor.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Neden biz",
+          "heading": "Bizimle çalışınca ne değişir?",
+          "text": "Bir web sitesi yaptırmaya karar veren işletme sahibinin aklındaki ilk soru genelde fiyattır. İkincisi ise kimseye söylenmez ama hep oradadır: işin ortasında yalnız kalır mıyım? Bu soru çoğu zaman yaşanmış bir hikâyeden doğar. Fotoğrafçı bir yerde, tasarımcı başka bir yerde, siteyi kuran kişi de çoktan başka işe geçmiştir. Çanakkale’de bir stüdyo olarak bu dağınıklığı ortadan kaldırmak için çalışıyoruz.\n\nBizim çalışma biçimimiz bu tabloya karşı kuruldu. Ürün çekimi ve web tasarımı aynı çatı altında yapılıyor, aynı takvime yazılıyor. Fotoğraflar sitenin hangi alanına gireceği bilinerek çekiliyor, site de o fotoğrafların öne çıkacağı şekilde tasarlanıyor. İki ayrı ekibin birbirine dosya yetiştirmesini beklemiyorsunuz.\n\n## Fiyatı neyin belirlediğini baştan bilirsiniz\n\nMasaya oturduğumuzda önce ne yapılacağını konuşuyoruz. Kaç sayfa olacak, kaç ürün yüklenecek, çekim gerekiyor mu, hangi ödeme ve kargo bağlantıları kurulacak. Fiyat bu kapsamın üstüne kuruluyor, kapsam değişmedikçe sürpriz bir kalem çıkmıyor. Bir sitenin maliyetini hangi kararların büyüttüğünü merak ediyorsanız, [e-ticaret sitesi fiyatını belirleyen kalemleri](page:blogfiyat) ayrı bir yazıda tek tek anlattık.\n\nBu yöntemin bir yan etkisi de var. Bazen görüşmenin sonunda istediğiniz şeyin şu an için gereksiz olduğunu söylüyoruz. Pazaryeri bağlantısı, ikinci dil ya da özel bir uygulama kimi işletme için erken bir adım. Söylemesi zor ama sonradan pişman olunan harcamadan iyidir.\n\n## Telefonu düşünerek tasarlıyoruz\n\nBir peynir üreticisinin müşterisi siteye büyük ihtimalle akşam, koltukta, elindeki telefondan bakıyor. O yüzden siteyi tasarlarken önce telefon ekranını düşünüyoruz. Yayından önce her sayfayı iki cihazda da tek tek açıp deniyoruz. Menü parmakla rahat açılıyor mu, ürün fotoğrafı yüklenirken sayfa kayıyor mu, sepete ekleme düğmesi gözden kaçıyor mu? Bunları ekrana bakarak değil, kullanarak görüyoruz.\n\nElinizde eskiyen bir site varsa sıfırdan başlamak her zaman şart değil. Tasarımın ve mobil görünümün nasıl elden geçtiğini [mevcut sitenin yenilenmesi](page:hyenileme) sayfasında anlattık.\n\n## Satışa hazır teslim ne demek\n\nBir mağazanın açılması için güzel görünmesi yetmiyor. Ürün listesinden sepete, ödeme adımından sipariş takibine kadar müşterinin izleyeceği yolu baştan sona kuruyoruz. Ödeme ve kargo hesaplarının siteye bağlanması da bu yolun bir parçası; ayrıntılarını [ödeme ve kargo entegrasyonu](page:hodemekargo) sayfasında bulabilirsiniz. Site yayına çıktığı gün ilk siparişi alabilecek durumda oluyor.\n\nE-ticaret sitelerimizde ikas altyapısını kullanıyoruz ve ikas’ın resmi iş ortağıyız. Bunu bir rozet olsun diye seçmedik. Sayfalar hızlı açılıyor, mobil alışverişe uygun bir yapı sunuyor, ürün, sipariş, ödeme ve kargo işleri tek panelden yönetiliyor. Siteyi teslim aldıktan sonra günlük işleri kendiniz takip edebilmeniz bizim için önemli.\n\n## Neden tek muhatap bu kadar önemli\n\nBir projede en çok zaman kaybettiren şey çoğu zaman iş değil, iletişimdir. Fotoğrafçıya söylenen bir şey tasarımcıya ulaşmaz, tasarımcının sorduğu soru cevapsız kalır. Bizimle çalıştığınızda çekimden yayına kadar aynı ekiple konuşuyorsunuz. Bir ürünün rengi fotoğrafta farklı mı çıktı, söylediğiniz kişi zaten o fotoğrafı sitede kullanacak kişi.\n\nOnay adımlarını da bu yüzden kısa tutuyoruz. Taslağı görüyorsunuz, yorumunuzu yazıyorsunuz, düzeltme aynı masada yapılıyor. Fotoğraf tarafında neler yaptığımızı görmek isterseniz [fotoğraf ve görsel üretimi](page:kfoto) başlığı altında beyaz fon çekimden konsept çekime kadar her şeyi topladık.\n\nSon bir not. Bu sayfadaki hiçbir başlık sihirli bir formül değil. Bir siteden beklediğiniz sonucu almanız, ürününüzün, fiyatınızın ve müşterinizle kurduğunuz ilişkinin toplamına bağlı. Bizim işimiz o toplamın dijital tarafını sağlam ve sizin yönetebileceğiniz biçimde kurmak.",
+          "align": "left",
+          "collapse": true,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
       "id": "nasilcalisiyoruz",
       "title": "Nasıl Çalışıyoruz?",
       "slug": "nasil-calisiyoruz",
@@ -14320,8 +14478,8 @@
     ]
   },
   "about": {
-    "eyebrow": "Neden biz",
-    "heading": "Bizimle çalışınca ne değişir?",
-    "text": "Bir web sitesi yaptırmaya karar veren işletme sahibinin aklındaki ilk soru genelde fiyattır. İkincisi ise kimseye söylenmez ama hep oradadır: işin ortasında yalnız kalır mıyım? Bu soru çoğu zaman yaşanmış bir hikâyeden doğar. Fotoğrafçı bir yerde, tasarımcı başka bir yerde, siteyi kuran kişi de çoktan başka işe geçmiştir. Çanakkale’de bir stüdyo olarak bu dağınıklığı ortadan kaldırmak için çalışıyoruz.\n\nBizim çalışma biçimimiz bu tabloya karşı kuruldu. Ürün çekimi ve web tasarımı aynı çatı altında yapılıyor, aynı takvime yazılıyor. Fotoğraflar sitenin hangi alanına gireceği bilinerek çekiliyor, site de o fotoğrafların öne çıkacağı şekilde tasarlanıyor. İki ayrı ekibin birbirine dosya yetiştirmesini beklemiyorsunuz.\n\n## Fiyatı neyin belirlediğini baştan bilirsiniz\n\nMasaya oturduğumuzda önce ne yapılacağını konuşuyoruz. Kaç sayfa olacak, kaç ürün yüklenecek, çekim gerekiyor mu, hangi ödeme ve kargo bağlantıları kurulacak. Fiyat bu kapsamın üstüne kuruluyor, kapsam değişmedikçe sürpriz bir kalem çıkmıyor. Bir sitenin maliyetini hangi kararların büyüttüğünü merak ediyorsanız, [e-ticaret sitesi fiyatını belirleyen kalemleri](page:blogfiyat) ayrı bir yazıda tek tek anlattık.\n\nBu yöntemin bir yan etkisi de var. Bazen görüşmenin sonunda istediğiniz şeyin şu an için gereksiz olduğunu söylüyoruz. Pazaryeri bağlantısı, ikinci dil ya da özel bir uygulama kimi işletme için erken bir adım. Söylemesi zor ama sonradan pişman olunan harcamadan iyidir.\n\n## Telefonu düşünerek tasarlıyoruz\n\nBir peynir üreticisinin müşterisi siteye büyük ihtimalle akşam, koltukta, elindeki telefondan bakıyor. O yüzden siteyi tasarlarken önce telefon ekranını düşünüyoruz. Yayından önce her sayfayı iki cihazda da tek tek açıp deniyoruz. Menü parmakla rahat açılıyor mu, ürün fotoğrafı yüklenirken sayfa kayıyor mu, sepete ekleme düğmesi gözden kaçıyor mu? Bunları ekrana bakarak değil, kullanarak görüyoruz.\n\nElinizde eskiyen bir site varsa sıfırdan başlamak her zaman şart değil. Tasarımın ve mobil görünümün nasıl elden geçtiğini [mevcut sitenin yenilenmesi](page:hyenileme) sayfasında anlattık.\n\n## Satışa hazır teslim ne demek\n\nBir mağazanın açılması için güzel görünmesi yetmiyor. Ürün listesinden sepete, ödeme adımından sipariş takibine kadar müşterinin izleyeceği yolu baştan sona kuruyoruz. Ödeme ve kargo hesaplarının siteye bağlanması da bu yolun bir parçası; ayrıntılarını [ödeme ve kargo entegrasyonu](page:hodemekargo) sayfasında bulabilirsiniz. Site yayına çıktığı gün ilk siparişi alabilecek durumda oluyor.\n\nE-ticaret sitelerimizde ikas altyapısını kullanıyoruz ve ikas’ın resmi iş ortağıyız. Bunu bir rozet olsun diye seçmedik. Sayfalar hızlı açılıyor, mobil alışverişe uygun bir yapı sunuyor, ürün, sipariş, ödeme ve kargo işleri tek panelden yönetiliyor. Siteyi teslim aldıktan sonra günlük işleri kendiniz takip edebilmeniz bizim için önemli.\n\n## Neden tek muhatap bu kadar önemli\n\nBir projede en çok zaman kaybettiren şey çoğu zaman iş değil, iletişimdir. Fotoğrafçıya söylenen bir şey tasarımcıya ulaşmaz, tasarımcının sorduğu soru cevapsız kalır. Bizimle çalıştığınızda çekimden yayına kadar aynı ekiple konuşuyorsunuz. Bir ürünün rengi fotoğrafta farklı mı çıktı, söylediğiniz kişi zaten o fotoğrafı sitede kullanacak kişi.\n\nOnay adımlarını da bu yüzden kısa tutuyoruz. Taslağı görüyorsunuz, yorumunuzu yazıyorsunuz, düzeltme aynı masada yapılıyor. Fotoğraf tarafında neler yaptığımızı görmek isterseniz [fotoğraf ve görsel üretimi](page:kfoto) başlığı altında beyaz fon çekimden konsept çekime kadar her şeyi topladık.\n\nSon bir not. Bu sayfadaki hiçbir başlık sihirli bir formül değil. Bir siteden beklediğiniz sonucu almanız, ürününüzün, fiyatınızın ve müşterinizle kurduğunuz ilişkinin toplamına bağlı. Bizim işimiz o toplamın dijital tarafını sağlam ve sizin yönetebileceğiniz biçimde kurmak."
+    "eyebrow": "Stüdyo",
+    "heading": "Stüdyoda neler oluyor?",
+    "text": "Diyelim ki Ezine’de peynir yapan bir işletme ya da Assos’ta sezonu bekleyen küçük bir pansiyon bize yazdı. İlk konuşmada sorduğumuz şey genelde aynı: insanlar sizi bugün nereden buluyor, yarın nereden bulsun istiyorsunuz? Cevap bazen bir e-ticaret sitesi çıkıyor, bazen birkaç sayfalık sade bir tanıtım sitesi, bazen de yalnızca iyi çekilmiş ürün fotoğrafları. Çanakkale merkezde, Fevzipaşa’daki stüdyomuzda yaptığımız işlerin hepsi bu sorudan başlıyor.\n\nKısaca anlatmak gerekirse web sitesi tasarlıyoruz, e-ticaret mağazası kuruyoruz ve ürün çekiyoruz. Bunların çevresinde Google görünürlüğü, pazaryeri bağlantıları, metin yazımı ve marka çalışmaları da elimizden geçiyor. Hepsini bir paket gibi satmıyoruz. Kimi işletme yalnız fotoğraf için geliyor, kimi yıllardır duran sitesini toparlamak için.\n\n## Web tasarım ve e-ticaret\n\nÇanakkale web tasarım işlerimizin büyük kısmı satış yapan siteler. Mağazaları ikas üzerinde kuruyoruz. Ürünlerini anlatmak isteyen ama internetten satış yapmayacak işletmeler için kurumsal siteler de tasarlıyoruz; bir mimarlık ofisinin, bir butik otelin ya da bir kooperatifin ihtiyacı bir zeytinyağı mağazasınınkinden çok farklı. Bu ayrımı ve alt hizmetleri [web tasarım ve e-ticaret](page:kweb) sayfasında toplu hâlde görebilirsiniz.\n\nElinizde başka bir altyapıda çalışan bir mağaza varsa onu ikas’a taşıyabiliyoruz. Türkçe ve İngilizce iki dilli siteler de kuruyoruz; Bozcaada’ya gelen yabancı misafire oda satan bir otel için bu bazen şart oluyor. Sıfırdan başlayan biriyseniz, işe girişmeden önce neleri hazır etmeniz gerektiğini [e-ticaret sitesi kurmak için gerekenler](page:blogeticaret) yazısında adım adım anlattık.\n\nBazı işler gözle görülmüyor ama sitenin kaderini belirliyor. Ürün ve kategori sayfalarının nasıl dizileceği, adreslerin nasıl yazılacağı, eski bir sayfa kalkınca ziyaretçinin hangi sayfaya yönleneceği, görsellerin sayfayı yavaşlatıp yavaşlatmadığı. Bunlara kurulum sırasında bakıyoruz, sonradan yamamak hem zor hem pahalı oluyor.\n\nSitelere eklenen küçük uygulamalar da geliştiriyoruz. Kategori Yıldızı, Yorum Merkezi ve Canlı Sipariş Haritası bunlardan üçü. Çok satan ürünü öne çıkarmak, müşteri yorumlarını görünür kılmak ya da siparişlerin Türkiye’nin hangi şehirlerine gittiğini haritada göstermek için yapıldılar.\n\n## Ürün fotoğrafı ve görseller\n\nStüdyonun öbür yarısı kamera. Pazaryeri listeleri için beyaz fonda sade çekimler, kampanya ve sosyal medya için renkli fonlar, markaya uygun dekorlar içinde konsept çekimler yapıyoruz. Ürünleri stüdyoya getirebilir ya da kargoyla gönderebilirsiniz. Gerektiğinde biz yerinde çekiyoruz. Bir seramik atölyesinde tezgâhın kendisi, bir bağda fıçıların arası bazen stüdyodaki herhangi bir fondan daha çok şey anlatıyor. Çekimden sonra rötuş ve boyutlandırma yapıp dosyaları kullanacağınız yere göre hazırlıyoruz. Hangi fonun hangi işe yaradığını kararsız kalanlar için [beyaz fon ile renkli fon karşılaştırması](page:blogfon) ayrı bir yazı olarak duruyor.\n\nBir de yapay zekâ ile hazırlanan görseller var. Elinizdeki ürün fotoğrafından yola çıkıp reklam ya da sosyal medya için sahneler üretiyoruz. Bu yöntem gerçek çekimin yerini tutmuyor, ama kampanya dönemlerinde işe yarıyor.\n\n## Sitenin çevresindeki işler\n\nSite yayına girince iş bitmiyor. Arama sonuçlarında doğru görünmesi için sayfa başlıklarını, açıklamaları ve iç bağlantıları düzenliyor, Merchant Center, Search Console ve Tag Manager kurulumlarını yapıyoruz. Yerel müşteriye satan bir dükkân için çoğu zaman en çok iş gören yer Google Haritalar oluyor; bununla ilgili [Çanakkale’deki işletmelerin haritada öne çıkması](page:blogharita) üzerine yazdıklarımız işinize yarayabilir.\n\nTrendyol ve Hepsiburada’da da satan markalar için mağaza açılışına, ürün yüklemeye ve sitenin bu mağazalarla stok, sipariş bağlantısına destek oluyoruz. Ayrıntıları [pazaryeri kurulumu ve entegrasyonlar](page:kpazar) başlığında anlattık.\n\nBir kısmı ise markanın kendisiyle ilgili. Logo ve kurumsal kimlik tasarlıyor, alan adı seçimine yardım ediyoruz. Marka tescili gerekirse hazırlıkları toparlayıp yetkili uzmanla iletişimi koordine ediyoruz; tescili biz yapmıyoruz, onu marka vekili yapıyor. Site metinleri, ürün açıklamaları ve blog yazıları da bizden çıkabiliyor. Bir zeytinyağının hangi zeytinden, hangi yöntemle yapıldığını müşteriye anlatan cümle, çoğu zaman en güzel fotoğraftan daha çok iş görüyor. Metinleri yazarken arama motorlarının yanında yapay zekâ destekli yanıt araçlarının da içeriği doğru anlamasını gözetiyoruz.\n\nYayından sonra yanınızda birini istiyorsanız danışmanlık ya da aylık site yönetimiyle devam ediyoruz. İstemiyorsanız panel sizde, mağazayı kendiniz yönetiyorsunuz.\n\nDengepak, Loogy ya da Çanakkale İli Damızlık Koyun Keçi Yetiştiricileri Birliği için yaptığımız işler birbirine hiç benzemiyor. Biri ürün satıyor, biri bir kurumu anlatıyor. Bizim için ortak nokta, her birinde işe aynı soruyla başlamış olmamız. Sizin için de oradan başlarız."
   }
 }
