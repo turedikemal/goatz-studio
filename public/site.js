@@ -2113,9 +2113,11 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const box = document.getElementById('promo');
   if (!box) return;
   const KEY = 'goatz-kampanya-shopier';
-  try { const t = Number(localStorage.getItem(KEY) || 0); if (Date.now() - t < 7 * 864e5) return; } catch (e) { /* depolama yoksa her ziyarette görünür */ }
+  // Deneme: /?pencere adresi pencereyi her seferinde 1 sn sonra açar, sayaçlara yazmaz
+  const TEST = /[?&]pencere\b/.test(location.search);
+  if (!TEST) try { const t = Number(localStorage.getItem(KEY) || 0); if (Date.now() - t < 7 * 864e5) return; } catch (e) { /* depolama yoksa her ziyarette görünür */ }
   let last = null, shown = false;
-  const ping = (e) => { try { const d = JSON.stringify({ e }); if (!(navigator.sendBeacon && navigator.sendBeacon('/api/promo', new Blob([d], { type: 'application/json' })))) fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: d, keepalive: true }); } catch (err) { /* sayaç gitmese de sorun değil */ } };
+  const ping = (e) => { if (TEST) return; try { const d = JSON.stringify({ e }); if (!(navigator.sendBeacon && navigator.sendBeacon('/api/promo', new Blob([d], { type: 'application/json' })))) fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: d, keepalive: true }); } catch (err) { /* sayaç gitmese de sorun değil */ } };
   const close = () => {
     ping('close');
     box.classList.remove('show');
@@ -2145,6 +2147,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const ck = document.getElementById('ckBar');
   let chosen = true;
   try { chosen = !!localStorage.getItem('goatz-cerez'); } catch (e) { /* çerez şeridi zaten görünür */ }
-  if (ck && !chosen) ck.addEventListener('click', (e) => { if (e.target.closest('[data-ck]')) setTimeout(open, 1500); });
+  if (TEST) setTimeout(open, 1000);
+  else if (ck && !chosen) ck.addEventListener('click', (e) => { if (e.target.closest('[data-ck]')) setTimeout(open, 1500); });
   else setTimeout(open, 5000);
 })();
