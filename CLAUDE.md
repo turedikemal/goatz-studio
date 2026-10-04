@@ -50,7 +50,7 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 ## Hizmetler sayfası ve sepet (2026-10-02)
 - `/hizmetler` (panelde "Hizmetler" sayfası): 6 kart bölümü, metinler ana sayfadaki "Neler yapıyoruz?" kutularından; blok başlığından otomatik bağlantı noktası (`#urun-cekimi`). Menüdeki "Hizmetler" bu sayfaya gider. Geri dönüş etiketi: `donus-noktasi-hizmetler-oncesi`.
 - Hizmet sepeti: `public/cart.js` (yalnız bu sayfada, `data-svc-cart` işaretiyle yüklenir). Kartlarda "Sepete ekle", sağda yapışkan sepet düğmesi, panelde "Fiyat al" formu → `POST /api/contact`, mesaj `FİYAT TALEBİ (hizmet sepeti)` ile başlar (`lib/mailer.js` konu satırı buna göre). Sepet `localStorage`'ta tutulur. Formda pazarlama onayı yok, yalnız KVKK.
-- SEO dosyaları `lib/seo.js` (robots.txt: arama motorları + yapay zekâ botları, sitemap.xml, llms.txt); yasal sayfalar robots'ta kapalı.
+- SEO dosyaları `lib/seo.js` (robots.txt: arama motorları + yapay zekâ botları, sitemap.xml, llms.txt); yasal sayfalar robots'ta açık ama `noindex, follow` (kapalı olunca Google noindex'i göremiyordu), `/sepet` kapalı. Kökteki hizmet sayfaları (anahtar teslim, tekstudyo, ikas → Web tasarım; ürün çekimi → Fotoğraf; Google SEO → SEO) ekmek kırıntısında kategoriye bağlı.
 
 ## Gece evreni, sepet, SEO (2026-10-02/03)
 - **Gece evreni** (`public/site.js`, "Mekik uçtuğu yöne bakar" bölümünden dosya sonuna): filolar, it dalaşı, ana gemi/taşıyıcı/düello, gezegenler; tüm gemiler tek döngüde (`loop`), gemi başına try/catch (tek hata döngüyü durdurmasın: bir kez tüm gemiler donmuştu). Sayfa açıldıktan 2 sn sonra başlar, gemiler hep kenardan girer, hiç durmaz, footer'da uzay yok. `f.w` gemi genişliğidir (açısal hız `f.om`). Yalnız ana gemiler büyük.
