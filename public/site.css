@@ -2189,3 +2189,8 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 .pt-lockup.is-side .pt-x { width: clamp(30px, 2.8vw, 42px); font-size: clamp(18px, 1.8vw, 26px); }
 @media (max-width: 520px) { .pt-lockup.is-side .pt-ikas, .pt-lockup.is-side .pt-goatz { font-size: 24px; } .head-lockup .pt-lockup.is-side { gap: 10px; } }
 @media (min-width: 1320px) { .head-lockup { flex-wrap: nowrap; width: max-content; max-width: calc(100vw - 120px); } .head-lockup > h2 { white-space: nowrap; flex: none; } .head-lockup .pt-lockup.is-side { flex: none; } }
+
+/* "Kapı Müşterisi Beklemeye Son!!!" ana sayfa hero'da, "Anahtar teslim" başlığının üstünde: aynı oval, daha küçük */
+.hero .hero-hook { position: relative; z-index: 2; margin: 0 auto clamp(14px, 2vw, 26px); }
+.hero .hero-hook .show-hook-big { font-size: clamp(18px, 2.5vw, 34px); line-height: 1.2; }
+@media (max-width: 600px) { .hero .hero-hook .show-hook-big { font-size: 4vw; } .hero .hero-hook mark { white-space: nowrap; } }
