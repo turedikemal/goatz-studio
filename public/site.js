@@ -464,12 +464,15 @@
     check();
   }
 
-  // ---------- Çerez bildirimi: ana sayfa her açıldığında altta ince şerit (Kemal: her ziyarette çıksın; seçim yine kaydedilir) ----------
+  // ---------- Çerez bildirimi: ana sayfada her açılışta (data-ck-always), diğer sayfalarda yalnız seçim kaydedilmemişse ----------
   const ckBar = document.getElementById('ckBar');
   if (ckBar) {
-    {
+    let saved = null;
+    try { saved = localStorage.getItem('goatz-cerez'); } catch (err) { /* kayıt okunamazsa şerit görünür */ }
+    if (ckBar.hasAttribute('data-ck-always') || !saved) {
       ckBar.hidden = false;
       document.documentElement.classList.add('ck-on');
+      document.documentElement.style.setProperty('--ck-h', ckBar.offsetHeight + 'px');
       setTimeout(() => ckBar.classList.add('show'), 900);
       ckBar.addEventListener('click', (e) => {
         const b = e.target.closest('[data-ck]');

@@ -2229,3 +2229,9 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
   html.svc-bar-on .cart-fab:not(.docked) svg { width: 22px; height: 22px; }
   html.svc-bar-on .cart-fab:not(.docked) .cart-count { min-width: 20px; height: 20px; font-size: 11px; padding: 0 4px; top: -8px; right: -5px; }
 }
+
+/* Çerez şeridi açıkken mobil alt çubuk (sepet, kategori çubuğu, yukarı ok) şeridin üstüne çıkar */
+@media (max-width: 900px) {
+  html.ck-on.svc-bar-on { --sb-b: calc(12px + env(safe-area-inset-bottom, 0px) + var(--ck-h, 120px) + 24px); }
+  html.ck-on:not(.svc-bar-on) .cart-rail { bottom: calc(18px + var(--ck-h, 120px) + 24px); }
+}
