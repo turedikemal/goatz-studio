@@ -2195,11 +2195,10 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 .hero .hero-hook .show-hook-big { font-size: clamp(18px, 2.5vw, 34px); line-height: 1.2; }
 @media (max-width: 600px) { .hero .hero-hook .show-hook-big { font-size: 4vw; } .hero .hero-hook mark { white-space: nowrap; } }
 
-/* Alt sayfa slayt zemini (pageBg): konuya göre soyut çizgiler, dikkat dağıtmaz */
-.page-bg { position: absolute; width: clamp(150px, 32vw, 470px); height: auto; aspect-ratio: 560 / 460; z-index: 0; pointer-events: none; color: #000; opacity: .1; }
-.pb-tl { top: 64px; left: 0; } .pb-tr { top: 64px; right: 0; } .pb-bl { bottom: 0; left: 0; } .pb-br { bottom: 0; right: 0; }
-html[data-theme="night"] .page-bg { color: #fff; opacity: .14; }
-@media (max-width: 700px) { .page-bg { opacity: .07; } }
+/* Alt sayfa slayt zemini (pageBg): ana sayfadaki şerit gibi, sayfaya göre farklı kıvrım, daha soluk */
+.page-hero .page-ribbon > g { opacity: .9; }
+html[data-theme="night"] .page-hero .page-ribbon .pr-band { stroke: rgba(255, 255, 255, .07) !important; }
+html[data-theme="night"] .page-hero .page-ribbon .shine { opacity: .12; }
 
 /* Ana sayfa İşler: "Markanızın yeni nesil dijital vitriniyle..." büyük harf, sağa yatık, daha büyük */
 .show-hook .show-hook-sub { font-size: clamp(20px, 2.8vw, 38px); font-weight: 800; font-style: italic; text-transform: uppercase; line-height: calc(.95em + 2mm); letter-spacing: 0; text-wrap: balance; }
