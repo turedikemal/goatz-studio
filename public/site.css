@@ -2200,8 +2200,10 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 html[data-theme="night"] .page-hero .page-ribbon .pr-band { stroke: rgba(255, 255, 255, .07) !important; }
 html[data-theme="night"] .page-hero .page-ribbon .shine { opacity: .12; }
 
-/* Ana sayfa İşler: "Markanızın yeni nesil dijital vitriniyle..." büyük harf, sağa yatık, daha büyük */
+/* Ana sayfa İşler: "Markanızın yeni dijital vitriniyle..." (yalnız "yeni dijital vitrini" sarı, siyah çerçeveli kutu) büyük harf, sağa yatık, daha büyük */
 .show-hook .show-hook-sub { font-size: clamp(20px, 2.8vw, 38px); font-weight: 800; font-style: italic; text-transform: uppercase; line-height: calc(.95em + 2mm); letter-spacing: 0; text-wrap: balance; }
 /* Vitrin cümlesi: kelimelerin altı hep sarı (üzerine gelinmiş gibi), tek renk; gece de aynı, yazı siyah */
-.show-hook .hook-hl { background: var(--sun); color: #000; padding: 0 .18em .02em; border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.show-hook .hook-hl { display: inline-block; background: var(--sun); color: #000; padding: .06em .28em .1em; margin: 0 .08em; border: 3px solid #000; border-radius: 10px; transform: rotate(-2deg); -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .show-hook .show-hook-sub .hw:hover, .show-hook .show-hook-sub .w:hover { background: none; }
+.show-hook .hook-nw { white-space: nowrap; }
+.show-hook .show-hook-sub { line-height: 1.4; } .show-hook .hook-hl { margin: 0 .04em 0 0; vertical-align: .04em; }
