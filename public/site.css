@@ -2215,3 +2215,17 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
 @media (max-width: 700px) { .page-bg { opacity: .12; } html[data-theme="night"] .page-bg { opacity: .13; } }
 /* Süreç başlığı dar ekranda taşmasın (uzun kelime) */
 @media (max-width: 600px) { .page-hero.pg-road h1 { font-size: min(48px, 10.4vw) !important; letter-spacing: -.04em; } }
+
+/* Mobil alt çubuk: sepet, kategori çubuğu ve yukarı oku tek sırada (üst üste binmez), kompakt */
+@media (max-width: 900px) {
+  html.svc-bar-on { --sb-h: 44px; --sb-side: 14px; --sb-b: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  html.svc-bar-on .svc-bar { bottom: var(--sb-b); max-width: calc(100vw - 2 * (var(--sb-side) + var(--sb-h) + 12px)); padding: 3px; border-width: 2px; }
+  html.svc-bar-on .svc-bar-track { gap: 3px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
+  html.svc-bar-on .svc-bar a { padding: 0 11px; height: 34px; display: inline-flex; align-items: center; max-width: 62vw; overflow: hidden; text-overflow: ellipsis; font-size: 12px; border-width: 1.5px; }
+  html.svc-bar-on .to-top { width: var(--sb-h); height: var(--sb-h); right: var(--sb-side); bottom: var(--sb-b); box-shadow: none; border-width: 2px; }
+  html.svc-bar-on .to-top svg { width: 20px; height: 20px; }
+  html.svc-bar-on .cart-rail { left: var(--sb-side); bottom: var(--sb-b); }
+  html.svc-bar-on .cart-fab:not(.docked) { width: var(--sb-h); height: var(--sb-h); border-width: 2px; }
+  html.svc-bar-on .cart-fab:not(.docked) svg { width: 22px; height: 22px; }
+  html.svc-bar-on .cart-fab:not(.docked) .cart-count { min-width: 20px; height: 20px; font-size: 11px; padding: 0 4px; top: -8px; right: -5px; }
+}

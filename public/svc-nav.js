@@ -97,6 +97,7 @@
     const sy = window.scrollY, first = tops[0] - sy, last = lastBottom - sy; // konumlar önbellekte: kaydırırken her karede yerleşim okunmaz
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
+    document.documentElement.classList.toggle('svc-bar-on', inside);
     rail.classList.toggle('show', inside); // bölüme girince filtre uzaklıktan (sonsuzluktan) gelir, çıkınca uzaklaşır
     let idx = 0;
     tops.forEach((t, i) => { if (t - sy <= vh * 0.4) idx = i; });
