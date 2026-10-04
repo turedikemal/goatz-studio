@@ -1,4 +1,4 @@
-// Hizmetler ve İşler sayfaları: aşağı inerken hangi kategoride olunduğunu gösteren yüzen çubuk (rengi kategoriyle değişir) ve tıklayınca bölüme gitme
+// Hizmetler ve İşler sayfaları: dar ekranda üst menünün altına yapışan kategori şeridi (renkli nokta + kısa ad, aktif olan dolu), geniş ekranda sol kapsüller; tıklayınca bölüme gider
 (() => {
   const blocks = [...document.querySelectorAll('.blk-cards[data-g], .work-group[data-g]')];
   if (!blocks.length) return;
@@ -8,7 +8,9 @@
   // Geçiş efekti yok: kategoriye gidilince sayfa doğrudan o bölüme açılır
   const setY = (v) => { if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(v, { immediate: true, force: true }); else window.scrollTo({ top: v, behavior: 'instant' }); };
   const smoothTo = (y) => setY(y);
-  const goTo = (b) => smoothTo(Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - 84)));
+  // Dar ekranda üstteki kategori şeridi (≈112px) başlığı örtmesin diye daha çok pay bırakılır
+  const goTo = (b) => smoothTo(Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - (matchMedia('(max-width: 1199px)').matches ? 128 : 84))));
+  const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
   // Bağlantılar
   const link = (a) => a.addEventListener('click', (e) => {
     const t = items.find((x) => '#' + x.id === a.getAttribute('href'));
@@ -30,7 +32,10 @@
     const a = document.createElement('a');
     a.href = '#' + x.id;
     a.dataset.g = x.b.dataset.g || String(x.i);
-    a.textContent = x.name.trim();
+    const dot = document.createElement('i'); dot.className = 'dot'; dot.setAttribute('aria-hidden', 'true');
+    const lab = document.createElement('span'); lab.textContent = SHORT(x.name.trim());
+    a.append(dot, lab);
+    a.setAttribute('aria-label', x.name.trim());
     link(a);
     track.append(a);
   });
@@ -40,7 +45,6 @@
 
   // Sol kenarda mini filtre (geniş ekranda): numaralı yuvarlaklar, üstüne gelince başlık açılır, aktif olan kendi renginde dolu
   let hoverT = 0; // tek ortak zamanlayıcı: listeyi tararken yalnız durulan kategori için gidilir
-  const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
   const rail = document.createElement('nav');
   rail.className = 'svc-rail';
   rail.setAttribute('aria-label', isWorks ? 'İş filtresi' : 'Hizmet filtresi');
@@ -105,6 +109,7 @@
       current = idx;
       pills.forEach((p, i) => p.classList.toggle('on', i === idx));
       railPills.forEach((p, i) => p.classList.toggle('on', i === idx));
+      pills.forEach((p, i) => { if (i === idx) p.setAttribute('aria-current', 'true'); else p.removeAttribute('aria-current'); });
       bar.dataset.g = blocks[idx].dataset.g || String(idx); // çubuğun rengi aktif kategoriye göre değişir
       const p = pills[idx];
       if (p && track.scrollTo) track.scrollTo({ left: Math.max(0, p.offsetLeft - track.clientWidth / 2 + p.offsetWidth / 2), behavior: reduced ? 'auto' : 'smooth' });

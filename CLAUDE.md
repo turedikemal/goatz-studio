@@ -94,3 +94,8 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Olaylar `window.goatzEvent` ile (GA yüklü değilse sessiz): `click_whatsapp`, `click_phone`, `click_teklif_al`, `generate_lead` (iletişim, sihirbaz, sepet), `promo_view/click/close`.
 - **Çerez şeridi** (2026-10-04): ana sayfada her açılışta çıkar (`data-ck-always`, promo penceresinin üstünde); diğer tüm herkese açık sayfalarda (panel önizleme hariç) yalnız `localStorage['goatz-cerez']` boşken çıkar, seçim her yerde geçerli. Açıkken `--ck-h` ile mobil alt çubuk (sepet/kategori/yukarı ok) şeridin üstüne çıkar (site.css sonu).
 - `/cerez-politikasi` (id `cerez`) kodla uyumlu yeniden yazıldı: goatz-cerez, goatz-tema, goatz-hizmet-sepeti, goatz-kampanya-shopier (localStorage), goatz_kampanya (çerez, 30 gün, yalnız promo "Teklif al"), gs_session (panel), GA4 `_ga` / `_ga_FBQTBMTMRF` yalnız "Kabul et" sonrası. Yeni depolama/çerez eklenirse bu sayfa güncellenmeli.
+
+## Mobil kategori filtresi v2 (2026-10-04)
+- Hizmetler ve İşler'de dar ekran (<1200px) için alt hap kaldırıldı: `svc-nav.js` `.svc-bar` artık üst menünün altına yapışan yatay kaydırılan şerit (üstten 64px, tam genişlik, solan kenarlar). Çip = renkli nokta + kısa ad (`SHORT`; tam ad `aria-label`), 44px yükseklik; aktif çip kategori renginde dolu, kalın siyah çerçeve, kaydırınca görünüme kayar. CSS: site.css "Dar ekran (<1200px) kategori şeridi". ≥1200px sol kapsüller aynen.
+- Alt köşelerde yalnız sepet (sol) ve yukarı oku (sağ), 44px yuvarlak; çerez şeridi açıkken `--sb-b` ile şeridin üstüne çıkar. Kategoriye gidişte üstte 128px pay bırakılır (şerit başlığı örtmesin).
+- Kontrol edilmeyen: gerçek iPhone Safari (safe-area, adres çubuğu); yalnız Playwright. Ekran görüntüleri `/mnt/project-files/mobil-filtre-v2/`.

@@ -2216,18 +2216,36 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
 /* Süreç başlığı dar ekranda taşmasın (uzun kelime) */
 @media (max-width: 600px) { .page-hero.pg-road h1 { font-size: min(48px, 10.4vw) !important; letter-spacing: -.04em; } }
 
-/* Mobil alt çubuk: sepet, kategori çubuğu ve yukarı oku tek sırada (üst üste binmez), kompakt */
+/* Mobil alt köşeler: sepet (sol) ve yukarı oku (sağ), kompakt; kategori şeridi artık üstte */
 @media (max-width: 900px) {
   html.svc-bar-on { --sb-h: 44px; --sb-side: 14px; --sb-b: calc(12px + env(safe-area-inset-bottom, 0px)); }
-  html.svc-bar-on .svc-bar { bottom: var(--sb-b); max-width: calc(100vw - 2 * (var(--sb-side) + var(--sb-h) + 12px)); padding: 3px; border-width: 2px; }
-  html.svc-bar-on .svc-bar-track { gap: 3px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); mask-image: linear-gradient(90deg, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
-  html.svc-bar-on .svc-bar a { padding: 0 11px; height: 34px; display: inline-flex; align-items: center; max-width: 62vw; overflow: hidden; text-overflow: ellipsis; font-size: 12px; border-width: 1.5px; }
   html.svc-bar-on .to-top { width: var(--sb-h); height: var(--sb-h); right: var(--sb-side); bottom: var(--sb-b); box-shadow: none; border-width: 2px; }
   html.svc-bar-on .to-top svg { width: 20px; height: 20px; }
   html.svc-bar-on .cart-rail { left: var(--sb-side); bottom: var(--sb-b); }
   html.svc-bar-on .cart-fab:not(.docked) { width: var(--sb-h); height: var(--sb-h); border-width: 2px; }
   html.svc-bar-on .cart-fab:not(.docked) svg { width: 22px; height: 22px; }
   html.svc-bar-on .cart-fab:not(.docked) .cart-count { min-width: 20px; height: 20px; font-size: 11px; padding: 0 4px; top: -8px; right: -5px; }
+}
+
+/* Dar ekran (<1200px) kategori şeridi: üst menünün hemen altına yapışır, yatay kaydırılır, kenarları solar. Alt köşelerde yalnız sepet ve yukarı oku kalır. */
+@media (max-width: 1199px) {
+  .svc-bar { top: calc(64px + env(safe-area-inset-top, 0px)); bottom: auto; left: 50%; translate: -50% 0; width: calc(100vw - 20px); max-width: 760px; padding: 3px; border: 2px solid #000; border-radius: var(--r-pill, 1600px); background: var(--paper) !important; z-index: 44; }
+  .svc-bar-track { display: flex; gap: 4px; padding: 0 10px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent); mask-image: linear-gradient(90deg, transparent, #000 12px, #000 calc(100% - 12px), transparent); }
+  .svc-bar a { scroll-snap-align: center; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px 0 12px; max-width: none; overflow: visible; border: 2px solid transparent; background: transparent; font-size: 14px; font-weight: 800; }
+  .svc-bar a .dot { flex: none; width: 14px; height: 14px; border: 2px solid #000; border-radius: 50%; background: var(--fc); }
+  .svc-bar a:hover { border-color: transparent; }
+  .svc-bar a.on { background: var(--fc); border: 3px solid #000; padding: 0 13px 0 11px; font-weight: 900; }
+  .svc-bar a.on .dot { background: #000; border-color: #000; }
+  .svc-bar a:focus-visible { outline: 3px solid #000; outline-offset: -3px; }
+  html[data-theme="night"] .svc-bar { background: #161b44 !important; border-color: #f4f1e8; }
+  html[data-theme="night"] .svc-bar a { color: #f4f1e8; }
+  html[data-theme="night"] .svc-bar a .dot { border-color: #000; }
+  html[data-theme="night"] .svc-bar a.on { color: #000; }
+  html:not(.svc-bar-on) .svc-bar { display: none; }
+}
+@media (max-width: 900px) {
+  /* şerit üstte olduğu için alt köşelerdeki düğmeler çerez şeridine göre konumlanır */
+  html.svc-bar-on .cart-rail, html.svc-bar-on .to-top { bottom: var(--sb-b); }
 }
 
 /* Çerez şeridi açıkken mobil alt çubuk (sepet, kategori çubuğu, yukarı ok) şeridin üstüne çıkar */
