@@ -2208,8 +2208,8 @@ html[data-theme="night"] .page-hero .page-ribbon .shine { opacity: .12; }
 .show-hook .hook-nw { white-space: nowrap; }
 .show-hook .show-hook-sub { line-height: 1.4; } .show-hook .hook-hl { margin: 0 .04em 0 0; vertical-align: .04em; }
 
-/* Süreç sayfası slayt zemini (roadBg): yol haritası çizimi, soluk */
-.page-road .rd-line { opacity: .7; }
-.page-road .rd-decor { opacity: .55; }
-html[data-theme="night"] .page-road .rd-line { opacity: .12; }
-html[data-theme="night"] .page-road .rd-decor { opacity: .3; }
+/* Süreç sayfası slayt zemini (roadBg): konuya göre soyut çizgiler, dikkat dağıtmaz */
+.page-bg { position: absolute; width: clamp(150px, 32vw, 470px); height: auto; aspect-ratio: 560 / 460; z-index: 0; pointer-events: none; color: #000; opacity: .1; }
+.pb-tl { top: 64px; left: 0; } .pb-tr { top: 64px; right: 0; } .pb-bl { bottom: 0; left: 0; } .pb-br { bottom: 0; right: 0; }
+html[data-theme="night"] .page-bg { color: #fff; opacity: .14; }
+@media (max-width: 700px) { .page-bg { opacity: .07; } }
