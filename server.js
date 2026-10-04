@@ -8,6 +8,7 @@ const store = require('./lib/content');
 const { resolvePages, resolveWorks, pagePath } = require('./lib/schema');
 const db = require('./lib/db');
 const promo = require('./lib/promo');
+const persist = require('./lib/persist');
 const salesRoutes = require('./lib/sales-routes');
 
 const PORT = Number(process.env.PORT) || 5173;
@@ -260,6 +261,7 @@ async function api(req, res, url) {
     if (!IMAGE_MAGIC[m[1]].some((sig) => sig.every((b, i) => buf[i] === b))) return json(res, 400, { error: 'Dosya içeriği bir görsel değil.' });
     const name = `${Date.now().toString(36)}-${crypto.randomBytes(4).toString('hex')}.${EXT[m[1]]}`;
     fs.writeFileSync(path.join(store.UPLOAD_DIR, name), buf);
+    persist.save(`uploads/${name}`, buf);
     return json(res, 200, { url: `/uploads/${name}` });
   }
 
@@ -268,6 +270,7 @@ async function api(req, res, url) {
     const file = /^[a-z0-9-]+\.(png|jpe?g|webp|gif)$/.test(name) && safeJoin(store.UPLOAD_DIR, name);
     if (!file || !fs.existsSync(file)) return json(res, 404, { error: 'Görsel bulunamadı.' });
     fs.unlinkSync(file);
+    persist.remove(`uploads/${name}`);
     return json(res, 200, { ok: true });
   }
 
@@ -612,6 +615,7 @@ const server = http.createServer(async (req, res) => {
 (async () => {
   try {
     await db.initSchema();
+    await persist.restore();
   } catch (e) {
     console.error('Database init error:', e.message);
   }
