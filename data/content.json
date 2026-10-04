@@ -2845,6 +2845,14 @@
               "color": "mint",
               "sticker": "star",
               "image": ""
+            },
+            {
+              "title": "Çanakkale’de web tasarım firması seçerken nelere bakmalıyım?",
+              "text": "Firmanın yayındaki işlerini telefonunuzdan açın, alan adı ve hesapların sizin adınıza açılacağından emin olun, fiyatın içinde neyin olduğunu ve yayından sonra kimin destek vereceğini yazılı isteyin. Sekiz soruluk listeyi {{web tasarım firması seçerken|/blog/canakkale-web-tasarim-firmasi-secerken}} yazısında bulabilirsiniz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
             }
           ],
           "ratio": "square",
@@ -10626,6 +10634,14 @@
               "color": "mint",
               "sticker": "star",
               "image": ""
+            },
+            {
+              "title": "Çanakkale’de ürün fotoğrafçısı arıyorum, stüdyonuz nerede?",
+              "text": "Stüdyomuz Çanakkale merkezde, Fevzipaşa Mahallesi Fatih Sokak, No: 39, İş Yeri: 4. Ürünlerinizi getirmeden önce yazmanız ya da aramanız yeterli. Çekime nasıl hazırlanacağınızı {{ürün çekimine hazırlık|/blog/urun-cekimine-nasil-hazirlanilir}} yazısında anlattık.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
             }
           ],
           "ratio": "square",
@@ -12021,6 +12037,75 @@
           "type": "faq",
           "visible": true,
           "background": "mint",
+          "eyebrow": "Yerel",
+          "heading": "Çanakkale’de çalışmak",
+          "text": "",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Çanakkale’de web tasarım ve e-ticaret sitesi yapıyor musunuz?",
+              "text": "Evet, işimiz bu. Ofisimiz ve stüdyomuz Çanakkale merkezde. Kurumsal web siteleri ve e-ticaret siteleri tasarlıyor, ürün fotoğraflarını aynı stüdyoda çekiyor, siteyi alan adınıza bağlayıp yayına alıyoruz. Yayından sonra Google görünürlüğü ve site yönetimi için de yanınızda olabiliyoruz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çanakkale’nin ilçelerindeki işletmelerle de çalışıyor musunuz?",
+              "text": "Evet. Biga, Çan, Ezine, Gelibolu, Lapseki, Ayvacık, Bayramiç, Yenice, Eceabat, Bozcaada ya da Gökçeada fark etmez. Görüşmelerin çoğunu WhatsApp, telefon ve e-postayla yürütüyoruz. Ürünlerinizi stüdyoya getirebilir ya da gönderebilirsiniz; yerinde çekim gerekiyorsa önce yazın, nerede ve nasıl yapılabileceğini birlikte konuşalım.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çanakkale dışındaki işletmelerle çalışıyor musunuz?",
+              "text": "Çalışıyoruz. Site kurulumunun büyük kısmı uzaktan ilerliyor, ürün çekimi için ürünlerinizi stüdyomuza gönderebilirsiniz.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Ofisinize gelmeden önce haber vermem gerekiyor mu?",
+              "text": "Evet, gelmeden önce yazmanız ya da aramanız yeterli. Adresimiz Fevzipaşa Mahallesi Fatih Sokak, No: 39, İş Yeri: 4, Çanakkale.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çanakkale’de yerel bir stüdyoyla çalışmanın ne avantajı var?",
+              "text": "Ürünlerinizi elden getirip götürebilir, taslakları masada birlikte konuşabilirsiniz. Çanakkale’deki aramaları, sezonu ve buradaki müşteriyi tanıdığımız için sitenizi ve Google İşletme Profili’nizi de buna göre kuruyoruz. Firma seçerken neye bakmanız gerektiğini {{web tasarım firması seçerken|/blog/canakkale-web-tasarim-firmasi-secerken}} yazısında anlattık.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çanakkale’deki yöresel ürünleri internetten satmak için destek veriyor musunuz?",
+              "text": "Evet. Peynir, zeytinyağı, reçel ya da el yapımı ürünleriniz için çekimi, e-ticaret sitesini ve istenirse pazaryeri mağazasını kuruyoruz. Satışa başlamadan önce gereken belgeleri ve kargo konusunu {{yöresel ürünleri internetten satmak|/blog/yoresel-urunleri-internetten-satmak}} yazısında anlattık.",
+              "color": "mint",
+              "sticker": "star",
+              "image": ""
+            }
+          ],
+          "ratio": "square",
+          "images": [
+            {
+              "image": "",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "mint",
           "eyebrow": "E-ticaret sitesi",
           "heading": "Anahtar teslim e-ticaret",
           "text": "",
@@ -12090,6 +12175,13 @@
               "color": "mint",
               "sticker": "star",
               "image": ""
+            },
+            {
+              "title": "Shopier’den kendi e-ticaret siteme geçebilir miyim?",
+              "text": "Evet. Ürünlerinizi, fotoğraflarınızı ve açıklamalarınızı toparlayıp yeni sitenize taşıyor, ödeme ve kargo hesaplarınızı bağlıyoruz. Shopier mağazasını kendi sitesine taşıyan işletmelere %10 indirim uyguluyoruz. Geçiş zamanının geldiğini gösteren işaretleri {{Shopier’den kendi sitenize geçiş|/blog/shopierden-kendi-siteye-gecis}} yazısında anlattık.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
             }
           ],
           "ratio": "square",
@@ -12143,6 +12235,20 @@
               "title": "Sadece ürün çekimi ya da sadece web sitesi yaptırabilir miyim?",
               "text": "Evet. Ürün çekimi, web sitesi ya da ikisi birden yaptırabilirsiniz. Hepsi aynı yoldan ilerler, yalnızca üretim adımı hizmete göre değişir.",
               "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Web sitesi yaptırmak ne kadar tutar?",
+              "text": "Fiyatı sayfa sayısı, sitenin e-ticaret olup olmadığı, ürün sayısı, fotoğraf ve metin ihtiyacı, ödeme, kargo ve pazaryeri bağlantıları belirliyor. Bu yüzden sabit bir fiyat listemiz yok. Kurulum fiyatının dışında alan adı, altyapı aboneliği ve ödeme komisyonu gibi düzenli giderler de olur. Hangi kalemin fiyatı nasıl etkilediğini {{e-ticaret sitesi fiyatını neler belirler?|/blog/e-ticaret-sitesi-fiyatini-neler-belirler}} yazısında anlattık.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Kurulum dışında her yıl ya da her ay ne öderim?",
+              "text": "Alan adının yıllık yenilemesi, site altyapısının aboneliği ve kartla ödeme alıyorsanız ödeme kuruluşunun komisyonu. Aylık site yönetimi ya da danışmanlık isterseniz o ayrıca konuşulur.",
+              "color": "sun",
               "sticker": "star",
               "image": ""
             }
@@ -12200,6 +12306,20 @@
               "color": "mint",
               "sticker": "star",
               "image": ""
+            },
+            {
+              "title": "Ürün çekimine nasıl hazırlanmalıyım?",
+              "text": "Her ürünün her seçeneğinden kusursuz bir örnek ayırın, etiketleri ve ambalajı temizleyin, fotoğrafları nerede kullanacağınızı (site, pazaryeri, Instagram) not edin. Gerisini çekimden önce birlikte planlıyoruz. Adım adım liste {{ürün çekimine hazırlık|/blog/urun-cekimine-nasil-hazirlanilir}} yazısında.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Çanakkale dışından ürünlerimi çekime gönderebilir miyim?",
+              "text": "Evet. Ürünlerinizi stüdyomuza gönderebilirsiniz. Kırılabilir ürünleri sağlam paketleyip kutuya ürün listesini koymanız yeterli. Çekim listesini önceden WhatsApp ya da e-postayla birlikte belirliyoruz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
             }
           ],
           "ratio": "square",
@@ -12246,6 +12366,27 @@
               "title": "Ziyaretçilerimi ve satışlarımı nasıl takip ederim?",
               "text": "Ziyaret kaynaklarını, alışveriş adımlarını ve satışları takip edebilmeniz için ölçümleme araçlarını kuruyoruz.",
               "color": "mint",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Google’da ilk sayfaya ne zaman çıkarım?",
+              "text": "Bunu kimse kesin olarak söyleyemez; sıralamayı Google belirliyor. Yeni bir sitede değişikliklerin etkisi çoğu zaman haftalar ya da aylar içinde görülür, bu süre aranan kelimedeki rekabete göre değişir. Bize düşen, sitenin teknik yapısını, içeriğini ve Google kurulumlarını doğru yapmak.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "“Çanakkale web tasarım” gibi yerel aramalarda nasıl görünürüm?",
+              "text": "Yerel aramalarda iki şey öne çıkıyor: Google İşletme Profili ve şehrinizi doğal biçimde anlatan bir web sitesi. Profili eksiksiz doldurmak, doğru kategoriyi seçmek, yorum toplamak ve adres-telefon bilgisinin her yerde aynı olması önemli. Adımları {{Google Haritalar’da öne çıkmak|/blog/canakkale-isletmeler-google-haritalar}} yazısında anlattık.",
+              "color": "sun",
+              "sticker": "star",
+              "image": ""
+            },
+            {
+              "title": "Instagram hesabım varken web sitesine ihtiyacım var mı?",
+              "text": "Instagram sizi takip edenlere ulaşmakta iyi, ama Google’da arama yapan müşteri çoğu zaman web sitelerini ve harita sonuçlarını görür. Kendi alan adınızda bir site, aramalarda bulunmanızı ve ilk kez gelen müşterinin size güvenmesini kolaylaştırır. Ayrıntılar {{Instagram yeterli mi?|/blog/instagram-yeterli-mi-web-sitesi-sart-mi}} yazısında.",
+              "color": "sun",
               "sticker": "star",
               "image": ""
             }
@@ -13036,7 +13177,7 @@
           "cards": [
             {
               "title": "Bu blogda hangi konularda yazılar var?",
-              "text": "E-ticarete başlarken akla gelen sorular üzerine yazıyoruz. Bir siteyi kurmak için neler gerektiği, fiyatın nelere göre değiştiği, ikas ile Shopify arasında nasıl seçim yapılacağı, ürün fotoğrafında fon seçimi ve Çanakkale’deki işletmelerin Google Haritalar’da nasıl görünür olacağı şimdilik ele aldığımız başlıklar.",
+              "text": "E-ticarete başlarken ve işinizi internete taşırken akla gelen sorular üzerine yazıyoruz. Bir siteyi kurmak için neler gerektiği, fiyatın nelere göre değiştiği, ikas ile Shopify arasında seçim, ürün fotoğrafında fon seçimi ve çekime hazırlık, Çanakkale’de web tasarım firması seçerken sorulacaklar, yöresel ürünleri internetten satmak, Shopier’den kendi siteye geçiş, Instagram ile web sitesinin farkı ve Google Haritalar’da öne çıkmak şimdilik ele aldığımız başlıklar.",
               "color": "sun",
               "sticker": "star",
               "image": "",
@@ -14440,6 +14581,1384 @@
             {
               "title": "Web sitem Google Haritalar sıralamasına katkı sağlar mı?",
               "text": "Sağlayabilir. Sayfa başlıklarında ve metinlerde şehrinizi ve hizmetlerinizi doğal biçimde geçirmek, iletişim sayfasına adres ve harita koymak, işletme bilgilerini yapılandırılmış veriyle siteye işlemek işe yarıyor. Ad, adres ve telefonun her yerde aynı yazılması da güven veriyor.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogcanakkaleweb",
+      "title": "Çanakkale’de web tasarım firması seçerken nelere bakmalı?",
+      "slug": "canakkale-web-tasarim-firmasi-secerken",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Çanakkale’de Web Tasarım Firması Seçerken 8 Soru",
+      "seoDescription": "Çanakkale’de web sitesi yaptıracaklar için görüşmeye gitmeden önce sorulacak 8 soru: canlı işler, alan adı sahipliği, fiyatın kapsamı, Google ve yayın sonrası destek.",
+      "background": "mint",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-04",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Çanakkale’de web tasarım firması seçerken nelere bakmalı?",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "mint"
+        },
+        "stickers": [
+          {
+            "type": "browser",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "Google’a “Çanakkale web tasarım” yazdığınızda karşınıza önce rehber siteleri ve ilan platformları çıkıyor. Oradan birkaç numara alıp aradığınızda herkes “site yaparız” diyor. Asıl zor kısım, kime güveneceğinize karar vermek.\n\nBu yazıyı, web sitesi yaptıranların en sık yaşadığı sorunlardan yola çıkarak hazırladık: yarım kalmış siteler, kimin adına alındığı bilinmeyen alan adları, güncellenemeyen paneller. Görüşmeye gitmeden önce aşağıdaki sorular cebinizde olsun.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "1. Yayındaki işlerini telefonunuzda açın",
+          "text": "Ekran görüntüsüne ya da sunum dosyasına bakmak yetmez. Firmanın yaptığı sitelerin adreslerini isteyin ve telefonunuzdan açın. Sayfa hızlı geliyor mu, menü rahat kullanılıyor mu, ürün fotoğrafları net mi, sepete eklemek kolay mı? Ziyaretçilerinizin büyük kısmı siteye telefondan gelecek, siz de öyle bakın.\n\nMümkünse o siteleri yaptıran işletmelerden biriyle konuşun. Çanakkale küçük bir şehir, bir telefonla öğrenebileceğiniz çok şey var. Bizim yaptıklarımızı [İşler](works) sayfasında canlı adresleriyle bulabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "2. Alan adı ve hesaplar kimin adına açılacak?",
+          "text": "Alan adınız (markaniz.com gibi) sizin adınıza kayıtlı olmalı. Site altyapısının aboneliği, Google hesapları, ödeme ve kargo hesapları da öyle. Tasarımcı adına alınmış bir alan adı, firmayla yollarınız ayrıldığında başınızı ağrıtır; bazen siteyi taşıyamaz hale gelirsiniz.\n\nGörüşmede açıkça sorun: “Bu hesapların sahibi kim olacak, şifreler bende olacak mı?” Cevap net değilse orada durun.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "3. Siteyi sonra kendiniz yönetebilecek misiniz?",
+          "text": "Yeni bir ürün eklemek, fiyat değiştirmek ya da bir kampanya bandı koymak için her seferinde firmayı aramak zorunda kalmamalısınız. Yönetim panelini görüşmede görmek isteyin, ürün eklemenin nasıl yapıldığını gösterin desinler.\n\nKendi yazılımı olan firmalarda dikkatli olun: kod yalnızca onlarda olduğu için ileride başka biriyle çalışmak zorlaşabilir. Yaygın kullanılan bir altyapı, yarın başka biriyle devam etme şansı verir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "4. Fiyatın içinde tam olarak ne var?",
+          "text": "İki teklif arasında büyük fark varsa çoğu zaman kapsam farklıdır. Sayfa sayısı, ürünlerin yüklenmesi, ürün fotoğrafları, metinler, ödeme ve kargo bağlantıları, Google kurulumları tekliflere ayrı ayrı yazılmalı.\n\nBir de her yıl ya da her ay ödenecek giderleri sorun: alan adı yenilemesi, altyapı aboneliği, ödeme kuruluşunun komisyonu. Bunlar kurulum fiyatının içinde değildir ve sonradan sürpriz olmamalı. Bu kalemleri [e-ticaret sitesinin fiyatını belirleyen etkenler](page:blogfiyat) yazısında tek tek anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "5. Site Google’a hazır teslim edilecek mi?",
+          "text": "Bir sitenin aramalarda bulunabilmesi için sayfa başlıklarının ve açıklamalarının yazılmış olması, sitenin hızlı açılması, Google Search Console’a eklenmesi ve işletmenin Google İşletme Profili’yle bağlanması gerekir. Bunları teslimden önce yapan firmayla, “sonra bakarız” diyen firma arasında aylar fark olabilir.\n\nGoogle’da ilk sırayı garanti eden birine denk gelirseniz temkinli olun. Sıralamayı Google belirler, kimse onun adına söz veremez.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "6. Ürün fotoğraflarını kim çekecek?",
+          "text": "En güzel tasarım bile kötü fotoğrafla zayıf görünür. Firma fotoğraf işini de üstleniyorsa çekimler sitenin ölçüsüne ve tarzına göre yapılır. Üstlenmiyorsa fotoğrafları kimin, hangi ölçüde hazırlayacağını baştan konuşun. Çekime nasıl hazırlanacağınızı [ürün çekimi hazırlık rehberimizde](page:blogcekimhazirlik) anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "7. Yüz yüze görüşebiliyor musunuz?",
+          "text": "Yerel bir firmayla çalışmanın en büyük kolaylığı, işler karıştığında masaya oturup konuşabilmek. Ürünlerinizi elden götürebilir, taslakları birlikte inceleyebilirsiniz. Yine de yalnızca yakın diye bir firmayı seçmeyin; yukarıdaki sorulara iyi cevap veren firma, şehrin öbür ucunda da olsa daha doğru seçimdir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "8. Yayından sonra kim bakacak?",
+          "text": "Site yayına çıktığında iş bitmez. Bir güncelleme sonrası bozulan bir sayfa, değişen bir kargo ayarı, yeni bir kampanya… Yayından sonra hangi konularda destek verildiğini, bunun ücretli mi ücretsiz mi olduğunu ve size nasıl ulaşılacağını yazılı olarak isteyin.\n\nBu sekiz soruya net cevap alabildiğiniz bir firma bulduysanız işin yarısı tamam demektir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Bu soruları bize de sorun.",
+          "text": "Ne istediğinizi birkaç adımda anlatın, kapsamı ve fiyatı netleştirelim.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Teklif al",
+            "target": "page:teklifal"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Web tasarım firması seçimi soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Çanakkale’de web sitesi yaptırmak ne kadara mal olur?",
+              "text": "Tek bir rakam vermek doğru olmaz, çünkü fiyatı sayfa sayısı, e-ticaret olup olmadığı, ürün sayısı, fotoğraf ve metin ihtiyacı belirliyor. Teklif alırken kapsamın kalem kalem yazılmasını isteyin ve her yıl ödenecek alan adı, altyapı aboneliği gibi giderleri ayrıca sorun. Kendi işiniz için fiyat görmek isterseniz yukarıdaki Teklif al butonundan birkaç soruyu cevaplamanız yeterli.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Alan adım tasarımcının adına kayıtlıysa ne yapmalıyım?",
+              "text": "Önce alan adının hangi firmadan alındığını ve kimin adına kayıtlı olduğunu öğrenin. Tasarımcıdan alan adını sizin adınıza devretmesini ya da size transfer kodunu vermesini isteyin. Sitenizi taşımadan veya yenilemeden önce bunu halletmek ileride yaşanacak sorunları önler.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Web tasarım firmasıyla yüz yüze görüşmek şart mı?",
+              "text": "Şart değil, görüşmelerin çoğu telefon, WhatsApp ve e-postayla yürüyebilir. Yine de ilk görüşmeyi yüz yüze yapmak, ürünleri birlikte görmek ve taslakları masada konuşmak işleri hızlandırır. Ofisimiz Çanakkale merkezde, gelmeden önce haber vermeniz yeterli.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Google’da ilk sırayı garanti eden firmaya güvenilir mi?",
+              "text": "Temkinli olun. Sıralamayı Google belirler ve bunu kimse önceden garanti edemez. İyi bir firma ne yapacağını anlatır: sayfa başlıkları, site hızı, içerik, Google İşletme Profili ve Search Console. Sonucu bir tarihe bağlayan değil, yaptığını gösteren firmayı tercih edin. Bizim neler yaptığımızı {{Google SEO|/google-seo}} sayfasında anlattık.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogcekimhazirlik",
+      "title": "Ürün çekimine nasıl hazırlanılır? Çanakkale’deki üreticiler için rehber",
+      "slug": "urun-cekimine-nasil-hazirlanilir",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Ürün Çekimine Nasıl Hazırlanılır? Adım Adım Rehber",
+      "seoDescription": "Ürün fotoğrafı çekiminden önce yapılacaklar: ürün seçimi, ambalaj, çekim listesi, fon kararı ve fotoğrafların kullanılacağı yerler. Çanakkale’deki üreticiler için rehber.",
+      "background": "lavender",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-04",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Ürün çekimine nasıl hazırlanılır? Çanakkale’deki üreticiler için rehber",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "mint"
+        },
+        "stickers": [
+          {
+            "type": "camera",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "Ürün çekiminin iyi geçmesi büyük ölçüde stüdyoya girmeden önce yapılanlara bağlı. Kırışık bir etiket, eksik bir renk seçeneği ya da fotoğrafların nerede kullanılacağının belli olmaması, çekim gününü uzatır ve sonucu zayıflatır.\n\nEzine’den peynir üreticisi de olabilirsiniz, Çanakkale merkezde bir seramik atölyesi de. Aşağıdaki adımlar ikisi için de işe yarar.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "1. Fotoğrafların nerede kullanılacağına karar verin",
+          "text": "Web sitesi, Trendyol veya Hepsiburada mağazası, Instagram gönderisi ve hikâyesi, katalog… Her birinin istediği oran ve fon farklı. Pazaryerleri ürün sayfasında sade, açık renkli fon ister; Instagram’da ise daha renkli, hikâyesi olan kareler öne çıkar.\n\nÇekimden önce bir liste yapın: “Her ürün için site için 4 kare, pazaryeri için beyaz fon, Instagram için 1 dikey kare” gibi. Bu liste çekimin iskeletidir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "2. Kusursuz örnekleri ayırın",
+          "text": "Her ürün, renk, boyut ve gramajdan en düzgün görüneni seçin. Kapağı eğri bir kavanoz, köşesi ezik bir kutu ya da etiketi kaymış bir şişe fotoğrafta büyür. Mümkünse her üründen yedek bir adet getirin; çekim sırasında bir şey olursa gün yarıda kalmaz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "3. Ambalajı ve etiketi hazırlayın",
+          "text": "Etiketlerin silinmiş, çizilmiş olmadığından emin olun. Fiyat etiketlerini ve barkod çıkartmalarını önceden sökün. Tekstil ürünlerini ütüleyin, cam şişeleri parmak izi kalmayacak şekilde silin. Rötuşla çok şey düzelir ama baştan temiz gelen ürün hem daha doğal görünür hem daha hızlı teslim edilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "4. Ürün bilgilerini yanınızda getirin",
+          "text": "Ürün adları, seçenekler, içerik ve kullanım bilgisi gibi detayları bir dosyada toplayın. Çekimde hangi fotoğrafın hangi ürüne ait olduğunu takip etmek kolaylaşır; dosyalar teslim edildiğinde siteye ya da pazaryerine yüklemek dakikalar sürer.\n\nYöresel ürünlerde bir de hikâye var: hangi köyde, nasıl üretildiği. Bunu da not edin; kampanya ve konsept karelerinde bu hikâyeyi gösterebiliriz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "5. Fon ve tarzda karar verin",
+          "text": "Sade beyaz fon ürünü olduğu gibi gösterir ve pazaryerleri için gereklidir. Renkli fon ve dekorlu kareler markanın havasını taşır, kampanyada ve sosyal medyada dikkat çeker. Çoğu marka ikisine de ihtiyaç duyar. Hangisinin ne zaman işe yaradığını [beyaz fon mu renkli fon mu](page:blogfon) yazısında anlattık.\n\nBeğendiğiniz birkaç fotoğrafı (kendi sektörünüzden ya da tamamen başka bir markadan) ekran görüntüsü olarak getirmeniz de çok işe yarar.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "6. Ürünleri stüdyoya ulaştırın",
+          "text": "Çanakkale’deyseniz ürünleri stüdyomuza getirebilirsiniz; bazı durumlarda çekimi yerinde yapıyoruz. Biga, Çan, Ezine ya da Gelibolu gibi ilçelerden veya şehir dışından çalışanlar ürünlerini stüdyoya gönderebiliyor. Kırılabilir ürünleri sağlam paketleyin ve gönderdiğiniz ürünlerin bir listesini kutuya koyun.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "7. Çekimden sonra ne olacak?",
+          "text": "Çekilen kareler seçilir, rötuşlanır ve kullanılacakları yere göre boyutlandırılır. Size kullanıma hazır dosyalar teslim edilir. Ürün sayfaları için özel kurgulanmış, dekorlu kareler istiyorsanız [konsept ürün çekimi](page:hkonsept) sayfasına bakabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Çekim listenizi birlikte çıkaralım.",
+          "text": "Ürünlerinizi ve fotoğrafları nerede kullanacağınızı anlatın, gerisini planlayalım.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Ürün çekimi",
+            "target": "page:uruncekimi"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Ürün çekimi hazırlık soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Ürün çekimi için kaç adet ürün getirmeliyim?",
+              "text": "Her ürünün her seçeneğinden (renk, boyut, gramaj) en az bir kusursuz örnek getirin. Mümkünse yedek bir adet de ekleyin. Çekim sırasında kırılan, lekelenen ya da beklenmedik şekilde görünen bir ürün olursa yedekle devam edilir.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Gıda ürünlerinin fotoğrafı çekilirken nelere dikkat edilir?",
+              "text": "Peynir, zeytin ve tatlı gibi ürünlerde tazelik çok önemli; ürünü çekim gününe yakın hazırlayın. Zeytinyağı ve cam şişelerde parlama ve parmak izi en sık sorun, şişeleri temiz getirin. Kesit ya da servis karesi isteniyorsa ürünün içini gösterecek kadar fazla getirmek gerekir.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Çanakkale dışından ürün çekimi yaptırabilir miyim?",
+              "text": "Evet. Ürünlerinizi stüdyomuza gönderebilirsiniz. Görüşmeleri WhatsApp ve e-postayla yürütüyor, çekim listesini önceden birlikte belirliyoruz. Kırılabilir ürünleri sağlam paketleyip kutuya ürün listesini koymanız yeterli.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Ürün fotoğraflarını hangi ölçüde teslim ediyorsunuz?",
+              "text": "Fotoğrafları nerede kullanacağınıza göre boyutlandırıyoruz: web sitesi, pazaryeri ya da sosyal medya. Bu yüzden çekimden önce fotoğrafların kullanılacağı yerleri konuşuyoruz. Ürünlerin pazaryerine yüklenmesini de istiyorsanız {{pazaryeri ürün yükleme|/hizmetler/pazaryeri-urun-yukleme}} sayfasına bakabilirsiniz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogyoresel",
+      "title": "Çanakkale’nin yöresel ürünlerini internetten satmak: üreticiler için yol haritası",
+      "slug": "yoresel-urunleri-internetten-satmak",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Çanakkale’nin Yöresel Ürünlerini İnternetten Satmak",
+      "seoDescription": "Ezine peyniri, zeytinyağı, reçel ve el yapımı ürünleri internetten satmak isteyen Çanakkaleli üreticiler için kanal seçimi, belgeler, kargo ve ürün sunumu rehberi.",
+      "background": "sun",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-04",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Çanakkale’nin yöresel ürünlerini internetten satmak: üreticiler için yol haritası",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "mint"
+        },
+        "stickers": [
+          {
+            "type": "cart",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "Çanakkale’nin ürünleri Türkiye’nin her yerinde aranıyor: Ezine peyniri, Ayvacık ve Küçükkuyu’nun zeytinyağı, Bayramiç’in elması, Gökçeada’nın ve Bozcaada’nın küçük üreticileri, köylerde elde yapılan reçeller, tarhanalar, sabunlar. Bu ürünleri yazın tatile gelen müşteri bir kez tadıyor, sonra kışın İstanbul’dan, Ankara’dan nereden sipariş vereceğini arıyor.\n\nBu yazıda, ürününü internetten satmak isteyen bir üreticinin hangi sırayla ne yapması gerektiğini anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Önce kanal: kendi siteniz mi, pazaryeri mi?",
+          "text": "Trendyol, Hepsiburada gibi pazaryerleri hazır bir müşteri kitlesi sunar ama orada yüzlerce peynir ve zeytinyağı satıcısıyla yan yana durursunuz; müşteri çoğu zaman fiyata bakar. Kendi siteniz ise markanızı ve hikâyenizi anlatabildiğiniz yerdir; tekrar sipariş veren müşteri genellikle oraya gelir.\n\nÇoğu üretici için doğru cevap ikisi birden. Pazaryeri yeni müşteri getirir, kendi siteniz o müşteriyi tutar. İkisini birbirine bağlayıp stok ve siparişleri tek yerden yönetmek de mümkün; bunu [pazaryeri mağaza kurulumu](page:hpzmagaza) sayfasında anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Gıda satıyorsanız belgeler",
+          "text": "Gıda ürünlerini satmak için ürettiğiniz yerin Tarım ve Orman Bakanlığı’nın il müdürlüğünde kayıtlı ya da onaylı olması gerekir. Etiketlerde ürün adı, içerik, net miktar, son tüketim tarihi ve üretici bilgileri yer almalı. Bunun yanında internetten satış yapan her işletme gibi vergi kaydı, ETBİS kaydı ve sitede yasal metinler gerekiyor.\n\nBu yazı genel bilgi veriyor; kendi durumunuz için Çanakkale Tarım ve Orman İl Müdürlüğü’ne ve mali müşavirinize danışın. Satışa başlamak için gerekenlerin tam listesini [e-ticaret sitesi kurmak için ne gerekir](page:blogeticaret) yazısında bulabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Coğrafi işaretli ürünler",
+          "text": "Ezine peyniri gibi coğrafi işaret tescilli ürünler, aramalarda adıyla aranır ve müşteri gözünde güven taşır. Ama bu adı ve coğrafi işaret logosunu kullanmak için tescildeki üretim şartlarına uymanız gerekiyor. Ürününüz bu şartları karşılıyorsa, sitede bunu açıkça göstermek iyi bir avantajdır; karşılamıyorsa adı ürün başlığında kullanmayın.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Hikâyeyi anlatın",
+          "text": "Büyük markalarla fiyatta yarışmak zor, ama onların sizin hikâyeniz yok. Zeytinlerin hangi köyden geldiği, peynirin kaç ay olgunlaştığı, reçelin kimin elinden çıktığı müşteriyi sizden almaya ikna eder. Ürün sayfasında bunları kısa ve sade cümlelerle yazın; “Hakkımızda” sayfasında üretim yerinizin ve ailenizin fotoğraflarına yer verin.\n\nAynı şey Google için de geçerli. “Ezine peyniri satın al” ya da “Ayvacık zeytinyağı” diye arayan biri, ürünün gerçekten oradan geldiğini anlatan bir sayfayı bulmak ister.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Fotoğraf satışın yarısıdır",
+          "text": "Müşteri peyniri koklayamıyor, zeytinyağını tadamıyor; tek gördüğü fotoğraf. Pazaryeri için sade fonlu, ürünü olduğu gibi gösteren kareler; kendi siteniz ve Instagram için sofrada, bahçede, üretim yerinde çekilmiş kareler gerekir. Çekime nasıl hazırlanacağınızı [ürün çekimi hazırlık rehberimizde](page:blogcekimhazirlik) adım adım anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Kargo ve paketleme",
+          "text": "Yöresel ürünlerde en çok sorun kargoda çıkıyor. Peynir ve tereyağı gibi ürünler yaz aylarında soğuk zincir ister; cam şişe ve kavanozlar sağlam paket. Hangi ürünleri hangi aylarda gönderebileceğinizi, kargo ücretini kimin ödeyeceğini ve kırılan ürünlerde ne yapacağınızı baştan belirleyin. Kargo firmanızın hesabı siteye bağlandığında gönderi kodları ve takip bilgisi otomatik oluşur.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Sezonu planlayın",
+          "text": "Zeytinyağının yeni hasadı sonbaharda çıkar, peynirin, reçelin, salçanın da kendi dönemi var. Siteyi yoğun dönemden önce hazır etmek, ilk siparişleri sezonun başında almanızı sağlar. Yaz boyunca dükkânınıza uğrayan müşterilere sitenizin adresini yazan küçük bir kart vermek, kış siparişlerinin en kolay yoludur.\n\nÇanakkale’de yerel üreticilerle çalıştığımız işlerden birkaçını görmek için [Çanakkale İli Damızlık Koyun Keçi Yetiştiricileri Birliği](work:canakkale-koyun-keci-birligi) ve Çanakkale’deki atölyesinde seramik ve soya mumu üreten [The Goatz Creative](work:the-goatz-creative) proje sayfalarına bakabilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Ürününüzü internete birlikte taşıyalım.",
+          "text": "Çekimden yayına kadar tüm işi biz yürütelim, siz üretime odaklanın.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Anahtar teslim e-ticaret",
+            "target": "page:anahtarteslim"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Yöresel ürün satışı soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Evde ürettiğim yöresel ürünleri internetten satabilir miyim?",
+              "text": "Gıda ürünlerinde üretim yerinin Tarım ve Orman İl Müdürlüğü’nde kayıtlı ya da onaylı olması gerekir; bu da çoğu zaman evdeki mutfağın düzenlenmesini ya da ayrı bir üretim yeri kullanmayı gerektirir. Vergi kaydı ve ETBİS kaydı da şart. Kendi durumunuzu il müdürlüğüne ve mali müşavirinize danışarak netleştirin.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Zeytinyağı ve peynir satmak için pazaryeri mi, kendi site mi daha iyi?",
+              "text": "İkisi farklı işe yarıyor. Pazaryeri yeni müşteri bulmayı kolaylaştırır ama orada fiyatla yarışırsınız. Kendi siteniz markanızı ve hikâyenizi anlatır, tekrar sipariş veren müşteriyi tutar. Çoğu üretici ikisini birlikte kullanıp stok ve siparişi tek panelden yönetiyor.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Peynir gibi soğuk zincir isteyen ürünleri kargoyla gönderebilir miyim?",
+              "text": "Gönderilebilir ama paketleme ve mevsim önemli. Sıcak aylarda yalıtımlı kutu ve buz aküsü kullanmak, kargonun hafta sonunu depoda geçirmemesi için gönderim günlerini ayarlamak gerekir. Hangi ürünü hangi koşulda gönderdiğinizi sitede açıkça yazmak, müşteriyle yaşanacak sorunları azaltır.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Yöresel ürünler için web sitesini Çanakkale’de yaptırabilir miyim?",
+              "text": "Evet. Ürünlerinizi stüdyomuzda fotoğraflıyor, e-ticaret sitenizi o fotoğraflara göre kurup yayına alıyoruz. Pazaryeri mağazası ve entegrasyon da istiyorsanız aynı süreçte kuruyoruz. Ayrıntılar {{Hizmetler|/hizmetler}} sayfasında.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "blogshopier",
+      "title": "Shopier’den kendi e-ticaret sitenize ne zaman geçmelisiniz?",
+      "slug": "shopierden-kendi-siteye-gecis",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Shopier’den Kendi E-Ticaret Sitenize Ne Zaman Geçmeli?",
+      "seoDescription": "Instagram ve Shopier ile satış yapan işletmeler için kendi e-ticaret sitesine geçmenin zamanını gösteren işaretler ve geçişte dikkat edilecek adımlar.",
+      "background": "blue",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-04",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Shopier’den kendi e-ticaret sitenize ne zaman geçmelisiniz?",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "blue"
+        },
+        "stickers": [
+          {
+            "type": "rocket",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "Instagram’da ürün paylaşıp Shopier bağlantısıyla ödeme almak, e-ticarete başlamanın en kolay yollarından biri. Çanakkale’de de pek çok butik, atölye ve üretici satışa böyle başlıyor. Bir noktadan sonra ise aynı soru geliyor: “Artık kendi sitemi açmalı mıyım?”\n\nBu yazıda geçiş zamanının geldiğini gösteren işaretleri ve geçerken nelere dikkat etmeniz gerektiğini anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "İşaret 1: Siparişler DM’de kayboluyor",
+          "text": "Mesajlarda fiyat soran, beden soran, “hâlâ var mı” diyen müşterilere tek tek cevap yetiştirmeye çalışıyorsanız, kaçırdığınız satışlar da vardır. Kendi sitenizde müşteri fiyatı, stoğu ve seçenekleri kendisi görür, gece yarısı da sipariş verebilir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "İşaret 2: Google’da bulunamıyorsunuz",
+          "text": "Instagram profiliniz ve ödeme bağlantılarınız aramalarda öne çıkmaz. Biri ürününüzün adını ya da “Çanakkale el yapımı seramik” gibi bir arama yaptığında karşısına çıkmak için kendi alan adınızla yayında olan bir siteniz olmalı. Sitenizle birlikte Google İşletme Profili’nizi de düzenlemek, yerel aramalarda görünmenin en kısa yolu; bunu [Google Haritalar rehberimizde](page:blogharita) anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "İşaret 3: Ürün sayınız arttı",
+          "text": "On ürünü bir Instagram profilinde göstermek kolaydır. Kırk ürün, birkaç kategori ve renk-beden seçenekleri olunca müşteri aradığını bulamaz. Kategoriler, filtreler ve arama kutusu olan bir mağaza bu noktada satışı doğrudan etkiler.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "İşaret 4: Kampanya yapmak istiyorsunuz",
+          "text": "İndirim kuponu, kargo bedava sınırı, ikinci üründe indirim, terk edilmiş sepet hatırlatması… Bunlar kendi sitenizde birkaç ayarla yapılabilen şeyler. Müşterilerinizin e-posta adresleri ve sipariş geçmişi de sizde kalır; bir sonraki kampanyayı kime göndereceğinizi bilirsiniz.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "İşaret 5: Markanız görünmüyor",
+          "text": "Ödeme sayfasında sizin markanızdan çok aracının adı görünüyorsa, müşteri aklında da öyle kalır. Kendi alan adınız, kendi renkleriniz ve kendi ürün fotoğraflarınızla açılan bir site, aynı ürünü daha güvenilir gösterir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Geçerken nelere dikkat etmeli?",
+          "text": "## Ürünleri ve fotoğrafları toparlayın\n\nÜrün adları, açıklamalar, fiyatlar ve seçenekler bir listede toplanmalı. Telefonla çekilmiş, ışığı farklı fotoğraflar sitede dağınık görünür; geçiş, fotoğrafları da tek tip hale getirmek için iyi bir zaman.\n\n## Ödeme ve kargoyu kurun\n\nKendi sitenizde ödeme almak için bir sanal POS ya da ödeme kuruluşu hesabı gerekir. Başvuru sırasında şirket bilgileri ve sitenin yasal metinleri istenir; bu yüzden başvuruyu kurulumla aynı anda başlatmak zaman kazandırır.\n\n## Müşterilerinize haber verin\n\nInstagram biyografinizdeki bağlantıyı, öne çıkan hikâyelerinizi ve paket içine koyduğunuz kartları yeni adresinizle güncelleyin. İlk siparişe özel küçük bir indirim, eski müşterilerin siteye gelmesini kolaylaştırır.\n\nAltyapı seçimi konusunda kararsızsanız [ikas mı Shopify mı](page:blogikas) yazısı işinize yarar. Mevcut mağazanızı taşıma işini bize bırakmak isterseniz [ikas’a site taşıma](page:hikastasima) sayfasına bakın.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "Shopier mağazanızı kendi sitenize taşıyalım.",
+          "text": "Shopier’den kendi e-ticaret sitesine geçen işletmelere %10 indirim uyguluyoruz.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Anahtar teslim e-ticaret",
+            "target": "page:anahtarteslim"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Shopier’den geçiş soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Shopier ile kendi e-ticaret sitesi arasındaki fark nedir?",
+              "text": "Shopier, ödeme bağlantısı ve basit bir mağaza sayfasıyla hızlı satış yapmayı sağlar. Kendi siteniz ise kendi alan adınızda, kendi tasarımınızla açılır; kategoriler, kampanyalar, müşteri hesapları ve Google görünürlüğü üzerinde tam kontrol sizde olur.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Shopier’den kendi siteme geçerken müşterilerimi kaybeder miyim?",
+              "text": "Doğru duyurulursa kaybetmezsiniz. Instagram biyografinizdeki bağlantıyı, öne çıkan hikâyeleri ve paket kartlarını yeni adresle güncelleyin. İlk siparişe özel küçük bir indirim, mevcut müşterilerin siteyi denemesini kolaylaştırır.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Kendi e-ticaret sitemi açmak için şirket kurmam gerekir mi?",
+              "text": "Düzenli satış yapacaksanız bir işletme kaydı, vergi levhası ve fatura düzeni gerekiyor. Kendi sitenizde ödeme almak için sanal POS başvurusunda da bu bilgiler isteniyor. Hangi şirket türünün size uygun olduğunu mali müşavirinize danışın.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Shopier’den geçenlere indirim var mı?",
+              "text": "Evet. Shopier mağazasını kendi sitesine taşıyan işletmelere %10 indirim uyguluyoruz. {{Teklif al|/teklif-al?kampanya=shopier}} adımlarını doldurduğunuzda indirim talebinize eklenir.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        }
+      ]
+    },
+    {
+      "id": "bloginstagram",
+      "title": "Instagram yeterli mi, web sitesi şart mı? Çanakkale’deki küçük işletmeler için",
+      "slug": "instagram-yeterli-mi-web-sitesi-sart-mi",
+      "slugAuto": false,
+      "visible": true,
+      "inNav": false,
+      "navLabel": "",
+      "seoTitle": "Instagram Yeterli mi, Web Sitesi Şart mı? Küçük İşletmeler",
+      "seoDescription": "Kafe, butik, atölye ve pansiyon gibi küçük işletmeler için Instagram ile web sitesinin farkı: Google aramaları, güven, rezervasyon ve sipariş. Çanakkale örnekleriyle.",
+      "background": "mint",
+      "showContact": true,
+      "kind": "blog",
+      "date": "2026-10-04",
+      "hero": {
+        "visible": true,
+        "eyebrow": "Blog",
+        "title": "Instagram yeterli mi, web sitesi şart mı? Çanakkale’deki küçük işletmeler için",
+        "subtitle": "",
+        "titleSize": 6,
+        "ribbon": {
+          "visible": true,
+          "color": "mint"
+        },
+        "stickers": [
+          {
+            "type": "chat",
+            "x": 88,
+            "y": 30,
+            "mx": 80,
+            "my": 14,
+            "size": 90,
+            "rotate": 10,
+            "float": true
+          }
+        ]
+      },
+      "blocks": [
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "",
+          "text": "Çanakkale’de kafesi, butiği, atölyesi ya da pansiyonu olan pek çok işletme sahibinin aklındaki soru aynı: “Instagram’ım var, müşteriler oradan buluyor, site neden gereksin?” Haklı oldukları bir taraf var. Ama Instagram’ın göremediği müşteriler de var.\n\nBu yazıda hangi işletmeye web sitesinin ne kattığını, hangisinin şimdilik Instagram’la idare edebileceğini anlattık.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Instagram’ın iyi olduğu yer",
+          "text": "Instagram sizi zaten takip eden ya da bir arkadaşının paylaşımında gören insanlara ulaşmakta çok iyi. Yeni ürünü, günün menüsünü, atölyedeki bir anı hızlıca göstermek için ondan pratiği yok. Bu yüzden web sitesi Instagram’ın yerine geçmez; ikisi farklı işler yapar.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Instagram’ın göremediği müşteri",
+          "text": "Kordon’da yürürken telefonundan “Çanakkale’de kahvaltı” arayan turist, Ezine peyniri almak için “Çanakkale’den peynir siparişi” yazan İstanbullu, düğün öncesi “Çanakkale’de çiçekçi” arayan biri… Bu insanlar Instagram’da değil, Google’da arıyor. Karşılarına harita sonuçları ve web siteleri çıkıyor.\n\nGoogle İşletme Profili bu aramalarda ilk adım; bunu nasıl düzenleyeceğinizi [Google Haritalar rehberimizde](page:blogharita) anlattık. Profilin “web sitesi” alanına Instagram bağlantısı koymak mümkün ama kendi alan adınızda bir site, Google’a çok daha fazla bilgi verir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Güven meselesi",
+          "text": "İlk kez sipariş verecek ya da rezervasyon yapacak biri, işletmenin gerçek olduğundan emin olmak ister. Adres, telefon, çalışma saatleri, iade koşulları ve yasal bilgilerin yazdığı bir site bu güveni verir. Yalnızca DM üzerinden ödeme istemek, özellikle şehir dışından gelen müşteride tereddüt yaratır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "",
+          "heading": "Hangi işletmeye ne lazım?",
+          "text": "## Kafe ve restoran\n\nMenü, adres, çalışma saatleri ve fotoğraflar. Tek sayfalık, telefonda hızlı açılan bir site çoğu zaman yeter. Önemli olan Google İşletme Profili’yle birlikte çalışması.\n\n## Pansiyon ve butik otel\n\nOdalar, fotoğraflar, konum, iletişim ve sık sorulan sorular. Bozcaada, Gökçeada ya da Assos gibi sezonluk yerlerde misafir ayları öncesinden plan yapar; sizi Google’da bulabilmesi önemli.\n\n## Butik, atölye ve üretici\n\nÜrün satıyorsanız ve siparişler artık DM’de kayboluyorsa e-ticaret sitesinin zamanı gelmiş olabilir. Bunun işaretlerini [Shopier’den kendi sitenize geçiş](page:blogshopier) yazısında anlattık.\n\n## Hizmet işletmeleri\n\nMuhasebe, hukuk, güzellik, eğitim gibi hizmetlerde insanlar karar vermeden önce sizi araştırır. Hizmetlerinizi, ekibinizi ve iletişim bilgilerinizi anlatan bir [kurumsal web sitesi](page:hkurumsal) bu araştırmanın sonunda sizi seçmelerini kolaylaştırır.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "mist",
+          "eyebrow": "",
+          "heading": "Kısacası",
+          "text": "Instagram’ı bırakmayın; ama her şeyi ona emanet etmeyin. Hesabınız kapanabilir, algoritma değişebilir, takipçiniz olmayan biri sizi hiç göremeyebilir. Kendi alan adınızda bir site, sahibi yalnızca sizin olan tek dijital adrestir.",
+          "align": "left",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "",
+          "heading": "İşletmenize uygun olanı konuşalım.",
+          "text": "Tek sayfalık bir siteden e-ticarete kadar ihtiyacınızı birlikte belirleyelim.",
+          "align": "center",
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Hizmetler",
+            "target": "page:hizmetler"
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Instagram ve web sitesi soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Küçük bir işletme için web sitesi gerçekten gerekli mi?",
+              "text": "Her işletme için aynı değil. Müşterileriniz sizi yalnızca Instagram’dan buluyorsa bir süre idare edebilirsiniz. Ama Google’da arama yapan, şehir dışından gelen ya da ilk kez sipariş verecek müşterilere ulaşmak istiyorsanız kendi alan adınızda bir site büyük fark yaratır.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Google İşletme Profili web sitesinin yerini tutar mı?",
+              "text": "Tutmaz ama ikisi birlikte çok iyi çalışır. İşletme Profili sizi haritada ve yerel aramalarda gösterir. Web siteniz ise Google’a ve müşteriye hizmetleriniz, ürünleriniz ve güven bilgileriniz hakkında çok daha fazlasını anlatır. Profilin web sitesi alanına kendi sitenizi eklemek profili de güçlendirir.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Tek sayfalık bir web sitesi yeterli olur mu?",
+              "text": "Kafe, restoran ya da küçük bir hizmet işletmesi için çoğu zaman yeterli: kim olduğunuz, ne yaptığınız, adres, saatler ve iletişim. Ürün satacaksanız ya da birden fazla hizmeti ayrı ayrı anlatmak istiyorsanız daha fazla sayfa gerekir.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Instagram’daki fotoğraflarımı web sitesinde kullanabilir miyim?",
+              "text": "Kullanabilirsiniz ama çoğu zaman yetmez. Instagram için çekilen kareler kare ya da dikey olur, sitede ise yatay geniş görseller ve sade ürün fotoğrafları gerekir. Siteye geçerken ürün ve mekân fotoğraflarını sitenin ölçüsüne göre çekmek, sonucu çok daha toplu gösterir. Ayrıntılar {{Çanakkale ürün çekimi|/urun-cekimi}} sayfasında.",
               "color": "sun",
               "sticker": "star",
               "image": "",
