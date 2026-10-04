@@ -257,13 +257,13 @@
     "line2Sticker": "check",
     "line2Start": "tek",
     "card": {
-      "visible": true,
+      "visible": false,
       "label": "Teklif al",
       "target": "page:teklifal",
       "color": "violet"
     },
     "line2End": "stüdyoda",
-    "line3": "Goatz studio",
+    "line3": "",
     "line3Sticker": "",
     "line1Sticker2": "camera",
     "button": {
