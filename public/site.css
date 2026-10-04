@@ -2171,3 +2171,6 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 }
 .promo.show .promo-badge { animation: promo-float 6.5s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .promo.show .promo-badge { animation: none; } }
+
+/* Çerez şeridi kampanya penceresinin üstünde kalır, ikisi ayrı ayrı kullanılır */
+.ck-bar { z-index: 95; }

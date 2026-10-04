@@ -464,12 +464,10 @@
     check();
   }
 
-  // ---------- Çerez bildirimi: seçim yapılmadıysa altta ince şerit ----------
+  // ---------- Çerez bildirimi: ana sayfa her açıldığında altta ince şerit (Kemal: her ziyarette çıksın; seçim yine kaydedilir) ----------
   const ckBar = document.getElementById('ckBar');
   if (ckBar) {
-    let chosen = null;
-    try { chosen = localStorage.getItem('goatz-cerez'); } catch (e) { /* depolama yoksa her seferinde görünür */ }
-    if (!chosen) {
+    {
       ckBar.hidden = false;
       document.documentElement.classList.add('ck-on');
       setTimeout(() => ckBar.classList.add('show'), 900);
@@ -2108,14 +2106,13 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
 })();
 
-// Ana sayfa kampanya penceresi (Shopier'den taşıyanlara %10). Çerez seçimi yapılmışsa 1,5 sn sonra, yapılmamışsa seçimden 0,6 sn sonra açılır; kapatınca 7 gün görünmez.
+// Ana sayfa kampanya penceresi (Shopier'den taşıyanlara %10). Çerez şeridinden bağımsız: ana sayfa her açıldığında 1,5 sn sonra bir kez açılır.
 (() => {
   const box = document.getElementById('promo');
   if (!box) return;
   const KEY = 'goatz-kampanya-shopier';
-  // Deneme: /?pencere adresi pencereyi her seferinde 1 sn sonra açar, sayaçlara yazmaz
+  // Deneme: /?pencere adresi pencereyi 1 sn sonra açar, sayaçlara yazmaz
   const TEST = /[?&]pencere\b/.test(location.search);
-  if (!TEST) try { const t = Number(localStorage.getItem(KEY) || 0); if (Date.now() - t < 7 * 864e5) return; } catch (e) { /* depolama yoksa her ziyarette görünür */ }
   let last = null, shown = false;
   const ping = (e) => { if (TEST) return; try { const d = JSON.stringify({ e }); if (!(navigator.sendBeacon && navigator.sendBeacon('/api/promo', new Blob([d], { type: 'application/json' })))) fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: d, keepalive: true }); } catch (err) { /* sayaç gitmese de sorun değil */ } };
   const close = () => {
@@ -2144,10 +2141,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       try { sessionStorage.setItem('goatz-kampanya', 'shopier'); localStorage.setItem(KEY, String(Date.now())); } catch (err) { /* adres parametresi yeter */ }
     }
   });
-  const ck = document.getElementById('ckBar');
-  let chosen = true;
-  try { chosen = !!localStorage.getItem('goatz-cerez'); } catch (e) { /* çerez şeridi zaten görünür */ }
   if (TEST) setTimeout(open, 1000);
-  else if (ck && !chosen) ck.addEventListener('click', (e) => { if (e.target.closest('[data-ck]')) setTimeout(open, 600); });
   else setTimeout(open, 1500);
 })();
