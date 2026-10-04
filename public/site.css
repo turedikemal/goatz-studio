@@ -2194,3 +2194,9 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 .hero .hero-hook { position: relative; z-index: 2; margin: 0 auto clamp(14px, 2vw, 26px); }
 .hero .hero-hook .show-hook-big { font-size: clamp(18px, 2.5vw, 34px); line-height: 1.2; }
 @media (max-width: 600px) { .hero .hero-hook .show-hook-big { font-size: 4vw; } .hero .hero-hook mark { white-space: nowrap; } }
+
+/* Alt sayfa slayt zemini (pageBg): konuya göre soyut çizgiler, dikkat dağıtmaz */
+.page-bg { position: absolute; width: clamp(150px, 32vw, 470px); height: auto; aspect-ratio: 560 / 460; z-index: 0; pointer-events: none; color: #000; opacity: .1; }
+.pb-tl { top: 64px; left: 0; } .pb-tr { top: 64px; right: 0; } .pb-bl { bottom: 0; left: 0; } .pb-br { bottom: 0; right: 0; }
+html[data-theme="night"] .page-bg { color: #fff; opacity: .14; }
+@media (max-width: 700px) { .page-bg { opacity: .07; } }
