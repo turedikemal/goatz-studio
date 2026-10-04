@@ -28,3 +28,4 @@ build/
 
 # Müşteri mesajları (kişisel veri)
 data/messages.json
+/data/promo.json

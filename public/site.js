@@ -2115,7 +2115,9 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const KEY = 'goatz-kampanya-shopier';
   try { const t = Number(localStorage.getItem(KEY) || 0); if (Date.now() - t < 7 * 864e5) return; } catch (e) { /* depolama yoksa her ziyarette görünür */ }
   let last = null, shown = false;
+  const ping = (e) => { try { const d = JSON.stringify({ e }); if (!(navigator.sendBeacon && navigator.sendBeacon('/api/promo', new Blob([d], { type: 'application/json' })))) fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: d, keepalive: true }); } catch (err) { /* sayaç gitmese de sorun değil */ } };
   const close = () => {
+    ping('close');
     box.classList.remove('show');
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* kayıt yoksa sorun değil */ }
     setTimeout(() => { box.hidden = true; }, 350);
@@ -2124,7 +2126,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
   const open = () => {
-    if (shown) return; shown = true;
+    if (shown) return; shown = true; ping('view');
     last = document.activeElement;
     box.hidden = false;
     requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('show')));
@@ -2134,6 +2136,9 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   box.addEventListener('click', (e) => {
     if (e.target.closest('[data-promo-x]')) close();
     else if (e.target.closest('.promo-go')) {
+      ping('click');
+      // 30 gün: bu kişi teklif, sepet ya da iletişim formundan yazarsa kampanyadan geldiği bilinsin
+      document.cookie = 'goatz_kampanya=shopier; max-age=2592000; path=/; samesite=lax';
       try { sessionStorage.setItem('goatz-kampanya', 'shopier'); localStorage.setItem(KEY, String(Date.now())); } catch (err) { /* adres parametresi yeter */ }
     }
   });

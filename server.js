@@ -7,6 +7,7 @@ const { render } = require('./lib/render');
 const store = require('./lib/content');
 const { resolvePages, resolveWorks, pagePath } = require('./lib/schema');
 const db = require('./lib/db');
+const promo = require('./lib/promo');
 const salesRoutes = require('./lib/sales-routes');
 
 const PORT = Number(process.env.PORT) || 5173;
@@ -98,6 +99,7 @@ function notFound(res, req) {
 const WORK_MOVED = { 'canakkale-ili-damizlik-koyun-keci-yetist': 'canakkale-koyun-keci-birligi' };
 const contactHits = new Map();
 const siteHits = new Map();
+const promoHits = new Map();
 const sitecheck = require('./lib/sitecheck');
 const json = (res, status, data, extra) => send(res, status, JSON.stringify(data), 'application/json; charset=utf-8', extra);
 
@@ -145,7 +147,15 @@ async function api(req, res, url) {
     if (hits.length >= 5) return json(res, 429, { error: 'Çok fazla mesaj gönderdin. Biraz sonra tekrar dene.' });
     const body = await readJson(req, 16 * 1024 * 1024);
     if (body && body.website) return json(res, 200, { ok: true }); // bot tuzağı
-    const saved = messages.add(body || {});
+    // Kampanya penceresinden gelen (çerez ya da sihirbaz satırı): mesaja işaret, panele ve kampanya kaydına
+    const fromPromo = cookies(req).goatz_kampanya === 'shopier' || /Kampanya: Shopier/.test(String((body && body.message) || ''));
+    if (fromPromo && body && typeof body.message === 'string' && !/Kampanya: Shopier/.test(body.message)) body.message += '\n\nKampanya: Shopier’den taşıma, %10 indirim';
+    const saved = messages.add({ ...(body || {}), campaign: fromPromo ? 'shopier' : '' });
+    if (fromPromo) {
+      const m = saved.message;
+      const kind = /^TEKLİF TALEBİ/.test(m) ? 'Teklif (tamamlandı)' : /^YARIM KALAN/.test(m) ? 'Teklif (yarım kaldı)' : /^FİYAT TALEBİ/.test(m) ? 'Hizmet sepeti' : 'İletişim mesajı';
+      promo.record('lead', { name: saved.name, email: saved.email, phone: saved.phone, kind }).catch((e) => console.warn('Kampanya kaydı yazılamadı:', e.message));
+    }
     const b64 = (x, max) => (typeof x === 'string' && x.length <= max && /^[A-Za-z0-9+/=]+$/.test(x) ? x : null);
     const files = { jpeg: b64(body.screenshot, 9e6), pdf: b64(body.pdf, 9e6) };
     const str = (x, n) => (typeof x === 'string' ? x.slice(0, n) : '');
@@ -154,6 +164,18 @@ async function api(req, res, url) {
     const report = r ? { route: str(r.route, 60), package: str(r.package, 80), scope: arr(r.scope, 40).map((x) => str(x, 300)), services: arr(r.services, 40).map((x) => str(x, 200)), answers: arr(r.answers, 40).filter(Array.isArray).map((x) => [str(x[0], 200), str(x[1], 300)]), note: str(r.note, 2000), marketing: !!r.marketing } : null;
     mailer.notify(saved, store.load().contact.email, files, report).then((r) => { if (!r.sent) console.warn('Mesaj e-postası gönderilemedi:', r.reason); }).catch((e) => console.warn('Mesaj e-postası hatası:', e.message));
     hits.push(now); contactHits.set(ip, hits);
+    return json(res, 200, { ok: true });
+  }
+
+  // Kampanya penceresi olayları (kişisel veri yok, yalnız sayaç)
+  if (route === 'POST /api/promo') {
+    const now = Date.now();
+    const hits = (promoHits.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
+    if (hits.length >= 20) return json(res, 429, { ok: false });
+    hits.push(now); promoHits.set(ip, hits);
+    const body = await readJson(req, 500).catch(() => null);
+    const e = body && body.e;
+    if (['view', 'click', 'close'].includes(e)) promo.record(e).catch((err) => console.warn('Kampanya olayı yazılamadı:', err.message));
     return json(res, 200, { ok: true });
   }
 
@@ -192,6 +214,7 @@ async function api(req, res, url) {
   if (!authed(req)) return json(res, 401, { error: 'Giriş yapmalısın.' });
 
   if (route === 'GET /api/messages') return json(res, 200, messages.list());
+  if (route === 'GET /api/promo') return json(res, 200, await promo.summary());
   if (route === 'POST /api/messages/reply') {
     const { id, text } = await readJson(req);
     const m = messages.get(String(id || ''));

@@ -555,6 +555,7 @@
       intro: 'Kullanıcıları ve rollerini yönetin.',
     },
     { id: 'mesajlar', label: 'Gelen Mesajlar', special: 'messages', anchor: '#top', intro: 'İletişim formundan gelen mesajlar. Yanıt için e-posta adresine tıkla.' },
+    { id: 'kampanya', label: 'Kampanya (Shopier %10)', special: 'promo', anchor: '#top', intro: 'Ana sayfadaki Shopier %10 penceresi: kaç kişi gördü, kaçı Teklif al’a tıkladı, kimler form gönderdi. Pencereden Teklif al’a tıklayan kişi 30 gün içinde hangi formdan yazarsa yazsın burada görünür.' },
     { id: 'media', label: 'Görsel Kütüphanesi', special: 'media', anchor: '#top', intro: 'Yüklediğin tüm görseller. Buradan yeni görsel yükleyebilir ya da kullanmadıklarını silebilirsin.' },
     { id: 'backups', label: 'Yedekler', special: 'backups', anchor: '#top', intro: 'Her kaydetmede eski içerik otomatik yedeklenir (son 30 kayıt). Bir yedeği yükleyip kaydedersen site o hale döner.' },
   ];
@@ -1139,6 +1140,7 @@
     else if (page.special === 'media') parts.push(mediaPage());
     else if (page.special === 'backups') parts.push(backupsPage());
     else if (page.special === 'messages') parts.push(messagesPage());
+    else if (page.special === 'promo') parts.push(promoPage());
     else if (page.special === 'themes') parts.push(themesEditor());
     else if (page.special === 'definitions') parts.push(commerce.definitions(page));
     else if (page.special === 'products') parts.push(commerce.products());
@@ -1579,7 +1581,7 @@
         h('div', { class: 'muted', style: 'font-size:12px' }, `Yanıtın · ${new Date(r.date).toLocaleString('tr-TR')}`),
         h('div', { style: 'white-space:pre-wrap' }, r.text)));
       return h('div', { class: 'card', style: 'margin-bottom:12px' },
-        h('p', { style: 'margin:0 0 6px;font-weight:700' }, `${m.read ? '' : '● '}${m.name}  ·  ${new Date(m.date).toLocaleString('tr-TR')}`),
+        h('p', { style: 'margin:0 0 6px;font-weight:700' }, `${m.read ? '' : '● '}${m.name}  ·  ${new Date(m.date).toLocaleString('tr-TR')}`, m.campaign === 'shopier' ? h('span', { style: 'margin-left:8px;padding:2px 8px;border:1.5px solid #000;border-radius:999px;background:#ffd731;color:#000;font-size:12px' }, 'Shopier %10') : ''),
         h('p', { class: 'muted', style: 'margin:0 0 8px' }, [m.email, m.phone].filter(Boolean).join('  ·  ')),
         h('p', { style: 'margin:0 0 10px;white-space:pre-wrap' }, m.message),
         ...replies,
@@ -1591,6 +1593,28 @@
       setUnread(list.filter((m) => !m.read).length);
     }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
     load();
+    return box;
+  }
+  function promoPage() {
+    const box = h('div', {}, h('p', { class: 'muted' }, 'Yükleniyor…'));
+    request('/api/promo').then((d) => {
+      const c = d.counts;
+      const rate = (a, b) => (b ? ` (%${Math.round((a / b) * 100)})` : '');
+      const stat = (label, k, base) => h('div', { class: 'card', style: 'flex:1 1 150px;margin:0' },
+        h('p', { class: 'muted', style: 'margin:0 0 4px;font-size:13px' }, label),
+        h('p', { style: 'margin:0;font-size:28px;font-weight:800' }, String(c[k].all)),
+        h('p', { class: 'muted', style: 'margin:4px 0 0;font-size:12px' }, `Son 7 gün: ${c[k].week}${base ? rate(c[k].all, c[base].all) : ''}`));
+      const row = (l) => h('tr', {}, h('td', {}, new Date(l.ts).toLocaleString('tr-TR')), h('td', {}, l.name || ''), h('td', {}, h('a', { href: `mailto:${l.email}` }, l.email || '')), h('td', {}, l.phone || ''), h('td', {}, l.kind || ''));
+      const td = 'padding:6px 10px;border-bottom:1px solid var(--line,#ddd);text-align:left';
+      box.replaceChildren(
+        h('div', { style: 'display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px' }, stat('Pencereyi gören', 'view'), stat('Teklif al’a tıklayan', 'click', 'view'), stat('Kapatan', 'close', 'view'), stat('Form gönderen', 'lead', 'click')),
+        h('h3', { style: 'margin:8px 0' }, 'Kampanyadan gelen talepler'),
+        d.leads.length ? h('div', { style: 'overflow:auto' }, h('table', { style: 'width:100%;border-collapse:collapse;font-size:14px' },
+          h('thead', {}, h('tr', {}, ...['Tarih', 'Ad', 'E-posta', 'Telefon', 'Nereden'].map((t) => h('th', { style: td }, t)))),
+          h('tbody', {}, ...d.leads.map(row)))) : h('p', { class: 'muted' }, 'Henüz kampanyadan gelen talep yok.'),
+        h('p', { class: 'muted', style: 'margin-top:12px;font-size:12px' }, 'Bu kişilerin mesajları "Gelen Mesajlar"da da "Shopier %10" etiketiyle durur; e-posta konusu [Shopier %10] ile başlar.'));
+      box.querySelectorAll('td').forEach((x) => { x.style.cssText = td; });
+    }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
     return box;
   }
   function backupsPage() {
