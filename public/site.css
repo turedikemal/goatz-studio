@@ -2209,7 +2209,9 @@ html[data-theme="night"] .page-hero .page-ribbon .shine { opacity: .12; }
 .show-hook .show-hook-sub { line-height: 1.4; } .show-hook .hook-hl { margin: 0 .04em 0 0; vertical-align: .04em; }
 
 /* Süreç sayfası slayt zemini (roadBg): konuya göre soyut çizgiler, dikkat dağıtmaz */
-.page-bg { position: absolute; width: clamp(150px, 32vw, 470px); height: auto; aspect-ratio: 560 / 460; z-index: 0; pointer-events: none; color: #000; opacity: .1; }
+.page-bg { position: absolute; width: clamp(150px, 32vw, 470px); height: auto; aspect-ratio: 560 / 460; z-index: 0; pointer-events: none; color: #000; opacity: .16; }
 .pb-tl { top: 64px; left: 0; } .pb-tr { top: 64px; right: 0; } .pb-bl { bottom: 0; left: 0; } .pb-br { bottom: 0; right: 0; }
-html[data-theme="night"] .page-bg { color: #fff; opacity: .14; }
-@media (max-width: 700px) { .page-bg { opacity: .07; } }
+html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
+@media (max-width: 700px) { .page-bg { opacity: .12; } html[data-theme="night"] .page-bg { opacity: .13; } }
+/* Süreç başlığı dar ekranda taşmasın (uzun kelime) */
+@media (max-width: 600px) { .page-hero.pg-road h1 { font-size: min(48px, 10.4vw) !important; letter-spacing: -.04em; } }
