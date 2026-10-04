@@ -1775,7 +1775,9 @@
             "title": "Kategori Yıldızı şu an kullanıma açık mı?",
             "text": "Henüz değil, uygulama geliştirme aşamasında. Kategori sayfalarında çok sayıda ürünü yan yana gösteren mağazalar düşünülerek hazırlanıyor. Ne zaman açılacağına dair kesin bir tarih vermiyoruz; ilgileniyorsanız bize yazın, son durumu açıkça paylaşalım."
           }
-        ]
+        ],
+        "aboutHeading": "Kategori Yıldızı hakkında",
+        "about": "Diyelim ki Ezine’de peynir ve tereyağı satan bir mağazanız var. Kategori sayfanızda yirmiden fazla ürün yan yana duruyor. Tam yağlı inek peyniri en çok satanınız, ama listenin ortalarında, keçi peyniriyle kaşar çeşitlerinin arasında kaybolmuş. Siteye ilk kez giren biri hangisini alacağını bilmiyor. Birkaç ürüne bakıyor, fiyatları karşılaştırıyor, sonra sekmeyi kapatıyor.\n\nBu sahne çoğu mağaza sahibine tanıdık gelir. Kategori Yıldızı’nı bu yüzden geliştiriyoruz.\n\nFikir basit. Mağazada zaten çok satan ürünler var ve bu bilgi siparişlerin içinde saklı duruyor. Ziyaretçi bunu göremiyor. Uygulama o bilgiyi ürün kartının üstüne küçük bir rozet olarak taşıyor. Rozet kategori sayfasında da ürünün kendi sayfasında da görünebiliyor; listede gözüne çarpan ürüne tıklayan kişi aynı işareti orada da buluyor ve arada bir kopukluk yaşamıyor.\n\nKararsız müşteri genelde başkalarının ne aldığına bakar. Dükkânda bir satış görevlisi olsa “en çok bunu götürüyorlar” derdi. İnternette o cümleyi kuracak kimse yok. Rozet onun yerini tutuyor.\n\nBurada mağaza sahibinin dikkat etmesi gereken bir şey var: rozet ne kadar seyrekse o kadar işe yarar. Her ürüne yıldız koyarsanız hiçbiri öne çıkmaz, ziyaretçi de bir süre sonra rozetleri görmez olur. Biz işareti gerçekten çok satan birkaç ürüne ayırmayı öneriyoruz. Bir kategoride az sayıda işaretli ürün, yarısı işaretli bir listeden çok daha fazla şey söyler.\n\nİkinci nokta görünüm. Ürün fotoğrafının köşesine yapıştırılmış, renkleri mağazayla kavga eden bir etiket ucuz durur. Uygulamada hazır ve premium şablonlar var; dolgulu, çizgili, kesik çizgili, gradyanlı ya da koyu zeminli bir rozet seçip yazısını, rengini ve fotoğraf üzerindeki yerini ayarlayabiliyorsunuz. Masaüstü ve mobil görünüm ayrı ayrı düzenleniyor. Bu ayrım boşuna değil, çünkü telefonda ürün kartı küçülüyor ve geniş ekranda rahat duran bir rozet küçük ekranda ürünün yarısını kapatabiliyor. Değişiklikleri yayına almadan önce canlı önizlemede hem kategori hem ürün sayfası için görebiliyorsunuz.\n\nRozetin altındaki fotoğraf da en az rozet kadar konuşur. Kötü ışıkta, dağınık bir arka planda çekilmiş bir ürünün üstüne ne koyarsanız koyun dikkat çekmez. Liste boyunca aynı hizada duracak temiz kareler için [ürün fotoğrafı çekimi](page:uruncekimi) tarafında yaptıklarımıza bakabilirsiniz. Ziyaretçi rozeti görüp ürüne tıkladığında karşısında onu ikna edecek bir metin de olmalı; bu iş için [ürün açıklaması yazımı](page:hurunaciklama) ayrı bir hizmet olarak duruyor.\n\nKategori Yıldızı ürünün çok sattığını söylüyor. Neden çok sattığını ise müşteriler anlatır. O yüzden gerçek müşteri sözlerini mağazanın farklı alanlarına taşıyan [Yorum Merkezi](work:yorum-merkezi) ile birlikte düşünülebilir. Biri ürünü işaretliyor, öteki işaretin arkasını dolduruyor.\n\nBir de şunu açıkça söyleyelim. Rozet zayıf bir kategori sayfasını kurtarmaz. Ürünler karışık sıralanmışsa, filtreler çalışmıyorsa, telefonda kartlar birbirine giriyorsa önce oradan başlamak gerekir. Bu durumdaki mağazalar için [web sitesi yenileme](page:hyenileme) daha doğru bir ilk adım olabilir. Rozet ondan sonra gelir.\n\nUygulama şu an geliştirme aşamasında. Kullandığı bağlantı yöntemlerini ve teknik ayrıntıları paylaşmıyoruz; mağaza tarafında ise kurulumun ve günlük yönetimin basit kalmasını hedefliyoruz. Çanakkale’de ya da başka bir şehirde, kategori sayfası kalabalık bir mağazanız varsa altyapınızı ve ürün yapınızı anlatın, sizin için anlamlı olup olmayacağına birlikte bakalım."
       },
       {
         "title": "Yorum Merkezi",
@@ -1870,7 +1872,9 @@
             "title": "Yorum Merkezi mağazamın tasarımına uyar mı?",
             "text": "Uymasını istiyoruz. Kart boyutu, yazı tipi, renkler, hizalama ve animasyonlar marka kimliğine göre ayarlanabiliyor. Akış, grid ya da açılır kart gibi yerleşimler var; masaüstü ve mobil için farklı davranış seçilebiliyor. Uygulama şu an geliştirme aşamasında."
           }
-        ]
+        ],
+        "aboutHeading": "Yorumlar vitrine çıkınca",
+        "about": "Çoğu mağazada en iyi satış metni, ürün sayfasının en altında, kimsenin inmediği bir yerde duruyor. Bir müşterinin yazdığı “Annem için aldım, kokusu tam köydeki gibi” cümlesi, sizin yazacağınız her açıklamadan daha inandırıcı. Ama ziyaretçi o cümleye ulaşmak için sayfayı sonuna kadar kaydırmak zorunda. Çoğu oraya varmadan kararını veriyor.\n\nYorum Merkezi’ni geliştirirken çıkış noktamız buydu. Yorumu saklandığı yerden çıkarıp satışın konuşulduğu yere taşımak.\n\n## Üç ayrı yerde biriken sözler\n\nDiyelim ki Ayvacık’ta zeytinyağı üreten bir aile işletmesisiniz. Kendi sitenizden satıyorsunuz, bir pazaryeri mağazanız var, yazın Assos’a gelip zeytinliğinize uğrayan misafirler de Google İşletme Profilinize yorum bırakıyor. Yıllar içinde güzel sözler birikmiş, ama dağınık. Sitenize giren kişi bunların çoğunu hiç görmüyor.\n\nUygulama birden fazla yorum kaynağıyla çalışacak biçimde kuruluyor. Mağaza yorumları vitrine çıkabiliyor, Google yorumları kullanılabiliyor, pazaryeri yorumları için de bir entegrasyon altyapısı var. Hangi kaynağın sizin mağazanıza nasıl bağlanacağı kullandığınız platforma göre değişiyor; bunu işin başında konuşmak gerekiyor. Google’daki yorumlar ayrıca haritadaki görünürlüğünüzü de ilgilendiriyor, bununla ilgili düşüncelerimizi [Google Haritalar’da öne çıkmak](page:blogharita) üzerine yazdığımız yazıda topladık. Pazaryerinde henüz mağazanız yoksa sıralama bellidir: önce [pazaryeri mağaza kurulumu](page:hpzmagaza), yorumlar sonra birikir.\n\nToplamak işin yarısı. Kaynağı belli olmayan bir yorum duvarı, ziyaretçide güvenden çok şüphe uyandırabilir. Bu yüzden her kartta yorumun nereden geldiği, tarihi ve hangi ürüne yazıldığı gösterilebiliyor. Müşteri adının hangi biçimde yazılacağını da siz seçiyorsunuz. Müşterinin adının sitede nasıl görüneceğine mağaza karar verebiliyor; küçük ama gerekli bir ayar bu.\n\n## Mağazaya uyan kartlar\n\nHazır yorum eklentilerinin çoğu mağazaya sonradan yapıştırılmış gibi durur. Başka bir yazı tipi, başka bir köşe yuvarlaklığı, alakasız bir renk. Ziyaretçi bunu tek tek fark etmese bile sayfa dağınık görünür. Yorum Merkezi’nde kart boyutu, yazı tipi, renkler, hizalama ve animasyonlar markaya göre ayarlanabiliyor. Logonuz ve renk düzeniniz henüz oturmadıysa bu ayarların dayanacağı bir zemin de yok demektir; o durumda sırada önce [kurumsal kimlik tasarımı](page:hkimlik) var.\n\nFotoğraflı yorumlar ayrıca öne çıkarılabiliyor. Fotoğrafı olmayan yorumlarda ürün görseli devreye girdiği için akışın içinde boş, gri kutular kalmıyor. Yerleşimi de siz seçiyorsunuz: akış, grid ya da açılır detay kartları. Telefonda grid sıkışık duruyorsa mobilde başka bir düzen kullanılabiliyor.\n\nMağaza sahiplerine önerimiz, yorumları tek bir sayfaya yığmak yerine yerine göre dağıtmak. Ana sayfada genel memnuniyeti anlatan birkaç kart. Ürün sayfasında yalnız o ürüne yazılanlar. Alışverişin son adımlarına yakın bir yerde paketleme ve teslimatla ilgili sözler. Her yorumun cevap verdiği soru farklı, modüler yapı da bunu mümkün kılıyor. Satış hareketini başka bir açıdan gösteren [Canlı Sipariş Haritası](work:canli-siparis-haritasi) aynı düşünceden çıktı: biri müşterinin ne dediğini, öteki siparişin nereye gittiğini gösteriyor.\n\nSon bir not. Uygulama yorum yazmıyor, yorumu güzelleştirmiyor; gösterdiği şey müşterinin gerçekten yazdığı. Olumsuz bir yoruma cevap vermek, sorunu çözmek yine mağazanın işi. Yorum Merkezi şu an geliştirme aşamasında. Çanakkale’den ya da başka bir yerden satış yapan, yorumları dağınık duran bir mağazanız varsa durumunuzu birlikte değerlendirebiliriz."
       },
       {
         "title": "Canlı Sipariş Haritası",
@@ -1960,7 +1964,9 @@
             "title": "Canlı Sipariş Haritası’nı mağazama ekleyebilir miyim?",
             "text": "Uygulama e-ticaret mağazasıyla entegre çalışacak, farklı mağazaların tasarımına uyarlanabilecek biçimde geliştiriliyor ve farklı kullanım planlarına göre bir özellik yapısı var. Şu an yayına hazırlanıyor. Kesin tarih vermiyoruz; ilgileniyorsanız bize yazın."
           }
-        ]
+        ],
+        "aboutHeading": "Haritanın arkasındaki fikir",
+        "about": "Sipariş haritası, bir mağazanın hangi şehirlere ürün gönderdiğini ziyaretçiye harita üzerinde gösteren bir alan. Canlı Sipariş Haritası bunu interaktif bir Türkiye haritasıyla yapıyor ve şu an yayına hazırlanıyor.\n\nBu uygulamayı tasarlarken aklımızda tek bir soru vardı: büyük olmayan bir mağaza nasıl güven verir?\n\n## Rakam yerine şehir\n\n“Binlerce mutlu müşteri” cümlesi artık kimseyi etkilemiyor, çünkü herkes yazıyor. Oysa Çanakkale’de seramik yapan küçük bir atölyenin sitesine giren biri, haritada Van’ın, Trabzon’un, Muğla’nın işaretlendiğini görürse bambaşka bir şey anlar. Bu ürünler gerçekten yola çıkıyor. Kimse ona söylemiyor, kendisi görüyor.\n\nUygulamada bir şehre sipariş ulaştığında o bölge haritada etkinleşiyor. Son sipariş ayrı bir alanda gösterilebiliyor, böylece sayfa durağan bir katalog gibi değil, o gün de çalışan bir dükkân gibi görünüyor. Mağazanın kendi konumu da haritaya konabiliyor. Siparişin çıktığı yerle ulaştığı şehir arasında bir bağ kuruluyor.\n\nBir uyarımız var. Harita sipariş verisiyle besleniyor ve veri azsa harita da boş görünür. Yeni açılmış, birkaç siparişi olan bir mağaza için büyük ölçüde boş bir Türkiye haritası tersine çalışabilir. Bu yüzden uygulamayı her mağazaya hemen önermiyoruz. Sipariş akışı oturmuş, farklı şehirlere düzenli gönderim yapan mağazalarda çok daha anlamlı.\n\n## Haritadan nereye gidilir\n\nŞehirler yalnız bir gösterge değil, tıklanabiliyor. Sipariş olan ve henüz olmayan şehirler için ayrı deneyimler kurgulanabiliyor; harita ziyaretçiyi ürünlere, kategorilere ya da bir kampanya alanına yönlendirebiliyor. Sipariş yoğunluğuna göre şehirlerin görünümü değişiyor, belli seviyelere ulaşan şehirler rozet alıyor. Küçük bir oyun gibi. İzmirli bir müşterinin “bizim şehir ne durumda” diye bakması bile sayfada biraz daha oyalanması demek.\n\nKurulumda mağaza sahibinin kafa yorması gereken asıl şey bu yönlendirmeler. Siparişi olmayan bir şehre tıklayan kişiye ne göstereceksiniz? İlk siparişe özel bir kampanya mı, o bölgeye uygun bir ürün mü? Bunun cevabı uygulamada değil, sizin satış planınızda. Harita yalnızca o planı ziyaretçinin önüne koyuyor.\n\nSatışı işaretlemenin başka bir yolu da [Kategori Yıldızı](work:kategori-yildizi) ile çok satan ürünlere rozet eklemek. Harita satışın coğrafyasını anlatıyor, rozet ise satışın hangi üründe toplandığını.\n\n## Kurmadan önce\n\nHaritanın doğru görünmesi siparişlerin düzgün kaydedilmesine bağlı. Teslimat adresleri, kargo bilgileri ve sipariş durumları karışık tutuluyorsa haritaya da yanlış bilgi düşer. Ödeme ve kargo ayarlarınız dağınıksa önce [ödeme ve kargo entegrasyonu](page:hodemekargo) tarafını toparlamak gerekebilir. Siparişlerin hangi kanaldan, hangi şehirden geldiğini rakamlarla siz de görmek istiyorsanız [ziyaretçi ve satış ölçümlemesi](page:holcumleme) kurulumu haritanın ziyaretçiye anlattığını size tablo olarak verir.\n\nUygulama mağazayla entegre çalışacak, farklı markaların tasarımına uyarlanabilecek şekilde geliştiriliyor. Masaüstünde ve telefonda çalışıyor, farklı kullanım planlarına göre ayrılmış bir özellik yapısı var. Teknik bağlantı yöntemlerini kamuya açık paylaşmıyoruz. Henüz satış yapan bir siteniz yoksa bu harita ilk adım değil; önce mağazanın kendisi kurulur, siparişler gelmeye başlar, harita sonra anlam kazanır."
       },
       {
         "title": "Web Sitesi Danışmanlığı",
@@ -3034,6 +3040,28 @@
               "target": ""
             }
           ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Açıklama",
+          "heading": "Bize yazmadan önce",
+          "text": "Diyelim ki Gelibolu’da küçük bir pansiyon işletiyorsunuz ve odalarınızın fotoğraflarını yenilemek, belki rezervasyon alan bir sayfa açmak istiyorsunuz. Bize ne yazacağınızı düşünüp mesajı ertelemeyin. Aklınızdaki şeyi iki cümleyle anlatmanız yeterli, gerisini konuşarak açıyoruz.\n\n## Hangi kanal ne için\n\nDört yoldan ulaşabilirsiniz ve hepsi doğrudan bize geliyor. WhatsApp kısa ve hızlı yazışmalar için rahat; bir fotoğraf ya da örnek bir site bağlantısı göndermek orada kolay. E-postayı daha uzun anlatımlar, dosyalar ya da birden fazla kişinin görmesi gereken konular için öneriyoruz, adresimiz hello@thegoatzstudio.com. Instagram’dan da mesaj atabilirsiniz. Bu sayfadaki form ise bilgisayar başındayken en kolay yol olabilir. Bir mesajı birkaç kanaldan birden göndermenize gerek yok. Aynı soru hem WhatsApp’tan hem e-postadan gelince ikisini eşleştirmek bizim için de karışık oluyor; birini seçin, konuşma orada devam etsin.\n\nMesajınızda bir ad ve size ulaşabileceğimiz bir telefon ya da e-posta olsun. Form bunları zaten istiyor. WhatsApp’ta numaranız görünüyor ama adınızı ve işletmenizin adını yazarsanız kiminle konuştuğumuzu karıştırmayız. Bir kurum adına yazıyorsanız karar verecek kişinin kim olduğunu belirtmeniz de işi kolaylaştırır.\n\nYazarken birkaç bilgi işimizi hızlandırır. Ne sattığınız ya da ne iş yaptığınız, varsa mevcut sitenizin adresi, ürünlerinizin yaklaşık sayısı ve aklınızdaki işin ne olduğu. Fiyat görmek istiyorsanız iki seçenek var: [teklif sihirbazında](page:teklifal) birkaç soruyu cevaplayabilir ya da [hizmet listesinden](page:hizmetler) istediğiniz kalemleri sepete ekleyip gönderebilirsiniz. İkisi de bize aynı yerden ulaşıyor.\n\n## İlk görüşmede ne konuşuruz\n\nİlk konuşma bir satış görüşmesi değil. Ürünlerinizi, hedefinizi, fotoğrafları ya da siteyi nerede kullanacağınızı soruyoruz. Sizin de bize sormak istedikleriniz olacaktır, örneğin işi kimin yaptığı, taslağı ne zaman göreceğiniz, yayından sonra kimin ilgileneceği. Bu soruları çekinmeden sorun. Bazen konuşurken büyük bir işe gerek olmadığı ortaya çıkıyor. Mevcut sitenizde birkaç fotoğrafın değişmesi ya da bir ayarın düzeltilmesi yetebiliyor. Öyleyse bunu açıkça söylüyoruz, ihtiyacınız olmayan bir işi pakete eklemiyoruz. Görüşmenin sonunda ne yapılacağını kâğıda dökmeye hazır oluruz; adımların nasıl ilerlediğini [çalışma sürecimiz](page:nasilcalisiyoruz) sayfasında ayrıca okuyabilirsiniz.\n\nHazırlık yapmanız gerekmiyor. Elinizde bir ürün listesi, birkaç eski fotoğraf ya da beğendiğiniz bir site varsa getirin, yoksa da sorun değil. Mevcut bir siteniz varsa yönetim paneline girebiliyor musunuz, alan adı kimin adına kayıtlı, bunları öğrenip gelmeniz iyi olur. Bilmiyorsanız birlikte buluruz.\n\n## Stüdyoya gelmek\n\nOfisimiz Çanakkale merkezde, Fevzipaşa Mahallesi Fatih Sokak No: 39, İş Yeri: 4 adresinde. Gelmeden önce kısa bir mesaj atmanızı rica ediyoruz. Çekimin ortasına denk gelirseniz sizi bekletmek istemeyiz. Yol tarifini haritadaki butondan alabilirsiniz.\n\nÜrün fotoğrafı için geliyorsanız ürünlerinizi yanınızda getirebilirsiniz. Taşınması zor ya da yerinde görünmesi gereken ürünler için çekimi sizin mekânınızda yapmayı da konuşabiliriz, [ürün fotoğrafçılığı](page:uruncekimi) sayfasında iki seçeneği de anlattık.\n\nBir işletmenin bulunması yalnız sitesine bağlı değil. Haritalarda adınız arandığında doğru adres ve telefon çıkıyor mu, buna da bakmakta fayda var. Bu konuyu [Haritalar’da öne çıkma yazımızda](page:blogharita) yerel işletmeler için anlattık.",
+          "align": "left",
+          "collapse": true,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
           "ratio": "square",
           "images": []
         }
@@ -11052,6 +11080,28 @@
               "caption": ""
             }
           ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Süreç",
+          "heading": "Sürecin ayrıntıları",
+          "text": "En sık gördüğümüz hata, işe renk ve logo konuşarak başlamak. İşletme sahibi beğendiği bir siteyi açıp “buna benzesin” der, iş ilerledikçe asıl sorular çıkar ortaya: ürünler kaç gruba ayrılıyor, fiyatları kim güncelleyecek, siparişi kim paketleyecek. Yukarıdaki adımları bu yüzden belli bir sırayla yürütüyoruz. Burada o sıranın arkasındaki mantığı biraz daha açmak istedik.\n\n## Konuşmanın asıl amacı\n\nTanışma görüşmesi bizim için bir sunum değil. Amacımız sizin işinizi anlamak, çünkü planın sağlam olup olmayacağı buna bağlı. Diyelim ki Ayvacık’ta zeytinyağı üreten bir aile bize geldi. Şişe, teneke ve hediye kutusu satıyorlar; siparişlerin bir kısmı köydeki dükkândan, bir kısmı telefonla geliyor. Böyle bir masada ilk konu sitenin rengi olmaz. Hangi ürün daha çok gidiyor, müşteri telefonda en çok neyi soruyor, kargoyu kim hazırlıyor, önce bunları dinleriz.\n\nSorduğumuz bazı sorular size ilgisiz gelebilir. Ürünlerin ağırlığı, stoğun nerede tutulduğu, iade gelince ne yaptığınız gibi. Hepsi kurulacak düzeni doğrudan etkiliyor. Cevabını bilmediğiniz bir şey çıkarsa dert etmeyin, not alıp devam ediyoruz.\n\nGörüşmeyi stüdyoda yapacaksak ürünlerinizden birkaçını yanınızda getirin. Ürünü elde tutmak, fotoğrafta neyin öne çıkacağını konuşmayı çok kolaylaştırıyor. Bir kavanozun etiketi mi, bir seramik kasenin sırrı mı, bir sabunun dokusu mu, bunu çoğu zaman masada görüyoruz.\n\n## Plan neden yazılı olur\n\nGörüşmeden sonra konuştuklarımızı yazıya döküyoruz. Yazılı plan iki tarafı da korur. Siz neyin yapılacağını ve neyin kapsam dışında kaldığını baştan görürsünüz, biz de sonradan “bunu da konuşmuştuk” tartışmasına girmeyiz. Ücret de bu kapsama göre çıkıyor.\n\nÇekim ile siteyi aynı stüdyoda yapmanın asıl kazancı bu aşamada görülüyor. Fotoğraflar sitenin ölçüsüne ve kadrajına göre çekiliyor, sayfa düzeni de o fotoğraflara göre kuruluyor. Fotoğrafçıyla tasarımcının birbirini beklediği, dosyaların e-postalar arasında kaybolduğu bir takvim yerine tek plan üzerinden ilerliyoruz. Siz de aynı derdi iki ayrı kişiye anlatmak zorunda kalmıyorsunuz.\n\nPlanda hangi sayfaların olacağı, hangi ürünlerin fotoğraflanacağı, metinleri kimin yazacağı ve hangi işin hangisini beklediği yer alır. Fotoğraflar gelmeden ürün sayfasının son halini tasarlamak zor, bu yüzden çekimi öne alıyoruz. Yazı tarafında elinizde hazır bir şey yoksa bunu da plana ekliyoruz; [site ve ürün metinlerini](page:kmetin) sizinle konuşarak hazırlayabiliyoruz.\n\nKurulumdan önce sizden birkaç şey isteriz: ürün listesi, şirket bilgileri, ödeme ve kargo tercihleriniz, varsa logo ve kurumsal renkler. Hepsinin aynı gün hazır olması gerekmiyor. Eksikleri birlikte listeleyip hangi sırayla tamamlanacağına karar veriyoruz.\n\n## Onay ne demek\n\nÜretim sırasında onay kelimesini sık duyacaksınız. Bunu formalite olsun diye istemiyoruz. Taslağı gördüğünüzde size yabancı gelen, içinize sinmeyen ne varsa söylemenizi bekleriz. Kurulum başladıktan sonra temel düzeni değiştirmek iki tarafın emeğini de boşa harcar, oysa aynı değişiklik taslak aşamasında birkaç dokunuşla yapılır.\n\nGeri bildirim verirken teknik bir dil kullanmanız gerekmiyor. “Bu sayfa bana kalabalık geldi” ya da “müşterim önce fiyata değil gramaja bakar” gibi cümleler bizim için yeterince açık. “Biraz daha canlı olsun” türünden yorumları ise bir örnekle desteklemenizi rica ediyoruz. Beğendiğiniz bir site, bir ambalaj, hatta bir dükkân vitrini olabilir. Neyi kastettiğinizi görünce çok daha az deneme yapıyoruz.\n\nÇekim tarafında da mantık aynı. Fon seçimi çoğunlukla burada netleşir: ürün sayfası için sade bir zemin mi, kampanya için renkli bir arka plan mı. İkisinin farkını [beyaz ve renkli fon karşılaştırmasında](page:blogfon) ayrıca anlattık. Ezine peynirini paketinde mi, kesilmiş halde tabakta mı göstereceğiniz de bir karardır ve bunu müşterinizin neye baktığına göre veriyoruz.\n\nSiteyi denerken bir müşteri gibi davranıyoruz. Ürünü arıyor, sepete atıyor, ödeme adımına kadar gidiyoruz. Aynısını sizin de yapmanızı isteriz. Telefonunuzdan, bir de mümkünse ailenizden birinin telefonundan. Kendi ürününüzü en iyi siz tanırsınız ve bizim gözümüzden kaçan bir eksik size hemen batar.\n\n## Yayından hemen önce\n\nSon aşamada birkaç iş daha kalır. Mesafeli satış sözleşmesi, iade ve cayma koşulları, KVKK ve çerez metinlerinin taslaklarını sitede yerine koyuyoruz. Bu metinler işletmenize özel bilgiler içerdiği için yayından önce bir hukukçuya ya da mali müşavirinize kontrol ettirmenizi öneriyoruz.\n\nAlan adı da genelde bu aşamada gündeme gelir. Adresiniz başka bir firmada kayıtlıysa ya da eski bir sitenin altında duruyorsa, bağlantıyı kurabilmek için gerekli erişimleri sizden isteriz. Bu bilgilerin kimde olduğunu baştan bilmek son gün çıkabilecek sürprizleri azaltır. Bilmiyorsanız eski sitenizi kuran kişiye ya da faturayı kesen firmaya sormak genelde yetiyor.\n\nMağazanın yönetimi size geçer. Ürün eklemek, stok güncellemek, siparişleri takip etmek için kimseye bağlı kalmazsınız. Kurduğumuz [anahtar teslim e-ticaret mağazalarında](page:anahtarteslim) anahtarın sizde olması tam olarak bunu anlatıyor.\n\nPlan yaptık diye her şeyin çizgiden hiç çıkmadan ilerleyeceğini söyleyemeyiz. Sonradan yeni bir ürün grubu eklenir, kargo firması değişir, bir fotoğraf beklediğinizden farklı çıkar. Böyle durumlarda planı yeniden açıp neyin değiştiğini konuşuyoruz. Değişiklik işi büyütüyorsa bunu sessizce eklemiyor, size söylüyoruz.\n\nYalnızca fotoğrafa ihtiyacınız varsa adımlar kısalır. Tanışma ve plan yine olur, tasarımın yerini [stüdyoda ürün çekimi](page:uruncekimi), rötuş ve boyutlandırma alır. Çanakkale’de dükkânı olan bir esnaf da, Biga’dan ürününü getiren bir üretici de aynı sırayla ilerler. Hangi yoldan başlayacağınızdan emin değilseniz [teklif sihirbazındaki kısa soruları](page:teklifal) cevaplamak işe başlamak için iyi bir yer.",
+          "align": "left",
+          "collapse": true,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
         }
       ]
     },
@@ -11523,6 +11573,83 @@
               "caption": ""
             }
           ]
+        },
+        {
+          "type": "faq",
+          "visible": true,
+          "background": "sun",
+          "eyebrow": "SSS",
+          "heading": "Teklif soruları",
+          "text": "",
+          "align": "left",
+          "collapse": false,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "Tüm sorular ↗",
+            "target": "page:sss"
+          },
+          "columns": 3,
+          "cards": [
+            {
+              "title": "Teklif sihirbazı bana kesin bir fiyat veriyor mu?",
+              "text": "Hayır. Sihirbaz cevaplarınızı bir proje özetine dönüştürüyor ve size en yakın paketi gösteriyor. Fiyatı, özetinizi okuyup yapılacak işi sizinle birlikte netleştirdikten sonra veriyoruz. Böylece ne için ödeme yaptığınızı baştan bilirsiniz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Bana uygun paket neye göre seçiliyor?",
+              "text": "Ürün sayınız, ürün türünüz, toptan satış ihtiyacınız, paneli kullanacak kişi sayısı ve yurt dışı planınız gibi cevaplara göre. Starter, Core, Signature ve Advanced arasında size en yakın olanı ortada, komşu paketleri arkasında görürsünüz.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Web sitem yoksa sihirbazda hangi seçenekler açık?",
+              "text": "Yeni e-ticaret sitesi ya da özel proje seçebilirsiniz. Platform geçişi ve yalnızca hizmet seçenekleri mevcut bir site gerektirdiği için kapalı görünür. Siteniz varsa bu kez yeni site seçeneği kapanır, geçiş ve hizmet açılır.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            },
+            {
+              "title": "Sihirbazı yarıda bırakırsam ne olur?",
+              "text": "İlk adımda verdiğiniz iletişim bilgileri onay verdiğiniz kapsamda bize ulaşır, böylece isterseniz size dönebiliriz. Proje özetiniz ise siz teklif talebini gönder düğmesine basana kadar bize iletilmez.",
+              "color": "sun",
+              "sticker": "star",
+              "image": "",
+              "target": ""
+            }
+          ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Açıklama",
+          "heading": "Sihirbaz nasıl işler",
+          "text": "Teklif sihirbazı bir fiyat hesaplayıcısı değil. Ekranda bir rakam çıkmıyor ve çıkmasını da istemedik. İki işletme aynı ürün sayısına sahip olsa bile biri pazaryerinde satıyor, öteki yurt dışına açılmak istiyor; ikisine aynı rakamı söylemek doğru olmazdı. Sihirbazın işi, ihtiyacınızı bizim anlayacağımız bir özete dönüştürmek.\n\nÖnce kim olduğunuzu soruyoruz: adınız, e-postanız ve telefonunuz. Ardından mevcut bir siteniz olup olmadığını. Siteniz varsa adresini yazıyorsunuz ve sihirbaz o adresin gerçekten açılıp açılmadığına bakıyor. Bu küçük kontrol, ilk görüşmede yanlış bir adres üzerine konuşmamızı önlüyor.\n\nSonra nasıl bir çalışma düşündüğünüzü seçiyorsunuz. Yeni bir mağaza, platform geçişi, özel bir proje ya da yalnızca bir hizmet. Cevabınıza göre bazı seçenekler kapanıyor. Siteniz yoksa taşıma ve yalnızca hizmet seçenekleri kapanıyor, mevcut bir siteyle gelenlerde ise sıfırdan kurulum seçeneği kapalı duruyor.\n\nSoruların çoğu tek dokunuşla cevaplanıyor. Tek seçimli sorularda cevabı işaretlediğiniz anda sonraki ekrana geçiyorsunuz. Teknik bilgiye ihtiyacınız yok; emin olmadığınız sorularda çoğu zaman “Emin değilim” ya da “Bilmiyorum” gibi bir seçenek de bulunuyor. Bunu işaretlemek sizi geri bırakmaz, o konuyu görüşmede birlikte netleştiriyoruz.\n\nYeni mağaza ve geçiş yolunda sorular satacağınız ürünlerin sayısına ve türüne, toptan ya da bayi satışına, yönetim panelini kaç kişinin kullanacağına, ürün bilgileri ile fotoğraflarınızın hazır olup olmadığına ve yurt dışı planınıza dair. Geçişte hangi altyapıdan geldiğinizi de soruyoruz. Elinizde yayında olan bir site varsa panele erişiminiz, alan adının kimin adına kayıtlı olduğu, sitenin şu an çalışıp çalışmadığı ve ölçümleme kurulumları da sorulara ekleniyor. Taşıma tarafında neye dikkat ettiğimizi [ikas’a geçiş hizmetinde](page:hikastasima) ayrıca anlattık.\n\nYalnızca hizmet ya da özel proje seçerseniz önce hizmetleri işaretliyorsunuz, sonra her biri için birkaç kısa soru geliyor. Ürün fotoğrafında hangi ürünlerin, kaç ürünün ve nerede çekileceği; Google tarafında hangi araçların kurulu olduğu gibi. Çanakkale’deki stüdyoya ürün getirmek ya da çekimi kendi yerinizde istemek de bu sorular arasında.\n\n## Sonuç ekranı\n\nSonunda bir proje özeti görüyorsunuz. Mağaza kurulumu ya da geçiş seçtiyseniz cevaplarınıza en yakın paket ortada duruyor: Starter, Core, Signature ya da Advanced. Daha sade ve daha geniş paketler de arkasında görünüyor, böylece neyi kazanıp neyi bıraktığınızı yan yana okuyabiliyorsunuz. Paketler ikas altyapısının imkânlarına göre kurgulandı; altyapı seçiminde kararsızsanız [ikas ile Shopify karşılaştırmasını](page:blogikas) okuyabilirsiniz.\n\nPaketin altında seçtiğiniz hizmetleri ve işinize yarayabilecek ek önerileri görüyorsunuz. İstemediğinizi çıkarıp ilginizi çekeni ekleyebiliyorsunuz. Cevaplarınız da bu ekranda kısa etiketler halinde duruyor. Yanlış işaretlediğiniz bir şey gözünüze çarparsa geri dönüp değiştirebilirsiniz. Özetiniz, siz teklif talebini gönderene kadar bize iletilmiyor.\n\nGönderdikten sonra özeti okuyup size dönüyoruz. Kesin rakamı, yapılacak işi birlikte netleştirdikten sonra veriyoruz. Ücretin hangi kalemlere göre şekillendiğini önceden görmek isterseniz [maliyeti belirleyen etkenleri](page:blogfiyat) ayrı bir yazıda topladık. Sihirbaz size uymuyorsa ve ne istediğinizi zaten biliyorsanız [hizmetleri tek tek seçip](page:hizmetler) fiyat isteyebilirsiniz.",
+          "align": "left",
+          "collapse": true,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
         }
       ]
     },
@@ -12054,6 +12181,28 @@
               "caption": ""
             }
           ]
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Açıklama",
+          "heading": "Soruların ötesi",
+          "text": "Bu sayfadaki sorular, bize gerçekten en çok sorulanlar. Ama sorulmayan sorular da var ve bazıları cevaplananlardan daha önemli. Onları buraya, kısa bir not olarak bırakıyoruz.\n\nİlki sahiplik. Alan adı kimin üzerine kayıtlı, mağazanın yönetim paneline kim giriyor, fotoğrafların dosyaları nerede duruyor? İşe başlarken bunu pek kimse sormuyor, sonra bir gün ajans değişince ya da sözleşme bitince akla geliyor. Bizim kurduğumuz mağazalarda yönetim panelinin anahtarı sizde durur. Yine de çalıştığınız herkese bu soruyu sormanızı öneririz.\n\nİkincisi hazırlık. Pek çok kişi elinde düzgün fotoğraf ya da metin olmadığı için başlamayı erteliyor. Oysa sırayı doğru kurmak, eksikleri baştan toplamaktan daha işe yarar. Bir adımın neden ötekini beklediğini [çalışma sürecimizi anlattığımız sayfada](page:nasilcalisiyoruz) adım adım yazdık.\n\nÜçüncüsü fiyat. Burada ücretle ilgili somut bir rakam göremezsiniz, çünkü iki mağaza birbirine benzemiyor. Bozcaada’da şarap satan bir bağ ile Lapseki’de kiraz kurusu satan bir üreticinin ürün sayısı, kargo düzeni ve fotoğraf ihtiyacı aynı değil. Ücreti hangi kalemlerin büyüttüğünü merak ediyorsanız [mağaza maliyetini etkileyen etkenleri](page:blogfiyat) bir yazıda topladık.\n\nDördüncüsü geçiş. Halihazırda başka bir altyapıda mağazası olanlar, taşınırken eski bağlantıların ne olacağını sorar. Ürün sayfalarınız Google’da yer edinmişse adresler değişince o emeğin kaybolmaması gerekir. [Mevcut mağazayı ikas’a taşıma](page:hikastasima) işinde bu yüzden ilk baktığımız şeylerden biri eski adreslerin yeni sayfalara yönlendirilmesi oluyor.\n\nSık karşılaştığımız bir kararsızlık da sıra. Önce fotoğraf mı çekilsin, önce site mi kurulsun? Elinizde hiç ürün görseli yoksa genelde fotoğrafı öne alıyoruz, çünkü sayfaların düzeni o görsellere göre şekilleniyor. Görselleriniz hazır ve kullanılabilir durumdaysa bu adım atlanabilir.\n\nMarka tarafı da sık atlanıyor. Logonuz yoksa ya da yıllar önce aceleyle yapılmışsa, mağazanın görünümü de onunla sınırlı kalır. Logo, renk ve yazı tipi seçimini kurulumdan önce ele almak, sonradan her şeyi yeniden boyamaktan çok daha kolay.\n\nPazaryeri mi, kendi mağazam mı sorusu da çok geliyor. İkisi birbirinin rakibi değil. Pazaryeri sizi hazır bir kalabalığın önüne çıkarır ama kuralları ve komisyonu oranın sahibi belirler. Kendi siteniz müşteriyle doğrudan bir ilişki kurar, markanızı istediğiniz gibi anlatmanıza izin verir. Pek çok işletme ikisini birlikte yürütüyor ve bu durumda ürün ile stok bilgisinin iki tarafta tutarlı kalması ayrıca düşünülmesi gereken bir iş oluyor.\n\nBir de görünürlük var. Site yayına çıkınca ziyaretçinin kendiliğinden geleceğini düşünenler çok. Gelmez. Arama motorunun sitenizi tanıması, ürünlerin listelenmesi, kimin nereden geldiğinin ölçülmesi ayrı bir iş. Çanakkale’de yerel müşteriye satan bir işletme için Haritalar kaydı bile tek başına fark edilir bir adım olabiliyor. Bu tarafı [Google ve SEO çalışmalarımızda](page:googleseo) ele alıyoruz.\n\nAradığınız cevap bu sayfada yoksa sorunuzu olduğu gibi bize yazın. Sık gelen soruları bu listeye ekliyoruz, yani sizin sorunuz bir sonraki okurun işine yarayabilir. Fiyat konusunda daha net bir resim isterseniz [teklif sihirbazı](page:teklifal) ihtiyacınızı birkaç soruyla toparlıyor.",
+          "align": "left",
+          "collapse": true,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
+          "ratio": "square",
+          "images": []
         }
       ]
     },
@@ -12760,6 +12909,28 @@
               "target": ""
             }
           ],
+          "ratio": "square",
+          "images": []
+        },
+        {
+          "type": "text",
+          "visible": true,
+          "background": "paper",
+          "eyebrow": "Açıklama",
+          "heading": "Neden yazıyoruz",
+          "text": "Buradaki yazıların neredeyse hepsi bir sorudan doğdu. Bir müşteri telefonda “ikas mı daha iyi, Shopify mı?” diye soruyor, bir başkası beyaz fonla renkli fon arasında kararsız kalıyor, Assos’ta butik otel işleten biri neden Haritalar’da rakibinin gerisinde kaldığını soruyor. Aynı soruyu birkaç kez cevapladıktan sonra yazıya dökmeye karar verdik. Hem sizin işinize yarıyor hem de biz her seferinde baştan anlatmıyoruz.\n\n## Hangi konuları seçiyoruz\n\nÖlçütümüz basit. Bir konu yazılmaya değerse, birisi o konuda bir karar vermek üzeredir. Bir mağaza açmak için neler gerektiği, fiyatın neye göre değiştiği, hangi altyapının kime uyduğu, ürün fotoğrafında hangi fonun nerede kullanıldığı. Hepsi para ve zaman harcamadan önce sorulan sorular.\n\nYazıları kısa tutmuyoruz ve bunun bir sebebi var. Bir karar verirken insanın aklına yan sorular da geliyor. Mağaza açmayı düşünen biri yalnızca altyapıyı değil, ödemeyi, kargoyu, yasal metinleri de merak ediyor. Bunları ayrı ayrı aramak yerine tek bir yerde bulmak işinizi kolaylaştırıyor.\n\nYazarken aklımızda tuttuğumuz okur, işini büyütmek isteyen küçük bir işletme sahibi. Biga’da bir tekstil atölyesi, Ezine’de bir mandıra, kent merkezinde bir kafe. Teknik terimleri bu yüzden ya hiç kullanmıyor ya da ilk geçtiği yerde açıklıyoruz.\n\nPopüler başlıkların peşinden koşmuyoruz. Her hafta yazı çıkarmak gibi bir hedefimiz de yok. Kendi işimizde karşılaştığımız, doğruluğundan emin olduğumuz konuları yazıyoruz. Hukuk, vergi ya da platform ücretleri gibi uzmanlık isteyen ya da sık değişen yerlerde genel çerçeveyi veriyor, güncel bilgiyi kaynağından kontrol etmenizi öneriyoruz.\n\nYazıların bir kısmı Çanakkale’ye özel. Bozcaada’da, Gökçeada’da ya da ÇOMÜ çevresinde iş yapan biri için yerel arama, İstanbul’daki bir markadan farklı işliyor. Bunu görmezden gelen genel rehberler yerine, buradaki işletmelerin gerçekten karşılaştığı durumlardan örnek vermeye çalışıyoruz.\n\n## Yazılar ve işimiz\n\nHer yazının arkasında her gün yaptığımız bir iş var. Altyapı seçimini anlatırken [ikas iş ortağı olarak kurduğumuz mağazalardan](page:ikas) gelen gözlemleri kullanıyoruz. Fon yazısının arkasında stüdyoda çektiğimiz ürünler duruyor. Haritalar yazısı ise [arama motoru ve ölçümleme işlerimizde](page:kseo) sık karşılaştığımız eksiklerden çıktı.\n\nHer yazıyı bir satış konuşmasına çevirmemeye de dikkat ediyoruz. Kendi başınıza yapabileceğiniz bir işi bize yaptırmanızı önermek doğru gelmiyor. İşletme profilinizi kendiniz düzenleyebiliyorsanız düzenleyin, takıldığınız yer olursa sorun.\n\nOkuyup kendiniz uygulamak isterseniz yazılar bunun için yeterince açık olmaya çalışıyor. Bir noktada işi devretmek isterseniz o da mümkün. Bir mağazayı baştan sona kurmamızı istiyorsanız [anahtar teslim kurulum](page:anahtarteslim) sayfası işin nasıl yürüdüğünü anlatıyor. Fotoğraf tarafında başlamak isteyenler için [ürün çekimi hizmetimiz](page:uruncekimi) ayrı bir sayfada.\n\nBu tür yazıları müşterilerimizin siteleri için de hazırlıyoruz. Kendi siteniz için müşterilerinizin sorularına cevap veren yazılar istiyorsanız [blog yazısı hizmetimize](page:hblogyazi) göz atabilirsiniz. Okumak istediğiniz bir konu varsa bize yazın, sıradaki yazı onunla başlayabilir.",
+          "align": "left",
+          "collapse": true,
+          "image": "",
+          "imageSide": "left",
+          "imageColor": "mint",
+          "imageSticker": "star",
+          "button": {
+            "label": "",
+            "target": ""
+          },
+          "columns": 3,
+          "cards": [],
           "ratio": "square",
           "images": []
         }

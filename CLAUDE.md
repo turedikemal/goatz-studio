@@ -77,6 +77,7 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 
 ## Ortak yapı (2026-10-03 gece, kullanıcı: "her sayfada birlik olsun")
 - **Ana sayfa:** Neden biz'in altında SSS (`faq`) ve uzun açıklama (`about` bölümü, `S.about`).
+- **Kural:** blog yazıları hariç her sayfada (ana sayfa, hizmet/kategori, İşler + tüm projeler, Süreç, SSS, iletişim, blog, teklif al) en altta SSS + "Devamını oku" açıklama var. Yeni sayfada ikisini de ekle.
 - **SSS:** SSS sayfası dışındaki tüm SSS'ler aynı: sarı zemin (`sun`), üst etiket "SSS", başlık "<konu> soruları", "Tüm sorular ↗" butonu, sayfanın en alttaki uzun açıklamasının hemen önünde. Kodla üretilenler `faqStd()` (render.js). Ana sayfa SSS bölümü `c.faq` (bölüm `faq`, Neden biz'in arkasında), İşler listesi `works.faq`, proje sayfaları `works.items[].faq` (panelde alanları var). Blog yazıları, blog, iletişim de SSS'li.
 - **Başlıklar:** `.blk-faq` ve `.blk-more` h2'leri her sayfada harf aralığı 0, satır `.95em + 2mm`. Uzun açıklamalar hep beyaz zemin.
 - **Kelime vurgusu:** her sayfada paragraf/liste kelimeleri üzerine gelince sarı, yazı siyah (site.js sonu; kartlar, formlar, araçlar hariç). Eski sayfaya özel `HW_PAGES` boş. Yazı içi bağlantılar da üzerine gelince sarı.
