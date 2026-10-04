@@ -2108,7 +2108,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
 })();
 
-// Ana sayfa kampanya penceresi (Shopier'den taşıyanlara %10). Çerez seçimi yapılmışsa 5 sn sonra, yapılmamışsa seçimden 1,5 sn sonra açılır; kapatınca 7 gün görünmez.
+// Ana sayfa kampanya penceresi (Shopier'den taşıyanlara %10). Çerez seçimi yapılmışsa 1,5 sn sonra, yapılmamışsa seçimden 0,6 sn sonra açılır; kapatınca 7 gün görünmez.
 (() => {
   const box = document.getElementById('promo');
   if (!box) return;
@@ -2148,6 +2148,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   let chosen = true;
   try { chosen = !!localStorage.getItem('goatz-cerez'); } catch (e) { /* çerez şeridi zaten görünür */ }
   if (TEST) setTimeout(open, 1000);
-  else if (ck && !chosen) ck.addEventListener('click', (e) => { if (e.target.closest('[data-ck]')) setTimeout(open, 1500); });
-  else setTimeout(open, 5000);
+  else if (ck && !chosen) ck.addEventListener('click', (e) => { if (e.target.closest('[data-ck]')) setTimeout(open, 600); });
+  else setTimeout(open, 1500);
 })();

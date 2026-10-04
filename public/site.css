@@ -2160,3 +2160,14 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 .promo-no { background: #fff; }
 @media (max-width: 420px) { .promo-badge { width: 76px; height: 76px; top: -20px; left: -8px; } .promo-badge b { font-size: 25px; } .promo-eye { margin-left: 52px; margin-right: 36px; font-size: 11.5px; letter-spacing: 0; white-space: nowrap; padding: 5px 10px; } .promo-t { font-size: 26px; } }
 @media (prefers-reduced-motion: reduce) { .promo-card, .promo-bg { transition: none; } }
+
+/* %10 rozeti uzay boşluğunda süzülür: yavaş, düzensiz salınım */
+@keyframes promo-float {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(3px, -7px) rotate(7deg); }
+  45% { transform: translate(-4px, -3px) rotate(-5deg); }
+  70% { transform: translate(2px, 5px) rotate(9deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+.promo.show .promo-badge { animation: promo-float 6.5s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .promo.show .promo-badge { animation: none; } }
