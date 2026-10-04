@@ -642,7 +642,7 @@
           const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: c.name.trim(), email: c.email.trim(), phone: c.phone.trim(), website: c.website, message: leadMessage(true), report: reportData(), screenshot, pdf }) });
           const j = await res.json().catch(() => ({}));
           if (!res.ok) throw new Error(j.error || 'Gönderilemedi, lütfen tekrar deneyin.');
-          state.sent = true; sendBtn.textContent = 'Gönderildi ✓'; status.textContent = 'Teşekkürler! Teklif talebiniz bize ulaştı, en kısa sürede dönüş yapacağız.'; status.classList.add('ok');
+          state.sent = true; if (window.goatzEvent) window.goatzEvent('generate_lead', { method: 'teklif_sihirbazi' }); sendBtn.textContent = 'Gönderildi ✓'; status.textContent = 'Teşekkürler! Teklif talebiniz bize ulaştı, en kısa sürede dönüş yapacağız.'; status.classList.add('ok');
         } catch (err) { sendBtn.disabled = false; status.textContent = err.message; status.classList.add('err'); }
       });
     }

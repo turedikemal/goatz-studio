@@ -475,6 +475,7 @@
         const b = e.target.closest('[data-ck]');
         if (!b) return;
         try { localStorage.setItem('goatz-cerez', b.dataset.ck); } catch (err) { /* kayıt yoksa sorun değil */ }
+        if (window.goatzGA) window.goatzGA(b.dataset.ck === 'kabul');
         ckBar.classList.remove('show');
         document.documentElement.classList.remove('ck-on');
         setTimeout(() => { ckBar.hidden = true; }, 450);
@@ -496,6 +497,7 @@
         const j = await r.json().catch(() => ({}));
         if (!r.ok) throw new Error(j.error || 'Gönderilemedi. Lütfen tekrar dene.');
         form.reset();
+        if (window.goatzEvent) window.goatzEvent('generate_lead', { method: 'iletisim_formu' });
         status.classList.add('ok');
         status.textContent = 'Mesajın bize ulaştı. En kısa sürede dönüş yapacağız.';
       } catch (err) {
@@ -2120,7 +2122,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   // Deneme: /?pencere adresi pencereyi 1 sn sonra açar, sayaçlara yazmaz
   const TEST = /[?&]pencere\b/.test(location.search);
   let last = null, shown = false;
-  const ping = (e) => { if (TEST) return; try { const d = JSON.stringify({ e }); if (!(navigator.sendBeacon && navigator.sendBeacon('/api/promo', new Blob([d], { type: 'application/json' })))) fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: d, keepalive: true }); } catch (err) { /* sayaç gitmese de sorun değil */ } };
+  const ping = (e) => { if (TEST) return; if (window.goatzEvent) window.goatzEvent('promo_' + e, { campaign: 'shopier' }); try { const d = JSON.stringify({ e }); if (!(navigator.sendBeacon && navigator.sendBeacon('/api/promo', new Blob([d], { type: 'application/json' })))) fetch('/api/promo', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: d, keepalive: true }); } catch (err) { /* sayaç gitmese de sorun değil */ } };
   const close = () => {
     ping('close');
     box.classList.remove('show');
@@ -2150,3 +2152,13 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   if (TEST) setTimeout(open, 1000);
   else setTimeout(open, 1500);
 })();
+
+// Google Analytics olayları (GA kapalıysa ya da çerez kabul edilmediyse goatzEvent hiçbir şey yapmaz): WhatsApp, telefon, Teklif al tıkları
+document.addEventListener('click', (e) => {
+  const a = e.target.closest && e.target.closest('a[href]');
+  if (!a || !window.goatzEvent) return;
+  const h = a.getAttribute('href') || '';
+  if (h.indexOf('wa.me') > -1 || h.indexOf('whatsapp.com') > -1) window.goatzEvent('click_whatsapp', { link_url: h });
+  else if (h.indexOf('tel:') === 0) window.goatzEvent('click_phone', { link_url: h });
+  else if (h.indexOf('/teklif-al') > -1) window.goatzEvent('click_teklif_al', { link_url: h });
+}, true);

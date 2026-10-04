@@ -339,7 +339,7 @@
             const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, phone: f('phone').value.trim(), message, website: f('website').value }) });
             const j = await res.json().catch(() => ({}));
             if (!res.ok) throw new Error(j.error || 'Gönderilemedi, lütfen tekrar deneyin.');
-            items = []; save(); done = true; render();
+            if (window.goatzEvent) window.goatzEvent('generate_lead', { method: 'fiyat_talebi_sepet' }); items = []; save(); done = true; render();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } catch (err) { status.textContent = err.message; status.classList.add('err'); btn.disabled = false; }
         });
