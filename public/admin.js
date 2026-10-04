@@ -572,6 +572,7 @@
     text: area('Metin', { hint: 'Boş bir satır bırakarak yeni paragraf açarsın.', showIf: is('text', 'imagetext', 'cards', 'faq', 'gallery', 'form') }),
     align: select('Hizalama', [['left', 'Sola yaslı'], ['center', 'Ortalı']]),
     collapse: bool('Uzun metni kısalt ("Devamını oku" düğmesiyle açılır)', { showIf: is('text') }),
+    partnerLockup: bool('Başlığın sağında ikas × The Goatz Studio işareti', { showIf: is('text') }),
     image: image('Görsel', { hint: 'Kare ya da yatay bir görsel iyi durur.', showIf: is('imagetext') }),
     imageSide: select('Görsel hangi tarafta?', [['left', 'Solda'], ['right', 'Sağda']]),
     imageColor: color('Görsel yokken zemin rengi'),

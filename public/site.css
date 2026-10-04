@@ -2180,3 +2180,12 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 
 /* Blog yazısı girişi: hero'dan sonraki başlıksız ilk metin kalın ve yatık */
 .blog-lead .blk-in p { font-weight: 700; font-style: italic; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.5; }
+
+/* Metin bloğu: başlığın sağında ikas × The Goatz Studio (partnerLockup) */
+.head-lockup { display: flex; align-items: center; flex-wrap: wrap; gap: 14px clamp(24px, 4vw, 56px); margin-bottom: var(--blk-head-gap, 18px); }
+.head-lockup > h2 { margin: 0; }
+.head-lockup .pt-lockup.is-side { flex-wrap: nowrap; padding: 4px 0 10px; gap: clamp(12px, 1.6vw, 22px); }
+.pt-lockup.is-side .pt-ikas, .pt-lockup.is-side .pt-goatz { font-size: clamp(26px, 3vw, 44px); }
+.pt-lockup.is-side .pt-x { width: clamp(30px, 2.8vw, 42px); font-size: clamp(18px, 1.8vw, 26px); }
+@media (max-width: 520px) { .pt-lockup.is-side .pt-ikas, .pt-lockup.is-side .pt-goatz { font-size: 24px; } .head-lockup .pt-lockup.is-side { gap: 10px; } }
+@media (min-width: 1320px) { .head-lockup { flex-wrap: nowrap; width: max-content; max-width: calc(100vw - 120px); } .head-lockup > h2 { white-space: nowrap; flex: none; } .head-lockup .pt-lockup.is-side { flex: none; } }
