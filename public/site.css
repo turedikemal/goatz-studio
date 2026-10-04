@@ -2207,3 +2207,9 @@ html[data-theme="night"] .page-hero .page-ribbon .shine { opacity: .12; }
 .show-hook .show-hook-sub .hw:hover, .show-hook .show-hook-sub .w:hover { background: none; }
 .show-hook .hook-nw { white-space: nowrap; }
 .show-hook .show-hook-sub { line-height: 1.4; } .show-hook .hook-hl { margin: 0 .04em 0 0; vertical-align: .04em; }
+
+/* Süreç sayfası slayt zemini (roadBg): yol haritası çizimi, soluk */
+.page-hero .page-road { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .22; }
+.page-road .rd-base { stroke: #fff; opacity: .55; }
+html[data-theme="night"] .page-hero .page-road { opacity: .13; filter: invert(1) hue-rotate(180deg); }
+@media (max-width: 700px) { .page-hero .page-road { opacity: .15; } }
