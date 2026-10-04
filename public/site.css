@@ -2174,3 +2174,6 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 
 /* Çerez şeridi kampanya penceresinin üstünde kalır, ikisi ayrı ayrı kullanılır */
 .ck-bar { z-index: 95; }
+
+/* Blog yazısı girişi: hero'dan sonraki başlıksız ilk metin kalın ve yatık */
+.blog-lead .blk-in p { font-weight: 700; font-style: italic; font-size: clamp(19px, 1.7vw, 23px); line-height: 1.5; }
