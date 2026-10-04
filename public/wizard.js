@@ -431,7 +431,10 @@
     const c = state.contact;
     const NL = String.fromCharCode(10);
     const head = (complete ? 'TEKLİF TALEBİ (proje oluşturucu)' : 'YARIM KALAN TEKLİF (sihirbaz başlatıldı, henüz tamamlanmadı)') + NL + 'Ticari elektronik ileti onayı: ' + (c.marketing ? 'EVET (kutu önceden işaretli geliyordu, kişi kaldırmadı)' : 'hayır (kişi kutuyu kaldırdı)');
-    return (complete ? head + NL + NL + summaryText() : head).slice(0, 3900);
+    let promo = false;
+    try { promo = /kampanya=shopier/.test(location.search) || sessionStorage.getItem('goatz-kampanya') === 'shopier'; } catch (e) { /* depolama yoksa adrese bakılır */ }
+    const head2 = promo ? head + NL + 'Kampanya: Shopier’den taşıma, %10 indirim' : head;
+    return (complete ? head2 + NL + NL + summaryText() : head2).slice(0, 3900);
   };
   const reportData = () => {
     const a = state.answers, st = state.site;

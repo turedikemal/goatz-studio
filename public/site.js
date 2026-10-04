@@ -2107,3 +2107,39 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   const run = () => document.querySelectorAll('main p, main li').forEach(wrap);
   (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
 })();
+
+// Ana sayfa kampanya penceresi (Shopier'den taşıyanlara %10). Çerez seçimi yapılmışsa 5 sn sonra, yapılmamışsa seçimden 1,5 sn sonra açılır; kapatınca 7 gün görünmez.
+(() => {
+  const box = document.getElementById('promo');
+  if (!box) return;
+  const KEY = 'goatz-kampanya-shopier';
+  try { const t = Number(localStorage.getItem(KEY) || 0); if (Date.now() - t < 7 * 864e5) return; } catch (e) { /* depolama yoksa her ziyarette görünür */ }
+  let last = null, shown = false;
+  const close = () => {
+    box.classList.remove('show');
+    try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* kayıt yoksa sorun değil */ }
+    setTimeout(() => { box.hidden = true; }, 350);
+    document.removeEventListener('keydown', onKey);
+    if (last && last.focus) last.focus();
+  };
+  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  const open = () => {
+    if (shown) return; shown = true;
+    last = document.activeElement;
+    box.hidden = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('show')));
+    document.addEventListener('keydown', onKey);
+    setTimeout(() => { const x = box.querySelector('.promo-card'); if (x) x.focus({ preventScroll: true }); }, 60);
+  };
+  box.addEventListener('click', (e) => {
+    if (e.target.closest('[data-promo-x]')) close();
+    else if (e.target.closest('.promo-go')) {
+      try { sessionStorage.setItem('goatz-kampanya', 'shopier'); localStorage.setItem(KEY, String(Date.now())); } catch (err) { /* adres parametresi yeter */ }
+    }
+  });
+  const ck = document.getElementById('ckBar');
+  let chosen = true;
+  try { chosen = !!localStorage.getItem('goatz-cerez'); } catch (e) { /* çerez şeridi zaten görünür */ }
+  if (ck && !chosen) ck.addEventListener('click', (e) => { if (e.target.closest('[data-ck]')) setTimeout(open, 1500); });
+  else setTimeout(open, 5000);
+})();
