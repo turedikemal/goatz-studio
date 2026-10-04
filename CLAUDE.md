@@ -60,7 +60,7 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 
 ## SEO düzeltmeleri (2026-10-03)
 - **Hız:** `send()` metin yanıtlarını gzip'ler. `lib/optimize.js` (yalnız sunucu, `pageHtml`): CSS/JS'e `?v=<özet>` ekler (sürümlü dosya 1 yıl önbellek, sürümsüz `no-cache`, panel `no-store`), `/uploads` görsellerine gerçek width/height yazar, eski görsel adlarını `image-redirects.json`'a göre yeni adla değiştirir. CSS: `:where(img[width][height]){height:auto}`.
-- **Blog:** başlıksız ilk metin bloğu giriş olur (`.blog-lead`, kalın + yatık). Sayfa türü `kind: 'blog'` + `date` (panel: Sayfa ayarları). Adres `/blog/<adres>` (`pagePath`, `lib/schema.js`); `/<adres>` 301 ile oraya gider. `/blog` sayfası `bloglist` bloğuyla listeler. BlogPosting şeması, yazı altında "Diğer yazılar".
+- **Blog:** başlıksız ilk metin bloğu giriş olur (`.page-lead`, kalın + yatık; ana sayfa hariç tüm sayfalarda, hizmet/kategori sayfaları dahil). Sayfa türü `kind: 'blog'` + `date` (panel: Sayfa ayarları). Adres `/blog/<adres>` (`pagePath`, `lib/schema.js`); `/<adres>` 301 ile oraya gider. `/blog` sayfası `bloglist` bloğuyla listeler. BlogPosting şeması, yazı altında "Diğer yazılar".
 - **Yeni sayfalar:** `/google-seo` (id `googleseo`), `/ikas` (id `ikas`), `/blog` + 5 yazı. Hizmet sayfalarında `Service` şeması (render.js `SERVICE`), Hizmetler'de `OfferCatalog`.
 - **404:** menülü sayfa, noindex (`notFound`, server.js). İş adresi değişince `WORK_MOVED` ile 301.
 - Adres: iş yeri (iletişim, SSS, şema) Fatih Sok. No: 39 İş Yeri: 4; yasal sayfalarda fatura adresi Medrese Sok. No: 1 İş Yeri: 2 kalır.
