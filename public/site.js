@@ -655,6 +655,12 @@
         fin(b);
         b.animate([{ translate: '0 3em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1), delay: start + ms(k * 0.1), easing: BOUNCE, fill: 'both' });
       });
+      // "Kapı Müşterisi Beklemeye Son!!!": başlıkla birlikte küçük ve dönmüş halden zıplayarak gelir, sonra hafif eğik yerine oturur
+      const hook = document.querySelector('.hero .hero-hook');
+      if (hook) {
+        fin(hook);
+        hook.animate([{ opacity: 0, scale: 0.3, rotate: '-14deg', translate: '0 -1.2em' }, { opacity: 1, scale: 1, rotate: '0deg', translate: '0 0' }], { duration: ms(1.1 * quick), delay: ms(0.9 * quick), easing: BOUNCE, fill: 'both' });
+      }
       // Kurdele yumuşakça belirir
       const rib = document.querySelector('.hero .ribbon');
       if (rib) { fin(rib); rib.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms(0.9), delay: start, easing: EASE, fill: 'both' }); }

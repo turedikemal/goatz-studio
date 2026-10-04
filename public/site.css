@@ -380,7 +380,7 @@
   @keyframes unhide { to { visibility: visible; } }
 
   /* Açılış: giriş bölümündeki her şey sırayla gelir */
-  html.js.mo-intro .hero [data-sub]:not(.shown), html.js.mo-intro .hero .actions .btn:not(.shown), html.js.mo-intro .hero .ribbon:not(.shown) { opacity: 0; }
+  html.js.mo-intro .hero [data-sub]:not(.shown), html.js.mo-intro .hero .actions .btn:not(.shown), html.js.mo-intro .hero .ribbon:not(.shown), html.js.mo-intro .hero .hero-hook:not(.shown) { opacity: 0; }
   .u-ib { display: inline-block; }
 
   /* Sticker'lar */
