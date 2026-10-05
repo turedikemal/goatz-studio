@@ -2180,6 +2180,11 @@
       ],
       "images": [
         {
+          "image": "/uploads/aci-biberli-zeytinyagi-renkli-fon-urun-fotografi-2.webp",
+          "caption": "Acı biberli zeytinyağı · renkli fon",
+          "category": "Gıda & zeytinyağı"
+        },
+        {
           "image": "/uploads/nar-eksisi-beyaz-fon-urun-fotografi.webp",
           "caption": "Nar ekşisi · beyaz fon",
           "category": "Gıda & zeytinyağı"
@@ -2192,11 +2197,6 @@
         {
           "image": "/uploads/aromali-zeytinyagi-renkli-fon-urun-fotografi.webp",
           "caption": "Aromalı zeytinyağı · renkli fon",
-          "category": "Gıda & zeytinyağı"
-        },
-        {
-          "image": "/uploads/aci-biberli-zeytinyagi-renkli-fon-urun-fotografi-2.webp",
-          "caption": "Acı biberli zeytinyağı · renkli fon",
           "category": "Gıda & zeytinyağı"
         },
         {

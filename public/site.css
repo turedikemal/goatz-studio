@@ -2258,3 +2258,6 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
 .svc-bar.is-works { display: none !important; }
 @media (max-width: 1199px) { .work-group[data-g] { scroll-margin-top: 84px; } }
 @media (max-width: 600px) { .work-filters { gap: 6px; } .work-filter { padding: 10px 14px; } }
+
+/* Büyütülmüş grup: kırpma yok, dikey/yatay görsel kareye tam sığar (boşluk görselin kenar rengiyle dolar) */
+.wp-gallery img, .wp-sector img { object-fit: contain; background: var(--paper); }

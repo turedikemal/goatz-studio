@@ -2169,3 +2169,19 @@ document.addEventListener('click', (e) => {
   else if (h.indexOf('tel:') === 0) window.goatzEvent('click_phone', { link_url: h });
   else if (h.indexOf('/teklif-al') > -1) window.goatzEvent('click_teklif_al', { link_url: h });
 }, true);
+
+// Ürün çekimi grup penceresi: kare olmayan görselin kare çerçevedeki boşluğunu görselin kenar rengiyle doldur
+(function () {
+  const fit = (im) => {
+    try {
+      const w = im.naturalWidth, h = im.naturalHeight;
+      if (!w || !h || Math.abs(w / h - 1) < 0.06) return;
+      const cv = document.createElement('canvas'); cv.width = 4; cv.height = 4;
+      const cx = cv.getContext('2d'); cx.drawImage(im, 0, 0, w, h, 0, 0, 4, 4);
+      const d = [[0, 0], [3, 0], [0, 3], [3, 3]].map(([x, y]) => cx.getImageData(x, y, 1, 1).data);
+      const m = [0, 1, 2].map((i) => Math.round(d.reduce((s, p) => s + p[i], 0) / 4));
+      im.style.backgroundColor = `rgb(${m.join(',')})`;
+    } catch (e) {}
+  };
+  document.querySelectorAll('.wp-gallery img, .wp-sector img').forEach((im) => { if (im.complete) fit(im); else im.addEventListener('load', () => fit(im)); });
+})();
