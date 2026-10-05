@@ -1162,7 +1162,7 @@ html.js .rm .rm-step { transition: opacity .6s ease, translate .7s cubic-bezier(
 .wp-light { width: 100vw; height: 100vh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: #fff; overflow: hidden; }
 .wp-light::backdrop { background: rgba(8, 8, 12, .9); }
 .wp-light figure { margin: 0; height: 100%; display: grid; grid-template-rows: 1fr auto; place-items: center; gap: 12px; padding: 56px 64px 24px; }
-.wp-light img { width: min(100%, calc(100vh - 150px)); aspect-ratio: 1 / 1; object-fit: cover; border-radius: var(--r-card); border: 1px solid #fff; }
+.wp-light img { width: auto; height: auto; max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; border-radius: var(--r-card); border: 1px solid #fff; }
 .wp-light figcaption { color: #fff; text-align: center; }
 .wp-light-x { position: absolute; top: 16px; right: 16px; padding: 10px 16px; border: 1px solid #fff; border-radius: var(--r-pill); background: transparent; color: #fff; cursor: pointer; font-family: inherit; }
 .wp-light-a { position: absolute; top: 50%; translate: 0 -50%; width: 48px; height: 48px; border: 1px solid #fff; border-radius: 50%; background: transparent; color: #fff; font-size: 30px; line-height: 1; cursor: pointer; }
