@@ -2185,3 +2185,44 @@ document.addEventListener('click', (e) => {
   };
   document.querySelectorAll('.wp-gallery img, .wp-sector img').forEach((im) => { if (im.complete) fit(im); else im.addEventListener('load', () => fit(im)); });
 })();
+
+// Ürün fotoğrafı kapak kartları: düz fonlu ürün görselini yakınlaştır, tüm kartlarda ürünün altı aynı tabana otursun
+(function () {
+  const TOP = 0.78, BASE = 0.87, WMAX = 0.74, SMAX = 2.2;
+  const bal = (im) => {
+    try {
+      const w = im.naturalWidth, h = im.naturalHeight;
+      if (!w || !h) return;
+      const N = 200, k = N / Math.max(w, h), cw = Math.max(8, Math.round(w * k)), ch = Math.max(8, Math.round(h * k));
+      const cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+      const cx = cv.getContext('2d', { willReadFrequently: true }); cx.drawImage(im, 0, 0, cw, ch);
+      const px = cx.getImageData(0, 0, cw, ch).data;
+      const at = (x, y) => { const i = (y * cw + x) * 4; return [px[i], px[i + 1], px[i + 2]]; };
+      const cs = [at(1, 1), at(cw - 2, 1), at(1, ch - 2), at(cw - 2, ch - 2), at(cw >> 1, 1), at(cw >> 1, ch - 2), at(1, ch >> 1), at(cw - 2, ch >> 1)];
+      const bg = [0, 1, 2].map((i) => Math.round(cs.reduce((s, p) => s + p[i], 0) / cs.length));
+      // fon düz değilse (fotoğraf kadrajı dolduruyor) dokunma
+      if (cs.some((p) => Math.abs(p[0] - bg[0]) + Math.abs(p[1] - bg[1]) + Math.abs(p[2] - bg[2]) > 36)) return;
+      // satır/sütun başına belirgin piksel sayısı: tek tük gürültü ve yumuşak gölge konuyu büyütmesin
+      const cc = new Array(cw).fill(0), rc = new Array(ch).fill(0);
+      for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) {
+        const i = (y * cw + x) * 4;
+        if (Math.abs(px[i] - bg[0]) + Math.abs(px[i + 1] - bg[1]) + Math.abs(px[i + 2] - bg[2]) > 90) { cc[x]++; rc[y]++; }
+      }
+      const first = (a) => a.findIndex((v) => v >= 3), last = (a) => { for (let i = a.length - 1; i >= 0; i--) if (a[i] >= 3) return i; return -1; };
+      const x0 = first(cc), x1 = last(cc), y0 = first(rc), y1 = last(rc);
+      if (x1 < 0 || y1 < 0) return;
+      // kare çerçevedeki (contain) konuma çevir
+      const sc = Math.min(1 / w, 1 / h), dw = w * sc, dh = h * sc, ox = (1 - dw) / 2, oy = (1 - dh) / 2;
+      const l = ox + (x0 / cw) * dw, r = ox + ((x1 + 1) / cw) * dw, t = oy + (y0 / ch) * dh, b = oy + ((y1 + 1) / ch) * dh;
+      const pw = r - l, ph = b - t; im.dataset.bb = [l, t, r, b].map((v) => v.toFixed(2)).join(',');
+      if (pw < 0.04 || ph < 0.04) return;
+      const s = Math.min(SMAX, Math.max(1, Math.min(TOP / ph, WMAX / pw)));
+      const clamp = (v) => Math.min(0, Math.max(1 - s, v));
+      const tx = clamp(0.5 - s * (l + r) / 2), ty = clamp(BASE - s * b);
+      im.style.setProperty('--zs', s.toFixed(3)); im.style.setProperty('--zx', (tx * 100).toFixed(2) + '%'); im.style.setProperty('--zy', (ty * 100).toFixed(2) + '%');
+      im.style.backgroundColor = 'rgb(' + bg.join(',') + ')';
+      im.setAttribute('data-zoom', '');
+    } catch (e) {}
+  };
+  document.querySelectorAll('.wp-sector img').forEach((im) => { if (im.complete && im.naturalWidth) bal(im); else im.addEventListener('load', () => bal(im)); });
+})();
