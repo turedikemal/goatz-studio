@@ -228,11 +228,11 @@
     { group: 'Tema Yönetimi' },
     {
       id: 'tema-overview', label: 'Tema Seçimi', path: [], anchor: '#top', special: 'themes',
-      intro: 'Tema seçin ve yönetin.',
+      intro: 'Sitenin teması ve renkleri.',
     },
     {
       id: 'theme', label: 'Renkler ve Stil', path: ['theme'], anchor: '#top',
-      intro: 'Sitenin tamamındaki renkleri ve genel görünümü buradan ayarlarsın. Bir rengi değiştirince o rengi kullanan her yer güncellenir.',
+      intro: 'Sitenin tamamındaki renkleri ve genel görünümü buradan ayarlarsın. Bir rengi değiştirince o rengi kullanan her yer güncellenir. Bunlar gündüz renkleridir; gece görünümünün renkleri koda gömülüdür. Değişiklik, Kaydet\'e basınca yayına geçer.',
       schema: {
         colors: group('Renk paleti', Object.fromEntries(Object.entries(COLOR_NAMES).map(([k, v]) => [k, hex(v)]))),
         look: group('Genel görünüm', {
@@ -771,6 +771,7 @@
   function updateStatus() {
     const dirty = isDirty();
     $('#saveBtn').disabled = !dirty;
+    const ps = $('#panelSave'); if (ps) { ps.disabled = !dirty; ps.hidden = !dirty; }
     $('#status').textContent = dirty ? '● Kaydedilmemiş değişiklikler' : 'Tüm değişiklikler kaydedildi';
     $('#status').classList.toggle('dirty', dirty);
   }
@@ -794,6 +795,7 @@
     } catch (err) { toast(err.message, true); updateStatus(); }
   }
   $('#saveBtn').addEventListener('click', save);
+  $('#panelSave').addEventListener('click', save);
   document.addEventListener('keydown', (e) => {
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 's') { e.preventDefault(); save(); }
   });
@@ -1669,15 +1671,18 @@
 
   // ---------- Temalar ----------
   function themesEditor() {
+    const col = state.theme.colors;
+    const keys = ['sun', 'mint', 'lavender', 'blue', 'ember', 'violet', 'carbon', 'paper'];
+    const go = () => selectPage(PAGES.find(p => p.id === 'theme'));
     return h('div', {},
       h('div', { class: 'card' },
-        h('h3', {}, 'Şu Anki Tema'),
-        h('p', {}, 'The Sun'),
-        h('button', { type: 'button', class: 'btn solid', style: 'margin-top:10px', onclick: () => selectPage(PAGES.find(p => p.id === 'theme')) }, 'Temayı Düzenle')),
-      h('div', { class: 'card' },
-        h('h3', {}, 'Tema Ekle'),
-        h('p', { class: 'hint' }, 'Yeni tema oluşturmak için hazırlanıyor…'),
-        h('button', { type: 'button', class: 'btn', disabled: true }, 'Yeni Tema Ekle')));
+        h('h3', {}, 'Şu anki tema: The Sun'),
+        h('p', { class: 'hint' }, 'Sitenin gündüz renkleri ve genel görünümü.'),
+        h('div', { style: 'display:flex;flex-wrap:wrap;gap:8px;margin-top:12px' },
+          ...keys.map((k) => h('button', { type: 'button', title: `${COLOR_NAMES[k]} ${col[k]}: düzenle`, 'aria-label': `${COLOR_NAMES[k]} rengini düzenle`, onclick: go,
+            style: `width:44px;height:44px;border-radius:50%;border:2px solid #000;cursor:pointer;padding:0;background:${col[k]}` }))),
+        h('button', { type: 'button', class: 'btn solid', style: 'margin-top:14px', onclick: go }, 'Renkleri düzenle')),
+      h('p', { class: 'hint' }, 'Tek tema var. Gece görünümünün renkleri koda gömülüdür, buradan değişmez.'));
   }
 
   const commerce = window.GoatzCommerce({ h, request, toast, rerender: () => renderPage() });
