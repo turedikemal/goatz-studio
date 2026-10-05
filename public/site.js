@@ -517,15 +517,19 @@
     const apply = (key) => {
       workFilters.querySelectorAll('.work-filter').forEach((b) => b.classList.toggle('on', b.dataset.filter === key));
       groups.forEach((g) => { g.hidden = !(key === 'all' || g.dataset.cat === key); });
+      window.dispatchEvent(new Event('resize')); // soldaki kapsüller yeniden ölçülsün
     };
     workFilters.addEventListener('click', (e) => {
       const b = e.target.closest('.work-filter');
       if (!b) return;
       apply(b.dataset.filter);
       history.replaceState(null, '', b.dataset.filter === 'all' ? location.pathname : `#${b.dataset.filter}`);
+      const top = workFilters.getBoundingClientRect().top + scrollY - 96;
+      if (scrollY > top) window.scrollTo({ top: Math.max(0, top), behavior: 'instant' });
     });
-    const want = decodeURIComponent(location.hash.slice(1));
-    if (want && [...workFilters.querySelectorAll('.work-filter')].some((b) => b.dataset.filter === want)) apply(want);
+    // Soldaki kapsüller (svc-nav.js) süzgeci kaldırıp bölüme gider; adresteki #bölüm süzmez, o bölüme kaydırır
+    window.goatzWorksAll = () => apply('all');
+    window.goatzWorksFiltered = () => workFilters.querySelector('.work-filter.on').dataset.filter !== 'all';
   }
 
   // ---------- Footer'daki dev yazı: her zaman satırın tam genişliğine sığar ----------

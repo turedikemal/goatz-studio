@@ -2253,3 +2253,8 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
   html.ck-on.svc-bar-on { --sb-b: calc(12px + env(safe-area-inset-bottom, 0px) + var(--ck-h, 120px) + 24px); }
   html.ck-on:not(.svc-bar-on) .cart-rail { bottom: calc(18px + var(--ck-h, 120px) + 24px); }
 }
+
+/* İşler: üstteki düğme filtresi (.work-filters) geri geldi. Dar ekranda yapışkan çip şeridi gizli (iki filtre üst üste binmesin), geniş ekranda sol kapsüller + üst düğmeler birlikte durur */
+.svc-bar.is-works { display: none !important; }
+@media (max-width: 1199px) { .work-group[data-g] { scroll-margin-top: 84px; } }
+@media (max-width: 600px) { .work-filters { gap: 6px; } .work-filter { padding: 10px 14px; } }

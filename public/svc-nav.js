@@ -9,7 +9,7 @@
   const setY = (v) => { if (window.__lenis && window.__lenis.scrollTo) window.__lenis.scrollTo(v, { immediate: true, force: true }); else window.scrollTo({ top: v, behavior: 'instant' }); };
   const smoothTo = (y) => setY(y);
   // Dar ekranda üstteki kategori şeridi (≈112px) başlığı örtmesin diye daha çok pay bırakılır
-  const goTo = (b) => smoothTo(Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - (matchMedia('(max-width: 1199px)').matches ? 128 : 84))));
+  const goTo = (b) => { if (window.goatzWorksFiltered && window.goatzWorksFiltered()) window.goatzWorksAll(); smoothTo(Math.max(0, Math.round(b.getBoundingClientRect().top + window.scrollY - (matchMedia('(max-width: 1199px)').matches ? 128 : 84)))); };
   const SHORT = (h) => { const t = String(h || '').toLocaleLowerCase('tr-TR'); return /web tasarım/.test(t) ? 'Web tasarım' : /fotoğraf/.test(t) ? 'Fotoğraf' : /metin/.test(t) ? 'Metin' : /marka/.test(t) ? 'Marka' : /pazaryeri/.test(t) ? 'Pazaryeri' : /seo/.test(t) ? 'SEO' : /danışmanlık/.test(t) ? 'Danışmanlık' : /uygulama/.test(t) ? 'Uygulama' : h; };
   // Bağlantılar
   const link = (a) => a.addEventListener('click', (e) => {
@@ -26,6 +26,7 @@
   const isWorks = blocks[0].classList.contains('work-group');
   bar.setAttribute('aria-label', isWorks ? 'İş kategorileri' : 'Hizmet kategorileri');
   bar.hidden = true;
+  if (isWorks && document.querySelector('.work-filters')) bar.classList.add('is-works'); // İşler'de üstteki düğme filtresi var: dar ekranda ikinci bir şerit gösterilmez
   const track = document.createElement('div');
   track.className = 'svc-bar-track';
   items.forEach((x) => {
@@ -66,7 +67,7 @@
     a.setAttribute('aria-label', x.name.trim());
     link(a);
     // Fare ile üstüne gelince (masaüstü) tıklamaya gerek kalmadan o bölüme gider; kısa bir bekleme, listeyi tararken sayfanın sıçramaması için
-    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 200); });
+    a.addEventListener('mouseenter', () => { if (!matchMedia('(hover: hover) and (pointer: fine)').matches || (window.goatzWorksFiltered && window.goatzWorksFiltered())) return; clearTimeout(hoverT); hoverT = setTimeout(() => { if (current !== x.i) goTo(x.b); }, 200); });
     a.addEventListener('mouseleave', () => clearTimeout(hoverT));
     rail.append(a);
   });
@@ -77,8 +78,10 @@
   const main = document.getElementById('top') || document.body;
   main.append(wrap);
   const placeRail = () => {
-    const h = blocks[0].querySelector('h2') || blocks[0];
-    const m = main.getBoundingClientRect(), hr = h.getBoundingClientRect(), lb = blocks[blocks.length - 1].getBoundingClientRect();
+    const vis = blocks.filter((b) => !b.hidden);
+    if (!vis.length) return;
+    const h = vis[0].querySelector('h2') || vis[0];
+    const m = main.getBoundingClientRect(), hr = h.getBoundingClientRect(), lb = vis[vis.length - 1].getBoundingClientRect();
     wrap.style.top = Math.max(0, hr.top - m.top) + 'px';
     wrap.style.height = Math.max(120, lb.bottom - hr.top) + 'px';
   };
@@ -92,19 +95,19 @@
 
   let current = -1;
   let tops = [], lastBottom = 0;
-  const measure = () => { const s = window.scrollY; tops = blocks.map((b) => b.getBoundingClientRect().top + s); lastBottom = blocks[blocks.length - 1].getBoundingClientRect().bottom + s; };
+  const measure = () => { const s = window.scrollY; tops = blocks.map((b) => (b.hidden ? Infinity : b.getBoundingClientRect().top + s)); const vis = blocks.filter((b) => !b.hidden); lastBottom = (vis.length ? vis[vis.length - 1] : blocks[0]).getBoundingClientRect().bottom + s; };
   measure();
   setInterval(measure, 800); // içerik yüklenirken yükseklikler değişir
   window.addEventListener('resize', measure);
   const update = () => {
     const vh = window.innerHeight;
-    const sy = window.scrollY, first = tops[0] - sy, last = lastBottom - sy; // konumlar önbellekte: kaydırırken her karede yerleşim okunmaz
+    const sy = window.scrollY, first = Math.min(...tops) - sy, last = lastBottom - sy; // konumlar önbellekte: kaydırırken her karede yerleşim okunmaz
     const inside = first < vh * 0.55 && last > vh * 0.3;
     bar.hidden = !inside;
     document.documentElement.classList.toggle('svc-bar-on', inside);
     rail.classList.toggle('show', inside); // bölüme girince filtre uzaklıktan (sonsuzluktan) gelir, çıkınca uzaklaşır
-    let idx = 0;
-    tops.forEach((t, i) => { if (t - sy <= vh * 0.4) idx = i; });
+    let idx = Math.max(0, tops.findIndex((t) => t !== Infinity));
+    tops.forEach((t, i) => { if (t !== Infinity && t - sy <= vh * 0.4) idx = i; });
     if (idx !== current) {
       current = idx;
       pills.forEach((p, i) => p.classList.toggle('on', i === idx));
