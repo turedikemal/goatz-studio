@@ -440,3 +440,7 @@ body.rte-lock { overflow: hidden; }
 }
 #pages > button.group:first-child { margin-top: 4px; }
 #pages > button.group .lbl { flex: 1; text-align: left; }
+
+/* Ana başlık hapları: hepsi aynı, içi saydam */
+#pages > button.group, #pages > button.group:hover { background: transparent; box-shadow: none; filter: none; }
+#pages > button.group:hover { background: rgba(0, 0, 0, .05); }
