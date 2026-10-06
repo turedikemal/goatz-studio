@@ -106,6 +106,6 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Yalnız 400/500/700/900 inen kalınlıklar; sahte kalın kapalı (`font-synthesis-weight:none`), italik yoksa tarayıcı eğik üretir.
 
 ## Panel Dashboard (2026-10-06)
-- Panel açılınca (adres çubuğunda `#` yoksa) Dashboard gelir. Sunucu: `GET /api/dashboard?period=today|7|30` (`lib/dashboard.js`), panel: `public/admin-dashboard.js` + admin.css "Dashboard" bölümü.
-- Yalnız gerçek veri: satış/sipariş (iptal ve iade ciroya sayılmaz), yapılacaklar (sipariş durumları, ödeme, stokta kalmayan varyant, okunmamış mesaj), gelen talepler (mesajın ilk satırına göre teklif/fiyat/yarım/iletişim), ürün sayıları, Shopier penceresi (son 7 gün). Ziyaretçi verisi panelde yok, Analytics bağlantısı var. DB yoksa ilgili kısımlar bunu söyler.
-- Bilinçli olarak yok: grafik, emoji, renkli/gradyanlı KPI kartları (Kemal: "standart AI dashboard istemiyorum").
+- Panel açılınca (adres çubuğunda `#` yoksa) Dashboard gelir. Sunucu: `GET /api/dashboard?period=today|7|30` (`lib/dashboard.js`, dönemler Türkiye gününe göre), panel: `public/admin-dashboard.js` + admin.css "Dashboard" bölümü.
+- E-ticaret odaklı (Kemal ilk sürümü "e-ticarete uygun değil" buldu; mesaj/teklif/Shopier/Analytics kartları kaldırıldı): ciro, sipariş, ortalama sepet, satılan adet, yeni müşteri (önceki döneme göre), günlük/saatlik ciro grafiği, satış kanalları, sipariş durumu, bekleyen ödemeler, stok uyarıları (tükenen + 5 ve altı, `LOW_STOCK`), en çok satanlar, son siparişler. İptal/iade ciroya sayılmaz. Yalnız gerçek veri; DB yoksa bunu söyler.
+- Bilinçli olarak yok: emoji, renkli/gradyanlı KPI kartları (Kemal: "standart AI dashboard istemiyorum"). Grafik tek seri, siyah sütun.
