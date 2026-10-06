@@ -231,7 +231,7 @@ async function api(req, res, url) {
 
   if (route === 'GET /api/content') return json(res, 200, store.load());
   if (route === 'GET /api/defaults') return json(res, 200, store.DEFAULTS);
-  if (route === 'PUT /api/content') return json(res, 200, store.save(await readJson(req)));
+  if (route === 'PUT /api/content') return json(res, 200, store.save(await readJson(req, 8 * 1024 * 1024)));
 
   if (route === 'POST /api/preview') {
     const html = render(store.conform(store.DEFAULTS, await readJson(req)), { preview: true });

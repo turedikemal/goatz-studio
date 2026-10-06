@@ -654,6 +654,21 @@
     p.blocks = [newBlock('text')];
     return p;
   };
+  // Hareketler tek sayfada toplanmaz: her hareket, ait olduğu bölümün "Hareket" satırında durur (site.js'te hangi bölümü etkilediğine göre).
+  // Bölüme ait olmayan, tüm siteyi ilgilendirenler Tema Ayarları altında üç ayrı satırdadır.
+  const MF = PAGES.find((x) => x.id === 'motion').schema.motion.fields;
+  const MOTION_FOR = {
+    ticker: ['marquee'], nav: ['navhide'], hero: ['intro', 'idle', 'parallax'], showcase: ['device'],
+    services: ['cards'], why: ['cards', 'slider'], band: ['marquee', 'parallax'], process: ['tabs'], contact: ['cards'],
+  };
+  const motionSchema = (flags) => ({ motion: group('Hareket', Object.fromEntries(flags.map((f) => [f, MF[f]]))) });
+  {
+    const mi = PAGES.findIndex((x) => x.id === 'motion');
+    PAGES.splice(mi + 1, 0,
+      { id: 'm-text', label: 'Başlık hareketleri', path: ['theme'], anchor: '#top', schema: { motion: group('Başlık hareketleri', { reveal: MF.reveal, headings: MF.headings }) } },
+      { id: 'm-sticker', label: 'Sticker hareketleri', path: ['theme'], anchor: '#top', schema: { motion: group('Sticker hareketleri', { pop: MF.pop }) } },
+      { id: 'm-global', label: 'Kaydırma ve hız', path: ['theme'], anchor: '#top', schema: { animations: bool('Tüm hareketler (kapatırsan sitede hiçbir şey oynamaz)'), motion: group('Kaydırma ve hız', { smooth: MF.smooth, speed: MF.speed, intensity: MF.intensity }) } });
+  }
   const customDef = (p) => ({ id: `pg:${p.id}`, label: p.title || 'Sayfa', custom: true, pageId: p.id, anchor: '#top' });
 
   // Gruplar "flat" olabilir ya da bir veri anahtarına karşılık gelmeyebilir.
@@ -744,6 +759,10 @@
     $('#app').hidden = false;
     const bl = $('.brand .logo-dot');
     if (state.brand.logoImage && bl) { bl.classList.add('has-img'); bl.replaceChildren(h('img', { src: state.brand.logoImage, alt: '' })); }
+    if (!page.custom && TE_IDS().has(page.id) && location.hash.length > 1) {
+      editTheme = activeId();
+      teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global'].includes(page.id) ? 'settings' : 'sections';
+    }
     navFollow = location.hash.length > 1;
     renderNav();
     renderPage();
@@ -762,6 +781,7 @@
   function updateStatus() {
     const dirty = isDirty();
     $('#saveBtn').disabled = !dirty;
+    const ts = $('#teSave'); if (ts) ts.disabled = !dirty;
     const ps = $('#panelSave'); if (ps) { ps.disabled = !dirty; ps.hidden = !dirty; }
     $('#status').textContent = dirty ? '● Kaydedilmemiş değişiklikler' : 'Tüm değişiklikler kaydedildi';
     $('#status').classList.toggle('dirty', dirty);
@@ -779,7 +799,12 @@
     if (!isDirty()) return;
     $('#saveBtn').disabled = true;
     try {
-      state = await request('/api/content', { method: 'PUT', body: JSON.stringify(state) });
+      if (liveStash) {
+        // Yayında olmayan tema düzenleniyor: yayındaki ayarlar aynen kalır, düzenlenen tema state.themes içine yazılır.
+        const r = await request('/api/content', { method: 'PUT', body: JSON.stringify({ ...state, ...liveStash, themes: { ...state.themes, [editTheme]: pickSlice(state) } }) });
+        liveStash = pickSlice(r);
+        state = { ...r, ...structuredClone(r.themes[editTheme] || pickSlice(state)) };
+      } else state = await request('/api/content', { method: 'PUT', body: JSON.stringify(state) });
       saved = JSON.stringify(state);
       updateStatus();
       toast('Kaydedildi. Site güncellendi.');
@@ -1003,11 +1028,15 @@
   const TEMA = 'Tema Yönetimi';
   // Tema görünümündeki iki akordeon: ilki tema ayarları, ikincisi ana sayfanın sitedeki sırası (kodda eskiden de bu adla geçiyordu).
   const G_TEMA = 'Tema', G_FLOW = 'Ana sayfa · sitedeki sıra';
-  const THEME_GROUPS = [G_TEMA, G_FLOW];
+  const THEME_GROUPS = [G_TEMA];
   let previewOn = false; // tema bölümlerinde canlı önizleme göster/gizle (varsayılan gizli: editör sağ alanın tamamını kullanır)
   function selectPage(p) {
+    if (!editTheme && p.id !== 'tema-overview' && TE_IDS().has(p.id)) {
+      editTheme = activeId(); tePageSel = 'home'; teOpen.clear();
+      teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global'].includes(p.id) ? 'settings' : 'sections';
+    }
     page = p;
-    navFollow = true;
+    navFollow = !editTheme;
     history.replaceState(null, '', `#${p.id}`);
     const target = p.custom ? p.pageId : (p.previewPage || null);
     renderNav();
@@ -1018,25 +1047,32 @@
   }
   const homePage = () => PAGES.find((x) => x.id === 'hero');
 
-  // "Panele dön": kaydedilmemiş değişiklik varsa sorar, yoksa sormadan döner.
-  function goBack() {
-    const leave = () => { navView = 'main'; $('#panel').classList.remove('open'); renderNav(); };
-    if (!isDirty()) { leave(); return; }
+  const panelIsOpen = () => $('#panel').classList.contains('open');
+  const isOn = (id) => panelIsOpen() && id === page.id;
+  // Kaydedilmemiş değişiklik varsa sorar ("Kaydet ve dön" / "Kaydetmeden dön" / "İptal"), yoksa sormadan devam eder.
+  // Kaydetmeden dönmek, değişiklikleri son kayda geri alır.
+  function confirmLeave(proceed, o = {}) {
+    if (!isDirty()) { (o.plain || proceed)(); return; }
     const dlg = h('dialog', { class: 'modal confirm-dlg', 'aria-label': 'Kaydetmek istiyor musunuz?' },
       h('div', { class: 'modal-head' }, h('h3', {}, 'Kaydetmek istiyor musunuz?')),
       h('p', { style: 'padding:0 18px' }, 'Kaydedilmemiş değişiklikler var.'),
       h('div', { style: 'display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px 18px;justify-content:flex-end' },
         h('button', { type: 'button', class: 'btn', onclick: () => dlg.close() }, 'İptal'),
-        h('button', { type: 'button', class: 'btn', onclick: () => { dlg.close(); leave(); } }, 'Kaydetmeden dön'),
-        h('button', { type: 'button', class: 'btn solid', onclick: async () => { dlg.close(); await save(); if (!isDirty()) leave(); } }, 'Kaydet ve dön')));
+        h('button', { type: 'button', class: 'btn', onclick: () => { dlg.close(); if (o.discardFn) o.discardFn(); else { state = JSON.parse(saved); proceed(); } } }, 'Kaydetmeden dön'),
+        h('button', { type: 'button', class: 'btn solid', onclick: async () => { dlg.close(); await save(); if (!isDirty()) (o.saveFn || proceed)(); } }, 'Kaydet ve dön')));
     dlg.addEventListener('close', () => dlg.remove());
     document.body.appendChild(dlg);
     dlg.showModal();
+  }
+  // "Panele dön"
+  function goBack() {
+    confirmLeave(() => { navView = 'main'; $('#panel').classList.remove('open'); renderNav(); renderPage(); refreshPreview(true); updateStatus(); });
   }
 
   // Sol menü: sitenin temasıyla aynı dilde çizilir ve ana sayfa bölümleri sitedeki gerçek sırayla dizilir.
   // Her bölümün yanındaki nokta, o bölümün sitedeki zemin rengidir.
   function renderNav() {
+    if (editTheme) { navFollow = false; renderThemeNav(); return; }
     const nav = $('#pages');
     const byId = (id) => PAGES.find((p) => p.id === id);
     const dotColor = (p) => {
@@ -1105,7 +1141,7 @@
         }
       } else if (p.id) {
         if (inFlow(p)) {
-          if (!flowDone) { flowDone = true; curG = G_FLOW; flow.forEach((f) => { pageGroup[f.id] = curG; }); push(...flow.map(btn).filter(Boolean)); }
+          if (!flowDone) { flowDone = true; flow.forEach((f) => { pageGroup[f.id] = curG; }); push(...flow.map(btn).filter(Boolean)); }
           return;
         }
         pageGroup[p.id] = curG;
@@ -1141,8 +1177,7 @@
     items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== openGroup; });
     let shown;
     if (navView === 'theme') {
-      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön')];
-      THEME_GROUPS.forEach((g) => { shown.push(head(g, 'var(--bg)'), ...items.filter((it) => gOf.get(it) === g)); });
+      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön'), btn(byId('tema-overview'))];
     } else {
       shown = items.filter((it) => !isTema(it));
       shown.push(h('button', { type: 'button', class: 'group nav-link', onclick: () => {
@@ -1167,15 +1202,19 @@
 
     // Preview pane'i sadece tema/site yönetimi sayfalarında göster
     const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages', 'tema-overview', 'isler-projeler', 'isler-ayarlar'];
-    const isThemePage = page.custom || themePages.includes(page.id);
+    const te = !!editTheme;
+    $('#app').classList.toggle('te', te);
+    $('#panelClose').textContent = te ? '←' : '×';
+    $('#panelClose').setAttribute('aria-label', te ? 'Geri' : 'Paneli kapat');
+    const isThemePage = te || page.custom || themePages.includes(page.id);
     const splitEl = $('#split');
     const wasHidden = splitEl.classList.contains('no-preview');
     splitEl.classList.toggle('no-preview', !isThemePage);
-    const panelWide = () => !isThemePage || !previewOn;
+    const panelWide = () => !te && (!isThemePage || !previewOn);
     $('#panel').classList.toggle('wide', panelWide());
     { const ph = $('.panel-head'); let pt = $('#previewToggle');
       if (!pt) { pt = h('button', { type: 'button', class: 'btn small', id: 'previewToggle' }); ph.insertBefore(pt, $('#panelClose')); }
-      pt.hidden = !isThemePage;
+      pt.hidden = !isThemePage || te;
       pt.textContent = previewOn ? 'Önizlemeyi gizle' : 'Önizleme';
       pt.onclick = () => { previewOn = !previewOn; pt.textContent = previewOn ? 'Önizlemeyi gizle' : 'Önizleme'; $('#panel').classList.toggle('wide', panelWide()); }; }
     if (isThemePage && wasHidden) refreshPreview(true);
@@ -1211,7 +1250,7 @@
     else if (page.special === 'customer-tags') parts.push(sales.customerTags());
     else if (page.special === 'coupons') parts.push(sales.coupons());
     else if (page.special === 'campaigns') parts.push(sales.campaigns());
-    else if (page.schema && Object.keys(page.schema).length > 0) parts.push(...objectFields(page.schema, page.path, true));
+    else if (page.schema && Object.keys(page.schema).length > 0) parts.push(...(te ? teRows(page) : objectFields(page.schema, page.path, true)));
     else parts.push(placeholderPage(page.label));
     ed.replaceChildren(...parts);
     ed.scrollTop = top;
@@ -1737,32 +1776,143 @@
     { id: 'ates', name: 'Ateş', note: 'Turuncu ağırlıklı', colors: { sky: '#ffe8dc', concrete: '#d4c6bf', mist: '#f0e9e5', blue: '#5aa9ff', mint: '#9ee37d', lavender: '#ffcdb8', ember: '#ff3d1f', sun: '#ffc233', violet: '#b3261e' } },
   ];
   const THEME_KEYS = ['sun', 'mint', 'lavender', 'blue', 'ember', 'violet'];
+  // ---- Tema verisi: yayındaki tema üst düzey alanlarda, diğerleri state.themes[kimlik] içinde durur ----
+  const sliceKeys = () => Object.keys(window.GoatzRender.DEFAULTS.themes.__dict);
+  const pickSlice = (o) => Object.fromEntries(sliceKeys().map((k) => [k, structuredClone(o[k])]));
+  let editTheme = null;   // düzenlenen temanın kimliği (null = tema listesi / ana panel)
+  let liveStash = null;   // yayında olmayan bir tema düzenlenirken yayındaki temanın ayarları
+  let teView = 'sections'; // 'sections' | 'settings'
+  let tePageSel = 'home';
+  const teOpen = new Set();
+  const activeId = () => { const id = (liveStash || state).theme.preset; return THEMES.some((t) => t.id === id) ? id : 'sun'; };
+  const freshTheme = (id) => { const v = pickSlice(state); v.theme.preset = id; Object.assign(v.theme.colors, THEMES.find((t) => t.id === id).colors); return v; };
+  const TE_IDS = () => new Set(['ticker', 'nav', ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)?.id), 'theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global']);
+
+  function enterTheme(id) {
+    if (isDirty()) { confirmLeave(() => enterTheme(id)); return; }
+    const act = activeId();
+    editTheme = id; teView = 'sections'; tePageSel = 'home'; teOpen.clear();
+    if (id !== act && !liveStash) {
+      liveStash = pickSlice(state);
+      Object.assign(state, structuredClone(state.themes[id] || freshTheme(id)));
+      saved = JSON.stringify(state);
+    }
+    page = PAGES.find((x) => x.id === 'tema-overview');
+    previewPage = null;
+    $('#panel').classList.remove('open');
+    renderNav(); renderPage(); refreshPreview(true); updateStatus();
+  }
+  // Kaydedilmemiş değişiklikler çöpe atılır (saved anına dönülür), sonra yayındaki tema geri konur.
+  function leaveTheme(discard) {
+    if (discard) state = JSON.parse(saved);
+    if (liveStash) { Object.assign(state, liveStash); liveStash = null; }
+    editTheme = null; previewPage = null;
+    saved = JSON.stringify(state);
+    page = PAGES.find((x) => x.id === 'tema-overview');
+    navView = 'theme'; $('#panel').classList.add('open');
+    history.replaceState(null, '', '#tema-overview');
+    renderNav(); renderPage(); refreshPreview(true); updateStatus();
+  }
+  async function activate(id) {
+    if (isDirty()) { toast('Önce Kaydet\'e bas, sonra yayına al.', true); return; }
+    const t = THEMES.find((x) => x.id === id);
+    if (!confirm(`${t.name} teması yayına alınsın mı? Site hemen bu temaya geçer; şu anki tema listeye geçer, ayarları kaybolmaz.`)) return;
+    const cur = activeId();
+    const themes = { ...state.themes };
+    let live, old;
+    if (liveStash) { old = liveStash; live = pickSlice(state); } else { old = pickSlice(state); live = structuredClone(themes[id] || freshTheme(id)); }
+    themes[cur] = old; delete themes[id];
+    live.theme.preset = id;
+    try {
+      const r = await request('/api/content', { method: 'PUT', body: JSON.stringify({ ...state, ...live, themes }) });
+      state = r; liveStash = null; saved = JSON.stringify(state);
+      toast(`${t.name} yayında. Site güncellendi.`);
+    } catch (err) { toast(err.message, true); return; }
+    renderNav(); renderPage(); refreshPreview(true); updateStatus();
+  }
+
   function themesEditor() {
-    const th = state.theme;
-    const col = th.colors;
-    const curId = THEMES.some((t) => t.id === th.preset) ? th.preset : 'sun';
-    const same = (t) => Object.entries(t.colors).every(([k, v]) => String(col[k]).toLowerCase() === v);
-    const cur = THEMES.find((t) => t.id === curId);
-    const edited = !same(cur);
-    const go = () => selectPage(PAGES.find((p) => p.id === 'theme'));
-    const apply = (t) => {
-      th.preset = t.id;
-      Object.assign(th.colors, t.colors);
-      changed(); rerender();
-      toast(`${t.name} teması seçildi. Yayına almak için Kaydet'e bas.`);
-    };
+    const act = activeId();
     return h('div', {},
-      h('div', { class: 'card' },
-        h('h3', {}, `Şu anki tema: ${cur.name}${edited ? ' (renkleri düzenlenmiş)' : ''}`),
-        h('p', { class: 'hint' }, 'Bir tema seçince önizleme hemen güncellenir, Kaydet\'e basınca yayına geçer. Seçtikten sonra renkleri tek tek değiştirebilirsin.'),
-        h('div', { class: 'theme-grid' },
-          ...THEMES.map((t) => h('button', { type: 'button', class: `theme-card${t.id === curId ? ' on' : ''}`, 'aria-pressed': String(t.id === curId), title: `${t.name} temasını seç`, onclick: () => apply(t) },
-            h('span', { class: 'theme-tick', 'aria-hidden': 'true' }, '✓'),
-            h('span', { class: 'theme-sw' }, ...THEME_KEYS.map((k) => h('i', { style: `background:${t.colors[k]}` }))),
-            h('b', {}, t.name),
-            h('small', {}, t.id === curId ? (edited ? 'Seçili, düzenlenmiş' : 'Seçili') : t.note)))),
-        h('button', { type: 'button', class: 'btn solid', style: 'margin-top:14px', onclick: go }, `Temayı düzenle (${cur.name})`)),
-      h('p', { class: 'hint' }, 'Gece görünümünün renkleri koda gömülüdür, buradan değişmez.'));
+      h('p', { class: 'hint' }, 'Bir tema seçip Düzenle\'ye gir: o temanın sayfa bölümlerini ve ayarlarını açarsın. Her temanın ayarları ayrı saklanır ve ayrı kaydedilir. Yayına al\'dan sonra site o temaya geçer.'),
+      h('div', { class: 'theme-grid' },
+        ...THEMES.map((t) => h('div', { class: `theme-card${t.id === act ? ' on' : ''}` },
+          h('span', { class: 'theme-sw' }, ...THEME_KEYS.map((k) => h('i', { style: `background:${t.colors[k]}` }))),
+          h('b', {}, t.name),
+          h('small', {}, t.id === act ? 'Yayında' : t.note),
+          h('div', { class: 'theme-actions' },
+            h('button', { type: 'button', class: 'btn small solid', onclick: () => enterTheme(t.id) }, 'Düzenle'),
+            t.id === act ? null : h('button', { type: 'button', class: 'btn small', onclick: () => activate(t.id) }, 'Yayına al'))))),
+      h('p', { class: 'hint' }, 'Gece görünümünün renkleri koda gömülüdür, buradan değişmez. Marka ve SEO, görseller, sayfalar ve işler tüm temalar için ortaktır.'));
+  }
+
+  // ---- Tema düzenleyici (sol sütun): sayfa seçici + bölüm listesi + Tema Ayarları ----
+  function renderThemeNav() {
+    const nav = $('#pages');
+    const th = THEMES.find((t) => t.id === editTheme) || THEMES[0];
+    const act = editTheme === activeId();
+    const dotColor = (p) => { const key = p.section ? state[p.section]?.background : p.id === 'ticker' ? state.ticker.background : null; return key ? state.theme.colors[key] : null; };
+    const rowBtn = (p, label, extra) => {
+      const sec = p.section && state.sections.find((x) => x.id === p.section);
+      const dc = dotColor(p);
+      return h('button', { type: 'button', class: `te-item${isOn(p.id) ? ' on' : ''}`, onclick: () => selectPage(p) },
+        dc ? h('i', { class: 'dot', style: `background:${dc}` }) : null,
+        h('span', { class: 'lbl' }, label || p.label),
+        sec && !sec.visible ? h('span', { class: 'eye' }, 'gizli') : null,
+        extra ? h('small', { class: 'te-note' }, extra) : null,
+        h('i', { class: 'chev', 'aria-hidden': 'true' }));
+    };
+    const rows = [
+      h('button', { type: 'button', class: 'back-btn', onclick: leaveEditFlow }, '← Temalara dön'),
+      h('div', { class: 'te-head' },
+        h('span', { class: 'te-sw' }, ...THEME_KEYS.map((k) => h('i', { style: `background:${th.colors[k]}` }))),
+        h('b', {}, th.name),
+        act ? h('span', { class: 'te-badge' }, 'Yayında') : h('button', { type: 'button', class: 'btn small', onclick: () => activate(editTheme) }, 'Yayına al'),
+        h('button', { type: 'button', class: 'btn small solid', id: 'teSave', disabled: !isDirty(), onclick: save }, 'Kaydet')),
+    ];
+    if (teView === 'settings') {
+      rows.push(h('button', { type: 'button', class: 'te-sub-back', onclick: () => { teView = 'sections'; renderNav(); } }, '‹ Sayfa bölümleri'),
+        h('h3', { class: 'te-title' }, 'Tema Ayarları'));
+      for (const id of ['theme', 'm-text', 'm-sticker', 'm-global', 'sections', 'brand']) {
+        const p = PAGES.find((x) => x.id === id);
+        rows.push(rowBtn(p, null, id === 'brand' ? 'ortak' : ''));
+      }
+    } else {
+      const sel = h('select', { class: 'te-pagesel', 'aria-label': 'Sayfa seç', onchange: () => {
+        tePageSel = sel.value; previewPage = tePageSel === 'home' ? null : tePageSel;
+        $('#panel').classList.remove('open'); renderNav(); refreshPreview(true);
+      } }, h('option', { value: 'home' }, 'Anasayfa'),
+      ...state.pages.map((pg) => h('option', { value: pg.id }, pg.title || 'Sayfa')));
+      sel.value = tePageSel;
+      rows.push(sel);
+      if (tePageSel === 'home') {
+        const flow = [PAGES.find((x) => x.id === 'ticker'), PAGES.find((x) => x.id === 'nav'), ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)).filter(Boolean)];
+        flow.forEach((p) => rows.push(rowBtn(p)));
+      } else {
+        const pg = state.pages.find((x) => x.id === tePageSel);
+        if (pg) rows.push(rowBtn(customDef(pg), 'Sayfa ayarları ve blokları'));
+      }
+      rows.push(h('button', { type: 'button', class: 'te-item te-settings', onclick: () => { teView = 'settings'; renderNav(); } },
+        h('span', { class: 'lbl' }, 'Tema Ayarları'), h('i', { class: 'chev', 'aria-hidden': 'true' })));
+    }
+    nav.replaceChildren(...rows);
+  }
+  const leaveEditFlow = () => confirmLeave(() => {}, { discardFn: () => leaveTheme(true), saveFn: () => leaveTheme(false), plain: () => leaveTheme(false) });
+
+  // Bölüm paneli: alanlar ikas gibi açılır satırlara bölünür; hareketler bölümün kendi "Hareket" satırındadır.
+  function teRow(key, label, nodes) {
+    const d = h('details', { class: 'te-row', open: teOpen.has(key) || null }, h('summary', {}, h('span', {}, label), h('i', { class: 'chev', 'aria-hidden': 'true' })), h('div', { class: 'te-body' }, ...nodes));
+    d.addEventListener('toggle', () => { if (d.open) teOpen.add(key); else teOpen.delete(key); });
+    return d;
+  }
+  function teRows(pg) {
+    const rows = [];
+    const entries = Object.entries(pg.schema || {});
+    const loose = Object.fromEntries(entries.filter(([, d]) => d.type !== 'group' && d.type !== 'list'));
+    if (Object.keys(loose).length) rows.push(teRow(`${pg.id}:_`, 'Genel', objectFields(loose, pg.path)));
+    for (const [k, d] of entries) if (d.type === 'group' || d.type === 'list') rows.push(teRow(`${pg.id}:${k}`, d.label || k, objectFields({ [k]: d }, pg.path)));
+    if (MOTION_FOR[pg.id]) rows.push(teRow(`${pg.id}:#hareket`, 'Hareket', objectFields(motionSchema(MOTION_FOR[pg.id]), ['theme'])));
+    return rows;
   }
 
   const commerce = window.GoatzCommerce({ h, request, toast, rerender: () => renderPage() });

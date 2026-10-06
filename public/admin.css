@@ -474,3 +474,46 @@ dialog.confirm-dlg { border: 2px solid var(--ink); border-radius: 20px; padding:
 #pages > button.back-btn:hover { background: var(--sun); color: var(--ink); }
 .panel-head #previewToggle { margin-left: auto; margin-right: 8px; }
 @media (max-width: 760px) { #previewToggle { display: none; } }
+
+/* ---------- Tema düzenleyici (ikas benzeri): sol sütunda liste, bölüm paneli sütunun üstüne kayar, önizleme hep açık ---------- */
+.theme-card:hover:not(.on) { background: var(--paper); }
+.theme-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+.theme-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+.te-head { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; padding: 6px 4px 10px; }
+.te-head b { font-size: 16px; font-weight: 900; }
+.te-head .te-sw { display: flex; width: 54px; }
+.te-head .te-sw i { flex: 1; height: 16px; border: 1.5px solid var(--ink); margin-left: -1.5px; }
+.te-head .te-sw i:first-child { border-radius: 999px 0 0 999px; margin-left: 0; }
+.te-head .te-sw i:last-child { border-radius: 0 999px 999px 0; }
+.te-head .btn:last-child, .te-head .te-badge + .btn { margin-left: auto; }
+.te-badge { font-size: 11px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 3px 10px; border: 1.5px solid var(--ink); border-radius: 999px; background: var(--sun); }
+.te-pagesel { width: 100%; min-height: 48px; padding: 0 14px; border: 2px solid var(--ink); border-radius: 12px; background: var(--paper); font-weight: 700; font-size: 14px; margin: 4px 0 10px; }
+.te-title { margin: 8px 4px 4px; font-size: 18px; font-weight: 900; }
+#pages > .te-item, #pages > .te-sub-back {
+  display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 12px 14px; text-align: left; cursor: pointer;
+  border: 0; border-bottom: 1px solid #e3e3e3; border-radius: 0; background: transparent; font-size: 14.5px; font-weight: 700; text-transform: none; letter-spacing: 0;
+}
+#pages > .te-item:hover, #pages > .te-sub-back:hover { background: var(--sun); transform: none; }
+#pages > .te-item .lbl { flex: 1; }
+#pages > .te-item .dot { flex: none; width: 11px; height: 11px; border-radius: 50%; border: 1px solid var(--ink); }
+#pages > .te-item .eye { font-size: 10px; font-weight: 700; padding: 2px 8px; border: 1px solid currentColor; border-radius: 999px; opacity: .7; }
+#pages > .te-item .te-note { color: var(--muted); font-size: 11px; font-weight: 600; }
+#pages .chev { flex: none; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: -45deg; }
+#pages > .te-settings { position: sticky; bottom: -32px; margin-top: 16px; background: var(--paper); border: 2px solid var(--ink); border-radius: 12px; font-weight: 900; }
+#pages > .te-sub-back { font-weight: 800; color: var(--muted); border-bottom: 0; min-height: 40px; }
+/* bölüm paneli içindeki açılır satırlar */
+.te-row { border-bottom: 1px solid #d9dbe2; background: var(--paper); border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--ink); overflow: hidden; }
+.te-row > summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 52px; padding: 12px 16px; cursor: pointer; list-style: none; font-weight: 800; font-size: 14.5px; }
+.te-row > summary::-webkit-details-marker { display: none; }
+.te-row > summary:hover { background: var(--sun); }
+.te-row > summary .chev { flex: none; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: -45deg; transition: rotate .15s; }
+.te-row[open] > summary .chev { rotate: 45deg; }
+.te-body { padding: 12px 14px 16px; border-top: 1px solid var(--ink); background: var(--bg); display: grid; gap: 12px; }
+.te-body .card, .te-body .inner-card { border-width: 1px; }
+.te-body .inner-card > h3 { display: none; }
+@media (min-width: 761px) {
+  .app.te .panel, .app.te .panel.wide { left: 0; width: var(--side); border-right: 1px solid var(--line); z-index: 25; }
+  .app.te .split.no-preview .preview { display: flex; }
+  .app.te .split-empty { display: none; }
+  .app.te #pages { gap: 0; }
+}
