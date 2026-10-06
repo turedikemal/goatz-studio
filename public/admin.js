@@ -59,7 +59,7 @@
 
     { group: 'Ürünler' },
     {
-      id: 'urunler', label: 'Ürün/Varyant', path: [], anchor: '#top', special: 'products',
+      id: 'urunler', label: 'Ürünler', path: [], anchor: '#top', special: 'products',
       intro: 'Ürünlerinizi ve varyantlarını yönetin. SEO, fiyat, stok ve görselleri ekleyin.',
     },
     {
