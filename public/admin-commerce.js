@@ -208,6 +208,53 @@ window.GoatzCommerce = (ctx) => {
     rerender();
   }
 
+  // Yan yana görseller; işaretçi olaylarıyla (fare + dokunmatik) sürükle-bırak sıralama.
+  function sortableThumbs(d) {
+    const wrap = h('div', { class: 'thumbs sortable' });
+    d.images.forEach((u, i) => wrap.append(h('div', { class: 'thumb', 'data-i': i },
+      h('img', { src: u, alt: '', draggable: 'false' }),
+      i === 0 ? h('span', { class: 'badge' }, 'Ana görsel') : null,
+      h('span', { class: 'grip', title: 'Sürükle' }, '⠿'),
+      h('button', { class: 'mini x', title: 'Kaldır', onpointerdown: (e) => e.stopPropagation(), onclick: () => { d.images.splice(i, 1); rerender(); } }, '×'))));
+    let drag = null;
+    wrap.addEventListener('pointerdown', (e) => {
+      const el = e.target.closest('.thumb'); if (!el || e.button > 0 || e.target.closest('button')) return;
+      drag = { el, id: e.pointerId, x: e.clientX, y: e.clientY, on: false, from: [...wrap.children].indexOf(el) };
+    });
+    wrap.addEventListener('pointermove', (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      const dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.on) {
+        if (Math.hypot(dx, dy) < 6) return;
+        drag.on = true; try { wrap.setPointerCapture(e.pointerId); } catch (_) {}
+        drag.el.classList.add('dragging'); wrap.classList.add('is-dragging');
+      }
+      e.preventDefault();
+      drag.el.style.transform = `translate(${dx}px,${dy}px)`;
+      drag.el.style.pointerEvents = 'none';
+      const over = document.elementFromPoint(e.clientX, e.clientY);
+      const t = over && over.closest ? over.closest('.thumb') : null;
+      if (t && t !== drag.el && t.parentNode === wrap) {
+        const kids = [...wrap.children], ti = kids.indexOf(t), di = kids.indexOf(drag.el);
+        const r0 = drag.el.getBoundingClientRect();
+        wrap.insertBefore(drag.el, ti > di ? t.nextSibling : t);
+        // DOM yer değiştirince başlangıç noktasını yeni yere göre düzelt (sıçrama olmasın)
+        const r1 = drag.el.getBoundingClientRect();
+        drag.x += r1.left - r0.left; drag.y += r1.top - r0.top;
+        drag.el.style.transform = `translate(${e.clientX - drag.x}px,${e.clientY - drag.y}px)`;
+      }
+    });
+    const end = () => {
+      if (!drag) return; const { el, on } = drag; drag = null;
+      if (!on) return;
+      el.style.transform = ''; el.style.pointerEvents = ''; el.classList.remove('dragging'); wrap.classList.remove('is-dragging');
+      const order = [...wrap.children].map((c) => Number(c.dataset.i));
+      if (order.some((v, i) => v !== i)) { d.images = order.map((i) => d.images[i]); rerender(); }
+    };
+    wrap.addEventListener('pointerup', end); wrap.addEventListener('pointercancel', end);
+    return wrap;
+  }
+
   function generateVariants() {
     const d = P.draft;
     const groups = data.properties.map((p) => ({ p, vals: p.values.filter((v) => (P.gen[p.id] || new Set()).has(v.id)) })).filter((g) => g.vals.length);
@@ -233,8 +280,25 @@ window.GoatzCommerce = (ctx) => {
     const slug = (d.slug || d.name || 'urun-adi').toLowerCase().replace(/[^a-z0-9ğüşıöç]+/g, '-');
     el.children[0].textContent = `goatz.com › urun › ${slug}`;
     el.children[1].textContent = d.seoTitle || d.name || 'Ürün başlığı';
-    el.children[2].textContent = d.seoDescription || (d.description || '').slice(0, 155) || 'Ürün açıklaması burada görünür.';
+    el.children[2].textContent = d.seoDescription || plain(d.description).slice(0, 155) || 'Ürün açıklaması burada görünür.';
   }
+
+  // Zengin metin editörü: taslak değişmesin diye her çizimde yeniden kurulur, içerik d.description'da tutulur.
+  function descEditor(d) {
+    if (!window.GoatzRich) return area(d, 'description', 'Ürün detayları, içerik, kullanım…', 6);
+    const ed = window.GoatzRich.create({
+      value: d.description || '', minHeight: 240,
+      onChange: (html) => { d.description = html; refreshSerp(); },
+      onUpload: async (f) => {
+        if (!/^image\/(png|jpeg|webp|gif)$/.test(f.type)) throw new Error('Yalnızca PNG, JPG, WEBP, GIF.');
+        const dataUrl = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(f); });
+        return (await api('POST', '/api/upload', { data: dataUrl })).url;
+      },
+    });
+    // field() bir <label>; tıklamalar editöre odaklanmasın diye div sarmalayıcı kullan
+    return h('div', { class: 'rte-wrap' }, ed.el);
+  }
+  const plain = (html) => { const t = document.createElement('div'); t.innerHTML = (window.GoatzRich ? window.GoatzRich.sanitize(html || '') : html || ''); return (t.textContent || '').replace(/\s+/g, ' ').trim(); };
 
   function productForm() {
     const d = P.draft;
@@ -242,12 +306,12 @@ window.GoatzCommerce = (ctx) => {
     const catOpts = opts(data.categories.map((c) => [c.id, (c.parent_id ? '↳ ' : '') + c.name]));
     const snippetTitle = d.seoTitle || d.name || 'Ürün başlığı';
     const snippetSlug = (d.slug || d.name || 'urun-adi').toLowerCase().replace(/[^a-z0-9ğüşıöç]+/g, '-');
-    const snippetDesc = d.seoDescription || (d.description || '').slice(0, 155) || 'Ürün açıklaması burada görünür.';
+    const snippetDesc = d.seoDescription || plain(d.description).slice(0, 155) || 'Ürün açıklaması burada görünür.';
 
     const basic = h('div', { class: 'card' }, h('h3', {}, '1 · Ürün bilgileri'), h('div', { class: 'stack' },
       field('Ürün adı *', text(d, 'name', 'Örn. Seramik Kaplı Soya Mumu', 'text', { oninput: (e) => { d.name = e.target.value; refreshSerp(); } })),
       row(field('Marka', select(d, 'brandId', opts(data.brands.map((b) => [b.id, b.name]), 'Marka seç'))), field('Kategori', select(d, 'categoryId', catOpts))),
-      field('Açıklama', area(d, 'description', 'Ürün detayları, içerik, kullanım…', 6))));
+      h('div', { class: 'field' }, h('span', {}, 'Açıklama'), descEditor(d))));
 
     const priceCard = h('div', { class: 'card' }, h('h3', {}, '2 · Fiyat ve vergi'), h('div', { class: 'stack' },
       row(field('Satış fiyatı (₺) *', text(d, 'salePrice', '0,00', 'number', { step: '0.01', min: '0' })), field('İndirimli fiyat (₺)', text(d, 'discountPrice', '', 'number', { step: '0.01', min: '0' }))),
@@ -290,9 +354,8 @@ window.GoatzCommerce = (ctx) => {
       h('div', { class: 'serp', id: 'serp' }, h('div', { class: 'serp-url' }, `goatz.com › urun › ${snippetSlug}`), h('div', { class: 'serp-title' }, snippetTitle), h('div', { class: 'serp-desc' }, snippetDesc))));
 
     const imgs = h('div', { class: 'card' }, h('h3', {}, 'Görseller'),
-      d.images.length ? h('div', { class: 'thumbs' }, ...d.images.map((u, i) => h('div', { class: 'thumb' }, h('img', { src: u, alt: '' }),
-        i === 0 ? h('span', { class: 'badge' }, 'Kapak') : h('button', { class: 'mini', title: 'Kapak yap', onclick: () => { d.images.unshift(d.images.splice(i, 1)[0]); rerender(); } }, '★'),
-        h('button', { class: 'mini x', title: 'Kaldır', onclick: () => { d.images.splice(i, 1); rerender(); } }, '×')))) : h('p', { class: 'hint' }, 'İlk görsel kapak olur.'),
+      d.images.length ? sortableThumbs(d) : h('p', { class: 'hint' }, 'Henüz görsel yok. İlk görsel ana görsel olur.'),
+      d.images.length > 1 ? h('p', { class: 'hint' }, 'Sırayı değiştirmek için görseli sürükleyin (dokunmatikte alttaki ⠿ tutamacından). İlk görsel ana görsel ve liste küçük resmidir.') : null,
       h('label', { class: 'btn small', style: 'margin-top:10px' }, '+ Görsel yükle', h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', multiple: true, hidden: true, onchange: (e) => uploadImages([...e.target.files]) })));
 
     const publish = h('div', { class: 'card' }, h('h3', {}, 'Yayın'), h('div', { class: 'stack' },
@@ -302,7 +365,7 @@ window.GoatzCommerce = (ctx) => {
       h('button', { class: 'btn wide', onclick: () => { P.view = 'list'; P.draft = null; rerender(); } }, 'Listeye dön')));
 
     return h('div', {}, h('div', { class: 'row-between' }, h('h3', { class: 'page-h' }, d.id ? 'Ürünü düzenle' : 'Yeni ürün')),
-      h('div', { class: 'product-layout' }, h('div', {}, basic, priceCard, stockCard, variantsCard, seoCard), h('div', {}, publish, imgs)));
+      h('div', { class: 'product-layout' }, h('div', {}, basic, imgs, priceCard, stockCard, variantsCard, seoCard), h('div', {}, publish)));
   }
 
   function productList() {
@@ -317,7 +380,9 @@ window.GoatzCommerce = (ctx) => {
     };
     const rows = items.map((p) => h('tr', {},
       h('td', {}, h('input', { type: 'checkbox', checked: P.selected.has(p.id), onchange: (e) => { e.target.checked ? P.selected.add(p.id) : P.selected.delete(p.id); rerender(); } })),
-      h('td', {}, h('button', { class: 'link', onclick: () => openProduct(p.id) }, p.name), p.sku ? h('div', { class: 'hint' }, p.sku) : null),
+      h('td', { class: 'prod-cell' },
+        (() => { const u = Array.isArray(p.images) ? p.images[0] : null; return u ? h('img', { class: 'prod-thumb', src: u, alt: '', loading: 'lazy' }) : h('span', { class: 'prod-thumb empty', 'aria-hidden': 'true' }); })(),
+        h('div', {}, h('button', { class: 'link', onclick: () => openProduct(p.id) }, p.name), p.sku ? h('div', { class: 'hint' }, p.sku) : null)),
       h('td', {}, p.brand_name || '—'), h('td', {}, p.category_name || '—'),
       h('td', {}, p.discount_price ? h('span', {}, h('s', { class: 'muted' }, money(p.sale_price)), ' ', money(p.discount_price)) : money(p.sale_price)),
       h('td', {}, p.total_stock), h('td', {}, p.variant_count > 1 || p.named_variants ? p.variant_count : '—'),
