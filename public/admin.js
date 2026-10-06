@@ -754,6 +754,7 @@
     $('#app').hidden = false;
     const bl = $('.brand .logo-dot');
     if (state.brand.logoImage && bl) { bl.classList.add('has-img'); bl.replaceChildren(h('img', { src: state.brand.logoImage, alt: '' })); }
+    navFollow = location.hash.length > 1;
     renderNav();
     renderPage();
     refreshPreview(true);
@@ -1008,7 +1009,8 @@
   });
 
   // Sol menü akordeonu: aynı anda yalnız bir grup açık; varsayılan hepsi kapalı, aktif sayfanın grubu açılır.
-  let openGroup = null, navFollow = false;
+  let openGroup = null, navFollow = false, navView = 'main'; // navView: 'main' ana menü, 'theme' yalnız tema görünümü
+  const TEMA = 'Tema Yönetimi';
   function selectPage(p) {
     page = p;
     navFollow = true;
@@ -1021,6 +1023,22 @@
     openPanel();
   }
   const homePage = () => PAGES.find((x) => x.id === 'hero');
+
+  // "Panele dön": kaydedilmemiş değişiklik varsa sorar, yoksa sormadan döner.
+  function goBack() {
+    const leave = () => { navView = 'main'; $('#panel').classList.remove('open'); renderNav(); };
+    if (!isDirty()) { leave(); return; }
+    const dlg = h('dialog', { class: 'modal confirm-dlg', 'aria-label': 'Kaydetmek istiyor musunuz?' },
+      h('div', { class: 'modal-head' }, h('h3', {}, 'Kaydetmek istiyor musunuz?')),
+      h('p', { style: 'padding:0 18px' }, 'Kaydedilmemiş değişiklikler var.'),
+      h('div', { style: 'display:flex;flex-wrap:wrap;gap:8px;padding:14px 18px 18px;justify-content:flex-end' },
+        h('button', { type: 'button', class: 'btn', onclick: () => dlg.close() }, 'İptal'),
+        h('button', { type: 'button', class: 'btn', onclick: () => { dlg.close(); leave(); } }, 'Kaydetmeden dön'),
+        h('button', { type: 'button', class: 'btn solid', onclick: async () => { dlg.close(); await save(); if (!isDirty()) leave(); } }, 'Kaydet ve dön')));
+    dlg.addEventListener('close', () => dlg.remove());
+    document.body.appendChild(dlg);
+    dlg.showModal();
+  }
 
   // Sol menü: sitenin temasıyla aynı dilde çizilir ve ana sayfa bölümleri sitedeki gerçek sırayla dizilir.
   // Her bölümün yanındaki nokta, o bölümün sitedeki zemin rengidir.
@@ -1088,6 +1106,7 @@
           currentGroup = p.group;
           // "Genel Bakış" başlığı yok: Dashboard başlıksız, en üstte tek düğme olarak durur.
           if (p.group === 'Genel Bakış') curG = null;
+          else if (p.group === TEMA) curG = TEMA; // başlık yok: ana menüde tek düğme, tema görünümünde düz liste
           else { items.push(head(p.group, groupColors[p.group] || 'var(--bg)')); curG = p.group; }
         }
       } else if (p.id) {
@@ -1119,8 +1138,27 @@
       selectPage(customDef(p));
     } }, '+ Yeni sayfa'));
 
-    if (navFollow) { navFollow = false; if (pageGroup[page.id]) openGroup = pageGroup[page.id]; }
-    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== openGroup; });
+    if (navFollow) {
+      navFollow = false;
+      navView = pageGroup[page.id] === TEMA ? 'theme' : 'main';
+      if (pageGroup[page.id] && pageGroup[page.id] !== TEMA) openGroup = pageGroup[page.id];
+    }
+    const isTema = (it) => gOf.get(it) === TEMA;
+    const temaItems = items.filter(isTema);
+    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== TEMA && g !== openGroup; });
+    let shown;
+    if (navView === 'theme') {
+      temaItems.forEach((it) => { it.hidden = false; });
+      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön'), ...temaItems];
+    } else {
+      shown = items.filter((it) => !isTema(it));
+      shown.push(h('button', { type: 'button', class: 'group nav-link', onclick: () => {
+        navView = 'theme';
+        const t = PAGES.find((x) => x.id === 'tema-overview');
+        if (t) selectPage(t); else renderNav();
+      } }, h('span', { class: 'lbl' }, TEMA), h('i', { class: 'chev', 'aria-hidden': 'true' })));
+    }
+    items.length = 0; items.push(...shown);
     nav.replaceChildren(...items);
   }
   $('#menuToggle').addEventListener('click', () => $('.sidebar').classList.toggle('open'));

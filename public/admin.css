@@ -459,3 +459,16 @@ body.rte-lock { overflow: hidden; }
 :is(#pages > button:not(.group), #pages > .nav-row > button) { border-width: 1px; }
 #pages > button:not(.group), #pages > .nav-row { margin-left: 14px; width: calc(100% - 14px); }
 #pages > button:not(.group):first-child { margin-left: 0; width: 100%; }
+
+/* Tema görünümü: Panele dön + ana menüdeki Tema Yönetimi düğmesi */
+#pages > button.back-btn { min-height: 54px; width: 100%; padding: 14px 22px; border: 2px solid var(--ink); border-radius: 999px; background: var(--ink); color: var(--paper); font-size: 14.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; text-align: left; margin: 0 0 12px; }
+#pages > button.back-btn:hover { background: #222; transform: none; }
+#pages > button.group.nav-link { margin-top: 18px; }
+#pages > button.group.nav-link .chev { rotate: -45deg; }
+dialog.confirm-dlg { border: 2px solid var(--ink); border-radius: 20px; padding: 0; max-width: min(480px, 92vw); }
+
+/* Üzerine gelince sitenin sarısı; aktif öğe siyah dolu kalır */
+#pages > button.group:hover, #pages > button.group.nav-link:hover { background: var(--sun); filter: none; }
+:is(#pages > button:not(.group):not(.back-btn), #pages > .nav-row > button):hover { background: var(--sun); color: var(--ink); }
+:is(#pages > button:not(.group), #pages > .nav-row > button).on, :is(#pages > button:not(.group), #pages > .nav-row > button).on:hover { background: var(--ink); color: var(--paper); }
+#pages > button.back-btn:hover { background: var(--sun); color: var(--ink); }
