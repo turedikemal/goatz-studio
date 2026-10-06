@@ -281,8 +281,17 @@ body.is-dragging-nav, body.is-dragging-nav * { cursor: grabbing !important; user
 .thumb .badge { position: absolute; left: 4px; top: 4px; font-size: 10px; font-weight: 800; background: var(--mint); border: 1px solid var(--line); border-radius: 999px; padding: 1px 6px; }
 .thumb .mini { position: absolute; left: 4px; top: 4px; width: 22px; height: 22px; border: 1px solid var(--line); border-radius: 50%; background: var(--paper); cursor: pointer; font-size: 11px; }
 .thumb .mini.x { left: auto; right: 4px; }
-.serp { padding: 12px 14px; border: 1px solid var(--soft); border-radius: 14px; background: var(--paper); }
-.serp-url { font-size: 12px; color: #1e7a3c; } .serp-title { font-size: 18px; color: #1a0dab; margin: 2px 0; } .serp-desc { font-size: 13px; color: #4d5156; }
+/* Google arama sonucu görünümü (masaüstü) */
+.serp { padding: 16px 18px; border: 1px solid #dadce0; border-radius: 8px; background: #fff; font-family: Arial, sans-serif; text-align: left; }
+.serp-head { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.serp-fav { flex: none; width: 28px; height: 28px; border-radius: 50%; background: #f1f3f4; border: 1px solid #ecedef; display: grid; place-items: center; overflow: hidden; }
+.serp-fav img { width: 18px; height: 18px; object-fit: contain; display: block; }
+.serp-site { display: grid; min-width: 0; line-height: 20px; }
+.serp-name { font-size: 14px; color: #202124; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.serp-url { font-size: 12px; line-height: 18px; color: #4d5156; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.serp-more { margin-left: auto; color: #4d5156; font-size: 16px; line-height: 1; padding: 0 2px; }
+.serp-title { font-size: 20px; line-height: 26px; color: #1a0dab; font-weight: 400; margin: 6px 0 4px; }
+.serp-desc { font-size: 14px; line-height: 22px; color: #4d5156; }
 
 /* Satış modülleri */
 .pill.s-received, .pill.s-pending, .pill.s-requested { background: var(--sun); }
@@ -624,7 +633,7 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .seo-adv .stack { padding-bottom: 14px; }
 .seo-prev { border: 2px solid var(--ink); border-radius: 16px; padding: 14px; background: var(--sun); display: grid; gap: 10px; position: sticky; top: 10px; }
 .seo-prev-h { font-weight: 900; font-style: italic; }
-.seo-prev .serp { background: var(--paper); border: 2px solid var(--ink); overflow-wrap: anywhere; }
+.seo-prev .serp { overflow-wrap: anywhere; }
 .seo-prev .hint { margin: 0; color: var(--ink); }
 .seo-sec { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--soft); }
 .seo-sec h4 { margin: 0 0 10px; font-size: 14px; font-weight: 900; font-style: italic; }
