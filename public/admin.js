@@ -1161,7 +1161,7 @@
       push(row(main, [tool('✕', 'Sayfayı sil', false, () => deletePage(pg.id), 'danger')], def.id === page.id, { group: 'pages', id: pg.id }));
     });
     push(h('button', { class: 'add-page', onclick: () => {
-      if (state.pages.length >= 30) { toast('En fazla 30 sayfa oluşturabilirsin.', true); return; }
+      if (state.pages.length >= 100) { toast('En fazla 100 sayfa oluşturabilirsin.', true); return; }
       const p = newPage();
       state.pages.push(p);
       changed();
@@ -1577,7 +1577,7 @@
         openLink,
         h('button', { type: 'button', class: 'btn small', disabled: idx === 0, onclick: () => move(-1) }, '↑ Menüde öne al'),
         h('button', { type: 'button', class: 'btn small', disabled: idx === state.pages.length - 1, onclick: () => move(1) }, '↓ Menüde geri al'),
-        h('button', { type: 'button', class: 'btn small', disabled: state.pages.length >= 30, onclick: () => {
+        h('button', { type: 'button', class: 'btn small', disabled: state.pages.length >= 100, onclick: () => {
           const copy = structuredClone(pg);
           copy.id = `p${Math.random().toString(36).slice(2, 8)}`;
           copy.title = `${pg.title} (kopya)`; copy.slugAuto = true;
@@ -1585,6 +1585,7 @@
           changed(); selectPage(customDef(copy));
         } }, '⧉ Kopyala'),
         h('button', { type: 'button', class: 'btn small danger', onclick: () => deletePage(pg.id) }, 'Sayfayı sil')));
+    if (editTheme) return [actions, ...teRows({ id: `pg:${pg.id}`, schema: PAGE_SCHEMA, path: ['pages', idx] })];
     return [actions, ...objectFields(PAGE_SCHEMA, ['pages', idx], true)];
   }
 
@@ -1846,6 +1847,53 @@
       h('p', { class: 'hint' }, 'Gece görünümünün renkleri koda gömülüdür, buradan değişmez. Marka ve SEO, görseller, sayfalar ve işler tüm temalar için ortaktır.'));
   }
 
+  // Sayfa seçici (ikas gibi özel açılır liste): üstte standart sayfalar (sitede gerçekten karşılığı olanlar), altta diğer mevcut sayfalar.
+  const STD_PAGES = [['home', 'Anasayfa'], ['hizmetler', 'Hizmetler Sayfası'], ['iletisim', 'İletişim Sayfası'], ['teklifal', 'Teklif Al Sayfası'], ['sepet', 'Sepet Sayfası'], ['sss', 'Sık Sorulan Sorular Sayfası'], ['blog', 'Blog Anasayfa'], ['@blog', 'Blog Yazısı Sayfası']];
+  function pageEntries() {
+    const std = [];
+    for (const [id, name] of STD_PAGES) {
+      if (id === 'home') { std.push({ id, name }); continue; }
+      if (id === '@blog') { const b = state.pages.find((x) => x.kind === 'blog'); if (b) std.push({ id: b.id, name, sub: b.title }); continue; }
+      if (state.pages.some((x) => x.id === id)) std.push({ id, name });
+    }
+    const stdIds = new Set(std.map((e) => e.id));
+    const custom = state.pages.filter((x) => !STD_PAGES.some(([sid]) => sid === x.id)).map((x) => ({ id: x.id, name: x.title || 'Sayfa', del: true }));
+    return { std, custom, stdIds };
+  }
+  function pagePicker() {
+    const { std, custom } = pageEntries();
+    const cur = std.find((e) => e.id === tePageSel) || custom.find((e) => e.id === tePageSel) || std[0];
+    const wrap = h('div', { class: 'te-dd' });
+    const menu = h('div', { class: 'te-dd-menu', role: 'listbox', hidden: true });
+    const close = () => { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+    const pick = (id) => {
+      tePageSel = id; previewPage = id === 'home' ? null : id;
+      $('#panel').classList.remove('open'); renderNav(); refreshPreview(true);
+    };
+    const item = (e) => h('div', { class: `te-dd-row${e.id === tePageSel ? ' on' : ''}` },
+      h('button', { type: 'button', class: 'te-dd-item', role: 'option', 'aria-selected': String(e.id === tePageSel), onclick: () => pick(e.id) },
+        h('span', { class: 'te-dd-check', 'aria-hidden': 'true' }, e.id === tePageSel ? '✓' : ''), h('span', { class: 'te-dd-name' }, e.name), e.sub ? h('small', {}, e.sub) : null),
+      e.del ? h('button', { type: 'button', class: 'te-dd-del', title: 'Sayfayı sil', 'aria-label': `${e.name} sayfasını sil`, onclick: () => {
+        close();
+        if (!confirm(`"${e.name}" sayfası silinsin mi?`)) return;
+        if (tePageSel === e.id) { tePageSel = 'home'; previewPage = null; }
+        page = PAGES.find((x) => x.id === 'tema-overview'); $('#panel').classList.remove('open');
+        deletePage(e.id); refreshPreview(true);
+      } }, '🗑') : null);
+    menu.append(...std.map(item), h('div', { class: 'te-dd-sep' }, 'Diğer sayfalar'), ...custom.map(item),
+      h('button', { type: 'button', class: 'te-dd-new', onclick: () => {
+        close();
+        if (state.pages.length >= 100) { toast('En fazla 100 sayfa oluşturabilirsin.', true); return; }
+        const np = newPage(); state.pages.push(np); changed(); tePageSel = np.id; selectPage(customDef(np));
+      } }, '⊕ Yeni Sayfa Oluştur'));
+    const btn = h('button', { type: 'button', class: 'te-dd-btn', 'aria-haspopup': 'listbox', 'aria-expanded': 'false', onclick: (ev) => { ev.stopPropagation(); menu.hidden = !menu.hidden; btn.setAttribute('aria-expanded', String(!menu.hidden)); if (!menu.hidden) menu.querySelector('.on .te-dd-item')?.scrollIntoView({ block: 'nearest' }); } },
+      h('span', { class: 'lbl' }, cur ? cur.name : 'Anasayfa'), h('i', { class: 'chev', 'aria-hidden': 'true' }));
+    wrap.append(btn, menu);
+    wrap.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') { close(); btn.focus(); } });
+    return wrap;
+  }
+  document.addEventListener('click', (e) => { document.querySelectorAll('.te-dd-menu:not([hidden])').forEach((m) => { if (!e.target.closest('.te-dd')) { m.hidden = true; m.parentNode.querySelector('.te-dd-btn')?.setAttribute('aria-expanded', 'false'); } }); });
+
   // ---- Tema düzenleyici (sol sütun): sayfa seçici + bölüm listesi + Tema Ayarları ----
   function renderThemeNav() {
     const nav = $('#pages');
@@ -1878,19 +1926,21 @@
         rows.push(rowBtn(p, null, id === 'brand' ? 'ortak' : ''));
       }
     } else {
-      const sel = h('select', { class: 'te-pagesel', 'aria-label': 'Sayfa seç', onchange: () => {
-        tePageSel = sel.value; previewPage = tePageSel === 'home' ? null : tePageSel;
-        $('#panel').classList.remove('open'); renderNav(); refreshPreview(true);
-      } }, h('option', { value: 'home' }, 'Anasayfa'),
-      ...state.pages.map((pg) => h('option', { value: pg.id }, pg.title || 'Sayfa')));
-      sel.value = tePageSel;
-      rows.push(sel);
+      rows.push(pagePicker());
       if (tePageSel === 'home') {
         const flow = [PAGES.find((x) => x.id === 'ticker'), PAGES.find((x) => x.id === 'nav'), ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)).filter(Boolean)];
         flow.forEach((p) => rows.push(rowBtn(p)));
       } else {
         const pg = state.pages.find((x) => x.id === tePageSel);
-        if (pg) rows.push(rowBtn(customDef(pg), 'Sayfa ayarları ve blokları'));
+        if (pg) {
+          // Sayfanın kendi bölümleri: ayarlar, Google, üst başlık ve içerik blokları (her biri panelde açılır satır).
+          for (const k of Object.keys(PAGE_SCHEMA)) {
+            const d = PAGE_SCHEMA[k];
+            const label = k === 'blocks' ? `${d.label} (${pg.blocks.length})` : d.label;
+            rows.push(h('button', { type: 'button', class: 'te-item', onclick: () => { teOpen.add(`pg:${pg.id}:${k}`); selectPage(customDef(pg)); } },
+              h('span', { class: 'lbl' }, label), h('i', { class: 'chev', 'aria-hidden': 'true' })));
+          }
+        }
       }
       rows.push(h('button', { type: 'button', class: 'te-item te-settings', onclick: () => { teView = 'settings'; renderNav(); } },
         h('span', { class: 'lbl' }, 'Tema Ayarları'), h('i', { class: 'chev', 'aria-hidden': 'true' })));

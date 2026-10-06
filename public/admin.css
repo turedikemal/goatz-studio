@@ -528,3 +528,29 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .cat-name { display: inline-flex; align-items: center; gap: 6px; }
 .cat-arrow { display: inline-block; width: 14px; font-size: 12px; transition: transform .15s; } .cat-arrow.open { transform: rotate(90deg); }
 .cat-badge { padding: 0 7px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 700; background: var(--paper); }
+
+/* Sayfa seçici (özel açılır liste) */
+.te-dd { position: relative; margin: 4px 0 10px; }
+.te-dd-btn { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 52px; padding: 0 16px; border: 2px solid var(--ink); border-radius: 12px; background: var(--paper); font-size: 15px; font-weight: 800; text-align: left; cursor: pointer; }
+.te-dd-btn:hover { background: var(--sun); }
+.te-dd-btn .lbl { flex: 1; }
+.te-dd-btn .chev { flex: none; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: 45deg; margin-top: -3px; }
+.te-dd-btn[aria-expanded="true"] .chev { rotate: -135deg; margin-top: 3px; }
+.te-dd-menu { position: absolute; z-index: 40; left: 0; right: 0; top: calc(100% + 6px); max-height: min(62vh, 520px); overflow-y: auto; background: var(--paper); border: 2px solid var(--ink); border-radius: 12px; padding: 6px 0 0; }
+.te-dd-row { display: flex; align-items: stretch; }
+.te-dd-item { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 0; background: transparent; text-align: left; font-size: 14px; font-weight: 600; cursor: pointer; }
+.te-dd-row.on .te-dd-item { font-weight: 800; }
+.te-dd-row:hover { background: var(--sun); }
+.te-dd-check { width: 16px; flex: none; font-weight: 900; }
+.te-dd-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.te-dd-item small { color: var(--muted); font-size: 11px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.te-dd-row:hover .te-dd-item small { color: var(--ink); }
+.te-dd-del { flex: none; width: 40px; border: 0; background: transparent; cursor: pointer; font-size: 15px; opacity: 0; }
+.te-dd-row:hover .te-dd-del, .te-dd-del:focus-visible { opacity: 1; }
+.te-dd-del:hover { color: var(--danger); }
+.te-dd-sep { margin-top: 6px; padding: 10px 14px 4px; border-top: 1px solid var(--ink); font-size: 11px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.te-dd-new { position: sticky; bottom: 0; display: block; width: 100%; min-height: 48px; padding: 12px 14px; border: 0; border-top: 1px solid var(--ink); background: var(--violet); color: #fff; font-size: 14px; font-weight: 800; text-align: left; cursor: pointer; }
+.te-dd-new:hover { background: var(--sun); color: var(--ink); }
+@media (hover: none) { .te-dd-del { opacity: 1; } }
+#pages .te-dd-btn .chev { rotate: 45deg; margin-top: -3px; }
+#pages .te-dd-btn[aria-expanded="true"] .chev { rotate: -135deg; margin-top: 3px; }
