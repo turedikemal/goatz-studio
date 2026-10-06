@@ -1086,8 +1086,9 @@
       if (p.group) {
         if (currentGroup !== p.group) {
           currentGroup = p.group;
-          items.push(head(p.group, groupColors[p.group] || 'var(--bg)'));
-          curG = p.group;
+          // "Genel Bakış" başlığı yok: Dashboard başlıksız, en üstte tek düğme olarak durur.
+          if (p.group === 'Genel Bakış') curG = null;
+          else { items.push(head(p.group, groupColors[p.group] || 'var(--bg)')); curG = p.group; }
         }
       } else if (p.id) {
         if (inFlow(p)) {
