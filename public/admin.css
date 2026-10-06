@@ -596,3 +596,16 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .vt-empty { font-weight: 900; font-size: 18px; }
 .vt-up { cursor: pointer; }
 @media (max-width: 560px) { .vt-styles { grid-template-columns: 1fr; } }
+
+/* Sıkı sol menü: satırlar birbirine yakın (başlıklar ~8px, alt öğeler ~4px aralıklı) */
+#pages { gap: 4px; }
+#pages > button.group { min-height: 46px; margin: 4px 0 0; padding: 8px 20px; }
+#pages > button.group:first-child { margin-top: 0; }
+:is(#pages > button:not(.group), #pages > .nav-row > button) { min-height: 44px; padding-top: 10px; padding-bottom: 10px; }
+#pages > button.back-btn { min-height: 46px; padding: 10px 22px; margin: 0 0 8px; }
+#pages > .te-item { min-height: 44px; padding-top: 10px; padding-bottom: 10px; }
+#pages > button.group.nav-link { margin-top: 4px; }
+#pages > .add-page { min-height: 44px; }
+.te-head { padding: 2px 4px 6px; }
+.te-dd { margin: 0 0 6px; }
+.te-dd-btn { min-height: 46px; }
