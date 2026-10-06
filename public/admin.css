@@ -629,3 +629,17 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .seo-sec { margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--soft); }
 .seo-sec h4 { margin: 0 0 10px; font-size: 14px; font-weight: 900; font-style: italic; }
 @media (max-width: 720px) { .seo-grid { grid-template-columns: 1fr; } .seo-prev { position: static; } }
+
+/* Yazı tipi seçici (Tema Ayarları > Yazı tipi) */
+.fp-cur { font-size: 26px; line-height: 1.2; font-weight: 700; padding: 8px 12px; border: 2px solid var(--ink, #111); border-radius: 12px; background: #fff; margin: 6px 0 4px; overflow-wrap: anywhere; }
+.fp-tools { display: flex; gap: 6px; margin: 8px 0 4px; }
+.fp-tools input { flex: 1; min-width: 0; }
+.fp-count { display: block; opacity: .6; margin: 2px 0 4px; }
+.fp-list { max-height: 340px; overflow-y: auto; border: 2px solid var(--ink, #111); border-radius: 12px; background: #fff; }
+.fp-row { display: block; width: 100%; text-align: left; font-size: 19px; line-height: 1.25; padding: 9px 12px; border: 0; border-bottom: 1px solid rgba(0,0,0,.1); background: transparent; color: inherit; cursor: pointer; content-visibility: auto; contain-intrinsic-size: auto 40px; }
+.fp-row:hover { background: #ffe34d; }
+.fp-row.on { background: #111; color: #fff; }
+.fp-status { display: block; margin-top: 6px; min-height: 1.2em; }
+.fp-status.err { color: #b3261e; font-weight: 700; }
+.fp .fp-tools input { width: auto; flex: 1 1 0; }
+.fp .fp-tools select { flex: 0 0 112px; width: 112px; }

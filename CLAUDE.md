@@ -99,3 +99,8 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Hizmetler ve İşler'de dar ekran (<1200px) için alt hap kaldırıldı: `svc-nav.js` `.svc-bar` artık üst menünün altına yapışan yatay kaydırılan şerit (üstten 64px, tam genişlik, solan kenarlar). Çip = renkli nokta + kısa ad (`SHORT`; tam ad `aria-label`), 44px yükseklik; aktif çip kategori renginde dolu, kalın siyah çerçeve, kaydırınca görünüme kayar. CSS: site.css "Dar ekran (<1200px) kategori şeridi". ≥1200px sol kapsüller aynen.
 - Alt köşelerde yalnız sepet (sol) ve yukarı oku (sağ), 44px yuvarlak; çerez şeridi açıkken `--sb-b` ile şeridin üstüne çıkar. Kategoriye gidişte üstte 128px pay bırakılır (şerit başlığı örtmesin).
 - Kontrol edilmeyen: gerçek iPhone Safari (safe-area, adres çubuğu); yalnız Playwright. Ekran görüntüleri `/mnt/project-files/mobil-filtre-v2/`.
+
+## Tek yazı tipi (2026-10-06)
+- Sitede tek yazı tipi var: `theme.font` (Google Fonts aile adı, tema başına; varsayılan `Inter`). Eski `bodyFont`/`displayFont`/metin başına `font` kalktı. Panel: Tema Ayarları > Yazı tipi (arama + her satır kendi yazı tipiyle; önizleme CSS'i yalnız panelde Google'dan gelir).
+- Ziyaretçi Google'a gitmez: `lib/fonts.js` seçilen ailenin woff2 (latin + latin-ext) dosyalarını indirir, `data/fonts/<ad>/` (+ `persist` ile PostgreSQL), `/fonts/<ad>/font.css`. Katalog `lib/fonts-catalog.json` (1526 aile, Türkçe karakterli). `POST /api/fonts/ensure`; kayıtta indirilemeyen yazı tipi önceki yazı tipine döner (`fontWarning`). `data/fonts/inter` git'te (varsayılan, ağ gerekmesin), ötekiler git dışı sayılmalı/commit edilmez.
+- Yalnız 400/500/700/900 inen kalınlıklar; sahte kalın kapalı (`font-synthesis-weight:none`), italik yoksa tarayıcı eğik üretir.

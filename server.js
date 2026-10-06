@@ -9,6 +9,7 @@ const { resolvePages, resolveWorks, pagePath } = require('./lib/schema');
 const db = require('./lib/db');
 const promo = require('./lib/promo');
 const persist = require('./lib/persist');
+const fonts = require('./lib/fonts');
 const salesRoutes = require('./lib/sales-routes');
 
 const PORT = Number(process.env.PORT) || 5173;
@@ -21,7 +22,7 @@ const MAX_UPLOAD = 8 * 1024 * 1024;
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
   '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif',
-  '.svg': 'image/svg+xml', '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2',
 };
 const IMAGE_MAGIC = {
   'image/png': [[0x89, 0x50, 0x4e, 0x47]],
@@ -136,6 +137,25 @@ function safeJoin(dir, name) {
   return file.startsWith(dir + path.sep) ? file : null;
 }
 
+// Kaydedilecek içerikteki yazı tipleri (yayındaki ve temaların) sunucuda yoksa indirilir; olmazsa kayıttaki önceki yazı tipi kalır.
+async function fontGuard(raw) {
+  if (!raw || typeof raw !== 'object') return '';
+  const prev = store.load();
+  const warns = [];
+  const check = async (t, prevT, label) => {
+    if (!t || typeof t !== 'object' || !t.font || t.font === fonts.DEFAULT_FAMILY) return;
+    try { await fonts.ensure(t.font); } catch (e) {
+      console.warn(`Yazı tipi indirilemedi (${t.font}):`, e.message);
+      const old = prevT && prevT.font;
+      warns.push(`"${t.font}" sunucuya indirilemedi${label}, önceki yazı tipi korundu.`);
+      t.font = old && (old === fonts.DEFAULT_FAMILY || fonts.has(old)) ? old : fonts.DEFAULT_FAMILY;
+    }
+  };
+  await check(raw.theme, prev.theme, '');
+  for (const [id, sl] of Object.entries(raw.themes || {})) await check(sl && sl.theme, prev.themes && prev.themes[id] && prev.themes[id].theme, ` (${id} teması)`);
+  return warns.join(' ');
+}
+
 // ---------- API ----------
 async function api(req, res, url) {
   const route = `${req.method} ${url.pathname}`;
@@ -231,7 +251,19 @@ async function api(req, res, url) {
 
   if (route === 'GET /api/content') return json(res, 200, store.load());
   if (route === 'GET /api/defaults') return json(res, 200, store.DEFAULTS);
-  if (route === 'PUT /api/content') return json(res, 200, store.save(await readJson(req, 8 * 1024 * 1024)));
+  if (route === 'PUT /api/content') {
+    const raw = await readJson(req, 8 * 1024 * 1024);
+    const warn = await fontGuard(raw);
+    const saved = store.save(raw);
+    return json(res, 200, warn ? { ...saved, fontWarning: warn } : saved);
+  }
+  // Yazı tipi: katalog (panel seçicisi) ve sunucuya indirme. Başarısızsa panel eski yazı tipini korur.
+  if (route === 'GET /api/fonts/catalog') return json(res, 200, fonts.CATALOG, { 'Cache-Control': 'private, max-age=86400' });
+  if (route === 'POST /api/fonts/ensure') {
+    const family = String((await readJson(req)).family || '');
+    try { await fonts.ensure(family); return json(res, 200, { ok: true }); }
+    catch (e) { console.warn(`Yazı tipi indirilemedi (${family}):`, e.message); return json(res, 502, { error: `"${family}" indirilemedi, önceki yazı tipi korundu. Sunucunun internet erişimini kontrol et ya da başka bir yazı tipi seç.` }); }
+  }
 
   if (route === 'POST /api/preview') {
     const html = render(store.conform(store.DEFAULTS, await readJson(req)), { preview: true });
@@ -569,6 +601,17 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === '/admin' || url.pathname === '/admin/') {
       return serveFile(res, path.join(PUBLIC_DIR, 'admin.html'));
     }
+    if (url.pathname.startsWith('/fonts/')) {
+      const fm = /^\/fonts\/([a-z0-9-]+)\/(font\.css|[a-f0-9]{12}\.woff2)$/.exec(url.pathname);
+      if (!fm) return send(res, 404, 'Bulunamadı');
+      const file = path.join(fonts.FONT_DIR, fm[1], fm[2]);
+      if (fm[2] === 'font.css' && !fs.existsSync(file)) {
+        // Veritabanı boşsa ya da dosyalar kaybolduysa katalogdaki aile yeniden indirilir
+        const fam = fonts.CATALOG.find((r) => fonts.slug(r[0]) === fm[1]);
+        if (fam) { try { await fonts.ensure(fam[0]); } catch { /* dosya yok: 404 */ } }
+      }
+      return serveFile(res, file, fm[2] === 'font.css' ? 'public, max-age=3600' : 'public, max-age=31536000, immutable');
+    }
     if (url.pathname.startsWith('/uploads/')) {
       const upName = decodeURIComponent(url.pathname.slice('/uploads/'.length));
       const moved = imageRedirects()[upName];
@@ -638,6 +681,12 @@ const server = http.createServer(async (req, res) => {
   } catch (e) {
     console.error('Database init error:', e.message);
   }
+  // Sitede kullanılan yazı tipleri (yayındaki ve temaların) sunucuda yoksa arka planda indirilir
+  try {
+    const c = store.load();
+    const used = new Set([fonts.DEFAULT_FAMILY, c.theme && c.theme.font, ...Object.values(c.themes || {}).map((x) => x && x.theme && x.theme.font)].filter(Boolean));
+    for (const f of used) fonts.ensure(f).catch((e) => console.warn(`Yazı tipi indirilemedi (${f}):`, e.message));
+  } catch (e) { console.warn('Yazı tipi denetimi:', e.message); }
 
   server.listen(PORT, () => {
     console.log(`The Goatz Studio: http://localhost:${PORT}  ·  Panel: http://localhost:${PORT}/admin`);

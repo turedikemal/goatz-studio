@@ -34,12 +34,6 @@
   const ribbon = group('Mavi kurdele', { visible: bool('Kurdeleyi göster'), color: color('Kurdele rengi') });
   const lineHint = 'Satır atlamak için Enter\'a bas.';
   const style = (label, o = {}) => ({ type: 'style', label, ...o });
-  const FONTS = {
-    inter: 'Inter', archivo: 'Archivo', bricolage: 'Bricolage Grotesque', spacegrotesk: 'Space Grotesk', dmsans: 'DM Sans',
-    outfit: 'Outfit', sora: 'Sora', jakarta: 'Plus Jakarta Sans', poppins: 'Poppins', unbounded: 'Unbounded',
-    syne: 'Syne', oswald: 'Oswald', anton: 'Anton', playfair: 'Playfair Display', dmserif: 'DM Serif Display',
-  };
-  const FONT_OPTS = Object.entries(FONTS);
   const stickerList = (label) => list(label, group('', {
     type: sticker('Sticker'),
     pos: group('Masaüstündeki konum', { x: number('Soldan', -10, 100, '%'), y: number('Yukarıdan', -10, 100, '%') }, { flat: true, row: true }),
@@ -232,8 +226,6 @@
           panelGap: number('Bölümler arası boşluk', 0, 60, 'px'),
         }, { flat: true }),
         typo: group('Genel yazı ayarları', {
-          bodyFont: select('Metin yazı tipi', FONT_OPTS),
-          displayFont: select('Dev başlık yazı tipi', FONT_OPTS),
           bodyTracking: number('Metin harf aralığı', -10, 20, '%', 0.5),
           bodyLeading: number('Metin satır aralığı', 80, 250, '%'),
           displayTracking: number('Dev başlık harf aralığı', -15, 10, '%'),
@@ -667,6 +659,7 @@
     PAGES.splice(mi + 1, 0,
       { id: 'm-text', label: 'Başlık hareketleri', path: ['theme'], anchor: '#top', schema: { motion: group('Başlık hareketleri', { reveal: MF.reveal, headings: MF.headings }) } },
       { id: 'm-sticker', label: 'Sticker hareketleri', path: ['theme'], anchor: '#top', schema: { motion: group('Sticker hareketleri', { pop: MF.pop }) } },
+      { id: 'm-font', label: 'Yazı tipi', path: ['theme'], anchor: '#top', schema: { font: { type: 'fontpicker', label: 'Sitenin yazı tipi' } } },
       { id: 'm-global', label: 'Kaydırma ve hız', path: ['theme'], anchor: '#top', schema: { animations: bool('Tüm hareketler (kapatırsan sitede hiçbir şey oynamaz)'), motion: group('Kaydırma ve hız', { smooth: MF.smooth, speed: MF.speed, intensity: MF.intensity }) } });
   }
   // Marka (site adı + logo) menüde göründüğü için tema düzenleyicide Menü bölümünün altındadır; Ayarlar'da yalnız SEO kalır (aynı veri iki yerde düzenlenmez).
@@ -769,7 +762,7 @@
     if (cp && location.hash.length > 1) { editTheme = activeId(); tePageSel = cp.id; teView = 'sections'; }
     if (!page.custom && TE_IDS().has(page.id) && location.hash.length > 1) {
       editTheme = activeId();
-      teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global'].includes(page.id) ? 'settings' : 'sections';
+      teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-font', 'm-global'].includes(page.id) ? 'settings' : 'sections';
     }
     navFollow = location.hash.length > 1;
     renderNav();
@@ -806,16 +799,19 @@
   async function save() {
     if (!isDirty()) return;
     $('#saveBtn').disabled = true;
+    let fontWarn = '';
     try {
       if (liveStash) {
         // Yayında olmayan tema düzenleniyor: yayındaki ayarlar aynen kalır, düzenlenen tema state.themes içine yazılır.
         const r = await request('/api/content', { method: 'PUT', body: JSON.stringify({ ...state, ...liveStash, themes: { ...state.themes, [editTheme]: pickSlice(state) } }) });
+        fontWarn = r.fontWarning; delete r.fontWarning;
         liveStash = pickSlice(r);
         state = { ...r, ...structuredClone(r.themes[editTheme] || pickSlice(state)) };
       } else state = await request('/api/content', { method: 'PUT', body: JSON.stringify(state) });
+      if (state.fontWarning) { fontWarn = state.fontWarning; delete state.fontWarning; }
       saved = JSON.stringify(state);
       updateStatus();
-      toast('Kaydedildi. Site güncellendi.');
+      if (fontWarn) { toast(`Kaydedildi, ama ${fontWarn}`, true); renderPage(); } else toast('Kaydedildi. Site güncellendi.');
     } catch (err) { toast(err.message, true); updateStatus(); }
   }
   $('#saveBtn').addEventListener('click', save);
@@ -872,12 +868,14 @@
     const same = l && l.nodeType === 1 && l.tagName === o.tagName && o.tagName === n.tagName && o.childNodes.length === n.childNodes.length;
     if (!same) { if (l) l.replaceWith(doc.importNode(n, true)); return; }
     syncAttrs(o, n, l);
-    for (let i = 0; i < o.childNodes.length; i++) patchNode(o.childNodes[i], n.childNodes[i], l.childNodes[i], doc);
+    // Betiğin bölümlerin başına eklediği gece gökyüzü (.ns) şablonda yoktur; sıra kaymasın diye sayılmaz.
+    const lk = [...l.childNodes].filter((x) => !(x.nodeType === 1 && x.classList.contains('ns')));
+    for (let i = 0; i < o.childNodes.length; i++) patchNode(o.childNodes[i], n.childNodes[i], lk[i], doc);
   }
   function patchHead(n, d) {
     const ns = n.head.querySelector('style'), ls = d.head.querySelector('style');
     if (ns && ls && ls.textContent !== ns.textContent) ls.textContent = ns.textContent;
-    const sel = 'link[href*="fonts.googleapis.com/css2"]';
+    const sel = 'link[href^="/fonts/"]';
     const nl = n.head.querySelector(sel), ll = d.head.querySelector(sel);
     if (nl && ll && ll.getAttribute('href') !== nl.getAttribute('href')) ll.setAttribute('href', nl.getAttribute('href'));
     if (d.title !== n.title) d.title = n.title;
@@ -1040,7 +1038,7 @@
   function selectPage(p) {
     if (!editTheme && p.id !== 'tema-overview' && (p.custom || TE_IDS().has(p.id))) {
       editTheme = activeId(); tePageSel = p.custom ? p.pageId : 'home'; teOpen.clear();
-      teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global'].includes(p.id) ? 'settings' : 'sections';
+      teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-font', 'm-global'].includes(p.id) ? 'settings' : 'sections';
     }
     page = p;
     navFollow = !editTheme;
@@ -1292,6 +1290,7 @@
       case 'sticker': return stickerField(def, value, (v) => { onSet(v); rerender(); });
       case 'target': return targetField(def, value, onSet);
       case 'select': return selectField(def, value, onSet);
+      case 'fontpicker': return fontPicker(def, value, onSet);
       case 'gallerybulk': return bulkUploadField(def, path);
       default: return h('p', {}, `Bilinmeyen alan: ${def.type}`);
     }
@@ -1368,8 +1367,6 @@
       const c = st.color;
       box.replaceChildren(
         h('div', { class: 'row2' },
-          h('label', { class: 'field' }, h('span', {}, 'Yazı tipi'),
-            h('select', { onchange: (e) => write({ font: e.target.value }) }, h('option', { value: '' }, 'Varsayılan'), FONT_OPTS.map(([k, n]) => h('option', { value: k, selected: st.font === k }, n)))),
           h('label', { class: 'field' }, h('span', {}, 'Kalınlık'),
             h('select', { onchange: (e) => write({ weight: e.target.value }) }, WEIGHT_OPTS.map(([k, n]) => h('option', { value: k, selected: st.weight === k }, n))))),
         optNumber('size', 'Boyut', 30, 300, '%', 100, '100 = varsayılan boyut.'),
@@ -1479,6 +1476,76 @@
   function selectField(def, value, onSet) {
     const sel = h('select', { onchange: (e) => { onSet(e.target.value); rerender(); } }, (typeof def.options === 'function' ? def.options() : def.options).map(([v, l]) => h('option', { value: v, selected: v === value }, l)));
     return wrap(def, sel);
+  }
+
+  // ---------- Yazı tipi seçici (Google Fonts kataloğu) ----------
+  // Sitede tek yazı tipi vardır. Seçilince sunucu dosyaları indirir (ziyaretçi Google'a gitmez); indirilemezse eski yazı tipi kalır.
+  // Satırların önizlemesi için yalnız panelde Google'dan küçük (yalnız adı kapsayan) CSS yüklenir.
+  let fontCatalog = null;
+  const FONT_CATS = [['', 'Tümü'], ['sans-serif', 'Sans'], ['serif', 'Serif'], ['display', 'Gösterişli'], ['handwriting', 'El yazısı'], ['monospace', 'Mono']];
+  const loadedFontPrev = new Set();
+  function previewFont(name) {
+    if (loadedFontPrev.has(name)) return;
+    loadedFontPrev.add(name);
+    const l = document.createElement('link');
+    l.rel = 'stylesheet';
+    l.href = `https://fonts.googleapis.com/css2?family=${encodeURIComponent(name).replace(/%20/g, '+')}&text=${encodeURIComponent(name)}&display=swap`;
+    document.head.appendChild(l);
+  }
+  function fontPicker(def, value, onSet) {
+    const cur = value || 'Inter';
+    const status = h('small', { class: 'fp-status' }, '');
+    const curBox = h('div', { class: 'fp-cur', style: `font-family:'${cur}', system-ui, sans-serif` }, cur);
+    previewFont(cur);
+    const search = h('input', { type: 'search', placeholder: 'Yazı tipi ara…', 'aria-label': 'Yazı tipi ara' });
+    const cat = h('select', { 'aria-label': 'Tür' }, FONT_CATS.map(([v, l]) => h('option', { value: v }, l)));
+    const listEl = h('div', { class: 'fp-list', role: 'listbox' }, h('p', { class: 'hint' }, 'Katalog yükleniyor…'));
+    const count = h('small', { class: 'fp-count' }, '');
+    let busy = false, io = null;
+    async function pick(name) {
+      if (busy || name === (get(['theme', 'font']) || 'Inter')) return;
+      busy = true;
+      status.textContent = `"${name}" sunucuya indiriliyor…`;
+      status.className = 'fp-status';
+      try {
+        await request('/api/fonts/ensure', { method: 'POST', body: JSON.stringify({ family: name }) });
+        onSet(name);
+        curBox.textContent = name;
+        curBox.style.fontFamily = `'${name}', system-ui, sans-serif`;
+        status.textContent = 'Uygulandı. Yayına geçmesi için Kaydet.';
+        listEl.querySelectorAll('.on').forEach((x) => x.classList.remove('on'));
+        const row = [...listEl.children].find((x) => x.dataset.name === name);
+        if (row) row.classList.add('on');
+      } catch (err) {
+        status.textContent = err.message || 'İndirilemedi, önceki yazı tipi korundu.';
+        status.className = 'fp-status err';
+        toast(status.textContent, true);
+      } finally { busy = false; }
+    }
+    function draw() {
+      if (!fontCatalog) return;
+      const q = search.value.trim().toLowerCase(), ct = cat.value;
+      const sel = get(['theme', 'font']) || 'Inter';
+      const rows = fontCatalog.filter((r) => (!ct || r[1] === ct) && (!q || r[0].toLowerCase().includes(q)));
+      count.textContent = `${rows.length} yazı tipi`;
+      if (io) io.disconnect();
+      io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { previewFont(e.target.dataset.name); io.unobserve(e.target); } }), { root: listEl, rootMargin: '200px' });
+      const nodes = rows.map((r) => {
+        const b = h('button', { type: 'button', role: 'option', class: `fp-row${r[0] === sel ? ' on' : ''}`, 'data-name': r[0], style: `font-family:'${r[0]}', system-ui, sans-serif`, onclick: () => pick(r[0]) }, r[0]);
+        io.observe(b);
+        return b;
+      });
+      listEl.replaceChildren(...(nodes.length ? nodes : [h('p', { class: 'hint' }, 'Eşleşen yazı tipi yok.')]));
+    }
+    search.addEventListener('input', draw);
+    cat.addEventListener('change', draw);
+    (fontCatalog ? Promise.resolve() : request('/api/fonts/catalog').then((c) => { fontCatalog = c; })).then(draw).catch(() => { listEl.replaceChildren(h('p', { class: 'hint' }, 'Katalog yüklenemedi.')); });
+    return h('div', { class: 'field fp' },
+      h('span', {}, def.label || 'Yazı tipi'),
+      curBox,
+      h('p', { class: 'hint' }, 'Sitede tek yazı tipi kullanılır (metin ve başlıklar). Seçilen tema için kaydedilir; Google Fonts kataloğundaki tüm aileler listelenir. Dosyalar sunucudan gelir, ziyaretçiler Google\'a bağlanmaz.'),
+      h('div', { class: 'fp-tools' }, search, cat),
+      count, listEl, status);
   }
 
   // ---------- Listeler ----------
@@ -1783,7 +1850,7 @@
   const teOpen = new Set();
   const activeId = () => { const id = (liveStash || state).theme.preset; return THEMES.some((t) => t.id === id) ? id : 'sun'; };
   const freshTheme = (id) => { const v = pickSlice(state); v.theme.preset = id; Object.assign(v.theme.colors, THEMES.find((t) => t.id === id).colors); return v; };
-  const TE_IDS = () => new Set(['ticker', 'nav', ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)?.id), 'theme', 'sections', 'm-text', 'm-sticker', 'm-global']);
+  const TE_IDS = () => new Set(['ticker', 'nav', ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)?.id), 'theme', 'sections', 'm-text', 'm-sticker', 'm-font', 'm-global']);
 
   function enterTheme(id) {
     if (isDirty()) { confirmLeave(() => enterTheme(id)); return; }
@@ -1917,7 +1984,7 @@
     if (teView === 'settings') {
       rows.push(h('button', { type: 'button', class: 'te-sub-back', onclick: () => { teView = 'sections'; renderNav(); } }, '‹ Sayfa bölümleri'),
         h('h3', { class: 'te-title' }, 'Tema Ayarları'));
-      for (const id of ['theme', 'm-text', 'm-sticker', 'm-global', 'sections']) {
+      for (const id of ['theme', 'm-font', 'm-text', 'm-sticker', 'm-global', 'sections']) {
         const p = PAGES.find((x) => x.id === id);
         rows.push(rowBtn(p));
       }
@@ -1955,7 +2022,8 @@
     const rows = [];
     const entries = Object.entries(pg.schema || {});
     const loose = Object.fromEntries(entries.filter(([, d]) => d.type !== 'group' && d.type !== 'list'));
-    if (Object.keys(loose).length) rows.push(teRow(`${pg.id}:_`, 'Genel', objectFields(loose, pg.path)));
+    if (pg.id === 'm-font') teOpen.add('m-font:_');
+    if (Object.keys(loose).length) rows.push(teRow(`${pg.id}:_`, pg.id === 'm-font' ? 'Yazı tipi seçimi' : 'Genel', objectFields(loose, pg.path)));
     for (const [k, d] of entries) if (d.type === 'group' || d.type === 'list') rows.push(teRow(`${pg.id}:${k}`, d.label || k, objectFields({ [k]: d }, pg.path)));
     if (pg.id === 'nav') rows.push(teRow('nav:#marka', 'Marka ve logo', [h('p', { class: 'hint' }, 'Site adı ve logo tüm temalar için ortaktır.'), ...objectFields({ brand: BRAND_GROUP }, [])]));
     if (MOTION_FOR[pg.id]) rows.push(teRow(`${pg.id}:#hareket`, 'Hareket', objectFields(motionSchema(MOTION_FOR[pg.id]), ['theme'])));
