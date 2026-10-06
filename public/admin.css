@@ -444,3 +444,18 @@ body.rte-lock { overflow: hidden; }
 /* Ana başlık hapları: hepsi aynı, içi saydam */
 #pages > button.group, #pages > button.group:hover { background: transparent; box-shadow: none; filter: none; }
 #pages > button.group:hover { background: rgba(0, 0, 0, .05); }
+
+/* Daha büyük ve rahat sol menü */
+:root { --side: 370px; }
+.sidebar { padding: 20px 16px 32px; }
+#pages { gap: 8px; }
+#pages > button.group { min-height: 52px; margin: 18px 0 4px; width: 100%; padding: 12px 20px; font-size: 14px; letter-spacing: .06em; border-width: 2px; }
+#pages > button.group:first-child { margin-top: 4px; }
+#pages > button.group .chev { width: 8px; height: 8px; border-width: 2.5px; }
+:is(#pages > button:not(.group), #pages > .nav-row > button) { min-height: 54px; padding-top: 14px; padding-bottom: 14px; padding-left: 22px; font-size: 14.5px; letter-spacing: .03em; border-width: 2px; }
+:is(#pages > button:not(.group), #pages > .nav-row > button):hover { background: var(--sky); }
+:is(#pages > button:not(.group), #pages > .nav-row > button).on, :is(#pages > button:not(.group), #pages > .nav-row > button).on:hover { background: var(--ink); color: var(--paper); }
+#pages > .add-page { min-height: 54px; }
+:is(#pages > button:not(.group), #pages > .nav-row > button) { border-width: 1px; }
+#pages > button:not(.group), #pages > .nav-row { margin-left: 14px; width: calc(100% - 14px); }
+#pages > button:not(.group):first-child { margin-left: 0; width: 100%; }
