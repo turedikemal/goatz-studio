@@ -738,3 +738,14 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
   .db-plot { height: 180px; }
   .db-chart-wrap { padding-left: 44px; }
 }
+
+/* Ürün formu: Yayın şeridi başlık hizasında, kaydırınca üstte kalır */
+.pub-head { position: sticky; top: -20px; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 10px 16px; flex-wrap: wrap; margin: 0 0 14px; padding: 8px 0; background: var(--bg); }
+.pub-head .page-h { margin: 0; }
+.pub-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; padding: 6px 6px 6px 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; }
+.pub-field { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; }
+.pub-field select { padding: 6px 28px 6px 12px; border: 1px solid #bbb; border-radius: 999px; background-color: var(--paper); font-size: 13px; }
+.pub-bar .check, .pub-bar label:not(.pub-field) { font-size: 13px; }
+.pub-hint { margin: 0; font-size: 12px; }
+.pub-bar .btn { padding: 8px 14px; }
+@media (max-width: 700px) { .pub-bar { border-radius: 16px; padding: 8px; } .pub-head { position: static; margin-top: 0; } }

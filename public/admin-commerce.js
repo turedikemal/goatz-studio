@@ -545,14 +545,15 @@ window.GoatzCommerce = (ctx) => {
       d.images.length > 1 ? h('p', { class: 'hint' }, 'Sırayı değiştirmek için görseli sürükleyin (dokunmatikte alttaki ⠿ tutamacından). İlk görsel ana görsel ve liste küçük resmidir.') : null,
       h('label', { class: 'btn small', style: 'margin-top:10px' }, '+ Görsel yükle', h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', multiple: true, hidden: true, onchange: (e) => uploadImages([...e.target.files]) })));
 
-    const publish = h('div', { class: 'card' }, h('h3', {}, 'Yayın'), h('div', { class: 'stack' },
-      field('Durum', select(d, 'status', Object.entries(STATUS), rerender)),
-      d.status === 'active' ? check(d, 'isPublished', 'Mağazada göster') : h('p', { class: 'hint' }, 'Yalnızca “Aktif” ürünler mağazada yayınlanabilir.'),
-      h('button', { class: 'btn solid wide', disabled: P.busy, onclick: saveProduct }, d.id ? 'Değişiklikleri kaydet' : 'Ürünü kaydet'),
-      h('button', { class: 'btn wide', onclick: () => { P.view = 'list'; P.draft = null; rerender(); } }, 'Listeye dön')));
+    // Yayın: başlık hizasında tek satırlık kompakt şerit (form tam genişlik kalır)
+    const publish = h('div', { class: 'pub-bar' },
+      h('label', { class: 'pub-field' }, h('span', {}, 'Durum'), select(d, 'status', Object.entries(STATUS), rerender)),
+      d.status === 'active' ? check(d, 'isPublished', 'Mağazada göster') : h('span', { class: 'hint pub-hint' }, 'Yalnız “Aktif” ürün mağazada görünür'),
+      h('button', { class: 'btn', onclick: () => { P.view = 'list'; P.draft = null; rerender(); } }, 'Listeye dön'),
+      h('button', { class: 'btn solid', disabled: P.busy, onclick: saveProduct }, d.id ? 'Değişiklikleri kaydet' : 'Ürünü kaydet'));
 
-    return h('div', {}, h('div', { class: 'row-between' }, h('h3', { class: 'page-h' }, d.id ? 'Ürünü düzenle' : 'Yeni ürün')),
-      h('div', { class: 'product-layout' }, h('div', {}, basic, imgs, priceCard, stockCard, variantsCard, seoBlock), h('div', {}, publish)));
+    return h('div', {}, h('div', { class: 'pub-head' }, h('h3', { class: 'page-h' }, d.id ? 'Ürünü düzenle' : 'Yeni ürün'), publish),
+      h('div', { class: 'product-form' }, basic, imgs, priceCard, stockCard, variantsCard, seoBlock));
   }
 
   function productList() {
