@@ -12,7 +12,11 @@ window.GoatzDashboard = (ctx) => {
   const TZ = 'Europe/Istanbul'; // dönemler sunucuda Türkiye gününe göre bölünür
   const OPEN_STATUSES = 'received,preparing,ready,shipped,delivered';
 
-  const S = { period: (() => { try { return localStorage.getItem('goatz-dash-donem') || '7'; } catch { return '7'; } })(), data: null, loading: false, error: null, box: null };
+  const S = { period: (() => { try { return localStorage.getItem('goatz-dash-donem') || '7'; } catch { return '7'; } })(), data: null, loading: false, error: null, box: null,
+    demo: (() => { try { return localStorage.getItem('goatz-dash-ornek') === '1'; } catch { return false; } })(), busy: false };
+  const setDemo = (v) => { S.demo = v; try { localStorage.setItem('goatz-dash-ornek', v ? '1' : '0'); } catch { /* sorun değil */ } };
+  // Dashboard'dan açılan sipariş listesi, o an görünen veriyle (örnek ya da gerçek) aynı kayıtları gösterir
+  const df = (f) => (S.data && S.data.sample && S.data.sample.orders ? { ...f, demo: S.demo ? '1' : '0' } : f);
   const num = (n) => Number(n || 0).toLocaleString('tr-TR');
   const short = (n) => '₺' + (n >= 1e6 ? `${(n / 1e6).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} mn` : n >= 1e3 ? `${(n / 1e3).toLocaleString('tr-TR', { maximumFractionDigits: 1 })} bin` : num(n));
   const when = (d) => {
@@ -34,7 +38,10 @@ window.GoatzDashboard = (ctx) => {
 
   async function load() {
     S.loading = true; S.error = null; paint();
-    try { S.data = await request(`/api/dashboard?period=${S.period}`); }
+    try {
+      S.data = await request(`/api/dashboard?period=${S.period}${S.demo ? '&demo=1' : ''}`);
+      if (S.demo && !(S.data.sample && S.data.sample.orders)) { setDemo(false); S.data = await request(`/api/dashboard?period=${S.period}`); }
+    }
     catch (e) { S.error = e.message; }
     S.loading = false; paint();
   }
@@ -110,17 +117,17 @@ window.GoatzDashboard = (ctx) => {
     h('span', { class: 'db-todo-l' }, label, hint ? h('small', {}, hint) : null), h('span', { class: 'db-val' }, value || ''), h('b', { class: 'db-count' }, num(n)), h('i', { class: 'chev', 'aria-hidden': 'true' }));
   function pipeline(d) {
     const o = d.open;
-    return card('', head('Sipariş durumu', more('Tümü', () => goto('siparisler'))), h('div', { class: 'db-todos' },
-      row('Onay bekliyor', o.received, () => sales.ordersWith({ status: 'received' }), 'Sipariş alındı'),
-      row('Hazırlanıyor', o.preparing, () => sales.ordersWith({ status: 'preparing' })),
-      row('Kargoya verilecek', o.ready, () => sales.ordersWith({ status: 'ready' }), 'Kargoya hazır'),
-      row('Kargoda', o.shipped, () => sales.ordersWith({ status: 'shipped' }), 'Gönderildi, teslim edilmedi'),
+    return card('', head('Sipariş durumu', more('Tümü', () => sales.ordersWith(df({})))), h('div', { class: 'db-todos' },
+      row('Onay bekliyor', o.received, () => sales.ordersWith(df({ status: 'received' })), 'Sipariş alındı'),
+      row('Hazırlanıyor', o.preparing, () => sales.ordersWith(df({ status: 'preparing' }))),
+      row('Kargoya verilecek', o.ready, () => sales.ordersWith(df({ status: 'ready' })), 'Kargoya hazır'),
+      row('Kargoda', o.shipped, () => sales.ordersWith(df({ status: 'shipped' })), 'Gönderildi, teslim edilmedi'),
       d.returns ? row('Açık iade talebi', d.returns, null, 'Sipariş ayrıntısından yönetilir') : null));
   }
   function payments(d) {
     const by = Object.fromEntries(d.unpaid.map((x) => [x.status, x]));
     const total = d.unpaid.reduce((a, x) => a + x.sum, 0);
-    const r = (k, label) => row(label, by[k]?.n || 0, () => sales.ordersWith({ payment: k, status: OPEN_STATUSES }), null, by[k] ? money(by[k].sum) : '');
+    const r = (k, label) => row(label, by[k]?.n || 0, () => sales.ordersWith(df({ payment: k, status: OPEN_STATUSES })), null, by[k] ? money(by[k].sum) : '');
     return card('', head('Bekleyen ödemeler'), h('div', { class: 'db-todos' }, r('pending', 'Ödeme bekleniyor'), r('partial', 'Kısmi ödendi'), r('failed', 'Ödeme başarısız')),
       h('p', { class: 'db-foot' }, total ? `Toplam ${money(total)} tahsil edilmedi (iptal/iade hariç).` : 'Ödemesi bekleyen sipariş yok.'));
   }
@@ -153,7 +160,32 @@ window.GoatzDashboard = (ctx) => {
           h('td', {}, pill(r.status, STATUS[r.status] || r.status)),
           h('td', { class: 'num' }, money(r.total)))))))
       : h('div', { class: 'db-empty' }, h('p', { class: 'muted' }, 'Henüz sipariş yok.'), h('button', { type: 'button', class: 'btn small', onclick: () => sales.newOrder() }, '+ Sipariş oluştur'));
-    return card('', head('Son siparişler', d.recent.length ? more('Tüm siparişler', () => goto('siparisler')) : null), body);
+    return card('', head('Son siparişler', d.recent.length ? more('Tüm siparişler', () => sales.ordersWith(df({}))) : null), body);
+  }
+
+  // Örnek veri: tek düğmeyle ekle/sil; görünürken sarı şerit rakamların gerçek olmadığını söyler
+  async function sampleDo(method) {
+    if (S.busy) return;
+    if (method === 'DELETE' && !confirm('Tüm örnek siparişler, örnek ürünler ve örnek müşteriler silinsin mi? Gerçek kayıtlara dokunulmaz.')) return;
+    S.busy = true; paint();
+    try { await request('/api/demo', { method }); setDemo(method === 'POST'); }
+    catch (e) { S.busy = false; S.error = e.message; paint(); return; }
+    S.busy = false; load();
+  }
+  function sampleBar(d) {
+    const sm = d.sample || { orders: 0 };
+    const b = (label, fn, cls = '') => h('button', { type: 'button', class: `btn small ${cls}`.trim(), disabled: S.busy || null, onclick: fn }, label);
+    if (S.demo && sm.orders) {
+      return h('div', { class: 'db-sample on' }, h('span', { class: 'db-sample-tag' }, 'ÖRNEK VERİ'),
+        h('p', {}, `Bu rakamlar gerçek değil. ${sm.orders} örnek sipariş, ${sm.products} örnek ürün ve ${sm.customers} örnek müşteri, dashboard’un nasıl çalıştığını göstermek için eklendi. Fiyatlar uydurmadır.`),
+        h('div', { class: 'db-sample-act' }, b('Gerçek veriye dön', () => { setDemo(false); load(); }), b(S.busy ? 'Siliniyor…' : 'Örnek veriyi sil', () => sampleDo('DELETE'), 'danger')));
+    }
+    if (sm.orders) {
+      return h('div', { class: 'db-sample' }, h('p', {}, `Panelde örnek veri var (${sm.orders} sipariş). Aşağıdaki rakamlar yalnız gerçek kayıtlardan.`),
+        h('div', { class: 'db-sample-act' }, b('Örnek veriyi göster', () => { setDemo(true); load(); }), b('Örnek veriyi sil', () => sampleDo('DELETE'), 'danger')));
+    }
+    return h('div', { class: 'db-sample' }, h('p', {}, 'Dashboard’un dolu hâlini görmek için örnek satışlar ekleyebilirsin. Hepsi “örnek” işaretli olur, gerçek ciroya karışmaz ve tek düğmeyle silinir.'),
+      h('div', { class: 'db-sample-act' }, b(S.busy ? 'Ekleniyor…' : 'Örnek satışları ekle', () => sampleDo('POST'))));
   }
 
   function paint() {
@@ -173,7 +205,7 @@ window.GoatzDashboard = (ctx) => {
     if (!d) return S.box.replaceChildren(top, note('Yükleniyor…'));
     if (!d.db) return S.box.replaceChildren(top, note('Veritabanı bağlı değil: sipariş, ürün ve stok verisi okunamıyor.'));
     if (d.error) return S.box.replaceChildren(top, note(d.error, true));
-    S.box.replaceChildren(top, stats(d),
+    S.box.replaceChildren(top, sampleBar(d), stats(d),
       h('div', { class: 'db-grid-a' }, chart(d), channels(d)),
       h('div', { class: 'db-grid3' }, pipeline(d), payments(d), stock(d)),
       h('div', { class: 'db-grid-b' }, bestsellers(d), recentOrders(d)));

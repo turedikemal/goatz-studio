@@ -40,7 +40,7 @@ window.GoatzSales = (ctx) => {
     odemeler: { title: 'Ödeme durumu', f: { payment: 'pending,partial,failed', status: 'received,preparing,ready,shipped,delivered' } },
     kargo: { title: 'Kargo operasyonu', f: { status: 'received,preparing,ready,shipped' } },
   };
-  const blankFilter = () => ({ q: '', status: '', payment: '', channel: '', carrier: '', from: '', to: '', min: '', max: '' });
+  const blankFilter = () => ({ q: '', demo: '', status: '', payment: '', channel: '', carrier: '', from: '', to: '', min: '', max: '' });
 
   async function loadOrders() {
     const { rows, total, sum } = await api('GET', `/api/orders?${qs({ ...O.f, limit: 50, offset: O.page * 50 })}`);
@@ -98,7 +98,7 @@ window.GoatzSales = (ctx) => {
     };
     const rows = O.data.rows.map((o) => h('tr', {},
       h('td', {}, h('input', { type: 'checkbox', checked: O.selected.has(o.id), onchange: (e) => { e.target.checked ? O.selected.add(o.id) : O.selected.delete(o.id); rerender(); } })),
-      h('td', {}, h('button', { class: 'link', onclick: () => openOrder(o.id) }, `#${o.order_no}`), h('div', { class: 'hint' }, fmt(o.created_at))),
+      h('td', {}, h('button', { class: 'link', onclick: () => openOrder(o.id) }, `#${o.order_no}`), o.demo ? h('span', { class: 'pill demo', title: 'Örnek sipariş: gerçek değil, Dashboard’dan silinir' }, 'ÖRNEK') : null, h('div', { class: 'hint' }, fmt(o.created_at))),
       h('td', {}, o.customer_name || '—', o.customer_phone ? h('div', { class: 'hint' }, o.customer_phone) : null),
       h('td', {}, CHANNEL[o.channel] || o.channel), h('td', {}, o.item_count),
       h('td', { class: 'num' }, money(o.total)),
@@ -107,7 +107,8 @@ window.GoatzSales = (ctx) => {
       h('td', {}, pill(o.status, STATUS[o.status])),
       kargoView ? h('td', {}, o.carrier ? `${o.carrier}${o.tracking_no ? ' · ' + o.tracking_no : ''}` : '—') : null,
       h('td', { class: 'actions' }, btn(kargoView && !o.carrier ? 'Kargola' : 'Aç', () => openOrder(o.id)))));
-    const demoRow = !O.hideDemo && O.page === 0 ? h('tr', { class: 'demo-row' },
+    // Elle gösterilen tek örnek satır: panelde gerçek örnek veri varken ya da örnek/gerçek süzmesi açıkken gösterilmez
+    const demoRow = !O.hideDemo && O.page === 0 && !O.f.demo && !O.data.rows.some((o) => o.demo) ? h('tr', { class: 'demo-row' },
       h('td', {}),
       h('td', {}, h('button', { class: 'link', onclick: () => { O.detail = demoOrder(); O.view = 'detail'; O.ret = { reason: RETURN_REASONS[0], note: '', qty: {}, amount: '' }; rerender(); } }, 'ÖRNEK'), h('div', { class: 'hint' }, 'gösterim amaçlı')),
       h('td', {}, 'Örnek Müşteri'), h('td', {}, 'Elle'), h('td', {}, 1), h('td', { class: 'num' }, money(demoOrder().total)),
@@ -123,6 +124,7 @@ window.GoatzSales = (ctx) => {
         O.hideDemo ? btn('Örnek siparişi göster', () => { O.hideDemo = false; try { localStorage.removeItem('goatz-ornek-siparis'); } catch { /* sorun değil */ } rerender(); }) : null,
         h('button', { class: 'btn solid', onclick: () => newOrder() }, '+ Sipariş oluştur')),
       adv,
+      O.f.demo ? h('div', { class: 'filter-row' }, h('b', {}, 'Kayıt'), h('span', { class: 'chip' }, O.f.demo === '1' ? 'Yalnız örnek siparişler' : 'Yalnız gerçek siparişler', h('button', { type: 'button', class: 'chip-x', title: 'Kaldır', onclick: () => { O.f.demo = ''; O.page = 0; refresh(); } }, '×'))) : null,
       h('div', { class: 'filter-row' }, h('b', {}, 'Durum'), chips('status', STATUS)),
       h('div', { class: 'filter-row' }, h('b', {}, 'Ödeme'), chips('payment', PAY)),
       O.selected.size ? h('div', { class: 'bulkbar' }, h('b', {}, `${O.selected.size} seçili`),
@@ -162,7 +164,7 @@ window.GoatzSales = (ctx) => {
   const demoOrder = () => {
     if (!O.demoOrder) {
       const t = new Date().toISOString();
-      O.demoOrder = { demo: true, id: 'demo', order_no: 'ÖRNEK', created_at: t, channel: 'manual', status: 'shipped', payment_status: 'pending', payment_method: '',
+      O.demoOrder = { fake: true, id: 'demo', order_no: 'ÖRNEK', created_at: t, channel: 'manual', status: 'shipped', payment_status: 'pending', payment_method: '',
         customer_name: 'Örnek Müşteri', customer_email: '', customer_phone: '', customer_id: null, shipping_address: {}, carrier: '', tracking_no: '',
         subtotal: 0, discount_total: 0, shipping_total: 0, tax_total: 0, total: 0, coupon_code: null, notes: '', invoice_no: null, invoice_date: null,
         items: [{ id: 1, name: 'Örnek Ürün', sku: '', quantity: 1, unit_price: 0, discount_unit: 0, campaign_name: '', line_total: 0 }],
@@ -185,7 +187,7 @@ window.GoatzSales = (ctx) => {
   }
 
   function orderDetail() {
-    const o = O.detail; const call = o && o.demo ? demoApi : api; if (!o) { O.view = 'list'; return orderList({ id: 'siparisler' }); }
+    const o = O.detail; const call = o && o.fake ? demoApi : api; if (!o) { O.view = 'list'; return orderList({ id: 'siparisler' }); }
     const act = async (fn, msg) => { if (O.busy) return; O.busy = true; try { O.detail = await fn(); O.dirty = true; toast(msg); } catch (e) { fail(e); } finally { O.busy = false; rerender(); } };
     const a = o.shipping_address || {};
     const canCancel = ['received', 'preparing', 'ready'].includes(o.status);
@@ -256,7 +258,7 @@ window.GoatzSales = (ctx) => {
       h('button', { class: 'btn wide', onclick: () => act(() => call('PUT', `/api/orders/${o.id}`, { notes: note.notes }), 'Not kaydedildi.') }, 'Notu kaydet')));
 
     return h('div', {},
-      h('div', { class: 'row-between' }, h('div', {}, h('h3', { class: 'page-h' }, o.demo ? 'ÖRNEK sipariş' : `Sipariş #${o.order_no}`, o.demo ? h('span', { class: 'pill s-received', style: 'margin-left:8px' }, 'ÖRNEK') : null), h('div', { class: 'hint' }, o.demo ? 'Gösterim amaçlı örnek: gerçek müşteri ya da sipariş değildir, kaydedilmez, sayımlara girmez. Ödeme, kargo ve iade bölümlerini burada deneyebilirsin.' : `${fmt(o.created_at)} · ${CHANNEL[o.channel] || o.channel}`)),
+      h('div', { class: 'row-between' }, h('div', {}, h('h3', { class: 'page-h' }, o.fake ? 'ÖRNEK sipariş' : `Sipariş #${o.order_no}`, o.fake || o.demo ? h('span', { class: 'pill s-received', style: 'margin-left:8px' }, 'ÖRNEK') : null), h('div', { class: 'hint' }, o.fake ? 'Gösterim amaçlı örnek: gerçek müşteri ya da sipariş değildir, kaydedilmez, sayımlara girmez. Ödeme, kargo ve iade bölümlerini burada deneyebilirsin.' : `${fmt(o.created_at)} · ${CHANNEL[o.channel] || o.channel}${o.demo ? ' · Örnek sipariş: gerçek değil, fiyatlar uydurma. Dashboard’daki “Örnek veriyi sil” ile kalkar.' : ''}`)),
         h('div', { class: 'btn-row', style: 'margin:0' }, pill(o.status, STATUS[o.status]), pill(o.payment_status, PAY[o.payment_status]),
           btn('‹ Listeye dön', () => { O.view = 'list'; O.detail = null; if (O.dirty) { O.dirty = false; refresh(); } else rerender(); }))),
       h('div', { class: 'product-layout' }, h('div', {}, items, customer, returnsCard, timeline), h('div', {}, statusCard, payCard, shipCard, invCard, noteCard)));

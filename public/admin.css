@@ -768,3 +768,11 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .chip.pick-type small { font-weight: 500; color: var(--muted); }
 .chip.pick-type.on { background: var(--sun); }
 @media (max-width: 700px) { .pub-head { position: sticky; top: -14px; } .pf-sec { padding: 0 12px 14px; } .pf-title { margin: 0 -12px 12px; padding: 10px 12px; } }
+/* Dashboard örnek veri şeridi */
+.db-sample { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; padding: 10px 14px; border: 1px dashed #9a9a9a; border-radius: 14px; background: var(--paper); }
+.db-sample p { margin: 0; flex: 1 1 320px; font-size: 13px; color: var(--muted); }
+.db-sample.on { border: 1px solid var(--line); background: var(--sun); }
+.db-sample.on p { color: var(--ink); }
+.db-sample-tag { padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: 11px; font-weight: 800; letter-spacing: .05em; }
+.db-sample-act { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill.demo { background: var(--sun); font-size: 10px; letter-spacing: .04em; margin-left: 6px; }

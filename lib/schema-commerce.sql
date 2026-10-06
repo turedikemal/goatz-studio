@@ -338,3 +338,8 @@ ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_title TEXT;
 ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_description TEXT;
 ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_noindex BOOLEAN DEFAULT false;
 ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_canonical TEXT;
+
+-- Örnek (demo) veri işareti: panelden tek düğmeyle eklenir/silinir, gerçek veriye karışmaz
+ALTER TABLE orders ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false;
+ALTER TABLE customers ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false;

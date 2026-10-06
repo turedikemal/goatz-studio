@@ -12,6 +12,7 @@ const persist = require('./lib/persist');
 const fonts = require('./lib/fonts');
 const salesRoutes = require('./lib/sales-routes');
 const dashboard = require('./lib/dashboard');
+const demo = require('./lib/demo');
 
 const PORT = Number(process.env.PORT) || 5173;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -237,7 +238,17 @@ async function api(req, res, url) {
 
   if (route === 'GET /api/messages') return json(res, 200, messages.list());
   if (route === 'GET /api/promo') return json(res, 200, await promo.summary());
-  if (route === 'GET /api/dashboard') return json(res, 200, await dashboard.summary(url.searchParams.get('period') || '7'));
+  if (route === 'GET /api/dashboard') {
+    const out = await dashboard.summary(url.searchParams.get('period') || '7', url.searchParams.get('demo') === '1');
+    try { out.sample = await demo.status(); } catch { out.sample = null; }
+    return json(res, 200, out);
+  }
+  // Örnek (demo) satış verisi: tek düğmeyle ekle / sil
+  if (route === 'GET /api/demo') return json(res, 200, await demo.status());
+  if (route === 'POST /api/demo' || route === 'DELETE /api/demo') {
+    try { return json(res, 200, route.startsWith('POST') ? await demo.create() : await demo.remove()); }
+    catch (e) { return json(res, e.status || 500, { error: e.status ? e.message : 'Örnek veri işlemi başarısız: ' + e.message }); }
+  }
   if (route === 'POST /api/messages/reply') {
     const { id, text } = await readJson(req);
     const m = messages.get(String(id || ''));
