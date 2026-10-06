@@ -669,10 +669,12 @@
       { id: 'm-sticker', label: 'Sticker hareketleri', path: ['theme'], anchor: '#top', schema: { motion: group('Sticker hareketleri', { pop: MF.pop }) } },
       { id: 'm-global', label: 'Kaydırma ve hız', path: ['theme'], anchor: '#top', schema: { animations: bool('Tüm hareketler (kapatırsan sitede hiçbir şey oynamaz)'), motion: group('Kaydırma ve hız', { smooth: MF.smooth, speed: MF.speed, intensity: MF.intensity }) } });
   }
+  // Marka (site adı + logo) menüde göründüğü için tema düzenleyicide Menü bölümünün altındadır; Ayarlar'da yalnız SEO kalır (aynı veri iki yerde düzenlenmez).
+  const BRAND_GROUP = PAGES.find((x) => x.id === 'brand').schema.brand;
   {
-    // Ana menüdeki Ayarlar görünümünde temalardan bağımsız marka ve SEO ayarı (tema düzenleyicideki "Marka ve SEO" ile aynı veri).
     const bd = PAGES.find((x) => x.id === 'brand');
-    PAGES.splice(PAGES.findIndex((x) => x.id === 'ayar-magaza'), 0, { id: 'ayar-marka', label: 'Marka ve SEO', path: [], anchor: '#top', intro: bd.intro, schema: bd.schema });
+    PAGES.splice(PAGES.findIndex((x) => x.id === 'ayar-magaza'), 0, { id: 'ayar-marka', label: 'SEO ve paylaşım', path: [], anchor: '#top', intro: 'Google\'da ve paylaşımlarda görünen bilgiler.', schema: { seo: bd.schema.seo } });
+    for (const id of ['brand', 'ayar-magaza']) PAGES.splice(PAGES.findIndex((x) => x.id === id), 1);
   }
   const customDef = (p) => ({ id: `pg:${p.id}`, label: p.title || 'Sayfa', custom: true, pageId: p.id, anchor: '#top' });
 
@@ -1781,7 +1783,7 @@
   const teOpen = new Set();
   const activeId = () => { const id = (liveStash || state).theme.preset; return THEMES.some((t) => t.id === id) ? id : 'sun'; };
   const freshTheme = (id) => { const v = pickSlice(state); v.theme.preset = id; Object.assign(v.theme.colors, THEMES.find((t) => t.id === id).colors); return v; };
-  const TE_IDS = () => new Set(['ticker', 'nav', ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)?.id), 'theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global']);
+  const TE_IDS = () => new Set(['ticker', 'nav', ...state.sections.map((x) => PAGES.find((q) => q.section === x.id)?.id), 'theme', 'sections', 'm-text', 'm-sticker', 'm-global']);
 
   function enterTheme(id) {
     if (isDirty()) { confirmLeave(() => enterTheme(id)); return; }
@@ -1915,9 +1917,9 @@
     if (teView === 'settings') {
       rows.push(h('button', { type: 'button', class: 'te-sub-back', onclick: () => { teView = 'sections'; renderNav(); } }, '‹ Sayfa bölümleri'),
         h('h3', { class: 'te-title' }, 'Tema Ayarları'));
-      for (const id of ['theme', 'm-text', 'm-sticker', 'm-global', 'sections', 'brand']) {
+      for (const id of ['theme', 'm-text', 'm-sticker', 'm-global', 'sections']) {
         const p = PAGES.find((x) => x.id === id);
-        rows.push(rowBtn(p, null, id === 'brand' ? 'ortak' : ''));
+        rows.push(rowBtn(p));
       }
     } else {
       rows.push(pagePicker());
@@ -1955,6 +1957,7 @@
     const loose = Object.fromEntries(entries.filter(([, d]) => d.type !== 'group' && d.type !== 'list'));
     if (Object.keys(loose).length) rows.push(teRow(`${pg.id}:_`, 'Genel', objectFields(loose, pg.path)));
     for (const [k, d] of entries) if (d.type === 'group' || d.type === 'list') rows.push(teRow(`${pg.id}:${k}`, d.label || k, objectFields({ [k]: d }, pg.path)));
+    if (pg.id === 'nav') rows.push(teRow('nav:#marka', 'Marka ve logo', [h('p', { class: 'hint' }, 'Site adı ve logo tüm temalar için ortaktır.'), ...objectFields({ brand: BRAND_GROUP }, [])]));
     if (MOTION_FOR[pg.id]) rows.push(teRow(`${pg.id}:#hareket`, 'Hareket', objectFields(motionSchema(MOTION_FOR[pg.id]), ['theme'])));
     return rows;
   }
