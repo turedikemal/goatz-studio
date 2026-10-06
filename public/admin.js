@@ -74,8 +74,12 @@
 
     { group: 'Siparişler' },
     {
-      id: 'siparisler', label: 'Siparişler', path: [], anchor: '#top', special: 'orders',
+      id: 'siparisler', label: 'Siparişlerim', path: [], anchor: '#top', special: 'orders',
       intro: 'Siparişleri filtrele, durumlarını yönet; ödeme, kargo, fatura ve iade işlemlerini yap.',
+    },
+    {
+      id: 'terk-edilen', label: 'Terk edilen siparişler', path: [], anchor: '#top', special: 'abandoned',
+      intro: 'Sepete ürün ekleyip siparişi tamamlamayanlar ve ödemesi tamamlanmayan siparişler.',
     },
 
     { group: 'Müşteriler' },
@@ -1243,6 +1247,7 @@
     else if (page.special === 'products') parts.push(commerce.products());
     else if (page.special === 'stock') parts.push(commerce.stock());
     else if (page.special === 'orders') parts.push(sales.orders(page));
+    else if (page.special === 'abandoned') parts.push(sales.abandoned());
     else if (page.special === 'returns') parts.push(sales.returns());
     else if (page.special === 'customers') parts.push(sales.customers());
     else if (page.special === 'customer-tags') parts.push(sales.customerTags());

@@ -41,6 +41,14 @@ window.GoatzDashboard = (ctx) => {
     try {
       S.data = await request(`/api/dashboard?period=${S.period}${S.demo ? '&demo=1' : ''}`);
       if (S.demo && !(S.data.sample && S.data.sample.orders)) { setDemo(false); S.data = await request(`/api/dashboard?period=${S.period}`); }
+      // Hiç gerçek sipariş yokken boş dashboard göstermek yerine örnek veriyi aç; örnek yoksa bir kez kendiliğinden ekle
+      // (elle silinmişse ya da bu oturumda "Gerçek veriye dön" denmişse yapma)
+      const d = S.data;
+      if (!S.demo && !S.chosenReal && d.db && !d.error && !(d.recent || []).length) {
+        let deleted = false; try { deleted = localStorage.getItem('goatz-ornek-silindi') === '1'; } catch { /* sorun değil */ }
+        if (!(d.sample && d.sample.orders) && !deleted) { S.busy = true; paint(); try { await request('/api/demo', { method: 'POST' }); } finally { S.busy = false; } }
+        if ((d.sample && d.sample.orders) || !deleted) { setDemo(true); S.data = await request(`/api/dashboard?period=${S.period}&demo=1`); }
+      }
     }
     catch (e) { S.error = e.message; }
     S.loading = false; paint();
@@ -209,7 +217,10 @@ window.GoatzDashboard = (ctx) => {
     if (S.busy) return;
     if (method === 'DELETE' && !confirm('Tüm örnek siparişler, örnek ürünler ve örnek müşteriler silinsin mi? Gerçek kayıtlara dokunulmaz.')) return;
     S.busy = true; paint();
-    try { await request('/api/demo', { method }); setDemo(method === 'POST'); }
+    try {
+      await request('/api/demo', { method }); setDemo(method === 'POST');
+      try { if (method === 'DELETE') localStorage.setItem('goatz-ornek-silindi', '1'); else localStorage.removeItem('goatz-ornek-silindi'); } catch { /* sorun değil */ }
+    }
     catch (e) { S.busy = false; S.error = e.message; paint(); return; }
     S.busy = false; load();
   }
@@ -219,7 +230,7 @@ window.GoatzDashboard = (ctx) => {
     if (S.demo && sm.orders) {
       return h('div', { class: 'db-sample on' }, h('span', { class: 'db-sample-tag' }, 'ÖRNEK VERİ'),
         h('p', {}, `Bu rakamlar gerçek değil. ${sm.orders} örnek sipariş, ${sm.products} örnek ürün ve ${sm.customers} örnek müşteri, dashboard’un nasıl çalıştığını göstermek için eklendi. Fiyatlar uydurmadır.`),
-        h('div', { class: 'db-sample-act' }, b('Gerçek veriye dön', () => { setDemo(false); load(); }), b(S.busy ? 'Siliniyor…' : 'Örnek veriyi sil', () => sampleDo('DELETE'), 'danger')));
+        h('div', { class: 'db-sample-act' }, b('Gerçek veriye dön', () => { S.chosenReal = true; setDemo(false); load(); }), b(S.busy ? 'Siliniyor…' : 'Örnek veriyi sil', () => sampleDo('DELETE'), 'danger')));
     }
     if (sm.orders) {
       return h('div', { class: 'db-sample' }, h('p', {}, `Panelde örnek veri var (${sm.orders} sipariş). Aşağıdaki rakamlar yalnız gerçek kayıtlardan.`),

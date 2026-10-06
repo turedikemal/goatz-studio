@@ -343,3 +343,29 @@ ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_canonical TEXT;
 ALTER TABLE orders ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false;
 ALTER TABLE products ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false;
 ALTER TABLE customers ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false;
+
+-- Terk edilen sepetler: mağazada sepete ürün ekleyip siparişi tamamlamayanlar.
+-- stage: cart (sepette bıraktı), checkout (bilgilerini girdi), payment (ödemede kaldı)
+-- status: open (açık), recovered (siparişe döndü), dismissed (kapatıldı)
+-- reminder_*: ileride "sepette ürün bıraktınız" otomasyonu buraya yazacak
+CREATE TABLE IF NOT EXISTS abandoned_carts (
+  id SERIAL PRIMARY KEY,
+  token VARCHAR(64) UNIQUE,
+  customer_id INTEGER REFERENCES customers(id) ON DELETE SET NULL,
+  customer_name VARCHAR(255),
+  customer_email VARCHAR(255),
+  customer_phone VARCHAR(50),
+  channel VARCHAR(40) DEFAULT 'web',
+  stage VARCHAR(20) NOT NULL DEFAULT 'cart',
+  status VARCHAR(20) NOT NULL DEFAULT 'open',
+  items JSONB NOT NULL DEFAULT '[]',
+  total DECIMAL(12, 2) DEFAULT 0,
+  recovered_order_id INTEGER REFERENCES orders(id) ON DELETE SET NULL,
+  reminder_count INTEGER NOT NULL DEFAULT 0,
+  last_reminder_at TIMESTAMP,
+  notes TEXT,
+  demo BOOLEAN NOT NULL DEFAULT false,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS idx_abandoned_status ON abandoned_carts(status, updated_at);

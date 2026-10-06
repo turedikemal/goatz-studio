@@ -558,7 +558,86 @@ window.GoatzSales = (ctx) => {
     if (page.id !== lastPage) {
       if (!keep) { O.view = 'list'; O.detail = null; O.draft = null; C.view = 'list'; C.detail = null; C.draft = null; K.draft = null; G.draft = null; }
       lastPage = page.id;
+      if (page.id === 'terk-edilen') { A.loaded = false; A.loading = false; A.demo = null; A.open.clear(); }
     }
+  }
+
+  // =====================================================================
+  //  Terk edilen siparişler: sepette bırakılanlar + ödemesi tamamlanmayanlar
+  // =====================================================================
+  const STAGE = { cart: 'Sepette bıraktı', checkout: 'Bilgilerini girdi', payment: 'Ödemede kaldı' };
+  const CART_ST = { open: 'Açık', recovered: 'Siparişe döndü', dismissed: 'Kapatıldı' };
+  const A = { loaded: false, loading: false, tab: 'carts', status: 'open', demo: null, data: null, sample: 0, open: new Set() };
+  async function loadAbandoned() {
+    if (A.demo === null) {
+      // Gerçek kayıt yoksa ve örnek veri varsa örnekleri göster (Dashboard'daki gibi, ÖRNEK VERİ şeridiyle)
+      const [real, st] = await Promise.all([api('GET', `/api/abandoned?status=${A.status}&demo=0`), api('GET', '/api/demo').catch(() => ({}))]);
+      A.sample = st.carts || 0;
+      const c = real.counts || {};
+      if (!c.open && !c.recovered && !c.dismissed && !c.unpaid && A.sample) A.demo = true;
+      else { A.demo = false; A.data = real; return; }
+    }
+    A.data = await api('GET', `/api/abandoned?status=${A.status}&demo=${A.demo ? 1 : 0}`);
+  }
+  const reloadAbandoned = () => { A.loaded = false; A.loading = false; rerender(); };
+  const ago = (d) => {
+    const m = Math.max(0, Math.round((Date.now() - new Date(d).getTime()) / 6e4));
+    return m < 60 ? `${m} dk önce` : m < 1440 ? `${Math.round(m / 60)} sa önce` : `${Math.round(m / 1440)} gün önce`;
+  };
+  function abandoned() {
+    if (ensure(A, loadAbandoned)) return loadingCard('Terk edilen siparişler yükleniyor…');
+    const d = A.data || {};
+    if (d.db === false) return h('div', { class: 'card' }, h('p', { class: 'muted' }, 'Veritabanı bağlı değil.'));
+    const c = d.counts || {};
+    const tab = (k, label, n) => h('button', { type: 'button', class: A.tab === k ? 'on' : '', onclick: () => { A.tab = k; rerender(); } }, `${label} (${n || 0})`);
+    const demoBar = A.demo
+      ? h('div', { class: 'db-sample on' }, h('span', { class: 'db-sample-tag' }, 'ÖRNEK VERİ'), h('p', {}, 'Henüz gerçek terk edilen sipariş yok; aşağıdakiler nasıl görüneceğini gösteren örnekler. Dashboard’daki “Örnek veriyi sil” ile kalkar.'),
+        h('div', { class: 'db-sample-act' }, btn('Gerçek veriye dön', () => { A.demo = false; reloadAbandoned(); })))
+      : A.sample ? h('div', { class: 'db-sample' }, h('p', {}, `Panelde ${A.sample} örnek sepet var. Aşağıdakiler yalnız gerçek kayıtlar.`), h('div', { class: 'db-sample-act' }, btn('Örnekleri göster', () => { A.demo = true; reloadAbandoned(); }))) : null;
+    const contact = (r) => [r.customer_email, r.customer_phone].filter(Boolean).map((x) => h('div', { class: 'hint' }, x));
+    let body;
+    if (A.tab === 'carts') {
+      const rows = [];
+      for (const r of d.carts || []) {
+        const items = Array.isArray(r.items) ? r.items : [];
+        const qty = items.reduce((a, x) => a + (Number(x.quantity) || 0), 0);
+        const isOpen = A.open.has(r.id);
+        const setSt = (st, msg) => btn(msg, async () => { try { await api('PUT', `/api/abandoned/${r.id}`, { status: st }); toast(`Sepet: ${CART_ST[st]}`); reloadAbandoned(); } catch (e) { fail(e); } });
+        rows.push(h('tr', {},
+          h('td', {}, h('button', { class: 'link', onclick: () => { isOpen ? A.open.delete(r.id) : A.open.add(r.id); rerender(); } }, `${isOpen ? '▾' : '▸'} ${qty} ürün`), r.demo ? h('span', { class: 'pill demo' }, 'ÖRNEK') : null,
+            h('div', { class: 'hint' }, items.map((x) => x.name).join(', '))),
+          h('td', {}, r.customer_name || h('span', { class: 'muted' }, 'Misafir (bilgi yok)'), ...contact(r)),
+          h('td', {}, pill(r.stage, STAGE[r.stage] || r.stage)),
+          h('td', { class: 'num' }, money(r.total)),
+          h('td', {}, ago(r.updated_at), h('div', { class: 'hint' }, fmt(r.updated_at))),
+          h('td', {}, r.reminder_count ? `${r.reminder_count} kez` : h('span', { class: 'muted' }, 'Gönderilmedi'), r.last_reminder_at ? h('div', { class: 'hint' }, fmt(r.last_reminder_at)) : null),
+          h('td', { class: 'actions' },
+            r.recovered_order_id ? btn(`#${r.recovered_order_no}`, () => openOrder(r.recovered_order_id)) : null,
+            r.status === 'open' ? setSt('dismissed', 'Kapat') : setSt('open', 'Yeniden aç'),
+            btn('Sil', async () => { if (!confirmDo('Bu sepet kaydı silinsin mi?')) return; try { await api('DELETE', `/api/abandoned/${r.id}`); toast('Silindi.'); reloadAbandoned(); } catch (e) { fail(e); } }, 'danger'))));
+        if (isOpen) rows.push(h('tr', { class: 'sub-row' }, h('td', { colspan: 7 }, h('table', { class: 'data-table mini' },
+          h('tbody', {}, ...items.map((x) => h('tr', {}, h('td', {}, x.name), h('td', {}, x.sku || ''), h('td', { class: 'num' }, `${x.quantity} × ${money(x.unit_price)}`), h('td', { class: 'num' }, money(x.quantity * x.unit_price)))))))));
+      }
+      const empty = A.status === 'open' ? 'Açık terk edilmiş sepet yok. Mağazada ödeme adımı açılınca sepette ürün bırakıp çıkanlar burada görünecek.' : 'Bu durumda kayıt yok.';
+      body = h('div', {},
+        h('div', { class: 'toolbar' }, h('select', { onchange: (e) => { A.status = e.target.value; reloadAbandoned(); } }, ...Object.entries(CART_ST).map(([v, l]) => h('option', { value: v, selected: A.status === v }, `${l} (${c[v] || 0})`))),
+          A.status === 'open' && c.open ? h('span', { class: 'muted' }, `Sepetlerde bekleyen tutar: ${money(c.open_total)}`) : null),
+        h('div', { class: 'card' }, table(['Sepet', 'Müşteri', 'Aşama', 'Tutar', 'Son hareket', 'Hatırlatma', ''], rows, empty)),
+        h('p', { class: 'hint' }, '“Sepette ürün bıraktınız” hatırlatması henüz bağlı değil; bağlandığında Hatırlatma sütunu dolacak.'));
+    } else {
+      const rows = (d.unpaid || []).map((o) => h('tr', {},
+        h('td', {}, h('button', { class: 'link', onclick: () => openOrder(o.id) }, `#${o.order_no}`), o.demo ? h('span', { class: 'pill demo' }, 'ÖRNEK') : null, h('div', { class: 'hint' }, fmt(o.created_at))),
+        h('td', {}, o.customer_name || '—', ...contact(o)),
+        h('td', {}, CHANNEL[o.channel] || o.channel || '—'),
+        h('td', {}, pill(o.payment_status, PAY[o.payment_status]), h('div', { class: 'hint' }, o.payment_method || '')),
+        h('td', {}, pill(o.status, STATUS[o.status])),
+        h('td', { class: 'num' }, money(o.total), h('div', { class: 'hint' }, `${o.item_count} ürün`)),
+        h('td', { class: 'actions' }, btn('Aç', () => openOrder(o.id)))));
+      body = h('div', {}, h('p', { class: 'hint', style: 'margin-bottom:10px' }, 'Ödemesi bekleyen ya da başarısız olan, iptal edilmemiş siparişler.'),
+        h('div', { class: 'card' }, table(['Sipariş', 'Müşteri', 'Kanal', 'Ödeme', 'Durum', 'Tutar', ''], rows, 'Ödemesi tamamlanmayan sipariş yok.')));
+    }
+    return h('div', { class: 'stack ab-page' }, demoBar,
+      h('div', { class: 'seg', role: 'tablist' }, tab('carts', 'Sepette bırakılanlar', c.open), tab('unpaid', 'Ödemesi tamamlanmayanlar', c.unpaid)), body);
   }
 
   // Dashboard'dan: siparişleri verilen filtreyle aç
@@ -567,5 +646,5 @@ window.GoatzSales = (ctx) => {
     visit('siparisler'); rerender();
   }
 
-  return { orders, returns, customers, customerTags, coupons, campaigns, onPage, newOrder: () => newOrder(), openOrder, ordersWith };
+  return { orders, abandoned, returns, customers, customerTags, coupons, campaigns, onPage, newOrder: () => newOrder(), openOrder, ordersWith };
 };

@@ -782,3 +782,9 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .db-range label { display: grid; gap: 3px; font-size: 11px; font-weight: 700; color: var(--muted); }
 .db-range input, .db-range select { padding: 6px 10px; border: 1px solid #bbb; border-radius: 999px; background: var(--paper); font-size: 13px; color: var(--ink); }
 .db-sum { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Terk edilen siparişler */
+.ab-page > .seg { justify-self: start; max-width: 100%; overflow-x: auto; }
+.ab-page .seg button { white-space: nowrap; }
+.ab-page .pill { white-space: nowrap; }
+.ab-page .sub-row > td { background: var(--paper); padding-top: 0; }
