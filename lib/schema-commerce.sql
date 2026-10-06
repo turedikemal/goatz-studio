@@ -328,3 +328,13 @@ CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
 CREATE INDEX IF NOT EXISTS idx_orders_created ON orders(created_at);
 CREATE INDEX IF NOT EXISTS idx_order_items_order ON order_items(order_id);
 CREATE INDEX IF NOT EXISTS idx_order_events_order ON order_events(order_id);
+
+
+-- SEO kartı (ürün ve kategori): slug mevcut slug sütunudur
+ALTER TABLE products ALTER COLUMN seo_title TYPE TEXT;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS seo_noindex BOOLEAN DEFAULT false;
+ALTER TABLE products ADD COLUMN IF NOT EXISTS seo_canonical TEXT;
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_title TEXT;
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_description TEXT;
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_noindex BOOLEAN DEFAULT false;
+ALTER TABLE categories ADD COLUMN IF NOT EXISTS seo_canonical TEXT;

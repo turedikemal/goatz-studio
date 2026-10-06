@@ -59,6 +59,61 @@ window.GoatzCommerce = (ctx) => {
     } };
     walk(0, 0); return out;
   }
+  // ----- SEO kartı (ürün ve kategori): slug, başlık, açıklama, gelişmiş ayarlar, canlı Google önizlemesi -----
+  const SEO_DOMAIN = 'thegoatzstudio.com';
+  const trSlug = (t) => String(t || '').replace(/[çğıİöşüÇĞÖŞÜ]/g, (c) => ({ ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', Ç: 'c', Ğ: 'g', Ö: 'o', Ş: 's', Ü: 'u' }[c]))
+    .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 185);
+  let seoRefresh = null;
+  // d: taslak (name, slug, seoTitle, seoDescription, seoNoindex, seoCanonical); fallbackDesc: boş açıklama için öneri metni
+  function seoCard(d, fallbackDesc, extra) {
+    const cnt = (el, n) => { el.textContent = `${n}/`; };
+    const slugCnt = h('span', { class: 'hint' }), titleCnt = h('span', { class: 'hint' }), descCnt = h('span', { class: 'hint' });
+    const pvUrl = h('div', { class: 'serp-url' }), pvTitle = h('div', { class: 'serp-title' }), pvDesc = h('div', { class: 'serp-desc' });
+    const slugPh = () => trSlug(d.name) || 'adres';
+    const update = () => {
+      const slug = trSlug(d.slug) || slugPh();
+      slugCnt.textContent = `${(d.slug || '').length}/185`; titleCnt.textContent = `${(d.seoTitle || '').length}/256`; descCnt.textContent = `${(d.seoDescription || '').length}/320`;
+      pvUrl.textContent = `${SEO_DOMAIN} › ${slug}`;
+      pvTitle.textContent = d.seoTitle || d.name || 'Sayfa başlığı';
+      pvDesc.textContent = d.seoDescription || (fallbackDesc ? fallbackDesc() : '') || 'Açıklama arama sonuçlarında başlığın altında görünür.';
+      slugIn.placeholder = slugPh(); titleIn.placeholder = d.name || 'Boş bırakırsan ad kullanılır'; descIn.placeholder = (fallbackDesc ? fallbackDesc() : '') || 'Arama sonuçlarında başlığın altında görünür.';
+    };
+    const slugIn = h('input', { type: 'text', value: d.slug || '', maxlength: 185, oninput: (e) => { d.slug = e.target.value; update(); },
+      onblur: (e) => { if (e.target.value.trim()) { d.slug = trSlug(e.target.value); e.target.value = d.slug; update(); } } });
+    const titleIn = h('input', { type: 'text', value: d.seoTitle || '', maxlength: 256, oninput: (e) => { d.seoTitle = e.target.value; update(); } });
+    const descIn = h('textarea', { rows: 4, maxlength: 320, oninput: (e) => { d.seoDescription = e.target.value; update(); } }, d.seoDescription || '');
+    // Canonical: "/" önekli giriş, Enter veya Ekle ile eklenir (tek adres)
+    const canBox = h('div', { class: 'seo-can' });
+    const drawCan = () => {
+      const inp = h('input', { type: 'text', placeholder: 'urun-adresi veya https://…', 'aria-label': 'Canonical URL',
+        onkeydown: (e) => { if (e.key === 'Enter') { e.preventDefault(); add(); } } });
+      const add = () => {
+        let t = inp.value.trim(); if (!t) return;
+        if (!/^https?:\/\//i.test(t)) t = '/' + t.replace(/^\/+/, '');
+        d.seoCanonical = t; drawCan();
+      };
+      canBox.replaceChildren(d.seoCanonical
+        ? h('span', { class: 'chip' }, d.seoCanonical, h('button', { type: 'button', class: 'chip-x', title: 'Kaldır', onclick: () => { d.seoCanonical = ''; drawCan(); } }, '×'))
+        : h('div', { class: 'seo-pre' }, h('span', { class: 'seo-slash' }, '/'), inp, h('button', { type: 'button', class: 'btn small', onclick: add }, 'Ekle')));
+    };
+    drawCan();
+    const adv = h('details', { class: 'seo-adv', open: !!(d.seoNoindex || d.seoCanonical) },
+      h('summary', {}, 'Gelişmiş SEO Ayarları'),
+      h('div', { class: 'stack' },
+        check(d, 'seoNoindex', 'Bu sayfayı arama motorlarının taramasını engelle'),
+        h('div', { class: 'field' }, h('span', {}, 'Canonical URL'), canBox, h('p', { class: 'hint' }, 'Aynı içerik başka adreste varsa asıl adresi yaz. Boş bırakırsan sayfanın kendi adresi sayılır.'))));
+    const left = h('div', { class: 'stack' },
+      h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Slug', slugCnt), h('div', { class: 'seo-pre' }, h('span', { class: 'seo-slash' }, '/'), slugIn),
+        h('p', { class: 'hint' }, 'Türkçe harfler dönüştürülür; yalnız küçük harf, rakam ve tire. Boşsa addan önerilir; aynı adres varsa sonuna sayı eklenir.')),
+      h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Sayfa Başlığı', titleCnt), titleIn),
+      h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Açıklama', descCnt), descIn),
+      extra || null, adv);
+    const right = h('div', { class: 'seo-prev' }, h('span', { class: 'seo-prev-h' }, 'Önizleme'), h('div', { class: 'serp', id: 'serp' }, pvUrl, pvTitle, pvDesc),
+      h('p', { class: 'hint' }, 'Alanlar boşken gri öneri görünür; kaydedilen değer değildir.'));
+    update(); seoRefresh = update;
+    return h('div', { class: 'seo-grid' }, left, right);
+  }
+
   const parentName = (id) => (data.categories.find((c) => c.id === id) || {}).name || '—';
   const DEF_TABS = {
     brands: {
@@ -75,10 +130,11 @@ window.GoatzCommerce = (ctx) => {
         r.kidCount ? h('span', { class: 'cat-arrow' + (catOpen.has(r.id) ? ' open' : ''), 'aria-hidden': 'true' }, '▸') : h('span', { class: 'cat-arrow none' }),
         r.name, r.kidCount ? h('span', { class: 'cat-badge', title: 'Alt kategori sayısı' }, String(r.kidCount)) : null),
         r.parent_id ? parentName(r.parent_id) : '—', '/' + r.slug],
-      form: (d, id) => [field('Kategori adı', text(d, 'name', 'Örn. Mumlar')),
+      form: (d, id) => [field('Kategori adı', text(d, 'name', 'Örn. Mumlar', 'text', { oninput: (e) => { d.name = e.target.value; refreshSerp(); } })),
         field('Üst kategori', select(d, 'parentId', [['', 'Ana kategori'], ...catTree(false).filter((c) => c.id !== id).map((c) => [c.id, '\u00a0\u00a0'.repeat(c.depth) + (c.depth ? '↳ ' : '') + c.name])])),
-        field('Açıklama', area(d, 'description', '', 3))],
-      toDraft: (r) => ({ name: r.name, parentId: r.parent_id || '', description: r.description || '' }),
+        field('Açıklama', h('textarea', { rows: 3, oninput: (e) => { d.description = e.target.value; refreshSerp(); } }, d.description ?? '')),
+        h('div', { class: 'seo-sec' }, h('h4', {}, 'Arama Motoru Optimizasyonu (SEO)'), (() => { d.name = d.name || ''; return seoCard(d, () => String(d.description || '').slice(0, 155)); })())],
+      toDraft: (r) => ({ name: r.name, parentId: r.parent_id || '', description: r.description || '', slug: r.slug || '', seoTitle: r.seo_title || '', seoDescription: r.seo_description || '', seoNoindex: !!r.seo_noindex, seoCanonical: r.seo_canonical || '' }),
     },
     taxes: {
       label: 'Vergi Oranları', url: 'tax-rates', noun: 'Vergi oranı', list: () => data.taxes,
@@ -279,7 +335,7 @@ window.GoatzCommerce = (ctx) => {
   const blankDraft = () => ({
     name: '', slug: '', description: '', brandId: '', categoryId: '', taxRateId: (data.taxes.find((t) => Number(t.rate) === 20) || data.taxes[0] || {}).id || '', sku: '', barcode: '',
     purchasePrice: '', salePrice: '', discountPrice: '', weight: '', desi: '', status: 'draft', isPublished: false,
-    seoTitle: '', seoDescription: '', seoKeywords: '', tags: [], images: [], variants: [], stock: '', warehouseId: (data.warehouses.find((w) => w.is_default) || data.warehouses[0] || {}).id || '',
+    seoTitle: '', seoDescription: '', seoKeywords: '', seoNoindex: false, seoCanonical: '', tags: [], images: [], variants: [], stock: '', warehouseId: (data.warehouses.find((w) => w.is_default) || data.warehouses[0] || {}).id || '',
   });
 
   async function openProduct(id) {
@@ -290,7 +346,7 @@ window.GoatzCommerce = (ctx) => {
         id: p.id, name: p.name, slug: p.slug, description: p.description || '', brandId: p.brand_id || '', categoryId: p.category_id || '', taxRateId: p.tax_rate_id || '',
         sku: p.sku || '', barcode: p.barcode || '', purchasePrice: p.purchase_price ?? '', salePrice: p.sale_price ?? '', discountPrice: p.discount_price ?? '',
         weight: p.weight ?? '', desi: p.desi ?? '', status: p.status, isPublished: p.is_published, seoTitle: p.seo_title || '', seoDescription: p.seo_description || '',
-        seoKeywords: p.seo_keywords || '', tags: Array.isArray(p.tags) ? p.tags.slice() : [], images: Array.isArray(p.images) ? p.images : [],
+        seoKeywords: p.seo_keywords || '', seoNoindex: !!p.seo_noindex, seoCanonical: p.seo_canonical || '', tags: Array.isArray(p.tags) ? p.tags.slice() : [], images: Array.isArray(p.images) ? p.images : [],
       });
       const named = p.variants.filter((v) => v.name);
       if (named.length) {
@@ -394,14 +450,7 @@ window.GoatzCommerce = (ctx) => {
     toast(added ? `${added} varyant üretildi.` : 'Bu kombinasyonlar zaten var.'); rerender();
   }
 
-  function refreshSerp() {
-    const el = document.getElementById('serp'); const d = P.draft;
-    if (!el || !d) return;
-    const slug = (d.slug || d.name || 'urun-adi').toLowerCase().replace(/[^a-z0-9ğüşıöç]+/g, '-');
-    el.children[0].textContent = `goatz.com › urun › ${slug}`;
-    el.children[1].textContent = d.seoTitle || d.name || 'Ürün başlığı';
-    el.children[2].textContent = d.seoDescription || plain(d.description).slice(0, 155) || 'Ürün açıklaması burada görünür.';
-  }
+  function refreshSerp() { if (seoRefresh) seoRefresh(); }
 
   // Zengin metin editörü: taslak değişmesin diye her çizimde yeniden kurulur, içerik d.description'da tutulur.
   function descEditor(d) {
@@ -447,9 +496,6 @@ window.GoatzCommerce = (ctx) => {
     const d = P.draft;
     const opts = (list, label = 'Seçiniz') => [['', label], ...list];
     const catOpts = opts(catTree(false).map((c) => [c.id, '\u00a0\u00a0'.repeat(c.depth) + (c.depth ? '↳ ' : '') + c.name]));
-    const snippetTitle = d.seoTitle || d.name || 'Ürün başlığı';
-    const snippetSlug = (d.slug || d.name || 'urun-adi').toLowerCase().replace(/[^a-z0-9ğüşıöç]+/g, '-');
-    const snippetDesc = d.seoDescription || plain(d.description).slice(0, 155) || 'Ürün açıklaması burada görünür.';
 
     const basic = h('div', { class: 'card' }, h('h3', {}, '1 · Ürün bilgileri'), h('div', { class: 'stack' },
       field('Ürün adı *', text(d, 'name', 'Örn. Seramik Kaplı Soya Mumu', 'text', { oninput: (e) => { d.name = e.target.value; refreshSerp(); } })),
@@ -491,11 +537,8 @@ window.GoatzCommerce = (ctx) => {
       d.variants.length ? table(['Varyant', 'SKU', 'Barkod', 'Fiyat (₺)', 'Stok', 'Depo', ''], vrows) : h('p', { class: 'hint' }, 'Varyant yok: ürün tek başına satılır.'),
       h('div', { class: 'btn-row' }, h('button', { class: 'btn small', onclick: () => { d.variants.push({ name: '', sku: '', barcode: '', salePrice: '', discountPrice: '', stock: 0, warehouseId: d.warehouseId }); rerender(); } }, '+ Elle varyant ekle')));
 
-    const seoCard = h('div', { class: 'card' }, h('h3', {}, '5 · SEO ve meta bilgileri'), h('div', { class: 'stack' },
-      field('SEO başlığı (title)', text(d, 'seoTitle', 'Boş bırakırsan ürün adı kullanılır', 'text', { maxlength: 70, oninput: (e) => { d.seoTitle = e.target.value; refreshSerp(); } }), 'Google’da görünen başlık. 60 karakter civarı ideal.'),
-      field('Meta açıklaması (description)', h('textarea', { rows: 3, placeholder: 'Arama sonuçlarında başlığın altında görünür.', oninput: (e) => { d.seoDescription = e.target.value; refreshSerp(); } }, d.seoDescription || ''), '150–160 karakter ideal.'),
-      row(field('Sayfa adresi (slug)', text(d, 'slug', 'Boş bırakırsan üründen üretilir', 'text', { oninput: (e) => { d.slug = e.target.value; refreshSerp(); } })), field('Anahtar kelimeler', text(d, 'seoKeywords', 'virgülle ayır: mum, soya, seramik'))),
-      h('div', { class: 'serp', id: 'serp' }, h('div', { class: 'serp-url' }, `goatz.com › urun › ${snippetSlug}`), h('div', { class: 'serp-title' }, snippetTitle), h('div', { class: 'serp-desc' }, snippetDesc))));
+    const seoBlock = h('div', { class: 'card' }, h('h3', {}, '5 · Arama Motoru Optimizasyonu (SEO)'),
+      seoCard(d, () => plain(d.description).slice(0, 155), field('Anahtar kelimeler', text(d, 'seoKeywords', 'virgülle ayır: mum, soya, seramik'))));
 
     const imgs = h('div', { class: 'card' }, h('h3', {}, 'Görseller'),
       d.images.length ? sortableThumbs(d) : h('p', { class: 'hint' }, 'Henüz görsel yok. İlk görsel ana görsel olur.'),
@@ -509,7 +552,7 @@ window.GoatzCommerce = (ctx) => {
       h('button', { class: 'btn wide', onclick: () => { P.view = 'list'; P.draft = null; rerender(); } }, 'Listeye dön')));
 
     return h('div', {}, h('div', { class: 'row-between' }, h('h3', { class: 'page-h' }, d.id ? 'Ürünü düzenle' : 'Yeni ürün')),
-      h('div', { class: 'product-layout' }, h('div', {}, basic, imgs, priceCard, stockCard, variantsCard, seoCard), h('div', {}, publish)));
+      h('div', { class: 'product-layout' }, h('div', {}, basic, imgs, priceCard, stockCard, variantsCard, seoBlock), h('div', {}, publish)));
   }
 
   function productList() {

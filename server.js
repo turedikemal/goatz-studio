@@ -329,9 +329,10 @@ async function api(req, res, url) {
 
   if (route === 'POST /api/definitions/categories') {
     try {
-      const { name, slug, parentId, description, icon } = await readJson(req);
+      const body = await readJson(req);
+      const { name, slug, parentId, description, icon } = body;
       if (!name) return json(res, 400, { error: 'Ad gerekli.' });
-      const category = await db.createCategory(name, slug || db.slugify(name), parentId || null, description, icon);
+      const category = await db.createCategory(name, slug, parentId || null, description, icon, body);
       return json(res, 201, category);
     } catch (e) {
       return json(res, e.status || 500, { error: e.status ? e.message : 'Kategori oluşturulamadı: ' + e.message });
