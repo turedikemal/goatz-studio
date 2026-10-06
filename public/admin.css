@@ -418,3 +418,12 @@ body.rte-lock { overflow: hidden; }
 #pages > .panel { overflow-x: auto; max-width: calc(100% - 8px); }
 #pages > .panel .editor { overflow-x: auto; }
 #pages > .panel .data-table { min-width: 520px; }
+
+/* Ana başlık hapı: tıklayınca alt menü açılır (hap stili korunur, yalnız küçük ok eklenir) */
+#pages > button.group { display: flex; align-items: center; gap: 8px; width: fit-content; cursor: pointer; font-family: inherit; }
+#pages > button.group:hover { filter: brightness(.96); }
+#pages > button.group .chev { flex: none; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: -45deg; transition: rotate .15s ease; }
+#pages > button.group.open .chev { rotate: 45deg; }
+#pages > button.group { background: var(--gc, var(--sky)); margin: 10px 2px 2px; padding: 5px 12px; transform: none; border-radius: 999px; }
+#pages > button.group:first-child { margin-top: 4px; }
+#pages > button.group:hover { transform: none; background: var(--gc, var(--sky)); }
