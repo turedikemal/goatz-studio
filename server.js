@@ -413,6 +413,17 @@ async function api(req, res, url) {
     }
   }
 
+  // Ürün etiketleri (müşteri etiketlerinden ayrı)
+  try {
+    if (route === 'GET /api/definitions/product-tags') return json(res, 200, await db.listProductTags());
+    if (route === 'POST /api/definitions/product-tags') return json(res, 201, await db.createProductTag(await readJson(req)));
+    const ptm = /^(PUT|DELETE) \/api\/definitions\/product-tags\/(\d+)$/.exec(route);
+    if (ptm) {
+      if (ptm[1] === 'DELETE') { await db.deleteProductTag(+ptm[2]); return json(res, 200, { ok: true }); }
+      return json(res, 200, await db.renameProductTag(+ptm[2], await readJson(req)));
+    }
+  } catch (e) { return json(res, e.status || 500, { error: e.status ? e.message : 'Etiket işlemi başarısız: ' + e.message }); }
+
   const defMatch = /^(PUT|DELETE) \/api\/definitions\/([a-z-]+)\/(\d+)$/.exec(route);
   if (defMatch) {
     const id = parseInt(defMatch[3], 10);

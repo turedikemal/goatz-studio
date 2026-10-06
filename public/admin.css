@@ -517,3 +517,14 @@ dialog.confirm-dlg { border: 2px solid var(--ink); border-radius: 20px; padding:
   .app.te .split-empty { display: none; }
   .app.te #pages { gap: 0; }
 }
+
+/* Ürün etiketleri */
+.tag-input { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); }
+.tag-input input { flex: 1 1 160px; min-width: 120px; border: 0 !important; outline: 0; box-shadow: none !important; padding: 4px 2px; background: transparent; }
+.chips.tiny { margin: 4px 0 0; gap: 4px; } .chips.tiny .chip { padding: 1px 7px; font-size: 11px; }
+
+/* Kategori ağacı */
+tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0,0,.03); }
+.cat-name { display: inline-flex; align-items: center; gap: 6px; }
+.cat-arrow { display: inline-block; width: 14px; font-size: 12px; transition: transform .15s; } .cat-arrow.open { transform: rotate(90deg); }
+.cat-badge { padding: 0 7px; border: 1px solid var(--line); border-radius: 999px; font-size: 11px; font-weight: 700; background: var(--paper); }

@@ -25,14 +25,15 @@ window.GoatzCommerce = (ctx) => {
   //  Tanımlamalar
   // =====================================================================
   const D = { loaded: false, loading: false, tab: 'brands', draft: {}, editId: null, valueDraft: {} };
-  const data = { brands: [], categories: [], properties: [], taxes: [], warehouses: [] };
+  const data = { brands: [], categories: [], properties: [], taxes: [], warehouses: [], productTags: [] };
 
   async function loadDefs() {
-    const [brands, categories, properties, taxes, warehouses] = await Promise.all([
+    const [brands, categories, properties, taxes, warehouses, productTags] = await Promise.all([
       api('GET', '/api/definitions/brands'), api('GET', '/api/definitions/categories'), api('GET', '/api/definitions/properties'),
       api('GET', '/api/definitions/tax-rates'), api('GET', '/api/definitions/warehouses'),
+      api('GET', '/api/definitions/product-tags').catch(() => []),
     ]);
-    Object.assign(data, { brands, categories, properties, taxes, warehouses });
+    Object.assign(data, { brands, categories, properties, taxes, warehouses, productTags });
   }
   function ensure(state, loader) {
     if (state.loaded) return false;
@@ -44,6 +45,20 @@ window.GoatzCommerce = (ctx) => {
   }
   const reloadDefs = async () => { try { await loadDefs(); } catch (e) { fail(e); } rerender(); };
 
+  // Kategori ağacı: ana kategoriler üstte, alt kategoriler ana kategorinin altında (ada göre sıralı).
+  const catOpen = new Set();
+  function catTree(onlyOpen) {
+    const ids = new Set(data.categories.map((c) => c.id)), kids = {};
+    for (const c of data.categories) { const k = c.parent_id && ids.has(c.parent_id) ? c.parent_id : 0; (kids[k] = kids[k] || []).push(c); }
+    for (const k of Object.keys(kids)) kids[k].sort((a, b) => a.name.localeCompare(b.name, 'tr'));
+    const out = [], seen = new Set();
+    const walk = (pid, depth) => { for (const c of kids[pid] || []) {
+      if (seen.has(c.id)) continue; seen.add(c.id);
+      const n = (kids[c.id] || []).length; out.push({ ...c, depth, kidCount: n });
+      if (n && (!onlyOpen || catOpen.has(c.id))) walk(c.id, depth + 1);
+    } };
+    walk(0, 0); return out;
+  }
   const parentName = (id) => (data.categories.find((c) => c.id === id) || {}).name || '—';
   const DEF_TABS = {
     brands: {
@@ -53,10 +68,15 @@ window.GoatzCommerce = (ctx) => {
       toDraft: (r) => ({ name: r.name, description: r.description || '' }),
     },
     categories: {
-      label: 'Kategoriler', url: 'categories', noun: 'Kategori', list: () => data.categories,
-      head: ['Kategori', 'Üst kategori', 'Adres'], cells: (r) => [(r.parent_id ? '↳ ' : '') + r.name, r.parent_id ? parentName(r.parent_id) : '—', '/' + r.slug],
+      label: 'Kategoriler', url: 'categories', noun: 'Kategori', list: () => catTree(true), total: () => data.categories.length,
+      rowClick: (r) => { if (!r.kidCount) return; catOpen.has(r.id) ? catOpen.delete(r.id) : catOpen.add(r.id); rerender(); },
+      head: ['Kategori', 'Üst kategori', 'Adres'],
+      cells: (r) => [h('span', { class: 'cat-name', style: `padding-left:${r.depth * 22}px` },
+        r.kidCount ? h('span', { class: 'cat-arrow' + (catOpen.has(r.id) ? ' open' : ''), 'aria-hidden': 'true' }, '▸') : h('span', { class: 'cat-arrow none' }),
+        r.name, r.kidCount ? h('span', { class: 'cat-badge', title: 'Alt kategori sayısı' }, String(r.kidCount)) : null),
+        r.parent_id ? parentName(r.parent_id) : '—', '/' + r.slug],
       form: (d, id) => [field('Kategori adı', text(d, 'name', 'Örn. Mumlar')),
-        field('Üst kategori', select(d, 'parentId', [['', 'Ana kategori'], ...data.categories.filter((c) => c.id !== id).map((c) => [c.id, c.name])])),
+        field('Üst kategori', select(d, 'parentId', [['', 'Ana kategori'], ...catTree(false).filter((c) => c.id !== id).map((c) => [c.id, '\u00a0\u00a0'.repeat(c.depth) + (c.depth ? '↳ ' : '') + c.name])])),
         field('Açıklama', area(d, 'description', '', 3))],
       toDraft: (r) => ({ name: r.name, parentId: r.parent_id || '', description: r.description || '' }),
     },
@@ -65,6 +85,12 @@ window.GoatzCommerce = (ctx) => {
       head: ['Ad', 'Oran'], cells: (r) => [r.name, '%' + r.rate],
       form: (d) => [field('Ad', text(d, 'name', 'Örn. KDV %20')), field('Oran (%)', text(d, 'rate', '20', 'number', { step: '0.01' }))],
       toDraft: (r) => ({ name: r.name, rate: r.rate }),
+    },
+    productTags: {
+      label: 'Etiketler', url: 'product-tags', noun: 'Etiket', list: () => data.productTags,
+      head: ['Etiket', 'Ürün sayısı'], cells: (r) => [r.name, String(r.product_count ?? 0)],
+      form: (d) => [field('Etiket adı', text(d, 'name', 'Örn. Yeni sezon, İndirimde'), 'Ürün etiketleridir; müşteri etiketlerinden ayrıdır. Yeniden adlandırınca ürünlerdeki adı da değişir.')],
+      toDraft: (r) => ({ name: r.name }),
     },
     warehouses: {
       label: 'Depolar', url: 'warehouses', noun: 'Depo', list: () => data.warehouses,
@@ -114,7 +140,7 @@ window.GoatzCommerce = (ctx) => {
   function definitions(page) {
     if (page && page.tab && D.tabInit !== page.id) { D.tab = page.tab; D.tabInit = page.id; D.draft = {}; D.editId = null; }
     if (ensure(D, loadDefs)) return loadingCard('Tanımlamalar yükleniyor…');
-    const ORDER = [['brands', 'Markalar'], ['categories', 'Kategoriler'], ['properties', 'Özellikler'], ['taxes', 'Vergi Oranları'], ['warehouses', 'Depolar']];
+    const ORDER = [['brands', 'Markalar'], ['categories', 'Kategoriler'], ['properties', 'Özellikler'], ['taxes', 'Vergi Oranları'], ['productTags', 'Etiketler'], ['warehouses', 'Depolar']];
     const tabs = h('div', { class: 'seg tabs-row' }, ...ORDER.map(([k, l]) => h('button', { class: D.tab === k ? 'on' : '', onclick: () => { D.tab = k; D.draft = {}; D.editId = null; rerender(); } }, l)));
     if (D.tab === 'properties') return h('div', {}, tabs, propertiesTab());
 
@@ -130,8 +156,8 @@ window.GoatzCommerce = (ctx) => {
       } catch (e) { fail(e); }
     } }, D.editId ? 'Güncelle' : `+ ${t.noun} ekle`);
 
-    const rows = items.map((r) => h('tr', {}, ...t.cells(r).map((c) => h('td', {}, c)),
-      h('td', { class: 'actions' },
+    const rows = items.map((r) => h('tr', t.rowClick ? { class: r.kidCount ? 'row-toggle' : '', onclick: () => t.rowClick(r) } : {}, ...t.cells(r).map((c) => h('td', {}, c)),
+      h('td', { class: 'actions', onclick: (e) => e.stopPropagation() },
         h('button', { class: 'btn small', onclick: () => { D.editId = r.id; D.draft = t.toDraft(r); rerender(); } }, 'Düzenle'),
         h('button', { class: 'btn small danger', onclick: async () => {
           if (!confirm(`"${r.name}" silinsin mi?`)) return;
@@ -142,7 +168,7 @@ window.GoatzCommerce = (ctx) => {
       h('div', { class: 'card' }, h('h3', {}, D.editId ? `${t.noun} düzenle` : `Yeni ${t.noun.toLowerCase()}`),
         h('div', { class: 'stack' }, ...t.form(D.draft, D.editId)),
         h('div', { class: 'btn-row' }, saveBtn, D.editId ? h('button', { class: 'btn', onclick: () => { reset(); rerender(); } }, 'Vazgeç') : null)),
-      h('div', { class: 'card' }, h('h3', {}, `${t.label} (${items.length})`), table([...t.head, ''], rows, `Henüz ${t.noun.toLowerCase()} yok.`)));
+      h('div', { class: 'card' }, h('h3', {}, `${t.label} (${t.total ? t.total() : items.length})`), table([...t.head, ''], rows, `Henüz ${t.noun.toLowerCase()} yok.`)));
   }
 
   // =====================================================================
@@ -159,7 +185,7 @@ window.GoatzCommerce = (ctx) => {
   const blankDraft = () => ({
     name: '', slug: '', description: '', brandId: '', categoryId: '', taxRateId: (data.taxes.find((t) => Number(t.rate) === 20) || data.taxes[0] || {}).id || '', sku: '', barcode: '',
     purchasePrice: '', salePrice: '', discountPrice: '', weight: '', desi: '', status: 'draft', isPublished: false,
-    seoTitle: '', seoDescription: '', seoKeywords: '', images: [], variants: [], stock: '', warehouseId: (data.warehouses.find((w) => w.is_default) || data.warehouses[0] || {}).id || '',
+    seoTitle: '', seoDescription: '', seoKeywords: '', tags: [], images: [], variants: [], stock: '', warehouseId: (data.warehouses.find((w) => w.is_default) || data.warehouses[0] || {}).id || '',
   });
 
   async function openProduct(id) {
@@ -170,7 +196,7 @@ window.GoatzCommerce = (ctx) => {
         id: p.id, name: p.name, slug: p.slug, description: p.description || '', brandId: p.brand_id || '', categoryId: p.category_id || '', taxRateId: p.tax_rate_id || '',
         sku: p.sku || '', barcode: p.barcode || '', purchasePrice: p.purchase_price ?? '', salePrice: p.sale_price ?? '', discountPrice: p.discount_price ?? '',
         weight: p.weight ?? '', desi: p.desi ?? '', status: p.status, isPublished: p.is_published, seoTitle: p.seo_title || '', seoDescription: p.seo_description || '',
-        seoKeywords: p.seo_keywords || '', images: Array.isArray(p.images) ? p.images : [],
+        seoKeywords: p.seo_keywords || '', tags: Array.isArray(p.tags) ? p.tags.slice() : [], images: Array.isArray(p.images) ? p.images : [],
       });
       const named = p.variants.filter((v) => v.name);
       if (named.length) {
@@ -300,10 +326,33 @@ window.GoatzCommerce = (ctx) => {
   }
   const plain = (html) => { const t = document.createElement('div'); t.innerHTML = (window.GoatzRich ? window.GoatzRich.sanitize(html || '') : html || ''); return (t.textContent || '').replace(/\s+/g, ' ').trim(); };
 
+  // Etiket alanı: yaz, Enter veya virgülle çip ekle; × ile sil; mevcut etiketler datalist önerisi.
+  function tagsInput(d) {
+    const wrap = h('div', { class: 'tag-input' });
+    const listId = 'ptag-list';
+    const add = (raw) => {
+      for (const part of String(raw).split(',')) {
+        const s = part.replace(/\s+/g, ' ').trim().slice(0, 100);
+        if (s && !d.tags.some((t) => t.toLocaleLowerCase('tr') === s.toLocaleLowerCase('tr'))) d.tags.push(s);
+      }
+    };
+    const input = h('input', { type: 'text', list: listId, placeholder: d.tags.length ? 'Etiket ekle…' : 'Etiket yaz, Enter veya virgülle ekle', maxlength: 100,
+      onkeydown: (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          if (input.value.trim()) { add(input.value); rerender(); setTimeout(() => { const n = document.querySelector('.tag-input input'); if (n) n.focus(); }, 0); }
+        } else if (e.key === 'Backspace' && !input.value && d.tags.length) { d.tags.pop(); rerender(); setTimeout(() => { const n = document.querySelector('.tag-input input'); if (n) n.focus(); }, 0); }
+      },
+      onchange: () => { if (input.value.trim()) { add(input.value); setTimeout(rerender, 0); } } });
+    const dl = h('datalist', { id: listId }, ...data.productTags.filter((t) => !d.tags.some((x) => x.toLocaleLowerCase('tr') === t.name.toLocaleLowerCase('tr'))).map((t) => h('option', { value: t.name })));
+    wrap.append(...d.tags.map((t, i) => h('span', { class: 'chip' }, t, h('button', { type: 'button', class: 'chip-x', title: 'Sil', onclick: () => { d.tags.splice(i, 1); rerender(); } }, '×'))), input, dl);
+    return wrap;
+  }
+
   function productForm() {
     const d = P.draft;
     const opts = (list, label = 'Seçiniz') => [['', label], ...list];
-    const catOpts = opts(data.categories.map((c) => [c.id, (c.parent_id ? '↳ ' : '') + c.name]));
+    const catOpts = opts(catTree(false).map((c) => [c.id, '\u00a0\u00a0'.repeat(c.depth) + (c.depth ? '↳ ' : '') + c.name]));
     const snippetTitle = d.seoTitle || d.name || 'Ürün başlığı';
     const snippetSlug = (d.slug || d.name || 'urun-adi').toLowerCase().replace(/[^a-z0-9ğüşıöç]+/g, '-');
     const snippetDesc = d.seoDescription || plain(d.description).slice(0, 155) || 'Ürün açıklaması burada görünür.';
@@ -311,6 +360,7 @@ window.GoatzCommerce = (ctx) => {
     const basic = h('div', { class: 'card' }, h('h3', {}, '1 · Ürün bilgileri'), h('div', { class: 'stack' },
       field('Ürün adı *', text(d, 'name', 'Örn. Seramik Kaplı Soya Mumu', 'text', { oninput: (e) => { d.name = e.target.value; refreshSerp(); } })),
       row(field('Marka', select(d, 'brandId', opts(data.brands.map((b) => [b.id, b.name]), 'Marka seç'))), field('Kategori', select(d, 'categoryId', catOpts))),
+      h('div', { class: 'field' }, h('span', {}, 'Etiketler'), tagsInput(d), h('p', { class: 'hint' }, 'Enter veya virgülle ekle. Etiket listesini Tanımlamalar → Etiketler’den yönetebilirsin.')),
       h('div', { class: 'field' }, h('span', {}, 'Açıklama'), descEditor(d))));
 
     const priceCard = h('div', { class: 'card' }, h('h3', {}, '2 · Fiyat ve vergi'), h('div', { class: 'stack' },
@@ -371,7 +421,7 @@ window.GoatzCommerce = (ctx) => {
   function productList() {
     const q = P.q.trim().toLocaleLowerCase('tr');
     const items = P.list.filter((p) => (!P.status || p.status === P.status)
-      && (!q || [p.name, p.sku, p.brand_name, p.category_name].some((x) => (x || '').toLocaleLowerCase('tr').includes(q))));
+      && (!q || [p.name, p.sku, p.brand_name, p.category_name, ...(p.tags || [])].some((x) => (x || '').toLocaleLowerCase('tr').includes(q))));
     const allSel = items.length && items.every((p) => P.selected.has(p.id));
     const bulk = async (action, label) => {
       const ids = [...P.selected]; if (!ids.length) return;
@@ -382,7 +432,8 @@ window.GoatzCommerce = (ctx) => {
       h('td', {}, h('input', { type: 'checkbox', checked: P.selected.has(p.id), onchange: (e) => { e.target.checked ? P.selected.add(p.id) : P.selected.delete(p.id); rerender(); } })),
       h('td', { class: 'prod-cell' },
         (() => { const u = Array.isArray(p.images) ? p.images[0] : null; return u ? h('img', { class: 'prod-thumb', src: u, alt: '', loading: 'lazy' }) : h('span', { class: 'prod-thumb empty', 'aria-hidden': 'true' }); })(),
-        h('div', {}, h('button', { class: 'link', onclick: () => openProduct(p.id) }, p.name), p.sku ? h('div', { class: 'hint' }, p.sku) : null)),
+        h('div', {}, h('button', { class: 'link', onclick: () => openProduct(p.id) }, p.name), p.sku ? h('div', { class: 'hint' }, p.sku) : null,
+          Array.isArray(p.tags) && p.tags.length ? h('div', { class: 'chips tiny' }, ...p.tags.slice(0, 4).map((t) => h('span', { class: 'chip' }, t)), p.tags.length > 4 ? h('span', { class: 'hint' }, `+${p.tags.length - 4}`) : null) : null)),
       h('td', {}, p.brand_name || '—'), h('td', {}, p.category_name || '—'),
       h('td', {}, p.discount_price ? h('span', {}, h('s', { class: 'muted' }, money(p.sale_price)), ' ', money(p.discount_price)) : money(p.sale_price)),
       h('td', {}, p.total_stock), h('td', {}, p.variant_count > 1 || p.named_variants ? p.variant_count : '—'),
@@ -390,7 +441,7 @@ window.GoatzCommerce = (ctx) => {
       h('td', { class: 'actions' }, h('button', { class: 'btn small', onclick: () => openProduct(p.id) }, 'Düzenle'))));
     return h('div', {},
       h('div', { class: 'toolbar' },
-        h('input', { type: 'search', class: 'search', placeholder: 'Ürün, SKU, marka ara…', value: P.q, oninput: (e) => { P.q = e.target.value; const pos = e.target.selectionStart; rerender(); const n = document.querySelector('.search'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } } }),
+        h('input', { type: 'search', class: 'search', placeholder: 'Ürün, SKU, marka, etiket ara…', value: P.q, oninput: (e) => { P.q = e.target.value; const pos = e.target.selectionStart; rerender(); const n = document.querySelector('.search'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } } }),
         h('select', { onchange: (e) => { P.status = e.target.value; rerender(); } }, ...[['', 'Tüm durumlar'], ...Object.entries(STATUS)].map(([v, l]) => h('option', { value: v, selected: P.status === v }, l))),
         h('button', { class: 'btn solid', onclick: () => { P.draft = blankDraft(); P.view = 'form'; P.gen = {}; rerender(); } }, '+ Yeni ürün')),
       P.selected.size ? h('div', { class: 'bulkbar' }, h('b', {}, `${P.selected.size} seçili`),

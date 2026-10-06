@@ -117,6 +117,15 @@ CREATE TABLE IF NOT EXISTS products (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Ürün etiketleri (müşteri etiketlerinden ayrı)
+CREATE TABLE IF NOT EXISTS product_tags (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL UNIQUE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE products ADD COLUMN IF NOT EXISTS tags TEXT[] NOT NULL DEFAULT '{}';
+
 -- Ürün Varyantları
 CREATE TABLE IF NOT EXISTS product_variants (
   id SERIAL PRIMARY KEY,
