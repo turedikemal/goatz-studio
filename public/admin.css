@@ -427,8 +427,8 @@ body.rte-lock { overflow: hidden; }
   .panel.wide { left: var(--side); width: auto; right: 0; border-right: 0; transform: none; }
   .panel.wide:not(.open) { transform: translateX(-24px); }
   .panel:not(.wide) { left: var(--side); width: var(--side); }
-  .app:has(.panel.open:not(.wide)) .split { padding-left: var(--side); }
-  .app:has(.panel.open:not(.wide)) .split-empty { display: none; }
+  .app:not(.te):has(.panel.open:not(.wide)) .split { padding-left: var(--side); }
+  .app:not(.te):has(.panel.open:not(.wide)) .split-empty { display: none; }
   .panel .table-wrap, .panel.wide .editor { overflow-x: auto; }
 }
 
@@ -446,7 +446,7 @@ body.rte-lock { overflow: hidden; }
 #pages > button.group:hover { background: rgba(0, 0, 0, .05); }
 
 /* Daha büyük ve rahat sol menü */
-:root { --side: 370px; }
+:root { --side: 420px; }
 .sidebar { padding: 20px 16px 32px; }
 #pages { gap: 8px; }
 #pages > button.group { min-height: 52px; margin: 18px 0 4px; width: 100%; padding: 12px 20px; font-size: 14px; letter-spacing: .06em; border-width: 2px; }
