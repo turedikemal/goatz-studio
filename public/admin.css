@@ -749,3 +749,22 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .pub-hint { margin: 0; font-size: 12px; }
 .pub-bar .btn { padding: 8px 14px; }
 @media (max-width: 700px) { .pub-bar { border-radius: 16px; padding: 8px; } .pub-head { position: static; margin-top: 0; } }
+
+/* Ürün formu: tek kart, bölümler arası boşluk yok, yalnız başlık şeridi; üstte bölüm barı */
+.pf-sheet { padding: 0; overflow: visible; }
+.pf-sec { padding: 0 16px 18px; border-top: 1px solid var(--line); scroll-margin-top: 120px; }
+.pf-sec:first-child { border-top: 0; }
+.pf-title { margin: 0 -16px 14px; padding: 10px 16px; font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; background: var(--soft); }
+.pf-sec:first-child .pf-title { border-radius: 17px 17px 0 0; }
+.pf-nav { flex-basis: 100%; display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; padding: 3px; background: var(--paper); border: 1px solid var(--line); border-radius: 999px; }
+.pf-nav::-webkit-scrollbar { display: none; }
+.pf-nav button { flex: none; border: 0; background: none; padding: 5px 12px; border-radius: 999px; cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; }
+.pf-nav button:hover { background: var(--bg); }
+.pf-nav button.on { background: var(--ink); color: var(--paper); }
+.gen-step { display: grid; gap: 8px; }
+.gen-step > b { font-size: 12px; }
+.gen-name { font-size: 12px; font-weight: 700; color: var(--muted); }
+.chip.pick-type { cursor: pointer; font: inherit; font-size: 12px; font-weight: 700; }
+.chip.pick-type small { font-weight: 500; color: var(--muted); }
+.chip.pick-type.on { background: var(--sun); }
+@media (max-width: 700px) { .pub-head { position: sticky; top: -14px; } .pf-sec { padding: 0 12px 14px; } .pf-title { margin: 0 -12px 12px; padding: 10px 12px; } }

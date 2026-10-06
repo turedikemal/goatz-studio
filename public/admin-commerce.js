@@ -324,7 +324,7 @@ window.GoatzCommerce = (ctx) => {
   // =====================================================================
   //  Ürünler
   // =====================================================================
-  const P = { loaded: false, loading: false, list: [], view: 'list', q: '', status: '', selected: new Set(), draft: null, gen: {}, busy: false };
+  const P = { loaded: false, loading: false, list: [], view: 'list', q: '', status: '', selected: new Set(), draft: null, gen: {}, genTypes: new Set(), secOn: null, busy: false };
 
   async function loadProducts() {
     const [list] = await Promise.all([api('GET', '/api/products'), loadDefs()]);
@@ -356,7 +356,7 @@ window.GoatzCommerce = (ctx) => {
         d.stock = p.variants[0].stock[0] ? p.variants[0].stock[0].quantity : 0;
         if (p.variants[0].stock[0]) d.warehouseId = p.variants[0].stock[0].warehouse_id;
       }
-      P.draft = d; P.view = 'form'; P.gen = {}; rerender();
+      P.draft = d; P.view = 'form'; P.gen = {}; P.genTypes = new Set(); P.secOn = null; rerender();
     } catch (e) { fail(e); }
   }
 
@@ -492,40 +492,99 @@ window.GoatzCommerce = (ctx) => {
     return wrap;
   }
 
+  // Ürün formu üst barı: bölüm başlıkları; tıklayınca ya da üzerinde kısa bekleyince o bölüme kayar, kaydırınca etkin başlık vurgulanır.
+  const SEC_LABEL = { temel: 'Temel bilgiler', fiyat: 'Fiyat listesi', gorseller: 'Görseller', detay: 'Ürün detayı', kategori: 'Kategori', envanter: 'Envanter', seo: 'SEO', varyant: 'Varyant' };
+  function goSec(id) {
+    const ed = document.getElementById('editor'), t = document.getElementById(`pf-${id}`), head = document.querySelector('.pub-head');
+    if (!ed || !t) return;
+    const top = ed.scrollTop + t.getBoundingClientRect().top - ed.getBoundingClientRect().top - (head ? head.offsetHeight : 0) + 2;
+    ed.scrollTo({ top, behavior: 'smooth' });
+  }
+  function spySections() {
+    const ed = document.getElementById('editor'), head = document.querySelector('.pub-head');
+    const secs = [...document.querySelectorAll('.pf-sec')];
+    if (!ed || !secs.length) return;
+    const line = (head ? head.getBoundingClientRect().bottom : ed.getBoundingClientRect().top) + 24;
+    let on = secs[0].dataset.sec;
+    for (const s of secs) if (s.getBoundingClientRect().top <= line) on = s.dataset.sec;
+    if (ed.scrollTop + ed.clientHeight >= ed.scrollHeight - 4) on = secs[secs.length - 1].dataset.sec;
+    P.secOn = on;
+    document.querySelectorAll('.pf-nav button').forEach((b) => {
+      const act = b.dataset.go === on;
+      if (act && !b.classList.contains('on')) { const nav = b.parentNode; nav.scrollTo({ left: b.offsetLeft - nav.clientWidth / 2 + b.offsetWidth / 2, behavior: 'smooth' }); }
+      b.classList.toggle('on', act);
+    });
+  }
+  function sectionNav(sections) {
+    const el = h('nav', { class: 'pf-nav', 'aria-label': 'Ürün bölümleri' }, ...sections.map((s) => {
+      const id = s.dataset.sec; let tm;
+      return h('button', { type: 'button', 'data-go': id, class: (P.secOn || 'temel') === id ? 'on' : '',
+        onclick: () => { clearTimeout(tm); goSec(id); }, onmouseenter: () => { tm = setTimeout(() => goSec(id), 350); }, onmouseleave: () => clearTimeout(tm) }, SEC_LABEL[id] || id);
+    }));
+    return { el, watch: () => {
+      setTimeout(() => {
+        const ed = document.getElementById('editor');
+        if (ed && !ed.dataset.pfSpy) { ed.dataset.pfSpy = '1'; ed.addEventListener('scroll', () => { if (document.querySelector('.pf-sec')) spySections(); }, { passive: true }); }
+        spySections();
+      }, 0);
+      return null;
+    } };
+  }
+
   function productForm() {
     const d = P.draft;
     const opts = (list, label = 'Seçiniz') => [['', label], ...list];
     const catOpts = opts(catTree(false).map((c) => [c.id, '\u00a0\u00a0'.repeat(c.depth) + (c.depth ? '↳ ' : '') + c.name]));
 
-    const basic = h('div', { class: 'card' }, h('h3', {}, '1 · Ürün bilgileri'), h('div', { class: 'stack' },
-      field('Ürün adı *', text(d, 'name', 'Örn. Seramik Kaplı Soya Mumu', 'text', { oninput: (e) => { d.name = e.target.value; refreshSerp(); } })),
-      row(field('Marka', select(d, 'brandId', opts(data.brands.map((b) => [b.id, b.name]), 'Marka seç'))), field('Kategori', select(d, 'categoryId', catOpts))),
-      h('div', { class: 'field' }, h('span', {}, 'Etiketler'), tagsInput(d), h('p', { class: 'hint' }, 'Enter veya virgülle ekle. Etiket listesini Tanımlamalar → Etiketler’den yönetebilirsin.')),
-      h('div', { class: 'field' }, h('span', {}, 'Açıklama'), descEditor(d))));
+    // Bölümler tek kart içinde, aralarında boşluk yok; her bölüm yalnız başlıkla ayrılır. Üstteki ince bar bunlara götürür.
+    const sec = (id, title, ...kids) => h('section', { class: 'pf-sec', id: `pf-${id}`, 'data-sec': id }, h('h3', { class: 'pf-title' }, title), h('div', { class: 'stack' }, ...kids));
 
-    const priceCard = h('div', { class: 'card' }, h('h3', {}, '2 · Fiyat ve vergi'), h('div', { class: 'stack' },
+    const basic = sec('temel', 'Temel bilgiler',
+      field('Ürün adı *', text(d, 'name', 'Örn. Seramik Kaplı Soya Mumu', 'text', { oninput: (e) => { d.name = e.target.value; refreshSerp(); } })),
+      field('Marka', select(d, 'brandId', opts(data.brands.map((b) => [b.id, b.name]), 'Marka seç'))),
+      h('div', { class: 'field' }, h('span', {}, 'Etiketler'), tagsInput(d), h('p', { class: 'hint' }, 'Enter veya virgülle ekle. Etiket listesini Tanımlamalar → Etiketler’den yönetebilirsin.')));
+
+    const priceCard = sec('fiyat', 'Fiyat listesi',
       row(field('Satış fiyatı (₺) *', text(d, 'salePrice', '0,00', 'number', { step: '0.01', min: '0' })), field('İndirimli fiyat (₺)', text(d, 'discountPrice', '', 'number', { step: '0.01', min: '0' }))),
       row(field('Alış maliyeti (₺)', text(d, 'purchasePrice', '', 'number', { step: '0.01', min: '0' })),
-        field('KDV oranı', select(d, 'taxRateId', opts(data.taxes.map((t) => [t.id, `${t.name}`]), 'Vergi seç'))))));
+        field('KDV oranı', select(d, 'taxRateId', opts(data.taxes.map((t) => [t.id, `${t.name}`]), 'Vergi seç')))));
+
+    const imgs = sec('gorseller', 'Görseller',
+      d.images.length ? sortableThumbs(d) : h('p', { class: 'hint' }, 'Henüz görsel yok. İlk görsel ana görsel olur.'),
+      d.images.length > 1 ? h('p', { class: 'hint' }, 'Sırayı değiştirmek için görseli sürükleyin (dokunmatikte alttaki ⠿ tutamacından). İlk görsel ana görsel ve liste küçük resmidir.') : null,
+      h('div', {}, h('label', { class: 'btn small' }, '+ Görsel yükle', h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', multiple: true, hidden: true, onchange: (e) => uploadImages([...e.target.files]) }))));
+
+    const detail = sec('detay', 'Ürün detayı', h('div', { class: 'field' }, h('span', {}, 'Açıklama'), descEditor(d)));
+
+    const catCard = sec('kategori', 'Kategori', field('Kategori', select(d, 'categoryId', catOpts), 'Alt kategorileri Ürünler → Kategori sayfasından yönetebilirsin.'));
 
     const simpleStock = d.variants.length ? null : row(
       field('Stok adedi', text(d, 'stock', '0', 'number', { min: '0', step: '1' })),
-      field('Depo', select(d, 'warehouseId', data.warehouses.map((w) => [w.id, w.name]))));
-    const stockCard = h('div', { class: 'card' }, h('h3', {}, '3 · Stok ve lojistik'), h('div', { class: 'stack' },
+      field('Depo (lokasyon)', select(d, 'warehouseId', data.warehouses.map((w) => [w.id, w.name]))));
+    const stockCard = sec('envanter', 'Envanter · stok ve lokasyon',
       row(field('SKU (stok kodu)', text(d, 'sku', 'Örn. MUM-001')), field('Barkod', text(d, 'barcode', 'EAN / UPC'))),
       row(field('Ağırlık (kg)', text(d, 'weight', '', 'number', { step: '0.001', min: '0' })), field('Desi', text(d, 'desi', '', 'number', { step: '0.001', min: '0' }))),
-      simpleStock, d.variants.length ? h('p', { class: 'hint' }, 'Varyant kullanıldığında stok her varyant satırında ayrı girilir.') : null));
+      simpleStock, d.variants.length ? h('p', { class: 'hint' }, 'Varyant kullanıldığında stok ve depo her varyant satırında ayrı girilir (Varyant bölümü).') : null);
 
-    const genBox = h('div', { class: 'gen-box' }, data.properties.length
-      ? [h('p', { class: 'hint' }, 'Kombinasyon üretmek için varyant türü değerlerini seç (Örn. Renk: Siyah, Beyaz × Beden: S, M).'),
-        ...data.properties.filter((p) => p.values.length).map((p) => h('div', { class: 'gen-group' }, h('b', {}, p.name),
-          h('div', { class: 'chips' }, ...p.values.map((v) => {
-            const set = P.gen[p.id] || (P.gen[p.id] = new Set());
-            return h('label', { class: 'chip pick' }, h('input', { type: 'checkbox', checked: set.has(v.id), onchange: (e) => { e.target.checked ? set.add(v.id) : set.delete(v.id); } }),
-              v.image_url ? h('img', { class: 'vt-box sm', src: v.image_url, alt: '' }) : v.color_hex ? h('i', { class: 'swatch', style: `background:${v.color_hex}` }) : null, v.value);
-          })))),
-        h('button', { class: 'btn small solid', onclick: generateVariants }, 'Kombinasyonları üret')]
-      : h('p', { class: 'hint' }, 'Varyant üretmek için önce Tanımlamalar → Varyant Türleri bölümünde Renk/Beden gibi türler ve değerlerini ekle.'));
+    const seoBlock = sec('seo', 'Arama Motoru Optimizasyonu (SEO)',
+      seoCard(d, () => plain(d.description).slice(0, 155), field('Anahtar kelimeler', text(d, 'seoKeywords', 'virgülle ayır: mum, soya, seramik'))));
+
+    // Varyant: 1) Tanımlamalar'da açılmış varyant türlerinden seç, 2) seçilen türlerin değerlerini işaretle, 3) ekle.
+    const types = data.properties.filter((p) => p.values.length);
+    const chosen = types.filter((p) => P.genTypes.has(p.id));
+    const genBox = h('div', { class: 'gen-box' }, types.length
+      ? [h('div', { class: 'gen-step' }, h('b', {}, '1. Varyant türü seç'),
+          h('div', { class: 'chips' }, ...types.map((p) => h('button', { type: 'button', class: `chip pick-type${P.genTypes.has(p.id) ? ' on' : ''}`, 'aria-pressed': String(P.genTypes.has(p.id)),
+            onclick: () => { if (P.genTypes.has(p.id)) { P.genTypes.delete(p.id); delete P.gen[p.id]; } else P.genTypes.add(p.id); rerender(); } }, p.name, h('small', {}, ` ${p.values.length} değer`))))),
+        chosen.length ? h('div', { class: 'gen-step' }, h('b', {}, '2. Değerleri seç'),
+          ...chosen.map((p) => h('div', { class: 'gen-group' }, h('span', { class: 'gen-name' }, p.name),
+            h('div', { class: 'chips' }, ...p.values.map((v) => {
+              const set = P.gen[p.id] || (P.gen[p.id] = new Set());
+              return h('label', { class: 'chip pick' }, h('input', { type: 'checkbox', checked: set.has(v.id), onchange: (e) => { e.target.checked ? set.add(v.id) : set.delete(v.id); } }),
+                v.image_url ? h('img', { class: 'vt-box sm', src: v.image_url, alt: '' }) : v.color_hex ? h('i', { class: 'swatch', style: `background:${v.color_hex}` }) : null, v.value);
+            })))),
+          h('div', {}, h('button', { class: 'btn small solid', onclick: generateVariants }, '3. Varyantları ekle'))) : h('p', { class: 'hint' }, 'Bir ya da birden çok tür seç (örn. Renk ve Beden); sonra değerlerini işaretleyip varyantları ekle.')]
+      : h('p', { class: 'hint' }, 'Önce Tanımlamalar → Varyant Türleri bölümünde Renk/Beden gibi türler ve değerlerini aç; burada seçilip eklenir.'));
 
     const vrows = d.variants.map((v, i) => h('tr', {},
       h('td', {}, text(v, 'name', 'Varyant')), h('td', {}, text(v, 'sku', 'SKU')), h('td', {}, text(v, 'barcode', 'Barkod')),
@@ -533,17 +592,12 @@ window.GoatzCommerce = (ctx) => {
       h('td', {}, text(v, 'stock', '0', 'number', { min: '0', step: '1' })),
       h('td', {}, select(v, 'warehouseId', data.warehouses.map((w) => [w.id, w.name]))),
       h('td', {}, h('button', { class: 'btn small danger', onclick: () => { d.variants.splice(i, 1); rerender(); } }, '×'))));
-    const variantsCard = h('div', { class: 'card' }, h('h3', {}, '4 · Varyantlar'), genBox,
+    const variantsCard = sec('varyant', 'Varyant', genBox,
       d.variants.length ? table(['Varyant', 'SKU', 'Barkod', 'Fiyat (₺)', 'Stok', 'Depo', ''], vrows) : h('p', { class: 'hint' }, 'Varyant yok: ürün tek başına satılır.'),
       h('div', { class: 'btn-row' }, h('button', { class: 'btn small', onclick: () => { d.variants.push({ name: '', sku: '', barcode: '', salePrice: '', discountPrice: '', stock: 0, warehouseId: d.warehouseId }); rerender(); } }, '+ Elle varyant ekle')));
 
-    const seoBlock = h('div', { class: 'card' }, h('h3', {}, '5 · Arama Motoru Optimizasyonu (SEO)'),
-      seoCard(d, () => plain(d.description).slice(0, 155), field('Anahtar kelimeler', text(d, 'seoKeywords', 'virgülle ayır: mum, soya, seramik'))));
-
-    const imgs = h('div', { class: 'card' }, h('h3', {}, 'Görseller'),
-      d.images.length ? sortableThumbs(d) : h('p', { class: 'hint' }, 'Henüz görsel yok. İlk görsel ana görsel olur.'),
-      d.images.length > 1 ? h('p', { class: 'hint' }, 'Sırayı değiştirmek için görseli sürükleyin (dokunmatikte alttaki ⠿ tutamacından). İlk görsel ana görsel ve liste küçük resmidir.') : null,
-      h('label', { class: 'btn small', style: 'margin-top:10px' }, '+ Görsel yükle', h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', multiple: true, hidden: true, onchange: (e) => uploadImages([...e.target.files]) })));
+    const sections = [basic, priceCard, imgs, detail, catCard, stockCard, seoBlock, variantsCard];
+    const secNav = sectionNav(sections);
 
     // Yayın: başlık hizasında tek satırlık kompakt şerit (form tam genişlik kalır)
     const publish = h('div', { class: 'pub-bar' },
@@ -552,8 +606,8 @@ window.GoatzCommerce = (ctx) => {
       h('button', { class: 'btn', onclick: () => { P.view = 'list'; P.draft = null; rerender(); } }, 'Listeye dön'),
       h('button', { class: 'btn solid', disabled: P.busy, onclick: saveProduct }, d.id ? 'Değişiklikleri kaydet' : 'Ürünü kaydet'));
 
-    return h('div', {}, h('div', { class: 'pub-head' }, h('h3', { class: 'page-h' }, d.id ? 'Ürünü düzenle' : 'Yeni ürün'), publish),
-      h('div', { class: 'product-form' }, basic, imgs, priceCard, stockCard, variantsCard, seoBlock));
+    return h('div', {}, h('div', { class: 'pub-head' }, h('h3', { class: 'page-h' }, d.id ? 'Ürünü düzenle' : 'Yeni ürün'), publish, secNav.el),
+      h('div', { class: 'card pf-sheet' }, ...sections), secNav.watch());
   }
 
   function productList() {
@@ -581,7 +635,7 @@ window.GoatzCommerce = (ctx) => {
       h('div', { class: 'toolbar' },
         h('input', { type: 'search', class: 'search', placeholder: 'Ürün, SKU, marka, etiket ara…', value: P.q, oninput: (e) => { P.q = e.target.value; const pos = e.target.selectionStart; rerender(); const n = document.querySelector('.search'); if (n) { n.focus(); n.setSelectionRange(pos, pos); } } }),
         h('select', { onchange: (e) => { P.status = e.target.value; rerender(); } }, ...[['', 'Tüm durumlar'], ...Object.entries(STATUS)].map(([v, l]) => h('option', { value: v, selected: P.status === v }, l))),
-        h('button', { class: 'btn solid', onclick: () => { P.draft = blankDraft(); P.view = 'form'; P.gen = {}; rerender(); } }, '+ Yeni ürün')),
+        h('button', { class: 'btn solid', onclick: () => { P.draft = blankDraft(); P.view = 'form'; P.gen = {}; P.genTypes = new Set(); P.secOn = null; rerender(); } }, '+ Yeni ürün')),
       P.selected.size ? h('div', { class: 'bulkbar' }, h('b', {}, `${P.selected.size} seçili`),
         h('button', { class: 'btn small', onclick: () => bulk('active', 'aktif yapıldı') }, 'Aktif yap'), h('button', { class: 'btn small', onclick: () => bulk('draft', 'taslağa alındı') }, 'Taslağa al'),
         h('button', { class: 'btn small', onclick: () => bulk('archived', 'arşivlendi') }, 'Arşivle'), h('button', { class: 'btn small danger', onclick: () => bulk('delete', 'silindi') }, 'Sil')) : null,
@@ -615,6 +669,6 @@ window.GoatzCommerce = (ctx) => {
       h('div', { class: 'card' }, table(['Ürün', 'SKU', 'Depo', 'Adet', ''], tr, 'Stok kaydı yok. Önce ürün ekle.')));
   }
 
-  const newProduct = () => { P.draft = blankDraft(); P.view = 'form'; P.gen = {}; };
+  const newProduct = () => { P.draft = blankDraft(); P.view = 'form'; P.gen = {}; P.genTypes = new Set(); P.secOn = null; };
   return { definitions, products, stock, newProduct, ui: { api, fail, money, field, text, area, select, check, row, table, ensure, loadingCard } };
 };
