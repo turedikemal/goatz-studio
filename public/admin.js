@@ -70,8 +70,10 @@
       id: 'stok', label: 'Stok', path: [], anchor: '#top', special: 'stock',
       intro: 'Depo bazında stok adetlerini görüntüle ve güncelle.',
     },
-
-    { group: 'Tanımlamalar' },
+    {
+      id: 'fiyat-listesi', label: 'Fiyat Listesi', path: [], anchor: '#top', special: 'pricelist',
+      intro: 'Ürün fiyat listeleri.',
+    },
     {
       id: 'tanimlamalar', label: 'Tanımlamalar', path: [], anchor: '#top', special: 'definitions', tab: 'brands',
       intro: 'Markalar, kategoriler, özellikler, vergi oranları ve depolarını yönetin.',
@@ -1211,6 +1213,7 @@
     else if (page.special === 'messages') parts.push(messagesPage());
     else if (page.special === 'promo') parts.push(promoPage());
     else if (page.special === 'themes') parts.push(themesEditor());
+    else if (page.special === 'pricelist') parts.push(h('div', { class: 'card' }, h('h3', {}, 'Fiyat Listesi'), h('p', { class: 'muted' }, 'Henüz fiyat listesi yok.')));
     else if (page.special === 'definitions') parts.push(commerce.definitions(page));
     else if (page.special === 'products') parts.push(commerce.products());
     else if (page.special === 'stock') parts.push(commerce.stock());
