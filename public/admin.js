@@ -84,18 +84,6 @@
       id: 'siparisler', label: 'Siparişler', path: [], anchor: '#top', special: 'orders',
       intro: 'Siparişleri filtrele, durumlarını yönet; ödeme, kargo, fatura ve iade işlemlerini yap.',
     },
-    {
-      id: 'odemeler', label: 'Ödeme Durumu', path: [], anchor: '#top', special: 'orders',
-      intro: 'Ödemesi bekleyen, kısmi ödenen veya başarısız siparişleri takip et.',
-    },
-    {
-      id: 'kargo', label: 'Kargo', path: [], anchor: '#top', special: 'orders',
-      intro: 'Kargoya verilecek ve yoldaki siparişleri yönet, takip numarası gir.',
-    },
-    {
-      id: 'iadeler', label: 'İadeler', path: [], anchor: '#top', special: 'returns',
-      intro: 'İade taleplerini onayla, teslim al ve iadesini tamamla.',
-    },
 
     { group: 'Müşteriler' },
     {
