@@ -63,19 +63,37 @@ window.GoatzCommerce = (ctx) => {
   const SEO_DOMAIN = 'thegoatzstudio.com';
   const trSlug = (t) => String(t || '').replace(/[çğıİöşüÇĞÖŞÜ]/g, (c) => ({ ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', Ç: 'c', Ğ: 'g', Ö: 'o', Ş: 's', Ü: 'u' }[c]))
     .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 185);
+  // Google masaüstü sonucu: başlık ~600 px (20px Arial), açıklama ~920 px (14px Arial) genişlikte "..." ile kesilir
+  const SEO_SITE = 'The Goatz Studio';
+  const SERP_TITLE_FONT = '20px Arial, sans-serif', SERP_TITLE_PX = 600, SERP_DESC_FONT = '14px Arial, sans-serif', SERP_DESC_PX = 920;
+  let serpCtx = null;
+  const serpCut = (t, font, max) => {
+    t = String(t).replace(/\s+/g, ' ').trim();
+    serpCtx = serpCtx || document.createElement('canvas').getContext('2d');
+    serpCtx.font = font;
+    if (serpCtx.measureText(t).width <= max) return t;
+    let lo = 0, hi = t.length;
+    while (lo < hi) { const m = (lo + hi + 1) >> 1; if (serpCtx.measureText(t.slice(0, m) + ' ...').width <= max) lo = m; else hi = m - 1; }
+    const cut = t.slice(0, lo), sp = cut.lastIndexOf(' ');
+    return (sp > lo * 0.6 ? cut.slice(0, sp) : cut).replace(/[\s,.;:–-]+$/, '') + ' ...';
+  };
   let seoRefresh = null;
   // d: taslak (name, slug, seoTitle, seoDescription, seoNoindex, seoCanonical); fallbackDesc: boş açıklama için öneri metni
   function seoCard(d, fallbackDesc, extra) {
     const cnt = (el, n) => { el.textContent = `${n}/`; };
     const slugCnt = h('span', { class: 'hint' }), titleCnt = h('span', { class: 'hint' }), descCnt = h('span', { class: 'hint' });
-    const pvUrl = h('div', { class: 'serp-url' }), pvTitle = h('div', { class: 'serp-title' }), pvDesc = h('div', { class: 'serp-desc' });
+    const pvUrl = h('span', { class: 'serp-url' }), pvTitle = h('div', { class: 'serp-title' }), pvDesc = h('div', { class: 'serp-desc' });
+    const pvHead = h('div', { class: 'serp-head' },
+      h('span', { class: 'serp-fav' }, h('img', { src: '/favicon.png', alt: '' })),
+      h('span', { class: 'serp-site' }, h('span', { class: 'serp-name' }, SEO_SITE), pvUrl),
+      h('span', { class: 'serp-more', 'aria-hidden': 'true' }, '⋮'));
     const slugPh = () => trSlug(d.name) || 'adres';
     const update = () => {
       const slug = trSlug(d.slug) || slugPh();
       slugCnt.textContent = `${(d.slug || '').length}/185`; titleCnt.textContent = `${(d.seoTitle || '').length}/256`; descCnt.textContent = `${(d.seoDescription || '').length}/320`;
-      pvUrl.textContent = `${SEO_DOMAIN} › ${slug}`;
-      pvTitle.textContent = d.seoTitle || d.name || 'Sayfa başlığı';
-      pvDesc.textContent = d.seoDescription || (fallbackDesc ? fallbackDesc() : '') || 'Açıklama arama sonuçlarında başlığın altında görünür.';
+      pvUrl.textContent = `https://${SEO_DOMAIN} › ${slug}`;
+      pvTitle.textContent = serpCut(d.seoTitle || d.name || 'Sayfa başlığı', SERP_TITLE_FONT, SERP_TITLE_PX);
+      pvDesc.textContent = serpCut(d.seoDescription || (fallbackDesc ? fallbackDesc() : '') || 'Açıklama arama sonuçlarında başlığın altında görünür.', SERP_DESC_FONT, SERP_DESC_PX);
       slugIn.placeholder = slugPh(); titleIn.placeholder = d.name || 'Boş bırakırsan ad kullanılır'; descIn.placeholder = (fallbackDesc ? fallbackDesc() : '') || 'Arama sonuçlarında başlığın altında görünür.';
     };
     const slugIn = h('input', { type: 'text', value: d.slug || '', maxlength: 185, oninput: (e) => { d.slug = e.target.value; update(); },
@@ -108,8 +126,8 @@ window.GoatzCommerce = (ctx) => {
       h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Sayfa Başlığı', titleCnt), titleIn),
       h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Açıklama', descCnt), descIn),
       extra || null, adv);
-    const right = h('div', { class: 'seo-prev' }, h('span', { class: 'seo-prev-h' }, 'Önizleme'), h('div', { class: 'serp', id: 'serp' }, pvUrl, pvTitle, pvDesc),
-      h('p', { class: 'hint' }, 'Alanlar boşken gri öneri görünür; kaydedilen değer değildir.'));
+    const right = h('div', { class: 'seo-prev' }, h('span', { class: 'seo-prev-h' }, 'Önizleme'), h('div', { class: 'serp', id: 'serp' }, pvHead, pvTitle, pvDesc),
+      h('p', { class: 'hint' }, 'Google masaüstü sonucu gibi kesilir: başlık ~600 px, açıklama ~920 px. Alanlar boşken gri öneri görünür; kaydedilen değer değildir.'));
     update(); seoRefresh = update;
     return h('div', { class: 'seo-grid' }, left, right);
   }
