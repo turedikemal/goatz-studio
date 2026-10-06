@@ -100,47 +100,141 @@ window.GoatzCommerce = (ctx) => {
     },
   };
 
+  // ----- Varyant Türleri: arama kutulu tablo + sağdan açılan yan panel (ikas tarzı) -----
+  const VT = { q: '', page: 0, size: 20 };
+  const STYLES = [['list', 'Liste', 'Açılır liste veya metin düğmeleri (Örn. Beden: S, M, L)'], ['color', 'Renk / Görsel', 'Renk daireleri veya görsel kutusu (Örn. Renk: Kırmızı, Mavi)']];
+  const styleOf = (p) => (p.input_type === 'color' ? 'color' : 'list');
+  const readFile = (f) => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(f); });
+  const valBox = (v, big) => (v.image_url || v.imageUrl)
+    ? h('img', { class: 'vt-box' + (big ? ' big' : ''), src: v.image_url || v.imageUrl, alt: v.value || '', title: v.value || '' })
+    : (v.color_hex || v.colorHex) ? h('i', { class: 'vt-box' + (big ? ' big' : ''), style: `background:${v.color_hex || v.colorHex}`, title: v.value || '' }) : null;
+
+  function openVariantTypePanel(p) {
+    const d = { name: p ? p.name : '', style: p ? styleOf(p) : 'list', orig: p ? p.input_type : 'select', values: p ? p.values.map((v) => ({ id: v.id, value: v.value, colorHex: v.color_hex || '', imageUrl: v.image_url || '' })) : [], add: '' };
+    let dirty = false, busy = false;
+    const touch = () => { dirty = true; };
+    const overlay = h('div', { class: 'vt-overlay' });
+    const close = (force) => {
+      if (!force && dirty && !confirm('Kaydedilmemiş değişiklikler silinsin mi?')) return;
+      window.removeEventListener('keydown', onKey, true); panel.classList.remove('open'); overlay.classList.remove('open');
+      setTimeout(() => { overlay.remove(); panel.remove(); }, 200);
+    };
+    const onKey = (e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } };
+    overlay.addEventListener('click', () => close());
+    window.addEventListener('keydown', onKey, true);
+
+    const nameIn = h('input', { type: 'text', placeholder: 'Örn. Renk, Boyut', value: d.name, maxlength: 255, oninput: (e) => { d.name = e.target.value; touch(); } });
+    const styleBox = h('div', { class: 'vt-styles', role: 'radiogroup' });
+    const valuesBox = h('div', { class: 'vt-values' });
+
+    const drawStyle = () => {
+      styleBox.replaceChildren(...STYLES.map(([k, l, t]) => h('button', { type: 'button', role: 'radio', 'aria-checked': String(d.style === k), class: 'vt-style' + (d.style === k ? ' on' : ''),
+        onclick: () => { d.style = k; touch(); drawStyle(); drawValues(); } },
+        h('span', { class: 'vt-style-demo' }, k === 'list'
+          ? [h('i', { class: 'vt-pill' }, 'S'), h('i', { class: 'vt-pill' }, 'M'), h('i', { class: 'vt-pill' }, 'L')]
+          : [h('i', { class: 'vt-dot', style: 'background:#fb4903' }), h('i', { class: 'vt-dot', style: 'background:#5c4ade' }), h('i', { class: 'vt-dot img' })]),
+        h('b', {}, l), h('small', {}, t))));
+    };
+    const move = (i, dir) => { const j = i + dir; if (j < 0 || j >= d.values.length) return; [d.values[i], d.values[j]] = [d.values[j], d.values[i]]; touch(); drawValues(); };
+    const addValue = (raw) => {
+      let n = 0;
+      for (const part of String(raw).split(',')) {
+        const t = part.replace(/\s+/g, ' ').trim().slice(0, 255);
+        if (!t) continue;
+        if (d.values.some((v) => v.value.toLocaleLowerCase('tr') === t.toLocaleLowerCase('tr'))) { toast(`"${t}" zaten var.`, true); continue; }
+        d.values.push({ id: null, value: t, colorHex: '', imageUrl: '' }); n++;
+      }
+      if (n) touch();
+      return n;
+    };
+    const uploadFor = async (v, f) => {
+      if (!f) return;
+      if (!/^image\/(png|jpeg|webp|gif)$/.test(f.type)) return toast('Yalnızca PNG, JPG, WEBP, GIF.', true);
+      try { v.imageUrl = (await api('POST', '/api/upload', { data: await readFile(f) })).url; touch(); drawValues(); } catch (e) { fail(e); }
+    };
+    const drawValues = () => {
+      const isColor = d.style === 'color';
+      const addIn = h('input', { type: 'text', placeholder: isColor ? 'Örn. Kırmızı, Mavi' : 'Örn. Geniş, Dar', value: d.add, 'aria-label': 'Yeni değer',
+        oninput: (e) => { d.add = e.target.value; },
+        onkeydown: (e) => { if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); if (addValue(addIn.value)) { d.add = ''; drawValues(); const n = valuesBox.querySelector('.vt-add input'); if (n) n.focus(); } } } });
+      const rows = d.values.map((v, i) => h('div', { class: 'vt-val' },
+        isColor ? h('div', { class: 'vt-pick' },
+          h('label', { class: 'vt-swatch', title: 'Renk seç' }, valBox(v, true) || h('span', { class: 'vt-empty' }, '+'),
+            h('input', { type: 'color', value: v.colorHex || '#000000', oninput: (e) => { v.colorHex = e.target.value; touch(); }, onchange: () => drawValues() })),
+          h('label', { class: 'btn small vt-up' }, v.imageUrl ? 'Görseli değiştir' : 'Görsel yükle',
+            h('input', { type: 'file', accept: 'image/png,image/jpeg,image/webp,image/gif', hidden: true, onchange: (e) => { uploadFor(v, e.target.files[0]); e.target.value = ''; } })),
+          v.imageUrl ? h('button', { type: 'button', class: 'btn small', title: 'Görseli kaldır', onclick: () => { v.imageUrl = ''; touch(); drawValues(); } }, 'Görseli kaldır') : null,
+          v.colorHex ? h('button', { type: 'button', class: 'btn small', title: 'Rengi kaldır', onclick: () => { v.colorHex = ''; touch(); drawValues(); } }, 'Rengi kaldır') : null) : null,
+        h('input', { type: 'text', class: 'vt-name', value: v.value, 'aria-label': 'Değer', maxlength: 255, oninput: (e) => { v.value = e.target.value; touch(); } }),
+        h('div', { class: 'vt-ctl' },
+          h('button', { type: 'button', class: 'mini', title: 'Yukarı', disabled: i === 0, onclick: () => move(i, -1) }, '↑'),
+          h('button', { type: 'button', class: 'mini', title: 'Aşağı', disabled: i === d.values.length - 1, onclick: () => move(i, 1) }, '↓'),
+          h('button', { type: 'button', class: 'mini x', title: 'Sil', onclick: () => { d.values.splice(i, 1); touch(); drawValues(); } }, '×'))));
+      valuesBox.replaceChildren(
+        h('div', { class: 'vt-add' }, addIn, h('button', { type: 'button', class: 'btn small solid', onclick: () => { if (addValue(addIn.value)) { d.add = ''; drawValues(); } else toast('Bir değer yazmalısın.', true); } }, '+ Ekle')),
+        h('p', { class: 'hint' }, 'Enter veya virgülle ekle. Sıralamayı ↑ ↓ ile değiştir.' + (isColor ? ' Her değere renk seç ve/veya görsel yükle (görsel varsa görsel gösterilir).' : '')),
+        ...rows, ...(d.values.length ? [] : [h('p', { class: 'muted' }, 'Henüz değer yok.')]));
+    };
+
+    const save = async () => {
+      if (busy) return;
+      if (!d.name.trim()) { nameIn.focus(); return toast('Varyant türü adı gerekli.', true); }
+      if (d.add.trim()) addValue(d.add), d.add = '';
+      if (!d.values.length) return toast('En az bir varyant değeri ekle.', true);
+      if (d.values.some((v) => !v.value.trim())) return toast('Boş değer olamaz.', true);
+      busy = true; saveBtn.disabled = true;
+      try {
+        const body = { name: d.name.trim(), inputType: d.style === 'color' ? 'color' : (d.orig === 'text' ? 'text' : 'select'), values: d.values.map((v) => ({ id: v.id, value: v.value.trim(), colorHex: v.colorHex || null, imageUrl: v.imageUrl || null })) };
+        if (p) await api('PUT', `/api/definitions/variant-types/${p.id}`, body); else await api('POST', '/api/definitions/variant-types', body);
+        toast(p ? 'Varyant türü güncellendi.' : 'Varyant türü eklendi.'); close(true); await reloadDefs();
+      } catch (e) { fail(e); busy = false; saveBtn.disabled = false; }
+    };
+    const saveBtn = h('button', { type: 'button', class: 'btn solid', onclick: save }, 'Kaydet');
+    const panel = h('aside', { class: 'vt-panel', role: 'dialog', 'aria-modal': 'true', 'aria-label': p ? 'Varyant türünü düzenle' : 'Varyant türü oluştur' },
+      h('div', { class: 'vt-head' }, h('h3', {}, p ? 'Varyant Türünü Düzenle' : 'Varyant Türü Oluştur'), h('button', { type: 'button', class: 'mini x', title: 'Kapat', onclick: () => close() }, '×')),
+      h('div', { class: 'vt-body' },
+        field('Varyant Türü Adı *', nameIn),
+        h('div', { class: 'field' }, h('span', {}, 'Seçim Stili *'), styleBox),
+        h('div', { class: 'field' }, h('span', {}, 'Varyantlar *'), valuesBox)),
+      h('div', { class: 'vt-foot' }, h('button', { type: 'button', class: 'btn', onclick: () => close() }, 'Vazgeç'), saveBtn));
+    drawStyle(); drawValues();
+    document.body.append(overlay, panel);
+    requestAnimationFrame(() => { overlay.classList.add('open'); panel.classList.add('open'); if (!p) nameIn.focus(); });
+  }
+
   function propertiesTab() {
-    const pd = D.propDraft || (D.propDraft = { name: '', inputType: 'select' });
-    const list = data.properties.map((p) => {
-      const vd = D.valueDraft[p.id] || (D.valueDraft[p.id] = { value: '', colorHex: '' });
-      return h('div', { class: 'card' },
-        h('div', { class: 'row-between' }, h('h3', {}, p.name),
-          h('button', { class: 'btn small danger', onclick: async () => {
-            if (!confirm(`"${p.name}" ve tüm değerleri silinsin mi?`)) return;
-            try { await api('DELETE', `/api/definitions/properties/${p.id}`); toast('Özellik silindi.'); await reloadDefs(); } catch (e) { fail(e); }
-          } }, 'Sil')),
-        h('div', { class: 'chips' }, ...(p.values.length ? p.values.map((v) => h('span', { class: 'chip' },
-          v.color_hex ? h('i', { class: 'swatch', style: `background:${v.color_hex}` }) : null, v.value,
-          h('button', { class: 'chip-x', title: 'Sil', onclick: async () => {
-            try { await api('DELETE', `/api/definitions/property-values/${v.id}`); await reloadDefs(); } catch (e) { fail(e); }
-          } }, '×'))) : [h('span', { class: 'muted' }, 'Henüz değer yok.')])),
-        h('div', { class: 'inline-add' },
-          text(vd, 'value', 'Yeni değer (Örn. Siyah, M)'),
-          h('input', { type: 'color', title: 'Renk (isteğe bağlı)', value: vd.colorHex || '#000000', oninput: (e) => { vd.colorHex = e.target.value; } }),
-          h('button', { class: 'btn small solid', onclick: async () => {
-            if (!vd.value.trim()) return toast('Değer yazmalısın.', true);
-            try {
-              await api('POST', '/api/definitions/property-values', { propertyId: p.id, value: vd.value.trim(), colorHex: vd.colorHex || null });
-              D.valueDraft[p.id] = { value: '', colorHex: '' }; await reloadDefs();
-            } catch (e) { fail(e); }
-          } }, '+ Değer ekle')));
-    });
+    const q = VT.q.trim().toLocaleLowerCase('tr');
+    const all = data.properties.filter((p) => !q || p.name.toLocaleLowerCase('tr') === q || p.name.toLocaleLowerCase('tr').includes(q) || p.values.some((v) => v.value.toLocaleLowerCase('tr').includes(q)));
+    const pages = Math.max(1, Math.ceil(all.length / VT.size));
+    if (VT.page >= pages) VT.page = pages - 1;
+    const slice = all.slice(VT.page * VT.size, VT.page * VT.size + VT.size);
+    const MAXV = 14;
+    const rows = slice.map((p) => h('tr', { class: 'row-toggle', onclick: () => openVariantTypePanel(p) },
+      h('td', {}, h('b', {}, p.name), h('div', { class: 'hint' }, styleOf(p) === 'color' ? 'Renk / Görsel' : 'Liste')),
+      h('td', {}, h('div', { class: 'vt-vals' }, ...(p.values.length ? [...p.values.slice(0, MAXV).map((v) => valBox(v) || h('span', { class: 'chip' }, v.value)),
+        p.values.length > MAXV ? h('span', { class: 'muted' }, `+${p.values.length - MAXV}`) : null] : [h('span', { class: 'muted' }, '—')]))),
+      h('td', { class: 'actions', onclick: (e) => e.stopPropagation() },
+        h('button', { class: 'btn small', onclick: () => openVariantTypePanel(p) }, 'Düzenle'),
+        h('button', { class: 'btn small danger', onclick: async () => {
+          if (!confirm(`"${p.name}" ve tüm değerleri silinsin mi?`)) return;
+          try { await api('DELETE', `/api/definitions/properties/${p.id}`); toast('Varyant türü silindi.'); await reloadDefs(); } catch (e) { fail(e); }
+        } }, 'Sil'))));
+    const from = all.length ? VT.page * VT.size + 1 : 0, to = Math.min(all.length, (VT.page + 1) * VT.size);
+    const search = h('input', { type: 'search', class: 'vt-search', placeholder: 'Ara (tür veya değer)', value: VT.q, 'aria-label': 'Varyant türü ara',
+      oninput: (e) => { VT.q = e.target.value; VT.page = 0; const pos = e.target.selectionStart; rerender(); const n = document.querySelector('.vt-search'); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (_) {} } } });
     return h('div', {},
-      h('div', { class: 'card' }, h('h3', {}, 'Yeni özellik'),
-        row(field('Özellik adı', text(pd, 'name', 'Örn. Renk, Beden, Boyut')),
-          field('Tür', select(pd, 'inputType', [['select', 'Seçim listesi'], ['color', 'Renk'], ['text', 'Metin']]))),
-        h('button', { class: 'btn solid', onclick: async () => {
-          if (!pd.name.trim()) return toast('Özellik adı gerekli.', true);
-          try { await api('POST', '/api/definitions/properties', { name: pd.name.trim(), inputType: pd.inputType }); D.propDraft = null; toast('Özellik eklendi.'); await reloadDefs(); } catch (e) { fail(e); }
-        } }, '+ Özellik ekle')),
-      ...list, data.properties.length ? null : h('p', { class: 'muted' }, 'Renk, Beden gibi özellikler tanımla; ürün formunda bu değerlerden varyant üretebilirsin.'));
+      h('div', { class: 'card' },
+        h('div', { class: 'row-between' }, search, h('button', { class: 'btn solid', onclick: () => openVariantTypePanel(null) }, '+ Varyant Türü Oluştur')),
+        table(['Tür', 'Tanımlanmış Değerler', ''], rows, data.properties.length ? 'Aramayla eşleşen varyant türü yok.' : 'Henüz varyant türü yok. Renk, Beden gibi türler tanımla; ürün formunda bu değerlerden varyant üretebilirsin.'),
+        h('div', { class: 'vt-pager' }, h('span', { class: 'muted' }, `${from}-${to} / ${all.length} adet`),
+          h('span', {}, h('button', { class: 'btn small', disabled: VT.page <= 0, onclick: () => { VT.page--; rerender(); } }, '‹ Önceki'),
+            h('button', { class: 'btn small', disabled: VT.page >= pages - 1, onclick: () => { VT.page++; rerender(); } }, 'Sonraki ›')))));
   }
 
   function definitions(page) {
     if (page && page.tab && D.tabInit !== page.id) { D.tab = page.tab; D.tabInit = page.id; D.draft = {}; D.editId = null; }
     if (ensure(D, loadDefs)) return loadingCard('Tanımlamalar yükleniyor…');
-    const ORDER = [['brands', 'Markalar'], ['categories', 'Kategoriler'], ['properties', 'Özellikler'], ['taxes', 'Vergi Oranları'], ['productTags', 'Etiketler'], ['warehouses', 'Depolar']];
+    const ORDER = [['brands', 'Markalar'], ['categories', 'Kategoriler'], ['properties', 'Varyant Türleri'], ['taxes', 'Vergi Oranları'], ['productTags', 'Etiketler'], ['warehouses', 'Depolar']];
     const tabs = h('div', { class: 'seg tabs-row' }, ...ORDER.map(([k, l]) => h('button', { class: D.tab === k ? 'on' : '', onclick: () => { D.tab = k; D.draft = {}; D.editId = null; rerender(); } }, l)));
     if (D.tab === 'properties') return h('div', {}, tabs, propertiesTab());
 
@@ -284,7 +378,7 @@ window.GoatzCommerce = (ctx) => {
   function generateVariants() {
     const d = P.draft;
     const groups = data.properties.map((p) => ({ p, vals: p.values.filter((v) => (P.gen[p.id] || new Set()).has(v.id)) })).filter((g) => g.vals.length);
-    if (!groups.length) return toast('Önce en az bir özellik değeri seç.', true);
+    if (!groups.length) return toast('Önce en az bir varyant türü değeri seç.', true);
     let combos = [[]];
     for (const g of groups) combos = combos.flatMap((c) => g.vals.map((v) => [...c, v]));
     if (combos.length > 100) return toast('En fazla 100 kombinasyon üretilebilir.', true);
@@ -377,15 +471,15 @@ window.GoatzCommerce = (ctx) => {
       simpleStock, d.variants.length ? h('p', { class: 'hint' }, 'Varyant kullanıldığında stok her varyant satırında ayrı girilir.') : null));
 
     const genBox = h('div', { class: 'gen-box' }, data.properties.length
-      ? [h('p', { class: 'hint' }, 'Kombinasyon üretmek için özellik değerlerini seç (Örn. Renk: Siyah, Beyaz × Beden: S, M).'),
+      ? [h('p', { class: 'hint' }, 'Kombinasyon üretmek için varyant türü değerlerini seç (Örn. Renk: Siyah, Beyaz × Beden: S, M).'),
         ...data.properties.filter((p) => p.values.length).map((p) => h('div', { class: 'gen-group' }, h('b', {}, p.name),
           h('div', { class: 'chips' }, ...p.values.map((v) => {
             const set = P.gen[p.id] || (P.gen[p.id] = new Set());
             return h('label', { class: 'chip pick' }, h('input', { type: 'checkbox', checked: set.has(v.id), onchange: (e) => { e.target.checked ? set.add(v.id) : set.delete(v.id); } }),
-              v.color_hex ? h('i', { class: 'swatch', style: `background:${v.color_hex}` }) : null, v.value);
+              v.image_url ? h('img', { class: 'vt-box sm', src: v.image_url, alt: '' }) : v.color_hex ? h('i', { class: 'swatch', style: `background:${v.color_hex}` }) : null, v.value);
           })))),
         h('button', { class: 'btn small solid', onclick: generateVariants }, 'Kombinasyonları üret')]
-      : h('p', { class: 'hint' }, 'Varyant üretmek için önce Tanımlamalar → Özellikler bölümünde Renk/Beden gibi özellikler ve değerleri ekle.'));
+      : h('p', { class: 'hint' }, 'Varyant üretmek için önce Tanımlamalar → Varyant Türleri bölümünde Renk/Beden gibi türler ve değerlerini ekle.'));
 
     const vrows = d.variants.map((v, i) => h('tr', {},
       h('td', {}, text(v, 'name', 'Varyant')), h('td', {}, text(v, 'sku', 'SKU')), h('td', {}, text(v, 'barcode', 'Barkod')),

@@ -76,7 +76,7 @@
     },
     {
       id: 'tanimlamalar', label: 'Tanımlamalar', path: [], anchor: '#top', special: 'definitions', tab: 'brands',
-      intro: 'Markalar, kategoriler, özellikler, vergi oranları ve depolarını yönetin.',
+      intro: 'Markalar, kategoriler, varyant türleri, vergi oranları ve depolarını yönetin.',
     },
 
     { group: 'Siparişler' },

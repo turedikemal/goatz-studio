@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS categories (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Özellikler (Properties) - Renk, Beden, vb.
+-- Varyant Türleri (properties tablosu) - Renk, Beden, vb. input_type: select/text = Liste, color = Renk / Görsel
 CREATE TABLE IF NOT EXISTS properties (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
@@ -47,6 +47,9 @@ CREATE TABLE IF NOT EXISTS property_values (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   UNIQUE(property_id, value)
 );
+
+-- Varyant türü değeri için görsel (Renk / Görsel seçim stili)
+ALTER TABLE property_values ADD COLUMN IF NOT EXISTS image_url TEXT;
 
 -- Depolar
 CREATE TABLE IF NOT EXISTS warehouses (

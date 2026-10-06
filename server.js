@@ -424,6 +424,13 @@ async function api(req, res, url) {
     }
   } catch (e) { return json(res, e.status || 500, { error: e.status ? e.message : 'Etiket işlemi başarısız: ' + e.message }); }
 
+  // Varyant türleri: tür + değerler tek kayıtta (ikas tarzı yan panel)
+  try {
+    if (route === 'POST /api/definitions/variant-types') return json(res, 201, await db.saveVariantType(null, await readJson(req)));
+    const vtm = /^PUT \/api\/definitions\/variant-types\/(\d+)$/.exec(route);
+    if (vtm) return json(res, 200, await db.saveVariantType(+vtm[1], await readJson(req)));
+  } catch (e) { return json(res, e.status || 500, { error: e.status ? e.message : 'Varyant türü kaydedilemedi: ' + e.message }); }
+
   const defMatch = /^(PUT|DELETE) \/api\/definitions\/([a-z-]+)\/(\d+)$/.exec(route);
   if (defMatch) {
     const id = parseInt(defMatch[3], 10);
