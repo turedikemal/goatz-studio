@@ -64,18 +64,27 @@ window.GoatzCommerce = (ctx) => {
   const trSlug = (t) => String(t || '').replace(/[çğıİöşüÇĞÖŞÜ]/g, (c) => ({ ç: 'c', ğ: 'g', ı: 'i', İ: 'i', ö: 'o', ş: 's', ü: 'u', Ç: 'c', Ğ: 'g', Ö: 'o', Ş: 's', Ü: 'u' }[c]))
     .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 185);
   let seoRefresh = null;
+  let serpMode = 'desktop';
   // d: taslak (name, slug, seoTitle, seoDescription, seoNoindex, seoCanonical); fallbackDesc: boş açıklama için öneri metni
   function seoCard(d, fallbackDesc, extra) {
     const cnt = (el, n) => { el.textContent = `${n}/`; };
     const slugCnt = h('span', { class: 'hint' }), titleCnt = h('span', { class: 'hint' }), descCnt = h('span', { class: 'hint' });
-    const pvUrl = h('div', { class: 'serp-url' }), pvTitle = h('div', { class: 'serp-title' }), pvDesc = h('div', { class: 'serp-desc' });
+    // Google sonucu gibi: favicon + site adı + adres yolu, mavi başlık, gri açıklama (uzunsa … ile kesilir)
+    const pvPath = h('span', { class: 'g-path' });
+    const pvUrl = h('div', { class: 'g-site' }, h('span', { class: 'g-fav' }, h('img', { src: '/favicon.png', alt: '' })),
+      h('span', { class: 'g-meta' }, h('span', { class: 'g-name' }, 'The Goatz Studio'), pvPath));
+    const pvTitle = h('div', { class: 'g-title' }), pvDesc = h('div', { class: 'g-desc' });
+    const cut = (t, n) => (t.length > n ? t.slice(0, n).replace(/\s+\S*$/, '') + ' ...' : t);
     const slugPh = () => trSlug(d.name) || 'adres';
     const update = () => {
       const slug = trSlug(d.slug) || slugPh();
       slugCnt.textContent = `${(d.slug || '').length}/185`; titleCnt.textContent = `${(d.seoTitle || '').length}/256`; descCnt.textContent = `${(d.seoDescription || '').length}/320`;
-      pvUrl.textContent = `${SEO_DOMAIN} › ${slug}`;
+      pvPath.textContent = `https://${SEO_DOMAIN} › ${slug}`;
       pvTitle.textContent = d.seoTitle || d.name || 'Sayfa başlığı';
-      pvDesc.textContent = d.seoDescription || (fallbackDesc ? fallbackDesc() : '') || 'Açıklama arama sonuçlarında başlığın altında görünür.';
+      pvTitle.classList.toggle('is-ph', !d.seoTitle);
+      const desc = d.seoDescription || (fallbackDesc ? fallbackDesc() : '') || 'Açıklama arama sonuçlarında başlığın altında görünür.';
+      pvDesc.textContent = cut(desc, serpMode === 'mobile' ? 120 : 158);
+      pvDesc.classList.toggle('is-ph', !d.seoDescription);
       slugIn.placeholder = slugPh(); titleIn.placeholder = d.name || 'Boş bırakırsan ad kullanılır'; descIn.placeholder = (fallbackDesc ? fallbackDesc() : '') || 'Arama sonuçlarında başlığın altında görünür.';
     };
     const slugIn = h('input', { type: 'text', value: d.slug || '', maxlength: 185, oninput: (e) => { d.slug = e.target.value; update(); },
@@ -108,8 +117,13 @@ window.GoatzCommerce = (ctx) => {
       h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Sayfa Başlığı', titleCnt), titleIn),
       h('label', { class: 'field' }, h('span', { class: 'row-between' }, 'Açıklama', descCnt), descIn),
       extra || null, adv);
-    const right = h('div', { class: 'seo-prev' }, h('span', { class: 'seo-prev-h' }, 'Önizleme'), h('div', { class: 'serp', id: 'serp' }, pvUrl, pvTitle, pvDesc),
-      h('p', { class: 'hint' }, 'Alanlar boşken gri öneri görünür; kaydedilen değer değildir.'));
+    const serp = h('div', { class: `g-serp is-${serpMode}`, id: 'serp' }, pvUrl, pvTitle, pvDesc);
+    const modeBtn = (k, label) => h('button', { type: 'button', class: serpMode === k ? 'on' : '', onclick: (e) => {
+      serpMode = k; serp.className = `g-serp is-${k}`; [...e.target.parentNode.children].forEach((b) => b.classList.toggle('on', b === e.target)); update();
+    } }, label);
+    const right = h('div', { class: 'seo-prev' },
+      h('div', { class: 'row-between' }, h('span', { class: 'seo-prev-h' }, 'Google önizlemesi'), h('div', { class: 'seg' }, modeBtn('desktop', 'Masaüstü'), modeBtn('mobile', 'Mobil'))),
+      serp, h('p', { class: 'hint' }, 'Gri yazı boş alan için öneridir, kaydedilmez. Google başlığı ya da açıklamayı kendisi de değiştirebilir.'));
     update(); seoRefresh = update;
     return h('div', { class: 'seo-grid' }, left, right);
   }
