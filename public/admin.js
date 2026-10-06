@@ -217,7 +217,7 @@
 
     { group: 'Tema Yönetimi' },
     {
-      id: 'tema-overview', label: 'Tema Seçimi', path: [], anchor: '#top', special: 'themes',
+      id: 'tema-overview', label: 'Temalar', path: [], anchor: '#top', special: 'themes',
       intro: 'Sitenin teması ve renkleri.',
     },
     {
@@ -669,6 +669,11 @@
       { id: 'm-sticker', label: 'Sticker hareketleri', path: ['theme'], anchor: '#top', schema: { motion: group('Sticker hareketleri', { pop: MF.pop }) } },
       { id: 'm-global', label: 'Kaydırma ve hız', path: ['theme'], anchor: '#top', schema: { animations: bool('Tüm hareketler (kapatırsan sitede hiçbir şey oynamaz)'), motion: group('Kaydırma ve hız', { smooth: MF.smooth, speed: MF.speed, intensity: MF.intensity }) } });
   }
+  {
+    // Ana menüdeki Ayarlar görünümünde temalardan bağımsız marka ve SEO ayarı (tema düzenleyicideki "Marka ve SEO" ile aynı veri).
+    const bd = PAGES.find((x) => x.id === 'brand');
+    PAGES.splice(PAGES.findIndex((x) => x.id === 'ayar-magaza'), 0, { id: 'ayar-marka', label: 'Marka ve SEO', path: [], anchor: '#top', intro: bd.intro, schema: bd.schema });
+  }
   const customDef = (p) => ({ id: `pg:${p.id}`, label: p.title || 'Sayfa', custom: true, pageId: p.id, anchor: '#top' });
 
   // Gruplar "flat" olabilir ya da bir veri anahtarına karşılık gelmeyebilir.
@@ -759,6 +764,7 @@
     $('#app').hidden = false;
     const bl = $('.brand .logo-dot');
     if (state.brand.logoImage && bl) { bl.classList.add('has-img'); bl.replaceChildren(h('img', { src: state.brand.logoImage, alt: '' })); }
+    if (cp && location.hash.length > 1) { editTheme = activeId(); tePageSel = cp.id; teView = 'sections'; }
     if (!page.custom && TE_IDS().has(page.id) && location.hash.length > 1) {
       editTheme = activeId();
       teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global'].includes(page.id) ? 'settings' : 'sections';
@@ -1024,15 +1030,14 @@
   });
 
   // Sol menü akordeonu: aynı anda yalnız bir grup açık; varsayılan hepsi kapalı, aktif sayfanın grubu açılır.
-  let openGroup = null, navFollow = false, navView = 'main'; // navView: 'main' ana menü, 'theme' yalnız tema görünümü
-  const TEMA = 'Tema Yönetimi';
+  let openGroup = null, navFollow = false, navView = 'main'; // navView: 'main' ana menü, 'settings' yalnız Ayarlar görünümü
+  const TEMA = 'Tema Yönetimi', AYAR = 'Ayarlar';
   // Tema görünümündeki iki akordeon: ilki tema ayarları, ikincisi ana sayfanın sitedeki sırası (kodda eskiden de bu adla geçiyordu).
   const G_TEMA = 'Tema', G_FLOW = 'Ana sayfa · sitedeki sıra';
-  const THEME_GROUPS = [G_TEMA];
   let previewOn = false; // tema bölümlerinde canlı önizleme göster/gizle (varsayılan gizli: editör sağ alanın tamamını kullanır)
   function selectPage(p) {
-    if (!editTheme && p.id !== 'tema-overview' && TE_IDS().has(p.id)) {
-      editTheme = activeId(); tePageSel = 'home'; teOpen.clear();
+    if (!editTheme && p.id !== 'tema-overview' && (p.custom || TE_IDS().has(p.id))) {
+      editTheme = activeId(); tePageSel = p.custom ? p.pageId : 'home'; teOpen.clear();
       teView = ['theme', 'brand', 'sections', 'm-text', 'm-sticker', 'm-global'].includes(p.id) ? 'settings' : 'sections';
     }
     page = p;
@@ -1110,6 +1115,8 @@
         onclick: () => { openGroup = isOpen ? null : t; renderNav(); } },
       h('span', { class: 'lbl' }, t), h('i', { class: 'chev', 'aria-hidden': 'true' }));
     };
+    // Akordeon açmayan başlık: tıklayınca ayrı görünüme (Ayarlar) ya da sayfaya götürür.
+    const linkHead = (t, c, fn) => h('button', { type: 'button', class: 'group nav-link', style: `--gc:${c}`, onclick: fn }, h('span', { class: 'lbl' }, t), h('i', { class: 'chev', 'aria-hidden': 'true' }));
     const push = (...els) => els.forEach((e) => { items.push(e); gOf.set(e, curG); });
     const groupColors = {
       'Genel Bakış': 'var(--sky)',
@@ -1136,7 +1143,11 @@
           currentGroup = p.group;
           // "Genel Bakış" başlığı yok: Dashboard başlıksız, en üstte tek düğme olarak durur.
           if (p.group === 'Genel Bakış') curG = null;
-          else if (p.group === TEMA) curG = G_TEMA; // başlık ana menüde yok: tek düğme; tema görünümünde iki akordeon
+          else if (p.group === TEMA) curG = G_TEMA; // ana menüde yalnız tek düğme (en altta); öğeleri tema düzenleyicide
+          else if (p.group === AYAR) {
+            items.push(linkHead(AYAR, groupColors[AYAR], () => { navView = 'settings'; const f = byId('ayar-marka'); if (f) selectPage(f); else renderNav(); }));
+            curG = AYAR;
+          }
           else { items.push(head(p.group, groupColors[p.group] || 'var(--bg)')); curG = p.group; }
         }
       } else if (p.id) {
@@ -1150,41 +1161,24 @@
       }
     });
 
-    items.push(head('Sayfalar', 'var(--mint)'));
-    curG = 'Sayfalar';
-    state.pages.forEach((pg, pi) => {
-      const def = customDef(pg);
-      const main = h('button', { class: def.id === page.id ? 'on' : '', onclick: notJustDragged(() => selectPage(def)) },
-        h('span', { class: 'lbl' }, pg.title || 'Sayfa'),
-        pg.visible ? null : h('span', { class: 'eye', title: 'Bu sayfa yayında değil' }, 'gizli'));
-      pageGroup[def.id] = 'Sayfalar';
-      push(row(main, [tool('✕', 'Sayfayı sil', false, () => deletePage(pg.id), 'danger')], def.id === page.id, { group: 'pages', id: pg.id }));
-    });
-    push(h('button', { class: 'add-page', onclick: () => {
-      if (state.pages.length >= 100) { toast('En fazla 100 sayfa oluşturabilirsin.', true); return; }
-      const p = newPage();
-      state.pages.push(p);
-      changed();
-      selectPage(customDef(p));
-    } }, '+ Yeni sayfa'));
-
     if (navFollow) {
       navFollow = false;
-      navView = THEME_GROUPS.includes(pageGroup[page.id]) ? 'theme' : 'main';
-      if (pageGroup[page.id]) openGroup = pageGroup[page.id];
+      const g = pageGroup[page.id];
+      navView = g === AYAR ? 'settings' : 'main';
+      if (g && g !== G_TEMA && g !== AYAR) openGroup = g;
     }
-    const isTema = (it) => THEME_GROUPS.includes(gOf.get(it));
-    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== openGroup; });
+    const isTema = (it) => gOf.get(it) === G_TEMA;
+    const isAyar = (it) => gOf.get(it) === AYAR;
+    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== G_TEMA && g !== AYAR && g !== openGroup; });
     let shown;
-    if (navView === 'theme') {
-      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön'), btn(byId('tema-overview'))];
+    if (navView === 'settings') {
+      // Ayarlar ayrı görünüm: ana menü gizlenir, yalnız Ayarlar öğeleri ve "Panele dön" görünür.
+      const ay = items.filter(isAyar); ay.forEach((it) => { it.hidden = false; });
+      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön'), ...ay];
     } else {
-      shown = items.filter((it) => !isTema(it));
-      shown.push(h('button', { type: 'button', class: 'group nav-link', onclick: () => {
-        navView = 'theme';
-        const t = PAGES.find((x) => x.id === 'tema-overview');
-        if (t) selectPage(t); else renderNav();
-      } }, h('span', { class: 'lbl' }, TEMA), h('i', { class: 'chev', 'aria-hidden': 'true' })));
+      shown = items.filter((it) => !isTema(it) && !isAyar(it));
+      shown.push(h('button', { type: 'button', class: 'group nav-link', onclick: () => { const t = byId('tema-overview'); if (t) selectPage(t); } },
+        h('span', { class: 'lbl' }, TEMA), h('i', { class: 'chev', 'aria-hidden': 'true' })));
     }
     items.length = 0; items.push(...shown);
     nav.replaceChildren(...items);
@@ -1201,7 +1195,7 @@
     if (page.custom && !state.pages.some((p) => p.id === page.pageId)) { page = homePage(); previewPage = null; renderNav(); refreshPreview(true); }
 
     // Preview pane'i sadece tema/site yönetimi sayfalarında göster
-    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages', 'tema-overview', 'isler-projeler', 'isler-ayarlar'];
+    const themePages = ['theme', 'motion', 'brand', 'sections', 'ticker', 'nav', 'hero', 'showcase', 'statement', 'services', 'why', 'band', 'process', 'contact', 'footer', 'media', 'backups', 'pages', 'ayar-marka', 'tema-overview', 'isler-projeler', 'isler-ayarlar'];
     const te = !!editTheme;
     $('#app').classList.toggle('te', te);
     $('#panelClose').textContent = te ? '←' : '×';
@@ -1810,7 +1804,7 @@
     editTheme = null; previewPage = null;
     saved = JSON.stringify(state);
     page = PAGES.find((x) => x.id === 'tema-overview');
-    navView = 'theme'; $('#panel').classList.add('open');
+    navView = 'main'; openGroup = null; $('#panel').classList.add('open');
     history.replaceState(null, '', '#tema-overview');
     renderNav(); renderPage(); refreshPreview(true); updateStatus();
   }
