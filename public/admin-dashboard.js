@@ -159,7 +159,7 @@ window.GoatzDashboard = (ctx) => {
           h('td', {}, pill(r.payment_status, PAY[r.payment_status] || r.payment_status)),
           h('td', {}, pill(r.status, STATUS[r.status] || r.status)),
           h('td', { class: 'num' }, money(r.total)))))))
-      : h('div', { class: 'db-empty' }, h('p', { class: 'muted' }, 'Henüz sipariş yok.'), h('button', { type: 'button', class: 'btn small', onclick: () => sales.newOrder() }, '+ Sipariş oluştur'));
+      : h('div', { class: 'db-empty' }, h('p', { class: 'muted' }, 'Henüz sipariş yok.'));
     return card('', head('Son siparişler', d.recent.length ? more('Tüm siparişler', () => sales.ordersWith(df({}))) : null), body);
   }
 
@@ -194,8 +194,6 @@ window.GoatzDashboard = (ctx) => {
       if (S.period === k) return; S.period = k; try { localStorage.setItem('goatz-dash-donem', k); } catch { /* sorun değil */ } load();
     } }, l)));
     const actions = h('div', { class: 'db-actions' },
-      h('button', { type: 'button', class: 'btn solid', onclick: () => sales.newOrder() }, '+ Sipariş oluştur'),
-      h('button', { type: 'button', class: 'btn', onclick: () => { commerce.newProduct(); goto('urunler'); } }, '+ Ürün ekle'),
       h('a', { class: 'btn', href: '/', target: '_blank', rel: 'noopener' }, 'Siteyi aç ↗'));
     const top = h('div', { class: 'db-top' }, seg, actions);
     const d = S.data;
