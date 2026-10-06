@@ -1000,22 +1000,29 @@
     });
   }
 
-  const openPanel = () => $('#panel').classList.add('open');
-  const closePanel = () => $('#panel').classList.remove('open');
+  // Akordeon: panel, açık bölümün menü satırının hemen altında durur (renderNav yerleştirir).
+  const panelIsOpen = () => $('#panel').classList.contains('open');
+  const isOn = (id) => panelIsOpen() && id === page.id;
+  const syncWide = () => $('#app').classList.toggle('acc-wide', panelIsOpen() && $('#panel').classList.contains('wide'));
+  const openPanel = () => { $('#panel').classList.add('open'); syncWide(); renderNav(); };
+  const closePanel = () => { $('#panel').classList.remove('open'); syncWide(); renderNav(); };
   $('#panelClose').addEventListener('click', closePanel);
+  { const sb = $('.sidebar'); sb.appendChild(h('button', { type: 'button', class: 'sidebar-close', 'aria-label': 'Menüyü kapat', onclick: () => sb.classList.remove('open') }, '×')); }
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && $('#panel').classList.contains('open') && !document.querySelector('dialog[open]') && !e.target.closest?.('input, textarea, select')) closePanel();
   });
 
-  function selectPage(p) {
+  function selectPage(p, toggle) {
+    if (toggle && panelIsOpen() && page.id === p.id) { closePanel(); return; }
     page = p;
+    $('#panel').classList.add('open');
     history.replaceState(null, '', `#${p.id}`);
     const target = p.custom ? p.pageId : (p.previewPage || null);
     renderNav();
     renderPage();
     if (target !== previewPage) { previewPage = target; refreshPreview(true); } else scrollPreviewTo(p.anchor);
-    $('.sidebar').classList.remove('open');
-    openPanel();
+    const row = $('#pages > .on, #pages > .nav-row.on');
+    if (row) { const sb = $('.sidebar'); sb.scrollTo({ top: Math.max(0, row.offsetTop - 70), behavior: 'auto' }); }
   }
   const homePage = () => PAGES.find((x) => x.id === 'hero');
 
@@ -1041,13 +1048,13 @@
     const btn = (p) => {
       const sec = p.section && state.sections.find((x) => x.id === p.section);
       const dc = dotColor(p);
-      const main = h('button', { class: p.id === page.id ? 'on' : '', onclick: notJustDragged(() => selectPage(p)) },
+      const main = h('button', { class: isOn(p.id) ? 'on' : '', onclick: notJustDragged(() => selectPage(p, true)) },
         dc ? h('i', { class: 'dot', style: `background:${dc}` }) : null,
         h('span', { class: 'lbl' }, p.label),
         sec && !sec.visible ? h('span', { class: 'eye', title: 'Bu bölüm gizli' }, 'gizli') : null,
         p.id === 'mesajlar' && unreadMsgs > 0 ? h('span', { class: 'nav-badge', title: `${unreadMsgs} okunmamış mesaj` }, String(unreadMsgs > 99 ? '99+' : unreadMsgs)) : null);
       if (!sec) return main;
-      return row(main, null, p.id === page.id, { group: 'sections', id: p.section });
+      return row(main, null, isOn(p.id), { group: 'sections', id: p.section });
     };
     const head = (t, c) => h('div', { class: 'group', style: `--gc:${c}` }, t);
     const items = [];
@@ -1089,10 +1096,10 @@
     items.push(head('Sayfalar', 'var(--mint)'));
     state.pages.forEach((pg, pi) => {
       const def = customDef(pg);
-      const main = h('button', { class: def.id === page.id ? 'on' : '', onclick: notJustDragged(() => selectPage(def)) },
+      const main = h('button', { class: isOn(def.id) ? 'on' : '', onclick: notJustDragged(() => selectPage(def, true)) },
         h('span', { class: 'lbl' }, pg.title || 'Sayfa'),
         pg.visible ? null : h('span', { class: 'eye', title: 'Bu sayfa yayında değil' }, 'gizli'));
-      items.push(row(main, [tool('✕', 'Sayfayı sil', false, () => deletePage(pg.id), 'danger')], def.id === page.id, { group: 'pages', id: pg.id }));
+      items.push(row(main, [tool('✕', 'Sayfayı sil', false, () => deletePage(pg.id), 'danger')], isOn(def.id), { group: 'pages', id: pg.id }));
     });
     items.push(h('button', { class: 'add-page', onclick: () => {
       if (state.pages.length >= 30) { toast('En fazla 30 sayfa oluşturabilirsin.', true); return; }
@@ -1102,7 +1109,14 @@
       selectPage(customDef(p));
     } }, '+ Yeni sayfa'));
 
-    nav.replaceChildren(...items);
+    // Açık bölümün paneli, aktif satırın hemen altına girer. Panel DOM'dan çıkarılmaz (yazarken odak kaybolmasın).
+    const panelEl = $('#panel');
+    const open = panelEl.classList.contains('open');
+    [...nav.children].forEach((c) => { if (c !== panelEl) c.remove(); });
+    const ai = open ? items.findIndex((it) => it.classList.contains('on') || it.querySelector('button.on')) : -1;
+    const order = items.slice();
+    if (ai >= 0) order.splice(ai + 1, 0, panelEl); else order.push(panelEl);
+    order.forEach((node, i) => { if (nav.children[i] !== node) nav.insertBefore(node, nav.children[i] || null); });
   }
   $('#menuToggle').addEventListener('click', () => $('.sidebar').classList.toggle('open'));
 
@@ -1112,6 +1126,8 @@
   function renderPage() {
     const ed = $('#editor');
     const top = ed.scrollTop;
+    const sbEl = $('.sidebar'), sbTop = sbEl.scrollTop;
+    queueMicrotask(() => { sbEl.scrollTop = sbTop; });
     changeHooks.clear();
     if (page.custom && !state.pages.some((p) => p.id === page.pageId)) { page = homePage(); previewPage = null; renderNav(); refreshPreview(true); }
 
@@ -1122,6 +1138,7 @@
     const wasHidden = splitEl.classList.contains('no-preview');
     splitEl.classList.toggle('no-preview', !isThemePage);
     $('#panel').classList.toggle('wide', !isThemePage);
+    syncWide();
     if (isThemePage && wasHidden) refreshPreview(true);
 
     if (page.custom) {
@@ -1670,19 +1687,42 @@
   }
 
   // ---------- Temalar ----------
+  // Hazır paletler: yalnız renk anahtarlarını değiştirir (siyah/beyaz sabit, kalın siyah çizgi kimliği korunur).
+  // Seçilen temanın kimliği theme.preset içinde saklanır; renkler yine theme.colors'ta durur (site bunu okur).
+  const THEMES = [
+    { id: 'sun', name: 'The Sun', note: 'Varsayılan', colors: { sky: '#dceeff', concrete: '#cccccc', mist: '#e9e9e9', blue: '#4da2ff', mint: '#55db9c', lavender: '#e9ccff', ember: '#fb4903', sun: '#ffd731', violet: '#5c4ade' } },
+    { id: 'nane', name: 'Nane', note: 'Yeşil ağırlıklı', colors: { sky: '#dff5ea', concrete: '#c4d1ca', mist: '#e7efe9', blue: '#3fb7c9', mint: '#2fd18b', lavender: '#cdeedd', ember: '#ff7a45', sun: '#c8f26b', violet: '#1f8a70' } },
+    { id: 'lavanta', name: 'Lavanta', note: 'Mor ağırlıklı', colors: { sky: '#ece4ff', concrete: '#cdc8d8', mist: '#ece9f2', blue: '#7fa6ff', mint: '#8fe6c0', lavender: '#d4b8ff', ember: '#ff5f8f', sun: '#ffe27a', violet: '#6a3df0' } },
+    { id: 'okyanus', name: 'Okyanus', note: 'Mavi ağırlıklı', colors: { sky: '#d2eaff', concrete: '#c3cfdb', mist: '#e5ecf3', blue: '#1f7cff', mint: '#34dcc0', lavender: '#bcd2ff', ember: '#ff5a36', sun: '#ffd23f', violet: '#1a3fd1' } },
+    { id: 'ates', name: 'Ateş', note: 'Turuncu ağırlıklı', colors: { sky: '#ffe8dc', concrete: '#d4c6bf', mist: '#f0e9e5', blue: '#5aa9ff', mint: '#9ee37d', lavender: '#ffcdb8', ember: '#ff3d1f', sun: '#ffc233', violet: '#b3261e' } },
+  ];
+  const THEME_KEYS = ['sun', 'mint', 'lavender', 'blue', 'ember', 'violet'];
   function themesEditor() {
-    const col = state.theme.colors;
-    const keys = ['sun', 'mint', 'lavender', 'blue', 'ember', 'violet', 'carbon', 'paper'];
-    const go = () => selectPage(PAGES.find(p => p.id === 'theme'));
+    const th = state.theme;
+    const col = th.colors;
+    const curId = THEMES.some((t) => t.id === th.preset) ? th.preset : 'sun';
+    const same = (t) => Object.entries(t.colors).every(([k, v]) => String(col[k]).toLowerCase() === v);
+    const cur = THEMES.find((t) => t.id === curId);
+    const edited = !same(cur);
+    const go = () => selectPage(PAGES.find((p) => p.id === 'theme'));
+    const apply = (t) => {
+      th.preset = t.id;
+      Object.assign(th.colors, t.colors);
+      changed(); rerender();
+      toast(`${t.name} teması seçildi. Yayına almak için Kaydet'e bas.`);
+    };
     return h('div', {},
       h('div', { class: 'card' },
-        h('h3', {}, 'Şu anki tema: The Sun'),
-        h('p', { class: 'hint' }, 'Sitenin gündüz renkleri ve genel görünümü.'),
-        h('div', { style: 'display:flex;flex-wrap:wrap;gap:8px;margin-top:12px' },
-          ...keys.map((k) => h('button', { type: 'button', title: `${COLOR_NAMES[k]} ${col[k]}: düzenle`, 'aria-label': `${COLOR_NAMES[k]} rengini düzenle`, onclick: go,
-            style: `width:44px;height:44px;border-radius:50%;border:2px solid #000;cursor:pointer;padding:0;background:${col[k]}` }))),
-        h('button', { type: 'button', class: 'btn solid', style: 'margin-top:14px', onclick: go }, 'Renkleri düzenle')),
-      h('p', { class: 'hint' }, 'Tek tema var. Gece görünümünün renkleri koda gömülüdür, buradan değişmez.'));
+        h('h3', {}, `Şu anki tema: ${cur.name}${edited ? ' (renkleri düzenlenmiş)' : ''}`),
+        h('p', { class: 'hint' }, 'Bir tema seçince önizleme hemen güncellenir, Kaydet\'e basınca yayına geçer. Seçtikten sonra renkleri tek tek değiştirebilirsin.'),
+        h('div', { class: 'theme-grid' },
+          ...THEMES.map((t) => h('button', { type: 'button', class: `theme-card${t.id === curId ? ' on' : ''}`, 'aria-pressed': String(t.id === curId), title: `${t.name} temasını seç`, onclick: () => apply(t) },
+            h('span', { class: 'theme-tick', 'aria-hidden': 'true' }, '✓'),
+            h('span', { class: 'theme-sw' }, ...THEME_KEYS.map((k) => h('i', { style: `background:${t.colors[k]}` }))),
+            h('b', {}, t.name),
+            h('small', {}, t.id === curId ? (edited ? 'Seçili, düzenlenmiş' : 'Seçili') : t.note)))),
+        h('button', { type: 'button', class: 'btn solid', style: 'margin-top:14px', onclick: go }, `Temayı düzenle (${cur.name})`)),
+      h('p', { class: 'hint' }, 'Gece görünümünün renkleri koda gömülüdür, buradan değişmez.'));
   }
 
   const commerce = window.GoatzCommerce({ h, request, toast, rerender: () => renderPage() });
