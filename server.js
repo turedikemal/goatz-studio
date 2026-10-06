@@ -243,6 +243,10 @@ async function api(req, res, url) {
     try { out.sample = await demo.status(); } catch { out.sample = null; }
     return json(res, 200, out);
   }
+  if (route === 'GET /api/dashboard/series') {
+    try { const q = url.searchParams; return json(res, 200, await dashboard.series({ from: q.get('from'), to: q.get('to'), step: q.get('step') }, q.get('demo') === '1')); }
+    catch (e) { return json(res, e.status || 500, { error: e.status ? e.message : 'Grafik verisi okunamadı: ' + e.message }); }
+  }
   // Örnek (demo) satış verisi: tek düğmeyle ekle / sil
   if (route === 'GET /api/demo') return json(res, 200, await demo.status());
   if (route === 'POST /api/demo' || route === 'DELETE /api/demo') {

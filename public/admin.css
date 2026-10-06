@@ -659,7 +659,7 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .db-num { font-size: 26px; font-weight: 800; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .db-sub { font-size: 12px; color: var(--muted); }
 .db-grid-a { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 14px; }
-.db-grid-b { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 14px; }
+.db-grid-b { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 14px; }
 .db-grid3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .db-card { display: flex; flex-direction: column; }
 .db-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
@@ -776,3 +776,9 @@ tr.row-toggle { cursor: pointer; } tr.row-toggle:hover td { background: rgba(0,0
 .db-sample-tag { padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper); font-size: 11px; font-weight: 800; letter-spacing: .05em; }
 .db-sample-act { display: flex; gap: 6px; flex-wrap: wrap; }
 .pill.demo { background: var(--sun); font-size: 10px; letter-spacing: .04em; margin-left: 6px; }
+
+/* Grafik zaman ayarı */
+.db-range { display: flex; align-items: flex-end; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; padding: 8px 10px; background: var(--bg); border-radius: 12px; }
+.db-range label { display: grid; gap: 3px; font-size: 11px; font-weight: 700; color: var(--muted); }
+.db-range input, .db-range select { padding: 6px 10px; border: 1px solid #bbb; border-radius: 999px; background: var(--paper); font-size: 13px; color: var(--ink); }
+.db-sum { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }

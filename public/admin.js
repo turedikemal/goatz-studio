@@ -678,6 +678,9 @@
   // =====================================================================
   let state = null;
   let saved = '';
+  // Panele ilk girişte (yeni sekme ya da şifreyle giriş) hep Dashboard açılır; aynı sekmede yenileyince sayfa korunur
+  const freshVisit = (() => { try { if (sessionStorage.getItem('goatz-panel-acik')) return false; sessionStorage.setItem('goatz-panel-acik', '1'); } catch {} return true; })();
+  if (freshVisit && location.hash) history.replaceState(null, '', location.pathname + location.search);
   let page = PAGES.find((p) => p.id === (location.hash.slice(1) || 'dashboard')) || PAGES.find((p) => p.id === 'hero');
   let previewPage = null; // önizlenen özel sayfanın kimliği (null = ana sayfa)
   const changeHooks = new Set();
@@ -735,6 +738,8 @@
     try {
       await request('/api/login', { method: 'POST', body: JSON.stringify({ password: $('#password').value }) });
       $('#password').value = '';
+      if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+      page = PAGES.find((p) => p.id === 'dashboard'); previewPage = null;
       start();
     } catch (err) { $('#loginError').textContent = err.message; }
   });

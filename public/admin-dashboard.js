@@ -12,7 +12,7 @@ window.GoatzDashboard = (ctx) => {
   const TZ = 'Europe/Istanbul'; // dönemler sunucuda Türkiye gününe göre bölünür
   const OPEN_STATUSES = 'received,preparing,ready,shipped,delivered';
 
-  const S = { period: (() => { try { return localStorage.getItem('goatz-dash-donem') || '7'; } catch { return '7'; } })(), data: null, loading: false, error: null, box: null,
+  const S = { period: (() => { try { return localStorage.getItem('goatz-dash-donem') || '7'; } catch { return '7'; } })(), data: null, loading: false, error: null, box: null, range: null, rangeData: null, rangeBusy: false, rangeError: null,
     demo: (() => { try { return localStorage.getItem('goatz-dash-ornek') === '1'; } catch { return false; } })(), busy: false };
   const setDemo = (v) => { S.demo = v; try { localStorage.setItem('goatz-dash-ornek', v ? '1' : '0'); } catch { /* sorun değil */ } };
   // Dashboard'dan açılan sipariş listesi, o an görünen veriyle (örnek ya da gerçek) aynı kayıtları gösterir
@@ -44,6 +44,7 @@ window.GoatzDashboard = (ctx) => {
     }
     catch (e) { S.error = e.message; }
     S.loading = false; paint();
+    if (S.range) loadRange();
   }
 
   // ----- Özet şeridi -----
@@ -59,25 +60,61 @@ window.GoatzDashboard = (ctx) => {
       cell('Yeni müşteri', num(d.customers), `${prev}: ${num(d.prevCustomers)}`));
   }
 
-  // ----- Satış grafiği: tek seri (ciro), dönem başına gün ya da saat sütunu -----
+  // ----- Satış grafiği: tek seri (ciro). Varsayılan üstteki dönem; istenirse tarih aralığı + adım (saat/gün/hafta/ay) seçilir -----
+  const STEP_LABEL = { hour: 'Saatlik', day: 'Günlük', week: 'Haftalık', month: 'Aylık' };
+  const ymd = (t) => new Date(t).toLocaleDateString('en-CA', { timeZone: TZ }); // YYYY-AA-GG (Türkiye günü)
+  async function loadRange() {
+    const r = S.range;
+    S.rangeBusy = true; S.rangeError = null; paint();
+    try { S.rangeData = await request(`/api/dashboard/series?from=${r.from}&to=${r.to}&step=${r.step}${S.demo ? '&demo=1' : ''}`); }
+    catch (e) { S.rangeError = e.message; S.rangeData = null; }
+    S.rangeBusy = false; paint();
+  }
+  function rangeControls(d, step) {
+    const s0 = d.series[0] ? ymd(d.series[0].t) : ymd(Date.now());
+    const cur = S.range || { from: s0, to: ymd(Date.now()), step };
+    const draft = { ...cur };
+    const date = (k) => h('input', { type: 'date', value: draft[k], max: ymd(Date.now()), onchange: (e) => { draft[k] = e.target.value; } });
+    const sel = h('select', { onchange: (e) => { draft.step = e.target.value; } }, ...Object.entries(STEP_LABEL).map(([k, l]) => h('option', { value: k, selected: draft.step === k }, l)));
+    return h('div', { class: 'db-range' },
+      h('label', {}, h('span', {}, 'Başlangıç'), date('from')), h('label', {}, h('span', {}, 'Bitiş'), date('to')),
+      h('label', {}, h('span', {}, 'Aralık'), sel),
+      h('button', { type: 'button', class: 'btn small solid', disabled: S.rangeBusy || null, onclick: () => {
+        if (!draft.from || !draft.to) return;
+        if (draft.from > draft.to) [draft.from, draft.to] = [draft.to, draft.from];
+        S.range = draft; loadRange();
+      } }, S.rangeBusy ? 'Yükleniyor…' : 'Uygula'),
+      S.range ? h('button', { type: 'button', class: 'btn small', onclick: () => { S.range = null; S.rangeData = null; S.rangeError = null; paint(); } }, 'Üstteki döneme dön') : null);
+  }
   function chart(d) {
-    const s = d.series, max = Math.max(...s.map((x) => x.revenue));
+    const custom = S.range && S.rangeData && S.rangeData.series;
+    const step = custom ? S.rangeData.step : d.period === 'today' ? 'hour' : 'day';
+    const s = custom ? S.rangeData.series : d.series;
+    const cancelledN = custom ? S.rangeData.cancelled : d.cancelled;
+    const max = Math.max(0, ...s.map((x) => x.revenue));
     const nice = (() => {
       if (!max) return 1000;
       const p = 10 ** Math.floor(Math.log10(max)), m = max / p;
       return (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p;
     })();
-    const hourly = d.period === 'today';
-    const hm = (t) => t.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', timeZone: TZ });
+    const o = (x) => ({ timeZone: TZ, ...x });
+    const hm = (t) => t.toLocaleTimeString('tr-TR', o({ hour: '2-digit', minute: '2-digit' }));
+    const multiDay = s.length > 1 && ymd(s[0].t) !== ymd(s[s.length - 1].t);
+    const every = Math.max(1, Math.ceil(s.length / (step === 'hour' && !multiDay ? 8 : 10)));
     const label = (x, i) => {
+      if (i % every !== 0 && i !== s.length - 1) return '';
       const t = new Date(x.t);
-      if (hourly) return i % 3 === 0 ? hm(t) : '';
-      if (s.length <= 7) return t.toLocaleDateString('tr-TR', { weekday: 'short', day: 'numeric', timeZone: TZ });
-      return i % 5 === 0 || i === s.length - 1 ? t.toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', timeZone: TZ }) : '';
+      if (step === 'hour') return multiDay ? `${t.toLocaleDateString('tr-TR', o({ day: 'numeric', month: 'short' }))} ${hm(t)}` : hm(t);
+      if (step === 'month') return t.toLocaleDateString('tr-TR', o({ month: 'short', year: '2-digit' }));
+      if (step === 'day' && s.length <= 7) return t.toLocaleDateString('tr-TR', o({ weekday: 'short', day: 'numeric' }));
+      return t.toLocaleDateString('tr-TR', o({ day: 'numeric', month: 'short' }));
     };
     const full = (x) => {
       const t = new Date(x.t);
-      return hourly ? `${hm(t)} – ${hm(new Date(t.getTime() + 36e5))}` : t.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: TZ });
+      if (step === 'hour') return `${t.toLocaleDateString('tr-TR', o({ day: 'numeric', month: 'long' }))} ${hm(t)} – ${hm(new Date(t.getTime() + 36e5))}`;
+      if (step === 'week') return `${t.toLocaleDateString('tr-TR', o({ day: 'numeric', month: 'long' }))} haftası`;
+      if (step === 'month') return t.toLocaleDateString('tr-TR', o({ month: 'long', year: 'numeric' }));
+      return t.toLocaleDateString('tr-TR', o({ weekday: 'long', day: 'numeric', month: 'long' }));
     };
     const tip = h('div', { class: 'db-tip', hidden: true });
     const plot = h('div', { class: 'db-plot' },
@@ -89,16 +126,20 @@ window.GoatzDashboard = (ctx) => {
           tip.replaceChildren(h('b', {}, full(x)), h('span', {}, `Ciro: ${money(x.revenue)}`), h('span', {}, `Sipariş: ${num(x.orders)}`));
           tip.hidden = false;
           const pr = plot.getBoundingClientRect(), cr = col.getBoundingClientRect();
-          tip.style.left = `${Math.min(Math.max(cr.left - pr.left + cr.width / 2, 80), pr.width - 80)}px`;
+          tip.style.left = `${Math.min(Math.max(cr.left - pr.left + cr.width / 2, 90), pr.width - 90)}px`;
         };
         col.addEventListener('mouseenter', show); col.addEventListener('focus', show);
         col.addEventListener('mouseleave', () => { tip.hidden = true; }); col.addEventListener('blur', () => { tip.hidden = true; });
         return col;
       })), tip);
     const axis = h('div', { class: 'db-xaxis' }, ...s.map((x, i) => h('span', {}, label(x, i))));
-    return card('db-chart', head(hourly ? 'Bugünkü satışlar · saatlik ciro' : 'Satışlar · günlük ciro'),
-      h('div', { class: 'db-chart-wrap' }, plot, axis, max ? null : h('p', { class: 'db-chart-empty' }, 'Bu dönemde satış yok.')),
-      h('p', { class: 'db-foot' }, 'İptal ve iade edilen siparişler ciroya sayılmaz' + (d.cancelled ? ` (bu dönemde ${num(d.cancelled)} sipariş).` : '.')));
+    const total = s.reduce((a, x) => a + x.revenue, 0);
+    const title = custom ? `Satışlar · ${STEP_LABEL[step].toLocaleLowerCase('tr')} ciro · ${new Date(S.rangeData.from + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })} – ${new Date(S.rangeData.to + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' })}`
+      : step === 'hour' ? 'Bugünkü satışlar · saatlik ciro' : 'Satışlar · günlük ciro';
+    return card('db-chart', head(title, custom ? h('span', { class: 'db-sum' }, `Toplam ${money(total)}`) : null), rangeControls(d, step),
+      S.rangeError ? h('p', { class: 'error', style: 'margin:0 0 8px' }, S.rangeError) : null,
+      h('div', { class: 'db-chart-wrap' }, plot, axis, max ? null : h('p', { class: 'db-chart-empty' }, 'Bu aralıkta satış yok.')),
+      h('p', { class: 'db-foot' }, 'İptal ve iade edilen siparişler ciroya sayılmaz' + (cancelledN ? ` (bu aralıkta ${num(cancelledN)} sipariş).` : '.')));
   }
 
   // ----- Satış kanalları -----
@@ -204,9 +245,9 @@ window.GoatzDashboard = (ctx) => {
     if (!d.db) return S.box.replaceChildren(top, note('Veritabanı bağlı değil: sipariş, ürün ve stok verisi okunamıyor.'));
     if (d.error) return S.box.replaceChildren(top, note(d.error, true));
     S.box.replaceChildren(top, sampleBar(d), stats(d),
+      h('div', { class: 'db-grid-b' }, recentOrders(d), bestsellers(d)),
       h('div', { class: 'db-grid-a' }, chart(d), channels(d)),
-      h('div', { class: 'db-grid3' }, pipeline(d), payments(d), stock(d)),
-      h('div', { class: 'db-grid-b' }, bestsellers(d), recentOrders(d)));
+      h('div', { class: 'db-grid3' }, pipeline(d), payments(d), stock(d)));
   }
 
   function page() {
