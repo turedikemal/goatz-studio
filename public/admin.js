@@ -1000,29 +1000,25 @@
     });
   }
 
-  // Akordeon: panel, açık bölümün menü satırının hemen altında durur (renderNav yerleştirir).
-  const panelIsOpen = () => $('#panel').classList.contains('open');
-  const isOn = (id) => panelIsOpen() && id === page.id;
-  const syncWide = () => $('#app').classList.toggle('acc-wide', panelIsOpen() && $('#panel').classList.contains('wide'));
-  const openPanel = () => { $('#panel').classList.add('open'); syncWide(); renderNav(); };
-  const closePanel = () => { $('#panel').classList.remove('open'); syncWide(); renderNav(); };
+  const openPanel = () => $('#panel').classList.add('open');
+  const closePanel = () => $('#panel').classList.remove('open');
   $('#panelClose').addEventListener('click', closePanel);
-  { const sb = $('.sidebar'); sb.appendChild(h('button', { type: 'button', class: 'sidebar-close', 'aria-label': 'Menüyü kapat', onclick: () => sb.classList.remove('open') }, '×')); }
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && $('#panel').classList.contains('open') && !document.querySelector('dialog[open]') && !e.target.closest?.('input, textarea, select')) closePanel();
   });
 
-  function selectPage(p, toggle) {
-    if (toggle && panelIsOpen() && page.id === p.id) { closePanel(); return; }
+  // Sol menü akordeonu: aynı anda yalnız bir grup açık; varsayılan hepsi kapalı, aktif sayfanın grubu açılır.
+  let openGroup = null, navFollow = false;
+  function selectPage(p) {
     page = p;
-    $('#panel').classList.add('open');
+    navFollow = true;
     history.replaceState(null, '', `#${p.id}`);
     const target = p.custom ? p.pageId : (p.previewPage || null);
     renderNav();
     renderPage();
     if (target !== previewPage) { previewPage = target; refreshPreview(true); } else scrollPreviewTo(p.anchor);
-    const row = $('#pages > .on, #pages > .nav-row.on');
-    if (row) { const sb = $('.sidebar'); sb.scrollTo({ top: Math.max(0, row.offsetTop - 70), behavior: 'auto' }); }
+    $('.sidebar').classList.remove('open');
+    openPanel();
   }
   const homePage = () => PAGES.find((x) => x.id === 'hero');
 
@@ -1048,16 +1044,25 @@
     const btn = (p) => {
       const sec = p.section && state.sections.find((x) => x.id === p.section);
       const dc = dotColor(p);
-      const main = h('button', { class: isOn(p.id) ? 'on' : '', onclick: notJustDragged(() => selectPage(p, true)) },
+      const main = h('button', { class: p.id === page.id ? 'on' : '', onclick: notJustDragged(() => selectPage(p)) },
         dc ? h('i', { class: 'dot', style: `background:${dc}` }) : null,
         h('span', { class: 'lbl' }, p.label),
         sec && !sec.visible ? h('span', { class: 'eye', title: 'Bu bölüm gizli' }, 'gizli') : null,
         p.id === 'mesajlar' && unreadMsgs > 0 ? h('span', { class: 'nav-badge', title: `${unreadMsgs} okunmamış mesaj` }, String(unreadMsgs > 99 ? '99+' : unreadMsgs)) : null);
       if (!sec) return main;
-      return row(main, null, isOn(p.id), { group: 'sections', id: p.section });
+      return row(main, null, p.id === page.id, { group: 'sections', id: p.section });
     };
-    const head = (t, c) => h('div', { class: 'group', style: `--gc:${c}` }, t);
     const items = [];
+    const gOf = new Map(); // öğe -> grup adı
+    const pageGroup = {}; // sayfa kimliği -> grup adı
+    let curG = null;
+    const head = (t, c) => {
+      const isOpen = openGroup === t;
+      return h('button', { type: 'button', class: `group${isOpen ? ' open' : ''}`, 'data-g': t, style: `--gc:${c}`, 'aria-expanded': String(isOpen),
+        onclick: () => { openGroup = isOpen ? null : t; renderNav(); } },
+      h('span', { class: 'lbl' }, t), h('i', { class: 'chev', 'aria-hidden': 'true' }));
+    };
+    const push = (...els) => els.forEach((e) => { items.push(e); gOf.set(e, curG); });
     const groupColors = {
       'Genel Bakış': 'var(--sky)',
       'Ürünler': '#55db9c',
@@ -1082,26 +1087,30 @@
         if (currentGroup !== p.group) {
           currentGroup = p.group;
           items.push(head(p.group, groupColors[p.group] || 'var(--bg)'));
+          curG = p.group;
         }
       } else if (p.id) {
         if (inFlow(p)) {
-          if (!flowDone) { flowDone = true; items.push(...flow.map(btn).filter(Boolean)); }
+          if (!flowDone) { flowDone = true; flow.forEach((f) => { pageGroup[f.id] = curG; }); push(...flow.map(btn).filter(Boolean)); }
           return;
         }
+        pageGroup[p.id] = curG;
         const b = btn(p);
-        if (b) items.push(b);
+        if (b) push(b);
       }
     });
 
     items.push(head('Sayfalar', 'var(--mint)'));
+    curG = 'Sayfalar';
     state.pages.forEach((pg, pi) => {
       const def = customDef(pg);
-      const main = h('button', { class: isOn(def.id) ? 'on' : '', onclick: notJustDragged(() => selectPage(def, true)) },
+      const main = h('button', { class: def.id === page.id ? 'on' : '', onclick: notJustDragged(() => selectPage(def)) },
         h('span', { class: 'lbl' }, pg.title || 'Sayfa'),
         pg.visible ? null : h('span', { class: 'eye', title: 'Bu sayfa yayında değil' }, 'gizli'));
-      items.push(row(main, [tool('✕', 'Sayfayı sil', false, () => deletePage(pg.id), 'danger')], isOn(def.id), { group: 'pages', id: pg.id }));
+      pageGroup[def.id] = 'Sayfalar';
+      push(row(main, [tool('✕', 'Sayfayı sil', false, () => deletePage(pg.id), 'danger')], def.id === page.id, { group: 'pages', id: pg.id }));
     });
-    items.push(h('button', { class: 'add-page', onclick: () => {
+    push(h('button', { class: 'add-page', onclick: () => {
       if (state.pages.length >= 30) { toast('En fazla 30 sayfa oluşturabilirsin.', true); return; }
       const p = newPage();
       state.pages.push(p);
@@ -1109,14 +1118,9 @@
       selectPage(customDef(p));
     } }, '+ Yeni sayfa'));
 
-    // Açık bölümün paneli, aktif satırın hemen altına girer. Panel DOM'dan çıkarılmaz (yazarken odak kaybolmasın).
-    const panelEl = $('#panel');
-    const open = panelEl.classList.contains('open');
-    [...nav.children].forEach((c) => { if (c !== panelEl) c.remove(); });
-    const ai = open ? items.findIndex((it) => it.classList.contains('on') || it.querySelector('button.on')) : -1;
-    const order = items.slice();
-    if (ai >= 0) order.splice(ai + 1, 0, panelEl); else order.push(panelEl);
-    order.forEach((node, i) => { if (nav.children[i] !== node) nav.insertBefore(node, nav.children[i] || null); });
+    if (navFollow) { navFollow = false; if (pageGroup[page.id]) openGroup = pageGroup[page.id]; }
+    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== openGroup; });
+    nav.replaceChildren(...items);
   }
   $('#menuToggle').addEventListener('click', () => $('.sidebar').classList.toggle('open'));
 
@@ -1126,8 +1130,6 @@
   function renderPage() {
     const ed = $('#editor');
     const top = ed.scrollTop;
-    const sbEl = $('.sidebar'), sbTop = sbEl.scrollTop;
-    queueMicrotask(() => { sbEl.scrollTop = sbTop; });
     changeHooks.clear();
     if (page.custom && !state.pages.some((p) => p.id === page.pageId)) { page = homePage(); previewPage = null; renderNav(); refreshPreview(true); }
 
@@ -1138,7 +1140,6 @@
     const wasHidden = splitEl.classList.contains('no-preview');
     splitEl.classList.toggle('no-preview', !isThemePage);
     $('#panel').classList.toggle('wide', !isThemePage);
-    syncWide();
     if (isThemePage && wasHidden) refreshPreview(true);
 
     if (page.custom) {

@@ -380,13 +380,14 @@ body.rte-lock { overflow: hidden; }
 
 /* ---------- Akordeon: bölüm, kendi menü satırının altında açılır ---------- */
 #pages > .panel { user-select: text; position: relative; inset: auto; width: auto; z-index: auto; transform: none; visibility: visible; transition: none;
-  display: none; margin: -6px 4px 6px; border: 1px solid var(--ink); border-top: 0; border-radius: 0 0 20px 20px; background: var(--bg); overflow: hidden; }
+  display: none; margin: -2px 4px 6px; border: 1px solid var(--ink); border-top: 0; border-radius: 0 0 20px 20px; background: var(--bg); overflow: hidden; }
 #pages > .panel.open { display: flex; animation: acc-open .22s ease; }
 @keyframes acc-open { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 #pages > .panel .panel-head { display: none; }
 #pages > .panel .editor { overflow: visible; padding: 14px 12px 20px; }
 #pages > .panel.wide .editor { padding: 14px 12px 20px; }
 #pages > .panel.wide .row2 { grid-template-columns: 1fr; }
+#pages > .panel #panelSave:not([hidden]) { display: block; position: sticky; bottom: 8px; margin: 0 12px 12px; z-index: 5; }
 /* e-ticaret tabloları gibi geniş bölümlerde menü, çalışma alanına doğru genişler */
 @media (min-width: 761px) {
   .app.acc-wide { grid-template-columns: clamp(340px, 62vw, 980px) 1fr; }
@@ -394,9 +395,9 @@ body.rte-lock { overflow: hidden; }
 }
 @media (max-width: 760px) {
   .sidebar { inset: 0; }
-  #pages > .panel #panelSave:not([hidden]) { display: block; position: sticky; bottom: 8px; margin: 0 12px 12px; z-index: 5; padding: 14px; font-size: 15px; }
+  #pages > .panel #panelSave:not([hidden]) { padding: 14px; font-size: 15px; }
   .sidebar .brand { padding-right: 52px; }
-  .sidebar .sidebar-close { display: grid; }
+  .sidebar-close { display: grid; }
 }
 .sidebar-close { display: none; position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; place-items: center; border: 1px solid var(--ink); border-radius: 50%; background: var(--paper); font-size: 18px; cursor: pointer; z-index: 2; }
 /* Tema kartları */
@@ -413,3 +414,36 @@ body.rte-lock { overflow: hidden; }
 .theme-sw i:last-child { border-radius: 0 999px 999px 0; }
 .theme-tick { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; display: none; place-items: center; font-size: 13px; font-weight: 900; }
 .theme-card.on .theme-tick { display: grid; }
+
+/* ---------- Sol menü: grup akordeonu (başlığa tıkla, altına açılır) ---------- */
+#pages { gap: 2px; }
+#pages > button.group {
+  display: flex; align-items: center; gap: 8px; width: 100%; margin: 0; padding: 11px 10px 11px 16px; text-align: left;
+  border: 0; border-top: 1px solid #e3e3e3; border-radius: 0; background: transparent; cursor: pointer;
+  font-size: 12px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; color: var(--ink);
+  box-shadow: inset 4px 0 0 var(--gc, var(--sky));
+}
+#pages > button.group:first-child { border-top: 0; }
+#pages > button.group:hover, #pages > button.group.open { background: var(--bg); }
+#pages > button.group .lbl { flex: 1; }
+#pages > button.group .chev { flex: none; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; rotate: -45deg; transition: rotate .15s ease; margin-right: 4px; }
+#pages > button.group.open .chev { rotate: 45deg; }
+:is(#pages > button:not(.group), #pages > .nav-row > button) {
+  border: 0; border-radius: 10px; background: transparent; padding: 9px 10px 9px 22px; text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 600;
+}
+:is(#pages > button:not(.group), #pages > .nav-row > button):hover { transform: none; background: var(--bg); }
+:is(#pages > button:not(.group), #pages > .nav-row > button).on { background: var(--ink); color: var(--paper); }
+#pages > .add-page { border: 1px dashed var(--ink); justify-content: center; padding-left: 10px; }
+
+/* Geniş bölümler (ürün, sipariş, müşteri...): menü yerinde kalır, içerik sağdaki alanda açılır */
+@media (min-width: 761px) {
+  .panel.wide { left: var(--side); width: auto; right: 0; border-right: 0; transform: none; }
+  .panel.wide:not(.open) { transform: translateX(-24px); }
+}
+
+/* Tüm bölümler aynı: menü hep görünür, içerik menünün sağında açılır (masaüstü) */
+@media (min-width: 761px) {
+  .panel:not(.wide) { left: var(--side); width: var(--side); border-right: 1px solid var(--line); }
+  .app:has(.panel.open:not(.wide)) .split { padding-left: var(--side); }
+  .app:has(.panel.open:not(.wide)) .split-empty { display: none; }
+}
