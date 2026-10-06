@@ -11,6 +11,7 @@ const promo = require('./lib/promo');
 const persist = require('./lib/persist');
 const fonts = require('./lib/fonts');
 const salesRoutes = require('./lib/sales-routes');
+const dashboard = require('./lib/dashboard');
 
 const PORT = Number(process.env.PORT) || 5173;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -236,6 +237,7 @@ async function api(req, res, url) {
 
   if (route === 'GET /api/messages') return json(res, 200, messages.list());
   if (route === 'GET /api/promo') return json(res, 200, await promo.summary());
+  if (route === 'GET /api/dashboard') return json(res, 200, await dashboard.summary(url.searchParams.get('period') || '7'));
   if (route === 'POST /api/messages/reply') {
     const { id, text } = await readJson(req);
     const m = messages.get(String(id || ''));

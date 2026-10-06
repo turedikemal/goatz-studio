@@ -559,5 +559,11 @@ window.GoatzSales = (ctx) => {
     }
   }
 
-  return { orders, returns, customers, customerTags, coupons, campaigns, onPage };
+  // Dashboard'dan: siparişleri verilen filtreyle aç
+  function ordersWith(f) {
+    O.preset = 'siparisler'; O.f = { ...blankFilter(), ...f }; O.page = 0; O.selected.clear(); O.loaded = false; O.adv = false; O.view = 'list'; O.detail = null;
+    visit('siparisler'); rerender();
+  }
+
+  return { orders, returns, customers, customerTags, coupons, campaigns, onPage, newOrder: () => newOrder(), openOrder, ordersWith };
 };

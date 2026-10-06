@@ -47,8 +47,7 @@
   const PAGES = [
     { group: 'Genel Bakış' },
     {
-      id: 'dashboard', label: 'Dashboard', path: [], anchor: '#top',
-      intro: 'Satış, sipariş ve müşteri özeti.',
+      id: 'dashboard', label: 'Dashboard', path: [], anchor: '#top', special: 'dashboard',
     },
 
     { group: 'Ürünler' },
@@ -679,7 +678,7 @@
   // =====================================================================
   let state = null;
   let saved = '';
-  let page = PAGES.find((p) => p.id === (location.hash.slice(1) || 'hero')) || PAGES.find((p) => p.id === 'hero');
+  let page = PAGES.find((p) => p.id === (location.hash.slice(1) || 'dashboard')) || PAGES.find((p) => p.id === 'hero');
   let previewPage = null; // önizlenen özel sayfanın kimliği (null = ana sayfa)
   const changeHooks = new Set();
   const collapsed = new Map();
@@ -771,8 +770,7 @@
     updateStatus();
     refreshUnread();
     setInterval(() => { if (!document.hidden) refreshUnread(); }, 60000);
-    if (location.hash.length > 1) openPanel();
-
+    if (location.hash.length > 1 || page.id === 'dashboard') openPanel();
   }
 
   // =====================================================================
@@ -1228,7 +1226,8 @@
       const sec = state.sections.find((s) => s.id === page.section);
       parts.push(h('div', { class: 'card' }, switchField('Bu bölümü sitede göster', sec.visible, (v) => { sec.visible = v; changed(); renderNav(); })));
     }
-    if (page.special === 'sections') parts.push(sectionsEditor());
+    if (page.special === 'dashboard') parts.push(dash.page());
+    else if (page.special === 'sections') parts.push(sectionsEditor());
     else if (page.special === 'media') parts.push(mediaPage());
     else if (page.special === 'backups') parts.push(backupsPage());
     else if (page.special === 'messages') parts.push(messagesPage());
@@ -2032,6 +2031,8 @@
 
   const commerce = window.GoatzCommerce({ h, request, toast, rerender: () => renderPage() });
   const sales = window.GoatzSales({ h, toast, rerender: () => renderPage(), goto: (id) => { const pg = PAGES.find((x) => x.id === id); if (pg) selectPage(pg); }, ui: commerce.ui });
+
+  const dash = window.GoatzDashboard({ h, request, goto: (id) => { const pg = PAGES.find((x) => x.id === id); if (pg) selectPage(pg); }, sales, commerce });
 
   function placeholderPage(title) {
     return h('div', { class: 'card' },

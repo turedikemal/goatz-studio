@@ -104,3 +104,8 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Sitede tek yazı tipi var: `theme.font` (Google Fonts aile adı, tema başına; varsayılan `Inter`). Eski `bodyFont`/`displayFont`/metin başına `font` kalktı. Panel: Tema Ayarları > Yazı tipi (arama + her satır kendi yazı tipiyle; önizleme CSS'i yalnız panelde Google'dan gelir).
 - Ziyaretçi Google'a gitmez: `lib/fonts.js` seçilen ailenin woff2 (latin + latin-ext) dosyalarını indirir, `data/fonts/<ad>/` (+ `persist` ile PostgreSQL), `/fonts/<ad>/font.css`. Katalog `lib/fonts-catalog.json` (1526 aile, Türkçe karakterli). `POST /api/fonts/ensure`; kayıtta indirilemeyen yazı tipi önceki yazı tipine döner (`fontWarning`). `data/fonts/inter` git'te (varsayılan, ağ gerekmesin), ötekiler git dışı sayılmalı/commit edilmez.
 - Yalnız 400/500/700/900 inen kalınlıklar; sahte kalın kapalı (`font-synthesis-weight:none`), italik yoksa tarayıcı eğik üretir.
+
+## Panel Dashboard (2026-10-06)
+- Panel açılınca (adres çubuğunda `#` yoksa) Dashboard gelir. Sunucu: `GET /api/dashboard?period=today|7|30` (`lib/dashboard.js`), panel: `public/admin-dashboard.js` + admin.css "Dashboard" bölümü.
+- Yalnız gerçek veri: satış/sipariş (iptal ve iade ciroya sayılmaz), yapılacaklar (sipariş durumları, ödeme, stokta kalmayan varyant, okunmamış mesaj), gelen talepler (mesajın ilk satırına göre teklif/fiyat/yarım/iletişim), ürün sayıları, Shopier penceresi (son 7 gün). Ziyaretçi verisi panelde yok, Analytics bağlantısı var. DB yoksa ilgili kısımlar bunu söyler.
+- Bilinçli olarak yok: grafik, emoji, renkli/gradyanlı KPI kartları (Kemal: "standart AI dashboard istemiyorum").
