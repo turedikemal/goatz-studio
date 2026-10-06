@@ -472,3 +472,5 @@ dialog.confirm-dlg { border: 2px solid var(--ink); border-radius: 20px; padding:
 :is(#pages > button:not(.group):not(.back-btn), #pages > .nav-row > button):hover { background: var(--sun); color: var(--ink); }
 :is(#pages > button:not(.group), #pages > .nav-row > button).on, :is(#pages > button:not(.group), #pages > .nav-row > button).on:hover { background: var(--ink); color: var(--paper); }
 #pages > button.back-btn:hover { background: var(--sun); color: var(--ink); }
+.panel-head #previewToggle { margin-left: auto; margin-right: 8px; }
+@media (max-width: 760px) { #previewToggle { display: none; } }

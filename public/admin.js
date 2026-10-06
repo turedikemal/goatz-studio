@@ -1011,6 +1011,10 @@
   // Sol menü akordeonu: aynı anda yalnız bir grup açık; varsayılan hepsi kapalı, aktif sayfanın grubu açılır.
   let openGroup = null, navFollow = false, navView = 'main'; // navView: 'main' ana menü, 'theme' yalnız tema görünümü
   const TEMA = 'Tema Yönetimi';
+  // Tema görünümündeki iki akordeon: ilki tema ayarları, ikincisi ana sayfanın sitedeki sırası (kodda eskiden de bu adla geçiyordu).
+  const G_TEMA = 'Tema', G_FLOW = 'Ana sayfa · sitedeki sıra';
+  const THEME_GROUPS = [G_TEMA, G_FLOW];
+  let previewOn = false; // tema bölümlerinde canlı önizleme göster/gizle (varsayılan gizli: editör sağ alanın tamamını kullanır)
   function selectPage(p) {
     page = p;
     navFollow = true;
@@ -1106,12 +1110,12 @@
           currentGroup = p.group;
           // "Genel Bakış" başlığı yok: Dashboard başlıksız, en üstte tek düğme olarak durur.
           if (p.group === 'Genel Bakış') curG = null;
-          else if (p.group === TEMA) curG = TEMA; // başlık yok: ana menüde tek düğme, tema görünümünde düz liste
+          else if (p.group === TEMA) curG = G_TEMA; // başlık ana menüde yok: tek düğme; tema görünümünde iki akordeon
           else { items.push(head(p.group, groupColors[p.group] || 'var(--bg)')); curG = p.group; }
         }
       } else if (p.id) {
         if (inFlow(p)) {
-          if (!flowDone) { flowDone = true; flow.forEach((f) => { pageGroup[f.id] = curG; }); push(...flow.map(btn).filter(Boolean)); }
+          if (!flowDone) { flowDone = true; curG = G_FLOW; flow.forEach((f) => { pageGroup[f.id] = curG; }); push(...flow.map(btn).filter(Boolean)); }
           return;
         }
         pageGroup[p.id] = curG;
@@ -1140,16 +1144,15 @@
 
     if (navFollow) {
       navFollow = false;
-      navView = pageGroup[page.id] === TEMA ? 'theme' : 'main';
-      if (pageGroup[page.id] && pageGroup[page.id] !== TEMA) openGroup = pageGroup[page.id];
+      navView = THEME_GROUPS.includes(pageGroup[page.id]) ? 'theme' : 'main';
+      if (pageGroup[page.id]) openGroup = pageGroup[page.id];
     }
-    const isTema = (it) => gOf.get(it) === TEMA;
-    const temaItems = items.filter(isTema);
-    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== TEMA && g !== openGroup; });
+    const isTema = (it) => THEME_GROUPS.includes(gOf.get(it));
+    items.forEach((it) => { const g = gOf.get(it); it.hidden = !!g && g !== openGroup; });
     let shown;
     if (navView === 'theme') {
-      temaItems.forEach((it) => { it.hidden = false; });
-      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön'), ...temaItems];
+      shown = [h('button', { type: 'button', class: 'back-btn', onclick: goBack }, '← Panele dön')];
+      THEME_GROUPS.forEach((g) => { shown.push(head(g, 'var(--bg)'), ...items.filter((it) => gOf.get(it) === g)); });
     } else {
       shown = items.filter((it) => !isTema(it));
       shown.push(h('button', { type: 'button', class: 'group nav-link', onclick: () => {
@@ -1178,7 +1181,13 @@
     const splitEl = $('#split');
     const wasHidden = splitEl.classList.contains('no-preview');
     splitEl.classList.toggle('no-preview', !isThemePage);
-    $('#panel').classList.toggle('wide', !isThemePage);
+    const panelWide = () => !isThemePage || !previewOn;
+    $('#panel').classList.toggle('wide', panelWide());
+    { const ph = $('.panel-head'); let pt = $('#previewToggle');
+      if (!pt) { pt = h('button', { type: 'button', class: 'btn small', id: 'previewToggle' }); ph.insertBefore(pt, $('#panelClose')); }
+      pt.hidden = !isThemePage;
+      pt.textContent = previewOn ? 'Önizlemeyi gizle' : 'Önizleme';
+      pt.onclick = () => { previewOn = !previewOn; pt.textContent = previewOn ? 'Önizlemeyi gizle' : 'Önizleme'; $('#panel').classList.toggle('wide', panelWide()); }; }
     if (isThemePage && wasHidden) refreshPreview(true);
 
     if (page.custom) {
