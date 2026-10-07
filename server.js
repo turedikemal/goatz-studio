@@ -100,7 +100,10 @@ function notFound(res, req) {
   return send(res, 404, html, 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
 }
 // Adresi değişen işler: eski adres -> yeni adres (301)
-const WORK_MOVED = { 'canakkale-ili-damizlik-koyun-keci-yetist': 'canakkale-koyun-keci-birligi' };
+const WORK_MOVED = { 'canakkale-ili-damizlik-koyun-keci-yetist': 'canakkale-koyun-keci-birligi', 'aylik-site-yonetimi': 'aylik-web-site-yonetimi' };
+// Adresi değişen sayfalar: eski adres → yeni adres (301)
+const PAGE_MOVED = { 'danismanlik-ve-site-yonetimi': 'danismanlik-ve-web-site-yonetimi' };
+const movedPage = (c, slug) => PAGE_MOVED[slug] && resolvePages(c.pages).find((p) => p.visible && p.slug === PAGE_MOVED[slug]);
 const contactHits = new Map();
 const siteHits = new Map();
 const promoHits = new Map();
@@ -667,6 +670,8 @@ const server = http.createServer(async (req, res) => {
       const c = store.load();
       const svc = resolvePages(c.pages).find((p) => p.visible && p.kind === 'service' && p.slug === sm[1]);
       if (svc) return send(res, 200, pageHtml(c, { page: svc.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      const mv = movedPage(c, sm[1]);
+      if (mv) { res.writeHead(301, { Location: pagePath(mv), 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
       return notFound(res, req);
     }
     // Özel sayfalar: /hakkimizda
@@ -676,6 +681,8 @@ const server = http.createServer(async (req, res) => {
       const page = resolvePages(c.pages).find((p) => p.visible && p.slug === pm[1]);
       if (page && (page.kind === 'blog' || page.kind === 'service')) { res.writeHead(301, { Location: pagePath(page), 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
       if (page) return send(res, 200, pageHtml(c, { page: page.id, origin: canonicalOrigin(req), path: url.pathname }), 'text/html; charset=utf-8', { 'Cache-Control': 'no-cache' });
+      const mv = movedPage(c, pm[1]);
+      if (mv) { res.writeHead(301, { Location: pagePath(mv), 'Cache-Control': 'public, max-age=86400' }); return res.end(); }
     }
     const file = safeJoin(PUBLIC_DIR, decodeURIComponent(url.pathname.slice(1)));
     if (file && fs.existsSync(file) && fs.statSync(file).isFile()) {
