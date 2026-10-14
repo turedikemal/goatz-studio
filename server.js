@@ -81,6 +81,7 @@ function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {})
 const messages = require('./lib/messages');
 const mailer = require('./lib/mailer');
 const seo = require('./lib/seo');
+const feed = require('./lib/feed');
 // Eski görsel adresleri -> yeni (SEO'lu, WebP) adresler; data/image-redirects.json
 let imgRedirCache = null;
 const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
@@ -643,6 +644,11 @@ const server = http.createServer(async (req, res) => {
     // Arama motoru ve yapay zekâ botları için: robots.txt, sitemap.xml, llms.txt (lib/seo.js, içerikten üretilir)
     if (url.pathname === '/robots.txt') return send(res, 200, seo.robots(origin, store.load()), 'text/plain; charset=utf-8');
     if (url.pathname === '/sitemap.xml') return send(res, 200, seo.sitemap(origin, store.load()), 'application/xml; charset=utf-8');
+    // Ürün XML feed'i (lib/feed.js): ikas Product Exporter mantığında, panel ürünlerinden canlı
+    if (url.pathname === '/urunler.xml') {
+      try { return send(res, 200, await feed.productsXml(origin, url.searchParams), 'application/xml; charset=utf-8', { 'Cache-Control': 'no-cache' }); }
+      catch (e) { return send(res, e.status || 500, e.status === 503 ? 'Veritabanı bağlı değil.' : 'Feed üretilemedi.'); }
+    }
     if (url.pathname === '/llms.txt') return send(res, 200, seo.llms(origin, store.load()), 'text/plain; charset=utf-8');
     // İşler: /isler ve /isler/proje-adi
     const wm = /^\/isler(?:\/([a-z0-9-]+))?\/?$/.exec(url.pathname);
