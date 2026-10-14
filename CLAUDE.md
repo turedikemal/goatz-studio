@@ -121,3 +121,4 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 
 ## Ürün XML feed (2026-10-14)
 - `/urunler.xml` (`lib/feed.js`): ikas Product Exporter mantığında, panel ürünlerinden canlı. Yalnız Aktif + "Mağazada göster" ürünler (`?demo=1` örnek ürünler). Parametreler: showCategoryPath, separateCategories, showTotalStockCount, showDiscountPrice, showPriceInfo. Görseller olduğu gibi (çoğu webp; JPEG dönüştürme yok, görsel kütüphanesi yok). ikas örnek dosyası buluttan açılamadı, etiket adları birebir ikas değil.
+- `/hizmetler.xml` (Hizmetler kartlarından; `?format=google` = Google Merchant RSS, title + link). Kemal bir araca XML verince "ürün adı ve satış bağlantısı olan ürün bulunamadı" hatası aldı: ürün feed'i boş ve ürünlerin sitede satış sayfası yok.
