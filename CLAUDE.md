@@ -118,3 +118,6 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 ## Web site yönetimi adı (2026-10-07)
 - Kemal: "site yönetimi" Google'da apartman site yönetimiyle karışıyor → her yerde "web site yönetimi". `lib/migrate.js` her `store.load()`'da içeriğe uygulanır (dosyaya yazmaz): metinlerde "site yönetimi" → "web site yönetimi", iş adresi `aylik-web-site-yonetimi`, kategori sayfası (`kdanis`) adresi `danismanlik-ve-web-site-yonetimi`, seoTitle/description. Eski adresler 301: `WORK_MOVED`, `PAGE_MOVED` (server.js).
 - Neden geçiş kodu: yayındaki içerik panelden kaydedilmiş; `data/content.json` push edilseydi Kemal'in panel düzenlemeleri Yedekler'e düşerdi. Git'teki `content.json` hâlâ eski adları taşıyor; bir sonraki içerik push'unda geçişi dosyaya da uygula (`node -e` ile `require('./lib/migrate')`), geçiş kodu yine zararsız kalır.
+
+## Ürün XML feed (2026-10-14)
+- `/urunler.xml` (`lib/feed.js`): ikas Product Exporter mantığında, panel ürünlerinden canlı. Yalnız Aktif + "Mağazada göster" ürünler (`?demo=1` örnek ürünler). Parametreler: showCategoryPath, separateCategories, showTotalStockCount, showDiscountPrice, showPriceInfo. Görseller olduğu gibi (çoğu webp; JPEG dönüştürme yok, görsel kütüphanesi yok). ikas örnek dosyası buluttan açılamadı, etiket adları birebir ikas değil.
