@@ -649,6 +649,7 @@ const server = http.createServer(async (req, res) => {
       try { return send(res, 200, await feed.productsXml(origin, url.searchParams), 'application/xml; charset=utf-8', { 'Cache-Control': 'no-cache' }); }
       catch (e) { return send(res, e.status || 500, e.status === 503 ? 'Veritabanı bağlı değil.' : 'Feed üretilemedi.'); }
     }
+    if (url.pathname === '/hizmetler.xml') return send(res, 200, feed.servicesXml(origin, store.load()), 'application/xml; charset=utf-8', { 'Cache-Control': 'no-cache' });
     if (url.pathname === '/llms.txt') return send(res, 200, seo.llms(origin, store.load()), 'text/plain; charset=utf-8');
     // İşler: /isler ve /isler/proje-adi
     const wm = /^\/isler(?:\/([a-z0-9-]+))?\/?$/.exec(url.pathname);
