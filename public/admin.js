@@ -1816,10 +1816,20 @@
           it.status === 'skipped' ? h('button', { type: 'button', class: 'btn small', onclick: () => act('/api/instagram/skip', it.id, { skip: false }) }, 'Geri al') : null);
         const published = d.items.filter((it) => it.status === 'published');
         const pending = d.items.filter((it) => it.status !== 'published');
+        const weeks = new Map();
+        for (const it of pending) {
+          const w = it.week || 'diger';
+          if (!weeks.has(w)) weeks.set(w, new Map());
+          const day = new Date(it.at).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'Europe/Istanbul' });
+          if (!weeks.get(w).has(day)) weeks.get(w).set(day, []);
+          weeks.get(w).get(day).push(it);
+        }
+        const planned = [...weeks].map(([w, days]) => h('div', { class: 'card' }, h('h3', {}, 'Hafta ' + w.replace(/^\d{4}-hafta-/, '')),
+          ...[...days].map(([day, list]) => h('div', { style: 'margin-top:12px' }, h('p', { style: 'margin:0;font-weight:700' }, day), ...list.map(row)))));
         box.replaceChildren(
           h('div', { class: 'card' }, head),
           h('div', { class: 'card' }, h('h3', {}, 'Paylaşılanlar'), published.length ? h('div', {}, ...published.map(row)) : h('p', { class: 'muted' }, 'Henüz paylaşım yok.')),
-          h('div', { class: 'card' }, h('h3', {}, 'Planlanan'), pending.length ? h('div', {}, ...pending.map(row)) : h('p', { class: 'muted' }, 'Planlı paylaşım yok.')));
+          ...(pending.length ? planned : [h('div', { class: 'card' }, h('p', { class: 'muted' }, 'Planlı paylaşım yok.'))]));
       }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
     }
     load();
