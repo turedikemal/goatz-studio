@@ -101,6 +101,7 @@
       id: 'kampanyalar', label: 'Kampanyalar', path: [], anchor: '#top', special: 'campaigns',
       intro: 'Kategori veya ürüne otomatik uygulanan indirim kampanyaları.',
     },
+    { id: 'instagram', label: 'Instagram paylaşımları', special: 'instagram', anchor: '#top', intro: 'Haftalık Instagram paketi plandaki saatte otomatik paylaşılır: karusel gönderiler ve hikâyeler. Saati 2 saatten fazla geçen paylaşım atlanır, toplu paylaşım olmaz.' },
     {
       id: 'blog', label: 'Blog', path: [], anchor: '#top',
       intro: 'Blog yazılarını yönetin.',
@@ -1241,6 +1242,7 @@
     else if (page.special === 'backups') parts.push(backupsPage());
     else if (page.special === 'messages') parts.push(messagesPage());
     else if (page.special === 'promo') parts.push(promoPage());
+    else if (page.special === 'instagram') parts.push(instagramPage());
     else if (page.special === 'themes') parts.push(themesEditor());
     else if (page.special === 'pricelist') parts.push(h('div', { class: 'card' }, h('h3', {}, 'Fiyat Listesi'), h('p', { class: 'muted' }, 'Henüz fiyat listesi yok.')));
     else if (page.special === 'definitions') parts.push(commerce.definitions(page));
@@ -1787,6 +1789,35 @@
         h('p', { class: 'muted', style: 'margin-top:12px;font-size:12px' }, 'Bu kişilerin mesajları "Gelen Mesajlar"da da "Shopier %10" etiketiyle durur; e-posta konusu [Shopier %10] ile başlar.'));
       box.querySelectorAll('td').forEach((x) => { x.style.cssText = td; });
     }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
+    return box;
+  }
+  function instagramPage() {
+    const box = h('div', {}, h('p', { class: 'muted' }, 'Yükleniyor…'));
+    const LABEL = { waiting: 'Bekliyor', published: 'Paylaşıldı', error: 'Hata', skipped: 'Atlandı' };
+    const COLOR = { published: '#1a7f37', error: '#c62828', skipped: '#777' };
+    const act = (url, id, extra = {}) => request(url, { method: 'POST', body: JSON.stringify({ id, ...extra }) }).then(load).catch((e) => toast(e.message, true));
+    function load() {
+      return request('/api/instagram').then((d) => {
+        const head = !d.configured
+          ? h('p', {}, 'Instagram bağlı değil. Railway değişkenlerine IG_ACCESS_TOKEN eklenince paylaşımlar plandaki saatte başlar.')
+          : d.accountError ? h('p', { class: 'error' }, 'Instagram hesabına ulaşılamadı: ' + d.accountError)
+          : h('p', {}, 'Bağlı hesap: ', h('b', {}, '@' + (d.account ? d.account.username : '?')), d.enabled ? ' · otomatik paylaşım açık' : (!d.db ? ' · veritabanı bağlı değil, otomatik paylaşım kapalı' : ' · otomatik paylaşım kapalı (IG_AUTOPOST=off)'));
+        const fmt = (iso) => new Date(iso).toLocaleString('tr-TR', { weekday: 'short', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' });
+        const row = (it) => h('div', { style: 'display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line,#ddd)' },
+          h('img', { src: it.thumb, alt: '', loading: 'lazy', style: `width:${it.type === 'story' ? 36 : 52}px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #000` }),
+          h('div', { style: 'flex:1;min-width:0' },
+            h('p', { style: 'margin:0;font-weight:700' }, fmt(it.at), ' · ', it.type === 'story' ? 'Hikâye' : `Gönderi (${it.count} kare)`),
+            h('p', { class: 'muted', style: 'margin:2px 0 0;font-size:13px' }, it.title),
+            it.error ? h('p', { class: 'error', style: 'margin:2px 0 0;font-size:12px' }, it.error) : null,
+            it.note ? h('p', { class: 'muted', style: 'margin:2px 0 0;font-size:12px' }, it.note) : null),
+          h('span', { style: `font-weight:700;font-size:13px;color:${COLOR[it.status] || 'inherit'}` }, LABEL[it.status] || it.status),
+          it.status !== 'published' && d.configured ? h('button', { type: 'button', class: 'btn small', onclick: () => { if (confirm('Bu paylaşım şimdi Instagram’a gönderilsin mi?')) act('/api/instagram/publish', it.id); } }, 'Şimdi paylaş') : null,
+          it.status === 'waiting' || it.status === 'error' ? h('button', { type: 'button', class: 'btn small', onclick: () => act('/api/instagram/skip', it.id) }, 'Atla') : null,
+          it.status === 'skipped' ? h('button', { type: 'button', class: 'btn small', onclick: () => act('/api/instagram/skip', it.id, { skip: false }) }, 'Geri al') : null);
+        box.replaceChildren(h('div', { class: 'card' }, head), h('div', { class: 'card' }, d.items.length ? h('div', {}, ...d.items.map(row)) : h('p', { class: 'muted' }, 'Planlı paylaşım yok.')));
+      }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
+    }
+    load();
     return box;
   }
   function backupsPage() {

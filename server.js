@@ -13,6 +13,7 @@ const fonts = require('./lib/fonts');
 const salesRoutes = require('./lib/sales-routes');
 const dashboard = require('./lib/dashboard');
 const demo = require('./lib/demo');
+const instagram = require('./lib/instagram');
 
 const PORT = Number(process.env.PORT) || 5173;
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
@@ -242,6 +243,13 @@ async function api(req, res, url) {
 
   if (route === 'GET /api/messages') return json(res, 200, messages.list());
   if (route === 'GET /api/promo') return json(res, 200, await promo.summary());
+  // Instagram otomatik paylaşım (lib/instagram.js)
+  if (route === 'GET /api/instagram') return json(res, 200, await instagram.summary());
+  if (route === 'POST /api/instagram/publish' || route === 'POST /api/instagram/skip') {
+    const body = await readJson(req, 2000);
+    try { return json(res, 200, route.endsWith('publish') ? await instagram.publishNow(String(body.id || ''), canonicalOrigin(req)) : instagram.skip(String(body.id || ''), body.skip !== false)); }
+    catch (e) { return json(res, e.status || 500, { error: e.message }); }
+  }
   if (route === 'GET /api/dashboard') {
     const out = await dashboard.summary(url.searchParams.get('period') || '7', url.searchParams.get('demo') === '1');
     try { out.sample = await demo.status(); } catch { out.sample = null; }
@@ -633,6 +641,10 @@ const server = http.createServer(async (req, res) => {
       }
       return serveFile(res, file, fm[2] === 'font.css' ? 'public, max-age=3600' : 'public, max-age=31536000, immutable');
     }
+    if (url.pathname.startsWith('/ig-media/')) {
+      const f = instagram.mediaFile(decodeURIComponent(url.pathname.slice('/ig-media/'.length)));
+      return f ? serveFile(res, f, 'public, max-age=3600') : send(res, 404, 'Bulunamadı');
+    }
     if (url.pathname.startsWith('/uploads/')) {
       const upName = decodeURIComponent(url.pathname.slice('/uploads/'.length));
       const moved = imageRedirects()[upName];
@@ -712,6 +724,8 @@ const server = http.createServer(async (req, res) => {
   } catch (e) {
     console.error('Database init error:', e.message);
   }
+  // Instagram görselleri Meta'nın sunucusu tarafından herkese açık adresten çekilir
+  instagram.start(() => (process.env.SITE_URL || '').replace(/\/+$/, '') || `http://localhost:${PORT}`);
   // Sitede kullanılan yazı tipleri (yayındaki ve temaların) sunucuda yoksa arka planda indirilir
   try {
     const c = store.load();

@@ -33,3 +33,7 @@ data/messages.json
 # İndirilen yazı tipleri (Inter hariç, o tohum olarak git'te)
 data/fonts/*
 !data/fonts/inter
+
+# Instagram otomatik paylaşım: durum ve yenilenen anahtar (yalnız veritabanında)
+data/instagram/state.json
+data/instagram/token.json

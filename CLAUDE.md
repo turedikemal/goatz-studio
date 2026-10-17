@@ -122,3 +122,10 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 ## Ürün XML feed (2026-10-14)
 - `/urunler.xml` (`lib/feed.js`): ikas Product Exporter mantığında, panel ürünlerinden canlı. Yalnız Aktif + "Mağazada göster" ürünler (`?demo=1` örnek ürünler). Parametreler: showCategoryPath, separateCategories, showTotalStockCount, showDiscountPrice, showPriceInfo. Görseller olduğu gibi (çoğu webp; JPEG dönüştürme yok, görsel kütüphanesi yok). ikas örnek dosyası buluttan açılamadı, etiket adları birebir ikas değil.
 - `/hizmetler.xml` (Hizmetler kartlarından; `?format=google` = Google Merchant RSS, title + link). Kemal bir araca XML verince "ürün adı ve satış bağlantısı olan ürün bulunamadı" hatası aldı: ürün feed'i boş ve ürünlerin sitede satış sayfası yok.
+
+## Instagram otomatik paylaşım (2026-10-17)
+- `lib/instagram.js`: `data/instagram/<hafta>/plan.json` + görseller (git'te). Sunucu dakikada bir bakar, saati gelen karusel/hikâyeyi Instagram API (graph.instagram.com, Instagram ile giriş) ile paylaşır; görseller `/ig-media/...` adresinden (yalnız jpg/png) çekilir, `SITE_URL` herkese açık olmalı. 2 saatten fazla geciken atlanır, turda bir paylaşım, hata 3 denemeye kadar.
+- Ortam: `IG_ACCESS_TOKEN` (Kemal Railway'e yapıştırır, sohbete yazılmaz), `IG_AUTOPOST=off` kapatır. Veritabanı yoksa çalışmaz (durum kaybolup çift paylaşım olmasın). Durum `data/instagram/state.json`, yenilenen anahtar `token.json` (ikisi git dışı, persist ile PostgreSQL). Anahtar 20 günde bir yenilenir.
+- Panel: Pazarlama > Instagram paylaşımları (durum, Şimdi paylaş, Atla/Geri al).
+- Yeni hafta: üretici `/mnt/project-files/instagram/_uretici/igpack.js <out/hafta-N> data/instagram/<yıl>-hafta-N <yıl> [başlangıç ISO]` → commit + push.
+- Alt metin otomatik eklenmiyor (API'de doğrulanmadı).
