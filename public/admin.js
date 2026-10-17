@@ -1814,7 +1814,12 @@
           it.status !== 'published' && d.configured ? h('button', { type: 'button', class: 'btn small', onclick: () => { if (confirm('Bu paylaşım şimdi Instagram’a gönderilsin mi?')) act('/api/instagram/publish', it.id); } }, 'Şimdi paylaş') : null,
           it.status === 'waiting' || it.status === 'error' ? h('button', { type: 'button', class: 'btn small', onclick: () => act('/api/instagram/skip', it.id) }, 'Atla') : null,
           it.status === 'skipped' ? h('button', { type: 'button', class: 'btn small', onclick: () => act('/api/instagram/skip', it.id, { skip: false }) }, 'Geri al') : null);
-        box.replaceChildren(h('div', { class: 'card' }, head), h('div', { class: 'card' }, d.items.length ? h('div', {}, ...d.items.map(row)) : h('p', { class: 'muted' }, 'Planlı paylaşım yok.')));
+        const published = d.items.filter((it) => it.status === 'published');
+        const pending = d.items.filter((it) => it.status !== 'published');
+        box.replaceChildren(
+          h('div', { class: 'card' }, head),
+          h('div', { class: 'card' }, h('h3', {}, 'Paylaşılanlar'), published.length ? h('div', {}, ...published.map(row)) : h('p', { class: 'muted' }, 'Henüz paylaşım yok.')),
+          h('div', { class: 'card' }, h('h3', {}, 'Planlanan'), pending.length ? h('div', {}, ...pending.map(row)) : h('p', { class: 'muted' }, 'Planlı paylaşım yok.')));
       }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
     }
     load();
