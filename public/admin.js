@@ -1804,7 +1804,7 @@
           : h('p', {}, 'Bağlı hesap: ', h('b', {}, '@' + (d.account ? d.account.username : '?')), d.enabled ? ' · otomatik paylaşım açık' : (!d.db ? ' · veritabanı bağlı değil, otomatik paylaşım kapalı' : ' · otomatik paylaşım kapalı (IG_AUTOPOST=off)'));
         const fmt = (iso) => new Date(iso).toLocaleString('tr-TR', { weekday: 'short', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Istanbul' });
         const row = (it) => h('div', { style: 'display:flex;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line,#ddd)' },
-          h('a', { href: it.thumb, target: '_blank', rel: 'noopener', title: 'Tam boyutta aç' }, h('img', { src: it.thumb, alt: '', loading: 'lazy', style: `width:${it.type === 'story' ? 36 : 52}px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #000` })),
+          h('div', { style: 'display:flex;gap:4px' }, ...(it.images && it.images.length > 1 ? it.images : [it.thumb]).map((src) => h('a', { href: src, target: '_blank', rel: 'noopener', title: 'Tam boyutta aç' }, h('img', { src, alt: '', loading: 'lazy', style: `width:${it.type === 'story' ? 36 : 52}px;height:64px;object-fit:cover;border-radius:6px;border:1px solid #000` })))),
           h('div', { style: 'flex:1;min-width:0' },
             h('p', { style: 'margin:0;font-weight:700' }, fmt(it.at), ' · ', it.type === 'story' ? 'Hikâye' : `Gönderi (${it.count} kare)`),
             h('p', { class: 'muted', style: 'margin:2px 0 0;font-size:13px' }, it.title),
