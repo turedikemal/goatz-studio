@@ -1826,9 +1826,12 @@
         }
         const planned = [...weeks].map(([w, days]) => h('div', { class: 'card' }, h('h3', {}, 'Hafta ' + w.replace(/^\d{4}-hafta-/, '')),
           ...[...days].map(([day, list]) => h('div', { style: 'margin-top:12px' }, h('p', { style: 'margin:0;font-weight:700' }, day), ...list.map(row)))));
+        const pubBody = published.length ? h('div', {}, ...published.map(row)) : h('p', { class: 'muted' }, 'Henüz paylaşım yok.');
+        const pubTitle = (open) => (open ? '▾ ' : '▸ ') + 'Paylaşılanlar (' + published.length + ')';
+        const pubHead = h('h3', { style: 'cursor:pointer;margin:0', onclick: () => { pubBody.hidden = !pubBody.hidden; pubHead.textContent = pubTitle(!pubBody.hidden); } }, pubTitle(true));
         box.replaceChildren(
           h('div', { class: 'card' }, head),
-          h('div', { class: 'card' }, h('h3', {}, 'Paylaşılanlar'), published.length ? h('div', {}, ...published.map(row)) : h('p', { class: 'muted' }, 'Henüz paylaşım yok.')),
+          h('div', { class: 'card' }, pubHead, pubBody),
           ...(pending.length ? planned : [h('div', { class: 'card' }, h('p', { class: 'muted' }, 'Planlı paylaşım yok.'))]));
       }).catch((err) => box.replaceChildren(h('p', { class: 'error' }, err.message)));
     }
