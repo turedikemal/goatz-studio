@@ -132,6 +132,6 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 
 ## Kodla eklenen işler (2026-10-23)
 - `lib/new-works.js` + `lib/migrate.js > addWorks`: içerikte aynı adresli/slug'lı iş yoksa İşler'in başına eklenir (panel içeriğine dokunmadan). İlki Fevzipaşa Tasarım Pazarı (`featured: true`). Kaldırmak için panelde gizle; silinirse geri gelir.
-- Ana sayfa slaytı (`S.showcase`) sırası: `featured`, sonra `premium`.
+- Ana sayfa: `featured` web işi (ilk bulunan) İşler vitrininin önünde ayrı sarı "Yeni iş" bölümünde (`.newwork`, `S.showcase` içinde üretilir) ve slayttan çıkar; slayt premium önde. Proje başka bir işe geçince `featured`'ı taşı.
 - WhatsApp numarası `+902869110760` (WhatsApp Business), eski numara `migrate.js` ile değişir.
 - Referans logoları: ana sayfada İşler vitrininin altında kayan şerit (`REFERENCES` + `refStrip`, render.js; CSS site.css "Referanslar"). Yeni logo: `data/uploads/referans-<ad>.webp` (beyazı kırpılmış) + listeye satır; yuvarlak/kare logoya `scale`. Adı bir işin başlığıyla aynıysa proje sayfasına bağlanır.
