@@ -417,6 +417,14 @@
     t.setAttribute('aria-expanded', String(open));
   });
 
+  // ---------- Ana sayfa "Yeni iş": proje görselleri sırayla değişir ----------
+  document.querySelectorAll('[data-nw]').forEach((box) => {
+    const imgs = [...box.querySelectorAll('img')];
+    if (imgs.length < 2) return;
+    let cur = 0;
+    setInterval(() => { if (document.hidden) return; imgs[cur].classList.remove('on'); cur = (cur + 1) % imgs.length; imgs[cur].classList.add('on'); }, 2800);
+  });
+
   // ---------- Ana sayfa işler vitrini: projeler sırayla değişir ----------
   document.querySelectorAll('[data-showcase]').forEach((box, bi) => {
     const slides = [...box.querySelectorAll('.show-slide')];
