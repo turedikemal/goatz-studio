@@ -417,6 +417,33 @@
     t.setAttribute('aria-expanded', String(open));
   });
 
+  // ---------- Üst menü: İşler'in altında "Yeni iş" bildirimi ----------
+  (() => {
+    const bub = document.getElementById('nwBubble');
+    if (!bub) return;
+    const KEY = 'goatz-yeni-is-kapandi', slug = bub.dataset.nwb;
+    try { if (sessionStorage.getItem(KEY) === slug) return; } catch (e) {}
+    let closed = false;
+    const remember = () => { try { sessionStorage.setItem(KEY, slug); } catch (e) {} };
+    const shut = () => { closed = true; bub.classList.remove('on'); remember(); setTimeout(() => { bub.hidden = true; }, 300); };
+    // İşler bağlantısının altına yerleşir; dar ekranda menü düğmesinin altına
+    const place = () => {
+      const a = [...document.querySelectorAll('.nav-links a[href="/isler"]')].find((x) => x.getBoundingClientRect().width > 0);
+      const at = a || document.getElementById('menuBtn');
+      if (!at) return false;
+      const r = at.getBoundingClientRect(), w = bub.offsetWidth, vw = document.documentElement.clientWidth;
+      const left = Math.max(16, Math.min(vw - w - 16, r.left + r.width / 2 - 34));
+      bub.style.left = left + 'px';
+      bub.style.top = (r.bottom + 14) + 'px';
+      bub.style.setProperty('--ax', Math.max(18, Math.min(w - 18, r.left + r.width / 2 - left)) + 'px');
+      return true;
+    };
+    const sync = () => { if (closed) return; const up = window.scrollY < 120; if (up) place(); bub.classList.toggle('on', up); };
+    bub.querySelector('.nwb-x').addEventListener('click', shut);
+    bub.querySelector('.nwb-link').addEventListener('click', remember);
+    setTimeout(() => { bub.hidden = false; if (!place()) return; requestAnimationFrame(sync); window.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); }, 1600);
+  })();
+
   // ---------- Ana sayfa "Yeni iş": proje görselleri sırayla değişir ----------
   document.querySelectorAll('[data-nw]').forEach((box) => {
     const imgs = [...box.querySelectorAll('img')];
