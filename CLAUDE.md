@@ -129,3 +129,8 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Panel: Pazarlama > Instagram paylaşımları (durum, Şimdi paylaş, Atla/Geri al).
 - Yeni hafta: üretici `/mnt/project-files/instagram/_uretici/igpack.js <out/hafta-N> data/instagram/<yıl>-hafta-N <yıl> [başlangıç ISO]` → commit + push.
 - Alt metin otomatik eklenmiyor (API'de doğrulanmadı).
+
+## Kodla eklenen işler (2026-10-23)
+- `lib/new-works.js` + `lib/migrate.js > addWorks`: içerikte aynı adresli/slug'lı iş yoksa İşler'in başına eklenir (panel içeriğine dokunmadan). İlki Fevzipaşa Tasarım Pazarı (`featured: true`). Kaldırmak için panelde gizle; silinirse geri gelir.
+- Ana sayfa slaytı (`S.showcase`) sırası: `featured`, sonra `premium`.
+- WhatsApp numarası `+902869110760` (WhatsApp Business), eski numara `migrate.js` ile değişir.
