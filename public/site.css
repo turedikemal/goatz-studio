@@ -2298,17 +2298,8 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
   .nw-shot .browser-bar i:nth-child(1) { background: var(--ember); } .nw-shot .browser-bar i:nth-child(2) { background: var(--sun); }
   .nw-shot .browser-bar .url { background: var(--paper); color: var(--carbon); border: 1px solid var(--carbon); font-size: 13px; padding: 5px 14px; }
 
-  /* ---------- Üst menü "Yeni iş" bildirimi (İşler'in altında baloncuk) ---------- */
-  .nw-bubble { position: fixed; z-index: 60; top: 0; left: 0; display: flex; align-items: center; gap: 4px; max-width: min(340px, calc(100vw - 32px)); padding: 6px; background: var(--paper); color: var(--carbon); border: 2px solid var(--carbon); border-radius: 18px; opacity: 0; transform: translateY(-8px) scale(.9); transform-origin: var(--ax, 30px) 0; transition: opacity .25s ease, transform .45s var(--bounce, ease); pointer-events: none; }
-  .nw-bubble.on { opacity: 1; transform: none; pointer-events: auto; }
-  .nw-bubble::before { content: ""; position: absolute; top: -9px; left: calc(var(--ax, 30px) - 8px); width: 14px; height: 14px; background: var(--paper); border-left: 2px solid var(--carbon); border-top: 2px solid var(--carbon); rotate: 45deg; }
-  .nwb-link { display: flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; min-width: 0; }
-  .nwb-link img { flex: none; width: 64px; height: 40px; object-fit: cover; object-position: top center; border: 1px solid var(--carbon); border-radius: 8px; }
-  .nwb-text { display: grid; gap: 2px; min-width: 0; }
-  .nwb-text b { justify-self: start; padding: 2px 9px; background: var(--ember); color: var(--paper); border-radius: var(--r-pill); font-size: 10px; }
-  .nwb-text span { font-weight: 700; font-size: 14px; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .nwb-link:hover .nwb-text span { text-decoration: underline; }
-  .nwb-x { flex: none; width: 28px; height: 28px; border: 0; background: transparent; font-size: 20px; line-height: 1; cursor: pointer; color: inherit; border-radius: 50%; }
-  .nwb-x:hover { background: var(--sun); }
-  .nw-bubble.on .nwb-text b { animation: nwb-ping 1.6s ease .4s 2; }
-  @keyframes nwb-ping { 0%, 100% { scale: 1; } 30% { scale: 1.18; } 60% { scale: .96; } }
+  /* ---------- Üst menü "Yeni bir iş" baloncuğu (İşler'in altında) ---------- */
+  .btn.nw-bubble { position: fixed; z-index: 60; top: 0; left: 0; padding: 10px 16px; font-size: 12px; white-space: nowrap; overflow: visible; opacity: 0; transform: translateY(-8px) scale(.9); transform-origin: var(--ax, 30px) 0; transition: opacity .25s ease, transform .45s var(--bounce, ease); pointer-events: none; }
+  .btn.nw-bubble.on { opacity: 1; transform: none; pointer-events: auto; animation: nwb-bob 2.4s ease-in-out .6s infinite; }
+  .nw-bubble::before { content: ""; position: absolute; top: -6px; left: calc(var(--ax, 30px) - 7px); width: 14px; height: 14px; background: var(--carbon); border-radius: 2px; rotate: 45deg; }
+  @keyframes nwb-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 3px; } }
