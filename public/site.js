@@ -603,11 +603,15 @@
   const bigFooter = document.querySelector('.sf-big');
   if (bigFooter) {
     const fit = () => {
-      bigFooter.style.fontSize = '100px';
-      bigFooter.style.width = 'max-content'; // yazının gerçek genişliğini ölçmek için
-      const w = bigFooter.getBoundingClientRect().width;
-      bigFooter.style.width = '';
-      if (w > 0) bigFooter.style.fontSize = `${Math.min(340, (100 * bigFooter.clientWidth) / w * 0.95).toFixed(1)}px`;
+      const available = bigFooter.parentElement.clientWidth;
+      const style = getComputedStyle(bigFooter);
+      const canvas = fit.canvas || (fit.canvas = document.createElement('canvas'));
+      const ctx = canvas.getContext('2d');
+      ctx.font = `${style.fontStyle} ${style.fontWeight} 100px ${style.fontFamily}`;
+      const text = bigFooter.textContent.trim().toLocaleUpperCase('tr');
+      const letterSpacing = parseFloat(style.letterSpacing) || 0;
+      const width = ctx.measureText(text).width + Math.max(0, text.length - 1) * letterSpacing;
+      if (width > 0 && available > 0) bigFooter.style.fontSize = `${Math.min(340, (100 * available) / width * 0.95).toFixed(1)}px`;
     };
     let fitQueued = false;
     const refit = () => { if (fitQueued) return; fitQueued = true; requestAnimationFrame(() => { fitQueued = false; fit(); }); };

@@ -646,7 +646,7 @@ const server = http.createServer(async (req, res) => {
       if (fm[2] === 'font.css' && fs.existsSync(file)) {
         // Asenkron yüklenen fontlar geç gelirse sistem fontundan geçiş büyük CLS oluşturur.
         const css = fs.readFileSync(file, 'utf8').replace(/font-display\s*:\s*swap/g, 'font-display:optional');
-        return send(res, 200, css, TYPES['.css'], { 'Cache-Control': 'public, max-age=3600' });
+        return send(res, 200, css, TYPES['.css'], { 'Cache-Control': 'public, max-age=31536000, immutable' });
       }
       return serveFile(res, file, fm[2] === 'font.css' ? 'public, max-age=3600' : 'public, max-age=31536000, immutable');
     }
@@ -656,7 +656,7 @@ const server = http.createServer(async (req, res) => {
     }
     if (url.pathname.startsWith('/responsive/')) {
       const name = decodeURIComponent(url.pathname.slice('/responsive/'.length));
-      if (!/^[a-z0-9-]+-(?:320|640|960)\.webp$/.test(name)) return send(res, 404, 'Bulunamadı');
+      if (!/^[a-z0-9-]+-(?:320|640|960)-q70\.webp$/.test(name)) return send(res, 404, 'Bulunamadı');
       const file = safeJoin(store.OPTIMIZED_DIR, name);
       return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
     }

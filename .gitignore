@@ -25,6 +25,8 @@ npm-debug.log*
 # Derleme çıktıları
 dist/
 build/
+!public/dist/
+!public/dist/**
 
 # Müşteri mesajları (kişisel veri)
 data/messages.json

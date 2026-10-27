@@ -6,6 +6,7 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Node >= 20, `npm install`, `.env` (bkz. `.env.example`), `npm run dev` → http://localhost:5173, panel: /admin
 - `.env` git'e girmez. Gizli anahtarları (RESEND_API_KEY vb.) asla sohbete yazdırma, kullanıcı kendi yapıştırır.
 - Sunucu sprite (`public/sprites.svg`), `lib/render.js` ve içerik şablonlarını başlangıçta okur: bunları değiştirince sunucuyu yeniden başlat. Tarayıcıda `#hash` aynı sayfaya gidince yenilemez, CSS/JS değişince sert yenile.
+- `public/site.css`, `site.js`, `cart.js`, `svc-nav.js` veya `wizard.js` değişince yayından önce `npm run build:assets` çalıştır; `public/dist/` içindeki minify edilmiş sürümler üretim sayfalarında sunulur ve commit'e eklenir.
 
 ## Yapı
 - `server.js` HTTP sunucu ve API; `lib/render.js` sayfa üretimi (sunucu + panel önizleme paketi); `lib/default-content.js` varsayılanlar; `data/content.json` kaydedilen içerik (git'te).
