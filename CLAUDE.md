@@ -137,3 +137,6 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 - Üst menü "Yeni bir iş" baloncuğu: yalnız yazı, siyah menü düğmesi biçiminde (`btn solid`), `featured` işin sayfasına gider; İşler bağlantısının altında (dar ekranda + düğmesinin altında) 1,6 sn sonra açılır, en üstteyken görünür, kapatma yok. render.js `bubble`, site.js `#nwBubble`.
 - WhatsApp numarası `+902869110760` (WhatsApp Business), eski numara `migrate.js` ile değişir.
 - Referans logoları: ana sayfada İşler vitrininin altında kayan şerit (`REFERENCES` + `refStrip`, render.js; CSS site.css "Referanslar"). Yeni logo: `data/uploads/referans-<ad>.webp` (beyazı kırpılmış) + listeye satır; yuvarlak/kare logoya `scale`. Her logo `url` ile markanın sitesine yeni sekmede gider (Kemal 2026-10-25). Beyaz/saydam logo gelirse siyaha çevir.
+
+## Metin düzenlemesi (2026-10-27)
+- `lib/copy-edits.js`: [eski, yeni] çiftleri, `migrate.js > text()` içinde alanın tamamı eskiyle birebir aynıysa değişir (panel düzenlemesine dokunmaz). Ana sayfa hizmet kutuları, hero alt yazısı, süreç, Hizmetler, Süreç ve İletişim sayfaları: hep "siz" hitabı, teknik terimler (UI/UX, URL, optimize, hiyerarşi) sadeleşti. Önce/sonra: `/mnt/project-files/metin-duzenleme/once-sonra.md`.
