@@ -602,7 +602,9 @@
   // ---------- Footer'daki dev yazı: her zaman satırın tam genişliğine sığar ----------
   const bigFooter = document.querySelector('.sf-big');
   if (bigFooter) {
+    let footerVisible = !reduce;
     const fit = () => {
+      if (!footerVisible) return;
       const available = bigFooter.parentElement.clientWidth;
       const style = getComputedStyle(bigFooter);
       const canvas = fit.canvas || (fit.canvas = document.createElement('canvas'));
@@ -619,6 +621,15 @@
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => { fit(); setTimeout(fit, 120); });
     window.addEventListener('resize', refit);
     window.addEventListener('load', fit);
+    if (reduce) {
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        footerVisible = true;
+        observer.disconnect();
+        refit();
+      }, { rootMargin: '200px' });
+      observer.observe(bigFooter);
+    }
   }
 
   window.__motionReady = true;

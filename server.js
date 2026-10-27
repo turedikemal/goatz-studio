@@ -93,6 +93,7 @@ function preloadFontFiles(html) {
   if (!match) return html;
   let css;
   try { css = fs.readFileSync(path.join(fonts.FONT_DIR, match[1], 'font.css'), 'utf8'); } catch { return html; }
+  if (match[1] === 'inter') css += '\n' + fs.readFileSync(path.join(__dirname, 'data', 'fonts', 'inter', 'turkish.css'), 'utf8');
   css = css.replace(/font-display\s*:\s*swap/g, 'font-display:optional');
   // Font faces are small; declaring them in HTML avoids a stylesheet round trip.
   html = html.replace(/<link rel="preload" as="style" href="\/fonts\/[^" ]+"[^>]*>\s*<noscript><link href="\/fonts\/[^" ]+" rel="stylesheet"><\/noscript>/, () => `<style>${css}</style>`);
