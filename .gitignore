@@ -29,6 +29,7 @@ build/
 # Müşteri mesajları (kişisel veri)
 data/messages.json
 /data/promo.json
+/data/optimized-images/
 
 # İndirilen yazı tipleri (Inter hariç, o tohum olarak git'te)
 data/fonts/*

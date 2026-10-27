@@ -10,6 +10,7 @@ const db = require('./lib/db');
 const promo = require('./lib/promo');
 const persist = require('./lib/persist');
 const fonts = require('./lib/fonts');
+const imageVariants = require('./lib/image-variants');
 const salesRoutes = require('./lib/sales-routes');
 const dashboard = require('./lib/dashboard');
 const demo = require('./lib/demo');
@@ -88,7 +89,7 @@ let imgRedirCache = null;
 const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
 const { optimize } = require('./lib/optimize');
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
-const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects());
+const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects(), store.OPTIMIZED_DIR);
 // Bulunamayan adres: menülü, hizmetlere bağlantılı 404 sayfası (arama motorlarına noindex)
 function notFound(res, req) {
   const c = store.load();
@@ -323,6 +324,8 @@ async function api(req, res, url) {
     const name = `${Date.now().toString(36)}-${crypto.randomBytes(4).toString('hex')}.${EXT[m[1]]}`;
     fs.writeFileSync(path.join(store.UPLOAD_DIR, name), buf);
     persist.save(`uploads/${name}`, buf);
+    try { await imageVariants.generate(name, buf, store.OPTIMIZED_DIR); }
+    catch (error) { console.warn(`Görsel boyutları üretilemedi (${name}):`, error.message); }
     return json(res, 200, { url: `/uploads/${name}` });
   }
 
@@ -332,6 +335,7 @@ async function api(req, res, url) {
     if (!file || !fs.existsSync(file)) return json(res, 404, { error: 'Görsel bulunamadı.' });
     fs.unlinkSync(file);
     persist.remove(`uploads/${name}`);
+    imageVariants.remove(name, store.OPTIMIZED_DIR);
     return json(res, 200, { ok: true });
   }
 
@@ -645,6 +649,12 @@ const server = http.createServer(async (req, res) => {
       const f = instagram.mediaFile(decodeURIComponent(url.pathname.slice('/ig-media/'.length)));
       return f ? serveFile(res, f, 'public, max-age=3600') : send(res, 404, 'Bulunamadı');
     }
+    if (url.pathname.startsWith('/responsive/')) {
+      const name = decodeURIComponent(url.pathname.slice('/responsive/'.length));
+      if (!/^[a-z0-9-]+-(?:320|640|960)\.webp$/.test(name)) return send(res, 404, 'Bulunamadı');
+      const file = safeJoin(store.OPTIMIZED_DIR, name);
+      return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
+    }
     if (url.pathname.startsWith('/uploads/')) {
       const upName = decodeURIComponent(url.pathname.slice('/uploads/'.length));
       const moved = imageRedirects()[upName];
@@ -721,6 +731,7 @@ const server = http.createServer(async (req, res) => {
   try {
     await db.initSchema();
     await persist.restore();
+    await imageVariants.prepareAll(store.UPLOAD_DIR, store.OPTIMIZED_DIR);
   } catch (e) {
     console.error('Database init error:', e.message);
   }

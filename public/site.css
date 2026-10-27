@@ -378,6 +378,8 @@
   html.js.mo-reveal [data-reveal]:not(.split-ready),
   html.js.mo-headings [data-heading]:not(.split-ready) { visibility: hidden; animation: unhide 0s 1.8s forwards; }
   @keyframes unhide { to { visibility: visible; } }
+  /* Telefonda başlık animasyonu kapalıdır; yazı tipini veya JavaScript'i beklemeden göster. */
+  @media (max-width: 700px) { html.js.mo-intro .hero [data-intro]:not(.ready) { visibility: visible; animation: none; } }
 
   /* Açılış: giriş bölümündeki her şey sırayla gelir */
   html.js.mo-intro .hero [data-sub]:not(.shown), html.js.mo-intro .hero .actions .btn:not(.shown), html.js.mo-intro .hero .ribbon:not(.shown), html.js.mo-intro .hero .hero-hook:not(.shown) { opacity: 0; }
@@ -457,6 +459,9 @@
   @media (prefers-reduced-motion: reduce) {
     html.js [data-pop], html.js [data-card], html.js [data-device], html.js [data-sub], html.js .hero .btn, html.js .hero .ribbon { opacity: 1 !important; scale: none !important; }
   }
+  html.perf-mobile body *, html.perf-mobile body *::before, html.perf-mobile body *::after { animation: none !important; }
+  html.perf-mobile [data-intro], html.perf-mobile [data-reveal], html.perf-mobile [data-heading] { visibility: visible !important; }
+  html.perf-mobile [data-pop], html.perf-mobile [data-card], html.perf-mobile [data-device], html.perf-mobile [data-sub], html.perf-mobile .hero .btn, html.perf-mobile .hero .ribbon, html.perf-mobile .hero .hero-hook { opacity: 1 !important; scale: none !important; }
   html.mo-safe [data-pop], html.mo-safe [data-card], html.mo-safe [data-device], html.mo-safe [data-sub], html.mo-safe .hero .btn, html.mo-safe .hero .ribbon { opacity: 1 !important; scale: none !important; }
   html.mo-safe [data-intro], html.mo-safe [data-reveal], html.mo-safe [data-heading] { visibility: visible !important; }
 
@@ -535,9 +540,6 @@
 
   /* Kare kalitesi: hareket eden katmanlar önceden ayrı katmana alınır (kaydırırken yeniden boyanmaz) */
   .ribbon, .sticker, .band-row, [data-device] { will-change: transform; }
-  /* Yazı tipi yüklenene kadar sayfa görünmez (yazı tipi değişirken metnin zıplaması olmaz) */
-  html.js:not(.fonts-ready) body { opacity: 0; }
-  body { transition: opacity .35s ease; }
   html.mo-safe body { opacity: 1 !important; }
 
   /* ---------- Footer ---------- */
@@ -2061,8 +2063,7 @@ html[data-theme="night"] .cp-group .cp-desc { opacity: .78; }
 html.cart-slot .cart-slot-el { display: inline-block; position: relative; width: 36px; height: 36px; flex: none; }
 .cart-fab.docked { position: absolute; top: 0; left: 0; width: 36px; height: 36px; border-width: 2px; }
 
-/* Menü yazı tipi hazır olana kadar görünmez (düğme genişlikleri değişip kaymasın); kaydırma çubuğu gelip gidince de menü oynamasın */
-html.js:not(.fnt) .nav { opacity: 0; }
+/* Yazı tipi yüklenirken üst menüyü gizlemeyin; sistem yazı tipi ilk boyamayı sağlar. */
 html { scrollbar-gutter: stable; }
 
 .cart-top { display: none; position: relative; }
@@ -2173,6 +2174,10 @@ html[data-theme="night"] .ikas-mark i { border-color: #000; }
 
 /* Ana sayfa kampanya penceresi (Shopier %10) */
 .promo { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 16px; }
+.promo-trigger { position: fixed; z-index: 89; right: 16px; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); display: inline-flex; align-items: center; gap: 9px; padding: 7px 14px 7px 8px; border: 2px solid #000; border-radius: 999px; background: var(--sun, #ffd731); color: #000; box-shadow: 3px 3px 0 #000; font: inherit; font-size: 13px; font-weight: 800; line-height: 1.1; cursor: pointer; }
+.promo-trigger[hidden] { display: none; }
+.promo-trigger b { display: grid; place-items: center; width: 30px; height: 30px; border: 2px solid #000; border-radius: 50%; background: #fff; font-size: 12px; }
+.promo-trigger:hover { translate: 0 -2px; }
 .promo[hidden] { display: none; }
 .promo-bg { position: absolute; inset: 0; background: rgba(0, 0, 0, .45); opacity: 0; transition: opacity .3s ease; }
 .promo-card { position: relative; width: min(500px, 100%); padding: clamp(26px, 4vw, 38px) clamp(20px, 4vw, 34px) clamp(22px, 3vw, 30px); border: 3px solid #000; border-radius: 26px; background: var(--mint, #55db9c); color: #000; box-shadow: 5px 6px 0 #000; translate: 0 30px; scale: .96; opacity: 0; transition: translate .45s var(--slush, ease), scale .45s var(--slush, ease), opacity .3s ease; }

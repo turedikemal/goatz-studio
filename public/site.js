@@ -1,6 +1,6 @@
 (() => {
   const root = document.documentElement;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('no-anim');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('perf-mobile') || document.body.classList.contains('no-anim');
   const on = (name) => !reduce && root.classList.contains('mo-' + name);
   const cssNum = (name, d) => parseFloat(getComputedStyle(root).getPropertyValue(name)) || d;
   const K = cssNum('--mi', 1); // hareket şiddeti
@@ -697,10 +697,11 @@
 
   // 1) Açılış: harfler boşluktan, bulanıklıktan sıyrılarak yavaşça belirir; sonra alt yazı, butonlar, sticker'lar ve kurdele
   if (introEl) {
+    const mobile = matchMedia('(max-width: 700px)').matches;
     const run = () => {
-      const letters = splitTitle();
+      const letters = mobile ? [] : splitTitle();
+      if (mobile) titleEl.classList.add('ready');
       const quick = matchMedia('(max-width: 700px)').matches ? 0.55 : 1; // mobilde başlık ve altındakiler belirgin biçimde daha hızlı gelir
-      const mobile = matchMedia('(max-width: 700px)').matches; // telefonda başlık harf efekti yok, doğrudan görünür
       (mobile ? [] : letters).forEach((l, i) => {
         const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
         l.querySelector('.rc').animate([
@@ -746,7 +747,8 @@
     // Yazı tipleri yavaş inen (mobil) bağlantıda başlık beklemesin: en geç 0,9 sn'de başlar; yazı tipi sonradan gelirse harf aralıkları yeniden hesaplanır
     const fr = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     const rekern = () => { if (!titleEl) return; titleEl.querySelectorAll('.rw').forEach((wd) => { const ls = [...wd.querySelectorAll('.rl')]; ls.forEach((n) => { n.style.marginLeft = ''; }); kernWord(wd, ls.map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))); }); };
-    Promise.race([fr, new Promise((r) => setTimeout(r, 900))]).then(() => { run(); fr.then(rekern); });
+    if (mobile) run();
+    else Promise.race([fr, new Promise((r) => setTimeout(r, 900))]).then(() => { run(); fr.then(rekern); });
   } else if (titleEl && on('idle')) {
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(splitTitle);
   }
@@ -2129,11 +2131,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   sync();
 })();
 
-// Üst menü, yazı tipi yüklenene kadar gizli kalır: yazı tipi değişince düğme genişlikleri değişip menünün sağa sola oynamasını önler
-(() => {
-  const show = () => document.documentElement.classList.add('fnt');
-  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(show), show);
-})();
 // "Devamını oku": uzun açıklamaların ilk kısmı görünür, gerisi düğmeyle açılır. Metnin tamamı sayfada durur (Google okur).
 (() => {
   document.querySelectorAll('[data-more]').forEach((box) => {
@@ -2192,6 +2189,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 (() => {
   const box = document.getElementById('promo');
   if (!box) return;
+  const trigger = document.getElementById('promoTrigger');
   const KEY = 'goatz-kampanya-shopier';
   // Deneme: /?pencere adresi pencereyi 1 sn sonra açar, sayaçlara yazmaz
   const TEST = /[?&]pencere\b/.test(location.search);
@@ -2202,18 +2200,21 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     box.classList.remove('show');
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* kayıt yoksa sorun değil */ }
     setTimeout(() => { box.hidden = true; }, 350);
+    if (trigger) trigger.hidden = false;
     document.removeEventListener('keydown', onKey);
     if (last && last.focus) last.focus();
   };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
   const open = () => {
     if (shown) return; shown = true; ping('view');
+    if (trigger) trigger.hidden = true;
     last = document.activeElement;
     box.hidden = false;
     requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('show')));
     document.addEventListener('keydown', onKey);
     setTimeout(() => { const x = box.querySelector('.promo-card'); if (x) x.focus({ preventScroll: true }); }, 60);
   };
+  if (trigger) trigger.addEventListener('click', open);
   box.addEventListener('click', (e) => {
     if (e.target.closest('[data-promo-x]')) close();
     else if (e.target.closest('.promo-go')) {
@@ -2224,7 +2225,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     }
   });
   if (TEST) setTimeout(open, 1000);
-  else setTimeout(open, 1500);
 })();
 
 // Google Analytics olayları (GA kapalıysa ya da çerez kabul edilmediyse goatzEvent hiçbir şey yapmaz): WhatsApp, telefon, Teklif al tıkları
