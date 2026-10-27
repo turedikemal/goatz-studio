@@ -495,11 +495,11 @@
     const step = (n) => { qa('[data-wa-step]').forEach((el) => { el.hidden = el.dataset.waStep !== String(n); }); q('[data-wa-no]').textContent = `${n}/2`; };
     const picked = (sel) => qa(`${sel} [aria-pressed="true"]`).map((b) => b.textContent);
     const message = () => {
-      const lines = ['Merhaba, The Goatz Studio sitesinden yazıyorum.', `İstediğim hizmet: ${picked('[data-wa-step="1"]').join(', ')}`];
+      const lines = ['Merhaba, web siteniz üzerinden ulaşıyorum.', `İlgilendiğim hizmetler: ${picked('[data-wa-step="1"]').join(', ')}`];
       qa('[data-wa-q]').forEach((g) => { const a = g.querySelector('[aria-pressed="true"]'); if (a) lines.push(`${g.dataset.waLabel}: ${a.textContent}`); });
       const name = q('#waName').value.trim();
-      if (name) lines.push(`İşletme: ${name}`);
-      lines.push('Bilgi alabilir miyim?');
+      if (name) lines.push(`Firma / marka: ${name}`);
+      lines.push('Detaylı bilgi ve fiyat teklifi almak istiyorum.');
       return lines.join('\n');
     };
     const refresh = () => {
