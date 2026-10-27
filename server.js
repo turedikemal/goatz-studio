@@ -66,15 +66,26 @@ function tooManyAttempts(ip) {
 }
 
 // ---------- Yardımcılar ----------
-// Metin yanıtları (HTML, CSS, JS, JSON, XML, SVG) tarayıcı destekliyorsa gzip ile sıkıştırılır
+// Yanıtın içeriğini değiştirmeden, tarayıcının desteklediği aktarım sıkıştırmasını seç.
 const COMPRESSIBLE = /^(text\/|application\/(json|xml|javascript)|image\/svg)/;
 function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {}) {
   const headers = { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin', ...extra };
-  const accepts = /\bgzip\b/.test(String((res.req && res.req.headers['accept-encoding']) || ''));
-  if (accepts && body && body.length > 1024 && COMPRESSIBLE.test(type)) {
-    body = zlib.gzipSync(body, { level: 6 });
-    headers['Content-Encoding'] = 'gzip';
-    headers.Vary = 'Accept-Encoding';
+  if (body && body.length > 1024 && COMPRESSIBLE.test(type)) {
+    const accepted = new Map(String((res.req && res.req.headers['accept-encoding']) || '').toLowerCase().split(',').map((part) => {
+      const [name, ...params] = part.trim().split(';');
+      const quality = params.map((p) => /^\s*q\s*=\s*([\d.]+)\s*$/.exec(p)).find(Boolean);
+      return [name, quality ? Math.max(0, Math.min(1, Number(quality[1]) || 0)) : 1];
+    }));
+    const br = accepted.get('br') ?? accepted.get('*') ?? 0;
+    const gzip = accepted.get('gzip') ?? accepted.get('*') ?? 0;
+    if (br > 0 && br >= gzip) {
+      body = zlib.brotliCompressSync(body, { params: { [zlib.constants.BROTLI_PARAM_QUALITY]: 5 } });
+      headers['Content-Encoding'] = 'br';
+    } else if (gzip > 0) {
+      body = zlib.gzipSync(body, { level: 6 });
+      headers['Content-Encoding'] = 'gzip';
+    }
+    headers.Vary = headers.Vary ? `${headers.Vary}, Accept-Encoding` : 'Accept-Encoding';
   }
   res.writeHead(status, headers);
   res.end(res.req && res.req.method === 'HEAD' ? undefined : body);
