@@ -88,8 +88,18 @@ const feed = require('./lib/feed');
 let imgRedirCache = null;
 const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
 const { optimize } = require('./lib/optimize');
+function preloadFontFiles(html) {
+  const match = html.match(/href="\/fonts\/([a-z0-9-]+)\/font\.css\?v=\d+"/);
+  if (!match) return html;
+  let css;
+  try { css = fs.readFileSync(path.join(fonts.FONT_DIR, match[1], 'font.css'), 'utf8'); } catch { return html; }
+  const urls = [...new Set([...css.matchAll(/url\((\/fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2)\)/g)].map((m) => m[1]))];
+  if (!urls.length) return html;
+  const links = urls.map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
+  return html.replace('</noscript>', `</noscript>\n${links}`);
+}
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
-const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects(), store.OPTIMIZED_DIR);
+const pageHtml = (c, opts) => optimize(preloadFontFiles(render(c, opts)), store.UPLOAD_DIR, imageRedirects(), store.OPTIMIZED_DIR);
 // Bulunamayan adres: menülü, hizmetlere bağlantılı 404 sayfası (arama motorlarına noindex)
 function notFound(res, req) {
   const c = store.load();
