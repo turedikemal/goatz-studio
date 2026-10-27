@@ -10,7 +10,6 @@ const db = require('./lib/db');
 const promo = require('./lib/promo');
 const persist = require('./lib/persist');
 const fonts = require('./lib/fonts');
-const imageVariants = require('./lib/image-variants');
 const salesRoutes = require('./lib/sales-routes');
 const dashboard = require('./lib/dashboard');
 const demo = require('./lib/demo');
@@ -88,29 +87,8 @@ const feed = require('./lib/feed');
 let imgRedirCache = null;
 const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
 const { optimize } = require('./lib/optimize');
-function preloadFontFiles(html) {
-  const match = html.match(/href="\/fonts\/([a-z0-9-]+)\/font\.css\?v=\d+"/);
-  if (!match) return html;
-  let css;
-  try { css = fs.readFileSync(path.join(fonts.FONT_DIR, match[1], 'font.css'), 'utf8'); } catch { return html; }
-  if (match[1] === 'inter') css += '\n' + fs.readFileSync(path.join(__dirname, 'data', 'fonts', 'inter', 'turkish.css'), 'utf8');
-  css = css.replace(/font-display\s*:\s*swap/g, 'font-display:optional');
-  // Font faces are small; declaring them in HTML avoids a stylesheet round trip.
-  html = html.replace(/<link rel="preload" as="style" href="\/fonts\/[^" ]+"[^>]*>\s*<noscript><link href="\/fonts\/[^" ]+" rel="stylesheet"><\/noscript>/, () => `<style>${css}</style>`);
-  const urls = new Set();
-  const re = /@font-face\s*\{([^}]+)\}/g;
-  for (const face of css.matchAll(re)) {
-    const rule = face[1];
-    if (!/unicode-range\s*:[^}]*U\+0000-00FF/.test(rule)) continue;
-    const url = /url\((\/fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2)\)/.exec(rule);
-    if (url) urls.add(url[1]);
-  }
-  if (!urls.size) return html;
-  const links = [...urls].map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
-  return html.replace('<style>', `${links}\n<style>`);
-}
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
-const pageHtml = (c, opts) => optimize(preloadFontFiles(render(c, opts)), store.UPLOAD_DIR, imageRedirects(), store.OPTIMIZED_DIR);
+const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects());
 // Bulunamayan adres: menülü, hizmetlere bağlantılı 404 sayfası (arama motorlarına noindex)
 function notFound(res, req) {
   const c = store.load();
@@ -345,8 +323,6 @@ async function api(req, res, url) {
     const name = `${Date.now().toString(36)}-${crypto.randomBytes(4).toString('hex')}.${EXT[m[1]]}`;
     fs.writeFileSync(path.join(store.UPLOAD_DIR, name), buf);
     persist.save(`uploads/${name}`, buf);
-    try { await imageVariants.generate(name, buf, store.OPTIMIZED_DIR); }
-    catch (error) { console.warn(`Görsel boyutları üretilemedi (${name}):`, error.message); }
     return json(res, 200, { url: `/uploads/${name}` });
   }
 
@@ -356,7 +332,6 @@ async function api(req, res, url) {
     if (!file || !fs.existsSync(file)) return json(res, 404, { error: 'Görsel bulunamadı.' });
     fs.unlinkSync(file);
     persist.remove(`uploads/${name}`);
-    imageVariants.remove(name, store.OPTIMIZED_DIR);
     return json(res, 200, { ok: true });
   }
 
@@ -664,22 +639,11 @@ const server = http.createServer(async (req, res) => {
         const fam = fonts.CATALOG.find((r) => fonts.slug(r[0]) === fm[1]);
         if (fam) { try { await fonts.ensure(fam[0]); } catch { /* dosya yok: 404 */ } }
       }
-      if (fm[2] === 'font.css' && fs.existsSync(file)) {
-        // Asenkron yüklenen fontlar geç gelirse sistem fontundan geçiş büyük CLS oluşturur.
-        const css = fs.readFileSync(file, 'utf8').replace(/font-display\s*:\s*swap/g, 'font-display:optional');
-        return send(res, 200, css, TYPES['.css'], { 'Cache-Control': 'public, max-age=31536000, immutable' });
-      }
       return serveFile(res, file, fm[2] === 'font.css' ? 'public, max-age=3600' : 'public, max-age=31536000, immutable');
     }
     if (url.pathname.startsWith('/ig-media/')) {
       const f = instagram.mediaFile(decodeURIComponent(url.pathname.slice('/ig-media/'.length)));
       return f ? serveFile(res, f, 'public, max-age=3600') : send(res, 404, 'Bulunamadı');
-    }
-    if (url.pathname.startsWith('/responsive/')) {
-      const name = decodeURIComponent(url.pathname.slice('/responsive/'.length));
-      if (!/^[a-z0-9-]+-(?:320|640|960)-q70\.webp$/.test(name)) return send(res, 404, 'Bulunamadı');
-      const file = safeJoin(store.OPTIMIZED_DIR, name);
-      return file ? serveFile(res, file, 'public, max-age=31536000, immutable') : send(res, 404, 'Bulunamadı');
     }
     if (url.pathname.startsWith('/uploads/')) {
       const upName = decodeURIComponent(url.pathname.slice('/uploads/'.length));
@@ -757,7 +721,6 @@ const server = http.createServer(async (req, res) => {
   try {
     await db.initSchema();
     await persist.restore();
-    await imageVariants.prepareAll(store.UPLOAD_DIR, store.OPTIMIZED_DIR);
   } catch (e) {
     console.error('Database init error:', e.message);
   }

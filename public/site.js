@@ -1,6 +1,6 @@
 (() => {
   const root = document.documentElement;
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || root.classList.contains('perf-mobile') || document.body.classList.contains('no-anim');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('no-anim');
   const on = (name) => !reduce && root.classList.contains('mo-' + name);
   const cssNum = (name, d) => parseFloat(getComputedStyle(root).getPropertyValue(name)) || d;
   const K = cssNum('--mi', 1); // hareket şiddeti
@@ -434,7 +434,7 @@
       return true;
     };
     const sync = () => { const up = window.scrollY < 120; if (up) place(); bub.classList.toggle('on', up); };
-    setTimeout(() => { bub.hidden = false; if (!place()) return; requestAnimationFrame(sync); window.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); }, reduce ? 0 : 1600);
+    setTimeout(() => { bub.hidden = false; if (!place()) return; requestAnimationFrame(sync); window.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); }, 1600);
   })();
 
   // ---------- Ana sayfa "Yeni iş": proje görselleri sırayla değişir ----------
@@ -540,8 +540,7 @@
       ckBar.hidden = false;
       document.documentElement.classList.add('ck-on');
       document.documentElement.style.setProperty('--ck-h', ckBar.offsetHeight + 'px');
-      if (reduce) ckBar.classList.add('show');
-      else setTimeout(() => ckBar.classList.add('show'), 900);
+      setTimeout(() => ckBar.classList.add('show'), 900);
       ckBar.addEventListener('click', (e) => {
         const b = e.target.closest('[data-ck]');
         if (!b) return;
@@ -603,18 +602,12 @@
   // ---------- Footer'daki dev yazı: her zaman satırın tam genişliğine sığar ----------
   const bigFooter = document.querySelector('.sf-big');
   if (bigFooter) {
-    let footerVisible = !reduce;
     const fit = () => {
-      if (!footerVisible) return;
-      const available = bigFooter.parentElement.clientWidth;
-      const style = getComputedStyle(bigFooter);
-      const canvas = fit.canvas || (fit.canvas = document.createElement('canvas'));
-      const ctx = canvas.getContext('2d');
-      ctx.font = `${style.fontStyle} ${style.fontWeight} 100px ${style.fontFamily}`;
-      const text = bigFooter.textContent.trim().toLocaleUpperCase('tr');
-      const letterSpacing = parseFloat(style.letterSpacing) || 0;
-      const width = ctx.measureText(text).width + Math.max(0, text.length - 1) * letterSpacing;
-      if (width > 0 && available > 0) bigFooter.style.fontSize = `${Math.min(340, (100 * available) / width * 0.95).toFixed(1)}px`;
+      bigFooter.style.fontSize = '100px';
+      bigFooter.style.width = 'max-content'; // yazının gerçek genişliğini ölçmek için
+      const w = bigFooter.getBoundingClientRect().width;
+      bigFooter.style.width = '';
+      if (w > 0) bigFooter.style.fontSize = `${Math.min(340, (100 * bigFooter.clientWidth) / w * 0.95).toFixed(1)}px`;
     };
     let fitQueued = false;
     const refit = () => { if (fitQueued) return; fitQueued = true; requestAnimationFrame(() => { fitQueued = false; fit(); }); };
@@ -622,15 +615,6 @@
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => { fit(); setTimeout(fit, 120); });
     window.addEventListener('resize', refit);
     window.addEventListener('load', fit);
-    if (reduce) {
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        footerVisible = true;
-        observer.disconnect();
-        refit();
-      }, { rootMargin: '200px' });
-      observer.observe(bigFooter);
-    }
   }
 
   window.__motionReady = true;
@@ -713,11 +697,10 @@
 
   // 1) Açılış: harfler boşluktan, bulanıklıktan sıyrılarak yavaşça belirir; sonra alt yazı, butonlar, sticker'lar ve kurdele
   if (introEl) {
-    const mobile = matchMedia('(max-width: 700px)').matches;
     const run = () => {
-      const letters = mobile ? [] : splitTitle();
-      if (mobile) titleEl.classList.add('ready');
+      const letters = splitTitle();
       const quick = matchMedia('(max-width: 700px)').matches ? 0.55 : 1; // mobilde başlık ve altındakiler belirgin biçimde daha hızlı gelir
+      const mobile = matchMedia('(max-width: 700px)').matches; // telefonda başlık harf efekti yok, doğrudan görünür
       (mobile ? [] : letters).forEach((l, i) => {
         const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
         l.querySelector('.rc').animate([
@@ -763,8 +746,7 @@
     // Yazı tipleri yavaş inen (mobil) bağlantıda başlık beklemesin: en geç 0,9 sn'de başlar; yazı tipi sonradan gelirse harf aralıkları yeniden hesaplanır
     const fr = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     const rekern = () => { if (!titleEl) return; titleEl.querySelectorAll('.rw').forEach((wd) => { const ls = [...wd.querySelectorAll('.rl')]; ls.forEach((n) => { n.style.marginLeft = ''; }); kernWord(wd, ls.map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))); }); };
-    if (mobile) run();
-    else Promise.race([fr, new Promise((r) => setTimeout(r, 900))]).then(() => { run(); fr.then(rekern); });
+    Promise.race([fr, new Promise((r) => setTimeout(r, 900))]).then(() => { run(); fr.then(rekern); });
   } else if (titleEl && on('idle')) {
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(splitTitle);
   }
@@ -1275,7 +1257,7 @@
 
   // Büyük bildiri satırları: en geniş satır ekrana sığacak şekilde yazı küçülür
   const stLines = document.querySelector('.statement .lines');
-  if (stLines && !matchMedia('(max-width: 700px)').matches) {
+  if (stLines) {
     const fitLines = () => {
       stLines.style.fontSize = '';
       const base = parseFloat(getComputedStyle(stLines).fontSize);
@@ -2147,6 +2129,11 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   sync();
 })();
 
+// Üst menü, yazı tipi yüklenene kadar gizli kalır: yazı tipi değişince düğme genişlikleri değişip menünün sağa sola oynamasını önler
+(() => {
+  const show = () => document.documentElement.classList.add('fnt');
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(show), show);
+})();
 // "Devamını oku": uzun açıklamaların ilk kısmı görünür, gerisi düğmeyle açılır. Metnin tamamı sayfada durur (Google okur).
 (() => {
   document.querySelectorAll('[data-more]').forEach((box) => {
@@ -2205,7 +2192,6 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 (() => {
   const box = document.getElementById('promo');
   if (!box) return;
-  const trigger = document.getElementById('promoTrigger');
   const KEY = 'goatz-kampanya-shopier';
   // Deneme: /?pencere adresi pencereyi 1 sn sonra açar, sayaçlara yazmaz
   const TEST = /[?&]pencere\b/.test(location.search);
@@ -2216,21 +2202,18 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     box.classList.remove('show');
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* kayıt yoksa sorun değil */ }
     setTimeout(() => { box.hidden = true; }, 350);
-    if (trigger) trigger.hidden = false;
     document.removeEventListener('keydown', onKey);
     if (last && last.focus) last.focus();
   };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
   const open = () => {
     if (shown) return; shown = true; ping('view');
-    if (trigger) trigger.hidden = true;
     last = document.activeElement;
     box.hidden = false;
     requestAnimationFrame(() => requestAnimationFrame(() => box.classList.add('show')));
     document.addEventListener('keydown', onKey);
     setTimeout(() => { const x = box.querySelector('.promo-card'); if (x) x.focus({ preventScroll: true }); }, 60);
   };
-  if (trigger) trigger.addEventListener('click', open);
   box.addEventListener('click', (e) => {
     if (e.target.closest('[data-promo-x]')) close();
     else if (e.target.closest('.promo-go')) {
@@ -2241,6 +2224,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     }
   });
   if (TEST) setTimeout(open, 1000);
+  else setTimeout(open, 1500);
 })();
 
 // Google Analytics olayları (GA kapalıysa ya da çerez kabul edilmediyse goatzEvent hiçbir şey yapmaz): WhatsApp, telefon, Teklif al tıkları

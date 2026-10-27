@@ -7,7 +7,6 @@
   // Hizmetler sayfasında kart adları değişti: eski adlarla sepete eklenmiş hizmetler yeni adlara taşınır
   const RENAME = { 'SEO ve ölçümleme': { 'google merchant center kurulumu': 'Google Entegrasyonları Kurulumu' },  'Ürün çekimi': { 'e-ticaret fotoğrafları': 'E-ticaret için ürün fotoğrafları', 'beyaz fon ürün fotoğrafları': 'Beyaz fonda ürün çekimi', 'renkli fon ürün fotoğrafları': 'Renkli fonda ürün çekimi', 'fotoğraflar siteye uyar': 'Sitenize uygun fotoğraf çekimi', 'fotoğraflarım sitemle uyumlu olacak': 'Sitenize uygun fotoğraf çekimi', 'site fotoğrafları taşır': 'Fotoğraflarınıza uygun web tasarım', 'çanakkale ürün fotoğrafı': 'E-ticaret için ürün fotoğrafları' } };
   let items = load().map((x) => { const m = RENAME[x.g]; const k = m && m[x.t.toLocaleLowerCase('tr-TR')]; return k ? { g: x.g, t: k } : x; });
-  if (!items.length && !document.querySelector('[data-svc-cart], [data-cart-page]')) return;
   items = items.filter((x, i) => items.findIndex((y) => y.g === x.g && y.t === x.t) === i);
   const listeners = [];
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch (e) { /* sepet yalnızca bu sayfada kalır */ } };

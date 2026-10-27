@@ -25,13 +25,10 @@ npm-debug.log*
 # Derleme çıktıları
 dist/
 build/
-!public/dist/
-!public/dist/**
 
 # Müşteri mesajları (kişisel veri)
 data/messages.json
 /data/promo.json
-/data/optimized-images/
 
 # İndirilen yazı tipleri (Inter hariç, o tohum olarak git'te)
 data/fonts/*
