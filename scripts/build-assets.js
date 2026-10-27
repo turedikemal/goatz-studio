@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { transform } = require('esbuild');
+const postcss = require('postcss');
 
 const root = path.join(__dirname, '..');
 const assets = ['site.css', 'site.js', 'cart.js', 'svc-nav.js', 'wizard.js'];
@@ -8,10 +9,37 @@ const assets = ['site.css', 'site.js', 'cart.js', 'svc-nav.js', 'wizard.js'];
 (async () => {
   const outDir = path.join(root, 'public', 'dist');
   fs.mkdirSync(outDir, { recursive: true });
+  const styles = postcss.parse(fs.readFileSync(path.join(root, 'public', 'site.css'), 'utf8'));
+  const chunks = { wizard: postcss.root(), works: postcss.root() };
+  const feature = (node) => {
+    if (node.type === 'rule') {
+      if (node.selectors.every((s) => /\.wz-/.test(s))) return 'wizard';
+      if (node.selectors.every((s) => /\.(?:works?-|wp-|fd-|fb-)/.test(s))) return 'works';
+    }
+    if (node.type === 'atrule' && /keyframes$/.test(node.name) && /^wz/.test(node.params)) return 'wizard';
+    return null;
+  };
+  const split = (container, targets) => {
+    for (const node of [...container.nodes]) {
+      const key = feature(node);
+      if (key) { targets[key].append(node.clone()); node.remove(); }
+      else if (node.type === 'atrule' && /^(media|supports|layer)$/.test(node.name) && node.nodes) {
+        const wrappers = Object.fromEntries(Object.keys(targets).map((name) => [name, node.clone({ nodes: [] })]));
+        split(node, wrappers);
+        for (const name of Object.keys(targets)) if (wrappers[name].nodes.length) targets[name].append(wrappers[name]);
+        if (!node.nodes.length) node.remove();
+      }
+    }
+  };
+  split(styles, chunks);
   for (const name of assets) {
-    const source = fs.readFileSync(path.join(root, 'public', name), 'utf8');
+    const source = name === 'site.css' ? styles.toString() : fs.readFileSync(path.join(root, 'public', name), 'utf8');
     const result = await transform(source, { loader: name.endsWith('.css') ? 'css' : 'js', minify: true, target: 'es2020' });
     fs.writeFileSync(path.join(outDir, name), result.code + '\n');
+  }
+  for (const [name, css] of Object.entries(chunks)) {
+    const result = await transform(css.toString(), { loader: 'css', minify: true, target: 'es2020' });
+    fs.writeFileSync(path.join(outDir, `${name}.css`), result.code + '\n');
   }
   const site = fs.readFileSync(path.join(root, 'public', 'site.js'), 'utf8');
   const motionStart = site.indexOf('  //  Hareketler');
