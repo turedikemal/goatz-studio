@@ -2321,7 +2321,7 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
   /* ---------- Yeni iş (ana sayfa, İşler vitrininin önünde tek proje) ---------- */
   .newwork { background: var(--sun); padding: clamp(56px, 8vw, 110px) 16px; }
   .nw-in { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: center; }
-  .nw-tag { display: inline-block; padding: 10px 26px; background: var(--ember); color: var(--paper); border: 2px solid var(--carbon); border-radius: var(--r-pill); font-size: clamp(20px, 2.2vw, 30px); font-weight: 900; rotate: -3deg; }
+  .nw-tag { display: inline-block; padding: 10px 26px; background: var(--ember); color: var(--carbon); border: 2px solid var(--carbon); border-radius: var(--r-pill); font-size: clamp(20px, 2.2vw, 30px); font-weight: 900; rotate: -3deg; }
   .nw-title { margin: 18px 0 12px; font-size: clamp(40px, 6vw, 84px); line-height: calc(.95em + 2mm); letter-spacing: 0; }
   .nw-sub { margin: 0 0 14px; font-weight: 700; font-size: clamp(17px, 1.6vw, 21px); }
   .nw-list { margin: 0 0 26px; padding-left: 1.1em; display: grid; gap: 6px; }
