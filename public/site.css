@@ -840,8 +840,10 @@
   .wa-intro { margin: 2px 0 0; font-size: 13px; font-weight: 600; line-height: 1.4; opacity: .8; }
   .wa-q { display: block; margin: 12px 0 8px; font-size: 14px; font-weight: 800; }
   .wa-q small { display: block; font-size: 12px; font-weight: 600; opacity: .65; margin-top: 2px; }
-  .wa-chips { display: flex; flex-wrap: wrap; gap: 6px; }
-  .wa-chip { padding: 8px 12px; border: 2px solid var(--carbon); border-radius: 99px; background: var(--paper); color: var(--carbon); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+  .wa-chips { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .wa-chips[data-wa-q="when"] { grid-template-columns: 1fr; }
+  .wa-chip:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .wa-chip { display: flex; align-items: center; min-height: 44px; padding: 7px 12px; border: 2px solid var(--carbon); border-radius: 14px; background: var(--paper); color: var(--carbon); font: inherit; font-size: 13px; font-weight: 700; line-height: 1.2; text-align: left; cursor: pointer; }
   .wa-chip[aria-pressed="true"] { background: var(--mint); }
   .wa-in { width: 100%; padding: 10px 14px; border: 2px solid var(--carbon); border-radius: 14px; background: var(--paper); color: var(--carbon); font: inherit; font-size: 14px; }
   .wa-note { margin: 10px 0 0; font-size: 12px; font-weight: 600; opacity: .65; line-height: 1.35; }

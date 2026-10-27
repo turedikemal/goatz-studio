@@ -493,7 +493,7 @@
     const qa = (s) => [...waMenu.querySelectorAll(s)];
     const waSet = (open) => { waMenu.hidden = !open; waBtn.setAttribute('aria-expanded', String(open)); };
     const step = (n) => { qa('[data-wa-step]').forEach((el) => { el.hidden = el.dataset.waStep !== String(n); }); q('[data-wa-no]').textContent = `${n}/2`; };
-    const picked = (sel) => qa(`${sel} [aria-pressed="true"]`).map((b) => b.textContent);
+    const picked = (sel) => qa(`${sel} [aria-pressed="true"]`).map((b) => b.dataset.waSvc || b.textContent);
     const message = () => {
       const lines = ['Merhaba, web siteniz üzerinden ulaşıyorum.', `İlgilendiğim hizmetler: ${picked('[data-wa-step="1"]').join(', ')}`];
       qa('[data-wa-q]').forEach((g) => { const a = g.querySelector('[aria-pressed="true"]'); if (a) lines.push(`${g.dataset.waLabel}: ${a.textContent}`); });
