@@ -643,6 +643,11 @@ const server = http.createServer(async (req, res) => {
         const fam = fonts.CATALOG.find((r) => fonts.slug(r[0]) === fm[1]);
         if (fam) { try { await fonts.ensure(fam[0]); } catch { /* dosya yok: 404 */ } }
       }
+      if (fm[2] === 'font.css' && fs.existsSync(file)) {
+        // Asenkron yüklenen fontlar geç gelirse sistem fontundan geçiş büyük CLS oluşturur.
+        const css = fs.readFileSync(file, 'utf8').replace(/font-display\s*:\s*swap/g, 'font-display:optional');
+        return send(res, 200, css, TYPES['.css'], { 'Cache-Control': 'public, max-age=3600' });
+      }
       return serveFile(res, file, fm[2] === 'font.css' ? 'public, max-age=3600' : 'public, max-age=31536000, immutable');
     }
     if (url.pathname.startsWith('/ig-media/')) {
