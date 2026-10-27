@@ -485,6 +485,45 @@
   });
 
   // ---------- Yukarı çık oku: biraz kaydırınca belirir ----------
+  // WhatsApp düğmesi: iki adımlık kısa form; seçilenler tek mesajda WhatsApp'a gider
+  const waBtn = document.querySelector('.wa-float');
+  const waMenu = document.getElementById('waMenu');
+  if (waBtn && waMenu) {
+    const q = (s) => waMenu.querySelector(s);
+    const qa = (s) => [...waMenu.querySelectorAll(s)];
+    const waSet = (open) => { waMenu.hidden = !open; waBtn.setAttribute('aria-expanded', String(open)); };
+    const step = (n) => { qa('[data-wa-step]').forEach((el) => { el.hidden = el.dataset.waStep !== String(n); }); q('[data-wa-no]').textContent = `${n}/2`; };
+    const picked = (sel) => qa(`${sel} [aria-pressed="true"]`).map((b) => b.textContent);
+    const message = () => {
+      const lines = ['Merhaba, The Goatz Studio sitesinden yazıyorum.', `İstediğim hizmet: ${picked('[data-wa-step="1"]').join(', ')}`];
+      qa('[data-wa-q]').forEach((g) => { const a = g.querySelector('[aria-pressed="true"]'); if (a) lines.push(`${g.dataset.waLabel}: ${a.textContent}`); });
+      const name = q('#waName').value.trim();
+      if (name) lines.push(`İşletme: ${name}`);
+      lines.push('Bilgi alabilir miyim?');
+      return lines.join('\n');
+    };
+    const refresh = () => {
+      q('[data-wa-next]').disabled = !picked('[data-wa-step="1"]').length;
+      q('[data-wa-send]').href = `https://wa.me/${waMenu.dataset.phone}?text=${encodeURIComponent(message())}`;
+    };
+    waBtn.addEventListener('click', (e) => { e.preventDefault(); waSet(waMenu.hidden); });
+    waMenu.addEventListener('click', (e) => {
+      const t = e.target;
+      if (t.closest('[data-wa-close]')) return waSet(false);
+      const svc = t.closest('[data-wa-svc]');
+      if (svc) svc.setAttribute('aria-pressed', String(svc.getAttribute('aria-pressed') !== 'true'));
+      const ans = t.closest('[data-wa-a]');
+      if (ans) { const on = ans.getAttribute('aria-pressed') !== 'true'; ans.parentElement.querySelectorAll('[data-wa-a]').forEach((b) => b.setAttribute('aria-pressed', 'false')); ans.setAttribute('aria-pressed', String(on)); }
+      if (t.closest('[data-wa-next]')) step(2);
+      if (t.closest('[data-wa-back]')) step(1);
+      refresh();
+      if (t.closest('[data-wa-send]')) { if (window.goatzEvent) window.goatzEvent('generate_lead', { form: 'whatsapp' }); setTimeout(() => { waSet(false); step(1); }, 300); }
+    });
+    q('#waName').addEventListener('input', refresh);
+    document.addEventListener('click', (e) => { if (!waMenu.hidden && !e.target.closest('#waBox')) waSet(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !waMenu.hidden) { waSet(false); waBtn.focus(); } });
+    refresh();
+  }
   const toTop = document.querySelector('.to-top');
   if (toTop) {
     const check = () => toTop.classList.toggle('show', window.scrollY > 300);
