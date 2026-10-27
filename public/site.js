@@ -434,7 +434,7 @@
       return true;
     };
     const sync = () => { const up = window.scrollY < 120; if (up) place(); bub.classList.toggle('on', up); };
-    setTimeout(() => { bub.hidden = false; if (!place()) return; requestAnimationFrame(sync); window.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); }, 1600);
+    setTimeout(() => { bub.hidden = false; if (!place()) return; requestAnimationFrame(sync); window.addEventListener('scroll', sync, { passive: true }); window.addEventListener('resize', sync); }, reduce ? 0 : 1600);
   })();
 
   // ---------- Ana sayfa "Yeni iş": proje görselleri sırayla değişir ----------
@@ -540,7 +540,8 @@
       ckBar.hidden = false;
       document.documentElement.classList.add('ck-on');
       document.documentElement.style.setProperty('--ck-h', ckBar.offsetHeight + 'px');
-      setTimeout(() => ckBar.classList.add('show'), 900);
+      if (reduce) ckBar.classList.add('show');
+      else setTimeout(() => ckBar.classList.add('show'), 900);
       ckBar.addEventListener('click', (e) => {
         const b = e.target.closest('[data-ck]');
         if (!b) return;
