@@ -823,6 +823,10 @@
   .to-top svg { width: 24px; height: 24px; }
   .to-top.show { opacity: 1; translate: 0 0; pointer-events: auto; }
   .to-top.show:hover { background: var(--carbon); color: var(--sun); translate: 0 -4px; }
+  /* Sabit WhatsApp düğmesi: sağda, yukarı okun hemen üstünde (çerez şeridi ve dar ekran şeridiyle birlikte kayar) */
+  .wa-float { --wa-b: clamp(14px, 2vw, 28px); position: fixed; right: clamp(14px, 2vw, 28px); bottom: calc(var(--wa-b) + 64px); z-index: 40; width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--carbon); border-radius: 50%; background: var(--mint); color: var(--carbon); box-shadow: 3px 4px 0 var(--carbon); transition: translate .3s var(--slush, ease), background .2s ease, color .2s ease, bottom .3s ease; }
+  .wa-float svg { width: 28px; height: 28px; }
+  .wa-float:hover { background: var(--carbon); color: var(--mint); translate: 0 -4px; }
   .work-premium-inline { padding: 5px 11px; font-size: 11px; }
 
   /* Çerez bildirimi: altta ortada, ince ve uzun sticker şerit */
@@ -837,12 +841,14 @@
   .ck-btn.ck-ok { background: var(--mint); }
   .ck-btn:hover { background: #000; color: #fff; }
   html.ck-on .to-top { bottom: calc(clamp(12px, 2vw, 24px) + 72px); }
+  html.ck-on .wa-float { --wa-b: calc(clamp(12px, 2vw, 24px) + 72px); }
   @media (max-width: 640px) {
     .ck-bar { border-radius: 24px; flex-wrap: wrap; gap: 8px 10px; padding: 10px 12px; }
     .ck-text { flex-basis: calc(100% - 46px); }
     .ck-act { width: 100%; }
     .ck-act .ck-btn { flex: 1; justify-content: center; }
     html.ck-on .to-top { bottom: calc(clamp(12px, 2vw, 24px) + 132px); }
+    html.ck-on .wa-float { --wa-b: calc(clamp(12px, 2vw, 24px) + 132px); }
   }
   @media (prefers-reduced-motion: reduce) { .ck-bar { transition: opacity .2s ease; } }
 
@@ -2222,6 +2228,8 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
   html.svc-bar-on { --sb-h: 44px; --sb-side: 14px; --sb-b: calc(12px + env(safe-area-inset-bottom, 0px)); }
   html.svc-bar-on .to-top { width: var(--sb-h); height: var(--sb-h); right: var(--sb-side); bottom: var(--sb-b); box-shadow: none; border-width: 2px; }
   html.svc-bar-on .to-top svg { width: 20px; height: 20px; }
+  html.svc-bar-on .wa-float { width: var(--sb-h); height: var(--sb-h); right: var(--sb-side); bottom: calc(var(--sb-b) + var(--sb-h) + 10px); box-shadow: none; border-width: 2px; }
+  html.svc-bar-on .wa-float svg { width: 24px; height: 24px; }
   html.svc-bar-on .cart-rail { left: var(--sb-side); bottom: var(--sb-b); }
   html.svc-bar-on .cart-fab:not(.docked) { width: var(--sb-h); height: var(--sb-h); border-width: 2px; }
   html.svc-bar-on .cart-fab:not(.docked) svg { width: 22px; height: 22px; }
