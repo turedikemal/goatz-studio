@@ -1263,7 +1263,7 @@
 
   // Büyük bildiri satırları: en geniş satır ekrana sığacak şekilde yazı küçülür
   const stLines = document.querySelector('.statement .lines');
-  if (stLines) {
+  if (stLines && !matchMedia('(max-width: 700px)').matches) {
     const fitLines = () => {
       stLines.style.fontSize = '';
       const base = parseFloat(getComputedStyle(stLines).fontSize);
