@@ -93,9 +93,16 @@ function preloadFontFiles(html) {
   if (!match) return html;
   let css;
   try { css = fs.readFileSync(path.join(fonts.FONT_DIR, match[1], 'font.css'), 'utf8'); } catch { return html; }
-  const urls = [...new Set([...css.matchAll(/url\((\/fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2)\)/g)].map((m) => m[1]))];
-  if (!urls.length) return html;
-  const links = urls.map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
+  const urls = new Set();
+  const re = /@font-face\s*\{([^}]+)\}/g;
+  for (const face of css.matchAll(re)) {
+    const rule = face[1];
+    if (!/font-style\s*:\s*normal\b/.test(rule) || !/unicode-range\s*:[^}]*U\+0100-02BA/.test(rule)) continue;
+    const url = /url\((\/fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2)\)/.exec(rule);
+    if (url) urls.add(url[1]);
+  }
+  if (!urls.size) return html;
+  const links = [...urls].map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
   return html.replace('</noscript>', `</noscript>\n${links}`);
 }
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
