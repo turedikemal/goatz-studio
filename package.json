@@ -13,7 +13,8 @@
     "node": ">=20"
   },
   "dependencies": {
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "esbuild": "^0.28.2"

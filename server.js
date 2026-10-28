@@ -10,6 +10,7 @@ const db = require('./lib/db');
 const promo = require('./lib/promo');
 const persist = require('./lib/persist');
 const fonts = require('./lib/fonts');
+const responsiveImages = require('./lib/responsive-images');
 const salesRoutes = require('./lib/sales-routes');
 const dashboard = require('./lib/dashboard');
 const demo = require('./lib/demo');
@@ -98,8 +99,23 @@ const feed = require('./lib/feed');
 let imgRedirCache = null;
 const imageRedirects = () => { if (!imgRedirCache) { try { imgRedirCache = JSON.parse(fs.readFileSync(path.join(__dirname, 'data', 'image-redirects.json'), 'utf8')); } catch (e) { imgRedirCache = {}; } } return imgRedirCache; };
 const { optimize } = require('./lib/optimize');
+function preloadPrimaryFont(html) {
+  const link = /<link href="(\/fonts\/([a-z0-9-]+)\/font\.css)" rel="stylesheet">/.exec(html);
+  if (!link) return html;
+  let css;
+  try { css = fs.readFileSync(path.join(fonts.FONT_DIR, link[2], 'font.css'), 'utf8'); } catch { return html; }
+  const urls = new Set();
+  for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
+    const rule = match[1];
+    if (!/font-style\s*:\s*normal\b/.test(rule) || !/unicode-range\s*:[^}]*U\+0000-00FF/.test(rule)) continue;
+    const source = /url\((\/fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2)\)/.exec(rule);
+    if (source) urls.add(source[1]);
+  }
+  const preloads = [...urls].map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
+  return html.replace(link[0], preloads + '\n' + link[0]);
+}
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
-const pageHtml = (c, opts) => optimize(render(c, opts), store.UPLOAD_DIR, imageRedirects());
+const pageHtml = (c, opts) => optimize(preloadPrimaryFont(render(c, opts)), store.UPLOAD_DIR, imageRedirects());
 // Bulunamayan adres: menülü, hizmetlere bağlantılı 404 sayfası (arama motorlarına noindex)
 function notFound(res, req) {
   const c = store.load();
@@ -655,6 +671,16 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname.startsWith('/ig-media/')) {
       const f = instagram.mediaFile(decodeURIComponent(url.pathname.slice('/ig-media/'.length)));
       return f ? serveFile(res, f, 'public, max-age=3600') : send(res, 404, 'Bulunamadı');
+    }
+    if (url.pathname.startsWith('/responsive/')) {
+      const match = /^\/responsive\/(320|640|960)\/([a-z0-9-]+\.(?:png|jpe?g|webp))$/.exec(url.pathname);
+      if (!match) return send(res, 404, 'Bulunamadı');
+      try {
+        const file = await responsiveImages.generate(match[2], Number(match[1]), store.UPLOAD_DIR, path.join(store.DATA_DIR, 'optimized-images'));
+        if (file) return serveFile(res, file, 'public, max-age=31536000, immutable');
+        res.writeHead(302, { Location: '/uploads/' + match[2] });
+        return res.end();
+      } catch (error) { if (error.code === 'ENOENT') return send(res, 404, 'Bulunamadı'); throw error; }
     }
     if (url.pathname.startsWith('/uploads/')) {
       const upName = decodeURIComponent(url.pathname.slice('/uploads/'.length));
