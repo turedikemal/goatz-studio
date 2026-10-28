@@ -1307,13 +1307,26 @@
       .onfinish = () => { el._spin = false; el.classList.add('idle-on'); };
   }));
 
+  // Prepare offscreen typography one viewport before it can become visible.
+  // The reveal observers and their original animation timings stay unchanged.
+  const prepareNearViewport = (selector, prepare) => {
+    const pending = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        prepare(entry.target);
+      });
+    }, { rootMargin: '100% 0px' });
+    document.querySelectorAll(selector).forEach((el) => pending.observe(el));
+  };
+
   // 3) Büyük başlıklar: harfler sağdan sola, soldan kayarak gelir (bir kez)
   if (on('reveal')) {
     const io = onceAt(ROOT80, (el) => {
       const chars = el._chars;
       chars.forEach((c, i) => c.animate([{ opacity: 0, translate: '-0.25em 0' }, { opacity: 1, translate: '0 0' }], { duration: ms(0.65), delay: ms((chars.length - 1 - i) * 0.015), easing: BOUNCE, fill: 'both' }));
     });
-    document.querySelectorAll('[data-reveal]').forEach((el) => {
+    prepareNearViewport('[data-reveal]', (el) => {
       el._chars = split(el);
       el._chars.forEach((c) => { c.style.opacity = 0; });
       el.classList.add('split-ready');
@@ -1329,7 +1342,7 @@
       lines.forEach((l, i) => l.animate([{ opacity: 0, transform: 'translateZ(5em) rotateY(-45deg)' }, { opacity: 1, transform: 'none' }], { duration: ms(0.85), delay: ms(i * 0.15), easing: BOUNCE, fill: 'both' }));
       setTimeout(revert, ms(0.85 + lines.length * 0.15) + 80);
     });
-    document.querySelectorAll('[data-heading]').forEach((el) => {
+    prepareNearViewport('[data-heading]', (el) => {
       el._split = splitLines(el);
       el.style.perspective = '1000px';
       el._split.lines.forEach((l) => { l.style.opacity = 0; });
