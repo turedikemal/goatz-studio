@@ -105,12 +105,29 @@ function preloadPrimaryFont(html) {
   let css;
   try { css = fs.readFileSync(path.join(fonts.FONT_DIR, link[2], 'font.css'), 'utf8'); } catch { return html; }
   const turkishFaces = [];
-  for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
-    const rule = match[1];
+  css = css.replace(/@font-face\s*\{([^}]+)\}/g, (face, rule) => {
     const source = /url\(\/fonts\/inter\/(3cd4ee51d59e|cf3eb50fb210)\.woff2\)/.exec(rule);
-    if (!source) continue;
+    if (!source) return face;
     turkishFaces.push('@font-face{' + rule.replace(source[0], `url(/font-subsets/${source[1]}-tr.woff2?v=1)`).replace(/unicode-range:[^;}]+/, 'unicode-range:U+011E-011F,U+0130,U+015E-015F') + '}');
-  }
+    // Disjoint ranges also prevent FontFaceSet.load() from fetching both faces.
+    // Dotless i is already present in the original Latin face.
+    const excluded = new Set([0x11e, 0x11f, 0x130, 0x131, 0x15e, 0x15f]);
+    return face.replace(/unicode-range:([^;}]+)/, (_, ranges) => {
+      const points = [];
+      for (const match of ranges.matchAll(/U\+([0-9A-F]+)(?:-([0-9A-F]+))?/gi)) {
+        const from = parseInt(match[1], 16), to = parseInt(match[2] || match[1], 16);
+        for (let cp = from; cp <= to; cp++) if (!excluded.has(cp)) points.push(cp);
+      }
+      const compact = [];
+      for (let i = 0; i < points.length; i++) {
+        const from = points[i];
+        let to = from;
+        while (points[i + 1] === to + 1) to = points[++i];
+        compact.push('U+' + from.toString(16) + (to === from ? '' : '-' + to.toString(16)));
+      }
+      return 'unicode-range:' + compact.join(',');
+    });
+  });
   css += '\n' + turkishFaces.join('\n');
   const urls = new Set();
   for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
