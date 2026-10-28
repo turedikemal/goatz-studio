@@ -109,14 +109,17 @@ function preloadPrimaryFont(html) {
   for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
     const rule = match[1];
     if (!/unicode-range\s*:[^}]*U\+0000-00FF/.test(rule) && !rule.includes('/font-subsets/')) continue;
-    const source = /url\((\/(?:fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2|font-subsets\/[a-f0-9]+-(?:tr|core)\.woff2\?v=1))\)/.exec(rule);
+    const source = /url\((\/(?:fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2|font-subsets\/[a-f0-9]+-(?:tr|core)\.woff2\?v=2))\)/.exec(rule);
     if (source) urls.add(source[1]);
   }
   const preloads = [...urls].map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
   return html.replace(link[0], preloads + '\n<style data-font-styles>' + css + '</style>');
 }
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
-const pageHtml = (c, opts) => optimize(preloadPrimaryFont(render(c, opts)), store.UPLOAD_DIR, imageRedirects());
+const pageHtml = (c, opts) => {
+  const html = optimize(preloadPrimaryFont(render(c, opts)), store.UPLOAD_DIR, imageRedirects());
+  return (!opts || (!opts.page && !opts.work)) ? require('./lib/priority-images').stageOffscreenImages(html) : html;
+};
 // Bulunamayan adres: menülü, hizmetlere bağlantılı 404 sayfası (arama motorlarına noindex)
 function notFound(res, req) {
   const c = store.load();
