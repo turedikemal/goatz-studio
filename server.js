@@ -115,8 +115,8 @@ function preloadPrimaryFont(html) {
   const urls = new Set();
   for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
     const rule = match[1];
-    if (!/font-style\s*:\s*normal\b/.test(rule) || !/unicode-range\s*:[^}]*U\+0000-00FF/.test(rule)) continue;
-    const source = /url\((\/fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2)\)/.exec(rule);
+    if (!/unicode-range\s*:[^}]*U\+0000-00FF/.test(rule) && !rule.includes('/font-subsets/')) continue;
+    const source = /url\((\/(?:fonts\/[a-z0-9-]+\/[a-f0-9]+\.woff2|font-subsets\/[a-f0-9]+-tr\.woff2\?v=1))\)/.exec(rule);
     if (source) urls.add(source[1]);
   }
   const preloads = [...urls].map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
