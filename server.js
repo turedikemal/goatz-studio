@@ -109,7 +109,7 @@ function preloadPrimaryFont(html) {
     const rule = match[1];
     const source = /url\(\/fonts\/inter\/(3cd4ee51d59e|cf3eb50fb210)\.woff2\)/.exec(rule);
     if (!source) continue;
-    turkishFaces.push('@font-face{' + rule.replace(source[0], `url(/font-subsets/${source[1]}-tr.woff2)`).replace(/unicode-range:[^;}]+/, 'unicode-range:U+011E-011F,U+0130,U+015E-015F') + '}');
+    turkishFaces.push('@font-face{' + rule.replace(source[0], `url(/font-subsets/${source[1]}-tr.woff2?v=1)`).replace(/unicode-range:[^;}]+/, 'unicode-range:U+011E-011F,U+0130,U+015E-015F') + '}');
   }
   css += '\n' + turkishFaces.join('\n');
   const urls = new Set();

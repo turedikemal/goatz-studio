@@ -215,13 +215,25 @@
     const m = document.createElement('span');
     m.style.cssText = 'position:absolute;visibility:hidden;white-space:pre;left:0;top:0';
     wordEl.append(m);
-    const w = (t) => { m.textContent = t; return m.getBoundingClientRect().width; };
     const fs = parseFloat(getComputedStyle(wordEl).fontSize) || 16;
-    const cache = new Map();
+    const samples = new Map();
+    const sample = (text) => {
+      if (samples.has(text)) return;
+      const node = document.createElement('span');
+      node.style.display = 'inline-block';
+      node.textContent = text;
+      m.append(node);
+      samples.set(text, node);
+    };
     for (let i = 1; i < items.length; i++) {
-      const key = items[i - 1].ch + items[i].ch;
-      if (!cache.has(key)) cache.set(key, w(items[i - 1].ch + items[i].ch) - w(items[i - 1].ch) - w(items[i].ch));
-      const k = cache.get(key);
+      sample(items[i - 1].ch + items[i].ch);
+      sample(items[i - 1].ch);
+      sample(items[i].ch);
+    }
+    // Read all measurements before writing any letter spacing.
+    const widths = new Map([...samples].map(([text, node]) => [text, node.getBoundingClientRect().width]));
+    for (let i = 1; i < items.length; i++) {
+      const k = widths.get(items[i - 1].ch + items[i].ch) - widths.get(items[i - 1].ch) - widths.get(items[i].ch);
       if (Math.abs(k) > 0.02) items[i].node.style.marginLeft = `${(k / fs).toFixed(4)}em`;
     }
     m.remove();
