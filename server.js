@@ -104,6 +104,14 @@ function preloadPrimaryFont(html) {
   if (!link) return html;
   let css;
   try { css = fs.readFileSync(path.join(fonts.FONT_DIR, link[2], 'font.css'), 'utf8'); } catch { return html; }
+  const turkishFaces = [];
+  for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
+    const rule = match[1];
+    const source = /url\(\/fonts\/inter\/(3cd4ee51d59e|cf3eb50fb210)\.woff2\)/.exec(rule);
+    if (!source) continue;
+    turkishFaces.push('@font-face{' + rule.replace(source[0], `url(/font-subsets/${source[1]}-tr.woff2)`).replace(/unicode-range:[^;}]+/, 'unicode-range:U+011E-011F,U+0130,U+015E-015F') + '}');
+  }
+  css += '\n' + turkishFaces.join('\n');
   const urls = new Set();
   for (const match of css.matchAll(/@font-face\s*\{([^}]+)\}/g)) {
     const rule = match[1];
@@ -112,7 +120,7 @@ function preloadPrimaryFont(html) {
     if (source) urls.add(source[1]);
   }
   const preloads = [...urls].map((url) => `<link rel="preload" href="${url}" as="font" type="font/woff2" crossorigin>`).join('\n');
-  return html.replace(link[0], preloads + '\n' + link[0]);
+  return html.replace(link[0], preloads + '\n<style data-font-styles>' + css + '</style>');
 }
 // Ziyaretçiye giden HTML: sayfa üretilir, sonra sürümlü CSS/JS ve görsel ölçüleri eklenir
 const pageHtml = (c, opts) => optimize(preloadPrimaryFont(render(c, opts)), store.UPLOAD_DIR, imageRedirects());
