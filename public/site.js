@@ -551,7 +551,9 @@
     if (ckBar.hasAttribute('data-ck-always') || !saved) {
       ckBar.hidden = false;
       document.documentElement.classList.add('ck-on');
-      document.documentElement.style.setProperty('--ck-h', ckBar.offsetHeight + 'px');
+      const measureCookieBar = () => document.documentElement.style.setProperty('--ck-h', ckBar.offsetHeight + 'px');
+      measureCookieBar();
+      if (window.ResizeObserver) new ResizeObserver(measureCookieBar).observe(ckBar);
       requestAnimationFrame(() => ckBar.classList.add('show'));
       ckBar.addEventListener('click', (e) => {
         const b = e.target.closest('[data-ck]');
@@ -723,7 +725,7 @@
   if (introEl) {
     const run = () => {
       const letters = splitTitle();
-      const quick = matchMedia('(max-width: 700px)').matches ? 0.55 : 1; // mobilde başlık ve altındakiler belirgin biçimde daha hızlı gelir
+      const quick = matchMedia('(max-width: 700px)').matches ? 0.35 : 1; // mobilde başlık ve altındakiler belirgin biçimde daha hızlı gelir
       const mobile = matchMedia('(max-width: 700px)').matches; // telefonda başlık harf efekti yok, doğrudan görünür
       (mobile ? [] : letters).forEach((l, i) => {
         const dx = ((rnd(i, 6) - 0.5) * 0.3).toFixed(3), dy = ((rnd(i, 7) - 0.5) * 0.3).toFixed(3);
@@ -733,7 +735,7 @@
         ], { duration: ms(2.4 * quick), delay: ms((0.15 + rnd(i, 9) * 0.9) * quick), easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'both' });
       });
 
-      const start = ms(0.6 * quick);
+      const start = ms(mobile ? 0.03 : 0.6 * quick);
       const fin = (el) => { el.classList.add('shown'); };
       // Alt yazı: cümleler 1,5 sn sonra sırayla yukarıdan gelir
       const sub = document.querySelector('.hero [data-sub]');
@@ -746,26 +748,26 @@
           s.innerHTML = t;
           sub.append(s);
           if (k < segs.length - 1) sub.append(' ');
-          s.animate([{ translate: '0 2em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1 * quick), delay: ms((1.5 + k * 0.3) * quick), easing: BOUNCE, fill: 'both' });
+          s.animate([{ translate: '0 2em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1 * quick), delay: ms(mobile ? 0.02 + k * 0.03 : (1.5 + k * 0.3) * quick), easing: BOUNCE, fill: 'both' });
         });
         fin(sub);
       }
       // Butonlar: aşağıdan, 0,1 sn arayla
       document.querySelectorAll('.hero .actions .btn').forEach((b, k) => {
         fin(b);
-        b.animate([{ translate: '0 3em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(1), delay: start + ms(k * 0.1), easing: BOUNCE, fill: 'both' });
+        b.animate([{ translate: '0 3em', opacity: 0 }, { translate: '0 0', opacity: 1 }], { duration: ms(mobile ? 0.35 : 1), delay: start + ms(k * (mobile ? 0.04 : 0.1)), easing: BOUNCE, fill: 'both' });
       });
       // "Kapı Müşterisi Beklemeye Son!!!": başlıkla birlikte küçük ve dönmüş halden zıplayarak gelir, sonra hafif eğik yerine oturur
       const hook = document.querySelector('.hero .hero-hook');
       if (hook) {
         fin(hook);
-        hook.animate([{ opacity: 0, scale: 0.3, rotate: '-14deg', translate: '0 -1.2em' }, { opacity: 1, scale: 1, rotate: '0deg', translate: '0 0' }], { duration: ms(1.1 * quick), delay: ms(0.9 * quick), easing: BOUNCE, fill: 'both' });
+        hook.animate([{ opacity: 0, scale: 0.3, rotate: '-14deg', translate: '0 -1.2em' }, { opacity: 1, scale: 1, rotate: '0deg', translate: '0 0' }], { duration: ms(mobile ? 0.38 : 1.1 * quick), delay: ms(mobile ? 0.02 : 0.9 * quick), easing: BOUNCE, fill: 'both' });
       }
       // Kurdele yumuşakça belirir
       const rib = document.querySelector('.hero .ribbon');
-      if (rib) { fin(rib); rib.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms(0.9), delay: start, easing: EASE, fill: 'both' }); }
+      if (rib) { fin(rib); rib.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms(mobile ? 0.32 : 0.9), delay: start, easing: EASE, fill: 'both' }); }
       // Sticker'lar: küçük ve dönmüş halden, rastgele sırayla
-      shuffle([...document.querySelectorAll('.hero [data-pop]')]).forEach((el, k) => popIn(el, start + ms(k * 0.1), 1));
+      shuffle([...document.querySelectorAll('.hero [data-pop]')]).forEach((el, k) => popIn(el, start + ms(k * (mobile ? 0.04 : 0.1)), mobile ? 0.4 : 1));
     };
     // Yazı tipleri yavaş inen (mobil) bağlantıda başlık beklemesin: en geç 0,9 sn'de başlar; yazı tipi sonradan gelirse harf aralıkları yeniden hesaplanır
     const fr = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();

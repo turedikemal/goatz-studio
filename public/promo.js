@@ -12,6 +12,7 @@
   const close = () => {
     ping('close');
     box.classList.remove('show');
+    document.documentElement.classList.remove('promo-open');
     shown = false;
     if (trigger) { trigger.hidden = false; trigger.setAttribute('aria-expanded', 'false'); }
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* kayıt yoksa sorun değil */ }
@@ -24,6 +25,7 @@
   const open = () => {
     if (shown) return; shown = true; ping('view');
     clearTimeout(closeTimer);
+    document.documentElement.classList.add('promo-open');
     if (trigger) { trigger.hidden = true; trigger.setAttribute('aria-expanded', 'true'); }
     last = document.activeElement;
     box.hidden = false;

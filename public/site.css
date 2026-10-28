@@ -2342,3 +2342,9 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
 
 /* Mobile already has no letter intro or letter idle animation. Keep native text ready for first paint. */
 @media (max-width: 700px) { html.js.mo-intro .hero [data-intro]:not(.ready) { visibility: visible; animation: none; } }
+
+/* Keep the minimized promotion reachable while the cookie notice is visible. */
+html.ck-on .promo-trigger { bottom: calc(18px + var(--ck-h, 120px) + 24px); }
+
+/* Pause covered background loops while the promotion is open; closing resumes their timeline. */
+html.promo-open :is(.band-row, .ribbon, .idle-on, .rl) { animation-play-state: paused !important; }
