@@ -2250,7 +2250,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   (window.requestIdleCallback || ((f) => setTimeout(f, 300)))(run);
 })();
 
-// Shopier kampanyası sağ alttaki düğmeden açılır.
+// Shopier kampanyası açılışta görünür; kapatılınca sağ alttaki düğmeden yeniden açılır.
 (() => {
   const box = document.getElementById('promo');
   if (!box) return;
@@ -2268,7 +2268,8 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     try { localStorage.setItem(KEY, String(Date.now())); } catch (e) { /* kayıt yoksa sorun değil */ }
     closeTimer = setTimeout(() => { box.hidden = true; }, 350);
     document.removeEventListener('keydown', onKey);
-    if (last && last.focus) last.focus();
+    if (trigger) trigger.focus({ preventScroll: true });
+    else if (last && last.focus) last.focus();
   };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
   const open = () => {
@@ -2292,6 +2293,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
     }
   });
   if (TEST) setTimeout(open, 1000);
+  else open();
 })();
 
 // Google Analytics olayları (GA kapalıysa ya da çerez kabul edilmediyse goatzEvent hiçbir şey yapmaz): WhatsApp, telefon, Teklif al tıkları
