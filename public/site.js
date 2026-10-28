@@ -552,7 +552,7 @@
       ckBar.hidden = false;
       document.documentElement.classList.add('ck-on');
       document.documentElement.style.setProperty('--ck-h', ckBar.offsetHeight + 'px');
-      setTimeout(() => ckBar.classList.add('show'), 900);
+      requestAnimationFrame(() => ckBar.classList.add('show'));
       ckBar.addEventListener('click', (e) => {
         const b = e.target.closest('[data-ck]');
         if (!b) return;
@@ -666,6 +666,7 @@
   // Dev başlığı harflere böler (kerning korunur). Her harf kendi süzülüşünü alır.
   const splitTitle = () => {
     if (!titleEl || titleEl.classList.contains('ready')) return [];
+    if (matchMedia('(max-width: 700px)').matches) { titleEl.classList.add('ready'); return []; }
     // <br> satır sonları korunur (textContent onları silip kelimeleri birleştirirdi)
     const srNodes = [...titleEl.children].filter((n) => n.classList.contains('sr-only')); // görünmez devam (arama motoru için) harflere bölünmez
     // ikas rozeti bölünmez: yerine tek bir işaret karakteri konur, harfler kurulurken rozet olduğu gibi geri takılır

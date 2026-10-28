@@ -2339,3 +2339,6 @@ html[data-theme="night"] .page-bg { color: #fff; opacity: .15; }
   .btn.nw-bubble.on { opacity: 1; transform: none; pointer-events: auto; animation: nwb-bob 2.4s ease-in-out .6s infinite; }
   .nw-bubble::before { content: ""; position: absolute; top: -6px; left: calc(var(--ax, 30px) - 7px); width: 14px; height: 14px; background: var(--carbon); border-radius: 2px; rotate: 45deg; }
   @keyframes nwb-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 3px; } }
+
+/* Mobile already has no letter intro or letter idle animation. Keep native text ready for first paint. */
+@media (max-width: 700px) { html.js.mo-intro .hero [data-intro]:not(.ready) { visibility: visible; animation: none; } }
