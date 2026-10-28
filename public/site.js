@@ -666,7 +666,18 @@
   // Dev başlığı harflere böler (kerning korunur). Her harf kendi süzülüşünü alır.
   const splitTitle = () => {
     if (!titleEl || titleEl.classList.contains('ready')) return [];
-    if (matchMedia('(max-width: 700px)').matches) { titleEl.classList.add('ready'); return []; }
+    const mobileIntro = matchMedia('(max-width: 700px)');
+    if (mobileIntro.matches) {
+      titleEl.classList.add('ready');
+      const enableDesktopLetters = (event) => {
+        if (event.matches) return;
+        mobileIntro.removeEventListener('change', enableDesktopLetters);
+        titleEl.classList.remove('ready');
+        splitTitle();
+      };
+      mobileIntro.addEventListener('change', enableDesktopLetters);
+      return [];
+    }
     // <br> satır sonları korunur (textContent onları silip kelimeleri birleştirirdi)
     const srNodes = [...titleEl.children].filter((n) => n.classList.contains('sr-only')); // görünmez devam (arama motoru için) harflere bölünmez
     // ikas rozeti bölünmez: yerine tek bir işaret karakteri konur, harfler kurulurken rozet olduğu gibi geri takılır
@@ -1619,7 +1630,13 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
       placed++;
     }
   };
-  const all = () => panels.forEach(fill);
+  const all = () => {
+    if (document.documentElement.dataset.theme !== 'night') return;
+    panels.forEach(fill);
+  };
+  new MutationObserver(() => {
+    if (document.documentElement.dataset.theme === 'night') all();
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   let t = 0;
   const later = () => { clearTimeout(t); t = setTimeout(all, 400); };
   window.addEventListener('load', () => setTimeout(all, 1200));
@@ -1631,6 +1648,7 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
 (() => {
   const hero = location.pathname === '/' && document.querySelector('[data-intro]') && document.querySelector('.panel.hero');
   if (!hero) return;
+  const initMoon = () => {
   const moon = document.createElement('i');
   moon.className = 'ns-moon';
   moon.setAttribute('aria-hidden', 'true');
@@ -1711,6 +1729,16 @@ document.querySelectorAll('.partner .pt-text').forEach((p) => {
   if (window.ResizeObserver) new ResizeObserver(() => { if (moon.clientWidth && Math.abs(moon.clientWidth * Math.min(devicePixelRatio || 1, 2) - size) > 2 && tex) setup(); }).observe(moon);
   // Tıklayınca dönmeye başlar, tekrar tıklayınca yavaşça durur
   moon.addEventListener('click', () => { spinning = !spinning; if (!running) { running = true; last = performance.now(); requestAnimationFrame(frame); } });
+  };
+  if (document.documentElement.dataset.theme === 'night') initMoon();
+  else {
+    const watch = new MutationObserver(() => {
+      if (document.documentElement.dataset.theme !== 'night') return;
+      watch.disconnect();
+      initMoon();
+    });
+    watch.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  }
 })();
 
 // Gece teması: arka planda yaşayan bir evren: gemiler gezer, filolar çatışır (salvolar, it dalaşı, ana gemi bombardımanı), gezegenler geçer; gemiye tıklayınca patlar.
