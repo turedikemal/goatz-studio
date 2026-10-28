@@ -25,7 +25,7 @@ const MAX_UPLOAD = 8 * 1024 * 1024;
 
 const TYPES = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8',
-  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.mp4': 'video/mp4',
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.gif': 'image/gif', '.mp4': 'video/mp4',
   '.svg': 'image/svg+xml', '.ico': 'image/x-icon', '.woff2': 'font/woff2',
 };
 const IMAGE_MAGIC = {
@@ -71,6 +71,13 @@ function tooManyAttempts(ip) {
 const COMPRESSIBLE = /^(text\/|application\/(json|xml|javascript)|image\/svg)/;
 function send(res, status, body, type = 'text/plain; charset=utf-8', extra = {}) {
   const headers = { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin', ...extra };
+  if (/^text\/html\b/.test(type) && typeof body === 'string') {
+    headers.Vary = headers.Vary ? headers.Vary + ', Accept' : 'Accept';
+    const acceptsAvif = String(res.req?.headers.accept || '').toLowerCase().split(',').some((part) => /^\s*image\/avif(?:\s*;|\s*$)/.test(part) && !/;\s*q=0(?:\.0*)?(?:\s*;|\s*$)/.test(part));
+    if (acceptsAvif) {
+      body = body.replace(/(\/responsive\/(?:photo\/)?\d+\/[a-z0-9-]+\.(?:png|jpe?g|webp))(\?v=[a-f0-9]+)/g, '$1.avif$2');
+    }
+  }
   if (body && body.length > 1024 && COMPRESSIBLE.test(type)) {
     const accepted = new Map(String((res.req && res.req.headers['accept-encoding']) || '').toLowerCase().split(',').map((part) => {
       const [name, ...params] = part.trim().split(';');
@@ -677,12 +684,12 @@ const server = http.createServer(async (req, res) => {
       return f ? serveFile(res, f, 'public, max-age=3600') : send(res, 404, 'Bulunamadı');
     }
     if (url.pathname.startsWith('/responsive/')) {
-      const match = /^\/responsive\/(320|640|960)\/([a-z0-9-]+\.(?:png|jpe?g|webp))$/.exec(url.pathname);
+      const match = /^\/responsive\/(?:(photo)\/)?(160|240|320|480|560|640|768|960|1280)\/([a-z0-9-]+\.(?:png|jpe?g|webp))(\.avif)?$/.exec(url.pathname);
       if (!match) return send(res, 404, 'Bulunamadı');
       try {
-        const file = await responsiveImages.generate(match[2], Number(match[1]), store.UPLOAD_DIR, path.join(store.DATA_DIR, 'optimized-images'));
+        const file = await responsiveImages.generate(match[3], Number(match[2]), store.UPLOAD_DIR, path.join(store.DATA_DIR, 'optimized-images'), match[4] ? 'avif' : 'webp', match[1] || '');
         if (file) return serveFile(res, file, 'public, max-age=31536000, immutable');
-        res.writeHead(302, { Location: '/uploads/' + match[2] });
+        res.writeHead(302, { Location: '/uploads/' + match[3] });
         return res.end();
       } catch (error) { if (error.code === 'ENOENT') return send(res, 404, 'Bulunamadı'); throw error; }
     }
