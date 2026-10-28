@@ -758,7 +758,15 @@
     // Yazı tipleri yavaş inen (mobil) bağlantıda başlık beklemesin: en geç 0,9 sn'de başlar; yazı tipi sonradan gelirse harf aralıkları yeniden hesaplanır
     const fr = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
     const rekern = () => { if (!titleEl) return; titleEl.querySelectorAll('.rw').forEach((wd) => { const ls = [...wd.querySelectorAll('.rl')]; ls.forEach((n) => { n.style.marginLeft = ''; }); kernWord(wd, ls.map((n) => ({ node: n, ch: n.querySelector('.rc').textContent }))); }); };
-    Promise.race([fr, new Promise((r) => setTimeout(r, 900))]).then(() => { run(); fr.then(rekern); });
+    const titleStyle = getComputedStyle(titleEl);
+    const titleFont = `${titleStyle.fontStyle} ${titleStyle.fontWeight} ${titleStyle.fontSize} ${titleStyle.fontFamily}`;
+    // The intro needs its own font, rather than waiting for every offscreen font.
+    const titleReady = document.fonts && document.fonts.load
+      ? document.fonts.load(titleFont, titleEl.textContent).catch(() => fr)
+      : fr;
+    const begin = () => { run(); fr.then(rekern); };
+    if (document.fonts && document.fonts.check(titleFont, titleEl.textContent)) begin();
+    else Promise.race([titleReady, new Promise((r) => setTimeout(r, 900))]).then(begin);
   } else if (titleEl && on('idle')) {
     (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(splitTitle);
   }
