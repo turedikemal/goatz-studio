@@ -139,3 +139,7 @@ Web tasarım + e-ticaret + ürün çekimi stüdyosu sitesi, içerik paneli (/adm
 
 ## Metin düzenlemesi (2026-10-27)
 - `lib/copy-edits.js`: [eski, yeni] çiftleri, `migrate.js > text()` içinde alanın tamamı eskiyle birebir aynıysa değişir (panel düzenlemesine dokunmaz). Ana sayfa hizmet kutuları, hero alt yazısı, süreç, Hizmetler, Süreç ve İletişim sayfaları: hep "siz" hitabı, teknik terimler (UI/UX, URL, optimize, hiyerarşi) sadeleşti. Önce/sonra: `/mnt/project-files/metin-duzenleme/once-sonra.md`.
+
+## Görsel kalitesi ve Sakin (2026-11-04)
+- `lib/optimize.js` `RESPONSIVE = false`: küçültülmüş AVIF/WebP çeşitleri (`lib/responsive-images.js`, `/responsive/...`) kapalı; Kemal kaliteyi düşük buldu, her yerde `/uploads` orijinal WebP gider. Yeni görselleri yüksek kalitede (q≈95) WebP yükle.
+- Yeni iş: Sakin Coffee & Cookie (`https://sakincoffee.com`, `lib/new-works.js` ilk sıra, `featured`), referans şeridinde ilk logo. Fevzipaşa "Yeni iş"ten çıktı (`migrate.js` badge/featured temizler).
